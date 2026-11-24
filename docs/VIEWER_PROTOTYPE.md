@@ -51,7 +51,7 @@ Or use **Open GLB** to load a local GLB file in the browser. Generated model bin
 - Global exploded-view slider with reassembly.
 - Wireframe toggle.
 - Qualitative cooling and power-delivery layers with explanations, linked components, assumptions and source links.
-- Local GLB import (256 MB prototype limit) and fallback scene.
+- Local GLB import (256 MiB limit), GLB 2.0 container checks, external-resource URI rejection and fallback scene.
 - Duplicate component-ID warnings for imported GLB files.
 
 ## Coordinate convention
@@ -60,7 +60,7 @@ The Blender source scene uses X = card length, Y = thickness, Z = height. The Bl
 
 ## Automated browser tests
 
-The Playwright suite runs in headless Chromium with SwiftShader WebGL. It covers fallback scene rendering, component selection, process-layer explanations, the bilingual quiz and explode/reassemble interaction:
+The five-test Playwright suite runs in headless Chromium with SwiftShader WebGL. It covers fallback scene rendering, component selection, process-layer explanations, the bilingual quiz and explode/reassemble interaction:
 
 ```bash
 npx playwright install chromium
