@@ -1,0 +1,21 @@
+{
+  "schema_version":"0.1-draft",
+  "device_model_id":"gpu.evga.12g-p5-3655-kr",
+  "status":"candidate_inventory_not_final",
+  "components":[
+    {"id":"gpu.evga.12g-p5-3655-kr.cooler.shroud","name":{"en":"Fan shroud","ru":"Кожух вентиляторов"},"category":"mechanical","parent_id":"gpu.evga.12g-p5-3655-kr.cooler","evidence_status":"visible_exact_model","geometry_status":"to_reconstruct"},
+    {"id":"gpu.evga.12g-p5-3655-kr.cooler.fan.1","name":{"en":"Axial fan 1","ru":"Осевой вентилятор 1"},"category":"thermal_mechanical","parent_id":"gpu.evga.12g-p5-3655-kr.cooler","evidence_status":"visible_exact_model","geometry_status":"to_reconstruct"},
+    {"id":"gpu.evga.12g-p5-3655-kr.cooler.fan.2","name":{"en":"Axial fan 2","ru":"Осевой вентилятор 2"},"category":"thermal_mechanical","parent_id":"gpu.evga.12g-p5-3655-kr.cooler","evidence_status":"visible_exact_model","geometry_status":"to_reconstruct"},
+    {"id":"gpu.evga.12g-p5-3655-kr.cooler.heatsink","name":{"en":"Heatsink fin stack","ru":"Радиатор с рёбрами"},"category":"thermal","parent_id":"gpu.evga.12g-p5-3655-kr.cooler","evidence_status":"visible_exact_model","geometry_status":"to_reconstruct"},
+    {"id":"gpu.evga.12g-p5-3655-kr.cooler.copper_base","name":{"en":"Copper GPU contact plate","ru":"Медная контактная пластина GPU"},"category":"thermal","parent_id":"gpu.evga.12g-p5-3655-kr.cooler","evidence_status":"visible_exact_model","geometry_status":"to_reconstruct"},
+    {"id":"gpu.evga.12g-p5-3655-kr.cooler.heatpipes","name":{"en":"Heat pipes","ru":"Тепловые трубки"},"category":"thermal","parent_id":"gpu.evga.12g-p5-3655-kr.cooler","evidence_status":"visible_exact_model","geometry_status":"approximate_until_measured"},
+    {"id":"gpu.evga.12g-p5-3655-kr.pcb","name":{"en":"Printed circuit board","ru":"Печатная плата"},"category":"electrical_mechanical","parent_id":"gpu.evga.12g-p5-3655-kr","evidence_status":"visible_exact_model","geometry_status":"outline_reconstruction_only"},
+    {"id":"gpu.evga.12g-p5-3655-kr.gpu","name":{"en":"NVIDIA GA106 GPU package","ru":"Графический процессор NVIDIA GA106"},"category":"semiconductor","parent_id":"gpu.evga.12g-p5-3655-kr.pcb","evidence_status":"teardown_supported","geometry_status":"package_block_only"},
+    {"id":"gpu.evga.12g-p5-3655-kr.memory","name":{"en":"GDDR6 memory packages","ru":"Микросхемы памяти GDDR6"},"category":"semiconductor","parent_id":"gpu.evga.12g-p5-3655-kr.pcb","quantity":6,"evidence_status":"candidate_count_requires_exact_board_confirmation","geometry_status":"package_blocks_only"},
+    {"id":"gpu.evga.12g-p5-3655-kr.power_delivery","name":{"en":"Power delivery components","ru":"Компоненты системы питания"},"category":"power_electronics","parent_id":"gpu.evga.12g-p5-3655-kr.pcb","evidence_status":"visible_but_not_fully_identified","geometry_status":"blockout_only"},
+    {"id":"gpu.evga.12g-p5-3655-kr.io_bracket","name":{"en":"PCIe I/O bracket","ru":"Планка интерфейсных разъёмов"},"category":"mechanical_io","parent_id":"gpu.evga.12g-p5-3655-kr","evidence_status":"visible_exact_model","geometry_status":"to_reconstruct"},
+    {"id":"gpu.evga.12g-p5-3655-kr.fasteners","name":{"en":"Fasteners","ru":"Крепёж"},"category":"mechanical","parent_id":"gpu.evga.12g-p5-3655-kr","evidence_status":"teardown_visible_count_and_positions_incomplete","geometry_status":"not_modeled"}
+  ],
+  "assemblies":[{"id":"gpu.evga.12g-p5-3655-kr.cooler","name":{"en":"Cooling assembly","ru":"Система охлаждения"},"parent_id":"gpu.evga.12g-p5-3655-kr"}],
+  "rules":["Candidate inventory, not a verified complete BOM.","Do not infer PCB reference designators or exact component values.","Confirm memory count and placement against exact-board evidence.","No backplate component is included because the XC BLACK review documents an exposed PCB and no backplate."]
+}
