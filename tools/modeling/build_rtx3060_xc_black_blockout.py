@@ -22,7 +22,6 @@ import sys
 from pathlib import Path
 
 import bpy
-from mathutils import Vector
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 MODEL_ROOT = REPO_ROOT / "MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB"
@@ -173,7 +172,6 @@ def main():
     scene.unit_settings.system = "METRIC"
     scene.unit_settings.scale_length = 0.001
     scene.unit_settings.length_unit = "MILLIMETERS"
-    scene.render.engine = "BLENDER_EEVEE_NEXT"
 
     root = scene.collection
     groups = {}
@@ -190,9 +188,15 @@ def main():
     pcbcol = groups["03_PCB_And_Electronics"]
     conn = groups["04_Connectors"]
 
-    cube("Envelope proxy | overall card", "assembly.card.envelope",
-         (CARD_LENGTH/2, 0, CARD_HEIGHT/2),
-         (CARD_LENGTH, CARD_THICKNESS, CARD_HEIGHT), MAT["shroud"], ext)
+    envelope = cube("Envelope guide | overall card", "assembly.card.envelope",
+                    (CARD_LENGTH/2, 0, CARD_HEIGHT/2),
+                    (CARD_LENGTH, CARD_THICKNESS, CARD_HEIGHT), MAT["metal"], ext)
+    # Wireframe keeps the nominal envelope visible without occluding internal proxy parts.
+    wire = envelope.modifiers.new("Envelope outline only", "WIREFRAME")
+    wire.thickness = 0.8
+    wire.use_replace = True
+    bpy.context.view_layer.objects.active = envelope
+    bpy.ops.object.modifier_apply(modifier=wire.name)
 
     # Shroud fascia is built from rails/bridges so fan openings remain visibly open.
     fascia_y = -half_y + SHROUD_THICKNESS/2
