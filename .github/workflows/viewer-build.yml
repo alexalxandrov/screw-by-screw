@@ -26,5 +26,9 @@ jobs:
           node-version: "22"
       - name: Install dependencies
         run: npm install --no-audit --no-fund
+      - name: Install Chromium for browser tests
+        run: npx playwright install --with-deps chromium
       - name: Build production viewer
         run: npm run build
+      - name: Run browser interaction tests
+        run: npm run test:e2e
