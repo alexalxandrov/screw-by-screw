@@ -631,19 +631,19 @@ def main():
             )
 
     set_manifest_bounds()
-    manifest_path = out_dir / "rtx3060_xc_black_blockout.manifest.json"
+    manifest_path = out_dir / "rtx3060_xc_black_blockout_v02.manifest.json"
     manifest_path.write_text(
         json.dumps(manifest, indent=2, ensure_ascii=False),
         encoding="utf-8",
     )
 
     if not args.no_blend:
-        blend_path = out_dir / "rtx3060_xc_black_blockout.blend"
+        blend_path = out_dir / "rtx3060_xc_black_blockout_v02.blend"
         bpy.ops.wm.save_as_mainfile(filepath=str(blend_path))
         print(f"Saved Blender scene: {blend_path}")
 
     if not args.no_glb:
-        glb_path = out_dir / "rtx3060_xc_black_blockout.glb"
+        glb_path = out_dir / "rtx3060_xc_black_blockout_v02.glb"
         if hasattr(bpy.ops.export_scene, "gltf"):
             # Export renderable parts and assembly empties; omit the reference
             # envelope so it cannot inflate browser-model bounds or obscure parts.
