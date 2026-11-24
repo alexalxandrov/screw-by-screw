@@ -122,3 +122,29 @@ The strongest route is still:
 5. Keep electrical details at block-diagram level until a trustworthy schematic/BOM is available.
 
 No third-party CAD, BoardView, schematic, images, or confidential PDF have been added to the repository.
+
+
+## 10. Exact-model visual geometry evidence
+
+A useful additional exact-XC-Black source is [LanOC Reviews — EVGA RTX 3060 XC Black](https://lanoc.org/review/video-cards/evga-rtx-3060-xc-black?showall=1). The article contains multiple views of the card and PCB layout. It describes:
+- compact dual-fan shroud;
+- no backplate and exposed rear PCB;
+- nominal length 201.8 mm and height 110 mm, dual-slot;
+- fan openings approximately 90 mm and impellers approximately 85 mm (reviewer measurements);
+- aluminum heatsink, copper GPU contact plate and heat pipes;
+- one 8-pin power connection and three DisplayPort plus one HDMI outputs;
+- PCB airflow cutout near one end.
+
+This is enough to anchor a first external blockout and document approximate fan geometry. It is not permission to reuse the article's photographs.
+
+### Ultra Librarian lead — downgraded
+
+The WIN SOURCE page shows a catalog field labelled “Ultra Librarian 3D Model” and an ECAD module label for the retail graphics-card part number. It does not expose evidence that a complete card-level mechanical model is downloadable. The lead is therefore classified as **unverified catalog metadata**, not a found CAD asset. It must not be used as geometry until the actual file is obtained, inspected and its scope/licence verified.
+
+### PCB identity status
+
+The follow-up search did not identify a reliable PCB silkscreen number or revision for the exact 12G-P5-3655-KR. The teardown video has a “Markings & Cooling Layout” segment at 06:45, but indexed text alone does not reveal a readable board identifier. A screenshot/frame inspection or physical sample is required. No boardview/schematic search can be considered exact-board until this identifier is established.
+
+### Modeling decision
+
+Proceed with an evidence-backed external blockout and coarse internal assembly. Do not wait for a full BoardView to build the first viewer prototype. Keep the PCB as a simplified reconstructed outline and component groups as clearly labeled blocks until exact-board evidence arrives.
