@@ -1,0 +1,7 @@
+# Local generated 3D assets (reproducible from tools/modeling scripts)
+MODELS/**/04-WORKING/generated/
+MODELS/**/05-EXPORT/generated/
+
+# Blender autosaves/backups
+*.blend1
+*.blend@
