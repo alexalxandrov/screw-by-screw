@@ -59,6 +59,7 @@ Screw by Screw — концепция публичной образовател�
 - [Спецификация MVP](docs/MVP_SPEC.md)
 - [Техническая архитектура](docs/ARCHITECTURE.md)
 - [Аудит источников RTX 3060](docs/GPU_SOURCE_AUDIT.md)
+- [Release roadmap and 1.0 gates](docs/RELEASE_ROADMAP.md)
 - [Каталог моделей](MODELS/README.md)
 
 ## Рабочее название
