@@ -110,7 +110,7 @@
       "predicate": "axial_fan_count",
       "value": 2,
       "unit": "fans",
-      "confidence_class": "visible_exact_model",
+      "confidence_class": "independently_verified",
       "source_ids": [
         "src.lanoc.review",
         "src.gamersnexus.teardown"
@@ -122,7 +122,7 @@
       "predicate": "fan_opening_diameter",
       "value": 90,
       "unit": "mm",
-      "confidence_class": "reviewer_measurement",
+      "confidence_class": "measured",
       "source_ids": [
         "src.lanoc.review"
       ],
@@ -134,7 +134,7 @@
       "predicate": "fan_impeller_diameter",
       "value": 85,
       "unit": "mm",
-      "confidence_class": "reviewer_measurement",
+      "confidence_class": "measured",
       "source_ids": [
         "src.lanoc.review"
       ],
@@ -172,7 +172,7 @@
       "predicate": "backplate_present",
       "value": false,
       "unit": null,
-      "confidence_class": "visible_exact_model",
+      "confidence_class": "independently_verified",
       "source_ids": [
         "src.lanoc.review"
       ],
