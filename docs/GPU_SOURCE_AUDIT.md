@@ -87,3 +87,38 @@ A publicly viewable teardown, review, product PDF, BoardView, or schematic is no
 - [Tom's Hardware RTX 3060 teardown](https://www.tomshardware.com/reviews/nvidia-geforce-rtx-3060-review/2)
 - [Hardwareluxx EVGA XC Gaming PCB/cooler review](https://www.hardwareluxx.com/index.php/artikel/hardware/grafikkarten/51282-test-und-review-evga-geforce-rtx-3060-xc-gaming-kompakt-und-schnell.html?start=2)
 - [Hardware Asylum EVGA RTX 3060 teardown](https://www.hardwareasylum.com/reviews/video/evga_rtx3060/page3.aspx)
+
+
+## 9. Follow-up search findings
+
+### Exact-SKU sources
+
+- [Neoseeker review — exact sample 12G-P5-3655-KR](https://www.neoseeker.com/Articles/Hardware/Reviews/evga-geforce-rtx-3060-xc-black-gaming/): explicitly states the review sample part number and distinguishes the XC Gaming 12G-P5-3657-KR. Useful for external dimensions and visual reference; reuse rights for images/text are not established.
+- [Gamers Nexus teardown](https://www.youtube.com/watch?v=hJFJ_clQT8U): exact XC Black disassembly. Indexed description gives timestamps for teardown (01:30), assembly/internal view (05:33), markings/cooling layout (06:45), fan removal (09:00), and shunt resistors (11:00). Use as a research/observation source; do not extract and republish frames without permission.
+- [Win Source part record](https://win-source.net/products/detail/evga/12g-p5-3655-kr.html): product page labels an “Ultra Librarian 3D Model” and ECAD module for this part number. This is only an unverified lead. It may refer to a symbolic/footprint/package-level ECAD representation or catalog metadata, not a complete graphics-card assembly. No model has been downloaded or inspected; do not treat it as GPU geometry.
+- [Tom's Hardware teardown](https://www.tomshardware.com/reviews/nvidia-geforce-rtx-3060-review/2): useful independent internal reference, but the article title identifies the broader EVGA RTX 3060 XC. Confirm exact SKU/revision before applying detailed PCB claims.
+- [EVGA specification PDF](https://sg-repo-production-photos.s3.eu-central-1.amazonaws.com/aikido/cache/70b60b3a1a7bbeaced972a5b6905797f.pdf): exact SKU, dimensions, memory and published specifications.
+
+### CAD / BoardView / schematic result
+
+Searches for the exact part number combined with STEP, STP, CAD, BoardView, board view, schematic, PCB layout and repair terms did not surface a verifiable complete card CAD assembly, exact-revision BoardView, or exact-revision schematic.
+
+This is a search result, not proof that the files do not exist. The next useful discriminator is the PCB silkscreen/revision from an exact physical sample or high-resolution teardown image. Then search by the board number/revision rather than only the retail SKU.
+
+### Confidential thermal document — do not use as a project asset
+
+A document titled “EVGA RTX 3060 series Black GAMING Thermal Strategy & Simulation” was found at:
+https://corner-stone.com.tw/wp-content/uploads/2022/11/EVGA-RTX-3060-series-Black-GAMING-Thermal-Strategy-and-Simulation.pdf
+
+The fetched document contains prominent “CornerStone Confidential” / “CONFIDENTIAL” markings and includes renderings that appear to depict different cooler configurations (including triple-fan imagery) rather than an unambiguous exact 12G-P5-3655-KR assembly. It is **not** a cleared public source. Do not copy, redistribute, embed, or rely on its proprietary simulation values. At most, retain the URL in this audit as a lead that must not be used without explicit authorization and exact-model verification.
+
+### Current conclusion
+
+The strongest route is still:
+1. Use exact-SKU teardown and review material as linked research evidence.
+2. Determine PCB silkscreen/revision.
+3. Search for BoardView/schematic by that board identifier.
+4. If no licensed CAD appears, build a project-owned reconstruction from permitted views, measurements and explicitly labeled approximations.
+5. Keep electrical details at block-diagram level until a trustworthy schematic/BOM is available.
+
+No third-party CAD, BoardView, schematic, images, or confidential PDF have been added to the repository.
