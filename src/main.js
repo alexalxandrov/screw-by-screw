@@ -744,20 +744,26 @@ function loadArrayBuffer(buffer, filename) {
     return;
   }
   const loader = new GLTFLoader();
-  loader.parse(buffer, "", (gltf) => {
-    const root = new THREE.Group();
-    root.name = filename || "Imported GLB";
-    root.add(gltf.scene);
-    // Blender GLB export is Y-up; the atlas uses the source scene Z-up convention.
-    root.rotation.x = Math.PI / 2;
-    installModel(root, "file");
-  }, (error) => {
+  const fail = (error) => {
     console.error(error);
     $("#viewer-error").hidden = false;
     $("#viewer-error").textContent = t("loadError");
     setStatus(t("loadError"));
     loadDemo();
-  });
+  };
+  try {
+    loader.parse(buffer, "", (gltf) => {
+      const root = new THREE.Group();
+      root.name = filename || "Imported GLB";
+      root.add(gltf.scene);
+      // Blender GLB export is Y-up; the atlas uses the source scene Z-up convention.
+      root.rotation.x = Math.PI / 2;
+      $("#viewer-error").hidden = true;
+      installModel(root, "file");
+    }, fail);
+  } catch (error) {
+    fail(error);
+  }
 }
 
 function initRenderer() {
@@ -904,7 +910,10 @@ async function tryLoadBundledModel() {
   try {
     const response = await fetch(`${import.meta.env.BASE_URL}models/rtx3060_xc_black_blockout_v04.glb`);
     if (!response.ok) throw new Error("No bundled model");
+    const contentType = response.headers.get("content-type") ?? "";
+    if (contentType.includes("text/html")) throw new Error("No bundled model");
     const buffer = await response.arrayBuffer();
+    if (buffer.byteLength < 12 || new TextDecoder().decode(buffer.slice(0, 4)) !== "glTF") throw new Error("No bundled GLB asset");
     loadArrayBuffer(buffer, "Bundled v0.4 GLB");
   } catch {
     loadDemo();
