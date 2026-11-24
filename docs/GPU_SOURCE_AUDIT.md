@@ -148,3 +148,19 @@ The follow-up search did not identify a reliable PCB silkscreen number or revisi
 ### Modeling decision
 
 Proceed with an evidence-backed external blockout and coarse internal assembly. Do not wait for a full BoardView to build the first viewer prototype. Keep the PCB as a simplified reconstructed outline and component groups as clearly labeled blocks until exact-board evidence arrives.
+
+## 11. External-length qualification and v0.4 correction
+
+The exact-model [LanOC card-layout review](https://lanoc.org/review/video-cards/evga-rtx-3060-xc-black?showall=1) states that the card's fan shroud overhangs the nominal 201.8 mm length and that the reviewer's own measurement was slightly longer. The article does not provide a precise overhang value in the indexed text.
+
+Consequences for the blockout:
+
+- EVGA's 201.8 mm value remains the manufacturer-published nominal length and must remain in the specification record.
+- It must **not** be treated as a confirmed maximum X extent for every external part.
+- The v0.3 X-bound check only proves that proxy geometry fits the generator's chosen envelope; it is not a product-fidelity check.
+- v0.4 must separate the nominal board/reference envelope from the measured outer shroud envelope. Until a calibrated view or physical measurement establishes the latter, overall shroud length remains unknown.
+- Do not simply increase the model length by an arbitrary number. Record the overhang as an unresolved measurement.
+
+LanOC also documents the dual-fan shroud, exposed rear PCB/no backplate, vertical heatsink fin orientation, copper GPU/memory contact plate, heatpipes, 8-pin power connector, and 3 DisplayPort + 1 HDMI output layout. These are useful exact-XC-Black topology cues, but the article's photographs remain copyrighted and are not automatically reusable.
+
+A separate [TweakTown XC BLACK review](https://www.tweaktown.com/reviews/9754/evga-geforce-rtx-3060-xc-black-gaming/index.html) provides another exact-model visual reference set (59-image gallery according to the indexed page). Its images are research references only until reuse rights are cleared.
