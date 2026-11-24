@@ -4,14 +4,14 @@ on:
   push:
     paths:
       - "tools/modeling/validate_blockout_package.py"
+      - "tools/modeling/inspect_blend_scene.py"
       - "tests/test_blockout_validator.py"
-      - "tools/modeling/inspect_blend_scene.py"\n      - "tools/modeling/inspect_blend_scene.py"
       - ".github/workflows/blockout-validator.yml"
   pull_request:
     paths:
       - "tools/modeling/validate_blockout_package.py"
-      - "tests/test_blockout_validator.py"
       - "tools/modeling/inspect_blend_scene.py"
+      - "tests/test_blockout_validator.py"
       - ".github/workflows/blockout-validator.yml"
 
 jobs:
