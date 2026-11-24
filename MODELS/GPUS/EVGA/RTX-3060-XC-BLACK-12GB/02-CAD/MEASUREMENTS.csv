@@ -1,0 +1,15 @@
+field,value,unit,evidence_status,source_or_method,notes
+card_length,201.8,mm,manufacturer_data,EVGA specification sheet,Published nominal length for 12G-P5-3655-KR
+card_height,110.0,mm,manufacturer_data,EVGA specification sheet,Published nominal height for 12G-P5-3655-KR
+slot_width,dual-slot,,manufacturer_data,EVGA specification sheet,Slot classification only; do not convert to an exact thickness
+fan_opening_diameter,90,mm,reviewer_measurement,LanOC exact XC BLACK review,Approximate reviewer measurement
+fan_impeller_diameter,85,mm,reviewer_measurement,LanOC exact XC BLACK review,Approximate reviewer measurement
+card_thickness,,mm,unknown,Not established,Do not treat dual-slot label as an exact measured thickness
+fan_center_positions,,mm,illustrative,Blockout placeholder,Must be replaced using calibrated orthogonal imagery or physical sample
+shroud_outline,,mm,unknown,Not yet measured,Current blockout uses envelope-sized proxy
+pcb_outline,,mm,unknown,Not yet measured,PCB identity/revision not established
+pcb_thickness,1.6,mm,illustrative,Generic placeholder,Not a verified measurement for this SKU
+gpu_package_position,,mm,unknown,Not established,Requires exact-board evidence
+memory_package_positions,,mm,unknown,Not established,Six candidates are placeholders only
+power_connector_position,,mm,unknown,Not established,Connector type supported; exact placement is not measured
+io_bracket_geometry,,mm,unknown,Not established,Port layout known; detailed geometry not measured
