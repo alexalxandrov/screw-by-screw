@@ -17,8 +17,8 @@ import build_release_manifest as manifest_builder
 def sample_package():
     return {
         "model": {"id": "model.demo", "part_number": "DEMO-1", "geometry_status": "illustrative_proxy_not_cad",
-                  "source_ids": ["src.demo"]},
-        "sources": {"sources": [{"id": "src.demo"}]},
+                  "source_ids": ["src.demo"], "release": {"version": "0.1-draft", "status": "draft"}},
+        "sources": {"sources": [{"id": "src.demo", "url": "https://example.test/source", "license_status": "test_only"}]},
         "components": {"components": [
             {"id": "assembly.root", "parent_id": None, "name": {"en": "Root", "ru": "Корень"},
              "evidence_status": "illustrative", "source_ids": ["src.demo"]},
