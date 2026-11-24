@@ -23,7 +23,7 @@ def sample_package():
             {"id": "assembly.root", "parent_id": None, "name": {"en": "Root", "ru": "Корень"},
              "evidence_status": "illustrative", "source_ids": ["src.demo"]},
             {"id": "part.one", "parent_id": "assembly.root", "name": {"en": "Part", "ru": "Деталь"},
-             "evidence_status": "visible_exact_model", "source_ids": ["src.demo"]}
+             "evidence_status": "visible_exact_model", "source_ids": ["src.demo"], "assumptions": []}
         ]},
         "relationships": {"relationships": [
             {"id": "rel.one", "from": "assembly.root", "to": "part.one",
