@@ -309,7 +309,7 @@ function renderTree() {
     const button = document.createElement("button");
     button.type = "button";
     button.className = `tree-item${entry.id === state.selectedId ? " active" : ""}`;
-    button.style.paddingLeft = `${7 + Math.min(entry.depth, 5) * 12}px`;
+    button.classList.add(`depth-${Math.min(entry.depth, 5)}`);
     button.dataset.id = entry.id;
     const symbol = document.createElement("span");
     symbol.className = "tree-symbol";
