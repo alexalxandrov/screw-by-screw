@@ -166,7 +166,7 @@ def main():
     bpy.ops.object.delete(use_global=False)
     for collection in list(bpy.data.collections):
         if collection.name != bpy.context.scene.collection.name:
-            bpy.data.collections.remove(collection)
+            bpy.data.collections.remove(collection, do_unlink=True)
 
     scene = bpy.context.scene
     scene.unit_settings.system = "METRIC"
