@@ -1,7 +1,7 @@
 # Geometry Reconstruction Plan
 
 **Target:** EVGA GeForce RTX 3060 XC BLACK GAMING, 12G-P5-3655-KR  
-**Status:** procedural proxy blockout generator committed; no verified full CAD geometry.
+**Status:** v0.4 candidate prepared; v0.3 is the last owner-accepted generator; no verified full CAD geometry.
 
 ## Modeling strategy
 
@@ -69,7 +69,7 @@ The generated geometry is a visual proxy only. It is not CAD, not dimensionally 
 
 ## First geometry acceptance gate
 
-The external blockout must match published envelope, fan count, fan placement, shroud silhouette, exposed PCB/no-backplate configuration and port layout. Current generator is only an initial proxy: it establishes the asset hierarchy and scale convention, but the acceptance gate is not passed until fan placement, silhouette, PCB outline and bracket geometry are checked against orthogonal references or a physical sample.
+The external blockout must match the published nominal reference dimensions, fan count, fan placement, shroud silhouette, exposed PCB/no-backplate configuration and port layout. The shroud may overhang the nominal 201.8 mm length; do not enforce that value as the maximum exterior X extent. Current generator is only an initial proxy: it establishes the asset hierarchy and scale convention, but the acceptance gate is not passed until fan placement, silhouette, PCB outline and bracket geometry are checked against orthogonal references or a physical sample.
 
 
 ## First-run technical audit — 2026-11-25
@@ -113,7 +113,7 @@ This is a transform-preservation bug in the helper used to parent newly linked m
 - preserves each child's explicit transform basis;
 - sets matrix_parent_inverse from the evaluated parent world matrix;
 - runs a pre-export transform-integrity check for both fan frames, hubs and each blade pivot;
-- rejects generation rather than saving/exporting when the fan pivots are displaced or renderable X/Z bounds fall outside the nominal card footprint;
+- rejects generation rather than saving/exporting when the fan pivots are displaced or the lower X / vertical Z sanity bounds fail; the nominal length is not a hard upper bound for all exterior geometry;
 - writes version-suffixed v0.3 artifacts, retaining v0.1 and v0.2 outputs.
 
 **Validation status:** v0.3 is committed but not yet run in the project owner's Blender environment. The owner must run the generator and inspect the new world-space checks before v0.3 can be accepted. A passing geometric validation does not establish exact real-product geometry; fan layout, blade profile/count, thickness and internal placement remain illustrative.
@@ -186,4 +186,4 @@ With v0.3 technically accepted, the next version should improve the product silh
 - GLB node extras exactly match the exported manifest IDs.
 - Blender 4.3.2 generation and GLB parse test must pass before accepting the version.
 
-The next version should be implemented as a new output version and must not overwrite v0.3 artifacts.
+The v0.4 candidate retains versioned outputs and must not overwrite v0.3 artifacts. The owner must run the candidate in Blender 4.3.2 and return the text inspection report before acceptance.
