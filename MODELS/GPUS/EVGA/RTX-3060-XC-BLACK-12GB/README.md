@@ -22,6 +22,14 @@ This package is specific to the XC BLACK SKU. Do not merge data from the distinc
 - 04-WORKING/ — editable Blender/FreeCAD working files.
 - 05-EXPORT/ — optimized GLB and published data package.
 
+## Current research package
+
+- [model.json](model.json) — source-backed model identity and high-level specifications.
+- [components.json](components.json) — preliminary component inventory; not a complete BOM.
+- [sources.json](00-SOURCES/sources.json) — structured source and rights register.
+- [REFERENCE_LOG.md](01-REFERENCES/REFERENCE_LOG.md) — visual observations and open questions.
+- [GEOMETRY_PLAN.md](02-CAD/GEOMETRY_PLAN.md) — staged reconstruction plan.
+
 ## Required package files (future)
 
 model.json, components.json, relationships.json, sources.json, assembly_steps.json, process_layers.json, and a release manifest.
