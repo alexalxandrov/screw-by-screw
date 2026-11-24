@@ -382,7 +382,8 @@ function selectComponent(id) {
   clearHighlights();
   state.selected = object;
   state.selectedId = id;
-  applyHighlight(object);
+  object.traverse((child) => { if (child.isMesh) applyHighlight(child); });
+  if (object.isMesh) applyHighlight(object);
   renderDetails(id);
   renderTree();
   setStatus(id);
@@ -390,6 +391,7 @@ function selectComponent(id) {
 
 function resetCamera() {
   if (!state.camera || !state.controls) return;
+  state.camera.up.set(0, 0, 1);
   state.camera.position.set(300, 235, 260);
   state.controls.target.set(101, 0, 55);
   state.controls.update();
@@ -401,6 +403,7 @@ function saveBaseTransforms() {
   const box = new THREE.Box3().setFromObject(state.modelRoot);
   const center = box.getCenter(new THREE.Vector3());
   state.modelRoot.traverse((object) => {
+    if (object === state.modelRoot) return;
     if (!object.isMesh && !object.userData?.sbs_component_id) return;
     object.updateMatrixWorld(true);
     const world = object.getWorldPosition(new THREE.Vector3());
@@ -423,6 +426,7 @@ function setExplode(value) {
   for (const record of state.baseTransforms.values()) {
     const targetWorld = record.world.clone().add(record.direction.clone().multiplyScalar(amount));
     if (record.object.parent) {
+      record.object.parent.updateWorldMatrix(true, false);
       record.object.position.copy(record.object.parent.worldToLocal(targetWorld));
     } else {
       record.object.position.copy(targetWorld);
@@ -532,6 +536,8 @@ function loadArrayBuffer(buffer, filename) {
     const root = new THREE.Group();
     root.name = filename || "Imported GLB";
     root.add(gltf.scene);
+    // Blender GLB export is Y-up; the atlas uses the source scene Z-up convention.
+    root.rotation.x = Math.PI / 2;
     installModel(root, "file");
   }, (error) => {
     console.error(error);
@@ -668,9 +674,8 @@ function bindUI() {
 }
 
 async function tryLoadBundledModel() {
-  const loader = new GLTFLoader();
   try {
-    const response = await fetch("/models/rtx3060_xc_black_blockout_v04.glb");
+    const response = await fetch(`${import.meta.env.BASE_URL}models/rtx3060_xc_black_blockout_v04.glb`);
     if (!response.ok) throw new Error("No bundled model");
     const buffer = await response.arrayBuffer();
     loadArrayBuffer(buffer, "Bundled v0.4 GLB");
