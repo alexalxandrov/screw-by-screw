@@ -58,6 +58,15 @@ Or use **Open GLB** to load a local GLB file in the browser. Generated model bin
 
 The Blender source scene uses X = card length, Y = thickness, Z = height. The Blender exporter writes a Y-up glTF asset. The viewer converts imported GLB content back to the atlas Z-up convention at the model wrapper. The fallback scene is authored directly in Z-up coordinates.
 
+## Automated browser tests
+
+The Playwright suite runs in headless Chromium with SwiftShader WebGL. It covers fallback scene rendering, component selection, process-layer explanations, the bilingual quiz and explode/reassemble interaction:
+
+```bash
+npx playwright install chromium
+npm run test:e2e
+```
+
 ## Known limitations
 
 - The 24 heatsink fin proxies, fan centres, blade profiles, thickness, PCB outline, shroud contour and internal component positions remain illustrative or unknown.
