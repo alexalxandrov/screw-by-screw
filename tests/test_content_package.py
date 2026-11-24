@@ -125,7 +125,7 @@ class ContentPackageTests(unittest.TestCase):
                     continue
                 (directory / f"{key}.json").write_text(json.dumps(value), encoding="utf-8")
             manifest_builder.build_manifest(directory)
-            (directory / "model.json").write_text('{"tampered": true}', encoding="utf-8")
+            (directory / "components.json").write_text((directory / "components.json").read_text(encoding="utf-8") + " ", encoding="utf-8")
             loaded = validator.load_package(directory)
             with self.assertRaisesRegex(validator.PackageError, "SHA-256 mismatch"):
                 validator.validate_package(loaded, directory)
