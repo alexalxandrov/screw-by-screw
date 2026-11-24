@@ -1,0 +1,13 @@
+{
+  "schema_version":"0.1-draft",
+  "id":"gpu.evga.12g-p5-3655-kr",
+  "manufacturer":"EVGA",
+  "product_name":"GeForce RTX 3060 XC BLACK GAMING",
+  "part_number":"12G-P5-3655-KR",
+  "gpu":{"manufacturer":"NVIDIA","family":"GeForce RTX 3060","architecture":"Ampere","die":"GA106","status":"source_supported"},
+  "memory":{"capacity_gb":12,"type":"GDDR6","bus_width_bits":192,"status":"manufacturer_specification"},
+  "physical":{"length_mm":201.8,"height_mm":110,"slot_width":"dual_slot","backplate":false,"fans":{"count":2,"opening_diameter_mm":90,"impeller_diameter_mm":85,"measurement_status":"reviewer_measurement_approximate"},"status":"review_source"},
+  "content_status":"research","geometry_status":"not_created","pcb_revision":null,"boardview_status":"not_verified","schematic_status":"not_verified","cad_status":"not_verified",
+  "notes":["Locked to EVGA part number 12G-P5-3655-KR.","Do not merge board-specific data from 12G-P5-3657-KR.","Dimensions and fan measurements are source-derived.","No PCB revision is asserted until a physical marking or reliable exact-board source is found."],
+  "source_ids":["src.evga.spec","src.gamersnexus.teardown","src.lanoc.review","src.neoseeker.review"]
+}
