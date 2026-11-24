@@ -278,9 +278,13 @@ def main():
 
     if not args.no_glb:
         glb_path = out_dir / "rtx3060_xc_black_blockout.glb"
-        bpy.ops.export_scene.gltf(filepath=str(glb_path), export_format="GLB",
-                                  export_apply=True, export_yup=True, export_extras=True)
-        print(f"Exported GLB: {glb_path}")
+        if hasattr(bpy.ops.export_scene, "gltf"):
+            bpy.ops.export_scene.gltf(filepath=str(glb_path), export_format="GLB",
+                                      export_apply=True, export_yup=True, export_extras=True)
+            print(f"Exported GLB: {glb_path}")
+        else:
+            print("GLB export skipped: Blender glTF exporter is not available in this installation.")
+            print("Enable/install the glTF 2.0 exporter, then rerun without --no-glb.")
 
     print(f"Saved manifest: {manifest_path}")
     print("WARNING: illustrative blockout only; not CAD or manufacturing geometry.")
