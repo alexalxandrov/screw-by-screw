@@ -1,6 +1,6 @@
 # Data Model
 
-**Status:** initial schema proposal
+**Status:** initial schema proposal with a validated pilot content package
 **Pilot:** EVGA GeForce RTX 3060 XC BLACK GAMING 12GB
 
 ## Principles
@@ -62,3 +62,8 @@ EVGA RTX 3060 XC BLACK → cooler assembly → fan A / fan B / heatsink; PCB ass
     }
 
 This is an illustrative shape, not a validated schema. Add formal JSON Schema after the first real component inventory.
+
+
+## Implemented pilot package
+
+The first structured content package is located at `content/models/evga-rtx3060-xc-black-12gb/`. It contains model identity/specifications, source register, bilingual component records, typed relationships, qualitative process layers, teardown observations, and source-backed learning questions. The package validator checks stable IDs and cross-file references. Assembly steps remain intentionally empty until the full teardown sequence is reviewed; six memory candidates and all proxy geometry remain explicitly unconfirmed.
