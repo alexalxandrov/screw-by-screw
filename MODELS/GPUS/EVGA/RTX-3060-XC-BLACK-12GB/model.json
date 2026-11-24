@@ -34,8 +34,8 @@
   "geometry_status": "illustrative_proxy_not_cad",
   "generator": {
     "path": "tools/modeling/build_rtx3060_xc_black_blockout.py",
-    "version": "0.3.0",
-    "technical_validation": "owner_run_blender_4.3.2_passed",
+    "version": "0.4.0",
+    "technical_validation": "pending_owner_run_blender_4.3.2",
     "visual_fidelity": "not_accepted"
   },
   "pcb_revision": null,
@@ -49,7 +49,8 @@
     "Fan opening and impeller diameters are approximate reviewer measurements.",
     "Fan centres, blade count/profile, thickness, shroud and PCB outlines, and internal placements remain illustrative or unknown.",
     "The v0.3 Blender-to-GLB pipeline passed owner-run structural and transform checks; this does not establish product geometry fidelity.",
-    "No PCB revision is asserted until a physical marking or reliable exact-board source is found."
+    "No PCB revision is asserted until a physical marking or reliable exact-board source is found.",
+    "v0.4 is a candidate generator revision; it is not accepted until the owner runs Blender 4.3.2 and inspects the exported scene."
   ],
   "source_ids": [
     "src.evga.spec",
@@ -57,4 +58,4 @@
     "src.lanoc.review",
     "src.neoseeker.review"
   ]
-}
+}\n
