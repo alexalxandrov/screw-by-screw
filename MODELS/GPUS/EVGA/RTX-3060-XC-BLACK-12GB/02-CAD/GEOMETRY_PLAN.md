@@ -94,3 +94,5 @@ Generator v0.2 is now committed as a refinement candidate:
 - GLB export requests node extras so component IDs and provenance can accompany the hierarchy.
 
 Validation status: v0.1 was run by the project owner. v0.2 has been committed but still requires a local Blender 4.3.2 run and visual inspection. Do not treat the new fan profiles, blade count or assembly placement as exact product geometry.
+
+- v0.2 writes version-suffixed `.blend`, `.glb` and manifest files so the validated v0.1 artifacts remain available for comparison.
