@@ -1,6 +1,6 @@
 # Content Production Pipeline
 
-**Status:** proposed workflow for the first production model
+**Status:** proposed workflow for the first production model  
 **Pilot:** EVGA GeForce RTX 3060 XC BLACK GAMING 12GB (12G-P5-3655-KR)
 
 ## Principle
@@ -13,7 +13,7 @@ Never silently convert missing evidence into invented geometry or facts. Every a
 2. **Acquire evidence.** Collect permitted CAD, teardown material, specifications, photographs, PCB/BoardView files, schematics, datasheets, manuals, and technical articles. Preserve original files unchanged.
 3. **Register provenance and rights.** Record URL, author/publisher, retrieval date, hash, license/terms, attribution, modification and redistribution permissions, and exact model/revision applicability. Unknown rights means do not publish the asset.
 4. **Extract structure.** Import CAD assemblies where available and preserve hierarchy/transforms. For photos/video, create a human-reviewed inventory; do not infer hidden geometry from one image.
-5. **Prepare geometry.** Use FreeCAD for CAD inspection and Blender Python for cleanup, naming, stable IDs, origins, materials, LODs, authored exploded positions, and GLB export. Keep source and derived geometry separate.
+5. **Prepare geometry.** Use FreeCAD for CAD inspection/import and Blender Python for cleanup, naming, stable IDs, origins, materials, LODs, authored exploded positions, and GLB export. Keep source and derived geometry separate.
 6. **Build semantic data.** Create component instances, definitions, parent-child relationships, typed connections, cards, and source-backed claims. Separate card-specific implementation from generic RTX 3060 architecture.
 7. **Author interactions.** Prepare reversible exploded states and assembly steps. Add power, signal, thermal, and airflow layers only when evidence supports them.
 8. **Validate.** Check identity, geometry, hierarchy, IDs, transforms, links, units, source coverage, licensing, accessibility, and browser performance.
@@ -37,6 +37,13 @@ AI can assist with document extraction, candidate identification, translation, a
 - Record PCB revision only from a physical sample or reliable source.
 - Collect exact-model teardown, product specifications, independent PCB/cooler coverage, and reference views.
 - Search for STEP/assembly CAD, PCB layout, BoardView, schematic, and datasheets. Record missing items explicitly.
+
+### First blockout (implemented as a generator; not yet executed here)
+- Run `blender --background --python tools/modeling/build_rtx3060_xc_black_blockout.py` from the repository root.
+- The generator creates a local .blend scene, GLB and JSON manifest under the model's `04-WORKING/generated/` directory by default.
+- The generator uses manufacturer dimensions for length/height and reviewer-measured approximate fan diameters; unverified dimensions and placements are explicitly marked illustrative.
+- Review the generated scene against exact-model photographs before promoting any proxy geometry to measured/photo-estimate status.
+- Generated binary artifacts are local working files and are not committed automatically.
 
 ### Structural model
 Start with high-confidence assemblies: shroud/fan assembly, heatsink, PCB, backplate if present, GPU package, memory packages, power-delivery components, connectors, and fasteners. This is a candidate inventory, not a claim that every item is present. Final structure must match the selected variant and evidence.
