@@ -96,3 +96,24 @@ Generator v0.2 is now committed as a refinement candidate:
 Validation status: v0.1 was run by the project owner. v0.2 has been committed but still requires a local Blender 4.3.2 run and visual inspection. Do not treat the new fan profiles, blade count or assembly placement as exact product geometry.
 
 - v0.2 writes version-suffixed `.blend`, `.glb` and manifest files so the validated v0.1 artifacts remain available for comparison.
+
+
+## Second-run technical audit — v0.2 — 2026-11-25
+
+The project owner ran v0.2 with Blender 4.3.2 and reported:
+- 44 scene objects: 37 meshes and 7 assembly empties.
+- All 44 objects had component IDs; 42 objects had parents.
+- GLB v2 container was valid: 43 nodes, 36 meshes, 9 materials; all 43 nodes retained component IDs in glTF extras.
+- The explicit fan and card assembly hierarchy exported.
+- However, the annular fan frames and swept blade meshes were at world origin after parenting. Their world-space origins were reported as (0, 0, 0), while the fan hubs remained at their intended positions (55, -21.7, 56) and (146, -21.7, 56).
+- Consequently, the ASCII front projection and aggregate bounds exposed geometry extending to X=-45 mm and Z=-45 mm. The earlier automated checks did not test world-space placement and therefore produced false-positive PASS results.
+
+This is a transform-preservation bug in the helper used to parent newly linked mesh data-blocks. A corrected generator candidate v0.3 now:
+- updates the dependency graph before parenting;
+- preserves each child's explicit transform basis;
+- sets matrix_parent_inverse from the evaluated parent world matrix;
+- runs a pre-export transform-integrity check for both fan frames, hubs and each blade pivot;
+- rejects generation rather than saving/exporting when the fan pivots are displaced or renderable X/Z bounds fall outside the nominal card footprint;
+- writes version-suffixed v0.3 artifacts, retaining v0.1 and v0.2 outputs.
+
+**Validation status:** v0.3 is committed but not yet run in the project owner's Blender environment. The owner must run the generator and inspect the new world-space checks before v0.3 can be accepted. A passing geometric validation does not establish exact real-product geometry; fan layout, blade profile/count, thickness and internal placement remain illustrative.
