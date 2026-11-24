@@ -56,7 +56,7 @@ def read_glb(path: Path) -> dict:
     if not chunks or chunks[0][0] != JSON_CHUNK:
         raise ValidationError("First GLB chunk is not JSON")
     try:
-        gltf = json.loads(chunks[0][1].decode("utf-8").rstrip(" \\t\\r\\n\\0"))
+        gltf = json.loads(chunks[0][1].decode("utf-8").rstrip(" \t\r\n\0"))
     except (UnicodeDecodeError, json.JSONDecodeError) as exc:
         raise ValidationError(f"Invalid embedded glTF JSON: {exc}") from exc
     if any(kind == JSON_CHUNK for kind, _ in chunks[1:]):
