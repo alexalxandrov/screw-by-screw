@@ -77,7 +77,7 @@ class BlockoutValidatorTests(unittest.TestCase):
     def test_invalid_child_index_fails(self):
         gltf = sample_gltf()
         gltf["nodes"][0]["children"] = [99]
-        with self.assertRaisesRegex(validator.ValidationError, "invalid child"):
+        with self.assertRaisesRegex(validator.ValidationError, "out of range"):
             validator.validate(sample_manifest(), gltf)
 
     def test_multiple_parents_fail(self):
@@ -94,6 +94,7 @@ class BlockoutValidatorTests(unittest.TestCase):
     def test_cycle_fails(self):
         gltf = sample_gltf()
         gltf["nodes"][1]["children"] = [0]
+        gltf["scenes"][0]["nodes"] = []
         with self.assertRaisesRegex(validator.ValidationError, "Cycle detected"):
             validator.validate(sample_manifest(), gltf)
 
