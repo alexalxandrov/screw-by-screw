@@ -70,3 +70,27 @@ The generated geometry is a visual proxy only. It is not CAD, not dimensionally 
 ## First geometry acceptance gate
 
 The external blockout must match published envelope, fan count, fan placement, shroud silhouette, exposed PCB/no-backplate configuration and port layout. Current generator is only an initial proxy: it establishes the asset hierarchy and scale convention, but the acceptance gate is not passed until fan placement, silhouette, PCB outline and bracket geometry are checked against orthogonal references or a physical sample.
+
+
+## First-run technical audit — 2026-11-25
+
+The first generated scene was run successfully by the project owner with Blender 4.3.2.
+
+Observed v0.1 results:
+- Blender scene opened and saved successfully.
+- 39 mesh objects, 4 organizational collections and 39 objects carrying stable sbs_component_id properties.
+- GLB v2 container and embedded glTF JSON validated; 39 nodes, 39 meshes and 10 exported materials; file length matched the GLB header.
+- Manifest parsed as valid JSON and retained the SKU identity and evidence labels.
+- The nominal envelope guide was slightly expanded by its applied wireframe modifier.
+- The fan frame and opening guide were cylinders rather than hollow rings, so they could visually occlude the hub and blades. The blades were simple box proxies.
+- The v0.1 scene had no explicit parent assembly nodes for grouped selection/exploded-view operations.
+- The aggregate proxy bounds (202.53 × 44.70 × 110.46 mm) were not a card-thickness measurement. They included the guide and protruding fan/power-connector proxies.
+
+Generator v0.2 is now committed as a refinement candidate:
+- Fan frames are annular meshes; blades are swept polygon proxies rather than rectangular blocks.
+- Fan assemblies and top-level subassemblies have explicit parent nodes and stable IDs.
+- The envelope guide is an exact-size wire display, tagged reference_only, and excluded from GLB export.
+- The manifest records derived proxy bounds separately and warns that the Y extent includes front/rear protrusions.
+- GLB export requests node extras so component IDs and provenance can accompany the hierarchy.
+
+Validation status: v0.1 was run by the project owner. v0.2 has been committed but still requires a local Blender 4.3.2 run and visual inspection. Do not treat the new fan profiles, blade count or assembly placement as exact product geometry.
