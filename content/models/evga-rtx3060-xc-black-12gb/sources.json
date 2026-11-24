@@ -1,0 +1,48 @@
+{
+  "schema_version": "0.1.0",
+  "sources": [
+    {
+      "id": "src.evga.spec",
+      "title": "EVGA GeForce RTX 3060 XC BLACK GAMING 12GB specification",
+      "publisher": "EVGA",
+      "url": "https://sg-repo-production-photos.s3.eu-central-1.amazonaws.com/aikido/cache/70b60b3a1a7bbeaced972a5b6905797f.pdf",
+      "type": "manufacturer_specification",
+      "applicability": "12G-P5-3655-KR",
+      "license_status": "redistribution_not_cleared"
+    },
+    {
+      "id": "src.lanoc.review",
+      "title": "EVGA RTX 3060 XC Black",
+      "publisher": "LanOC Reviews",
+      "url": "https://lanoc.org/review/video-cards/evga-rtx-3060-xc-black?showall=1",
+      "type": "exact_model_review",
+      "applicability": "explicit_XC_Black_review_sample",
+      "license_status": "third_party_copyright_no_reuse_permission"
+    },
+    {
+      "id": "src.gamersnexus.teardown",
+      "title": "EVGA RTX 3060 XC Black teardown",
+      "publisher": "Gamers Nexus",
+      "url": "https://www.youtube.com/watch?v=hJFJ_clQT8U",
+      "type": "exact_model_teardown",
+      "applicability": "explicitly_EVGA_RTX_3060_XC_Black",
+      "locators": [
+        "01:30",
+        "05:33",
+        "06:45",
+        "09:00",
+        "11:00"
+      ],
+      "license_status": "third_party_copyright_no_reuse_permission"
+    },
+    {
+      "id": "src.neoseeker.review",
+      "title": "EVGA GeForce RTX 3060 XC Black Gaming Review",
+      "publisher": "Neoseeker",
+      "url": "https://www.neoseeker.com/Articles/Hardware/Reviews/evga-geforce-rtx-3060-xc-black-gaming/",
+      "type": "exact_sku_review",
+      "applicability": "review_sample_part_number_12G-P5-3655-KR",
+      "license_status": "third_party_copyright_no_reuse_permission"
+    }
+  ]
+}
