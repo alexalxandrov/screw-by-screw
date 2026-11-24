@@ -147,3 +147,43 @@ The project owner ran generator v0.3 with Blender 4.3.2 and supplied the local i
 This does **not** mean the product geometry is accurate. Fan centres, blade shape/count, overall thickness, shroud silhouette, PCB outline and internal component placement remain illustrative or unverified. The external/product-fidelity acceptance gate remains open pending calibrated references or physical measurements.
 
 The optional Draco compression warning is non-fatal; the produced GLB was independently parsed and validated without Draco compression.
+
+
+## Next modeling milestone — v0.4 photo-informed assemblies
+
+With v0.3 technically accepted, the next version should improve the product silhouette and cooling topology without pretending that photo-estimated values are measured CAD.
+
+### Priority 1 — External shroud
+- Replace the five skeletal rails with a continuous fascia proxy and two circular fan apertures.
+- Keep the central bridge and upper/lower branding areas as separate selectable children.
+- Add simplified recessed/textured side zones based on the exact XC BLACK front reference.
+- Keep fan openings at approximately 90 mm and impeller visual diameter at approximately 85 mm, with reviewer-measurement provenance.
+- Exact fascia outline, bevels, fan centres and branding geometry remain photo-estimates.
+
+### Priority 2 — PCB silhouette and fastener locations
+- Replace the plain rectangular PCB proxy with a shaped board outline and the large ventilation cutout visible in the exact-SKU rear photo.
+- Represent the four central heatsink mounting locations as separate screw proxies, preserving the locations as photo-estimates.
+- Do not invent reference designators, pad locations, board revision or component values.
+
+### Priority 3 — Cooling assembly
+- Replace the solid heatsink block with separately selectable fin plates aligned to the side-profile photograph.
+- Add distinct copper heatpipe proxy paths and keep their count/routing labelled illustrative until a teardown view provides a defensible count.
+- Keep the copper GPU/memory contact plate a distinct component.
+- Add two fan-header/lead proxies near the side shown in the reference photograph; do not infer pinout.
+
+### Priority 4 — I/O and power details
+- Replace the flat I/O panel with a ventilated bracket proxy featuring three DisplayPort openings and one HDMI opening.
+- Replace the power-port cube with a receptacle proxy exposing the 2×4 contact arrangement.
+- Keep exact port cutout dimensions and connector placement as photo-estimates.
+
+### Acceptance criteria for v0.4
+- No parent operation may change a child's world-space placement.
+- Every selectable part and assembly has a unique stable component ID.
+- All generated renderable mesh bounds remain near the documented nominal envelope, with explicitly recorded protrusions.
+- The fascia visibly has two open fan apertures; fan blades remain visible through them.
+- Heatsink fins are independently selectable; heatpipe and fan-cable proxies are separate.
+- PCB airflow cutout and four fastener proxies exist as separate, provenance-labelled parts.
+- GLB node extras exactly match the exported manifest IDs.
+- Blender 4.3.2 generation and GLB parse test must pass before accepting the version.
+
+The next version should be implemented as a new output version and must not overwrite v0.3 artifacts.
