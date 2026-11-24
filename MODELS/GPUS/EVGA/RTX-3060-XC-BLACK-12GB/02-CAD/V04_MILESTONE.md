@@ -11,7 +11,7 @@ The owner supplied Blender 4.3.2 inspection output confirming:
 - 44 scene objects, 37 meshes and 7 assembly empties;
 - 44 unique IDs in the Blender scene;
 - both fan frames, hubs and all blade pivots at configured world-space centres;
-- proxy X/Z bounds within the nominal envelope;
+- proxy X/Z bounds within the generator's configured envelope (an internal consistency check, not a verified physical envelope);
 - valid manifest JSON with SKU 12G-P5-3655-KR;
 - valid GLB 2.0 with a JSON chunk and exact declared file length;
 - 43 exported nodes with IDs matching the 43 non-reference manifest objects;
@@ -27,7 +27,7 @@ The validator is a structural gate only. It cannot replace visual review or phys
 
 ## Geometry priorities for v0.4
 
-1. **External silhouette:** replace the five-rail shroud proxy with a contour reconstructed from permitted, near-orthogonal exact-SKU views. Keep the current proxy as a fallback.
+1. **External silhouette and envelope:** replace the five-rail shroud proxy with a contour reconstructed from permitted, near-orthogonal exact-SKU views. Separate the 201.8 mm manufacturer nominal length from the outer shroud length: LanOC explicitly notes that the shroud overhangs the nominal length, but does not quantify the overhang. Keep the current proxy as a fallback and do not use 201.8 mm as a hard maximum for all exterior geometry.
 2. **Fan placement:** measure fan centres from calibrated images using the known 201.8 mm card length as a scale reference. Record image, crop, calibration endpoints, pixel-to-mm ratio and uncertainty for each estimate.
 3. **PCB outline:** reconstruct only the visible outline from exact-SKU rear/PCB views. Do not borrow the layout from 12G-P5-3657-KR or generic RTX 3060 boards.
 4. **I/O bracket:** separate the bracket silhouette, port apertures and retention tab only when their locations are visible in reliable references.
