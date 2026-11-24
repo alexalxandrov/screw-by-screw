@@ -117,3 +117,33 @@ This is a transform-preservation bug in the helper used to parent newly linked m
 - writes version-suffixed v0.3 artifacts, retaining v0.1 and v0.2 outputs.
 
 **Validation status:** v0.3 is committed but not yet run in the project owner's Blender environment. The owner must run the generator and inspect the new world-space checks before v0.3 can be accepted. A passing geometric validation does not establish exact real-product geometry; fan layout, blade profile/count, thickness and internal placement remain illustrative.
+
+
+## Third-run technical acceptance — v0.3 — 2026-11-25
+
+The project owner ran generator v0.3 with Blender 4.3.2 and supplied the local inspection output.
+
+### Confirmed in Blender
+- 44 scene objects: 37 mesh objects and 7 assembly empties.
+- All 44 scene objects carry component IDs; 42 objects participate in parent relationships.
+- Both fan frame world positions match their configured centres: (55, -19.5, 56) mm and (146, -19.5, 56) mm.
+- Both fan hubs match their configured world positions: (55, -21.7, 56) mm and (146, -21.7, 56) mm.
+- All 14 blade pivots match their expected fan centres.
+- Renderable proxy bounds remain within the nominal X/Z envelope: X = -0.5..201.8 mm, Z = 0..110 mm.
+- Manifest parses as JSON, has schema 0.3.0, correct SKU 12G-P5-3655-KR, 44 objects, 44 unique component IDs and no duplicates.
+
+### Confirmed in exported GLB
+- Valid GLB 2.0 container; declared length equals the actual 153,800-byte file length.
+- First JSON chunk exists and is 36,580 bytes.
+- 43 nodes, 36 meshes and 9 materials.
+- All 43 exported nodes carry component IDs in glTF extras.
+- Exported component IDs exactly match the 43 non-reference IDs in the manifest: no missing or unexpected IDs.
+- Seven expected assembly nodes preserve their child relationships: card root, cooling, two fans, PCB/electronics, connectors and shroud.
+- Reference-only envelope guide is omitted from GLB.
+
+### Acceptance decision
+**v0.3 passes the technical generation, transform-integrity, manifest and GLB-structure checks in the owner's Blender 4.3.2 environment.** This establishes a functioning source-to-GLB pipeline and stable assembly/component identity.
+
+This does **not** mean the product geometry is accurate. Fan centres, blade shape/count, overall thickness, shroud silhouette, PCB outline and internal component placement remain illustrative or unverified. The external/product-fidelity acceptance gate remains open pending calibrated references or physical measurements.
+
+The optional Draco compression warning is non-fatal; the produced GLB was independently parsed and validated without Draco compression.
