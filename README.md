@@ -61,6 +61,7 @@ Screw by Screw — концепция публичной образовател�
 - [Аудит источников RTX 3060](docs/GPU_SOURCE_AUDIT.md)
 - [Release roadmap and 1.0 gates](docs/RELEASE_ROADMAP.md)
 - [1.0 acceptance checklist](docs/1.0_ACCEPTANCE_CHECKLIST.md)
+- [Security and privacy notes](docs/SECURITY.md)
 - [Viewer prototype](docs/VIEWER_PROTOTYPE.md)
 - [Каталог моделей](MODELS/README.md)
 - [Pilot content package](content/models/evga-rtx3060-xc-black-12gb/README.md) — source claims, SHA-256 release manifest and bilingual learning data.
