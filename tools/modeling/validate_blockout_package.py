@@ -115,15 +115,16 @@ def validate(manifest: dict, gltf: dict) -> list[str]:
     if len(node_ids) != len(set(node_ids)):
         raise ValidationError("Duplicate component IDs in GLB nodes")
     actual_ids = set(node_ids)
+    leaked_references = sorted(actual_ids & reference_ids)
+    if leaked_references:
+        raise ValidationError(
+            f"Reference-only objects leaked into GLB: {leaked_references}"
+        )
     missing = sorted(export_ids - actual_ids)
     unexpected = sorted(actual_ids - export_ids)
     if missing or unexpected:
         raise ValidationError(
             f"GLB/manifest ID mismatch; missing={missing}, unexpected={unexpected}"
-        )
-    if actual_ids & reference_ids:
-        raise ValidationError(
-            f"Reference-only objects leaked into GLB: {sorted(actual_ids & reference_ids)}"
         )
     checks.append(f"GLB component IDs match manifest: PASS ({len(actual_ids)} nodes)")
 
