@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - "tools/modeling/validate_blockout_package.py"
-      - "tests/test_blockout_validator.py"
+      - "tests/test_blockout_validator.py"\n      - "tools/modeling/inspect_blend_scene.py"
       - ".github/workflows/blockout-validator.yml"
   pull_request:
     paths:
