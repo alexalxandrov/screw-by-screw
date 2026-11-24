@@ -23,7 +23,7 @@
           <span class="build-tag">PROTOTYPE 0.6</span>
           <button class="quiet-button" id="language-toggle" type="button" aria-label="Switch language">RU / EN</button>
           <button class="primary-button" id="open-model" type="button" data-i18n="openGlb">Open GLB</button>
-          <input id="model-file" type="file" accept=".glb,.gltf,model/gltf-binary,model/gltf+json" hidden />
+          <input id="model-file" type="file" accept=".glb,model/gltf-binary" hidden />
         </div>
       </header>
 
@@ -121,6 +121,23 @@
             <div id="quiz-feedback" class="quiz-feedback" aria-live="polite"></div>
             <div id="quiz-sources" class="quiz-sources"></div>
             <button id="quiz-next" class="primary-button quiz-next" type="button" disabled>Check answer</button>
+          </div>
+          <div id="process-details" class="process-details" hidden>
+            <div class="process-detail-type" id="process-detail-type">COOLING</div>
+            <h3 id="process-detail-title">—</h3>
+            <p id="process-detail-description" class="detail-description">—</p>
+            <div class="detail-section">
+              <span class="eyebrow" data-i18n="linkedComponents">LINKED COMPONENTS</span>
+              <div id="process-components" class="process-components"></div>
+            </div>
+            <div class="detail-section">
+              <span class="eyebrow" data-i18n="assumptions">ASSUMPTIONS & LIMITS</span>
+              <ul id="process-assumptions" class="process-assumptions"></ul>
+            </div>
+            <div class="detail-section">
+              <span class="eyebrow" data-i18n="sources">SOURCES</span>
+              <div id="process-sources" class="source-links"></div>
+            </div>
           </div>
           <div id="component-details" hidden>
             <div class="detail-category" id="detail-category">COMPONENT</div>
