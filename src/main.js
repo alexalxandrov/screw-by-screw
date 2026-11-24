@@ -648,6 +648,7 @@ function setIsolated(isolate) {
 }
 
 function setLayer(layer) {
+  if (!state.modelRoot) return;
   clearHighlights();
   state.activeLayer = layer === "clear" || state.activeLayer === layer ? null : layer;
   document.querySelectorAll(".process-button").forEach((button) => {
@@ -912,5 +913,6 @@ applyLanguage();
 initRenderer();
 if (state.renderer) {
   canvasHost.addEventListener("dblclick", resetCamera);
+  loadDemo();
   tryLoadBundledModel();
 }
