@@ -11,11 +11,12 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools" / "content"))
 
 import validate_model_package as validator
+import build_release_manifest as manifest_builder
 
 
 def sample_package():
     return {
-        "model": {"id": "model.demo", "geometry_status": "illustrative_proxy_not_cad",
+        "model": {"id": "model.demo", "part_number": "DEMO-1", "geometry_status": "illustrative_proxy_not_cad",
                   "source_ids": ["src.demo"]},
         "sources": {"sources": [{"id": "src.demo"}]},
         "components": {"components": [
@@ -33,6 +34,12 @@ def sample_package():
              "source_ids": ["src.demo"]}
         ]},
         "assembly_steps": {"status": "not_authored", "steps": []},
+        "claims": {"claims": [
+            {"id": "claim.demo", "subject_id": "model.demo", "predicate": "demo_value",
+             "value": 1, "confidence_class": "manufacturer_data", "source_ids": ["src.demo"]}
+        ]},
+        "release": {"model_id": "model.demo", "part_number": "DEMO-1", "package_version": "0.1-draft",
+                    "status": "draft", "geometry_status": "illustrative_proxy_not_cad", "files": []},
         "learning": {"questions": [
             {"id": "q.one", "prompt": {"en": "Question?", "ru": "Вопрос?"},
              "choices": [{"en": "A", "ru": "А"}, {"en": "B", "ru": "Б"}],
@@ -82,6 +89,46 @@ class ContentPackageTests(unittest.TestCase):
                                                  "source_ids": ["src.demo"]}]
         with self.assertRaisesRegex(validator.PackageError, "marked not_authored"):
             validator.validate_package(package)
+
+    def test_unknown_claim_must_have_null_value(self):
+        package = sample_package()
+        package["claims"]["claims"][0]["confidence_class"] = "unknown"
+        with self.assertRaisesRegex(validator.PackageError, "must have a null value"):
+            validator.validate_package(package)
+
+    def test_claim_subject_must_exist(self):
+        package = sample_package()
+        package["claims"]["claims"][0]["subject_id"] = "missing"
+        with self.assertRaisesRegex(validator.PackageError, "unknown subject_id"):
+            validator.validate_package(package)
+
+    def test_build_manifest_hashes_all_content_files(self):
+        with tempfile.TemporaryDirectory() as temp:
+            directory = Path(temp)
+            package = sample_package()
+            for key, value in package.items():
+                if key == "release":
+                    continue
+                (directory / f"{key}.json").write_text(json.dumps(value), encoding="utf-8")
+            release = manifest_builder.build_manifest(directory)
+            self.assertEqual(len(release["files"]), len(manifest_builder.HASHED_FILES))
+            loaded = validator.load_package(directory)
+            report = validator.validate_package(loaded, directory)
+            self.assertIn("Release manifest and SHA-256 integrity: PASS", report)
+
+    def test_manifest_detects_tampered_content(self):
+        with tempfile.TemporaryDirectory() as temp:
+            directory = Path(temp)
+            package = sample_package()
+            for key, value in package.items():
+                if key == "release":
+                    continue
+                (directory / f"{key}.json").write_text(json.dumps(value), encoding="utf-8")
+            manifest_builder.build_manifest(directory)
+            (directory / "model.json").write_text('{"tampered": true}', encoding="utf-8")
+            loaded = validator.load_package(directory)
+            with self.assertRaisesRegex(validator.PackageError, "SHA-256 mismatch"):
+                validator.validate_package(loaded, directory)
 
     def test_directory_loader_requires_all_files(self):
         with tempfile.TemporaryDirectory() as temp:
