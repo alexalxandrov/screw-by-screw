@@ -1,0 +1,117 @@
+{
+  "schema_version": "0.1.0",
+  "device_model_id": "gpu.evga.12g-p5-3655-kr",
+  "relationships": [
+    {
+      "id": "rel.card.contains.shroud",
+      "from": "assembly.card.root",
+      "to": "assembly.shroud",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.card.contains.cooling",
+      "from": "assembly.card.root",
+      "to": "assembly.cooling",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review",
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.card.contains.pcb",
+      "from": "assembly.card.root",
+      "to": "assembly.pcb.electronics",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.card.contains.connectors",
+      "from": "assembly.card.root",
+      "to": "assembly.connectors",
+      "type": "contains",
+      "source_ids": [
+        "src.evga.spec",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.cooling.contains.fan1",
+      "from": "assembly.cooling",
+      "to": "assembly.fan.1",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.cooling.contains.fan2",
+      "from": "assembly.cooling",
+      "to": "assembly.fan.2",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.cooling.contains.heatsink",
+      "from": "assembly.cooling",
+      "to": "cooling.heatsink",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.cooling.contains.contact",
+      "from": "assembly.cooling",
+      "to": "cooling.gpu_contact",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.cooling.airflow",
+      "from": "assembly.fan.1",
+      "to": "cooling.heatsink",
+      "type": "airflow_over",
+      "source_ids": [
+        "src.lanoc.review"
+      ],
+      "certainty": "qualitative"
+    },
+    {
+      "id": "rel.pcb.contains.gpu",
+      "from": "assembly.pcb.electronics",
+      "to": "chip.gpu.ga106",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.connector.contains.power",
+      "from": "assembly.connectors",
+      "to": "connector.power.8pin",
+      "type": "contains",
+      "source_ids": [
+        "src.evga.spec"
+      ]
+    },
+    {
+      "id": "rel.connector.contains.io",
+      "from": "assembly.connectors",
+      "to": "connector.io.bracket",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    }
+  ]
+}
