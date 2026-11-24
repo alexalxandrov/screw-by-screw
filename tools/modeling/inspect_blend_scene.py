@@ -24,8 +24,8 @@ def object_record(obj):
         mins = [min(point[i] for point in world_corners) for i in range(3)]
         maxs = [max(point[i] for point in world_corners) for i in range(3)]
         bounds = {
-            "min_mm": [round(float(value * 1000), 3) for value in mins],
-            "max_mm": [round(float(value * 1000), 3) for value in maxs],
+            "min_mm": [round(float(value * bpy.context.scene.unit_settings.scale_length * 1000.0), 3) for value in mins],
+            "max_mm": [round(float(value * bpy.context.scene.unit_settings.scale_length * 1000.0), 3) for value in maxs],
         }
     else:
         bounds = None
@@ -39,8 +39,8 @@ def object_record(obj):
         "evidence_status": obj.get("sbs_evidence_status"),
         "geometry_status": obj.get("sbs_geometry_status"),
         "export_role": obj.get("sbs_export_role"),
-        "location_mm": [round(float(value * 1000), 3) for value in obj.matrix_world.translation],
-        "dimensions_mm": [round(float(value * 1000), 3) for value in obj.dimensions],
+        "location_mm": [round(float(value * bpy.context.scene.unit_settings.scale_length * 1000.0), 3) for value in obj.matrix_world.translation],
+        "dimensions_mm": [round(float(value * bpy.context.scene.unit_settings.scale_length * 1000.0), 3) for value in obj.dimensions],
         "world_bounds": bounds,
         "collections": sorted(collection.name for collection in obj.users_collection),
         "mesh_vertices": len(obj.data.vertices) if obj.type == "MESH" else None,
