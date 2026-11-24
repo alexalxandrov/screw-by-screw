@@ -53,3 +53,31 @@ test("exploded view can be returned to assembled state", async ({ page }) => {
   await page.getByRole("button", { name: "Собрать" }).click();
   await expect(page.locator("#explode-value")).toHaveText("0%");
 });
+
+test("rejects GLB files that reference external resources", async ({ page }) => {
+  await page.goto("/");
+  const document = {
+    asset: { version: "2.0" },
+    scene: 0,
+    scenes: [{ nodes: [] }],
+    nodes: [],
+    images: [{ uri: "https://example.invalid/remote-image.png" }]
+  };
+  const json = new TextEncoder().encode(JSON.stringify(document));
+  const paddedLength = Math.ceil(json.length / 4) * 4;
+  const buffer = new Uint8Array(20 + paddedLength);
+  const view = new DataView(buffer.buffer);
+  view.setUint32(0, 0x46546c67, true);
+  view.setUint32(4, 2, true);
+  view.setUint32(8, buffer.byteLength, true);
+  view.setUint32(12, paddedLength, true);
+  view.setUint32(16, 0x4e4f534a, true);
+  buffer.set(json, 20);
+  buffer.fill(0x20, 20 + json.length);
+  await page.locator("#model-file").setInputFiles({
+    name: "external-resource.glb",
+    mimeType: "model/gltf-binary",
+    buffer: Buffer.from(buffer)
+  });
+  await expect(page.locator("#viewer-error")).toContainText("внешние файлы");
+});
