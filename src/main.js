@@ -213,10 +213,11 @@ function createFallbackModel() {
   createFan(cooling, 1, 55);
   createFan(cooling, 2, 146);
 
+  const heatsink = makeGroup(cooling, "cooling.heatsink", "Heatsink assembly");
   const finSpan = 145.3;
   for (let index = 0; index < 24; index += 1) {
     const x = (201.8 - finSpan) / 2 + (index * finSpan) / 23;
-    makeMesh(cooling, `cooling.heatsink.fin.${String(index + 1).padStart(2, "0")}`,
+    makeMesh(heatsink, `cooling.heatsink.fin.${String(index + 1).padStart(2, "0")}`,
       `Heatsink fin proxy ${index + 1}`,
       new THREE.BoxGeometry(1, 13, 52.8), materials.metal, [x, 0, 55]);
   }
@@ -655,6 +656,8 @@ function setLayer(layer) {
     button.classList.toggle("active", button.dataset.layer === state.activeLayer);
   });
   if (!state.activeLayer) {
+    state.learningMode = false;
+    $("#learning-panel").hidden = true;
     $("#process-details").hidden = true;
     if (state.selectedId) renderDetails(state.selectedId);
     else {
