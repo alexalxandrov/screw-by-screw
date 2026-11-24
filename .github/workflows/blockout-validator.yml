@@ -1,20 +1,21 @@
-name: Blockout validator tests
+name: Model package validation
 
 on:
   push:
     paths:
-      - "tools/modeling/validate_blockout_package.py"
-      - "tools/modeling/inspect_blend_scene.py"
+      - "tools/modeling/**"
       - "tools/content/**"
       - "content/**"
-      - "tests/test_content_package.py"
       - "tests/test_blockout_validator.py"
+      - "tests/test_content_package.py"
       - ".github/workflows/blockout-validator.yml"
   pull_request:
     paths:
-      - "tools/modeling/validate_blockout_package.py"
-      - "tools/modeling/inspect_blend_scene.py"
+      - "tools/modeling/**"
+      - "tools/content/**"
+      - "content/**"
       - "tests/test_blockout_validator.py"
+      - "tests/test_content_package.py"
       - ".github/workflows/blockout-validator.yml"
 
 jobs:
