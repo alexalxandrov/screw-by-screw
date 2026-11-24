@@ -24,7 +24,8 @@ def sample_package():
              "evidence_status": "illustrative", "source_ids": ["src.demo"],
              "description": {"en": "Root description", "ru": "Описание корня"}},
             {"id": "part.one", "parent_id": "assembly.root", "name": {"en": "Part", "ru": "Деталь"},
-             "evidence_status": "visible_exact_model", "source_ids": ["src.demo"], "assumptions": []}
+             "evidence_status": "visible_exact_model", "source_ids": ["src.demo"],
+             "description": {"en": "Part description", "ru": "Описание детали"}}
         ]},
         "relationships": {"relationships": [
             {"id": "rel.one", "from": "assembly.root", "to": "part.one",
