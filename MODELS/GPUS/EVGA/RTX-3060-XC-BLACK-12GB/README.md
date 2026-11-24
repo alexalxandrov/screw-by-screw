@@ -8,7 +8,7 @@
 - GPU: NVIDIA GeForce RTX 3060 (Ampere / GA106 family)
 - Memory: 12GB GDDR6
 - Content status: research / source audit
-- Geometry status: not acquired
+- Geometry status: first procedural blockout generator added; not CAD
 - Rights status: not cleared for third-party media/assets
 
 This package is specific to the XC BLACK SKU. Do not merge data from the distinct EVGA XC Gaming SKU (12G-P5-3657-KR) or other RTX 3060 boards without evidence of equivalence.
@@ -17,18 +17,42 @@ This package is specific to the XC BLACK SKU. Do not merge data from the distinc
 
 - 00-SOURCES/ — source register and rights notes.
 - 01-REFERENCES/ — visual reference inventory; no copied media by default.
-- 02-CAD/ — original CAD and imported assembly files, only when permitted.
+- 02-CAD/ — original CAD and imported assembly files, only when permitted; includes measurement ledger and geometry plan.
 - 03-BOARDVIEW/ — BoardView, schematic and PCB evidence.
 - 04-WORKING/ — editable Blender/FreeCAD working files.
 - 05-EXPORT/ — optimized GLB and published data package.
 
-## Current research package
+## Current research and modeling package
 
 - [model.json](model.json) — source-backed model identity and high-level specifications.
 - [components.json](components.json) — preliminary component inventory; not a complete BOM.
 - [sources.json](00-SOURCES/sources.json) — structured source and rights register.
 - [REFERENCE_LOG.md](01-REFERENCES/REFERENCE_LOG.md) — visual observations and open questions.
 - [GEOMETRY_PLAN.md](02-CAD/GEOMETRY_PLAN.md) — staged reconstruction plan.
+- [MEASUREMENTS.csv](02-CAD/MEASUREMENTS.csv) — evidence-ranked dimensions and unresolved measurements.
+- [Blockout generator](../../../../tools/modeling/build_rtx3060_xc_black_blockout.py) — procedural Blender scene generator.
+
+## Generate the first blockout
+
+From the repository root, with Blender installed:
+
+```bash
+blender --background --python tools/modeling/build_rtx3060_xc_black_blockout.py
+```
+
+By default, generated local artifacts are written to:
+`MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/`
+
+Optional arguments are passed after Blender's `--` separator:
+
+```bash
+blender --background --python tools/modeling/build_rtx3060_xc_black_blockout.py -- --output-dir /path/to/output
+blender --background --python tools/modeling/build_rtx3060_xc_black_blockout.py -- --no-glb
+```
+
+The script produces a Blender scene, GLB export and JSON manifest unless disabled. Generated binaries are local working artifacts and are not committed by this script.
+
+**Accuracy warning:** the card length and height use manufacturer-published values; fan diameters are approximate reviewer measurements. Thickness, fan centres, shroud/PCB outlines and internal placements are illustrative or unknown. This asset is not suitable for manufacturing, fitment, repair or physical simulation.
 
 ## Required package files (future)
 
