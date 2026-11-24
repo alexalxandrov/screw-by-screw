@@ -53,7 +53,13 @@ Screw by Screw — концепция публичной образовател�
 ## Документы
 
 - [Подробная концепция продукта](docs/PRODUCT_CONCEPT.md)
-- [Аналоги, исследовательские направления и источники](docs/RESEARCH.md)\n- [Content Production Pipeline](docs/CONTENT_PIPELINE.md)\n- [Модель данных](docs/DATA_MODEL.md)\n- [Спецификация MVP](docs/MVP_SPEC.md)\n- [Техническая архитектура](docs/ARCHITECTURE.md)\n- [Аудит источников RTX 3060](docs/GPU_SOURCE_AUDIT.md)\n- [Каталог моделей](MODELS/README.md)
+- [Аналоги, исследовательские направления и источники](docs/RESEARCH.md)
+- [Content Production Pipeline](docs/CONTENT_PIPELINE.md)
+- [Модель данных](docs/DATA_MODEL.md)
+- [Спецификация MVP](docs/MVP_SPEC.md)
+- [Техническая архитектура](docs/ARCHITECTURE.md)
+- [Аудит источников RTX 3060](docs/GPU_SOURCE_AUDIT.md)
+- [Каталог моделей](MODELS/README.md)
 
 ## Рабочее название
 
