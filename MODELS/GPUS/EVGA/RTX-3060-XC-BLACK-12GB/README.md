@@ -7,8 +7,8 @@
 - Part number: 12G-P5-3655-KR
 - GPU: NVIDIA GeForce RTX 3060 (Ampere / GA106 family)
 - Memory: 12GB GDDR6
-- Content status: research / source audit
-- Geometry status: first procedural blockout generator added; not CAD
+- Content status: research / blockout pipeline
+- Geometry status: v0.3 technically accepted; v0.4 candidate pending local Blender run; not CAD
 - Rights status: not cleared for third-party media/assets
 
 This package is specific to the XC BLACK SKU. Do not merge data from the distinct EVGA XC Gaming SKU (12G-P5-3657-KR) or other RTX 3060 boards without evidence of equivalence.
@@ -52,12 +52,12 @@ blender --background --python tools/modeling/build_rtx3060_xc_black_blockout.py 
 
 The script produces a Blender scene, GLB export and JSON manifest unless disabled. Generated binaries are local working artifacts and are not committed by this script.
 
-The current generator version is v0.3 and writes versioned artifacts:
-- `rtx3060_xc_black_blockout_v03.blend`
+The current generator candidate is v0.4 and writes versioned artifacts:
+- `rtx3060_xc_black_blockout_v04.blend`
 - `rtx3060_xc_black_blockout_v03.glb`
 - `rtx3060_xc_black_blockout_v03.manifest.json`
 
-Earlier v0.1/v0.2 outputs are retained locally for comparison. v0.3 includes a pre-export transform-integrity check for fan frames, hubs, blade pivots and the nominal X/Z footprint. It passed local generation and transform-integrity checks in Blender 4.3.2. The GLB was independently validated: 43/43 component IDs matched the manifest and the assembly hierarchy was preserved. An independent standard-library validator is available at [validate_blockout_package.py](../../../../tools/modeling/validate_blockout_package.py); run it using the command in [BLOCKOUT_VALIDATION.md](02-CAD/BLOCKOUT_VALIDATION.md). Product geometry is still illustrative and has not passed the external-fidelity gate.
+Earlier v0.1/v0.2/v0.3 outputs are retained locally for comparison. v0.4 retains a pre-export transform-integrity check for fan frames, hubs, blade pivots and the nominal X/Z footprint. The v0.3 baseline passed local generation and transform-integrity checks in Blender 4.3.2. The v0.4 candidate must be run locally before acceptance. An independent standard-library validator is available at [validate_blockout_package.py](../../../../tools/modeling/validate_blockout_package.py); run it using the command in [BLOCKOUT_VALIDATION.md](02-CAD/BLOCKOUT_VALIDATION.md). Product geometry remains illustrative and has not passed the external-fidelity gate.
 
 **Accuracy warning:** the card length and height use manufacturer-published values; fan diameters are approximate reviewer measurements. Thickness, fan centres, shroud/PCB outlines and internal placements are illustrative or unknown. This asset is not suitable for manufacturing, fitment, repair or physical simulation.
 
