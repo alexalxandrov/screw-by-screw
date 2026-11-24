@@ -62,7 +62,7 @@ Screw by Screw — концепция публичной образовател�
 - [Release roadmap and 1.0 gates](docs/RELEASE_ROADMAP.md)
 - [Viewer prototype](docs/VIEWER_PROTOTYPE.md)
 - [Каталог моделей](MODELS/README.md)
-- [Pilot content package](content/models/evga-rtx3060-xc-black-12gb/README.md)
+- [Pilot content package](content/models/evga-rtx3060-xc-black-12gb/README.md) — source claims, SHA-256 release manifest and bilingual learning data.
 
 ## Рабочее название
 
