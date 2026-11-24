@@ -64,6 +64,7 @@ The Blender source scene uses X = card length, Y = thickness, Z = height. The Bl
 - The component inventory is a starter set, not a complete BOM.
 - Exploded view is a reversible visual separation, not a verified physical removal sequence.
 - Cooling and power layers are qualitative highlighting, not CFD, thermal analysis or circuit simulation.
+- The learning quiz is a small source-backed starter set, not a complete course or assessment system.
 - The viewer has not yet passed local browser testing against the owner's generated v0.4 GLB.
 - No model editing, user accounts, backend, telemetry or publishing workflow is included.
 
