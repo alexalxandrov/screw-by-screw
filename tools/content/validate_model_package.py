@@ -143,6 +143,8 @@ def validate_package(package: dict, package_dir: Path | None = None) -> list[str
     for source in sources:
         if not isinstance(source.get("url"), str) or not source["url"].startswith(("https://", "http://")):
             raise PackageError(f"Source {source['id']} has no valid URL")
+        if not isinstance(source.get("title"), str) or not isinstance(source.get("publisher"), str):
+            raise PackageError(f"Source {source['id']} needs title and publisher")
         if not isinstance(source.get("license_status"), str):
             raise PackageError(f"Source {source['id']} has no license_status")
 
@@ -159,6 +161,9 @@ def validate_package(package: dict, package_dir: Path | None = None) -> list[str
         name = component.get("name")
         if not isinstance(name, dict) or not all(isinstance(name.get(lang), str) and name[lang] for lang in ("en", "ru")):
             raise PackageError(f"Component {component['id']} must have non-empty en/ru names")
+        description = component.get("description")
+        if not isinstance(description, dict) or not all(isinstance(description.get(lang), str) and description[lang] for lang in ("en", "ru")):
+            raise PackageError(f"Component {component['id']} must have bilingual descriptions")
         require_source_ids(component.get("source_ids"), source_ids, f"component {component['id']}")
     for component_id in parent_map:
         seen = set()
@@ -187,8 +192,12 @@ def validate_package(package: dict, package_dir: Path | None = None) -> list[str
         if layer.get("mode") not in {"qualitative", "quantitative"}:
             raise PackageError(f"Process layer {layer['id']} has invalid mode")
         require_source_ids(layer.get("source_ids"), source_ids, f"process layer {layer['id']}")
-        if not isinstance(layer.get("assumptions"), list):
-            raise PackageError(f"Process layer {layer['id']} assumptions must be an array")
+        if not isinstance(layer.get("assumptions"), list) or any(not isinstance(value, str) for value in layer["assumptions"]):
+            raise PackageError(f"Process layer {layer['id']} assumptions must be an array of strings")
+        for field in ("title", "description"):
+            localized = layer.get(field)
+            if not isinstance(localized, dict) or not all(isinstance(localized.get(lang), str) and localized[lang] for lang in ("en", "ru")):
+                raise PackageError(f"Process layer {layer['id']} must have bilingual {field}")
 
     for step in steps:
         if not isinstance(step, dict) or not isinstance(step.get("id"), str):
@@ -215,6 +224,9 @@ def validate_package(package: dict, package_dir: Path | None = None) -> list[str
         for lang in ("en", "ru"):
             if not isinstance(question.get("prompt", {}).get(lang), str):
                 raise PackageError(f"Question {question['id']} has no {lang} prompt")
+        for choice_index, choice in enumerate(choices):
+            if not isinstance(choice, dict) or not all(isinstance(choice.get(lang), str) and choice[lang] for lang in ("en", "ru")):
+                raise PackageError(f"Question {question['id']} choice {choice_index} must be bilingual")
         require_source_ids(question.get("source_ids"), source_ids, f"question {question['id']}")
 
     for claim in claims:
