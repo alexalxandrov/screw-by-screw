@@ -80,6 +80,41 @@ class BlockoutValidatorTests(unittest.TestCase):
         with self.assertRaisesRegex(validator.ValidationError, "invalid child"):
             validator.validate(sample_manifest(), gltf)
 
+    def test_multiple_parents_fail(self):
+        gltf = sample_gltf()
+        gltf["nodes"].append({"name": "Second root", "children": [1],
+                              "extras": {"sbs_component_id": "extra"}})
+        manifest = sample_manifest()
+        manifest["objects"].append({"component_id": "extra", "export_role": "assembly"})
+        gltf["nodes"][0]["children"] = [1]
+        gltf["nodes"][2]["children"] = [1]
+        with self.assertRaisesRegex(validator.ValidationError, "multiple parents"):
+            validator.validate(manifest, gltf)
+
+    def test_cycle_fails(self):
+        gltf = sample_gltf()
+        gltf["nodes"][1]["children"] = [0]
+        with self.assertRaisesRegex(validator.ValidationError, "Cycle detected"):
+            validator.validate(sample_manifest(), gltf)
+
+    def test_invalid_scene_root_fails(self):
+        gltf = sample_gltf()
+        gltf["scenes"][0]["nodes"] = [99]
+        with self.assertRaisesRegex(validator.ValidationError, "out of range"):
+            validator.validate(sample_manifest(), gltf)
+
+    def test_boolean_scene_index_fails(self):
+        gltf = sample_gltf()
+        gltf["scene"] = True
+        with self.assertRaisesRegex(validator.ValidationError, "integer index"):
+            validator.validate(sample_manifest(), gltf)
+
+    def test_malformed_manifest_object_fails_cleanly(self):
+        manifest = sample_manifest()
+        manifest["objects"].append(None)
+        with self.assertRaisesRegex(validator.ValidationError, "must be an object"):
+            validator.validate(manifest, sample_gltf())
+
     def test_glb_header_and_json_chunk_parse(self):
         with tempfile.TemporaryDirectory() as temp:
             path = Path(temp) / "sample.glb"
