@@ -495,7 +495,7 @@ def set_manifest_bounds():
             round(maxs[i] - mins[i], 3) for i in range(3)
         ],
         "axis_meaning": {
-            "x": "card length",
+            "x": "nominal card-length axis; exterior shroud may overhang",
             "y": "thickness axis; includes front/rear proxy protrusions",
             "z": "card height",
         },
