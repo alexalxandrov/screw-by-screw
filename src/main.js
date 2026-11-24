@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { MODEL, COMPONENTS, EVIDENCE } from "./data/model.js";
+import LEARNING_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/learning.json";
 import "./styles.css";
 
 const $ = (selector) => document.querySelector(selector);
@@ -25,7 +26,13 @@ const state = {
   wireframe: false,
   activeLayer: null,
   sourceMode: "demo",
-  animationFrame: 0
+  animationFrame: 0,
+  learningMode: false,
+  learningIndex: 0,
+  learningScore: 0,
+  learningSelected: null,
+  learningAnswered: false,
+  learningComplete: false
 };
 
 const UI = {
@@ -48,7 +55,7 @@ const UI = {
     allVisible: "All components visible", layerCooling: "Cooling layer · qualitative",
     layerPower: "Power path · qualitative", noWebgl: "WebGL is unavailable in this browser.",
     source: "Source", noSources: "No direct source linked to this component.",
-    modelLoaded: "Model ready", glbPicker: "Choose a .glb file"
+    modelLoaded: "Model ready", glbPicker: "Choose a .glb file", learn: "Learn", learning: "LEARNING", question: "QUESTION", checkAnswer: "Check answer", nextQuestion: "Next question", finishQuiz: "Finish", restartQuiz: "Try again", correctAnswer: "Correct", wrongAnswer: "Not quite", quizComplete: "Quiz complete", yourScore: "Your score", chooseAnswer: "Choose an answer first"
   },
   ru: {
     pilotModel: "ПИЛОТНАЯ МОДЕЛЬ", structure: "СТРУКТУРА", components: "Компоненты",
@@ -69,7 +76,7 @@ const UI = {
     allVisible: "Все компоненты видимы", layerCooling: "Слой охлаждения · качественно",
     layerPower: "Путь питания · качественно", noWebgl: "В этом браузере недоступен WebGL.",
     source: "Источник", noSources: "Для этого компонента нет прямой ссылки на источник.",
-    modelLoaded: "Модель готова", glbPicker: "Выберите файл .glb"
+    modelLoaded: "Модель готова", glbPicker: "Выберите файл .glb", learn: "Обучение", learning: "ОБУЧЕНИЕ", question: "ВОПРОС", checkAnswer: "Проверить ответ", nextQuestion: "Следующий вопрос", finishQuiz: "Завершить", restartQuiz: "Повторить", correctAnswer: "Верно", wrongAnswer: "Не совсем", quizComplete: "Тест завершён", yourScore: "Ваш результат", chooseAnswer: "Сначала выберите ответ"
   }
 };
 
@@ -87,7 +94,8 @@ function applyLanguage() {
     node.placeholder = t(node.dataset.i18nPlaceholder);
   });
   renderTree();
-  if (state.selectedId) renderDetails(state.selectedId);
+  if (state.learningMode) renderLearning();
+  else if (state.selectedId) renderDetails(state.selectedId);
 }
 
 function tag(object, id, evidence = "illustrative", geometry = "proxy") {
@@ -311,6 +319,10 @@ function renderTree() {
 }
 
 function renderDetails(id) {
+  state.learningMode = false;
+  $("#learning-panel").hidden = true;
+  $("#details-heading-eyebrow").textContent = t("inspection");
+  $("#details-heading-title").textContent = t("componentDetails");
   const object = findNodeById(id);
   const data = getComponentData(id, object);
   const label = state.language === "ru" ? data.ru : data.en;
@@ -348,6 +360,120 @@ function renderDetails(id) {
   });
 }
 
+function showLearning() {
+  state.learningMode = true;
+  state.learningIndex = 0;
+  state.learningScore = 0;
+  state.learningSelected = null;
+  state.learningAnswered = false;
+  state.learningComplete = false;
+  $("#empty-selection").hidden = true;
+  $("#component-details").hidden = true;
+  $("#learning-panel").hidden = false;
+  $("#details-heading-eyebrow").textContent = t("learning");
+  $("#details-heading-title").textContent = t("learn");
+  renderLearning();
+}
+
+function renderLearning() {
+  const questions = LEARNING_PACKAGE.questions;
+  const panel = $("#learning-panel");
+  if (!panel || !state.learningMode) return;
+  panel.hidden = false;
+  $("#quiz-sources").replaceChildren();
+
+  if (state.learningComplete) {
+    $("#quiz-progress").textContent = `${questions.length} / ${questions.length}`;
+    $("#quiz-score").textContent = `${t("yourScore")}: ${state.learningScore} / ${questions.length}`;
+    $("#quiz-question").textContent = t("quizComplete");
+    $("#quiz-choices").replaceChildren();
+    $("#quiz-feedback").textContent = `${state.learningScore} / ${questions.length}`;
+    $("#quiz-next").disabled = false;
+    $("#quiz-next").textContent = t("restartQuiz");
+    return;
+  }
+
+  const question = questions[state.learningIndex];
+  $("#quiz-progress").textContent = `${String(state.learningIndex + 1).padStart(2, "0")} / ${String(questions.length).padStart(2, "0")}`;
+  $("#quiz-score").textContent = `${t("yourScore")}: ${state.learningScore}`;
+  $("#quiz-question").textContent = question.prompt[state.language];
+  $("#quiz-feedback").textContent = state.learningAnswered
+    ? question.explanation[state.language]
+    : "";
+  $("#quiz-choices").replaceChildren();
+
+  question.choices.forEach((choice, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "quiz-choice";
+    button.textContent = choice[state.language];
+    button.setAttribute("aria-pressed", String(state.learningSelected === index));
+    if (state.learningSelected === index) button.classList.add("selected");
+    if (state.learningAnswered && index === question.correct_index) button.classList.add("correct");
+    if (state.learningAnswered && state.learningSelected === index && index !== question.correct_index) button.classList.add("incorrect");
+    button.disabled = state.learningAnswered;
+    button.addEventListener("click", () => {
+      state.learningSelected = index;
+      renderLearning();
+    });
+    $("#quiz-choices").append(button);
+  });
+
+  if (state.learningAnswered) {
+    $("#quiz-feedback").classList.toggle("correct-copy", state.learningSelected === question.correct_index);
+    $("#quiz-feedback").classList.toggle("incorrect-copy", state.learningSelected !== question.correct_index);
+    $("#quiz-feedback").textContent = `${state.learningSelected === question.correct_index ? t("correctAnswer") : t("wrongAnswer")} — ${question.explanation[state.language]}`;
+  } else {
+    $("#quiz-feedback").classList.remove("correct-copy", "incorrect-copy");
+  }
+
+  const sourceMap = new Map(MODEL.sources.map((source) => [source.id, source]));
+  question.source_ids.forEach((sourceId) => {
+    const source = sourceMap.get(sourceId);
+    if (!source) return;
+    const link = document.createElement("a");
+    link.href = source.url;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = `↗ ${source.label}`;
+    $("#quiz-sources").append(link);
+  });
+
+  $("#quiz-next").disabled = !state.learningAnswered && state.learningSelected === null;
+  $("#quiz-next").textContent = !state.learningAnswered
+    ? t("checkAnswer")
+    : state.learningIndex === questions.length - 1 ? t("finishQuiz") : t("nextQuestion");
+}
+
+function submitLearningAnswer() {
+  const questions = LEARNING_PACKAGE.questions;
+  if (state.learningComplete) {
+    state.learningIndex = 0;
+    state.learningScore = 0;
+    state.learningSelected = null;
+    state.learningAnswered = false;
+    state.learningComplete = false;
+    renderLearning();
+    return;
+  }
+  const question = questions[state.learningIndex];
+  if (!state.learningAnswered) {
+    if (state.learningSelected === null) return;
+    if (state.learningSelected === question.correct_index) state.learningScore += 1;
+    state.learningAnswered = true;
+    renderLearning();
+    return;
+  }
+  if (state.learningIndex >= questions.length - 1) {
+    state.learningComplete = true;
+  } else {
+    state.learningIndex += 1;
+    state.learningSelected = null;
+    state.learningAnswered = false;
+  }
+  renderLearning();
+}
+
 function applyHighlight(object, color = 0xc3e86d) {
   if (!object || object.userData.__sbsHighlighted) return;
   object.userData.__sbsOriginalMaterial = object.material;
@@ -380,6 +506,7 @@ function selectComponent(id) {
   const object = findNodeById(id);
   if (!object) return;
   clearHighlights();
+  state.learningMode = false;
   state.selected = object;
   state.selectedId = id;
   object.traverse((child) => { if (child.isMesh) applyHighlight(child); });
@@ -646,6 +773,7 @@ function bindUI() {
     $("#wireframe-toggle").classList.toggle("active", state.wireframe);
   });
   $("#explode-slider").addEventListener("input", (event) => setExplode(event.target.value));
+  $("#quiz-next").addEventListener("click", submitLearningAnswer);
   $("#assemble-button").addEventListener("click", () => setExplode(0));
   $("#explode-button").addEventListener("click", () => setExplode(100));
   document.querySelectorAll(".process-button").forEach((button) => {
@@ -657,6 +785,13 @@ function bindUI() {
       if (button.dataset.mode === "disassemble") setExplode(100);
       if (button.dataset.mode === "explore") setExplode(0);
       if (button.dataset.mode === "understand") setLayer("cooling");
+      if (button.dataset.mode === "learn") showLearning();
+      else if (state.learningMode) {
+        state.learningMode = false;
+        $("#learning-panel").hidden = true;
+        if (state.selectedId) renderDetails(state.selectedId);
+        else $("#empty-selection").hidden = false;
+      }
     });
   });
   canvasHost.addEventListener("click", onCanvasClick);
