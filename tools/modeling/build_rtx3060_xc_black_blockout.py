@@ -748,12 +748,12 @@ def main():
     )
 
     if not args.no_blend:
-        blend_path = out_dir / "rtx3060_xc_black_blockout_v03.blend"
+        blend_path = out_dir / "rtx3060_xc_black_blockout_v04.blend"
         bpy.ops.wm.save_as_mainfile(filepath=str(blend_path))
         print(f"Saved Blender scene: {blend_path}")
 
     if not args.no_glb:
-        glb_path = out_dir / "rtx3060_xc_black_blockout_v03.glb"
+        glb_path = out_dir / "rtx3060_xc_black_blockout_v04.glb"
         if hasattr(bpy.ops.export_scene, "gltf"):
             # Export renderable parts and assembly empties; omit the reference
             # envelope so it cannot inflate browser-model bounds or obscure parts.
