@@ -1,0 +1,152 @@
+{
+  "schema_version": "0.1.0",
+  "status": "draft",
+  "questions": [
+    {
+      "id": "quiz.memory.capacity",
+      "prompt": {
+        "en": "How much GDDR6 memory does this exact SKU specify?",
+        "ru": "Какой объём памяти GDDR6 указан для этого SKU?"
+      },
+      "choices": [
+        {
+          "en": "8 GB",
+          "ru": "8 ГБ"
+        },
+        {
+          "en": "12 GB",
+          "ru": "12 ГБ"
+        },
+        {
+          "en": "16 GB",
+          "ru": "16 ГБ"
+        }
+      ],
+      "correct_index": 1,
+      "explanation": {
+        "en": "The EVGA specification lists 12 GB of GDDR6.",
+        "ru": "В спецификации EVGA указано 12 ГБ GDDR6."
+      },
+      "source_ids": [
+        "src.evga.spec"
+      ]
+    },
+    {
+      "id": "quiz.memory.bus",
+      "prompt": {
+        "en": "What is the memory bus width?",
+        "ru": "Какова ширина шины памяти?"
+      },
+      "choices": [
+        {
+          "en": "128-bit",
+          "ru": "128 бит"
+        },
+        {
+          "en": "192-bit",
+          "ru": "192 бита"
+        },
+        {
+          "en": "256-bit",
+          "ru": "256 бит"
+        }
+      ],
+      "correct_index": 1,
+      "explanation": {
+        "en": "The manufacturer specification lists a 192-bit memory interface.",
+        "ru": "В спецификации производителя указана 192-битная шина памяти."
+      },
+      "source_ids": [
+        "src.evga.spec"
+      ]
+    },
+    {
+      "id": "quiz.power.connector",
+      "prompt": {
+        "en": "Which auxiliary power connector is specified?",
+        "ru": "Какой дополнительный разъём питания указан?"
+      },
+      "choices": [
+        {
+          "en": "6-pin",
+          "ru": "6-pin"
+        },
+        {
+          "en": "8-pin",
+          "ru": "8-pin"
+        },
+        {
+          "en": "12VHPWR",
+          "ru": "12VHPWR"
+        }
+      ],
+      "correct_index": 1,
+      "explanation": {
+        "en": "This model uses a single 8-pin power connector.",
+        "ru": "В этой модели используется один разъём питания 8-pin."
+      },
+      "source_ids": [
+        "src.evga.spec",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "quiz.outputs",
+      "prompt": {
+        "en": "Which display-output layout is documented?",
+        "ru": "Какая конфигурация видеовыходов документирована?"
+      },
+      "choices": [
+        {
+          "en": "2 DisplayPort + 2 HDMI",
+          "ru": "2 DisplayPort + 2 HDMI"
+        },
+        {
+          "en": "3 DisplayPort + 1 HDMI",
+          "ru": "3 DisplayPort + 1 HDMI"
+        },
+        {
+          "en": "4 DisplayPort",
+          "ru": "4 DisplayPort"
+        }
+      ],
+      "correct_index": 1,
+      "explanation": {
+        "en": "The exact XC BLACK review shows three DisplayPort outputs and one HDMI output.",
+        "ru": "В обзоре точной версии XC BLACK показаны три DisplayPort и один HDMI."
+      },
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "quiz.backplate",
+      "prompt": {
+        "en": "Does this XC BLACK sample have a rear backplate?",
+        "ru": "Есть ли у этого образца XC BLACK задняя backplate?"
+      },
+      "choices": [
+        {
+          "en": "Yes",
+          "ru": "Да"
+        },
+        {
+          "en": "No; the PCB rear is exposed",
+          "ru": "Нет; задняя сторона PCB открыта"
+        },
+        {
+          "en": "Not documented",
+          "ru": "Не документировано"
+        }
+      ],
+      "correct_index": 1,
+      "explanation": {
+        "en": "LanOC documents no backplate on the reviewed XC BLACK sample.",
+        "ru": "LanOC указывает, что у рассмотренного образца XC BLACK нет backplate."
+      },
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    }
+  ]
+}
