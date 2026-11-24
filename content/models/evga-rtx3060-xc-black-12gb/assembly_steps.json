@@ -1,0 +1,33 @@
+{
+  "schema_version": "0.1.0",
+  "status": "not_authored",
+  "policy": "Do not infer a complete removal sequence from sparse video timecodes. Author steps only after reviewing the full teardown or a service procedure.",
+  "steps": [],
+  "observations": [
+    {
+      "source_id": "src.gamersnexus.teardown",
+      "locator": "01:30",
+      "note": "Disassembly begins; this timestamp is not a complete step description."
+    },
+    {
+      "source_id": "src.gamersnexus.teardown",
+      "locator": "05:33",
+      "note": "Assembly and internal views are discussed."
+    },
+    {
+      "source_id": "src.gamersnexus.teardown",
+      "locator": "06:45",
+      "note": "Markings and cooling layout are shown."
+    },
+    {
+      "source_id": "src.gamersnexus.teardown",
+      "locator": "09:00",
+      "note": "Fan removal segment."
+    },
+    {
+      "source_id": "src.gamersnexus.teardown",
+      "locator": "11:00",
+      "note": "Shunt resistors are discussed."
+    }
+  ]
+}
