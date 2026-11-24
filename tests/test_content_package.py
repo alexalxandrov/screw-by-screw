@@ -21,7 +21,8 @@ def sample_package():
         "sources": {"sources": [{"id": "src.demo", "url": "https://example.test/source", "license_status": "test_only"}]},
         "components": {"components": [
             {"id": "assembly.root", "parent_id": None, "name": {"en": "Root", "ru": "Корень"},
-             "evidence_status": "illustrative", "source_ids": ["src.demo"]},
+             "evidence_status": "illustrative", "source_ids": ["src.demo"],
+             "description": {"en": "Root description", "ru": "Описание корня"}},
             {"id": "part.one", "parent_id": "assembly.root", "name": {"en": "Part", "ru": "Деталь"},
              "evidence_status": "visible_exact_model", "source_ids": ["src.demo"], "assumptions": []}
         ]},
@@ -31,7 +32,9 @@ def sample_package():
         ]},
         "process_layers": {"process_layers": [
             {"id": "layer.one", "mode": "qualitative", "linked_component_ids": ["part.one"],
-             "source_ids": ["src.demo"], "assumptions": []}
+             "source_ids": ["src.demo"], "assumptions": [],
+             "title": {"en": "Layer", "ru": "Слой"},
+             "description": {"en": "Layer description", "ru": "Описание слоя"}}
         ]},
         "assembly_steps": {"status": "not_authored", "steps": []},
         "claims": {"claims": [
@@ -129,6 +132,24 @@ class ContentPackageTests(unittest.TestCase):
             loaded = validator.load_package(directory)
             with self.assertRaisesRegex(validator.PackageError, "SHA-256 mismatch"):
                 validator.validate_package(loaded, directory)
+
+    def test_untranslated_component_description_fails(self):
+        package = sample_package()
+        package["components"]["components"][1]["description"].pop("ru")
+        with self.assertRaisesRegex(validator.PackageError, "bilingual descriptions"):
+            validator.validate_package(package)
+
+    def test_untranslated_process_layer_fails(self):
+        package = sample_package()
+        package["process_layers"]["process_layers"][0]["description"].pop("ru")
+        with self.assertRaisesRegex(validator.PackageError, "bilingual description"):
+            validator.validate_package(package)
+
+    def test_untranslated_quiz_choice_fails(self):
+        package = sample_package()
+        package["learning"]["questions"][0]["choices"][0].pop("ru")
+        with self.assertRaisesRegex(validator.PackageError, "must be bilingual"):
+            validator.validate_package(package)
 
     def test_directory_loader_requires_all_files(self):
         with tempfile.TemporaryDirectory() as temp:
