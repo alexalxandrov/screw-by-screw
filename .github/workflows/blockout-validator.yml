@@ -1,0 +1,26 @@
+name: Blockout validator tests
+
+on:
+  push:
+    paths:
+      - "tools/modeling/validate_blockout_package.py"
+      - "tests/test_blockout_validator.py"
+      - ".github/workflows/blockout-validator.yml"
+  pull_request:
+    paths:
+      - "tools/modeling/validate_blockout_package.py"
+      - "tests/test_blockout_validator.py"
+      - ".github/workflows/blockout-validator.yml"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile validator
+        run: python -m py_compile tools/modeling/validate_blockout_package.py
+      - name: Run unit tests
+        run: python -m unittest discover -s tests -v
