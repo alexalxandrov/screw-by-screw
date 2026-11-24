@@ -1,5 +1,5 @@
 """
-Screw by Screw — EVGA RTX 3060 XC BLACK blockout generator.
+Screw by Screw — EVGA RTX 3060 XC BLACK blockout generator v0.3.
 
 Run from repository root:
   blender --background --python tools/modeling/build_rtx3060_xc_black_blockout.py
@@ -54,12 +54,12 @@ STATUS = {
 }
 
 manifest = {
-    "schema_version": "0.2.0",
+    "schema_version": "0.3.0",
     "model_id": "gpu.evga.12g-p5-3655-kr",
     "model": "EVGA GeForce RTX 3060 XC BLACK GAMING 12GB",
     "part_number": "12G-P5-3655-KR",
     "asset_type": "blockout",
-    "generator_version": "0.2.0",
+    "generator_version": "0.3.0",
     "geometry_status": "illustrative_proxy_not_cad",
     "units": "mm",
     "dimensions": {
@@ -153,9 +153,23 @@ def tag(obj, component_id, evidence, geometry="proxy", export_role="component"):
 
 
 def set_parent_keep_world(child, parent):
-    world = child.matrix_world.copy()
+    """
+    Parent without changing the child's generated world-space placement.
+
+    Newly linked data-block objects may have a stale identity matrix_world.
+    Preserve their explicit transform basis and cancel the parent's initial
+    world transform with matrix_parent_inverse.
+    """
+    bpy.context.view_layer.update()
+    parent_world = parent.matrix_world.copy()
+    child_basis = child.matrix_basis.copy()
+
     child.parent = parent
-    child.matrix_world = world
+    child.matrix_parent_inverse = parent_world.inverted()
+    child.matrix_basis = child_basis
+
+    bpy.context.view_layer.update()
+
     parent_id = parent.get("sbs_component_id")
     if parent_id:
         child["sbs_parent_component_id"] = parent_id
@@ -367,6 +381,91 @@ def make_fan(index, x, z, y, collection, cooling_parent):
             y - 1.5, collection,
         )
         set_parent_keep_world(obj, assembly)
+
+
+def validate_scene_transform_integrity():
+    """Fail generation if parent assignment moves geometry away from its centres."""
+    bpy.context.view_layer.update()
+    failures = []
+
+    for index, x in enumerate(FAN_CENTERS_X, start=1):
+        expected_frame = Vector((x, -CARD_THICKNESS / 2 - 1.5, FAN_CENTER_Z))
+        expected_hub = Vector((x, -CARD_THICKNESS / 2 - 1.5 - 2.2, FAN_CENTER_Z))
+        expected_blades = Vector((
+            x,
+            -CARD_THICKNESS / 2 - 1.5 - 1.5,
+            FAN_CENTER_Z,
+        ))
+
+        frame = bpy.data.objects.get(f"Fan {index} | annular frame")
+        hub = bpy.data.objects.get(f"Fan {index} | hub")
+        if frame is None or hub is None:
+            failures.append(f"Fan {index}: frame or hub object missing")
+            continue
+
+        checks = [
+            (f"Fan {index} frame", frame, expected_frame),
+            (f"Fan {index} hub", hub, expected_hub),
+        ]
+        for blade_index in range(1, FAN_BLADE_COUNT + 1):
+            blade = bpy.data.objects.get(f"Fan {index} | blade {blade_index}")
+            if blade is None:
+                failures.append(f"Fan {index}: blade {blade_index} missing")
+            else:
+                checks.append((
+                    f"Fan {index} blade {blade_index}",
+                    blade,
+                    expected_blades,
+                ))
+
+        for label, obj, expected in checks:
+            actual = obj.matrix_world.translation
+            if (actual - expected).length > 0.01:
+                failures.append(
+                    f"{label} displaced: expected "
+                    f"{tuple(round(v, 3) for v in expected)}, got "
+                    f"{tuple(round(v, 3) for v in actual)}"
+                )
+
+    # Renderable geometry must stay near the card's nominal X/Z footprint.
+    corners = []
+    for obj in bpy.data.objects:
+        if obj.type != "MESH" or obj.get("sbs_export_role") == "reference_only":
+            continue
+        for corner in obj.bound_box:
+            corners.append(obj.matrix_world @ Vector(corner))
+
+    if corners:
+        mins = [min(v[i] for v in corners) for i in range(3)]
+        maxs = [max(v[i] for v in corners) for i in range(3)]
+        if mins[0] < -1.0 or maxs[0] > CARD_LENGTH + 1.0:
+            failures.append(
+                f"Unexpected X bounds: {mins[0]:.3f} .. {maxs[0]:.3f} mm"
+            )
+        if mins[2] < -1.0 or maxs[2] > CARD_HEIGHT + 1.0:
+            failures.append(
+                f"Unexpected Z bounds: {mins[2]:.3f} .. {maxs[2]:.3f} mm"
+            )
+
+    if failures:
+        print("TRANSFORM INTEGRITY CHECK: FAILED")
+        for failure in failures:
+            print(" -", failure)
+        raise RuntimeError(
+            "Scene transform validation failed; refusing to save/export v0.3."
+        )
+
+    print("TRANSFORM INTEGRITY CHECK: PASS")
+    print("Both fan frames, hubs and all blade pivots match expected centres.")
+    if corners:
+        print(
+            "Proxy X bounds:",
+            round(mins[0], 3), "..", round(maxs[0], 3), "mm"
+        )
+        print(
+            "Proxy Z bounds:",
+            round(mins[2], 3), "..", round(maxs[2], 3), "mm"
+        )
 
 
 def set_manifest_bounds():
@@ -630,20 +729,21 @@ def main():
                 CARD_LENGTH / 2, 0, CARD_HEIGHT / 2
             )
 
+    validate_scene_transform_integrity()
     set_manifest_bounds()
-    manifest_path = out_dir / "rtx3060_xc_black_blockout_v02.manifest.json"
+    manifest_path = out_dir / "rtx3060_xc_black_blockout_v03.manifest.json"
     manifest_path.write_text(
         json.dumps(manifest, indent=2, ensure_ascii=False),
         encoding="utf-8",
     )
 
     if not args.no_blend:
-        blend_path = out_dir / "rtx3060_xc_black_blockout_v02.blend"
+        blend_path = out_dir / "rtx3060_xc_black_blockout_v03.blend"
         bpy.ops.wm.save_as_mainfile(filepath=str(blend_path))
         print(f"Saved Blender scene: {blend_path}")
 
     if not args.no_glb:
-        glb_path = out_dir / "rtx3060_xc_black_blockout_v02.glb"
+        glb_path = out_dir / "rtx3060_xc_black_blockout_v03.glb"
         if hasattr(bpy.ops.export_scene, "gltf"):
             # Export renderable parts and assembly empties; omit the reference
             # envelope so it cannot inflate browser-model bounds or obscure parts.
