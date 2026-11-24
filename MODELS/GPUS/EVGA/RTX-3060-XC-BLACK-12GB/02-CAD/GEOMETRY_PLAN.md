@@ -1,34 +1,47 @@
 # Geometry Reconstruction Plan
 
 **Target:** EVGA GeForce RTX 3060 XC BLACK GAMING, 12G-P5-3655-KR  
-**Status:** plan only; no geometry has been created.
+**Status:** procedural proxy blockout generator committed; no verified full CAD geometry.
 
 ## Modeling strategy
 
 Build a dimensionally anchored blockout first, then replace approximations with verified geometry. Do not begin with detailed PCB components.
 
-### Stage A — external envelope
-- Card envelope: 201.8 mm nominal length × 110 mm height; dual-slot.
-- PCIe edge and I/O bracket.
-- Shroud outline and fan openings.
-- Two fan assemblies.
-- No backplate.
+### Stage A — external envelope (current first pass)
 
-Keep PCB and shroud lengths separate because the shroud may overhang the PCB.
+A Blender Python generator now exists at [build_rtx3060_xc_black_blockout.py](../../../../tools/modeling/build_rtx3060_xc_black_blockout.py).
+
+It creates separate collections for external structure, cooling, PCB/electronics and connectors; tags selectable objects with stable component IDs and evidence status; and writes a JSON manifest. It can save a .blend scene and export GLB.
+
+Grounded inputs:
+- Card envelope: 201.8 mm nominal length × 110 mm height.
+- Dual-slot classification (not an exact thickness measurement).
+- Two fans.
+- Fan opening diameter approximately 90 mm and impeller diameter approximately 85 mm, as measured by the LanOC reviewer.
+
+Unresolved/illustrative inputs:
+- Overall thickness; the script currently uses a 36 mm placeholder.
+- Fan centres and exact fan spacing.
+- Shroud silhouette and detailed fan openings.
+- PCB outline, thickness and position.
+- Internal component positions and dimensions.
+- Exact I/O bracket geometry.
+
+The generated geometry is a visual proxy only. It is not CAD, not dimensionally complete, and must not be used for fitment, manufacturing, repair or physical simulation.
 
 ### Stage B — cooling assembly
-- Aluminum fin stack.
-- Copper GPU contact plate.
-- Heat pipes.
-- Fan frames, hubs and blades.
-- Thermal pads as simplified visual elements, marked illustrative unless dimensions are sourced.
+- Replace the coarse heatsink block with measured fin-stack geometry.
+- Confirm copper GPU contact plate shape and heatpipe count/routing.
+- Replace fan proxy frames/hubs/blades with exact geometry when evidence permits.
+- Thermal pads remain illustrative unless dimensions are sourced.
 
 ### Stage C — PCB blockout
-- PCB outline and thickness from orthogonal photographs or physical measurement.
-- GPU package location.
-- Six memory-package candidates only after exact-board count/location confirmation.
-- Power-delivery region as block geometry until components are identified.
-- I/O connectors, fan headers and power connector.
+- Establish PCB board number and revision from a physical sample or reliable evidence.
+- Determine PCB outline and thickness from orthogonal photographs or physical measurement.
+- Confirm GPU package location.
+- Confirm memory-package count/location; six current candidates are not verified.
+- Identify power-delivery components from exact-board evidence.
+- Confirm fan headers, power connector and I/O details.
 
 ### Stage D — component-level fidelity
 - Add exact package dimensions and reference designators from verified BoardView/BOM/schematic or direct inspection.
@@ -38,20 +51,22 @@ Keep PCB and shroud lengths separate because the shroud may overhang the PCB.
 ## Coordinate and scale convention
 
 - Units: millimetres in source CAD/Blender scene.
-- Define one project coordinate convention before detailed modeling.
+- Blender scene convention: X = card length, Y = thickness, Z = card height.
+- Front/fan side faces -Y.
+- Origin: lower-left-rear corner of the nominal envelope.
 - Preserve separate source and derived scenes.
 - Every selectable object receives a stable component instance ID.
-- Maintain a measurement ledger with value, source, method, uncertainty and reviewer.
+- Maintain the measurement ledger at [MEASUREMENTS.csv](MEASUREMENTS.csv).
 
 ## Accuracy labels
 
-- measured: measured from physical sample.
-- manufacturer_data: manufacturer-published dimension.
+- manufacturer_data: published by the manufacturer.
 - reviewer_measurement: measured by a cited reviewer.
+- measured: measured from a physical sample.
 - photo_estimate: estimated from calibrated photographs.
 - illustrative: visual stand-in, not exact geometry.
 - unknown: no defensible value.
 
 ## First geometry acceptance gate
 
-The external blockout must match published envelope, fan count, fan placement, shroud silhouette, exposed PCB/no-backplate configuration and port layout. It must not imply a complete internal CAD assembly.
+The external blockout must match published envelope, fan count, fan placement, shroud silhouette, exposed PCB/no-backplate configuration and port layout. Current generator is only an initial proxy: it establishes the asset hierarchy and scale convention, but the acceptance gate is not passed until fan placement, silhouette, PCB outline and bracket geometry are checked against orthogonal references or a physical sample.
