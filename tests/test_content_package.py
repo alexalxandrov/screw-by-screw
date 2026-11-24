@@ -31,7 +31,7 @@ def sample_package():
         ]},
         "process_layers": {"process_layers": [
             {"id": "layer.one", "mode": "qualitative", "linked_component_ids": ["part.one"],
-             "source_ids": ["src.demo"]}
+             "source_ids": ["src.demo"], "assumptions": []}
         ]},
         "assembly_steps": {"status": "not_authored", "steps": []},
         "claims": {"claims": [
