@@ -1,17 +1,17 @@
 """
 Screw by Screw — EVGA RTX 3060 XC BLACK blockout generator.
 
-Run from the repository root:
+Run from repository root:
   blender --background --python tools/modeling/build_rtx3060_xc_black_blockout.py
 
-Optional arguments (after Blender's --):
+Optional arguments after Blender's --:
   --output-dir PATH
   --no-glb
   --no-blend
 
-All geometry is proxy/blockout geometry. Only the card envelope is manufacturer-published.
-Fan dimensions are reviewer measurements; component placement and thickness are illustrative
-until confirmed from an orthogonal reference or a physical sample.
+All geometry is proxy/blockout geometry. Manufacturer dimensions and reviewer
+fan diameters are provenance-labelled. Fan blade count/profile, fan positions,
+card thickness, shroud, PCB and component positions remain illustrative.
 """
 from __future__ import annotations
 
@@ -22,24 +22,29 @@ import sys
 from pathlib import Path
 
 import bpy
+from mathutils import Vector
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 MODEL_ROOT = REPO_ROOT / "MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB"
 DEFAULT_OUTPUT = MODEL_ROOT / "04-WORKING/generated"
 
-# All coordinates and dimensions below are millimetres (scene scale_length = 0.001).
+# All coordinates and dimensions are millimetres (scene scale_length = 0.001).
 CARD_LENGTH = 201.8       # manufacturer-published nominal length
 CARD_HEIGHT = 110.0       # manufacturer-published nominal height
-FAN_OPENING_DIA = 90.0    # reviewer measurement, approximate
-FAN_IMPELLER_DIA = 85.0   # reviewer measurement, approximate
+FAN_OPENING_DIA = 90.0    # approximate reviewer measurement
+FAN_IMPELLER_DIA = 85.0   # approximate reviewer measurement
 
 # Illustrative placeholders only — replace when measured from a sample or calibrated views.
 CARD_THICKNESS = 36.0
 FAN_CENTERS_X = (55.0, 146.0)
 FAN_CENTER_Z = 56.0
+FAN_BLADE_COUNT = 7       # illustrative; exact blade count not confirmed
 SHROUD_THICKNESS = 5.0
 PCB_THICKNESS = 1.6
 HEATSINK_THICKNESS = 13.0
+FAN_FRAME_DEPTH = 3.0
+FAN_HUB_RADIUS = 13.0
+FAN_BLADE_DEPTH = 1.8
 
 STATUS = {
     "manufacturer_data": "manufacturer_data",
@@ -47,6 +52,55 @@ STATUS = {
     "illustrative": "illustrative",
     "photo_estimate": "photo_estimate",
 }
+
+manifest = {
+    "schema_version": "0.2.0",
+    "model_id": "gpu.evga.12g-p5-3655-kr",
+    "model": "EVGA GeForce RTX 3060 XC BLACK GAMING 12GB",
+    "part_number": "12G-P5-3655-KR",
+    "asset_type": "blockout",
+    "generator_version": "0.2.0",
+    "geometry_status": "illustrative_proxy_not_cad",
+    "units": "mm",
+    "dimensions": {
+        "card_length": {
+            "value": CARD_LENGTH,
+            "status": STATUS["manufacturer_data"],
+        },
+        "card_height": {
+            "value": CARD_HEIGHT,
+            "status": STATUS["manufacturer_data"],
+        },
+        "card_thickness": {
+            "value": CARD_THICKNESS,
+            "status": STATUS["illustrative"],
+            "note": "Unverified placeholder; not a published SKU measurement.",
+        },
+        "fan_opening_diameter": {
+            "value": FAN_OPENING_DIA,
+            "status": STATUS["reviewer_measurement"],
+        },
+        "fan_impeller_diameter": {
+            "value": FAN_IMPELLER_DIA,
+            "status": STATUS["reviewer_measurement"],
+        },
+        "fan_blade_count": {
+            "value": FAN_BLADE_COUNT,
+            "status": STATUS["illustrative"],
+            "note": "Visual proxy count; exact blade count not confirmed.",
+        },
+    },
+    "objects": [],
+    "warnings": [
+        "This is a visual blockout, not dimensionally complete CAD.",
+        "Fan centres, blade count/profile, shroud outline, PCB outline, thickness and internal positions are illustrative.",
+        "Fan ring diameters use approximate reviewer measurements as a visual guide, not a verified fan manufacturer drawing.",
+        "Computed geometry bounds include protruding proxy components and must not be treated as the card's official thickness.",
+        "No PCB revision, BoardView, schematic or exact mechanical CAD has been confirmed.",
+        "Do not use this asset for manufacturing, fitment, repair or thermal simulation.",
+    ],
+}
+
 
 def parse_args():
     argv = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
@@ -56,11 +110,13 @@ def parse_args():
     parser.add_argument("--no-blend", action="store_true")
     return parser.parse_args(argv)
 
+
 def material(name, color, roughness=0.65):
     mat = bpy.data.materials.new(name)
     mat.diffuse_color = (*color, 1.0)
     mat.roughness = roughness
     return mat
+
 
 MAT = {
     "shroud": material("Proxy | shroud", (0.075, 0.085, 0.10)),
@@ -72,55 +128,64 @@ MAT = {
     "connector": material("Proxy | connector", (0.08, 0.08, 0.085)),
     "gpu": material("Proxy | GPU package", (0.16, 0.16, 0.17)),
     "memory": material("Proxy | memory package", (0.12, 0.12, 0.13)),
-    "accent": material("Proxy | illustrative labels", (0.8, 0.55, 0.12)),
 }
 
-manifest = {
-    "schema_version": "0.1.0",
-    "model_id": "gpu.evga.12g-p5-3655-kr",
-    "model": "EVGA GeForce RTX 3060 XC BLACK GAMING 12GB",
-    "part_number": "12G-P5-3655-KR",
-    "asset_type": "blockout",
-    "geometry_status": "illustrative_proxy_not_cad",
-    "units": "mm",
-    "dimensions": {
-        "card_length": {"value": CARD_LENGTH, "status": STATUS["manufacturer_data"]},
-        "card_height": {"value": CARD_HEIGHT, "status": STATUS["manufacturer_data"]},
-        "card_thickness": {"value": CARD_THICKNESS, "status": STATUS["illustrative"],
-                           "note": "Unverified placeholder; not a published SKU measurement."},
-        "fan_opening_diameter": {"value": FAN_OPENING_DIA, "status": STATUS["reviewer_measurement"]},
-        "fan_impeller_diameter": {"value": FAN_IMPELLER_DIA, "status": STATUS["reviewer_measurement"]},
-    },
-    "objects": [],
-    "warnings": [
-        "This is a visual blockout, not a dimensionally complete CAD model.",
-        "Fan centres, shroud outline, PCB outline, thickness and internal component positions are illustrative.",
-        "No PCB revision, BoardView, schematic or exact mechanical CAD has been confirmed.",
-        "Do not use this asset for manufacturing, fitment, repair or thermal simulation.",
-    ],
-}
 
-def tag(obj, component_id, evidence, geometry="proxy"):
+def tag(obj, component_id, evidence, geometry="proxy", export_role="component"):
     obj["sbs_component_id"] = component_id
     obj["sbs_evidence_status"] = evidence
     obj["sbs_geometry_status"] = geometry
     obj["sbs_model_id"] = manifest["model_id"]
-    manifest["objects"].append({
+    obj["sbs_export_role"] = export_role
+
+    record = {
         "name": obj.name,
         "component_id": component_id,
+        "node_type": "assembly" if obj.type == "EMPTY" else "mesh",
         "evidence_status": evidence,
         "geometry_status": geometry,
+        "export_role": export_role,
         "dimensions_mm": [round(float(v), 3) for v in obj.dimensions],
         "location_mm": [round(float(v), 3) for v in obj.location],
-    })
+    }
+    manifest["objects"].append(record)
     return obj
+
+
+def set_parent_keep_world(child, parent):
+    world = child.matrix_world.copy()
+    child.parent = parent
+    child.matrix_world = world
+    parent_id = parent.get("sbs_component_id")
+    if parent_id:
+        child["sbs_parent_component_id"] = parent_id
+        for record in manifest["objects"]:
+            if record["component_id"] == child.get("sbs_component_id"):
+                record["parent_component_id"] = parent_id
+                break
+
 
 def move_to_collection(obj, collection):
     for old in list(obj.users_collection):
         old.objects.unlink(obj)
     collection.objects.link(obj)
 
-def cube(name, component_id, location, dimensions, mat, collection, evidence=STATUS["illustrative"]):
+
+def make_assembly(name, component_id, location, collection, parent=None):
+    obj = bpy.data.objects.new(name, None)
+    obj.empty_display_type = "PLAIN_AXES"
+    obj.empty_display_size = 6.0
+    obj.location = location
+    collection.objects.link(obj)
+    tag(obj, component_id, STATUS["illustrative"], geometry="assembly_node",
+        export_role="assembly")
+    if parent is not None:
+        set_parent_keep_world(obj, parent)
+    return obj
+
+
+def cube(name, component_id, location, dimensions, mat, collection,
+         evidence=STATUS["illustrative"], export_role="component"):
     bpy.ops.mesh.primitive_cube_add(size=1, location=location)
     obj = bpy.context.object
     obj.name = name
@@ -128,12 +193,17 @@ def cube(name, component_id, location, dimensions, mat, collection, evidence=STA
     bpy.ops.object.transform_apply(location=False, rotation=False, scale=True)
     obj.data.materials.append(mat)
     move_to_collection(obj, collection)
-    return tag(obj, component_id, evidence)
+    return tag(obj, component_id, evidence, export_role=export_role)
 
-def cylinder(name, component_id, location, radius, depth, mat, collection, evidence=STATUS["illustrative"], vertices=64):
+
+def cylinder(name, component_id, location, radius, depth, mat, collection,
+             evidence=STATUS["illustrative"], vertices=64):
     bpy.ops.mesh.primitive_cylinder_add(
-        vertices=vertices, radius=radius, depth=depth,
-        location=location, rotation=(math.radians(90), 0, 0)
+        vertices=vertices,
+        radius=radius,
+        depth=depth,
+        location=location,
+        rotation=(math.radians(90), 0, 0),
     )
     obj = bpy.context.object
     obj.name = name
@@ -141,21 +211,193 @@ def cylinder(name, component_id, location, radius, depth, mat, collection, evide
     move_to_collection(obj, collection)
     return tag(obj, component_id, evidence)
 
-def make_fan(index, x, z, y, collection):
-    prefix = f"FAN-{index:02d}"
-    # Outer ring, hub and four simple blade proxies. Placement is illustrative.
-    cylinder(f"Fan {index} | frame", f"fan.{index}.frame", (x, y, z),
-             FAN_OPENING_DIA / 2, 3.0, MAT["fan"], collection)
-    cylinder(f"Fan {index} | hub", f"fan.{index}.hub", (x, y - 2.2, z),
-             13.0, 4.0, MAT["connector"], collection)
-    for blade in range(7):
-        angle = 2 * math.pi * blade / 7
-        bx = x + math.cos(angle) * 23.0
-        bz = z + math.sin(angle) * 23.0
-        obj = cube(f"Fan {index} | blade {blade+1}", f"fan.{index}.blade.{blade+1}",
-                   (bx, y - 1.5, bz), (25.0, 1.8, 7.0), MAT["fan"], collection)
-        obj.rotation_euler[1] = -angle
-    return prefix
+
+def annular_ring(name, component_id, location, outer_radius, inner_radius,
+                 depth, mat, collection, segments=96):
+    """Create a hollow ring in the XZ plane; Y is the card-thickness axis."""
+    if not (outer_radius > inner_radius > 0):
+        raise ValueError("Ring radii must satisfy outer_radius > inner_radius > 0")
+
+    verts = []
+    y_front = -depth / 2
+    y_back = depth / 2
+
+    for y in (y_front, y_back):
+        for radius in (outer_radius, inner_radius):
+            for i in range(segments):
+                angle = 2.0 * math.pi * i / segments
+                verts.append((
+                    radius * math.cos(angle),
+                    y,
+                    radius * math.sin(angle),
+                ))
+
+    def idx(side, ring, i):
+        return side * 2 * segments + ring * segments + (i % segments)
+
+    faces = []
+    for i in range(segments):
+        j = (i + 1) % segments
+        # Front annulus, rear annulus, outer wall, inner wall.
+        faces.append((idx(0, 0, i), idx(0, 0, j),
+                      idx(0, 1, j), idx(0, 1, i)))
+        faces.append((idx(1, 0, j), idx(1, 0, i),
+                      idx(1, 1, i), idx(1, 1, j)))
+        faces.append((idx(0, 0, i), idx(1, 0, i),
+                      idx(1, 0, j), idx(0, 0, j)))
+        faces.append((idx(0, 1, j), idx(1, 1, j),
+                      idx(1, 1, i), idx(0, 1, i)))
+
+    mesh = bpy.data.meshes.new(name + " mesh")
+    mesh.from_pydata(verts, [], faces)
+    mesh.validate()
+    mesh.update()
+
+    obj = bpy.data.objects.new(name, mesh)
+    obj.location = location
+    collection.objects.link(obj)
+    obj.data.materials.append(mat)
+    obj["sbs_outer_diameter_mm"] = round(outer_radius * 2, 3)
+    obj["sbs_inner_diameter_mm"] = round(inner_radius * 2, 3)
+    return tag(obj, component_id, STATUS["reviewer_measurement"])
+
+
+def curved_fan_blade(index, blade_index, count, center, base_y, collection):
+    """Illustrative swept blade surface, extruded along Y."""
+    # (radius, sweep angle in degrees, half-width in mm); entirely illustrative.
+    profile = (
+        (13.5, -5.0, 2.8),
+        (22.0, 1.0, 4.2),
+        (32.0, 11.0, 4.0),
+        (41.0, 20.0, 2.4),
+    )
+    base_angle = 2.0 * math.pi * blade_index / count
+    side_a = []
+    side_b = []
+
+    for radius, sweep_deg, half_width in profile:
+        angle = base_angle + math.radians(sweep_deg)
+        radial_x = math.cos(angle)
+        radial_z = math.sin(angle)
+        tangent_x = -radial_z
+        tangent_z = radial_x
+        cx = radius * radial_x
+        cz = radius * radial_z
+        side_a.append((
+            cx - half_width * tangent_x,
+            cz - half_width * tangent_z,
+        ))
+        side_b.append((
+            cx + half_width * tangent_x,
+            cz + half_width * tangent_z,
+        ))
+
+    outline = side_a + list(reversed(side_b))
+    n = len(outline)
+    y_front = -FAN_BLADE_DEPTH / 2
+    y_back = FAN_BLADE_DEPTH / 2
+    verts = (
+        [(x, y_front, z) for x, z in outline]
+        + [(x, y_back, z) for x, z in outline]
+    )
+
+    faces = [
+        tuple(range(n)),
+        tuple(reversed(range(n, 2 * n))),
+    ]
+    for i in range(n):
+        j = (i + 1) % n
+        faces.append((i, j, n + j, n + i))
+
+    name = f"Fan {index} | blade {blade_index + 1}"
+    mesh = bpy.data.meshes.new(name + " mesh")
+    mesh.from_pydata(verts, [], faces)
+    mesh.validate()
+    mesh.update()
+
+    obj = bpy.data.objects.new(name, mesh)
+    obj.location = (center[0], base_y, center[2])
+    collection.objects.link(obj)
+    obj.data.materials.append(MAT["fan"])
+    return tag(
+        obj,
+        f"fan.{index}.blade.{blade_index + 1}",
+        STATUS["illustrative"],
+    )
+
+
+def make_fan(index, x, z, y, collection, cooling_parent):
+    assembly = make_assembly(
+        f"Fan {index} assembly",
+        f"assembly.fan.{index}",
+        (x, y, z),
+        collection,
+        parent=cooling_parent,
+    )
+
+    # The ring is hollow: blades and hub remain visible instead of being hidden
+    # behind a solid cylinder. Measured diameters remain approximate guides.
+    frame = annular_ring(
+        f"Fan {index} | annular frame",
+        f"fan.{index}.frame",
+        (x, y, z),
+        FAN_OPENING_DIA / 2,
+        FAN_IMPELLER_DIA / 2,
+        FAN_FRAME_DEPTH,
+        MAT["fan"],
+        collection,
+    )
+    set_parent_keep_world(frame, assembly)
+
+    hub = cylinder(
+        f"Fan {index} | hub",
+        f"fan.{index}.hub",
+        (x, y - 2.2, z),
+        FAN_HUB_RADIUS,
+        4.0,
+        MAT["connector"],
+        collection,
+        vertices=64,
+    )
+    set_parent_keep_world(hub, assembly)
+
+    for blade in range(FAN_BLADE_COUNT):
+        obj = curved_fan_blade(
+            index, blade, FAN_BLADE_COUNT, (x, y, z),
+            y - 1.5, collection,
+        )
+        set_parent_keep_world(obj, assembly)
+
+
+def set_manifest_bounds():
+    corners = []
+    for obj in bpy.data.objects:
+        if obj.type != "MESH" or obj.get("sbs_export_role") == "reference_only":
+            continue
+        for corner in obj.bound_box:
+            corners.append(obj.matrix_world @ Vector(corner))
+
+    if not corners:
+        return
+
+    mins = [min(v[i] for v in corners) for i in range(3)]
+    maxs = [max(v[i] for v in corners) for i in range(3)]
+    manifest["generated_geometry_bounds"] = {
+        "units": "mm",
+        "status": "derived_from_proxy_meshes",
+        "includes_reference_guides": False,
+        "min": [round(v, 3) for v in mins],
+        "max": [round(v, 3) for v in maxs],
+        "dimensions": [
+            round(maxs[i] - mins[i], 3) for i in range(3)
+        ],
+        "axis_meaning": {
+            "x": "card length",
+            "y": "thickness axis; includes front/rear proxy protrusions",
+            "z": "card height",
+        },
+    }
+
 
 def main():
     args = parse_args()
@@ -175,105 +417,225 @@ def main():
 
     root = scene.collection
     groups = {}
-    for name in ("01_External", "02_Cooling", "03_PCB_And_Electronics", "04_Connectors"):
+    for name in (
+        "01_External",
+        "02_Cooling",
+        "03_PCB_And_Electronics",
+        "04_Connectors",
+    ):
         col = bpy.data.collections.new(name)
         root.children.link(col)
         groups[name] = col
 
     # Coordinate convention: X = card length, Y = thickness, Z = card height.
-    # Front/fan side faces -Y. Origin is the lower-left-rear corner of the envelope.
+    # Front/fan side faces -Y. Origin is the lower-left-rear corner
+    # of the nominal envelope.
     half_y = CARD_THICKNESS / 2
     ext = groups["01_External"]
     cool = groups["02_Cooling"]
     pcbcol = groups["03_PCB_And_Electronics"]
     conn = groups["04_Connectors"]
 
-    envelope = cube("Envelope guide | overall card", "assembly.card.envelope",
-                    (CARD_LENGTH/2, 0, CARD_HEIGHT/2),
-                    (CARD_LENGTH, CARD_THICKNESS, CARD_HEIGHT), MAT["metal"], ext)
-    # Wireframe keeps the nominal envelope visible without occluding internal proxy parts.
-    wire = envelope.modifiers.new("Envelope outline only", "WIREFRAME")
-    wire.thickness = 0.8
-    wire.use_replace = True
-    bpy.context.view_layer.objects.active = envelope
-    bpy.ops.object.modifier_apply(modifier=wire.name)
+    card_root = make_assembly(
+        "Graphics card assembly",
+        "assembly.card.root",
+        (CARD_LENGTH / 2, 0, CARD_HEIGHT / 2),
+        ext,
+    )
 
-    # Shroud fascia is built from rails/bridges so fan openings remain visibly open.
-    fascia_y = -half_y + SHROUD_THICKNESS/2
-    cube("Shroud proxy | top rail", "assembly.shroud.top",
-         (CARD_LENGTH/2, fascia_y, CARD_HEIGHT - 4.0),
-         (CARD_LENGTH, SHROUD_THICKNESS, 8.0), MAT["shroud"], ext)
-    cube("Shroud proxy | bottom rail", "assembly.shroud.bottom",
-         (CARD_LENGTH/2, fascia_y, 4.0),
-         (CARD_LENGTH, SHROUD_THICKNESS, 8.0), MAT["shroud"], ext)
-    cube("Shroud proxy | left rail", "assembly.shroud.left",
-         (4.0, fascia_y, CARD_HEIGHT/2),
-         (8.0, SHROUD_THICKNESS, CARD_HEIGHT - 16.0), MAT["shroud"], ext)
-    cube("Shroud proxy | right rail", "assembly.shroud.right",
-         (CARD_LENGTH - 4.0, fascia_y, CARD_HEIGHT/2),
-         (8.0, SHROUD_THICKNESS, CARD_HEIGHT - 16.0), MAT["shroud"], ext)
-    cube("Shroud proxy | centre bridge", "assembly.shroud.bridge",
-         ((FAN_CENTERS_X[0] + FAN_CENTERS_X[1])/2, fascia_y, FAN_CENTER_Z),
-         (3.0, SHROUD_THICKNESS, 12.0), MAT["shroud"], ext)
+    shroud_group = make_assembly(
+        "Shroud assembly",
+        "assembly.shroud",
+        (CARD_LENGTH / 2, -half_y, CARD_HEIGHT / 2),
+        ext,
+        parent=card_root,
+    )
+
+    cooling_group = make_assembly(
+        "Cooling assembly",
+        "assembly.cooling",
+        (CARD_LENGTH / 2, 0, CARD_HEIGHT / 2),
+        cool,
+        parent=card_root,
+    )
+
+    pcb_group = make_assembly(
+        "PCB and electronics assembly",
+        "assembly.pcb.electronics",
+        (CARD_LENGTH / 2, half_y - PCB_THICKNESS / 2, CARD_HEIGHT / 2),
+        pcbcol,
+        parent=card_root,
+    )
+
+    connector_group = make_assembly(
+        "I/O and power connectors assembly",
+        "assembly.connectors",
+        (0, 0, 0),
+        conn,
+        parent=card_root,
+    )
+
+    # Reference-only nominal envelope. It is an exact-size wire display,
+    # not a thickened mesh, and is deliberately excluded from the GLB.
+    envelope = cube(
+        "Envelope guide | overall card",
+        "assembly.card.envelope",
+        (CARD_LENGTH / 2, 0, CARD_HEIGHT / 2),
+        (CARD_LENGTH, CARD_THICKNESS, CARD_HEIGHT),
+        MAT["metal"],
+        ext,
+        export_role="reference_only",
+    )
+    envelope.display_type = "WIRE"
+    envelope.show_in_front = True
+
+    # Shroud fascia is built from rails/bridges so fan rings remain open.
+    fascia_y = -half_y + SHROUD_THICKNESS / 2
+    shroud_parts = [
+        cube(
+            "Shroud proxy | top rail",
+            "assembly.shroud.top",
+            (CARD_LENGTH / 2, fascia_y, CARD_HEIGHT - 4.0),
+            (CARD_LENGTH, SHROUD_THICKNESS, 8.0),
+            MAT["shroud"], ext,
+        ),
+        cube(
+            "Shroud proxy | bottom rail",
+            "assembly.shroud.bottom",
+            (CARD_LENGTH / 2, fascia_y, 4.0),
+            (CARD_LENGTH, SHROUD_THICKNESS, 8.0),
+            MAT["shroud"], ext,
+        ),
+        cube(
+            "Shroud proxy | left rail",
+            "assembly.shroud.left",
+            (4.0, fascia_y, CARD_HEIGHT / 2),
+            (8.0, SHROUD_THICKNESS, CARD_HEIGHT - 16.0),
+            MAT["shroud"], ext,
+        ),
+        cube(
+            "Shroud proxy | right rail",
+            "assembly.shroud.right",
+            (CARD_LENGTH - 4.0, fascia_y, CARD_HEIGHT / 2),
+            (8.0, SHROUD_THICKNESS, CARD_HEIGHT - 16.0),
+            MAT["shroud"], ext,
+        ),
+        cube(
+            "Shroud proxy | centre bridge",
+            "assembly.shroud.bridge",
+            ((FAN_CENTERS_X[0] + FAN_CENTERS_X[1]) / 2,
+             fascia_y, FAN_CENTER_Z),
+            (3.0, SHROUD_THICKNESS, 12.0),
+            MAT["shroud"], ext,
+        ),
+    ]
+    for part in shroud_parts:
+        set_parent_keep_world(part, shroud_group)
 
     for i, x in enumerate(FAN_CENTERS_X, start=1):
-        make_fan(i, x, FAN_CENTER_Z, -half_y - 1.5, cool)
-        # Accent ring is a visual guide for the measured opening diameter.
-        cylinder(f"Fan {i} | opening guide", f"fan.{i}.opening_guide",
-                 (x, -half_y - 3.2, FAN_CENTER_Z), FAN_OPENING_DIA/2, 0.8,
-                 MAT["accent"], ext)
-
-    # Rear-side exposed PCB proxy: exact outline and position are not yet measured.
-    cube("PCB proxy | exposed rear", "assembly.pcb",
-         (CARD_LENGTH/2, half_y - 2.0, CARD_HEIGHT/2),
-         (CARD_LENGTH * 0.88, PCB_THICKNESS, CARD_HEIGHT * 0.78),
-         MAT["pcb"], pcbcol)
+        make_fan(i, x, FAN_CENTER_Z, -half_y - 1.5, cool, cooling_group)
 
     # Cooling stack: coarse blocks only, not fin-by-fin geometry.
-    cube("Heatsink proxy | fin stack", "cooling.heatsink",
-         (CARD_LENGTH/2, 0, CARD_HEIGHT/2),
-         (CARD_LENGTH * 0.72, HEATSINK_THICKNESS, CARD_HEIGHT * 0.48),
-         MAT["heatsink"], cool)
-    cube("GPU contact proxy | copper", "cooling.gpu_contact",
-         (CARD_LENGTH*0.48, -3.0, CARD_HEIGHT*0.52),
-         (48.0, 3.0, 42.0), MAT["copper"], cool)
+    heatsink = cube(
+        "Heatsink proxy | fin stack",
+        "cooling.heatsink",
+        (CARD_LENGTH / 2, 0, CARD_HEIGHT / 2),
+        (CARD_LENGTH * 0.72, HEATSINK_THICKNESS, CARD_HEIGHT * 0.48),
+        MAT["heatsink"], cool,
+    )
+    set_parent_keep_world(heatsink, cooling_group)
 
-    # GPU package and memory candidates are deliberately generic proxy blocks.
-    cube("GPU package proxy | GA106", "chip.gpu.ga106",
-         (CARD_LENGTH*0.48, half_y - 4.0, CARD_HEIGHT*0.52),
-         (40.0, 5.0, 40.0), MAT["gpu"], pcbcol)
+    contact = cube(
+        "GPU contact proxy | copper",
+        "cooling.gpu_contact",
+        (CARD_LENGTH * 0.48, -3.0, CARD_HEIGHT * 0.52),
+        (48.0, 3.0, 42.0),
+        MAT["copper"], cool,
+    )
+    set_parent_keep_world(contact, cooling_group)
+
+    # Rear-side exposed PCB proxy: exact outline and position remain unknown.
+    pcb = cube(
+        "PCB proxy | exposed rear",
+        "assembly.pcb.board",
+        (CARD_LENGTH / 2, half_y - 2.0, CARD_HEIGHT / 2),
+        (CARD_LENGTH * 0.88, PCB_THICKNESS, CARD_HEIGHT * 0.78),
+        MAT["pcb"], pcbcol,
+    )
+    set_parent_keep_world(pcb, pcb_group)
+
+    # GPU package and memory candidates are generic proxy blocks.
+    gpu_package = cube(
+        "GPU package proxy | GA106",
+        "chip.gpu.ga106",
+        (CARD_LENGTH * 0.48, half_y - 4.0, CARD_HEIGHT * 0.52),
+        (40.0, 5.0, 40.0),
+        MAT["gpu"], pcbcol,
+    )
+    set_parent_keep_world(gpu_package, pcb_group)
+
     for i in range(6):
-        x = CARD_LENGTH*0.25 + i * 16.0
-        cube(f"GDDR6 candidate {i+1}", f"chip.memory.candidate.{i+1}",
-             (x, half_y - 4.0, CARD_HEIGHT*0.52),
-             (14.0, 4.0, 12.0), MAT["memory"], pcbcol)
+        x = CARD_LENGTH * 0.25 + i * 16.0
+        memory = cube(
+            f"GDDR6 candidate {i + 1}",
+            f"chip.memory.candidate.{i + 1}",
+            (x, half_y - 4.0, CARD_HEIGHT * 0.52),
+            (14.0, 4.0, 12.0),
+            MAT["memory"], pcbcol,
+        )
+        set_parent_keep_world(memory, pcb_group)
 
-    # Single 8-pin connector and bracket/port area are symbolic, not measured geometry.
-    cube("8-pin power connector proxy", "connector.power.8pin",
-         (CARD_LENGTH*0.72, half_y - 1.0, CARD_HEIGHT - 5.0),
-         (22.0, 8.0, 10.0), MAT["connector"], conn)
-    cube("I/O bracket proxy", "connector.io.bracket",
-         (2.0, 0, CARD_HEIGHT/2), (2.0, CARD_THICKNESS, CARD_HEIGHT),
-         MAT["metal"], conn)
-    cube("Display output panel proxy", "connector.io.panel",
-         (1.0, 0, CARD_HEIGHT*0.48), (3.0, CARD_THICKNESS*0.8, 48.0),
-         MAT["connector"], conn)
+    # Single 8-pin connector and bracket/port area are symbolic, not measured.
+    power = cube(
+        "8-pin power connector proxy",
+        "connector.power.8pin",
+        (CARD_LENGTH * 0.72, half_y - 1.0, CARD_HEIGHT - 5.0),
+        (22.0, 8.0, 10.0),
+        MAT["connector"], conn,
+    )
+    set_parent_keep_world(power, connector_group)
+
+    bracket = cube(
+        "I/O bracket proxy",
+        "connector.io.bracket",
+        (2.0, 0, CARD_HEIGHT / 2),
+        (2.0, CARD_THICKNESS, CARD_HEIGHT),
+        MAT["metal"], conn,
+    )
+    set_parent_keep_world(bracket, connector_group)
+
+    display_panel = cube(
+        "Display output panel proxy",
+        "connector.io.panel",
+        (1.0, 0, CARD_HEIGHT * 0.48),
+        (3.0, CARD_THICKNESS * 0.8, 48.0),
+        MAT["connector"], conn,
+    )
+    set_parent_keep_world(display_panel, connector_group)
 
     # Scene-level provenance metadata.
     scene["sbs_model_id"] = manifest["model_id"]
     scene["sbs_asset_type"] = "blockout"
     scene["sbs_geometry_status"] = "illustrative_proxy_not_cad"
-    scene["sbs_coordinate_convention"] = "X=length, Y=thickness, Z=height; units=mm"
+    scene["sbs_coordinate_convention"] = (
+        "X=length, Y=thickness, Z=height; units=mm"
+    )
 
-    # Set a useful default view and deselect all objects.
+    # Useful initial view.
     bpy.ops.object.select_all(action="DESELECT")
     for area in bpy.context.screen.areas if bpy.context.screen else []:
         if area.type == "VIEW_3D":
             area.spaces.active.region_3d.view_distance = 330
-            area.spaces.active.region_3d.view_location = (CARD_LENGTH/2, 0, CARD_HEIGHT/2)
+            area.spaces.active.region_3d.view_location = (
+                CARD_LENGTH / 2, 0, CARD_HEIGHT / 2
+            )
 
+    set_manifest_bounds()
     manifest_path = out_dir / "rtx3060_xc_black_blockout.manifest.json"
-    manifest_path.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+    manifest_path.write_text(
+        json.dumps(manifest, indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
 
     if not args.no_blend:
         blend_path = out_dir / "rtx3060_xc_black_blockout.blend"
@@ -283,15 +645,34 @@ def main():
     if not args.no_glb:
         glb_path = out_dir / "rtx3060_xc_black_blockout.glb"
         if hasattr(bpy.ops.export_scene, "gltf"):
-            bpy.ops.export_scene.gltf(filepath=str(glb_path), export_format="GLB",
-                                      export_apply=True, export_yup=True, export_extras=True)
+            # Export renderable parts and assembly empties; omit the reference
+            # envelope so it cannot inflate browser-model bounds or obscure parts.
+            bpy.ops.object.select_all(action="DESELECT")
+            export_objects = [
+                obj for obj in bpy.context.scene.objects
+                if obj.get("sbs_export_role") != "reference_only"
+            ]
+            for obj in export_objects:
+                obj.select_set(True)
+
+            bpy.context.view_layer.objects.active = card_root
+            bpy.ops.export_scene.gltf(
+                filepath=str(glb_path),
+                export_format="GLB",
+                export_apply=True,
+                export_yup=True,
+                export_extras=True,
+                use_selection=True,
+            )
+            bpy.ops.object.select_all(action="DESELECT")
             print(f"Exported GLB: {glb_path}")
         else:
-            print("GLB export skipped: Blender glTF exporter is not available in this installation.")
-            print("Enable/install the glTF 2.0 exporter, then rerun without --no-glb.")
+            print("GLB export skipped: Blender glTF exporter is unavailable.")
+            print("Enable the glTF 2.0 exporter, then rerun without --no-glb.")
 
     print(f"Saved manifest: {manifest_path}")
     print("WARNING: illustrative blockout only; not CAD or manufacturing geometry.")
+
 
 if __name__ == "__main__":
     main()
