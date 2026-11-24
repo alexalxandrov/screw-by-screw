@@ -52,6 +52,13 @@ blender --background --python tools/modeling/build_rtx3060_xc_black_blockout.py 
 
 The script produces a Blender scene, GLB export and JSON manifest unless disabled. Generated binaries are local working artifacts and are not committed by this script.
 
+The current generator version writes versioned artifacts:
+- `rtx3060_xc_black_blockout_v03.blend`
+- `rtx3060_xc_black_blockout_v03.glb`
+- `rtx3060_xc_black_blockout_v03.manifest.json`
+
+Earlier v0.1/v0.2 outputs are retained locally for comparison. v0.3 includes a pre-export transform-integrity check for fan frames, hubs, blade pivots and the nominal X/Z footprint. It must still be run locally in Blender 4.3.2 before acceptance.
+
 **Accuracy warning:** the card length and height use manufacturer-published values; fan diameters are approximate reviewer measurements. Thickness, fan centres, shroud/PCB outlines and internal placements are illustrative or unknown. This asset is not suitable for manufacturing, fitment, repair or physical simulation.
 
 ## Required package files (future)
