@@ -194,14 +194,27 @@ def main():
          (CARD_LENGTH/2, 0, CARD_HEIGHT/2),
          (CARD_LENGTH, CARD_THICKNESS, CARD_HEIGHT), MAT["shroud"], ext)
 
-    # Shroud front plate and simplified fan apertures represented as separate rings.
-    cube("Shroud proxy | front fascia", "assembly.shroud.front",
-         (CARD_LENGTH/2, -half_y + SHROUD_THICKNESS/2, CARD_HEIGHT/2),
-         (CARD_LENGTH, SHROUD_THICKNESS, CARD_HEIGHT), MAT["shroud"], ext)
+    # Shroud fascia is built from rails/bridges so fan openings remain visibly open.
+    fascia_y = -half_y + SHROUD_THICKNESS/2
+    cube("Shroud proxy | top rail", "assembly.shroud.top",
+         (CARD_LENGTH/2, fascia_y, CARD_HEIGHT - 4.0),
+         (CARD_LENGTH, SHROUD_THICKNESS, 8.0), MAT["shroud"], ext)
+    cube("Shroud proxy | bottom rail", "assembly.shroud.bottom",
+         (CARD_LENGTH/2, fascia_y, 4.0),
+         (CARD_LENGTH, SHROUD_THICKNESS, 8.0), MAT["shroud"], ext)
+    cube("Shroud proxy | left rail", "assembly.shroud.left",
+         (4.0, fascia_y, CARD_HEIGHT/2),
+         (8.0, SHROUD_THICKNESS, CARD_HEIGHT - 16.0), MAT["shroud"], ext)
+    cube("Shroud proxy | right rail", "assembly.shroud.right",
+         (CARD_LENGTH - 4.0, fascia_y, CARD_HEIGHT/2),
+         (8.0, SHROUD_THICKNESS, CARD_HEIGHT - 16.0), MAT["shroud"], ext)
+    cube("Shroud proxy | centre bridge", "assembly.shroud.bridge",
+         ((FAN_CENTERS_X[0] + FAN_CENTERS_X[1])/2, fascia_y, FAN_CENTER_Z),
+         (3.0, SHROUD_THICKNESS, 12.0), MAT["shroud"], ext)
 
     for i, x in enumerate(FAN_CENTERS_X, start=1):
         make_fan(i, x, FAN_CENTER_Z, -half_y - 1.5, cool)
-        # Accent ring indicates opening diameter, not a cut-out in the shroud mesh.
+        # Accent ring is a visual guide for the measured opening diameter.
         cylinder(f"Fan {i} | opening guide", f"fan.{i}.opening_guide",
                  (x, -half_y - 3.2, FAN_CENTER_Z), FAN_OPENING_DIA/2, 0.8,
                  MAT["accent"], ext)
@@ -266,7 +279,7 @@ def main():
     if not args.no_glb:
         glb_path = out_dir / "rtx3060_xc_black_blockout.glb"
         bpy.ops.export_scene.gltf(filepath=str(glb_path), export_format="GLB",
-                                  export_apply=True, export_yup=True)
+                                  export_apply=True, export_yup=True, export_extras=True)
         print(f"Exported GLB: {glb_path}")
 
     print(f"Saved manifest: {manifest_path}")
