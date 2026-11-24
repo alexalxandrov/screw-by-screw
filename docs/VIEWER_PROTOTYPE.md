@@ -67,6 +67,7 @@ The Blender source scene uses X = card length, Y = thickness, Z = height. The Bl
 - Cooling and power layers are qualitative highlighting, not CFD, thermal analysis or circuit simulation.
 - The learning quiz is a small source-backed starter set, not a complete course or assessment system.
 - The viewer has not yet passed local browser testing against the owner's generated v0.4 GLB.
+- The content package and viewer are being unified around JSON source-of-truth files; local review is still required.
 - No model editing, user accounts, backend, telemetry or publishing workflow is included.
 
 ## Next gate
