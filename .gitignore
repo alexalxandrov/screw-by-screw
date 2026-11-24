@@ -5,3 +5,8 @@ MODELS/**/05-EXPORT/generated/
 # Blender autosaves/backups
 *.blend1
 *.blend@
+
+# Frontend dependencies and generated bundles
+node_modules/
+dist/
+.DS_Store
