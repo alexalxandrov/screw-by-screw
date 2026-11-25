@@ -64,6 +64,14 @@ class PackageModelTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "unsafe package path"):
             build_package(self.model_dir, self.scene, self.output)
 
+    def test_rejects_duplicate_archive_paths(self):
+        manifest_path = self.model_dir / "model-package.json"
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        manifest["files"]["components"] = "model.json"
+        manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+        with self.assertRaisesRegex(ValueError, "duplicate package archive path"):
+            build_package(self.model_dir, self.scene, self.output)
+
     def test_rejects_mismatched_model_id(self):
         (self.model_dir / "model.json").write_text(json.dumps({"id": "wrong.device"}), encoding="utf-8")
         with self.assertRaisesRegex(ValueError, "model ID does not match"):
