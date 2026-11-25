@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { SceneController } from "./viewer/SceneController.js";
 import { MODEL, COMPONENTS, EVIDENCE } from "./data/model.js";
 import LEARNING_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/learning.json";
 import PROCESS_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/process_layers.json";
@@ -21,7 +22,7 @@ const state = {
   selectedId: null,
   componentNodes: new Map(),
   catalog: new Map(COMPONENTS.map((item) => [item.id, item])),
-  baseTransforms: new Map(),
+  sceneController: null,
   exploded: 0,
   isolated: false,
   wireframe: false,
@@ -590,62 +591,34 @@ function resetCamera() {
   state.controls.update();
 }
 
-function saveBaseTransforms() {
-  state.baseTransforms.clear();
-  state.modelRoot.updateMatrixWorld(true);
-  const box = new THREE.Box3().setFromObject(state.modelRoot);
-  const center = box.getCenter(new THREE.Vector3());
-  state.modelRoot.traverse((object) => {
-    if (object === state.modelRoot) return;
-    if (!object.isMesh && !object.userData?.sbs_component_id) return;
-    object.updateMatrixWorld(true);
-    const world = object.getWorldPosition(new THREE.Vector3());
-    const direction = world.clone().sub(center);
-    if (direction.lengthSq() < 0.001) direction.set(0, 0.8, 0);
-    direction.normalize();
-    state.baseTransforms.set(object.uuid, {
-      object,
-      local: object.position.clone(),
-      world,
-      direction
-    });
-  });
-}
-
-function setExplode(value) {
+function updateExplodeUi(value) {
   state.exploded = Math.max(0, Math.min(100, Number(value)));
-  const amount = state.exploded * 0.42;
-  state.modelRoot.updateMatrixWorld(true);
-  for (const record of state.baseTransforms.values()) {
-    const targetWorld = record.world.clone().add(record.direction.clone().multiplyScalar(amount));
-    if (record.object.parent) {
-      record.object.parent.updateWorldMatrix(true, false);
-      record.object.position.copy(record.object.parent.worldToLocal(targetWorld));
-    } else {
-      record.object.position.copy(targetWorld);
-    }
-  }
   $("#explode-slider").value = String(state.exploded);
-  $("#explode-value").textContent = `${state.exploded}%`;
+  $("#explode-value").textContent = `${Math.round(state.exploded)}%`;
   $("#model-state").textContent = state.exploded ? "EXPLODED VIEW" : t("assembledState");
 }
 
+function setExplode(value) {
+  if (!state.sceneController) return;
+  state.sceneController.setExplode(value);
+  updateExplodeUi(value);
+}
+
+async function animateExplodeCycle() {
+  if (!state.sceneController) return;
+  const button = $("#animate-button");
+  button.disabled = true;
+  const expanded = await state.sceneController.animateExplode(100, 950, updateExplodeUi);
+  if (expanded) await state.sceneController.animateExplode(0, 950, updateExplodeUi);
+  button.disabled = false;
+}
+
 function setIsolated(isolate) {
-  if (!state.selected) return;
-  state.isolated = isolate;
-  const keep = new Set();
-  let current = state.selected;
-  while (current) {
-    keep.add(current);
-    current = current.parent;
-  }
-  state.selected.traverse((object) => keep.add(object));
-  state.modelRoot.traverse((object) => {
-    if (object === state.modelRoot) return;
-    object.visible = !isolate || keep.has(object);
-  });
-  $("#isolate-toggle").classList.toggle("active", isolate);
-  setStatus(isolate ? t("isolate") : t("allVisible"));
+  if (!state.selected || !state.sceneController) return;
+  state.isolated = Boolean(isolate);
+  state.sceneController.setIsolated(state.selected, state.isolated);
+  $("#isolate-toggle").classList.toggle("active", state.isolated);
+  setStatus(state.isolated ? t("isolate") : t("allVisible"));
 }
 
 function setLayer(layer) {
@@ -711,6 +684,8 @@ function disposeModel(root) {
 }
 
 function installModel(root, mode) {
+  if (state.sceneController) state.sceneController.reset();
+  state.sceneController = null;
   if (state.modelRoot) disposeModel(state.modelRoot);
   state.modelRoot = root;
   state.scene.add(root);
@@ -724,7 +699,7 @@ function installModel(root, mode) {
   $("#empty-selection").hidden = false;
   document.querySelectorAll(".process-button").forEach((button) => button.classList.remove("active"));
   collectNodes(root);
-  saveBaseTransforms();
+  state.sceneController = new SceneController(root);
   fitModel(root);
   setExplode(0);
   setLoadState(mode === "file" ? t("loadedGlb") : t("demoLoaded"));
