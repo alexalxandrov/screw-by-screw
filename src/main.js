@@ -408,9 +408,10 @@ function renderTree() {
   if (query) {
     for (const entry of entries.filter((item) => item.matches)) {
       let parent = entry.object.parent;
-      while (parent && parent !== state.modelRoot) {
+      while (parent) {
         const parentId = parent.userData?.sbs_component_id;
         if (parentId) visibleIds.add(parentId);
+        if (parent === state.modelRoot) break;
         parent = parent.parent;
       }
     }
