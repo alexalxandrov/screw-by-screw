@@ -131,7 +131,7 @@ test("rejects unknown component parents", () => {
 test("rejects relationships that point outside the component inventory", () => {
   const data = makeData();
   data.relationships.relationships[0].to = "not-a-component";
-  const manifest = { format: "sbs-model", schema_version: "1.0.0", model_id: modelId, files: {} };
+  const manifest = testManifest();
   assert.throws(() => validateModelPackageData(manifest, data), /unknown component/);
 });
 
