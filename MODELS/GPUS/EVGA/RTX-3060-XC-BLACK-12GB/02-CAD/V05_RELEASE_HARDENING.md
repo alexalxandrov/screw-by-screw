@@ -56,6 +56,7 @@ The inspection report must show no missing or duplicate component IDs. The packa
 - Added a selectable power-conversion zone made of unnumbered proxy objects. It must not be read as an exact VRM phase layout.
 - Added a viewer-only operating state: fan rotation plus qualitative airflow and power-path particles, with a speed control and reduced-motion handling.
 - All moving paths are explicitly schematic; no CFD, SPICE, pin mapping or measured fan rpm is claimed.
+- v0.5 exports 84 Blender objects: 74 meshes and 10 assembly nodes. All 83 non-reference GLB nodes have unique IDs; 22 are canonical content components and the remaining IDs label unverified proxy geometry.
 
 ## Remaining release blockers
 

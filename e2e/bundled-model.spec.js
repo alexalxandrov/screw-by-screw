@@ -12,7 +12,7 @@ test("loads the generated Blender v0.5 GLB and resolves content-package IDs", as
   const modelBytes = await modelResponse.body();
   expect(modelBytes.byteLength).toBeLessThan(1024 * 1024);
   await expect(page.locator("#app-status")).toHaveText("Модель готова");
-  await expect(page.locator("#component-count")).toHaveText("69");
+  await expect(page.locator("#component-count")).toHaveText("83");
   await expect(page.getByRole("button", { name: /Видеокарта в сборе/ })).toBeVisible();
 
   await page.getByRole("button", { name: /Охлаждение/ }).click();
