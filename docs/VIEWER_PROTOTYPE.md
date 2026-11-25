@@ -10,12 +10,12 @@ A static, local-first Three.js viewer for the EVGA GeForce RTX 3060 XC BLACK pil
 - npm.
 - A current desktop browser with WebGL support.
 
-The frontend uses Three.js 0.187.0 and Vite 8.3.8. These are pinned in `package.json`.
+The frontend uses Three.js 0.187.0 and Vite 8.3.8. These are pinned in `package.json` and `package-lock.json`.
 
 ## Start locally
 
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
@@ -60,10 +60,12 @@ The Blender source scene uses X = card length, Y = thickness, Z = height. The Bl
 
 ## Automated browser tests
 
-The five-test Playwright suite runs in headless Chromium with SwiftShader WebGL. It covers fallback scene rendering, component selection, process-layer explanations, the bilingual quiz and explode/reassemble interaction:
+The viewer CI passes eight Playwright tests across Chromium and Firefox. The suite covers component selection, process-layer explanations, the bilingual quiz, explode/reassemble, GLB external-resource rejection, two automated WCAG A/AA audits and a Firefox learning-flow smoke test.
+
+The Blender workflow separately loads the generated v0.4 GLB into the viewer, checks all canonical component IDs and parent ancestry, verifies heatsink selection, and enforces a 1 MiB GLB size budget.
 
 ```bash
-npx playwright install chromium
+npx playwright install chromium firefox
 npm run test:e2e
 ```
 
@@ -75,10 +77,9 @@ npm run test:e2e
 - Exploded view is a reversible visual separation, not a verified physical removal sequence.
 - Cooling and power layers are qualitative highlighting, not CFD, thermal analysis or circuit simulation.
 - The learning quiz is a small source-backed starter set, not a complete course or assessment system.
-- The viewer has not yet passed local browser testing against the owner's generated v0.4 GLB.
-- The content package and viewer are being unified around JSON source-of-truth files; local review is still required.
+- CI validates the generated v0.4 model and viewer integration; local visual acceptance on the owner's machine remains pending.
 - No model editing, user accounts, backend, telemetry or publishing workflow is included.
 
 ## Next gate
 
-Run the app locally, load the v0.4 GLB, and verify orbit, picking, component IDs, hierarchy, isolate/restore, exploded/reassembled transforms, and RU/EN card rendering. Record browser and console output before accepting v0.6.
+Run the app locally, load the v0.4 GLB, and verify camera orientation, picking, hierarchy, isolate/restore, exploded/reassembled transforms and RU/EN card rendering. Record browser and console output before accepting the visual result.
