@@ -1,7 +1,27 @@
 import { defineConfig } from "vite";
+import { resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const projectRoot = fileURLToPath(new URL(".", import.meta.url));
+
+function serveSourceTemplateAtRoot() {
+  return {
+    name: "sbs-source-template-at-root",
+    apply: "serve",
+    configureServer(server) {
+      server.middlewares.use((request, _response, next) => {
+        if (request.url === "/" || request.url?.startsWith("/?")) {
+          request.url = request.url.replace(/^\/(?=\?|$)/, "/index.template.html");
+        }
+        next();
+      });
+    }
+  };
+}
 
 export default defineConfig({
   base: "./",
+  plugins: [serveSourceTemplateAtRoot()],
   server: {
     host: "127.0.0.1",
     port: 5173,
@@ -14,6 +34,13 @@ export default defineConfig({
   },
   build: {
     target: "es2022",
-    sourcemap: true
+    sourcemap: false,
+    assetsInlineLimit: 512 * 1024 * 1024,
+    rollupOptions: {
+      input: resolve(projectRoot, "index.template.html"),
+      output: {
+        inlineDynamicImports: true
+      }
+    }
   }
 });
