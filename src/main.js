@@ -23,6 +23,7 @@ const state = {
   componentNodes: new Map(),
   catalog: new Map(COMPONENTS.map((item) => [item.id, item])),
   sceneController: null,
+  cameraHome: null,
   exploded: 0,
   isolated: false,
   wireframe: false,
@@ -586,8 +587,13 @@ function selectComponent(id) {
 function resetCamera() {
   if (!state.camera || !state.controls) return;
   state.camera.up.set(0, 0, 1);
-  state.camera.position.set(300, 235, 260);
-  state.controls.target.set(101, 0, 55);
+  if (state.cameraHome) {
+    state.camera.position.copy(state.cameraHome.position);
+    state.controls.target.copy(state.cameraHome.target);
+  } else {
+    state.camera.position.set(300, 235, 260);
+    state.controls.target.set(101, 0, 55);
+  }
   state.controls.update();
 }
 
@@ -665,10 +671,16 @@ function fitModel(root) {
   const maxDimension = Math.max(size.x, size.y, size.z, 100);
   state.controls.target.copy(center);
   state.camera.position.copy(center).add(new THREE.Vector3(maxDimension * 1.35, maxDimension * 1.0, maxDimension * 1.25));
-  state.camera.near = Math.max(0.1, maxDimension / 1000);
-  state.camera.far = maxDimension * 30;
+  state.controls.minDistance = Math.max(0.01, maxDimension * 0.08);
+  state.controls.maxDistance = maxDimension * 30;
+  state.camera.near = Math.max(0.001, maxDimension / 1000);
+  state.camera.far = maxDimension * 40;
   state.camera.updateProjectionMatrix();
   state.controls.update();
+  state.cameraHome = {
+    position: state.camera.position.clone(),
+    target: center.clone()
+  };
 }
 
 function disposeModel(root) {
