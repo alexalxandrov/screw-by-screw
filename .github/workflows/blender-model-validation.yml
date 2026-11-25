@@ -88,6 +88,7 @@ jobs:
         run: |
           mkdir -p public/models
           cp MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v04.glb public/models/
+          cp artifacts/rtx3060_xc_black_v04.sbsmodel public/models/
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
@@ -111,6 +112,8 @@ jobs:
         run: npm run build
       - name: Test generated GLB inside the viewer
         run: npm run test:e2e:model
+      - name: Test real .sbsmodel import in browser
+        run: npm run test:e2e:generated-package
       - name: Run full viewer and accessibility suite against generated GLB
         run: npm run test:e2e:chromium
       - name: Collect generated artifacts
