@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { SceneController } from "./viewer/SceneController.js";
 import { MODEL, COMPONENTS, EVIDENCE } from "./data/model.js";
 import LEARNING_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/learning.json";
 import PROCESS_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/process_layers.json";
@@ -21,7 +22,9 @@ const state = {
   selectedId: null,
   componentNodes: new Map(),
   catalog: new Map(COMPONENTS.map((item) => [item.id, item])),
-  baseTransforms: new Map(),
+  sceneController: null,
+  cameraHome: null,
+  gridHelper: null,
   exploded: 0,
   isolated: false,
   wireframe: false,
@@ -44,7 +47,7 @@ const UI = {
     pilotModel: "PILOT MODEL", structure: "STRUCTURE", components: "Components",
     searchPlaceholder: "Find a component…", assemblyTree: "ASSEMBLY TREE", showAll: "Show all",
     proxyNote: "Illustrative geometry · not CAD", explore: "Explore", disassemble: "Disassemble",
-    understand: "Understand", assembledState: "ASSEMBLED STATE", demoScene: "DEMO SCENE · LOCAL",
+    understand: "Understand", animate: "Animate", assembledState: "ASSEMBLED STATE", demoScene: "DEMO SCENE · LOCAL",
     assemblyState: "ASSEMBLY STATE", assemble: "Assemble", explode: "Explode",
     assembled: "ASSEMBLED", exploded: "EXPLODED", processLayers: "PROCESS LAYERS",
     qualitativeOnly: "QUALITATIVE ONLY", cooling: "Cooling", powerDelivery: "Power delivery",
@@ -65,7 +68,7 @@ const UI = {
     pilotModel: "ПИЛОТНАЯ МОДЕЛЬ", structure: "СТРУКТУРА", components: "Компоненты",
     searchPlaceholder: "Найти компонент…", assemblyTree: "ДЕРЕВО СБОРКИ", showAll: "Показать все",
     proxyNote: "Условная геометрия · не CAD", explore: "Обзор", disassemble: "Разборка",
-    understand: "Принцип работы", assembledState: "СОБРАННОЕ СОСТОЯНИЕ", demoScene: "ДЕМО-СЦЕНА · ЛОКАЛЬНО",
+    understand: "Принцип работы", animate: "Анимировать", assembledState: "СОБРАННОЕ СОСТОЯНИЕ", demoScene: "ДЕМО-СЦЕНА · ЛОКАЛЬНО",
     assemblyState: "СОСТОЯНИЕ СБОРКИ", assemble: "Собрать", explode: "Разобрать",
     assembled: "СОБРАНО", exploded: "РАЗОБРАНО", processLayers: "СЛОИ ПРОЦЕССОВ",
     qualitativeOnly: "КАЧЕСТВЕННО", cooling: "Охлаждение", powerDelivery: "Питание",
@@ -283,7 +286,8 @@ function getComponentData(id, object) {
     descriptionEn: "Imported GLB node. No additional component description is supplied in the model manifest.",
     descriptionRu: "Узел импортированного GLB. В манифесте нет дополнительного описания компонента.",
     evidence,
-    geometry: object?.userData?.sbs_geometry_status ?? "unknown"
+    geometry: object?.userData?.sbs_geometry_status ?? "unknown",
+    sourceIds: []
   };
 }
 
@@ -352,13 +356,8 @@ function renderDetails(id) {
 
   const sourceHost = $("#source-links");
   sourceHost.replaceChildren();
-  const sourceList = data.id === "assembly.card.root"
-    ? MODEL.sources
-    : data.id.includes("gpu") || data.id.includes("memory")
-      ? [MODEL.sources[2], MODEL.sources[1]]
-      : data.id.includes("fan") || data.id.includes("cooling") || data.id.includes("shroud")
-        ? [MODEL.sources[1], MODEL.sources[2]]
-        : [MODEL.sources[0], MODEL.sources[1]];
+  const sourceMap = new Map(MODEL.sources.map((source) => [source.id, source]));
+  const sourceList = (data.sourceIds ?? []).map((sourceId) => sourceMap.get(sourceId)).filter(Boolean);
   sourceList.forEach((source) => {
     const link = document.createElement("a");
     link.href = source.url;
@@ -585,67 +584,48 @@ function selectComponent(id) {
 function resetCamera() {
   if (!state.camera || !state.controls) return;
   state.camera.up.set(0, 0, 1);
-  state.camera.position.set(300, 235, 260);
-  state.controls.target.set(101, 0, 55);
+  if (state.cameraHome) {
+    state.camera.position.copy(state.cameraHome.position);
+    state.controls.target.copy(state.cameraHome.target);
+  } else {
+    state.camera.position.set(300, 235, 260);
+    state.controls.target.set(101, 0, 55);
+  }
   state.controls.update();
 }
 
-function saveBaseTransforms() {
-  state.baseTransforms.clear();
-  state.modelRoot.updateMatrixWorld(true);
-  const box = new THREE.Box3().setFromObject(state.modelRoot);
-  const center = box.getCenter(new THREE.Vector3());
-  state.modelRoot.traverse((object) => {
-    if (object === state.modelRoot) return;
-    if (!object.isMesh && !object.userData?.sbs_component_id) return;
-    object.updateMatrixWorld(true);
-    const world = object.getWorldPosition(new THREE.Vector3());
-    const direction = world.clone().sub(center);
-    if (direction.lengthSq() < 0.001) direction.set(0, 0.8, 0);
-    direction.normalize();
-    state.baseTransforms.set(object.uuid, {
-      object,
-      local: object.position.clone(),
-      world,
-      direction
-    });
-  });
+function updateExplodeUi(value) {
+  state.exploded = Math.max(0, Math.min(100, Number(value)));
+  $("#explode-slider").value = String(state.exploded);
+  $("#explode-value").textContent = `${Math.round(state.exploded)}%`;
+  $("#model-state").textContent = state.exploded ? t("exploded") : t("assembledState");
 }
 
 function setExplode(value) {
-  state.exploded = Math.max(0, Math.min(100, Number(value)));
-  const amount = state.exploded * 0.42;
-  state.modelRoot.updateMatrixWorld(true);
-  for (const record of state.baseTransforms.values()) {
-    const targetWorld = record.world.clone().add(record.direction.clone().multiplyScalar(amount));
-    if (record.object.parent) {
-      record.object.parent.updateWorldMatrix(true, false);
-      record.object.position.copy(record.object.parent.worldToLocal(targetWorld));
-    } else {
-      record.object.position.copy(targetWorld);
-    }
+  if (!state.sceneController) return;
+  state.sceneController.setExplode(value);
+  updateExplodeUi(value);
+}
+
+async function animateExplodeCycle() {
+  if (!state.sceneController) return;
+  const controller = state.sceneController;
+  const button = $("#animate-button");
+  button.disabled = true;
+  try {
+    const expanded = await controller.animateExplode(100, 950, updateExplodeUi);
+    if (expanded) await controller.animateExplode(0, 950, updateExplodeUi);
+  } finally {
+    button.disabled = false;
   }
-  $("#explode-slider").value = String(state.exploded);
-  $("#explode-value").textContent = `${state.exploded}%`;
-  $("#model-state").textContent = state.exploded ? "EXPLODED VIEW" : t("assembledState");
 }
 
 function setIsolated(isolate) {
-  if (!state.selected) return;
-  state.isolated = isolate;
-  const keep = new Set();
-  let current = state.selected;
-  while (current) {
-    keep.add(current);
-    current = current.parent;
-  }
-  state.selected.traverse((object) => keep.add(object));
-  state.modelRoot.traverse((object) => {
-    if (object === state.modelRoot) return;
-    object.visible = !isolate || keep.has(object);
-  });
-  $("#isolate-toggle").classList.toggle("active", isolate);
-  setStatus(isolate ? t("isolate") : t("allVisible"));
+  if (!state.selected || !state.sceneController) return;
+  state.isolated = Boolean(isolate);
+  state.sceneController.setIsolated(state.selected, state.isolated);
+  $("#isolate-toggle").classList.toggle("active", state.isolated);
+  setStatus(state.isolated ? t("isolate") : t("allVisible"));
 }
 
 function setLayer(layer) {
@@ -667,13 +647,12 @@ function setLayer(layer) {
     setStatus(t("ready"));
     return;
   }
+  const layerData = PROCESS_PACKAGE.process_layers.find((item) => item.type === state.activeLayer);
+  const linkedIds = new Set(layerData?.linked_component_ids ?? []);
   const matches = [];
   state.modelRoot.traverse((object) => {
-    const id = getNodeId(object) ?? "";
-    const match = state.activeLayer === "cooling"
-      ? id.includes("cooling") || id.includes("fan") || id.includes("shroud")
-      : id.includes("power") || id.includes("gpu") || id.includes("connector");
-    if (match && object.userData?.sbs_component_id) matches.push(object);
+    const id = object.userData?.sbs_component_id;
+    if (id && linkedIds.has(id)) matches.push(object);
   });
   matches.forEach((object) => {
     const color = state.activeLayer === "cooling" ? 0x6bc8e8 : 0xe8b75e;
@@ -690,12 +669,22 @@ function fitModel(root) {
   const size = box.getSize(new THREE.Vector3());
   const center = box.getCenter(new THREE.Vector3());
   const maxDimension = Math.max(size.x, size.y, size.z, 100);
+  if (state.gridHelper) {
+    state.gridHelper.position.set(center.x, center.y, box.min.z - maxDimension * 0.08);
+    state.gridHelper.scale.setScalar(maxDimension / 100);
+  }
   state.controls.target.copy(center);
   state.camera.position.copy(center).add(new THREE.Vector3(maxDimension * 1.35, maxDimension * 1.0, maxDimension * 1.25));
-  state.camera.near = Math.max(0.1, maxDimension / 1000);
-  state.camera.far = maxDimension * 30;
+  state.controls.minDistance = Math.max(0.01, maxDimension * 0.08);
+  state.controls.maxDistance = maxDimension * 30;
+  state.camera.near = Math.max(0.001, maxDimension / 1000);
+  state.camera.far = maxDimension * 40;
   state.camera.updateProjectionMatrix();
   state.controls.update();
+  state.cameraHome = {
+    position: state.camera.position.clone(),
+    target: center.clone()
+  };
 }
 
 function disposeModel(root) {
@@ -711,6 +700,8 @@ function disposeModel(root) {
 }
 
 function installModel(root, mode) {
+  if (state.sceneController) state.sceneController.reset();
+  state.sceneController = null;
   if (state.modelRoot) disposeModel(state.modelRoot);
   state.modelRoot = root;
   state.scene.add(root);
@@ -724,7 +715,7 @@ function installModel(root, mode) {
   $("#empty-selection").hidden = false;
   document.querySelectorAll(".process-button").forEach((button) => button.classList.remove("active"));
   collectNodes(root);
-  saveBaseTransforms();
+  state.sceneController = new SceneController(root);
   fitModel(root);
   setExplode(0);
   setLoadState(mode === "file" ? t("loadedGlb") : t("demoLoaded"));
@@ -851,7 +842,7 @@ function initRenderer() {
 
     const grid = new THREE.GridHelper(280, 28, 0x293640, 0x1b2730);
     grid.rotation.x = Math.PI / 2;
-    grid.position.set(101, -25, 55);
+    state.gridHelper = grid;
     state.scene.add(grid);
 
     const resize = () => {
@@ -930,6 +921,7 @@ function bindUI() {
   $("#quiz-next").addEventListener("click", submitLearningAnswer);
   $("#assemble-button").addEventListener("click", () => setExplode(0));
   $("#explode-button").addEventListener("click", () => setExplode(100));
+  $("#animate-button").addEventListener("click", animateExplodeCycle);
   document.querySelectorAll(".process-button").forEach((button) => {
     button.addEventListener("click", () => setLayer(button.dataset.layer));
   });
