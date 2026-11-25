@@ -72,7 +72,7 @@ test("opens the self-contained root index.html directly with the embedded Blende
     })()
   }));
   await expect(page.locator("#viewer-canvas canvas"), JSON.stringify({ diagnostics, pageErrors, consoleErrors, requestFailures })).toBeVisible({ timeout: 10000 });
-  await expect(page.locator("#component-count")).toHaveText("67", { timeout: 15000 });
+  await expect(page.locator("#component-count")).toHaveText("83", { timeout: 15000 });
   await expect(page.locator("#load-state")).toContainText("ВСТРОЕННАЯ МОДЕЛЬ");
   await page.getByRole("button", { name: /Воздушный поток|Охлаждение/ }).click();
   await expect(page.locator("#process-details")).toBeVisible();
