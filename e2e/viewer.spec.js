@@ -154,5 +154,5 @@ test("shows model-level specifications when the top-level device is selected", a
   await page.locator('#component-tree button[data-id="assembly.card.root"]').click();
   await expect(page.locator("#detail-claims-section")).toBeVisible();
   await expect(page.locator('[data-claim-id="claim.memory.capacity"]')).toContainText("12 GB");
-  await expect(page.locator('[data-claim-id="claim.card.outer_shroud_length"]')).toContainText("Unknown");
+  await expect(page.locator('[data-claim-id="claim.card.outer_shroud_length"]')).toContainText("Неизвестно");
 });
