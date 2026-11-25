@@ -8,13 +8,14 @@
   },
   "scripts": {
     "dev": "vite --host 127.0.0.1",
-    "build": "vite build",
+    "build": "vite build && node tools/build_standalone_html.mjs",
     "preview": "vite preview --host 127.0.0.1",
-    "test:e2e": "playwright test e2e/viewer.spec.js e2e/model-package.spec.js e2e/rotation-controls.spec.js e2e/accessibility.spec.js e2e/firefox-smoke.spec.js",
+    "test:e2e": "playwright test e2e/viewer.spec.js e2e/file-open.spec.js e2e/model-package.spec.js e2e/rotation-controls.spec.js e2e/accessibility.spec.js e2e/firefox-smoke.spec.js",
     "test:e2e:model": "playwright test --project=chromium e2e/bundled-model.spec.js",
-    "test:e2e:chromium": "playwright test --project=chromium e2e/viewer.spec.js e2e/model-package.spec.js e2e/rotation-controls.spec.js e2e/accessibility.spec.js",
+    "test:e2e:chromium": "playwright test --project=chromium e2e/viewer.spec.js e2e/file-open.spec.js e2e/model-package.spec.js e2e/rotation-controls.spec.js e2e/accessibility.spec.js",
     "test:unit": "node --test tests/*.test.js",
-    "test:e2e:generated-package": "playwright test --project=chromium e2e/generated-model-package.spec.js"
+    "test:e2e:generated-package": "playwright test --project=chromium e2e/generated-model-package.spec.js",
+    "test:e2e:file": "playwright test --project=chromium e2e/file-open.spec.js"
   },
   "dependencies": {
     "three": "0.187.0",
