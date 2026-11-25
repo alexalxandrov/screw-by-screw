@@ -6,6 +6,19 @@ import { loadModelPackage, validateModelPackageData } from "../src/viewer/ModelP
 
 const modelId = "test.device";
 
+function testManifest() {
+  return {
+    format: "sbs-model",
+    schema_version: "1.0.0",
+    model_id: modelId,
+    files: {
+      model: "model.json", scene: "scene.glb", components: "components.json", sources: "sources.json",
+      relationships: "relationships.json", claims: "claims.json", process_layers: "process_layers.json",
+      assembly_steps: "assembly_steps.json", learning: "learning.json", animations: "animations.json"
+    }
+  };
+}
+
 function makeGlb(document = { asset: { version: "2.0" }, scene: 0, scenes: [{ nodes: [0] }], nodes: [{ extras: { sbs_component_id: "root" }, children: [1] }, { extras: { sbs_component_id: "part" } }] }) {
   const json = strToU8(JSON.stringify(document));
   const paddedLength = Math.ceil(json.length / 4) * 4;
@@ -111,7 +124,7 @@ test("rejects path traversal entries before extraction", async () => {
 test("rejects unknown component parents", () => {
   const data = makeData();
   data.components.components[1].parent_id = "missing";
-  const manifest = { format: "sbs-model", schema_version: "1.0.0", model_id: modelId, files: {} };
+  const manifest = testManifest();
   assert.throws(() => validateModelPackageData(manifest, data), /unknown parent/);
 });
 
