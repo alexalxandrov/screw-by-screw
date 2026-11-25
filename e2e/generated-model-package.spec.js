@@ -23,5 +23,10 @@ test("opens the real Blender-generated RTX 3060 .sbsmodel archive", async ({ pag
   await page.locator("#animation-stop").click();
   await expect(page.locator("#animation-player-panel")).toHaveAttribute("data-status", "ready");
   await page.locator(".process-button[data-layer=\"power_delivery\"]").click();
+  await page.locator("#catalog-open").click();
+  const loadedCard = page.locator('[data-model-id="gpu.evga.12g-p5-3655-kr"]');
+  await expect(loadedCard.locator(".catalog-load-button")).toBeDisabled();
+  await expect(loadedCard).toContainText("Уже загружена");
+  await page.locator("#catalog-close").click();
   await expect(page.locator("#process-details")).toBeVisible();
 });

@@ -2,21 +2,27 @@ import { test, expect } from "@playwright/test";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 
-test("loads the generated Blender v0.5 GLB and resolves content-package IDs", async ({ page }) => {
+test("loads the generated Blender v0.5 SBS model package and resolves content-package IDs", async ({ page }) => {
   const pageErrors = [];
   page.on("pageerror", (error) => pageErrors.push(error.message));
-  const modelResponsePromise = page.waitForResponse((response) => response.url().includes("rtx3060_xc_black_blockout_v05.glb"));
+  const modelResponsePromise = page.waitForResponse((response) => response.url().includes("rtx3060_xc_black_v05.sbsmodel"));
   await page.goto("/");
   const modelResponse = await modelResponsePromise;
   expect(modelResponse.ok()).toBeTruthy();
   const modelBytes = await modelResponse.body();
-  expect(modelBytes.byteLength).toBeLessThan(1024 * 1024);
+  expect(modelBytes.byteLength).toBeGreaterThan(0);
+  expect(modelBytes.byteLength).toBeLessThan(512 * 1024 * 1024);
   await expect(page.locator("#app-status")).toHaveText("Модель готова");
   await expect(page.locator("#component-count")).toHaveText("85");
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-fan-rotors", "2");
   await expect(page.locator('#component-tree button[data-id="assembly.fan.1.rotor"]')).toBeVisible();
   await expect(page.locator('#component-tree button[data-id="assembly.fan.2.rotor"]')).toBeVisible();
   await expect(page.getByRole("button", { name: /Видеокарта в сборе/ })).toBeVisible();
+  await page.locator("#catalog-open").click();
+  const loadedCard = page.locator('[data-model-id="gpu.evga.12g-p5-3655-kr"]');
+  await expect(loadedCard.locator(".catalog-load-button")).toBeDisabled();
+  await expect(loadedCard).toContainText("Уже загружена");
+  await page.locator("#catalog-close").click();
 
   await page.locator("#camera-preset").selectOption("fan");
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-camera-preset", "fan");
@@ -103,7 +109,14 @@ test("opens the self-contained root index.html directly with the embedded Blende
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-fan-rotors", "2");
   await expect(page.locator('#component-tree button[data-id="assembly.fan.1.rotor"]')).toBeVisible();
   await expect(page.locator('#component-tree button[data-id="assembly.fan.2.rotor"]')).toBeVisible();
-  await expect(page.locator("#load-state")).toContainText("ВСТРОЕННАЯ МОДЕЛЬ");
+  await expect(page.locator("#load-state")).toContainText("ПАКЕТ SBS MODEL");
+  const embeddedCatalogueIds = await page.evaluate(() => Object.keys(globalThis.SBS_CATALOG_PACKAGE_DATA_URLS ?? {}));
+  expect(embeddedCatalogueIds).toContain("gpu.evga.12g-p5-3655-kr");
+  await page.locator("#catalog-open").click();
+  const loadedFileCard = page.locator('[data-model-id="gpu.evga.12g-p5-3655-kr"]');
+  await expect(loadedFileCard.locator(".catalog-load-button")).toBeDisabled();
+  await expect(loadedFileCard).toContainText("Уже загружена");
+  await page.locator("#catalog-close").click();
   await page.locator("#camera-preset").selectOption("io");
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-camera-preset", "io");
   await page.locator("#slice-toggle").click();

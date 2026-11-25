@@ -61,3 +61,8 @@ The current browser pilot uses Three.js + Vite, loads self-contained GLB files l
 ## First technical spike
 
 Before the full application: create a test scene with 10–20 independently selectable parts; export GLB from Blender; load it in a minimal Three.js page; verify node names, transforms, picking, ID mapping, exploded interpolation and reassembly; measure load time and memory in a desktop browser. Resolve these integration risks before building the larger UI.
+
+
+## Implemented static device catalogue
+
+The viewer includes a statically imported bilingual index at `content/catalog/models.json`. It records exact manufacturer part number, category, package version/path and geometry-evidence class. It does not need a catalogue API. Hosted builds resolve staged `.sbsmodel` archives by relative URL. The standalone HTML build embeds packages staged under `public/` as data URLs so the same catalogue works through `file://`. Every selection uses the standard package loader and package model-ID comparison.

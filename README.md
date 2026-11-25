@@ -78,8 +78,14 @@ Screw by Screw — концепция публичной образовател�
 - [Assembly evidence and disassembly timeline](docs/ASSEMBLY_EVIDENCE_TIMELINE.md)
 - [Package-authored animation runtime](docs/ANIMATION_RUNTIME.md)
 - [Каталог моделей](MODELS/README.md)
+- [Offline model catalogue and local package loading](docs/OFFLINE_MODEL_CATALOG.md)
 - [Pilot content package](content/models/evga-rtx3060-xc-black-12gb/README.md) — source claims, SHA-256 release manifest and bilingual learning data.
 
 ## Рабочее название
 
 **Screw by Screw** — запоминающееся название с акцентом на глубокую разборку. Дескриптор **Interactive Technical Atlas** объясняет более широкую задачу проекта и не ограничивает его только винтами, ремонтом или механикой.
+
+
+## Автономный каталог устройств
+
+Библиотека использует локальный индекс `content/catalog/models.json`: поиск по названию, производителю и точному part number, фильтр категории, статус исследования и класс точности геометрии. Hosted-версия загружает пакеты по относительным путям, а standalone `index.html` встраивает staged `.sbsmodel`-архивы для запуска через `file://` без сервера.

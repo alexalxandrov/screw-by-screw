@@ -67,3 +67,8 @@ Geometry fidelity and evidence status are explicit package data. A visually smoo
 ## Current status
 
 The first package manifest is authored for EVGA GeForce RTX 3060 XC BLACK GAMING 12GB, part number `12G-P5-3655-KR`. The browser loader and package builder are implemented; automated tests cover archive validation and import. The generated `.sbsmodel` artifact is produced by the Blender CI workflow.
+
+
+## Catalogue package binding
+
+A catalogue entry has its own stable catalogue ID and a `package_model_id` reference to the archive's internal `model_id`. The viewer verifies that binding before loading. The catalogue cannot bypass manifest, file-path, SHA-256, cross-reference or GLB node-binding validation.

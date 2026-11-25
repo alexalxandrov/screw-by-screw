@@ -77,11 +77,45 @@ for (const match of stylesheetTags) {
 }
 html = html.replace(/<link\b(?=[^>]*\brel=(["'])modulepreload\1)[^>]*>/gi, "");
 
-const publicGlb = resolve(projectRoot, "public/models/rtx3060_xc_black_blockout_v05.glb");
-if (await exists(publicGlb)) {
-  const bytes = await readFile(publicGlb);
-  const dataUrl = "data:model/gltf-binary;base64," + bytes.toString("base64");
-  const preload = "<script>globalThis.SBS_BUNDLED_GLB_DATA_URL = " + JSON.stringify(dataUrl) + ";</script>";
+// Embed staged catalogue packages into the offline launcher for double-click file:// use.
+const catalogManifestPath = resolve(projectRoot, "content/catalog/models.json");
+const embeddedCatalogPackages = {};
+let embeddedCatalogPackageCount = 0;
+let embeddedCatalogPackageBytes = 0;
+if (await exists(catalogManifestPath)) {
+  const catalogManifest = JSON.parse(await readFile(catalogManifestPath, "utf8"));
+  if (!Array.isArray(catalogManifest.models)) throw new Error("Model catalogue must contain a models array");
+  const publicRoot = resolve(projectRoot, "public");
+  for (const model of catalogManifest.models) {
+    const packagePath = model.package_path;
+    if (typeof model.id !== "string" || !model.id || typeof packagePath !== "string" ||
+        packagePath.startsWith("/") || packagePath.includes(String.fromCharCode(92)) ||
+        /^[a-z]+:/i.test(packagePath) ||
+        packagePath.split("/").some((part) => !part || part === "." || part === ".." || part.includes("%") || part.includes("?") || part.includes("#")) ||
+        !packagePath.endsWith(".sbsmodel")) {
+      throw new Error("Unsafe catalogue package path for model " + String(model.id));
+    }
+    const assetPath = resolve(publicRoot, ...packagePath.split("/"));
+    const publicRelative = relative(publicRoot, assetPath);
+    if (!publicRelative || publicRelative === ".." || publicRelative.startsWith(".." + sep) || isAbsolute(publicRelative)) {
+      throw new Error("Catalogue package path escapes public/: " + packagePath);
+    }
+    if (!(await exists(assetPath))) continue;
+    const bytes = await readFile(assetPath);
+    if (!bytes.length || bytes.length > 512 * 1024 * 1024) {
+      throw new Error("Catalogue package size is outside the 512 MiB limit: " + packagePath);
+    }
+    embeddedCatalogPackageBytes += bytes.length;
+    if (embeddedCatalogPackageBytes > 512 * 1024 * 1024) {
+      throw new Error("Embedded catalogue packages exceed the 512 MiB total limit");
+    }
+    embeddedCatalogPackages[model.id] = "data:application/octet-stream;base64," + bytes.toString("base64");
+    embeddedCatalogPackageCount += 1;
+  }
+}
+if (embeddedCatalogPackageCount) {
+  const preload = "<script>globalThis.SBS_CATALOG_PACKAGE_DATA_URLS = " +
+    JSON.stringify(embeddedCatalogPackages) + ";</script>";
   html = html.replace("</head>", preload + "\n</head>");
 }
 
@@ -90,8 +124,8 @@ if (/<link\b(?=[^>]*\brel=(["'])stylesheet\1)[^>]*\bhref=/i.test(html)) throw ne
 if (!html.includes('id="viewer-canvas"') || !html.includes('id="startup-fallback"')) {
   throw new Error("Generated HTML is missing required viewer shell elements");
 }
-if (!html.includes("SBS_BUNDLED_GLB_DATA_URL") && await exists(publicGlb)) {
-  throw new Error("Generated HTML did not embed the staged Blender GLB");
+if (embeddedCatalogPackageCount > 0 && !html.includes("SBS_CATALOG_PACKAGE_DATA_URLS")) {
+  throw new Error("Generated HTML did not embed staged catalogue packages");
 }
 for (const outputPath of htmlOutputPaths) {
   const temporaryPath = outputPath + ".tmp";
@@ -103,7 +137,8 @@ console.log(JSON.stringify({
   outputs: htmlOutputPaths.map((path) => relative(projectRoot, path)),
   inlinedScripts,
   stylesheetsInlined: stylesheetTags.length,
-  embeddedGlb: html.includes("SBS_BUNDLED_GLB_DATA_URL"),
+  embeddedCatalogPackages: embeddedCatalogPackageCount,
+  embeddedCatalogPackageBytes,
   launchMode: "file:// self-contained HTML",
   bytes: Buffer.byteLength(html)
 }, null, 2));
