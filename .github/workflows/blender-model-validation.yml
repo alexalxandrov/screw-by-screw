@@ -63,6 +63,9 @@ jobs:
           python tools/modeling/validate_blockout_package.py \
             --manifest MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v04.manifest.json \
             --glb MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v04.glb
+          python tools/content/validate_glb_bindings.py \\
+            --components content/models/evga-rtx3060-xc-black-12gb/components.json \\
+            --glb MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v04.glb
       - name: Stage generated GLB for viewer
         run: |
           mkdir -p public/models
