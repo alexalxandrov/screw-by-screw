@@ -468,7 +468,8 @@ function applyLanguage() {
   });
   renderTree();
   if ($("#model-catalog-dialog")?.open) renderCatalog();
-  if (state.activeLayer) renderProcessLayer();
+  if (state.compareMode) renderComparison();
+  else if (state.activeLayer) renderProcessLayer();
   else if (state.learningMode) renderLearning();
   else if (state.selectedId) renderDetails(state.selectedId);
   updateMeasurementReadout();
@@ -1160,6 +1161,8 @@ function renderAssemblyEvidence(componentId) {
 }
 
 function renderDetails(id) {
+  state.compareMode = false;
+  $("#comparison-panel").hidden = true;
   state.learningMode = false;
   $("#learning-panel").hidden = true;
   $("#process-details").hidden = true;
@@ -1226,6 +1229,8 @@ function updateLearningProgressStatus() {
 }
 
 function showLearning() {
+  state.compareMode = false;
+  $("#comparison-panel").hidden = true;
   clearHighlights();
   state.activeLayer = null;
   document.querySelectorAll(".process-button").forEach((button) => button.classList.remove("active"));
@@ -1353,7 +1358,282 @@ function submitLearningAnswer() {
   renderLearning();
 }
 
+function comparisonStatusLabel(status) {
+  const keys = {
+    same: "compareSame",
+    different: "compareDifferent",
+    unknown_both: "compareUnknownBoth",
+    unknown_left: "compareUnknownLeft",
+    unknown_right: "compareUnknownRight",
+    not_recorded_left: "compareNotRecordedLeft",
+    not_recorded_right: "compareNotRecordedRight"
+  };
+  return t(keys[status] ?? "compareNotRecorded");
+}
+
+function comparisonValueText(value) {
+  if (value === null || value === undefined) return t("compareUnknown");
+  if (typeof value === "object") return JSON.stringify(value);
+  return String(value);
+}
+
+function comparisonIdentity(data) {
+  const model = data.model ?? {};
+  const pcb = (data.claims?.claims ?? []).find((claim) => claim.predicate === "pcb_revision");
+  return {
+    id: model.id ?? "unknown",
+    manufacturer: model.manufacturer ?? "",
+    name: model.display_name ?? model.product_name ?? model.name ?? model.id ?? "Unknown model",
+    part_number: model.part_number ?? "",
+    geometry_status: model.geometry_status ?? "unknown",
+    pcb_revision: pcb?.value ?? model.specifications?.pcb_revision ?? null
+  };
+}
+
+function appendComparisonIdentity(host, identity, side, sideLabel) {
+  const card = document.createElement("article");
+  card.className = "comparison-identity-card";
+  card.dataset.side = side;
+  const heading = document.createElement("span");
+  heading.className = "eyebrow";
+  heading.textContent = sideLabel;
+  const name = document.createElement("strong");
+  name.className = "comparison-identity-name";
+  name.textContent = identity.name;
+  const manufacturer = document.createElement("span");
+  manufacturer.className = "comparison-identity-manufacturer";
+  manufacturer.textContent = identity.manufacturer || t("compareNotRecorded");
+  const part = document.createElement("div");
+  part.className = "comparison-identity-field";
+  part.textContent = `${t("compareSku")}: ${identity.part_number || t("compareNotRecorded")}`;
+  const geometry = document.createElement("div");
+  geometry.className = "comparison-identity-field";
+  geometry.textContent = `${t("compareGeometry")}: ${identity.geometry_status}`;
+  const pcb = document.createElement("div");
+  pcb.className = "comparison-identity-field";
+  pcb.textContent = `${t("comparePcb")}: ${comparisonValueText(identity.pcb_revision)}`;
+  card.append(heading, name, manufacturer, part, geometry, pcb);
+  host.append(card);
+}
+
+function createComparisonStatusBadge(status) {
+  const badge = document.createElement("span");
+  badge.className = "comparison-status";
+  badge.dataset.status = status;
+  badge.textContent = comparisonStatusLabel(status);
+  return badge;
+}
+
+function appendComparisonSources(host, sources, label) {
+  if (!sources?.length) return;
+  const block = document.createElement("div");
+  block.className = "comparison-sources";
+  const heading = document.createElement("span");
+  heading.className = "eyebrow";
+  heading.textContent = label;
+  block.append(heading);
+  const list = document.createElement("div");
+  list.className = "comparison-source-list";
+  sources.forEach((source) => {
+    const item = source.url && /^https?:\/\//i.test(source.url)
+      ? document.createElement("a")
+      : document.createElement("span");
+    item.textContent = source.label ?? source.id ?? t("compareNotRecorded");
+    if (item.tagName === "A") {
+      item.href = source.url;
+      item.target = "_blank";
+      item.rel = "noopener noreferrer";
+    }
+    list.append(item);
+  });
+  block.append(list);
+  host.append(block);
+}
+
+function appendComparisonCell(host, value, evidence, sources, sideLabel, notes = null) {
+  const cell = document.createElement("div");
+  cell.className = "comparison-value-cell";
+  const valueText = document.createElement("div");
+  valueText.className = "comparison-value";
+  valueText.textContent = comparisonValueText(value);
+  cell.append(valueText);
+  if (evidence) {
+    const evidenceText = document.createElement("span");
+    evidenceText.className = "comparison-evidence";
+    evidenceText.textContent = `${sideLabel}: ${evidence}`;
+    cell.append(evidenceText);
+  }
+  if (notes) {
+    const note = document.createElement("p");
+    note.className = "comparison-note";
+    note.textContent = String(notes);
+    cell.append(note);
+  }
+  appendComparisonSources(cell, sources, sideLabel);
+  host.append(cell);
+}
+
+function renderComparisonRows(report, rows, host, kind) {
+  host.replaceChildren();
+  if (!rows.length) {
+    const empty = document.createElement("p");
+    empty.className = "comparison-empty";
+    empty.textContent = kind === "claims" ? t("compareNoClaims") : t("compareNoSpecifications");
+    host.append(empty);
+    return;
+  }
+
+  rows.forEach((row) => {
+    const card = document.createElement("article");
+    card.className = "comparison-row";
+    card.dataset.status = row.status;
+    const header = document.createElement("div");
+    header.className = "comparison-row-header";
+    const key = document.createElement("strong");
+    key.textContent = kind === "claims"
+      ? String(row.predicate).replaceAll("_", " ")
+      : row.path.replaceAll(".", " · ").replaceAll("_", " ");
+    header.append(key, createComparisonStatusBadge(row.status));
+    const values = document.createElement("div");
+    values.className = "comparison-values";
+
+    if (kind === "claims") {
+      const left = appendComparisonCell(values, row.value_left, row.evidence_left,
+        row.sources_left, t("compareEvidenceA"), row.notes_left);
+      const right = appendComparisonCell(values, row.value_right, row.evidence_right,
+        row.sources_right, t("compareEvidenceB"), row.notes_right);
+      if (row.unit_left || row.unit_right) {
+        const units = document.createElement("div");
+        units.className = "comparison-units";
+        units.textContent = `A: ${row.unit_left ?? "—"} · B: ${row.unit_right ?? "—"}`;
+        values.append(units);
+      }
+    } else {
+      appendComparisonCell(values, row.left, null, null, "");
+      appendComparisonCell(values, row.right, null, null, "");
+    }
+    card.append(header, values);
+    host.append(card);
+  });
+}
+
+function renderComparison() {
+  if (!state.compareMode) return;
+  const panel = $("#comparison-panel");
+  if (!panel) return;
+  panel.hidden = false;
+  $("#details-heading-eyebrow").textContent = t("compareTitle");
+  $("#details-heading-title").textContent = t("compare");
+  const identities = $("#comparison-identities");
+  identities.replaceChildren();
+  appendComparisonIdentity(identities, comparisonIdentity(state.packageData),
+    "a", t("compareLeft"));
+
+  const rightData = state.comparisonPackageData;
+  if (!rightData) {
+    const placeholder = document.createElement("article");
+    placeholder.className = "comparison-identity-card comparison-identity-placeholder";
+    const label = document.createElement("span");
+    label.className = "eyebrow";
+    label.textContent = t("compareRight");
+    const hint = document.createElement("p");
+    hint.textContent = t("compareWaiting");
+    placeholder.append(label, hint);
+    identities.append(placeholder);
+    $("#comparison-status").textContent = t("compareWaiting");
+    $("#comparison-summary").replaceChildren();
+    $("#comparison-specification-list").replaceChildren();
+    $("#comparison-claim-list").replaceChildren();
+    $("#comparison-coverage").replaceChildren();
+    $("#compare-clear-model").disabled = true;
+    return;
+  }
+
+  try {
+    const report = compareModelPackages(state.packageData, rightData);
+    appendComparisonIdentity(identities, report.right, "b", t("compareRight"));
+    $("#comparison-status").textContent = `${t("compareLoaded")} · ${state.comparisonFilename}`;
+    $("#compare-clear-model").disabled = false;
+
+    const summary = $("#comparison-summary");
+    summary.replaceChildren();
+    [
+      [t("compareSame"), report.summary.specifications_same],
+      [t("compareDifferent"), report.summary.specifications_different],
+      [t("compareUnknown"), report.summary.specifications_unknown],
+      [t("compareNotRecorded"), report.summary.specifications_not_recorded]
+    ].forEach(([label, value]) => {
+      const item = document.createElement("div");
+      item.className = "comparison-summary-item";
+      const number = document.createElement("strong");
+      number.textContent = String(value);
+      const text = document.createElement("span");
+      text.textContent = label;
+      item.append(number, text);
+      summary.append(item);
+    });
+
+    renderComparisonRows(report, report.specifications, $("#comparison-specification-list"), "specifications");
+    renderComparisonRows(report, report.claims, $("#comparison-claim-list"), "claims");
+
+    const coverage = $("#comparison-coverage");
+    coverage.replaceChildren();
+    const counts = report.component_coverage;
+    [
+      [t("compareShared"), counts.shared_count],
+      [t("compareLeftOnly"), counts.left_only_ids.length],
+      [t("compareRightOnly"), counts.right_only_ids.length]
+    ].forEach(([label, value]) => {
+      const item = document.createElement("div");
+      item.className = "comparison-summary-item";
+      const number = document.createElement("strong");
+      number.textContent = String(value);
+      const text = document.createElement("span");
+      text.textContent = label;
+      item.append(number, text);
+      coverage.append(item);
+    });
+    const inventoryNote = document.createElement("p");
+    inventoryNote.className = "comparison-caveat";
+    inventoryNote.textContent = counts.interpretation;
+    coverage.append(inventoryNote);
+
+    const limitations = document.createElement("ul");
+    limitations.className = "comparison-limitations";
+    report.limitations.forEach((message) => {
+      const item = document.createElement("li");
+      item.textContent = message;
+      limitations.append(item);
+    });
+    $("#comparison-limitations").replaceChildren(limitations);
+  } catch (error) {
+    $("#comparison-status").textContent = `${t("compareError")}: ${error.message}`;
+    $("#comparison-summary").replaceChildren();
+    $("#comparison-specification-list").replaceChildren();
+    $("#comparison-claim-list").replaceChildren();
+    $("#comparison-coverage").replaceChildren();
+    $("#comparison-limitations").replaceChildren();
+    $("#compare-clear-model").disabled = false;
+  }
+}
+
+function showComparison() {
+  if (state.activeLayer) setLayer("clear");
+  else clearHighlights();
+  state.animationPlayer?.stop();
+  state.compareMode = true;
+  state.learningMode = false;
+  $("#learning-panel").hidden = true;
+  $("#process-details").hidden = true;
+  $("#component-details").hidden = true;
+  $("#empty-selection").hidden = true;
+  $("#comparison-panel").hidden = false;
+  renderComparison();
+}
+
 function renderProcessLayer() {
+  state.compareMode = false;
+  $("#comparison-panel").hidden = true;
   const layer = PROCESS_PACKAGE.process_layers.find((item) => item.type === state.activeLayer);
   if (!layer) return;
   state.learningMode = false;
@@ -1912,6 +2192,7 @@ function applyPackageData(packageData) {
   document.querySelectorAll(".view-tab").forEach((button) => {
     if (button.dataset.mode === "learn") button.disabled = LEARNING_PACKAGE.questions.length === 0;
   });
+  if (state.compareMode) renderComparison();
 }
 
 function useGenericModelData(filename) {
@@ -1933,7 +2214,7 @@ function useGenericModelData(filename) {
   ANIMATION_PACKAGE = { clips: [] };
   state.catalog = new Map();
   state.packageData = {
-    model: { id: MODEL.id, manufacturer: MODEL.manufacturer, name: MODEL.name, geometry_status: "unknown" },
+    model: { id: MODEL.id, manufacturer: MODEL.manufacturer, name: MODEL.name, geometry_status: "unknown", specifications: {} },
     components: { components: [] },
     sources: { sources: [] },
     relationships: { relationships: [] },
@@ -1957,6 +2238,7 @@ function useGenericModelData(filename) {
   document.querySelectorAll(".view-tab").forEach((button) => {
     if (button.dataset.mode === "learn") button.disabled = true;
   });
+  if (state.compareMode) renderComparison();
 }
 
 function loadArrayBuffer(buffer, filename, mode = "file", packageData = null, { cancelIfInteracted = false } = {}) {
@@ -2287,6 +2569,44 @@ function bindUI() {
     }
     event.target.value = "";
   });
+  $("#compare-select-model").addEventListener("click", () => $("#comparison-file").click());
+  $("#compare-clear-model").addEventListener("click", () => {
+    state.comparisonPackageData = null;
+    state.comparisonFilename = "";
+    $("#comparison-file").value = "";
+    renderComparison();
+  });
+  $("#comparison-file").addEventListener("change", async (event) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    state.userInteracted = true;
+    if (!/\\.sbsmodel$/i.test(file.name)) {
+      $("#comparison-status").textContent = t("compareError") + ": .sbsmodel required";
+      event.target.value = "";
+      return;
+    }
+    if (file.size > MAX_MODEL_PACKAGE_BYTES) {
+      $("#comparison-status").textContent = t("packageTooLarge");
+      event.target.value = "";
+      return;
+    }
+    $("#comparison-status").textContent = t("loading");
+    try {
+      const candidate = await loadModelPackage(file);
+      if (candidate.report.modelId === state.packageData.model.id) {
+        // An identical model ID is permitted, but both packages remain independent snapshots.
+      }
+      state.comparisonPackageData = candidate.data;
+      state.comparisonFilename = file.name;
+      renderComparison();
+    } catch (error) {
+      state.comparisonPackageData = null;
+      state.comparisonFilename = "";
+      $("#comparison-status").textContent = `${t("compareError")}: ${error.message}`;
+      renderComparison();
+    }
+    event.target.value = "";
+  });
   $("#component-search").addEventListener("input", renderTree);
   $("#camera-preset").addEventListener("change", (event) => setCameraPreset(event.target.value));
   $("#slice-toggle").addEventListener("click", () => setSliceEnabled(!state.sliceEnabled));
@@ -2352,6 +2672,8 @@ function bindUI() {
   document.querySelectorAll(".view-tab").forEach((button) => {
     button.addEventListener("click", () => {
       document.querySelectorAll(".view-tab").forEach((tab) => tab.classList.toggle("active", tab === button));
+      if (button.dataset.mode === "compare") { showComparison(); return; }
+      if (state.compareMode) { state.compareMode = false; $("#comparison-panel").hidden = true; }
       if (button.dataset.mode === "disassemble") { setLayer("clear"); setExplode(100); }
       if (button.dataset.mode === "explore") { setLayer("clear"); setExplode(0); }
       if (button.dataset.mode === "understand") setLayer("cooling");
