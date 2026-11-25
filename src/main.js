@@ -43,7 +43,8 @@ const state = {
   learningSelected: null,
   learningAnswered: false,
   learningComplete: false,
-  modelWarnings: []
+  modelWarnings: [],
+  modelRevision: 0
 };
 
 const MAX_GLB_BYTES = MAX_SCENE_GLB_BYTES;
@@ -710,6 +711,7 @@ function installModel(root, mode) {
   state.sceneController = null;
   if (state.modelRoot) disposeModel(state.modelRoot);
   state.modelRoot = root;
+  state.modelRevision += 1;
   state.scene.add(root);
   state.sourceMode = mode;
   state.selected = null;
@@ -805,7 +807,6 @@ function loadArrayBuffer(buffer, filename, mode = "file", packageData = null) {
     $("#viewer-error").hidden = false;
     $("#viewer-error").textContent = t("loadError");
     setStatus(t("loadError"));
-    loadDemo();
   };
   try {
     loader.parse(buffer, "", (gltf) => {
@@ -985,6 +986,7 @@ function bindUI() {
 }
 
 async function tryLoadBundledModel() {
+  const revision = state.modelRevision;
   try {
     const response = await fetch(`${import.meta.env.BASE_URL}models/rtx3060_xc_black_blockout_v04.glb`);
     if (!response.ok) throw new Error("No bundled model");
@@ -992,9 +994,10 @@ async function tryLoadBundledModel() {
     if (contentType.includes("text/html")) throw new Error("No bundled model");
     const buffer = await response.arrayBuffer();
     if (buffer.byteLength < 12 || new TextDecoder().decode(buffer.slice(0, 4)) !== "glTF") throw new Error("No bundled GLB asset");
+    if (state.modelRevision !== revision) return;
     loadArrayBuffer(buffer, "Bundled v0.4 GLB", "bundled");
   } catch {
-    loadDemo();
+    if (state.modelRevision === revision) loadDemo();
   }
 }
 
