@@ -9,10 +9,11 @@ This package separates device identity, component instances, relationships, proc
 ## Validate
 
 ```bash
+python tools/content/build_release_manifest.py content/models/evga-rtx3060-xc-black-12gb
 python tools/content/validate_model_package.py content/models/evga-rtx3060-xc-black-12gb
 ```
 
-The validator checks bilingual component names, unique IDs, parent references, relationship endpoints, source references, process-layer links and quiz answer indices.
+The manifest builder hashes every JSON content file. The validator checks SHA-256 integrity, bilingual component names, unique IDs, acyclic parent references, relationship endpoints, atomic claim provenance, source references, process-layer links, teardown observations and quiz answer indices.
 
 ## Evidence rules
 

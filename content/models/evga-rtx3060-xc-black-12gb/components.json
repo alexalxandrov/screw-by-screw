@@ -13,7 +13,11 @@
       "category": "assembly",
       "evidence_status": "illustrative",
       "geometry_status": "assembly_node",
-      "source_ids": []
+      "source_ids": [],
+      "description": {
+        "en": "Top-level assembly for the exact EVGA XC BLACK retail SKU.",
+        "ru": "Верхний уровень сборки точного розничного SKU EVGA XC BLACK."
+      }
     },
     {
       "id": "assembly.shroud",
@@ -27,7 +31,11 @@
       "geometry_status": "proxy",
       "source_ids": [
         "src.lanoc.review"
-      ]
+      ],
+      "description": {
+        "en": "Outer fan shroud. The exact exterior contour is not yet measured.",
+        "ru": "Внешний кожух вентиляторов. Точный наружный контур пока не измерен."
+      }
     },
     {
       "id": "assembly.cooling",
@@ -42,7 +50,11 @@
       "source_ids": [
         "src.lanoc.review",
         "src.gamersnexus.teardown"
-      ]
+      ],
+      "description": {
+        "en": "Dual-fan cooler with an aluminium fin stack and copper contact area. Internal routing remains incomplete.",
+        "ru": "Двухвентиляторный кулер с алюминиевым радиатором и медной контактной зоной. Внутренняя разводка пока не реконструирована."
+      }
     },
     {
       "id": "assembly.fan.1",
@@ -57,7 +69,11 @@
       "source_ids": [
         "src.lanoc.review",
         "src.gamersnexus.teardown"
-      ]
+      ],
+      "description": {
+        "en": "First axial fan. Its centre and blade profile are illustrative placeholders.",
+        "ru": "Первый осевой вентилятор. Центр и профиль лопастей заданы условно."
+      }
     },
     {
       "id": "assembly.fan.2",
@@ -72,7 +88,11 @@
       "source_ids": [
         "src.lanoc.review",
         "src.gamersnexus.teardown"
-      ]
+      ],
+      "description": {
+        "en": "Second axial fan. Its centre and blade profile are illustrative placeholders.",
+        "ru": "Второй осевой вентилятор. Центр и профиль лопастей заданы условно."
+      }
     },
     {
       "id": "cooling.heatsink",
@@ -86,7 +106,11 @@
       "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.lanoc.review"
-      ]
+      ],
+      "description": {
+        "en": "Fin-stack topology proxy. Fin count and pitch are not measured.",
+        "ru": "Прокси структуры рёбер радиатора. Количество и шаг рёбер не измерены."
+      }
     },
     {
       "id": "cooling.gpu_contact",
@@ -100,7 +124,11 @@
       "geometry_status": "proxy",
       "source_ids": [
         "src.lanoc.review"
-      ]
+      ],
+      "description": {
+        "en": "Copper contact plate described in the exact-model review; its dimensions are still proxy geometry.",
+        "ru": "Медная контактная пластина описана в обзоре точной модели; её размеры пока представлены условной геометрией."
+      }
     },
     {
       "id": "assembly.pcb.electronics",
@@ -115,7 +143,11 @@
       "source_ids": [
         "src.lanoc.review",
         "src.gamersnexus.teardown"
-      ]
+      ],
+      "description": {
+        "en": "Exposed PCB assembly. Exact board revision and all component positions are not confirmed.",
+        "ru": "Сборка открытой PCB. Точная ревизия платы и положения всех компонентов не подтверждены."
+      }
     },
     {
       "id": "assembly.pcb.board",
@@ -129,7 +161,11 @@
       "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.lanoc.review"
-      ]
+      ],
+      "description": {
+        "en": "PCB outline proxy. The exact silkscreen identifier and revision remain unknown.",
+        "ru": "Прокси контура PCB. Точный идентификатор маркировки и ревизия пока неизвестны."
+      }
     },
     {
       "id": "chip.gpu.ga106",
@@ -144,7 +180,11 @@
       "source_ids": [
         "src.evga.spec",
         "src.gamersnexus.teardown"
-      ]
+      ],
+      "description": {
+        "en": "GA106 GPU package. Exact package coordinates on this PCB revision are not confirmed.",
+        "ru": "Корпус GPU GA106. Точные координаты корпуса на этой ревизии PCB не подтверждены."
+      }
     },
     {
       "id": "assembly.connectors",
@@ -159,7 +199,11 @@
       "source_ids": [
         "src.evga.spec",
         "src.lanoc.review"
-      ]
+      ],
+      "description": {
+        "en": "Group of auxiliary power and display-output connectors.",
+        "ru": "Группа разъёмов дополнительного питания и вывода изображения."
+      }
     },
     {
       "id": "connector.power.8pin",
@@ -174,7 +218,11 @@
       "source_ids": [
         "src.evga.spec",
         "src.lanoc.review"
-      ]
+      ],
+      "description": {
+        "en": "Single auxiliary 8-pin power connector. Internal pin mapping is not documented here.",
+        "ru": "Один дополнительный разъём питания 8-pin. Внутренняя распиновка здесь не документирована."
+      }
     },
     {
       "id": "connector.io.bracket",
@@ -189,7 +237,11 @@
       "source_ids": [
         "src.evga.spec",
         "src.lanoc.review"
-      ]
+      ],
+      "description": {
+        "en": "Rear bracket with three DisplayPort outputs and one HDMI output; aperture dimensions are approximate.",
+        "ru": "Задняя планка с тремя DisplayPort и одним HDMI; размеры отверстий приблизительные."
+      }
     },
     {
       "id": "connector.io.panel",
@@ -203,7 +255,11 @@
       "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.lanoc.review"
-      ]
+      ],
+      "description": {
+        "en": "Display-output panel proxy; exact aperture geometry is not measured.",
+        "ru": "Прокси панели видеовыходов; точная геометрия отверстий не измерена."
+      }
     },
     {
       "id": "chip.memory.candidate.1",
@@ -217,7 +273,11 @@
       "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.gamersnexus.teardown"
-      ]
+      ],
+      "description": {
+        "en": "Candidate package proxy. Exact population and position require confirmation against the correct PCB revision.",
+        "ru": "Прокси-кандидат компонента. Количество и положение требуют подтверждения по правильной ревизии PCB."
+      }
     },
     {
       "id": "chip.memory.candidate.2",
@@ -231,7 +291,11 @@
       "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.gamersnexus.teardown"
-      ]
+      ],
+      "description": {
+        "en": "Candidate package proxy. Exact population and position require confirmation against the correct PCB revision.",
+        "ru": "Прокси-кандидат компонента. Количество и положение требуют подтверждения по правильной ревизии PCB."
+      }
     },
     {
       "id": "chip.memory.candidate.3",
@@ -245,7 +309,11 @@
       "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.gamersnexus.teardown"
-      ]
+      ],
+      "description": {
+        "en": "Candidate package proxy. Exact population and position require confirmation against the correct PCB revision.",
+        "ru": "Прокси-кандидат компонента. Количество и положение требуют подтверждения по правильной ревизии PCB."
+      }
     },
     {
       "id": "chip.memory.candidate.4",
@@ -259,7 +327,11 @@
       "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.gamersnexus.teardown"
-      ]
+      ],
+      "description": {
+        "en": "Candidate package proxy. Exact population and position require confirmation against the correct PCB revision.",
+        "ru": "Прокси-кандидат компонента. Количество и положение требуют подтверждения по правильной ревизии PCB."
+      }
     },
     {
       "id": "chip.memory.candidate.5",
@@ -273,7 +345,11 @@
       "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.gamersnexus.teardown"
-      ]
+      ],
+      "description": {
+        "en": "Candidate package proxy. Exact population and position require confirmation against the correct PCB revision.",
+        "ru": "Прокси-кандидат компонента. Количество и положение требуют подтверждения по правильной ревизии PCB."
+      }
     },
     {
       "id": "chip.memory.candidate.6",
@@ -287,7 +363,11 @@
       "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.gamersnexus.teardown"
-      ]
+      ],
+      "description": {
+        "en": "Candidate package proxy. Exact population and position require confirmation against the correct PCB revision.",
+        "ru": "Прокси-кандидат компонента. Количество и положение требуют подтверждения по правильной ревизии PCB."
+      }
     }
   ],
   "rules": [

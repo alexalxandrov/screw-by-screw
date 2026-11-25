@@ -638,8 +638,15 @@ def main():
     for i, x in enumerate(FAN_CENTERS_X, start=1):
         make_fan(i, x, FAN_CENTER_Z, -half_y - 1.5, cool, cooling_group)
 
-    # Cooling stack: independently selectable vertical fin plates. Their
-    # count, pitch and dimensions are visual placeholders, not measured CAD.
+    # Heatsink parent node is a stable selectable assembly in the content model.
+    # The fin count, pitch and dimensions below remain visual placeholders.
+    heatsink_group = make_assembly(
+        "Heatsink fin stack",
+        "cooling.heatsink",
+        (CARD_LENGTH / 2, 0, CARD_HEIGHT / 2),
+        cool,
+        parent=cooling_group,
+    )
     fin_span = CARD_LENGTH * 0.72
     fin_start_x = (CARD_LENGTH - fin_span) / 2
     for fin_index in range(24):
@@ -652,7 +659,7 @@ def main():
             MAT["heatsink"], cool,
             evidence=STATUS["illustrative"],
         )
-        set_parent_keep_world(fin, cooling_group)
+        set_parent_keep_world(fin, heatsink_group)
 
     contact = cube(
         "GPU contact proxy | copper",

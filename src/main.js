@@ -59,7 +59,7 @@ const UI = {
     allVisible: "All components visible", layerCooling: "Cooling layer · qualitative",
     layerPower: "Power path · qualitative", noWebgl: "WebGL is unavailable in this browser.",
     source: "Source", noSources: "No direct source linked to this component.",
-    modelLoaded: "Model ready", glbPicker: "Choose a .glb file", learn: "Learn", learning: "LEARNING", linkedComponents: "LINKED COMPONENTS", assumptions: "ASSUMPTIONS & LIMITS", processLayer: "PROCESS LAYER", fileTooLarge: "GLB exceeds the 256 MB prototype limit.", question: "QUESTION", checkAnswer: "Check answer", nextQuestion: "Next question", finishQuiz: "Finish", restartQuiz: "Try again", correctAnswer: "Correct", wrongAnswer: "Not quite", quizComplete: "Quiz complete", yourScore: "Your score", chooseAnswer: "Choose an answer first"
+    modelLoaded: "Model ready", glbPicker: "Choose a .glb file", learn: "Learn", learning: "LEARNING", linkedComponents: "LINKED COMPONENTS", assumptions: "ASSUMPTIONS & LIMITS", processLayer: "PROCESS LAYER", fileTooLarge: "GLB exceeds the 256 MB prototype limit.", externalResources: "This GLB references external files. Only self-contained GLB files are allowed.", question: "QUESTION", checkAnswer: "Check answer", nextQuestion: "Next question", finishQuiz: "Finish", restartQuiz: "Try again", correctAnswer: "Correct", wrongAnswer: "Not quite", quizComplete: "Quiz complete", yourScore: "Your score", chooseAnswer: "Choose an answer first"
   },
   ru: {
     pilotModel: "ПИЛОТНАЯ МОДЕЛЬ", structure: "СТРУКТУРА", components: "Компоненты",
@@ -80,7 +80,7 @@ const UI = {
     allVisible: "Все компоненты видимы", layerCooling: "Слой охлаждения · качественно",
     layerPower: "Путь питания · качественно", noWebgl: "В этом браузере недоступен WebGL.",
     source: "Источник", noSources: "Для этого компонента нет прямой ссылки на источник.",
-    modelLoaded: "Модель готова", glbPicker: "Выберите файл .glb", learn: "Обучение", learning: "ОБУЧЕНИЕ", linkedComponents: "СВЯЗАННЫЕ КОМПОНЕНТЫ", assumptions: "ДОПУЩЕНИЯ И ОГРАНИЧЕНИЯ", processLayer: "СЛОЙ ПРОЦЕССА", fileTooLarge: "GLB превышает лимит прототипа 256 МБ.", question: "ВОПРОС", checkAnswer: "Проверить ответ", nextQuestion: "Следующий вопрос", finishQuiz: "Завершить", restartQuiz: "Повторить", correctAnswer: "Верно", wrongAnswer: "Не совсем", quizComplete: "Тест завершён", yourScore: "Ваш результат", chooseAnswer: "Сначала выберите ответ"
+    modelLoaded: "Модель готова", glbPicker: "Выберите файл .glb", learn: "Обучение", learning: "ОБУЧЕНИЕ", linkedComponents: "СВЯЗАННЫЕ КОМПОНЕНТЫ", assumptions: "ДОПУЩЕНИЯ И ОГРАНИЧЕНИЯ", processLayer: "СЛОЙ ПРОЦЕССА", fileTooLarge: "GLB превышает лимит прототипа 256 МБ.", externalResources: "Этот GLB ссылается на внешние файлы. Разрешены только самодостаточные GLB.", question: "ВОПРОС", checkAnswer: "Проверить ответ", nextQuestion: "Следующий вопрос", finishQuiz: "Завершить", restartQuiz: "Повторить", correctAnswer: "Верно", wrongAnswer: "Не совсем", quizComplete: "Тест завершён", yourScore: "Ваш результат", chooseAnswer: "Сначала выберите ответ"
   }
 };
 
@@ -213,10 +213,11 @@ function createFallbackModel() {
   createFan(cooling, 1, 55);
   createFan(cooling, 2, 146);
 
+  const heatsink = makeGroup(cooling, "cooling.heatsink", "Heatsink assembly");
   const finSpan = 145.3;
   for (let index = 0; index < 24; index += 1) {
     const x = (201.8 - finSpan) / 2 + (index * finSpan) / 23;
-    makeMesh(cooling, `cooling.heatsink.fin.${String(index + 1).padStart(2, "0")}`,
+    makeMesh(heatsink, `cooling.heatsink.fin.${String(index + 1).padStart(2, "0")}`,
       `Heatsink fin proxy ${index + 1}`,
       new THREE.BoxGeometry(1, 13, 52.8), materials.metal, [x, 0, 55]);
   }
@@ -308,7 +309,7 @@ function renderTree() {
     const button = document.createElement("button");
     button.type = "button";
     button.className = `tree-item${entry.id === state.selectedId ? " active" : ""}`;
-    button.style.paddingLeft = `${7 + Math.min(entry.depth, 5) * 12}px`;
+    button.classList.add(`depth-${Math.min(entry.depth, 5)}`);
     button.dataset.id = entry.id;
     const symbol = document.createElement("span");
     symbol.className = "tree-symbol";
@@ -655,6 +656,8 @@ function setLayer(layer) {
     button.classList.toggle("active", button.dataset.layer === state.activeLayer);
   });
   if (!state.activeLayer) {
+    state.learningMode = false;
+    $("#learning-panel").hidden = true;
     $("#process-details").hidden = true;
     if (state.selectedId) renderDetails(state.selectedId);
     else {
@@ -732,6 +735,54 @@ function loadDemo() {
   installModel(createFallbackModel(), "demo");
 }
 
+function validateSelfContainedGlb(buffer) {
+  if (buffer.byteLength < 20) throw new Error("Invalid GLB: file is too short");
+  const view = new DataView(buffer);
+  if (view.getUint32(0, true) !== 0x46546c67 || view.getUint32(4, true) !== 2 ||
+      view.getUint32(8, true) !== buffer.byteLength) {
+    throw new Error("Invalid GLB header");
+  }
+  let offset = 12;
+  let jsonCount = 0;
+  let binCount = 0;
+  let document = null;
+  while (offset < buffer.byteLength) {
+    if (offset + 8 > buffer.byteLength) throw new Error("Invalid GLB chunk header");
+    const chunkLength = view.getUint32(offset, true);
+    const chunkType = view.getUint32(offset + 4, true);
+    const chunkStart = offset + 8;
+    const chunkEnd = chunkStart + chunkLength;
+    if (chunkEnd > buffer.byteLength || chunkLength % 4 !== 0) {
+      throw new Error("Invalid GLB chunk bounds or alignment");
+    }
+    if (chunkType === 0x4e4f534a) {
+      jsonCount += 1;
+      if (jsonCount > 1 || offset !== 12) throw new Error("Invalid GLB JSON chunk order");
+      try {
+        document = JSON.parse(new TextDecoder().decode(buffer.slice(chunkStart, chunkEnd)).trimEnd());
+      } catch {
+        throw new Error("Invalid GLB JSON document");
+      }
+    } else if (chunkType === 0x004e4942) {
+      binCount += 1;
+      if (binCount > 1) throw new Error("Multiple GLB BIN chunks are not supported");
+    }
+    offset = chunkEnd;
+  }
+  if (offset !== buffer.byteLength || jsonCount !== 1 || !document || typeof document !== "object") {
+    throw new Error("Incomplete GLB container");
+  }
+  const resources = [
+    ...(Array.isArray(document.buffers) ? document.buffers : []),
+    ...(Array.isArray(document.images) ? document.images : [])
+  ];
+  const external = resources.filter((resource) =>
+    resource && typeof resource.uri === "string" && !resource.uri.startsWith("data:")
+  );
+  if (external.length) throw new Error("External resource URIs are not allowed");
+  return document;
+}
+
 function loadArrayBuffer(buffer, filename) {
   setStatus(t("loading"));
   if (buffer.byteLength > MAX_GLB_BYTES) {
@@ -740,21 +791,35 @@ function loadArrayBuffer(buffer, filename) {
     setStatus(t("fileTooLarge"));
     return;
   }
+  try {
+    validateSelfContainedGlb(buffer);
+  } catch (error) {
+    $("#viewer-error").hidden = false;
+    $("#viewer-error").textContent = error.message.includes("External resource") ? t("externalResources") : t("loadError");
+    setStatus($("#viewer-error").textContent);
+    return;
+  }
   const loader = new GLTFLoader();
-  loader.parse(buffer, "", (gltf) => {
-    const root = new THREE.Group();
-    root.name = filename || "Imported GLB";
-    root.add(gltf.scene);
-    // Blender GLB export is Y-up; the atlas uses the source scene Z-up convention.
-    root.rotation.x = Math.PI / 2;
-    installModel(root, "file");
-  }, (error) => {
+  const fail = (error) => {
     console.error(error);
     $("#viewer-error").hidden = false;
     $("#viewer-error").textContent = t("loadError");
     setStatus(t("loadError"));
     loadDemo();
-  });
+  };
+  try {
+    loader.parse(buffer, "", (gltf) => {
+      const root = new THREE.Group();
+      root.name = filename || "Imported GLB";
+      root.add(gltf.scene);
+      // Blender GLB export is Y-up; the atlas uses the source scene Z-up convention.
+      root.rotation.x = Math.PI / 2;
+      $("#viewer-error").hidden = true;
+      installModel(root, "file");
+    }, fail);
+  } catch (error) {
+    fail(error);
+  }
 }
 
 function initRenderer() {
@@ -901,7 +966,10 @@ async function tryLoadBundledModel() {
   try {
     const response = await fetch(`${import.meta.env.BASE_URL}models/rtx3060_xc_black_blockout_v04.glb`);
     if (!response.ok) throw new Error("No bundled model");
+    const contentType = response.headers.get("content-type") ?? "";
+    if (contentType.includes("text/html")) throw new Error("No bundled model");
     const buffer = await response.arrayBuffer();
+    if (buffer.byteLength < 12 || new TextDecoder().decode(buffer.slice(0, 4)) !== "glTF") throw new Error("No bundled GLB asset");
     loadArrayBuffer(buffer, "Bundled v0.4 GLB");
   } catch {
     loadDemo();
