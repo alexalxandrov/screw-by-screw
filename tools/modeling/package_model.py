@@ -51,13 +51,19 @@ def validate_glb(data: bytes) -> None:
 def build_package(model_dir: Path, scene_path: Path, output_path: Path) -> dict[str, Any]:
     model_dir = model_dir.resolve(strict=True)
     scene_path = scene_path.resolve(strict=True)
-    manifest = read_json(model_dir / "model-package.json")
+    manifest_path = (model_dir / "model-package.json").resolve(strict=True)
+    if model_dir not in manifest_path.parents:
+        raise ValueError("model-package.json escapes model directory")
+    manifest = read_json(manifest_path)
     if manifest.get("format") != "sbs-model" or manifest.get("schema_version") != "1.0.0":
         raise ValueError("unsupported model-package.json format or schema version")
     files = manifest.get("files")
     if not isinstance(files, dict) or any(not isinstance(files.get(key), str) for key in REQUIRED_KEYS):
         raise ValueError("model-package.json is missing required file entries")
-    model = read_json(model_dir / safe_relative_path(files["model"]))
+    model_path = (model_dir / safe_relative_path(files["model"])).resolve(strict=True)
+    if model_dir not in model_path.parents:
+        raise ValueError("model metadata escapes model directory")
+    model = read_json(model_path)
     if model.get("id") != manifest.get("model_id"):
         raise ValueError("model ID does not match package manifest")
     payload: dict[str, bytes] = {"model-package.json": (model_dir / "model-package.json").read_bytes()}
