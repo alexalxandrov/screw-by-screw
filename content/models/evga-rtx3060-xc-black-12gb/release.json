@@ -28,7 +28,7 @@
     },
     {
       "path": "assembly_steps.json",
-      "sha256": "37036cb18e7b638138fda5314e2fb92252142f12c36842481ed1079aba961737"
+      "sha256": "d4189a842fd1d594c08135578509c2de9c9d9442fc6884d61da1aef8d9446122"
     },
     {
       "path": "learning.json",
@@ -40,7 +40,7 @@
     },
     {
       "path": "animations.json",
-      "sha256": "2e96a1d01ec960a84586c20a84fab2209ca8400a3084ef579107b97ceb470310"
+      "sha256": "138267f60c6a0d1decffe1d0b20e64bc0bf544451daf542cea6a12e74bfa7ca7"
     }
   ]
 }
