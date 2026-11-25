@@ -60,7 +60,7 @@ def build_package(model_dir: Path, scene_path: Path, output_path: Path) -> dict[
     model = read_json(model_dir / safe_relative_path(files["model"]))
     if model.get("id") != manifest.get("model_id"):
         raise ValueError("model ID does not match package manifest")
-    payload: dict[str, bytes] = {}
+    payload: dict[str, bytes] = {"model-package.json": (model_dir / "model-package.json").read_bytes()}
     for key in REQUIRED_KEYS:
         archive_path = safe_relative_path(files[key]).as_posix()
         source_path = scene_path if key == "scene" else (model_dir / safe_relative_path(files[key])).resolve(strict=True)
