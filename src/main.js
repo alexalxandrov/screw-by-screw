@@ -24,6 +24,7 @@ const state = {
   catalog: new Map(COMPONENTS.map((item) => [item.id, item])),
   sceneController: null,
   cameraHome: null,
+  gridHelper: null,
   exploded: 0,
   isolated: false,
   wireframe: false,
@@ -597,7 +598,7 @@ function updateExplodeUi(value) {
   state.exploded = Math.max(0, Math.min(100, Number(value)));
   $("#explode-slider").value = String(state.exploded);
   $("#explode-value").textContent = `${Math.round(state.exploded)}%`;
-  $("#model-state").textContent = state.exploded ? "EXPLODED VIEW" : t("assembledState");
+  $("#model-state").textContent = state.exploded ? t("exploded") : t("assembledState");
 }
 
 function setExplode(value) {
@@ -664,6 +665,7 @@ function fitModel(root) {
   const size = box.getSize(new THREE.Vector3());
   const center = box.getCenter(new THREE.Vector3());
   const maxDimension = Math.max(size.x, size.y, size.z, 100);
+  if (state.gridHelper) state.gridHelper.position.set(center.x, center.y, box.min.z - maxDimension * 0.08);
   state.controls.target.copy(center);
   state.camera.position.copy(center).add(new THREE.Vector3(maxDimension * 1.35, maxDimension * 1.0, maxDimension * 1.25));
   state.controls.minDistance = Math.max(0.01, maxDimension * 0.08);
@@ -833,7 +835,7 @@ function initRenderer() {
 
     const grid = new THREE.GridHelper(280, 28, 0x293640, 0x1b2730);
     grid.rotation.x = Math.PI / 2;
-    grid.position.set(101, -25, 55);
+    state.gridHelper = grid;
     state.scene.add(grid);
 
     const resize = () => {
