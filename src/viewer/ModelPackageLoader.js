@@ -275,6 +275,13 @@ export async function loadModelPackage(file) {
   const sceneBytes = archive[paths.scene];
   if (!sceneBytes || sceneBytes.byteLength > MAX_SCENE_GLB_BYTES) fail("scene GLB is missing or too large");
   const sceneBuffer = sceneBytes.buffer.slice(sceneBytes.byteOffset, sceneBytes.byteOffset + sceneBytes.byteLength);
-  validateSelfContainedGlb(sceneBuffer);
+  const glbDocument = validateSelfContainedGlb(sceneBuffer);
+  const sceneComponentIds = new Set((glbDocument.nodes ?? [])
+    .map((node) => node.extras?.sbs_component_id)
+    .filter((id) => typeof id === "string"));
+  const missingComponents = data.components.components
+    .filter((component) => !sceneComponentIds.has(component.id))
+    .map((component) => component.id);
+  if (missingComponents.length) fail("scene GLB is missing component nodes: " + missingComponents.slice(0, 8).join(", "));
   return { manifest, data, sceneBuffer, report, integrityVerified, filename: file.name || "model.sbsmodel" };
 }
