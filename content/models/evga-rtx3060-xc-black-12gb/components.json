@@ -1,0 +1,298 @@
+{
+  "schema_version": "0.1.0",
+  "device_model_id": "gpu.evga.12g-p5-3655-kr",
+  "status": "candidate_inventory_not_final",
+  "components": [
+    {
+      "id": "assembly.card.root",
+      "parent_id": null,
+      "name": {
+        "en": "Graphics card assembly",
+        "ru": "Видеокарта в сборе"
+      },
+      "category": "assembly",
+      "evidence_status": "illustrative",
+      "geometry_status": "assembly_node",
+      "source_ids": []
+    },
+    {
+      "id": "assembly.shroud",
+      "parent_id": "assembly.card.root",
+      "name": {
+        "en": "Fan shroud",
+        "ru": "Кожух вентиляторов"
+      },
+      "category": "mechanical",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "proxy",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "assembly.cooling",
+      "parent_id": "assembly.card.root",
+      "name": {
+        "en": "Cooling assembly",
+        "ru": "Система охлаждения"
+      },
+      "category": "thermal_mechanical",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "proxy",
+      "source_ids": [
+        "src.lanoc.review",
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "assembly.fan.1",
+      "parent_id": "assembly.cooling",
+      "name": {
+        "en": "Axial fan 1",
+        "ru": "Осевой вентилятор 1"
+      },
+      "category": "thermal_mechanical",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "proxy",
+      "source_ids": [
+        "src.lanoc.review",
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "assembly.fan.2",
+      "parent_id": "assembly.cooling",
+      "name": {
+        "en": "Axial fan 2",
+        "ru": "Осевой вентилятор 2"
+      },
+      "category": "thermal_mechanical",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "proxy",
+      "source_ids": [
+        "src.lanoc.review",
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "cooling.heatsink",
+      "parent_id": "assembly.cooling",
+      "name": {
+        "en": "Heatsink fin stack",
+        "ru": "Радиатор с рёбрами"
+      },
+      "category": "thermal",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "cooling.gpu_contact",
+      "parent_id": "assembly.cooling",
+      "name": {
+        "en": "Copper contact plate",
+        "ru": "Медная контактная пластина"
+      },
+      "category": "thermal",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "proxy",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "assembly.pcb.electronics",
+      "parent_id": "assembly.card.root",
+      "name": {
+        "en": "PCB and electronics",
+        "ru": "Печатная плата и электроника"
+      },
+      "category": "electrical_mechanical",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "proxy",
+      "source_ids": [
+        "src.lanoc.review",
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "assembly.pcb.board",
+      "parent_id": "assembly.pcb.electronics",
+      "name": {
+        "en": "Printed circuit board",
+        "ru": "Печатная плата"
+      },
+      "category": "electrical_mechanical",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "chip.gpu.ga106",
+      "parent_id": "assembly.pcb.electronics",
+      "name": {
+        "en": "GPU package · GA106",
+        "ru": "Корпус GPU · GA106"
+      },
+      "category": "semiconductor",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "proxy",
+      "source_ids": [
+        "src.evga.spec",
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "assembly.connectors",
+      "parent_id": "assembly.card.root",
+      "name": {
+        "en": "Connectors",
+        "ru": "Разъёмы"
+      },
+      "category": "mechanical_io",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "proxy",
+      "source_ids": [
+        "src.evga.spec",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "connector.power.8pin",
+      "parent_id": "assembly.connectors",
+      "name": {
+        "en": "8-pin power connector",
+        "ru": "Разъём питания 8-pin"
+      },
+      "category": "power_electronics",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.evga.spec",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "connector.io.bracket",
+      "parent_id": "assembly.connectors",
+      "name": {
+        "en": "I/O bracket",
+        "ru": "Планка интерфейсных разъёмов"
+      },
+      "category": "mechanical_io",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.evga.spec",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "connector.io.panel",
+      "parent_id": "assembly.connectors",
+      "name": {
+        "en": "Display output panel",
+        "ru": "Панель видеовыходов"
+      },
+      "category": "mechanical_io",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "chip.memory.candidate.1",
+      "parent_id": "assembly.pcb.electronics",
+      "name": {
+        "en": "GDDR6 package candidate 1",
+        "ru": "Кандидат микросхемы GDDR6 1"
+      },
+      "category": "semiconductor",
+      "evidence_status": "candidate_count_requires_exact_board_confirmation",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "chip.memory.candidate.2",
+      "parent_id": "assembly.pcb.electronics",
+      "name": {
+        "en": "GDDR6 package candidate 2",
+        "ru": "Кандидат микросхемы GDDR6 2"
+      },
+      "category": "semiconductor",
+      "evidence_status": "candidate_count_requires_exact_board_confirmation",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "chip.memory.candidate.3",
+      "parent_id": "assembly.pcb.electronics",
+      "name": {
+        "en": "GDDR6 package candidate 3",
+        "ru": "Кандидат микросхемы GDDR6 3"
+      },
+      "category": "semiconductor",
+      "evidence_status": "candidate_count_requires_exact_board_confirmation",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "chip.memory.candidate.4",
+      "parent_id": "assembly.pcb.electronics",
+      "name": {
+        "en": "GDDR6 package candidate 4",
+        "ru": "Кандидат микросхемы GDDR6 4"
+      },
+      "category": "semiconductor",
+      "evidence_status": "candidate_count_requires_exact_board_confirmation",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "chip.memory.candidate.5",
+      "parent_id": "assembly.pcb.electronics",
+      "name": {
+        "en": "GDDR6 package candidate 5",
+        "ru": "Кандидат микросхемы GDDR6 5"
+      },
+      "category": "semiconductor",
+      "evidence_status": "candidate_count_requires_exact_board_confirmation",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "chip.memory.candidate.6",
+      "parent_id": "assembly.pcb.electronics",
+      "name": {
+        "en": "GDDR6 package candidate 6",
+        "ru": "Кандидат микросхемы GDDR6 6"
+      },
+      "category": "semiconductor",
+      "evidence_status": "candidate_count_requires_exact_board_confirmation",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    }
+  ],
+  "rules": [
+    "This is not a complete BOM.",
+    "Candidate memory package count and positions require exact PCB confirmation.",
+    "Do not infer reference designators or component values."
+  ]
+}

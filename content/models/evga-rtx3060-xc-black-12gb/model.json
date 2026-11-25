@@ -1,0 +1,81 @@
+{
+  "schema_version": "0.1.0",
+  "id": "gpu.evga.12g-p5-3655-kr",
+  "manufacturer": "EVGA",
+  "product_name": "GeForce RTX 3060 XC BLACK GAMING 12GB",
+  "part_number": "12G-P5-3655-KR",
+  "variant_notes": "Do not merge facts or geometry from 12G-P5-3657-KR, RTX 3060 Ti, or another PCB revision without evidence.",
+  "status": "research_blockout",
+  "geometry_status": "illustrative_proxy_not_cad",
+  "coordinate_system": {
+    "units": "mm",
+    "x": "nominal card length axis",
+    "y": "thickness axis",
+    "z": "card height axis",
+    "front": "negative Y"
+  },
+  "specifications": {
+    "memory": {
+      "capacity_gb": 12,
+      "type": "GDDR6",
+      "bus_width_bits": 192,
+      "source_ids": [
+        "src.evga.spec"
+      ],
+      "evidence_status": "manufacturer_data"
+    },
+    "gpu": {
+      "family": "GeForce RTX 3060",
+      "architecture": "Ampere",
+      "die": "GA106",
+      "cuda_cores": 3584,
+      "boost_clock_mhz": 1777,
+      "source_ids": [
+        "src.evga.spec"
+      ],
+      "evidence_status": "manufacturer_data"
+    },
+    "memory_bandwidth_gbps": 360,
+    "interface": "PCI Express 4.0",
+    "physical": {
+      "nominal_length_mm": 201.8,
+      "height_mm": 110,
+      "slot_width": "dual_slot",
+      "overall_shroud_length_mm": null,
+      "source_ids": [
+        "src.evga.spec",
+        "src.lanoc.review"
+      ],
+      "notes": "LanOC reports the shroud extends slightly beyond nominal 201.8 mm length; exact overhang is not quantified."
+    },
+    "cooling": {
+      "fan_count": 2,
+      "fan_opening_diameter_mm": 90,
+      "fan_impeller_diameter_mm": 85,
+      "diameter_evidence": "reviewer_measurement_approximate",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    "power_connector": "single 8-pin",
+    "display_outputs": {
+      "displayport": 3,
+      "hdmi": 1,
+      "source_ids": [
+        "src.evga.spec",
+        "src.lanoc.review"
+      ]
+    }
+  },
+  "source_ids": [
+    "src.evga.spec",
+    "src.lanoc.review",
+    "src.gamersnexus.teardown",
+    "src.neoseeker.review"
+  ],
+  "release": {
+    "version": "0.1-draft",
+    "status": "draft",
+    "geometry_fidelity": "illustrative_proxy_not_cad"
+  }
+}
