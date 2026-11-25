@@ -189,3 +189,19 @@ test("component search keeps ordinary name and stable-ID lookup", async ({ page 
   await search.fill("Радиатор с рёбрами");
   await expect(page.locator('#component-tree button[data-id="cooling.heatsink"]')).toBeVisible();
 });
+
+
+test("a missing optional bundled model does not reset active user interaction", async ({ page }) => {
+  await page.route("**/models/rtx3060_xc_black_blockout_v04.glb", async (route) => {
+    await new Promise((resolve) => setTimeout(resolve, 750));
+    await route.fulfill({ status: 404, body: "not found" });
+  });
+  await page.goto("/");
+  const toggle = page.locator("#measurement-toggle");
+  await expect(toggle).toBeEnabled();
+  await toggle.click();
+  await expect(toggle).toHaveAttribute("aria-pressed", "true");
+  await page.waitForTimeout(850);
+  await expect(toggle).toHaveAttribute("aria-pressed", "true");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-measurement-enabled", "true");
+});
