@@ -1,7 +1,6 @@
 name: Viewer build
 permissions:
   contents: write
-  actions: write
 concurrency:
   group: viewer-build-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
@@ -57,7 +56,6 @@ jobs:
             git commit -m "chore: add npm dependency lockfile"
             git push origin "HEAD:${GITHUB_REF_NAME}"
           fi
-          gh workflow run viewer-build.yml --ref "${GITHUB_REF_NAME}"
       - name: Install locked dependencies
         run: npm ci --no-audit --no-fund
       - name: Run viewer engine unit tests
