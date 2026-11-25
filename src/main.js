@@ -2580,7 +2580,7 @@ function bindUI() {
     const file = event.target.files?.[0];
     if (!file) return;
     state.userInteracted = true;
-    if (!/\\.sbsmodel$/i.test(file.name)) {
+    if (!/\.sbsmodel$/i.test(file.name)) {
       $("#comparison-status").textContent = t("compareError") + ": .sbsmodel required";
       event.target.value = "";
       return;
@@ -2602,8 +2602,8 @@ function bindUI() {
     } catch (error) {
       state.comparisonPackageData = null;
       state.comparisonFilename = "";
-      $("#comparison-status").textContent = `${t("compareError")}: ${error.message}`;
       renderComparison();
+      $("#comparison-status").textContent = `${t("compareError")}: ${error.message}`;
     }
     event.target.value = "";
   });
