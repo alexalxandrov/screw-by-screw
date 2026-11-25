@@ -249,14 +249,18 @@ export async function loadModelPackage(file) {
   if (!manifest.files || typeof manifest.files !== "object") fail("manifest file map is missing");
   const integrityVerified = await verifyPackageChecksums(archive, manifest);
   const paths = {};
+  const mappedPaths = new Set();
   for (const key of REQUIRED_FILE_KEYS) {
     const path = manifest.files[key];
     if (!isSafeArchivePath(path) || !archive[path]) fail("manifest references a missing or unsafe file: " + key);
+    if (mappedPaths.has(path)) fail("multiple manifest keys point to the same archive file: " + path);
+    mappedPaths.add(path);
     paths[key] = path;
   }
   let release = null;
   if (manifest.files.release !== undefined) {
     if (!isSafeArchivePath(manifest.files.release) || !archive[manifest.files.release]) fail("manifest references a missing or unsafe release file");
+    if (mappedPaths.has(manifest.files.release)) fail("release file duplicates another manifest path");
     release = parseJsonFile(archive, manifest.files.release, "release");
   }
   const data = {
