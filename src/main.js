@@ -1003,7 +1003,13 @@ function bindUI() {
 async function tryLoadBundledModel() {
   const revision = state.modelRevision;
   try {
-    const response = await fetch(`${import.meta.env.BASE_URL}models/rtx3060_xc_black_blockout_v04.glb`);
+    const embeddedModelUrl = globalThis.SBS_BUNDLED_GLB_DATA_URL;
+    if (!embeddedModelUrl && window.location.protocol === "file:") {
+      setLoadState(t("demoLoaded"));
+      return;
+    }
+    const modelUrl = embeddedModelUrl || `${import.meta.env.BASE_URL}models/rtx3060_xc_black_blockout_v04.glb`;
+    const response = await fetch(modelUrl);
     if (!response.ok) throw new Error("No bundled model");
     const contentType = response.headers.get("content-type") ?? "";
     if (contentType.includes("text/html")) throw new Error("No bundled model");

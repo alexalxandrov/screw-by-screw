@@ -14,7 +14,7 @@ export default defineConfig({
   projects: [
     {
       name: "chromium",
-      testMatch: ["**/viewer.spec.js", "**/model-package.spec.js", "**/rotation-controls.spec.js", "**/generated-model-package.spec.js", "**/accessibility.spec.js", "**/bundled-model.spec.js"],
+      testMatch: ["**/viewer.spec.js", "**/file-open.spec.js", "**/model-package.spec.js", "**/rotation-controls.spec.js", "**/generated-model-package.spec.js", "**/accessibility.spec.js", "**/bundled-model.spec.js"],
       use: {
         browserName: "chromium",
         launchOptions: {
