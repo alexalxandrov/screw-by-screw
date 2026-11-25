@@ -7,32 +7,50 @@
     {
       "source_id": "src.gamersnexus.teardown",
       "locator": "01:30",
-      "note": "Disassembly begins; this timestamp is not a complete step description."
+      "note": {
+        "en": "Disassembly begins; this timestamp is not a complete step description.",
+        "ru": "Начинается разборка; эта отметка времени не является полным описанием шага."
+      }
     },
     {
       "source_id": "src.gamersnexus.teardown",
       "locator": "05:33",
-      "note": "Assembly and internal views are discussed."
+      "note": {
+        "en": "Assembly and internal views are discussed.",
+        "ru": "Обсуждаются сборка и внутренний вид устройства."
+      }
     },
     {
       "source_id": "src.gamersnexus.teardown",
       "locator": "06:45",
-      "note": "Markings and cooling layout are shown."
+      "note": {
+        "en": "Markings and cooling layout are shown.",
+        "ru": "Показаны маркировки и компоновка системы охлаждения."
+      }
     },
     {
       "source_id": "src.gamersnexus.teardown",
       "locator": "09:00",
-      "note": "Fan removal segment."
+      "note": {
+        "en": "Fan removal segment.",
+        "ru": "Фрагмент снятия вентилятора."
+      }
     },
     {
       "source_id": "src.gamersnexus.teardown",
       "locator": "11:00",
-      "note": "Shunt resistors are discussed."
+      "note": {
+        "en": "Shunt resistors are discussed.",
+        "ru": "Обсуждаются шунтирующие резисторы."
+      }
     },
     {
       "source_id": "src.tomshardware.teardown",
       "locator": "PCB front-side teardown photograph",
-      "note": "Six Samsung K4ZAF325BM-HC16 GDDR6 packages are visible around the GA106 GPU package. 3D package centres are estimated from the photo, not measured."
+      "note": {
+        "en": "Six Samsung K4ZAF325BM-HC16 GDDR6 packages are visible around the GA106 GPU package. 3D package centres are estimated from the photo, not measured.",
+        "ru": "На фотографии платы видны шесть микросхем Samsung K4ZAF325BM-HC16 GDDR6 вокруг корпуса GPU GA106. Координаты корпусов в 3D оценены по фотографии и не измерены."
+      }
     }
   ]
 }
