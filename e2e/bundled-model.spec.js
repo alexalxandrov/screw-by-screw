@@ -1,4 +1,6 @@
 import { test, expect } from "@playwright/test";
+import { resolve } from "node:path";
+import { pathToFileURL } from "node:url";
 
 test("loads the generated Blender v0.4 GLB and resolves content-package IDs", async ({ page }) => {
   const pageErrors = [];
@@ -25,5 +27,19 @@ test("loads the generated Blender v0.4 GLB and resolves content-package IDs", as
     element.dispatchEvent(new Event("input", { bubbles: true }));
   });
   await expect(page.locator("#explode-value")).toHaveText("100%");
+  expect(pageErrors).toEqual([]);
+});
+
+
+test("opens the self-contained root index.html directly with the embedded Blender model", async ({ page }) => {
+  const pageErrors = [];
+  page.on("pageerror", (error) => pageErrors.push(error.message));
+  await page.goto(pathToFileURL(resolve(process.cwd(), "index.html")).href);
+
+  await expect(page.locator("#viewer-canvas canvas")).toBeVisible();
+  await expect(page.locator("#component-count")).toHaveText("67", { timeout: 15000 });
+  await expect(page.locator("#load-state")).toContainText("ВСТРОЕННАЯ МОДЕЛЬ");
+  await page.getByRole("button", { name: /Охлаждение/ }).click();
+  await expect(page.locator("#process-details")).toBeVisible();
   expect(pageErrors).toEqual([]);
 });
