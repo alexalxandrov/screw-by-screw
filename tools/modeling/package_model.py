@@ -41,7 +41,7 @@ def validate_glb(data: bytes) -> None:
     if chunk_type != 0x4E4F534A or chunk_length % 4 or 20 + chunk_length > len(data):
         raise ValueError("invalid GLB JSON chunk")
     try:
-        document = json.loads(data[20:20 + chunk_length].decode("utf-8").rstrip(" \\t\\r\\n\\0"))
+        document = json.loads(data[20:20 + chunk_length].decode("utf-8").rstrip(" \t\r\n\0"))
     except (UnicodeDecodeError, json.JSONDecodeError) as exc:
         raise ValueError("invalid GLB JSON document") from exc
     resources = list(document.get("buffers", [])) + list(document.get("images", []))
@@ -83,7 +83,7 @@ def build_package(model_dir: Path, scene_path: Path, output_path: Path) -> dict[
         raise ValueError("expanded model package exceeds 512 MiB")
     manifest = dict(manifest)
     manifest["sha256"] = {name: hashlib.sha256(value).hexdigest() for name, value in sorted(payload.items())}
-    manifest_bytes = (json.dumps(manifest, ensure_ascii=False, indent=2, sort_keys=True) + "\\n").encode("utf-8")
+    manifest_bytes = (json.dumps(manifest, ensure_ascii=False, indent=2, sort_keys=True) + "\n").encode("utf-8")
     output_path.parent.mkdir(parents=True, exist_ok=True)
     fd, temporary_name = tempfile.mkstemp(prefix=output_path.name + ".", suffix=".tmp", dir=output_path.parent)
     os.close(fd)
