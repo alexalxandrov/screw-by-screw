@@ -285,7 +285,8 @@ function getComponentData(id, object) {
     descriptionEn: "Imported GLB node. No additional component description is supplied in the model manifest.",
     descriptionRu: "Узел импортированного GLB. В манифесте нет дополнительного описания компонента.",
     evidence,
-    geometry: object?.userData?.sbs_geometry_status ?? "unknown"
+    geometry: object?.userData?.sbs_geometry_status ?? "unknown",
+    sourceIds: []
   };
 }
 
@@ -354,13 +355,8 @@ function renderDetails(id) {
 
   const sourceHost = $("#source-links");
   sourceHost.replaceChildren();
-  const sourceList = data.id === "assembly.card.root"
-    ? MODEL.sources
-    : data.id.includes("gpu") || data.id.includes("memory")
-      ? [MODEL.sources[2], MODEL.sources[1]]
-      : data.id.includes("fan") || data.id.includes("cooling") || data.id.includes("shroud")
-        ? [MODEL.sources[1], MODEL.sources[2]]
-        : [MODEL.sources[0], MODEL.sources[1]];
+  const sourceMap = new Map(MODEL.sources.map((source) => [source.id, source]));
+  const sourceList = (data.sourceIds ?? []).map((sourceId) => sourceMap.get(sourceId)).filter(Boolean);
   sourceList.forEach((source) => {
     const link = document.createElement("a");
     link.href = source.url;
@@ -646,13 +642,12 @@ function setLayer(layer) {
     setStatus(t("ready"));
     return;
   }
+  const layer = PROCESS_PACKAGE.process_layers.find((item) => item.type === state.activeLayer);
+  const linkedIds = new Set(layer?.linked_component_ids ?? []);
   const matches = [];
   state.modelRoot.traverse((object) => {
-    const id = getNodeId(object) ?? "";
-    const match = state.activeLayer === "cooling"
-      ? id.includes("cooling") || id.includes("fan") || id.includes("shroud")
-      : id.includes("power") || id.includes("gpu") || id.includes("connector");
-    if (match && object.userData?.sbs_component_id) matches.push(object);
+    const id = object.userData?.sbs_component_id;
+    if (id && linkedIds.has(id)) matches.push(object);
   });
   matches.forEach((object) => {
     const color = state.activeLayer === "cooling" ? 0x6bc8e8 : 0xe8b75e;
