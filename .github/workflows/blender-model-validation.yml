@@ -84,16 +84,6 @@ jobs:
             --model-dir content/models/evga-rtx3060-xc-black-12gb \
             --scene MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v04.glb \
             --output artifacts/rtx3060_xc_black_v04.sbsmodel
-      - name: Verify portable package with browser loader
-        run: |
-          node --input-type=module <<'NODE'
-          import { readFile } from "node:fs/promises";
-          import { loadModelPackage } from "./src/viewer/ModelPackageLoader.js";
-          const bytes = await readFile("artifacts/rtx3060_xc_black_v04.sbsmodel");
-          const buffer = bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength);
-          const pkg = await loadModelPackage({ name: "rtx3060_xc_black_v04.sbsmodel", size: bytes.byteLength, arrayBuffer: async () => buffer });
-          console.log(JSON.stringify({ modelId: pkg.report.modelId, components: pkg.report.componentCount, relationships: pkg.report.relationshipCount, integrityVerified: pkg.integrityVerified }, null, 2));
-          NODE
       - name: Stage generated GLB for viewer
         run: |
           mkdir -p public/models
@@ -105,6 +95,16 @@ jobs:
         run: npm install --package-lock-only --ignore-scripts --no-audit --no-fund
       - name: Install locked viewer dependencies
         run: npm ci --no-audit --no-fund
+      - name: Verify portable package with browser loader
+        run: |
+          node --input-type=module <<'NODE'
+          import { readFile } from "node:fs/promises";
+          import { loadModelPackage } from "./src/viewer/ModelPackageLoader.js";
+          const bytes = await readFile("artifacts/rtx3060_xc_black_v04.sbsmodel");
+          const buffer = bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength);
+          const pkg = await loadModelPackage({ name: "rtx3060_xc_black_v04.sbsmodel", size: bytes.byteLength, arrayBuffer: async () => buffer });
+          console.log(JSON.stringify({ modelId: pkg.report.modelId, components: pkg.report.componentCount, relationships: pkg.report.relationshipCount, integrityVerified: pkg.integrityVerified }, null, 2));
+          NODE
       - name: Install Chromium for GLB integration test
         run: npx playwright install --with-deps chromium
       - name: Build viewer with generated GLB
