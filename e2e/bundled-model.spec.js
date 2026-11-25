@@ -15,7 +15,7 @@ test("loads the generated Blender v0.5 GLB and resolves content-package IDs", as
   await expect(page.locator("#component-count")).toHaveText("83");
   await expect(page.getByRole("button", { name: /Видеокарта в сборе/ })).toBeVisible();
 
-  await page.getByRole("button", { name: /Охлаждение/ }).click();
+  await page.locator('.process-button[data-layer="cooling"]').click();
   await expect(page.locator("#process-details")).toBeVisible();
   const heatsink = page.locator("#process-components").getByRole("button", { name: "Радиатор с рёбрами" });
   await expect(heatsink).toBeVisible();
