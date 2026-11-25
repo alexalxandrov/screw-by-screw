@@ -232,3 +232,19 @@ test("a missing optional bundled model does not reset active user interaction", 
   await expect(toggle).toHaveAttribute("aria-pressed", "true");
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-measurement-enabled", "true");
 });
+
+
+test("source observations remain separate from an unauthored disassembly sequence", async ({ page }) => {
+  await page.goto("/");
+  await page.locator('#component-tree button[data-id="assembly.card.root"]').click();
+
+  const section = page.locator("#detail-assembly-section");
+  await expect(section).toBeVisible();
+  await expect(page.locator("#assembly-empty-note")).toContainText("Подтверждённая последовательность разборки");
+  await expect(page.locator("#assembly-step-list")).toBeHidden();
+  await expect(page.locator("#assembly-observation-heading")).toContainText("НАБЛЮДЕНИЯ В ИСТОЧНИКАХ");
+  const observation = page.locator('[data-observation-source-id="src.gamersnexus.teardown"]').first();
+  await expect(observation).toContainText("01:30");
+  await expect(observation).toContainText("timestamp is not a complete step description");
+  await expect(observation.locator("a")).toHaveAttribute("href", /t=90s/);
+});

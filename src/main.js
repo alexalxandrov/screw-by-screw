@@ -8,6 +8,7 @@ import DEFAULT_LEARNING_PACKAGE from "../content/models/evga-rtx3060-xc-black-12
 import DEFAULT_PROCESS_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/process_layers.json";
 import DEFAULT_CLAIM_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/claims.json";
 import DEFAULT_RELATIONSHIP_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/relationships.json";
+import DEFAULT_ASSEMBLY_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/assembly_steps.json";
 import { loadModelPackage, validateSelfContainedGlb, MAX_MODEL_PACKAGE_BYTES, MAX_SCENE_GLB_BYTES } from "./viewer/ModelPackageLoader.js";
 
 let MODEL = DEFAULT_MODEL;
@@ -16,6 +17,7 @@ let LEARNING_PACKAGE = DEFAULT_LEARNING_PACKAGE;
 let PROCESS_PACKAGE = DEFAULT_PROCESS_PACKAGE;
 let CLAIM_PACKAGE = DEFAULT_CLAIM_PACKAGE;
 let RELATIONSHIP_PACKAGE = DEFAULT_RELATIONSHIP_PACKAGE;
+let ASSEMBLY_PACKAGE = DEFAULT_ASSEMBLY_PACKAGE;
 
 const $ = (selector) => document.querySelector(selector);
 const canvasHost = $("#viewer-canvas");
@@ -81,7 +83,7 @@ const UI = {
     measure: "Measure", clearMeasurement: "Clear", measureIdle: "Measurement off · model-space only", measurePrompt: "Click a visible surface to set point 1 of 2", measureFirstPoint: "Point 1 of 2 set · select the second point", measureDistance: "Distance", measureDisclaimer: "model-space only", measureNoHit: "Click a visible model surface", measureEnabled: "Measurement enabled", measureDisabled: "Measurement disabled", modelUnits: "model units", measureNote: "Not a verified physical dimension",
     clearLayer: "Clear layer", inspection: "INSPECTION", componentDetails: "Component details",
     selectComponent: "Select a component", selectHint: "Choose a part in the 3D view or assembly tree to inspect its role and evidence.",
-    identity: "IDENTITY", parent: "Parent", geometry: "Geometry", evidence: "EVIDENCE", technicalClaims: "TECHNICAL CLAIMS", claimUnknown: "Unknown", yes: "Yes", no: "No", claimSources: "Evidence sources", technicalRelationships: "TECHNICAL RELATIONSHIPS", qualitativeRelation: "Qualitative relationship", noRelationshipSource: "No source registered",
+    identity: "IDENTITY", parent: "Parent", geometry: "Geometry", evidence: "EVIDENCE", technicalClaims: "TECHNICAL CLAIMS", claimUnknown: "Unknown", yes: "Yes", no: "No", claimSources: "Evidence sources", technicalRelationships: "TECHNICAL RELATIONSHIPS", qualitativeRelation: "Qualitative relationship", noRelationshipSource: "No source registered", assemblyEvidence: "DISASSEMBLY EVIDENCE", noVerifiedSequence: "No verified disassembly sequence has been authored for this model.", sourceObservations: "SOURCE OBSERVATIONS · NOT DISASSEMBLY STEPS", stepLabel: "Step", toolsLabel: "Tools", safetyLabel: "Safety", prerequisitesLabel: "Prerequisites", openAtSource: "Open source",
     sources: "SOURCES", accuracyFooter: "Unknown values remain unknown. No inferred CAD accuracy.",
     ready: "READY", localFirst: "LOCAL-FIRST · NO ACCOUNT", openModel: "Open model",
     noSelection: "No component selected", componentsCount: "components",
@@ -106,7 +108,7 @@ const UI = {
     measure: "Измерить", clearMeasurement: "Сброс", measureIdle: "Измерение выключено · только пространство модели", measurePrompt: "Нажмите на видимую поверхность, чтобы задать точку 1 из 2", measureFirstPoint: "Точка 1 из 2 задана · выберите вторую", measureDistance: "Расстояние", measureDisclaimer: "ед. модели", measureNoHit: "Нажмите на видимую поверхность модели", measureEnabled: "Инструмент измерения включён", measureDisabled: "Инструмент измерения выключен", modelUnits: "единицы модели", measureNote: "Не подтверждённый физический размер",
     clearLayer: "Сбросить слой", inspection: "ИНСПЕКЦИЯ", componentDetails: "Карточка компонента",
     selectComponent: "Выберите компонент", selectHint: "Выберите деталь в 3D-окне или дереве сборки, чтобы изучить её назначение и источники.",
-    identity: "ИДЕНТИФИКАЦИЯ", parent: "Родитель", geometry: "Геометрия", evidence: "ДОКАЗАТЕЛЬНОСТЬ", technicalClaims: "ТЕХНИЧЕСКИЕ УТВЕРЖДЕНИЯ", claimUnknown: "Неизвестно", yes: "Да", no: "Нет", claimSources: "Источники утверждения", technicalRelationships: "ТЕХНИЧЕСКИЕ СВЯЗИ", qualitativeRelation: "Качественная связь", noRelationshipSource: "Источник не зарегистрирован",
+    identity: "ИДЕНТИФИКАЦИЯ", parent: "Родитель", geometry: "Геометрия", evidence: "ДОКАЗАТЕЛЬНОСТЬ", technicalClaims: "ТЕХНИЧЕСКИЕ УТВЕРЖДЕНИЯ", claimUnknown: "Неизвестно", yes: "Да", no: "Нет", claimSources: "Источники утверждения", technicalRelationships: "ТЕХНИЧЕСКИЕ СВЯЗИ", qualitativeRelation: "Качественная связь", noRelationshipSource: "Источник не зарегистрирован", assemblyEvidence: "ДОКАЗАТЕЛЬСТВА РАЗБОРКИ", noVerifiedSequence: "Подтверждённая последовательность разборки для этой модели пока не составлена.", sourceObservations: "НАБЛЮДЕНИЯ В ИСТОЧНИКАХ · НЕ ШАГИ РАЗБОРКИ", stepLabel: "Шаг", toolsLabel: "Инструменты", safetyLabel: "Безопасность", prerequisitesLabel: "Предварительные шаги", openAtSource: "Открыть источник",
     sources: "ИСТОЧНИКИ", accuracyFooter: "Неизвестное остаётся неизвестным. Точность CAD не подразумевается.",
     ready: "ГОТОВО", localFirst: "ЛОКАЛЬНО · БЕЗ АККАУНТА", openModel: "Открыть модель",
     noSelection: "Компонент не выбран", componentsCount: "компонентов",
@@ -647,6 +649,180 @@ function renderRelationships(componentId) {
   });
 }
 
+
+function localizedPackageText(value) {
+  if (typeof value === "string") return value;
+  if (value && typeof value === "object" && !Array.isArray(value)) {
+    const localized = value[state.language] ?? value.en ?? value.ru;
+    return typeof localized === "string" ? localized : "";
+  }
+  return "";
+}
+
+function localizedPackageList(value) {
+  const items = Array.isArray(value) ? value : value == null ? [] : [value];
+  return items.map(localizedPackageText).filter(Boolean);
+}
+
+function sourceUrlAtLocator(source, locator) {
+  if (!source?.url || typeof locator !== "string") return source?.url ?? "";
+  try {
+    const url = new URL(source.url);
+    const match = locator.trim().match(/^(?:(\d+):)?(\d{1,2}):(\d{2})$/);
+    const isYouTube = url.hostname === "youtube.com" || url.hostname === "www.youtube.com" || url.hostname === "youtu.be";
+    if (match && isYouTube) {
+      const hours = Number(match[1] ?? 0);
+      const minutes = Number(match[2]);
+      const seconds = Number(match[3]);
+      url.searchParams.set("t", `${hours * 3600 + minutes * 60 + seconds}s`);
+    }
+    return url.href;
+  } catch {
+    return source.url;
+  }
+}
+
+function renderAssemblyEvidence(componentId) {
+  const section = $("#detail-assembly-section");
+  const emptyNote = $("#assembly-empty-note");
+  const stepHost = $("#assembly-step-list");
+  const observationHeading = $("#assembly-observation-heading");
+  const observationHost = $("#assembly-observation-list");
+  if (!section || !emptyNote || !stepHost || !observationHeading || !observationHost) return;
+
+  stepHost.replaceChildren();
+  observationHost.replaceChildren();
+  const isDeviceRoot = componentId === "assembly.card.root";
+  const steps = (ASSEMBLY_PACKAGE.steps ?? []).filter((step) =>
+    isDeviceRoot || (step.component_ids ?? []).includes(componentId)
+  );
+  const observations = isDeviceRoot ? (ASSEMBLY_PACKAGE.observations ?? []) : [];
+  section.hidden = steps.length === 0 && observations.length === 0 && !isDeviceRoot;
+  if (section.hidden) return;
+
+  emptyNote.hidden = !(isDeviceRoot && steps.length === 0);
+  emptyNote.textContent = steps.length === 0 ? t("noVerifiedSequence") : "";
+  stepHost.hidden = steps.length === 0;
+  observationHeading.hidden = observations.length === 0;
+  observationHeading.textContent = t("sourceObservations");
+  observationHost.hidden = observations.length === 0;
+
+  const sourceMap = new Map(MODEL.sources.map((source) => [source.id, source]));
+
+  steps.forEach((step, index) => {
+    const card = document.createElement("article");
+    card.className = "assembly-step-card";
+    card.dataset.stepId = step.id ?? `step-${index + 1}`;
+
+    const title = document.createElement("strong");
+    title.className = "assembly-step-title";
+    const sequence = Number.isInteger(step.sequence) ? step.sequence : index + 1;
+    title.textContent = `${t("stepLabel")} ${sequence}: ${localizedPackageText(step.title ?? step.action)}`;
+    card.append(title);
+
+    const descriptionText = localizedPackageText(step.description);
+    if (descriptionText) {
+      const description = document.createElement("p");
+      description.className = "assembly-step-description";
+      description.textContent = descriptionText;
+      card.append(description);
+    }
+
+    const targets = (step.component_ids ?? []).map((id) => {
+      const data = state.catalog.get(id);
+      const object = findNodeById(id);
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "assembly-component-link";
+      button.dataset.componentId = id;
+      button.textContent = data
+        ? (state.language === "ru" ? data.ru : data.en)
+        : id;
+      button.disabled = !object;
+      button.addEventListener("click", () => {
+        if (object) selectComponent(id);
+      });
+      return button;
+    });
+    if (targets.length) {
+      const targetList = document.createElement("div");
+      targetList.className = "assembly-step-targets";
+      targets.forEach((button) => targetList.append(button));
+      card.append(targetList);
+    }
+
+    const tools = localizedPackageList(step.tool_requirements);
+    if (tools.length) {
+      const toolsText = document.createElement("p");
+      toolsText.className = "assembly-step-meta";
+      toolsText.textContent = `${t("toolsLabel")}: ${tools.join(" · ")}`;
+      card.append(toolsText);
+    }
+
+    const safety = localizedPackageList(step.safety_notes);
+    if (safety.length) {
+      const safetyText = document.createElement("p");
+      safetyText.className = "assembly-step-safety";
+      safetyText.textContent = `${t("safetyLabel")}: ${safety.join(" · ")}`;
+      card.append(safetyText);
+    }
+
+    const prerequisites = step.prerequisite_step_ids ?? [];
+    if (prerequisites.length) {
+      const prerequisiteText = document.createElement("p");
+      prerequisiteText.className = "assembly-step-meta";
+      prerequisiteText.textContent = `${t("prerequisitesLabel")}: ${prerequisites.join(", ")}`;
+      card.append(prerequisiteText);
+    }
+
+    const sources = (step.source_ids ?? []).map((sourceId) => sourceMap.get(sourceId)).filter((source) => source?.url);
+    sources.forEach((source) => {
+      const link = document.createElement("a");
+      link.className = "assembly-source-link";
+      link.href = source.url;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.textContent = `↗ ${source.label}`;
+      card.append(link);
+    });
+
+    stepHost.append(card);
+  });
+
+  observations.forEach((observation, index) => {
+    const card = document.createElement("article");
+    card.className = "assembly-observation-card";
+    card.dataset.observationSourceId = observation.source_id ?? "";
+    card.dataset.observationIndex = String(index);
+
+    const source = sourceMap.get(observation.source_id);
+    const locator = document.createElement("strong");
+    locator.className = "assembly-observation-locator";
+    locator.textContent = observation.locator ?? "—";
+
+    const note = document.createElement("p");
+    note.className = "assembly-observation-note";
+    note.textContent = observation.note ?? "";
+
+    card.append(locator, note);
+    if (source?.url) {
+      const link = document.createElement("a");
+      link.className = "assembly-source-link";
+      link.href = sourceUrlAtLocator(source, observation.locator);
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.textContent = `↗ ${t("openAtSource")}: ${source.label}`;
+      card.append(link);
+    } else {
+      const missing = document.createElement("span");
+      missing.className = "assembly-step-meta";
+      missing.textContent = t("noRelationshipSource");
+      card.append(missing);
+    }
+    observationHost.append(card);
+  });
+}
+
 function renderDetails(id) {
   state.learningMode = false;
   $("#learning-panel").hidden = true;
@@ -672,6 +848,7 @@ function renderDetails(id) {
   $("#evidence-copy").textContent = evidence[state.language === "ru" ? "copyRu" : "copyEn"];
   renderClaims(id);
   renderRelationships(id);
+  renderAssemblyEvidence(id);
   $("#rotate-component").disabled = !object || !state.sceneController;
 
   const sourceHost = $("#source-links");
@@ -1333,6 +1510,7 @@ function applyPackageData(packageData) {
   PROCESS_PACKAGE = packageData.process_layers ?? { process_layers: [] };
   CLAIM_PACKAGE = packageData.claims ?? { claims: [] };
   RELATIONSHIP_PACKAGE = packageData.relationships ?? { relationships: [] };
+  ASSEMBLY_PACKAGE = packageData.assembly_steps ?? { steps: [], observations: [] };
   state.catalog = new Map(COMPONENTS.map((item) => [item.id, item]));
   state.learningMode = false;
   state.learningIndex = 0;
@@ -1365,6 +1543,7 @@ function useGenericModelData(filename) {
   PROCESS_PACKAGE = { process_layers: [] };
   CLAIM_PACKAGE = { claims: [] };
   RELATIONSHIP_PACKAGE = { relationships: [] };
+  ASSEMBLY_PACKAGE = { steps: [], observations: [] };
   state.catalog = new Map();
   state.learningMode = false;
   updateModelHeader();
