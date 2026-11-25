@@ -665,7 +665,10 @@ function fitModel(root) {
   const size = box.getSize(new THREE.Vector3());
   const center = box.getCenter(new THREE.Vector3());
   const maxDimension = Math.max(size.x, size.y, size.z, 100);
-  if (state.gridHelper) state.gridHelper.position.set(center.x, center.y, box.min.z - maxDimension * 0.08);
+  if (state.gridHelper) {
+    state.gridHelper.position.set(center.x, center.y, box.min.z - maxDimension * 0.08);
+    state.gridHelper.scale.setScalar(maxDimension / 100);
+  }
   state.controls.target.copy(center);
   state.camera.position.copy(center).add(new THREE.Vector3(maxDimension * 1.35, maxDimension * 1.0, maxDimension * 1.25));
   state.controls.minDistance = Math.max(0.01, maxDimension * 0.08);
