@@ -1196,7 +1196,7 @@ async function tryLoadBundledModel() {
       setLoadState(t("demoLoaded"));
       return;
     }
-    const modelUrl = embeddedModelUrl || `${import.meta.env.BASE_URL}models/rtx3060_xc_black_blockout_v04.glb`;
+    const modelUrl = embeddedModelUrl || `${import.meta.env.BASE_URL}models/rtx3060_xc_black_blockout_v05.glb`;
     const response = await fetch(modelUrl);
     if (!response.ok) throw new Error("No bundled model");
     const contentType = response.headers.get("content-type") ?? "";
@@ -1204,7 +1204,7 @@ async function tryLoadBundledModel() {
     const buffer = await response.arrayBuffer();
     if (buffer.byteLength < 12 || new TextDecoder().decode(buffer.slice(0, 4)) !== "glTF") throw new Error("No bundled GLB asset");
     if (state.modelRevision !== revision) return;
-    loadArrayBuffer(buffer, "Bundled v0.4 GLB", "bundled");
+    loadArrayBuffer(buffer, "Bundled v0.5 GLB", "bundled");
   } catch {
     if (state.modelRevision === revision) loadDemo();
   }
