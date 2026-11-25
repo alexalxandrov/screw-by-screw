@@ -127,6 +127,11 @@ test("rejects GLB files with external resource URIs", async () => {
   await assert.rejects(() => loadModelPackage(asFile(makeArchive({ scene }))), /External resource URIs/);
 });
 
+test("rejects a package with a mismatched SHA-256 checksum", async () => {
+  const bytes = makeArchive({ manifestOverrides: { sha256: { "model.json": "0".repeat(64) } } });
+  await assert.rejects(() => loadModelPackage(asFile(bytes)), /SHA-256 mismatch/);
+});
+
 test("rejects unsupported package schema versions", async () => {
   const bytes = makeArchive({ manifestOverrides: { schema_version: "9.9.9" } });
   await assert.rejects(() => loadModelPackage(asFile(bytes)), /unsupported package format or schema version/);
