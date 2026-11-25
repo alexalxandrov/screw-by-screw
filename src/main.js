@@ -59,7 +59,8 @@ const state = {
   sliceFraction: 0.5,
   slicePlane: new THREE.Plane(new THREE.Vector3(1, 0, 0), 0),
   measurementController: null,
-  measurementEnabled: false
+  measurementEnabled: false,
+  userInteracted: false
 };
 
 const MAX_GLB_BYTES = MAX_SCENE_GLB_BYTES;
@@ -1443,6 +1444,9 @@ function onCanvasClick(event) {
 }
 
 function bindUI() {
+  // Preserve the fallback scene if the optional bundled GLB resolves after interaction.
+  document.addEventListener("pointerdown", () => { state.userInteracted = true; }, { capture: true });
+  document.addEventListener("keydown", () => { state.userInteracted = true; }, { capture: true });
   $("#language-toggle").addEventListener("click", () => {
     state.language = state.language === "ru" ? "en" : "ru";
     applyLanguage();
@@ -1573,7 +1577,10 @@ async function tryLoadBundledModel() {
     if (contentType.includes("text/html")) throw new Error("No bundled model");
     const buffer = await response.arrayBuffer();
     if (buffer.byteLength < 12 || new TextDecoder().decode(buffer.slice(0, 4)) !== "glTF") throw new Error("No bundled GLB asset");
-    if (state.modelRevision !== revision) return;
+    if (state.modelRevision !== revision || state.userInteracted) {
+      if (state.modelRevision === revision) setLoadState(t("demoLoaded"));
+      return;
+    }
     loadArrayBuffer(buffer, "Bundled v0.5 GLB", "bundled");
   } catch {
     // The fallback scene is installed before this optional bundle fetch starts.

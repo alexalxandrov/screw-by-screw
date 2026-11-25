@@ -205,3 +205,36 @@ test("a missing optional bundled model does not reset active user interaction", 
   await expect(toggle).toHaveAttribute("aria-pressed", "true");
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-measurement-enabled", "true");
 });
+
+test("a successful but delayed bundled model cannot replace a scene after user interaction", async ({ page }) => {
+  await page.route("**/models/rtx3060_xc_black_blockout_v05.glb", async (route) => {
+    await new Promise((resolve) => setTimeout(resolve, 1200));
+    const document = {
+      asset: { version: "2.0" },
+      scene: 0,
+      scenes: [{ nodes: [0] }],
+      nodes: [{ name: "Late bundled root", extras: { sbs_component_id: "assembly.card.root" } }]
+    };
+    const json = Buffer.from(JSON.stringify(document), "utf8");
+    const paddedLength = Math.ceil(json.length / 4) * 4;
+    const glb = Buffer.alloc(20 + paddedLength);
+    glb.writeUInt32LE(0x46546c67, 0);
+    glb.writeUInt32LE(2, 4);
+    glb.writeUInt32LE(glb.length, 8);
+    glb.writeUInt32LE(paddedLength, 12);
+    glb.writeUInt32LE(0x4e4f534a, 16);
+    json.copy(glb, 20);
+    glb.fill(0x20, 20 + json.length);
+    await route.fulfill({ status: 200, contentType: "model/gltf-binary", body: glb });
+  });
+
+  await page.goto("/");
+  await expect(page.locator("#component-count")).not.toHaveText("—");
+  const fan = page.locator('#component-tree button[data-id="assembly.fan.1"]');
+  await expect(fan).toBeVisible();
+  await fan.click();
+  await expect(page.locator("#detail-id")).toHaveText("assembly.fan.1");
+  await page.waitForTimeout(1450);
+  await expect(page.locator("#detail-id")).toHaveText("assembly.fan.1");
+  await expect(page.locator('#component-tree button[data-id="assembly.fan.1"]')).toBeVisible();
+});
