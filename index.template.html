@@ -97,6 +97,7 @@
                 <button id="assemble-button" class="text-button" type="button" data-i18n="assemble">Assemble</button>
                 <button id="explode-button" class="text-button" type="button" data-i18n="explode">Explode</button>
                 <button id="animate-button" class="text-button" type="button" data-i18n="animate">Animate</button>
+                <button id="power-toggle" class="text-button power-toggle" type="button" data-i18n="powerOn" aria-pressed="false">Включить питание</button>
               </div>
             </div>
             <input id="explode-slider" class="range-slider" type="range" min="0" max="100" value="0" aria-label="Exploded view amount" />
@@ -109,6 +110,11 @@
               <button class="process-button" data-layer="cooling" type="button"><span class="process-icon cooling-icon">≈</span><span data-i18n="cooling">Cooling</span></button>
               <button class="process-button" data-layer="power_delivery" type="button"><span class="process-icon power-icon">ϟ</span><span data-i18n="powerDelivery">Power delivery</span></button>
               <button class="process-button" data-layer="clear" type="button"><span class="process-icon clear-icon">×</span><span data-i18n="clearLayer">Clear layer</span></button>
+            </div>
+            <div class="simulation-controls">
+              <label for="simulation-speed" data-i18n="simulationSpeed">Скорость анимации</label>
+              <input id="simulation-speed" type="range" min="0.25" max="2" step="0.25" value="1" aria-label="Animation speed" />
+              <output id="simulation-speed-value">1.00×</output>
             </div>
           </div>
         </section>

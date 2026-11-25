@@ -77,7 +77,7 @@ for (const match of stylesheetTags) {
 }
 html = html.replace(/<link\b(?=[^>]*\brel=(["'])modulepreload\1)[^>]*>/gi, "");
 
-const publicGlb = resolve(projectRoot, "public/models/rtx3060_xc_black_blockout_v04.glb");
+const publicGlb = resolve(projectRoot, "public/models/rtx3060_xc_black_blockout_v05.glb");
 if (await exists(publicGlb)) {
   const bytes = await readFile(publicGlb);
   const dataUrl = "data:model/gltf-binary;base64," + bytes.toString("base64");

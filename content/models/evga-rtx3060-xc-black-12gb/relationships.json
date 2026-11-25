@@ -112,6 +112,23 @@
       "source_ids": [
         "src.lanoc.review"
       ]
+    },
+    {
+      "id": "rel.cooling.contains.heatpipes",
+      "from": "assembly.cooling",
+      "to": "cooling.heatpipes",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review",
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.pcb.contains.power_stage",
+      "from": "assembly.pcb.electronics",
+      "to": "assembly.power_stage",
+      "type": "contains",
+      "source_ids": []
     }
   ]
 }

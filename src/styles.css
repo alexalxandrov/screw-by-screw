@@ -242,3 +242,13 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); ou
   font: 11px var(--mono);
 }
 .startup-fallback-card .startup-fallback-note { margin-bottom: 0; font-size: 10px; }
+
+
+/* Operating-state and process-flow controls */
+.power-toggle { color: #e9b96a; font-weight: 800; }
+.power-toggle:hover, .power-toggle.active { color: #ffe0a1; }
+.power-toggle.active { text-shadow: 0 0 12px rgba(233,185,106,.28); }
+.simulation-controls { display: grid; grid-template-columns: auto minmax(70px,1fr) auto; align-items: center; gap: 10px; margin-top: 9px; color: var(--muted); font: 8px var(--mono); }
+.simulation-controls input { min-width: 0; width: 100%; height: 3px; accent-color: #e9b96a; }
+.simulation-controls output { color: #e9b96a; font-size: 9px; }
+@media (max-width: 480px) { .timeline-actions { gap: 8px; flex-wrap: wrap; justify-content: flex-end; } }
