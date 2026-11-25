@@ -47,7 +47,7 @@ jobs:
           gh workflow run viewer-build.yml --ref "${GITHUB_REF_NAME}"
       - name: Install locked dependencies
         run: npm ci --no-audit --no-fund
-      - name: Install Chromium for browser tests
+      - name: Install Chromium and Firefox for browser tests
         run: npx playwright install --with-deps chromium firefox
       - name: Build production viewer
         run: npm run build
