@@ -78,3 +78,8 @@ Screw by Screw — концепция публичной образовател�
 ## Рабочее название
 
 **Screw by Screw** — запоминающееся название с акцентом на глубокую разборку. Дескриптор **Interactive Technical Atlas** объясняет более широкую задачу проекта и не ограничивает его только винтами, ремонтом или механикой.
+
+
+## Competitive feature study
+
+See [docs/COMPETITIVE_FEATURE_AUDIT.md](docs/COMPETITIVE_FEATURE_AUDIT.md) for the reference-product audit, adopted interaction patterns, accuracy boundaries and staged roadmap.

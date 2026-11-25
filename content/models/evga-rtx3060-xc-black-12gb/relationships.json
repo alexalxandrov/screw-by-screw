@@ -112,6 +112,99 @@
       "source_ids": [
         "src.lanoc.review"
       ]
+    },
+    {
+      "id": "rel.fan1.contains.rotor",
+      "from": "assembly.fan.1",
+      "to": "assembly.fan.1.rotor",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review",
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.fan2.contains.rotor",
+      "from": "assembly.fan.2",
+      "to": "assembly.fan.2.rotor",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review",
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.cooling.contains.heatpipes",
+      "from": "assembly.cooling",
+      "to": "cooling.heatpipes",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review",
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.pcb.contains.power_stage",
+      "from": "assembly.pcb.electronics",
+      "to": "assembly.power_stage",
+      "type": "contains",
+      "source_ids": []
+    },
+    {
+      "id": "rel.heatpipes.contains.route1",
+      "from": "cooling.heatpipes",
+      "to": "cooling.heatpipes.route.1",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review",
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.heatpipes.contains.route2",
+      "from": "cooling.heatpipes",
+      "to": "cooling.heatpipes.route.2",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review",
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.heatpipes.contains.route3",
+      "from": "cooling.heatpipes",
+      "to": "cooling.heatpipes.route.3",
+      "type": "contains",
+      "source_ids": [
+        "src.fpsreview.exact_sku"
+      ]
+    },
+    {
+      "id": "rel.heatpipes.contains.route4",
+      "from": "cooling.heatpipes",
+      "to": "cooling.heatpipes.route.4",
+      "type": "contains",
+      "source_ids": [
+        "src.fpsreview.exact_sku"
+      ]
+    },
+    {
+      "id": "rel.heatpipes.contains.route5",
+      "from": "cooling.heatpipes",
+      "to": "cooling.heatpipes.route.5",
+      "type": "contains",
+      "source_ids": [
+        "src.fpsreview.exact_sku"
+      ]
+    },
+    {
+      "id": "rel.heatpipes.contains.route6",
+      "from": "cooling.heatpipes",
+      "to": "cooling.heatpipes.route.6",
+      "type": "contains",
+      "source_ids": [
+        "src.fpsreview.exact_sku"
+      ]
     }
   ]
 }

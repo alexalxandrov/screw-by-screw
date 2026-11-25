@@ -242,3 +242,14 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); ou
   font: 11px var(--mono);
 }
 .startup-fallback-card .startup-fallback-note { margin-bottom: 0; font-size: 10px; }
+
+
+/* Operating mode: fan rotor, airflow and power-flow animation controls. */
+.run-controls { display: grid; grid-template-columns: auto minmax(90px, 1fr) auto; align-items: center; gap: 8px 12px; margin: 12px 0 4px; color: var(--muted); font: 8px var(--mono); }
+.run-controls label { grid-column: 2; grid-row: 1; white-space: nowrap; }
+.run-controls input { grid-column: 2; grid-row: 2; width: 100%; min-width: 0; accent-color: #e8b85f; }
+.run-controls output { grid-column: 3; grid-row: 2; color: #e8b85f; }
+.run-controls .power-toggle { grid-column: 1; grid-row: 1 / span 2; color: #e8b85f; font-weight: 800; white-space: nowrap; }
+.power-toggle.active { color: #ffe0a1; text-shadow: 0 0 12px rgba(233,185,106,.3); }
+body[data-sbs-powered="true"] .live-indicator { background: #e8b85f; box-shadow: 0 0 10px #e8b85f; }
+@media (max-width: 520px) { .run-controls { grid-template-columns: auto 1fr auto; gap: 7px; } .run-controls .power-toggle { font-size: 8px; } }
