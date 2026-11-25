@@ -1,0 +1,19 @@
+{
+  "format": "sbs-model",
+  "schema_version": "1.0.0",
+  "model_id": "gpu.evga.12g-p5-3655-kr",
+  "package_version": "0.1.0",
+  "geometry_status": "illustrative_proxy_not_cad",
+  "files": {
+    "model": "model.json",
+    "scene": "scene.glb",
+    "components": "components.json",
+    "sources": "sources.json",
+    "relationships": "relationships.json",
+    "claims": "claims.json",
+    "process_layers": "process_layers.json",
+    "assembly_steps": "assembly_steps.json",
+    "learning": "learning.json",
+    "animations": "animations.json"
+  }
+}
