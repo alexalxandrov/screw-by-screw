@@ -1,4 +1,7 @@
 name: Blender blockout generation
+concurrency:
+  group: blender-model-validation-${{ github.ref }}
+  cancel-in-progress: true
 
 on:
   workflow_dispatch:
