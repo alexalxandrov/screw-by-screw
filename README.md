@@ -54,7 +54,7 @@ Screw by Screw — концепция публичной образовател�
 
 ## Статус проекта
 
-**Этап: работающий прототип 3D-пайплайна и веб-просмотрщика.** Генератор Blender v0.3 прошёл локальную техническую проверку; v0.4 остаётся кандидатом до локального запуска. Добавлены независимый GLB-валидатор, инспектор сцены и начальный Three.js viewer. Точность геометрии остаётся иллюстративной, а функциональность ещё не соответствует релизу 1.0.
+**Этап: работающий локальный прототип, v0.6 interaction slice.** Blender v0.5 воспроизводимо генерирует пилотную сцену в CI; просмотрщик поддерживает ракурсы камеры, сечение, режим качественной визуализации работы, измерение в координатах модели, поиск по компонентам/утверждениям/источникам, карточки доказательств, типизированные связи и панель наблюдений по разборке. Для пилотной RTX 3060 геометрия остаётся `illustrative_proxy_not_cad`; точная PCB-ревизия и CAD не подтверждены, а пошаговая разборка намеренно не опубликована до проверки полного teardown. Релиз 1.0 не утверждён.
 
 ## Документы
 
@@ -72,6 +72,10 @@ Screw by Screw — концепция публичной образовател�
 - [Viewer prototype](docs/VIEWER_PROTOTYPE.md)
 - [Universal Viewer Engine](docs/UNIVERSAL_VIEWER_ENGINE.md)
 - [SBS Model Package Format](docs/MODEL_PACKAGE_FORMAT.md)
+- [Model-space measurement tool](docs/MEASUREMENT_TOOL.md)
+- [Source-backed claim presentation](docs/CLAIM_PRESENTATION.md)
+- [Typed relationship inspector](docs/RELATIONSHIP_INSPECTOR.md)
+- [Assembly evidence and disassembly timeline](docs/ASSEMBLY_EVIDENCE_TIMELINE.md)
 - [Каталог моделей](MODELS/README.md)
 - [Pilot content package](content/models/evga-rtx3060-xc-black-12gb/README.md) — source claims, SHA-256 release manifest and bilingual learning data.
 

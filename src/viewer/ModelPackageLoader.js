@@ -171,9 +171,54 @@ export function validateModelPackageData(manifest, data) {
     assertStringArray(claim.source_ids, "claim.source_ids", sourceIds);
   }
   if (!Array.isArray(data.assembly_steps.steps)) fail("assembly_steps.steps must be an array");
+  const assemblyStepIds = new Set();
+  const assemblyStepById = new Map();
+  const assemblySequences = new Set();
   for (const step of data.assembly_steps.steps) {
+    assertString(step.id, "assembly step id");
+    if (assemblyStepIds.has(step.id)) fail("duplicate assembly step ID: " + step.id);
+    assemblyStepIds.add(step.id);
+    assemblyStepById.set(step.id, step);
+    if (!Number.isInteger(step.sequence) || step.sequence < 1 || assemblySequences.has(step.sequence)) {
+      fail("assembly step sequence must be a unique positive integer");
+    }
+    assemblySequences.add(step.sequence);
+    const action = step.action ?? step.title;
+    if (!(typeof action === "string" && action.trim()) &&
+        !(action && typeof action === "object" && !Array.isArray(action) &&
+          ["en", "ru"].some((language) => typeof action[language] === "string" && action[language].trim()))) {
+      fail("assembly step action/title must contain readable text");
+    }
+    if (!Array.isArray(step.component_ids) || step.component_ids.length === 0) fail("assembly step needs at least one component");
     assertStringArray(step.component_ids, "assembly step component_ids", componentIds);
+    if (!Array.isArray(step.source_ids) || step.source_ids.length === 0) fail("assembly step needs at least one source");
     assertStringArray(step.source_ids, "assembly step source_ids", sourceIds);
+    assertStringArray(step.prerequisite_step_ids, "assembly step prerequisite_step_ids");
+    assertStringArray(step.tool_requirements, "assembly step tool_requirements");
+    if (step.safety_notes !== undefined && typeof step.safety_notes !== "string" &&
+        !(step.safety_notes && typeof step.safety_notes === "object" && !Array.isArray(step.safety_notes)) &&
+        !Array.isArray(step.safety_notes)) fail("assembly step safety_notes has an invalid shape");
+  }
+  for (const step of data.assembly_steps.steps) {
+    for (const prerequisiteId of step.prerequisite_step_ids ?? []) {
+      const prerequisite = assemblyStepById.get(prerequisiteId);
+      if (!prerequisite) fail("assembly step references an unknown prerequisite: " + prerequisiteId);
+      if (prerequisite.sequence >= step.sequence) fail("assembly step prerequisite must precede its dependent step");
+    }
+  }
+  if (data.assembly_steps.observations !== undefined && !Array.isArray(data.assembly_steps.observations)) {
+    fail("assembly_steps.observations must be an array");
+  }
+  for (const observation of data.assembly_steps.observations ?? []) {
+    assertString(observation.source_id, "assembly observation source_id");
+    if (!sourceIds.has(observation.source_id)) fail("assembly observation references an unknown source");
+    assertString(observation.locator, "assembly observation locator");
+    const note = observation.note;
+    if (typeof note === "string") assertString(note, "assembly observation note");
+    else if (!note || typeof note !== "object" || Array.isArray(note) ||
+      !["en", "ru"].some((language) => typeof note[language] === "string" && note[language].trim())) {
+      fail("assembly observation note must contain readable text");
+    }
   }
   if (!Array.isArray(data.learning.questions)) fail("learning.questions must be an array");
   validateAnimationPackage(data.animations, componentIds);

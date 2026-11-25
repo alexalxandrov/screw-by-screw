@@ -77,3 +77,8 @@ The viewer renders atomic claims from the model package alongside the selected c
 ## Relationship inspection
 
 The component inspector renders incoming and outgoing typed relationships for the selected component instance. Each edge retains its direction, neighbour component ID, relation type, optional certainty label and source IDs. Selecting the neighbour navigates to its component card. A relationship with an empty source list is labelled as unsourced; the viewer does not invent provenance. Plain GLB imports have no relationship sidecar and show no inferred edges.
+
+
+## Assembly step contract
+
+An authored disassembly/assembly step must include a stable ID, a unique positive sequence number, a readable localized action or title, one or more target component instance IDs and at least one registered source ID. Optional fields include prerequisite step IDs, tool requirements, safety notes and localized descriptions. Prerequisites must resolve to another step in the same package. The viewer renders the sequence and links to targeted components; source observations (timecodes, figure/page locators and notes) remain a separate collection and are never treated as procedural steps.

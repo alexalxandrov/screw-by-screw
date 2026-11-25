@@ -357,3 +357,74 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); ou
 .relationship-sources { display: flex; flex-direction: column; gap: 5px; margin-top: 8px; }
 .relationship-sources a { color: #91a6b5; font-size: 8px; line-height: 1.4; text-decoration: none; overflow-wrap: anywhere; }
 .relationship-sources a:hover { color: var(--accent); }
+
+
+/* Evidence-backed disassembly authoring surface. Observations never masquerade as steps. */
+.assembly-empty-note {
+  margin: 10px 0;
+  padding: 9px 10px;
+  border-left: 2px solid #b08a56;
+  background: rgba(176,138,86,.08);
+  color: #d0c0a7;
+  font-size: 9px;
+  line-height: 1.55;
+}
+.assembly-step-list, .assembly-observation-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+.assembly-observation-heading { display: block; margin-top: 14px; }
+.assembly-step-card, .assembly-observation-card {
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: #0b1219;
+  padding: 9px 10px;
+}
+.assembly-step-title, .assembly-observation-locator {
+  display: block;
+  color: #d2dbe1;
+  font-size: 9px;
+  line-height: 1.45;
+  font-weight: 650;
+}
+.assembly-step-description, .assembly-observation-note {
+  margin: 7px 0 0;
+  color: var(--muted);
+  font-size: 8px;
+  line-height: 1.55;
+}
+.assembly-step-targets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+.assembly-component-link {
+  padding: 4px 6px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: #121c25;
+  color: #9ec6d5;
+  font: 8px var(--mono);
+  cursor: pointer;
+}
+.assembly-component-link:disabled { opacity: .45; cursor: not-allowed; }
+.assembly-step-meta, .assembly-step-safety {
+  margin: 7px 0 0;
+  color: var(--muted);
+  font: 8px var(--mono);
+  line-height: 1.55;
+}
+.assembly-step-safety { color: #d0b184; }
+.assembly-source-link {
+  display: block;
+  margin-top: 7px;
+  color: #91a6b5;
+  font-size: 8px;
+  line-height: 1.4;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+.assembly-source-link:hover { color: var(--accent); }
