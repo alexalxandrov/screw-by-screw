@@ -371,8 +371,7 @@ def make_fan(index, x, z, y, collection, cooling_parent):
         parent=cooling_parent,
     )
 
-    # The ring is hollow: blades and hub remain visible instead of being hidden
-    # behind a solid cylinder. Measured diameters remain approximate guides.
+    # The ring and hub are static parts of the fan assembly.
     frame = annular_ring(
         f"Fan {index} | annular frame",
         f"fan.{index}.frame",
@@ -397,12 +396,24 @@ def make_fan(index, x, z, y, collection, cooling_parent):
     )
     set_parent_keep_world(hub, assembly)
 
+    # A dedicated stable pivot lets the viewer animate only the impeller.
+    # Its local Y axis is the fan axle; geometry remains illustrative proxy.
+    rotor = make_assembly(
+        f"Fan {index} impeller rotor",
+        f"assembly.fan.{index}.rotor",
+        (x, y - 1.5, z),
+        collection,
+        parent=assembly,
+    )
+    rotor["sbs_fan_rotor"] = True
+    rotor["sbs_fan_axis"] = "y"
+
     for blade in range(FAN_BLADE_COUNT):
         obj = curved_fan_blade(
             index, blade, FAN_BLADE_COUNT, (x, y, z),
             y - 1.5, collection,
         )
-        set_parent_keep_world(obj, assembly)
+        set_parent_keep_world(obj, rotor)
 
 
 def validate_scene_transform_integrity():
@@ -413,31 +424,39 @@ def validate_scene_transform_integrity():
     for index, x in enumerate(FAN_CENTERS_X, start=1):
         expected_frame = Vector((x, -CARD_THICKNESS / 2 - 1.5, FAN_CENTER_Z))
         expected_hub = Vector((x, -CARD_THICKNESS / 2 - 1.5 - 2.2, FAN_CENTER_Z))
-        expected_blades = Vector((
-            x,
-            -CARD_THICKNESS / 2 - 1.5 - 1.5,
-            FAN_CENTER_Z,
-        ))
+        expected_rotor = Vector((x, -CARD_THICKNESS / 2 - 1.5 - 1.5, FAN_CENTER_Z))
 
         frame = bpy.data.objects.get(f"Fan {index} | annular frame")
         hub = bpy.data.objects.get(f"Fan {index} | hub")
-        if frame is None or hub is None:
-            failures.append(f"Fan {index}: frame or hub object missing")
+        rotor = bpy.data.objects.get(f"Fan {index} impeller rotor")
+        if frame is None or hub is None or rotor is None:
+            failures.append(f"Fan {index}: frame, hub or rotor pivot missing")
             continue
+        if rotor.get("sbs_component_id") != f"assembly.fan.{index}.rotor":
+            failures.append(f"Fan {index}: rotor stable component ID missing")
+        if rotor.get("sbs_fan_axis") != "y":
+            failures.append(f"Fan {index}: rotor axis metadata is not Y")
+        if rotor.parent != bpy.data.objects.get(f"Fan {index} assembly"):
+            failures.append(f"Fan {index}: rotor is not a child of the fan assembly")
+        if frame.parent != rotor.parent or hub.parent != rotor.parent:
+            failures.append(f"Fan {index}: static frame/hub must stay outside the rotor pivot")
 
         checks = [
             (f"Fan {index} frame", frame, expected_frame),
             (f"Fan {index} hub", hub, expected_hub),
+            (f"Fan {index} rotor pivot", rotor, expected_rotor),
         ]
         for blade_index in range(1, FAN_BLADE_COUNT + 1):
             blade = bpy.data.objects.get(f"Fan {index} | blade {blade_index}")
             if blade is None:
                 failures.append(f"Fan {index}: blade {blade_index} missing")
             else:
+                if blade.parent != rotor:
+                    failures.append(f"Fan {index}: blade {blade_index} is not parented to rotor pivot")
                 checks.append((
                     f"Fan {index} blade {blade_index}",
                     blade,
-                    expected_blades,
+                    expected_rotor,
                 ))
 
         for label, obj, expected in checks:
@@ -482,7 +501,7 @@ def validate_scene_transform_integrity():
         )
 
     print("TRANSFORM INTEGRITY CHECK: PASS")
-    print("Both fan frames, hubs and all blade pivots match expected centres.")
+    print("Both fan frames, hubs and dedicated impeller pivots match expected centres.")
     if corners:
         print(
             "Proxy X bounds:",

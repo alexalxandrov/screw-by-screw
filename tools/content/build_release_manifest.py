@@ -7,7 +7,7 @@ import json
 from pathlib import Path
 
 HASHED_FILES = ("model.json", "sources.json", "components.json", "relationships.json",
-                "process_layers.json", "assembly_steps.json", "learning.json", "claims.json")
+                "process_layers.json", "assembly_steps.json", "learning.json", "claims.json", "animations.json")
 
 
 def build_manifest(directory: Path) -> dict:

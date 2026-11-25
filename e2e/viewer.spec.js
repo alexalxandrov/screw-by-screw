@@ -282,3 +282,29 @@ test("a successful but delayed bundled model cannot replace a scene after user i
   await expect(page.locator("#detail-id")).toHaveText("assembly.fan.1");
   await expect(page.locator('#component-tree button[data-id="assembly.fan.1"]')).toBeVisible();
 });
+
+
+test("fallback impellers have independent pivots and an evidence-labelled package clip", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-fan-rotors", "2");
+  await expect(page.locator("#animation-player-panel")).toBeVisible();
+  await expect(page.locator("#animation-evidence-note")).toContainText("не является измеренным RPM");
+
+  const rotor = page.locator("#component-tree button[data-id=\"assembly.fan.1.rotor\"]");
+  await expect(rotor).toBeVisible();
+  await rotor.click();
+  await expect(page.locator("#detail-id")).toHaveText("assembly.fan.1.rotor");
+  await expect(page.locator("#evidence-badge")).toHaveText("УСЛОВНАЯ ГЕОМЕТРИЯ");
+
+  await page.locator("#power-toggle").click();
+  await expect(page.locator("body")).toHaveAttribute("data-sbs-powered", "true");
+  await expect(page.locator("#animation-player-panel")).toHaveAttribute("data-status", "ready");
+  await page.locator("#animation-play").click();
+  await expect(page.locator("body")).toHaveAttribute("data-sbs-powered", "false");
+  await expect(page.locator("#animation-player-panel")).toHaveAttribute("data-status", "playing");
+  await page.waitForTimeout(140);
+  await page.locator("#animation-pause").click();
+  await page.locator("#animation-stop").click();
+  await expect(page.locator("#animation-player-panel")).toHaveAttribute("data-status", "ready");
+  await expect(page.locator("#component-tree button[data-id=\"assembly.fan.2.rotor\"]")).toBeVisible();
+});

@@ -27,3 +27,10 @@ A package clip and an exploded-view transform both write component transforms. S
 The package validator checks clip IDs, titles, duration, easing, evidence status, source references, target component references, duplicate target/property tracks, property/value types and normalized keyframe order. The runtime snapshots original transforms and restores them on stop, clip switching or disposal.
 
 The runtime does not infer fan RPM, physical mechanisms, removal order, airflow, thermal behavior or electrical waveforms. Those remain separate evidence and simulation concerns.
+
+
+## RTX 3060 pilot demonstration
+
+The pilot includes one clip, clip.fan-impeller-visual-turn, targeting two dedicated component nodes: assembly.fan.1.rotor and assembly.fan.2.rotor. It rotates only the seven-blade proxy impeller groups around their local Y pivots; each static annular frame and hub remains outside those pivots.
+
+The clip is explicitly labelled educational_approximation and has no source_ids. It performs one visual revolution in 3.2 seconds as a convenient playback demonstration. That duration is not measured RPM, duty cycle or a manufacturer operating specification. Blade profile and blade count remain illustrative. The clip does not document disassembly, repair or a verified mechanical service procedure.
