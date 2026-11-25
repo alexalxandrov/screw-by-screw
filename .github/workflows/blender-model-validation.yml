@@ -123,10 +123,10 @@ jobs:
       - name: Run full viewer and accessibility suite against generated GLB
         run: npm run test:e2e:chromium
       - name: Commit standalone root launcher to feature branch
-        if: (github.event_name == 'push' && github.ref_type == 'branch' && github.ref_name != 'main') || (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository)
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
         env:
           GH_TOKEN: ${{ github.token }}
-          TARGET_BRANCH: ${{ github.event.pull_request.head.ref || github.ref_name }}
+          TARGET_BRANCH: ${{ github.head_ref }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
