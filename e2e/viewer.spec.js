@@ -99,3 +99,13 @@ test("rejects GLB files that reference external resources", async ({ page }) => 
   });
   await expect(page.locator("#viewer-error")).toContainText("внешние файлы");
 });
+
+
+test("keeps the shell styled and explains when the app entry module fails", async ({ page }) => {
+  await page.route("**/src/main.js", (route) => route.abort());
+  await page.goto("/");
+  await expect(page.locator("#startup-fallback")).toBeVisible({ timeout: 10000 });
+  await expect(page.locator("#app")).toHaveClass(/app-shell/);
+  const bodyBackground = await page.locator("body").evaluate((node) => getComputedStyle(node).backgroundColor);
+  expect(bodyBackground).toBe("rgb(9, 13, 18)");
+});
