@@ -24,7 +24,8 @@ export const COMPONENTS = COMPONENT_PACKAGE.components.map((component) => ({
   descriptionEn: component.description.en,
   descriptionRu: component.description.ru,
   evidence: component.evidence_status,
-  geometry: component.geometry_status
+  geometry: component.geometry_status,
+  sourceIds: component.source_ids ?? []
 }));
 
 export const EVIDENCE = {
