@@ -109,3 +109,25 @@ test("keeps the shell styled and explains when the app entry module fails", asyn
   const bodyBackground = await page.locator("body").evaluate((node) => getComputedStyle(node).backgroundColor);
   expect(bodyBackground).toBe("rgb(9, 13, 18)");
 });
+
+
+test("measurement mode is reversible, keyboard-accessible and labelled as model-space only", async ({ page }) => {
+  await page.goto("/");
+  const toggle = page.locator("#measurement-toggle");
+  const readout = page.locator("#measurement-readout");
+  await expect(toggle).toBeEnabled();
+  await expect(toggle).toHaveAttribute("aria-pressed", "false");
+  await expect(readout).toContainText("Измерение выключено");
+  await toggle.click();
+  await expect(toggle).toHaveAttribute("aria-pressed", "true");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-measurement-enabled", "true");
+  await expect(readout).toContainText("Нажмите на видимую поверхность");
+  await page.locator("#language-toggle").click();
+  await expect(readout).toContainText("Click a visible surface");
+  await page.keyboard.press("Escape");
+  await expect(toggle).toHaveAttribute("aria-pressed", "false");
+  await page.locator("#language-toggle").click();
+  await page.locator("#measurement-toggle").click();
+  await page.locator("#measurement-clear").click();
+  await expect(readout).toContainText("Нажмите на видимую поверхность");
+});

@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { SceneController } from "./viewer/SceneController.js";
+import { MeasurementController } from "./viewer/MeasurementController.js";
 import { MODEL as DEFAULT_MODEL, COMPONENTS as DEFAULT_COMPONENTS, EVIDENCE, createModelDataAdapter } from "./data/model.js";
 import DEFAULT_LEARNING_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/learning.json";
 import DEFAULT_PROCESS_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/process_layers.json";
@@ -54,7 +55,9 @@ const state = {
   sliceEnabled: false,
   sliceAxis: "x",
   sliceFraction: 0.5,
-  slicePlane: new THREE.Plane(new THREE.Vector3(1, 0, 0), 0)
+  slicePlane: new THREE.Plane(new THREE.Vector3(1, 0, 0), 0),
+  measurementController: null,
+  measurementEnabled: false
 };
 
 const MAX_GLB_BYTES = MAX_SCENE_GLB_BYTES;
@@ -71,6 +74,7 @@ const UI = {
     powerOn: "Run animation", powerOff: "Stop animation", operatingState: "OPERATING VISUALIZATION", simulationSpeed: "Animation speed",
     cameraPreset: "VIEW", viewIso: "Isometric", viewFan: "Fan side", viewPcb: "PCB side", viewIo: "I/O bracket", viewPower: "Power connector", viewTop: "Top",
     sliceToggle: "Section cut", sliceAxis: "Axis", sliceNote: "Visual cut · uncapped · not CAD",
+    measure: "Measure", clearMeasurement: "Clear", measureIdle: "Measurement off · model-space only", measurePrompt: "Click a visible surface to set point 1 of 2", measureFirstPoint: "Point 1 of 2 set · select the second point", measureDistance: "Distance", measureDisclaimer: "model-space only", measureNoHit: "Click a visible model surface", measureEnabled: "Measurement enabled", measureDisabled: "Measurement disabled", modelUnits: "model units", measureNote: "Not a verified physical dimension",
     clearLayer: "Clear layer", inspection: "INSPECTION", componentDetails: "Component details",
     selectComponent: "Select a component", selectHint: "Choose a part in the 3D view or assembly tree to inspect its role and evidence.",
     identity: "IDENTITY", parent: "Parent", geometry: "Geometry", evidence: "EVIDENCE",
@@ -95,6 +99,7 @@ const UI = {
     powerOn: "Включить анимацию", powerOff: "Остановить анимацию", operatingState: "ВИЗУАЛИЗАЦИЯ РАБОТЫ", simulationSpeed: "Скорость анимации",
     cameraPreset: "РАКУРС", viewIso: "Изометрия", viewFan: "Сторона вентиляторов", viewPcb: "Сторона PCB", viewIo: "Планка I/O", viewPower: "Разъём питания", viewTop: "Сверху",
     sliceToggle: "Сечение", sliceAxis: "Ось", sliceNote: "Визуальный срез · без крышек · не CAD",
+    measure: "Измерить", clearMeasurement: "Сброс", measureIdle: "Измерение выключено · только пространство модели", measurePrompt: "Нажмите на видимую поверхность, чтобы задать точку 1 из 2", measureFirstPoint: "Точка 1 из 2 задана · выберите вторую", measureDistance: "Расстояние", measureDisclaimer: "ед. модели", measureNoHit: "Нажмите на видимую поверхность модели", measureEnabled: "Инструмент измерения включён", measureDisabled: "Инструмент измерения выключен", modelUnits: "единицы модели", measureNote: "Не подтверждённый физический размер",
     clearLayer: "Сбросить слой", inspection: "ИНСПЕКЦИЯ", componentDetails: "Карточка компонента",
     selectComponent: "Выберите компонент", selectHint: "Выберите деталь в 3D-окне или дереве сборки, чтобы изучить её назначение и источники.",
     identity: "ИДЕНТИФИКАЦИЯ", parent: "Родитель", geometry: "Геометрия", evidence: "ДОКАЗАТЕЛЬНОСТЬ",
@@ -129,6 +134,7 @@ function applyLanguage() {
   if (state.activeLayer) renderProcessLayer();
   else if (state.learningMode) renderLearning();
   else if (state.selectedId) renderDetails(state.selectedId);
+  updateMeasurementReadout();
 }
 
 function tag(object, id, evidence = "illustrative", geometry = "proxy") {
@@ -997,6 +1003,20 @@ function disposeModel(root) {
 function installModel(root, mode) {
   if (state.sceneController) state.sceneController.reset();
   disposeProcessVisuals();
+  state.measurementController?.clear();
+  state.measurementController?.setUnit(MODEL.units ?? null);
+  state.measurementEnabled = false;
+  const measurementButton = $("#measurement-toggle");
+  if (measurementButton) {
+    measurementButton.classList.remove("active");
+    measurementButton.setAttribute("aria-pressed", "false");
+    measurementButton.disabled = !root;
+  }
+  if (canvasHost) {
+    canvasHost.dataset.measurementEnabled = "false";
+    canvasHost.dataset.measurementPoints = "0";
+  }
+  updateMeasurementReadout();
   state.powered = false;
   const powerButton = $("#power-toggle");
   if (powerButton) {
@@ -1080,6 +1100,7 @@ function useGenericModelData(filename) {
     partNumber: "",
     manufacturer: "Imported model",
     status: "unknown",
+    units: null,
     sources: []
   };
   COMPONENTS = [];
@@ -1143,6 +1164,7 @@ function loadArrayBuffer(buffer, filename, mode = "file", packageData = null) {
 function initRenderer() {
   try {
     state.scene = new THREE.Scene();
+    state.measurementController = new MeasurementController(state.scene, { markerRadius: 1.5, unit: MODEL.units ?? null });
     state.scene.background = new THREE.Color(0x0a1016);
     state.camera = new THREE.PerspectiveCamera(42, 1, 0.1, 4000);
     state.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
@@ -1208,13 +1230,62 @@ function initRenderer() {
   }
 }
 
+
+function measurementUnitLabel() {
+  const unit = MODEL.units;
+  if (!unit) return t("modelUnits");
+  if (state.language === "ru" && unit === "mm") return "мм";
+  return unit;
+}
+
+function updateMeasurementReadout() {
+  const output = $("#measurement-readout");
+  if (!output) return;
+  const points = state.measurementController?.points ?? [];
+  if (points.length >= 2) {
+    const distance = state.measurementController.getDistance();
+    output.textContent = `${t("measureDistance")}: ${distance.toFixed(2)} ${measurementUnitLabel()} · ${t("measureNote")}`;
+  } else if (points.length === 1) {
+    output.textContent = t("measureFirstPoint");
+  } else {
+    output.textContent = state.measurementEnabled ? t("measurePrompt") : t("measureIdle");
+  }
+}
+
+function setMeasurementEnabled(enabled) {
+  if (!state.measurementController || !state.modelRoot) return;
+  state.measurementEnabled = Boolean(enabled);
+  const button = $("#measurement-toggle");
+  button?.classList.toggle("active", state.measurementEnabled);
+  button?.setAttribute("aria-pressed", String(state.measurementEnabled));
+  if (canvasHost) canvasHost.dataset.measurementEnabled = String(state.measurementEnabled);
+  updateMeasurementReadout();
+  setStatus(state.measurementEnabled ? t("measureEnabled") : t("measureDisabled"));
+}
+
+function clearMeasurement() {
+  state.measurementController?.clear();
+  if (canvasHost) canvasHost.dataset.measurementPoints = "0";
+  updateMeasurementReadout();
+}
+
 function onCanvasClick(event) {
   const rect = state.renderer.domElement.getBoundingClientRect();
   state.pointer.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
   state.pointer.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
   state.raycaster.setFromCamera(state.pointer, state.camera);
   const hits = state.raycaster.intersectObject(state.modelRoot, true);
-  if (!hits.length) return;
+  if (!hits.length) {
+    if (state.measurementEnabled) setStatus(t("measureNoHit"));
+    return;
+  }
+  if (state.measurementEnabled) {
+    const result = state.measurementController.addPoint(hits[0].point);
+    canvasHost.dataset.measurementPoints = String(result.pointCount);
+    updateMeasurementReadout();
+    setStatus(result.distance === null ? t("measureFirstPoint") : `${t("measureDistance")}: ${result.distance.toFixed(2)} ${measurementUnitLabel()}`);
+    return;
+  }
   const id = getNodeId(hits[0].object);
   if (id) selectComponent(id);
 }
@@ -1262,6 +1333,8 @@ function bindUI() {
     updateSlicePlane();
   });
   $("#slice-position").addEventListener("input", (event) => updateSlicePosition(event.target.value));
+  $("#measurement-toggle").addEventListener("click", () => setMeasurementEnabled(!state.measurementEnabled));
+  $("#measurement-clear").addEventListener("click", clearMeasurement);
   $("#reset-view").addEventListener("click", resetCamera);
   $("#expand-tree").addEventListener("click", () => {
     $("#component-search").value = "";
@@ -1325,6 +1398,7 @@ function bindUI() {
       $("#component-search").focus();
     }
     if (event.key === "Escape") {
+      setMeasurementEnabled(false);
       setIsolated(false);
       setExplode(0);
       setLayer("clear");
