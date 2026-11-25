@@ -16,6 +16,23 @@ test("loads the generated Blender v0.5 GLB and resolves content-package IDs", as
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-fan-rotors", "2");
   await expect(page.getByRole("button", { name: /Видеокарта в сборе/ })).toBeVisible();
 
+  await page.locator("#camera-preset").selectOption("fan");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-camera-preset", "fan");
+  await page.locator("#camera-preset").selectOption("pcb");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-camera-preset", "pcb");
+
+  await page.locator("#slice-toggle").click();
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-slice-enabled", "true");
+  await page.locator("#slice-axis").selectOption("y");
+  await page.locator("#slice-position").evaluate((element) => {
+    element.value = "35";
+    element.dispatchEvent(new Event("input", { bubbles: true }));
+  });
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-slice-axis", "y");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-slice-fraction", "0.35");
+  await page.locator("#slice-toggle").click();
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-slice-enabled", "false");
+
   await page.locator('.process-button[data-layer="cooling"]').click();
   await expect(page.locator("#process-details")).toBeVisible();
   const heatsink = page.locator("#process-components").getByRole("button", { name: "Радиатор с рёбрами" });
@@ -79,6 +96,10 @@ test("opens the self-contained root index.html directly with the embedded Blende
   await expect(page.locator("#component-count")).toHaveText("83", { timeout: 15000 });
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-fan-rotors", "2");
   await expect(page.locator("#load-state")).toContainText("ВСТРОЕННАЯ МОДЕЛЬ");
+  await page.locator("#camera-preset").selectOption("io");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-camera-preset", "io");
+  await page.locator("#slice-toggle").click();
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-slice-enabled", "true");
   await page.getByRole("button", { name: /Воздушный поток|Охлаждение/ }).click();
   await expect(page.locator("#process-details")).toBeVisible();
   await page.locator("#power-toggle").click();
