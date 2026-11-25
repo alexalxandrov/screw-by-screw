@@ -48,7 +48,7 @@ Exploded-view transforms must be reversible and deterministic. The engine captur
 
 ## Viewer integration milestones
 
-- Engine foundation: implemented reusable component indexing, reversible explode/reassemble, visibility-safe isolation, reset and generic rotation/explode animation primitives; Five Node unit tests cover deterministic transforms, isolation and duplicate-ID reporting.
+- Engine foundation: implemented reusable component indexing, reversible explode/reassemble, visibility-safe isolation, reset and generic rotation/explode animation primitives; Six Node unit tests cover deterministic transforms, isolation and duplicate-ID reporting.
 - Package loader: next; move GLB and JSON validation into a reusable package loader and verify cross-file references before rendering.
 - Animation runtime: current UI demonstrates a reversible explode animation; package-authored clips, pause, seek and animation-track validation remain next.
 - Model catalogue: discover packages through a static catalogue manifest first; no backend is required for a local-first viewer.
