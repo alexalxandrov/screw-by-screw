@@ -35,7 +35,7 @@ test("opens the self-contained root index.html directly with the embedded Blende
   const pageErrors = [];
   const consoleErrors = [];
   const requestFailures = [];
-  page.on("pageerror", (error) => pageErrors.push(error.message));
+  page.on("pageerror", (error) => pageErrors.push({ message: error.message, stack: error.stack }));
   page.on("console", (message) => { if (message.type() === "error") consoleErrors.push(message.text()); });
   page.on("requestfailed", (request) => requestFailures.push({ url: request.url(), failure: request.failure()?.errorText }));
   await page.goto(pathToFileURL(resolve(process.cwd(), "index.html")).href);
@@ -48,6 +48,13 @@ test("opens the self-contained root index.html directly with the embedded Blende
     status: document.querySelector("#app-status")?.textContent,
     loadState: document.querySelector("#load-state")?.textContent,
     scriptCount: document.querySelectorAll("script").length,
+    scripts: [...document.querySelectorAll("script")].map((node) => ({
+      type: node.type || "classic",
+      source: node.src || "inline",
+      length: node.textContent?.length ?? 0,
+      first: node.textContent?.slice(0, 160) ?? "",
+      last: node.textContent?.slice(-160) ?? ""
+    })),
     externalScripts: [...document.querySelectorAll("script[src]")].map((node) => node.src),
     webgl: (() => {
       try {
