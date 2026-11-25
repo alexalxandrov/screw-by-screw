@@ -92,7 +92,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); ou
 .timeline-heading strong { color: var(--accent); font: 11px var(--mono); }
 .timeline-actions { display: flex; gap: 16px; }
 .range-slider { width: 100%; height: 3px; margin: 12px 0 4px; accent-color: var(--accent); cursor: pointer; }
-.range-labels { display: flex; justify-content: space-between; color: #62717e; font: 8px var(--mono); letter-spacing: .1em; }
+.range-labels { display: flex; justify-content: space-between; color: var(--muted); font: 8px var(--mono); letter-spacing: .1em; }
 .process-panel { padding: 12px 19px 14px; border-top: 1px solid var(--line); background: #0c1219; }
 .process-title { display: flex; justify-content: space-between; color: var(--dim); font: 8px var(--mono); letter-spacing: .1em; margin-bottom: 9px; }
 .process-buttons { display: flex; gap: 7px; }
