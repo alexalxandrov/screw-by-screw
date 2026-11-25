@@ -1,6 +1,6 @@
 name: Viewer build
 concurrency:
-  group: viewer-build-${{ github.ref }}
+  group: viewer-build-${{ github.head_ref || github.ref_name }}
   cancel-in-progress: true
 
 on:
