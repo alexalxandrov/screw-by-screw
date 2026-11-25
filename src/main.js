@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { zipSync, strToU8 } from "fflate";
 import { createSemanticInventory, createInventoryCsvFiles } from "./data/inventory-export.js";
+import { createLearningProgressStore } from "./data/learning-progress.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { SceneController } from "./viewer/SceneController.js";
@@ -41,6 +42,7 @@ const DEFAULT_PACKAGE_DATA = {
   animations: DEFAULT_ANIMATION_PACKAGE,
   release: DEFAULT_RELEASE_PACKAGE
 };
+const LEARNING_PROGRESS_STORE = createLearningProgressStore();
 const MODEL_CATALOG = createCatalogAdapter(CATALOG_SOURCE, { defaultPackageModelId: DEFAULT_MODEL.id });
 
 const $ = (selector) => document.querySelector(selector);
@@ -73,6 +75,8 @@ const state = {
   learningSelected: null,
   learningAnswered: false,
   learningComplete: false,
+  learningProgressAvailable: false,
+  learningResumed: false,
   modelWarnings: [],
   modelRevision: 0,
   powered: false,
@@ -126,7 +130,7 @@ const UI = {
     allVisible: "All components visible", layerCooling: "Cooling layer · qualitative",
     layerPower: "Power path · qualitative", noWebgl: "WebGL is unavailable in this browser.",
     source: "Source", noSources: "No direct source linked to this component.",
-    modelLoaded: "Model ready", glbPicker: "Choose a .glb file", learn: "Learn", learning: "LEARNING", authoredAnimations: "PACKAGE ANIMATIONS", clipSelect: "Select clip", clipTimeline: "Animation timeline", clipPlay: "Play", clipPause: "Pause", clipStop: "Stop / reset", clipReady: "Ready", clipPlaying: "Playing", clipPaused: "Paused", clipCompleted: "Completed", clipTime: "TIME", clipEvidenceNote: "Authored model motion · not a physics simulation", clipEducationalApproximation: "Educational approximation · duration is not measured RPM", clipIllustrative: "Illustrative motion · not a measured mechanism", clipDocumentedMotion: "Documented motion · source-linked", clipMeasuredMotion: "Measured motion · source and method recorded", linkedComponents: "LINKED COMPONENTS", assumptions: "ASSUMPTIONS & LIMITS", processLayer: "PROCESS LAYER", fileTooLarge: "GLB exceeds the 256 MB limit.", packageTooLarge: "SBS model package exceeds the 512 MB limit.", externalResources: "This GLB references external files. Only self-contained GLB files are allowed.", question: "QUESTION", checkAnswer: "Check answer", nextQuestion: "Next question", finishQuiz: "Finish", restartQuiz: "Try again", correctAnswer: "Correct", wrongAnswer: "Not quite", quizComplete: "Quiz complete", yourScore: "Your score", chooseAnswer: "Choose an answer first"
+    modelLoaded: "Model ready", glbPicker: "Choose a .glb file", learn: "Learn", learning: "LEARNING", authoredAnimations: "PACKAGE ANIMATIONS", clipSelect: "Select clip", clipTimeline: "Animation timeline", clipPlay: "Play", clipPause: "Pause", clipStop: "Stop / reset", clipReady: "Ready", clipPlaying: "Playing", clipPaused: "Paused", clipCompleted: "Completed", clipTime: "TIME", clipEvidenceNote: "Authored model motion · not a physics simulation", clipEducationalApproximation: "Educational approximation · duration is not measured RPM", clipIllustrative: "Illustrative motion · not a measured mechanism", clipDocumentedMotion: "Documented motion · source-linked", clipMeasuredMotion: "Measured motion · source and method recorded", linkedComponents: "LINKED COMPONENTS", assumptions: "ASSUMPTIONS & LIMITS", processLayer: "PROCESS LAYER", fileTooLarge: "GLB exceeds the 256 MB limit.", packageTooLarge: "SBS model package exceeds the 512 MB limit.", externalResources: "This GLB references external files. Only self-contained GLB files are allowed.", question: "QUESTION", checkAnswer: "Check answer", nextQuestion: "Next question", finishQuiz: "Finish", restartQuiz: "Try again", correctAnswer: "Correct", wrongAnswer: "Not quite", quizComplete: "Quiz complete", yourScore: "Your score", chooseAnswer: "Choose an answer first", learningProgressSaved: "Progress saved in this browser", learningProgressLocal: "Local progress · this browser", learningProgressSession: "Local storage unavailable · session only"
   },
   ru: {
     modelLabel: "МОДЕЛЬ", catalogOpen: "Каталог", catalogTitle: "БИБЛИОТЕКА МОДЕЛЕЙ", catalogSubtitle: "Автономные пакеты устройств", catalogClose: "Закрыть каталог", catalogSearch: "Название, производитель или part number…", catalogSearchLabel: "ПОИСК ПО БИБЛИОТЕКЕ", catalogCategoryLabel: "КАТЕГОРИЯ", catalogEntries: "МОДЕЛИ", catalogFooter: "Пакеты моделей хранятся локально. Аккаунт и удалённый сервис каталога не нужны.", catalogAllCategories: "Все категории", catalogEmpty: "Подходящих моделей не найдено.", catalogLoad: "Открыть модель", catalogLoaded: "Уже загружена", catalogLoading: "Загрузка пакета…", catalogStatusResearch: "ИССЛЕДОВАТЕЛЬСКИЙ МАКЕТ", catalogGeometryProxy: "Условная геометрия · не CAD", catalogPackageVersion: "Пакет", catalogChoosePackage: "Выберите соответствующий файл .sbsmodel.", catalogError: "Не удалось открыть пакет из каталога.", structure: "СТРУКТУРА", components: "Компоненты",
@@ -151,7 +155,7 @@ const UI = {
     allVisible: "Все компоненты видимы", layerCooling: "Слой охлаждения · качественно",
     layerPower: "Путь питания · качественно", noWebgl: "В этом браузере недоступен WebGL.",
     source: "Источник", noSources: "Для этого компонента нет прямой ссылки на источник.",
-    modelLoaded: "Модель готова", glbPicker: "Выберите файл .glb", learn: "Обучение", learning: "ОБУЧЕНИЕ", authoredAnimations: "АНИМАЦИИ ПАКЕТА", clipSelect: "Выберите клип", clipTimeline: "Шкала анимации", clipPlay: "Пуск", clipPause: "Пауза", clipStop: "Стоп / сброс", clipReady: "Готово", clipPlaying: "Воспроизведение", clipPaused: "Пауза", clipCompleted: "Завершено", clipTime: "ВРЕМЯ", clipEvidenceNote: "Анимация из пакета · не физическая симуляция", clipEducationalApproximation: "Учебное приближение · длительность не является измеренным RPM", clipIllustrative: "Условное движение · не измеренный механизм", clipDocumentedMotion: "Движение подтверждено источником", clipMeasuredMotion: "Измеренное движение · источник и метод указаны", linkedComponents: "СВЯЗАННЫЕ КОМПОНЕНТЫ", assumptions: "ДОПУЩЕНИЯ И ОГРАНИЧЕНИЯ", processLayer: "СЛОЙ ПРОЦЕССА", fileTooLarge: "GLB превышает лимит 256 МБ.", packageTooLarge: "Пакет SBS model превышает лимит 512 МБ.", externalResources: "Этот GLB ссылается на внешние файлы. Разрешены только самодостаточные GLB.", question: "ВОПРОС", checkAnswer: "Проверить ответ", nextQuestion: "Следующий вопрос", finishQuiz: "Завершить", restartQuiz: "Повторить", correctAnswer: "Верно", wrongAnswer: "Не совсем", quizComplete: "Тест завершён", yourScore: "Ваш результат", chooseAnswer: "Сначала выберите ответ"
+    modelLoaded: "Модель готова", glbPicker: "Выберите файл .glb", learn: "Обучение", learning: "ОБУЧЕНИЕ", authoredAnimations: "АНИМАЦИИ ПАКЕТА", clipSelect: "Выберите клип", clipTimeline: "Шкала анимации", clipPlay: "Пуск", clipPause: "Пауза", clipStop: "Стоп / сброс", clipReady: "Готово", clipPlaying: "Воспроизведение", clipPaused: "Пауза", clipCompleted: "Завершено", clipTime: "ВРЕМЯ", clipEvidenceNote: "Анимация из пакета · не физическая симуляция", clipEducationalApproximation: "Учебное приближение · длительность не является измеренным RPM", clipIllustrative: "Условное движение · не измеренный механизм", clipDocumentedMotion: "Движение подтверждено источником", clipMeasuredMotion: "Измеренное движение · источник и метод указаны", linkedComponents: "СВЯЗАННЫЕ КОМПОНЕНТЫ", assumptions: "ДОПУЩЕНИЯ И ОГРАНИЧЕНИЯ", processLayer: "СЛОЙ ПРОЦЕССА", fileTooLarge: "GLB превышает лимит 256 МБ.", packageTooLarge: "Пакет SBS model превышает лимит 512 МБ.", externalResources: "Этот GLB ссылается на внешние файлы. Разрешены только самодостаточные GLB.", question: "ВОПРОС", checkAnswer: "Проверить ответ", nextQuestion: "Следующий вопрос", finishQuiz: "Завершить", restartQuiz: "Повторить", correctAnswer: "Верно", wrongAnswer: "Не совсем", quizComplete: "Тест завершён", yourScore: "Ваш результат", chooseAnswer: "Сначала выберите ответ", learningProgressSaved: "Прогресс сохранён в этом браузере", learningProgressLocal: "ПРОГРЕСС · ЭТОТ БРАУЗЕР", learningProgressSession: "Локальное хранилище недоступно · только эта сессия"
   }
 };
 
@@ -1197,6 +1201,30 @@ function renderDetails(id) {
   });
 }
 
+function persistLearningProgress() {
+  const saved = LEARNING_PROGRESS_STORE.save(MODEL.id, LEARNING_PACKAGE.questions ?? [], {
+    index: state.learningIndex,
+    score: state.learningScore,
+    selected_index: state.learningSelected,
+    answered: state.learningAnswered,
+    complete: state.learningComplete
+  });
+  state.learningProgressAvailable = saved;
+  state.learningResumed = saved;
+  return saved;
+}
+
+function updateLearningProgressStatus() {
+  const status = $("#learning-save-status");
+  if (!status) return;
+  status.textContent = t(
+    !state.learningProgressAvailable
+      ? "learningProgressSession"
+      : state.learningResumed ? "learningProgressSaved" : "learningProgressLocal"
+  );
+  status.dataset.available = String(state.learningProgressAvailable);
+}
+
 function showLearning() {
   clearHighlights();
   state.activeLayer = null;
@@ -1204,11 +1232,14 @@ function showLearning() {
   $("#process-details").hidden = true;
   buildProcessVisuals();
   state.learningMode = true;
-  state.learningIndex = 0;
-  state.learningScore = 0;
-  state.learningSelected = null;
-  state.learningAnswered = false;
-  state.learningComplete = false;
+  const restored = LEARNING_PROGRESS_STORE.load(MODEL.id, LEARNING_PACKAGE.questions ?? []);
+  state.learningIndex = restored.progress.index;
+  state.learningScore = restored.progress.score;
+  state.learningSelected = restored.progress.selected_index;
+  state.learningAnswered = restored.progress.answered;
+  state.learningComplete = restored.progress.complete;
+  state.learningProgressAvailable = restored.available;
+  state.learningResumed = restored.resumed;
   $("#empty-selection").hidden = true;
   $("#component-details").hidden = true;
   $("#learning-panel").hidden = false;
@@ -1223,6 +1254,7 @@ function renderLearning() {
   if (!panel || !state.learningMode) return;
   panel.hidden = false;
   $("#quiz-sources").replaceChildren();
+  updateLearningProgressStatus();
 
   if (state.learningComplete) {
     $("#quiz-progress").textContent = `${questions.length} / ${questions.length}`;
@@ -1256,6 +1288,7 @@ function renderLearning() {
     button.disabled = state.learningAnswered;
     button.addEventListener("click", () => {
       state.learningSelected = index;
+      persistLearningProgress();
       renderLearning();
     });
     $("#quiz-choices").append(button);
@@ -1295,6 +1328,8 @@ function submitLearningAnswer() {
     state.learningSelected = null;
     state.learningAnswered = false;
     state.learningComplete = false;
+    state.learningResumed = false;
+    state.learningProgressAvailable = LEARNING_PROGRESS_STORE.clear(MODEL.id);
     renderLearning();
     return;
   }
@@ -1303,6 +1338,7 @@ function submitLearningAnswer() {
     if (state.learningSelected === null) return;
     if (state.learningSelected === question.correct_index) state.learningScore += 1;
     state.learningAnswered = true;
+    persistLearningProgress();
     renderLearning();
     return;
   }
@@ -1313,6 +1349,7 @@ function submitLearningAnswer() {
     state.learningSelected = null;
     state.learningAnswered = false;
   }
+  persistLearningProgress();
   renderLearning();
 }
 
@@ -1862,6 +1899,8 @@ function applyPackageData(packageData) {
   state.learningSelected = null;
   state.learningAnswered = false;
   state.learningComplete = false;
+  state.learningProgressAvailable = false;
+  state.learningResumed = false;
   state.loadedCatalogModelId = MODEL_CATALOG.models.find((entry) => entry.packageModelId === MODEL.id)?.id ?? null;
   state.catalogLoadingId = null;
   updateModelHeader();
@@ -1909,6 +1948,8 @@ function useGenericModelData(filename) {
   state.catalogLoadingId = null;
   renderCatalog();
   state.learningMode = false;
+  state.learningProgressAvailable = false;
+  state.learningResumed = false;
   updateModelHeader();
   document.querySelectorAll(".process-button[data-layer]").forEach((button) => {
     button.disabled = button.dataset.layer !== "clear";
