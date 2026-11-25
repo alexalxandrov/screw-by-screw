@@ -13,3 +13,4 @@ gpu_package_position,,mm,unknown,Not established,Requires exact-board evidence
 memory_package_positions,,mm,unknown,Not established,Six candidates are placeholders only
 power_connector_position,,mm,unknown,Not established,Connector type supported; exact placement is not measured
 io_bracket_geometry,,mm,unknown,Not established,Port layout known; detailed geometry not measured
+overall_shroud_length,,mm,unknown,LanOC exact XC BLACK review,Reviewer states fan shroud overhangs nominal 201.8 mm length; exact overhang not quantified
