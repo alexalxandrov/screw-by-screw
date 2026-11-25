@@ -59,3 +59,8 @@ No feature is marked complete only because its control appears. Each new interac
 - browser tests;
 - standalone `file://` validation;
 - an owner visual review on the generated v0.6 model.
+
+
+## Assembly evidence and step authoring
+
+The viewer has a model-package-driven disassembly evidence panel. It displays authored, source-backed assembly steps separately from source observations. The RTX 3060 pilot deliberately keeps the sequence empty; its current teardown timecodes are presented as localized source observations, not a verified removal order. The loader enforces unique step IDs and sequence numbers, valid component/source references, resolvable prerequisites and explicit source provenance.

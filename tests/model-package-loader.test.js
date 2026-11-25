@@ -162,3 +162,62 @@ test("rejects unsupported package schema versions", async () => {
   const bytes = makeArchive({ manifestOverrides: { schema_version: "9.9.9" } });
   await assert.rejects(() => loadModelPackage(asFile(bytes)), /unsupported package format or schema version/);
 });
+
+
+test("validates source-backed assembly steps and prerequisite references", () => {
+  const data = makeData();
+  data.assembly_steps.steps = [
+    {
+      id: "step.one",
+      sequence: 1,
+      action: { en: "Remove the cover", ru: "Снять кожух" },
+      component_ids: ["part"],
+      source_ids: ["src.one"],
+      tool_requirements: ["T8"],
+      safety_notes: { en: "Disconnect power", ru: "Отключить питание" }
+    },
+    {
+      id: "step.two",
+      sequence: 2,
+      action: "Remove the fan",
+      component_ids: ["part"],
+      source_ids: ["src.one"],
+      prerequisite_step_ids: ["step.one"]
+    }
+  ];
+  const report = validateModelPackageData(testManifest(), data);
+  assert.equal(report.componentCount, 2);
+
+  data.assembly_steps.steps[0].sequence = 2;
+  data.assembly_steps.steps[1].sequence = 1;
+  assert.throws(() => validateModelPackageData(testManifest(), data), /prerequisite must precede/);
+});
+
+test("rejects assembly steps with unknown prerequisites or missing source provenance", () => {
+  const data = makeData();
+  data.assembly_steps.steps = [{
+    id: "step.one",
+    sequence: 1,
+    action: "Remove a component",
+    component_ids: ["part"],
+    source_ids: ["src.one"],
+    prerequisite_step_ids: ["missing.step"]
+  }];
+  assert.throws(() => validateModelPackageData(testManifest(), data), /unknown prerequisite/);
+
+  data.assembly_steps.steps[0].prerequisite_step_ids = [];
+  data.assembly_steps.steps[0].source_ids = [];
+  assert.throws(() => validateModelPackageData(testManifest(), data), /at least one source/);
+});
+
+test("validates teardown observations separately from assembly steps", () => {
+  const data = makeData();
+  data.assembly_steps.observations = [{
+    source_id: "src.one",
+    locator: "01:30",
+    note: { en: "An observed teardown segment, not a complete removal step.", ru: "Наблюдение из разборки, а не полное описание операции." }
+  }];
+  assert.doesNotThrow(() => validateModelPackageData(testManifest(), data));
+  data.assembly_steps.observations[0].source_id = "missing";
+  assert.throws(() => validateModelPackageData(testManifest(), data), /unknown source/);
+});
