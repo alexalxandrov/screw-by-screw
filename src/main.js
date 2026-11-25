@@ -7,6 +7,7 @@ import { MODEL as DEFAULT_MODEL, COMPONENTS as DEFAULT_COMPONENTS, EVIDENCE, cre
 import DEFAULT_LEARNING_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/learning.json";
 import DEFAULT_PROCESS_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/process_layers.json";
 import DEFAULT_CLAIM_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/claims.json";
+import DEFAULT_RELATIONSHIP_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/relationships.json";
 import { loadModelPackage, validateSelfContainedGlb, MAX_MODEL_PACKAGE_BYTES, MAX_SCENE_GLB_BYTES } from "./viewer/ModelPackageLoader.js";
 
 let MODEL = DEFAULT_MODEL;
@@ -14,6 +15,7 @@ let COMPONENTS = DEFAULT_COMPONENTS;
 let LEARNING_PACKAGE = DEFAULT_LEARNING_PACKAGE;
 let PROCESS_PACKAGE = DEFAULT_PROCESS_PACKAGE;
 let CLAIM_PACKAGE = DEFAULT_CLAIM_PACKAGE;
+let RELATIONSHIP_PACKAGE = DEFAULT_RELATIONSHIP_PACKAGE;
 
 const $ = (selector) => document.querySelector(selector);
 const canvasHost = $("#viewer-canvas");
@@ -80,7 +82,7 @@ const UI = {
     measure: "Measure", clearMeasurement: "Clear", measureIdle: "Measurement off · model-space only", measurePrompt: "Click a visible surface to set point 1 of 2", measureFirstPoint: "Point 1 of 2 set · select the second point", measureDistance: "Distance", measureDisclaimer: "model-space only", measureNoHit: "Click a visible model surface", measureEnabled: "Measurement enabled", measureDisabled: "Measurement disabled", modelUnits: "model units", measureNote: "Not a verified physical dimension",
     clearLayer: "Clear layer", inspection: "INSPECTION", componentDetails: "Component details",
     selectComponent: "Select a component", selectHint: "Choose a part in the 3D view or assembly tree to inspect its role and evidence.",
-    identity: "IDENTITY", parent: "Parent", geometry: "Geometry", evidence: "EVIDENCE", technicalClaims: "TECHNICAL CLAIMS", claimUnknown: "Unknown", yes: "Yes", no: "No", claimSources: "Evidence sources",
+    identity: "IDENTITY", parent: "Parent", geometry: "Geometry", evidence: "EVIDENCE", technicalClaims: "TECHNICAL CLAIMS", claimUnknown: "Unknown", yes: "Yes", no: "No", claimSources: "Evidence sources", technicalRelationships: "TECHNICAL RELATIONSHIPS", qualitativeRelation: "Qualitative relationship", noRelationshipSource: "No source registered",
     sources: "SOURCES", accuracyFooter: "Unknown values remain unknown. No inferred CAD accuracy.",
     ready: "READY", localFirst: "LOCAL-FIRST · NO ACCOUNT", openModel: "Open model",
     noSelection: "No component selected", componentsCount: "components",
@@ -105,7 +107,7 @@ const UI = {
     measure: "Измерить", clearMeasurement: "Сброс", measureIdle: "Измерение выключено · только пространство модели", measurePrompt: "Нажмите на видимую поверхность, чтобы задать точку 1 из 2", measureFirstPoint: "Точка 1 из 2 задана · выберите вторую", measureDistance: "Расстояние", measureDisclaimer: "ед. модели", measureNoHit: "Нажмите на видимую поверхность модели", measureEnabled: "Инструмент измерения включён", measureDisabled: "Инструмент измерения выключен", modelUnits: "единицы модели", measureNote: "Не подтверждённый физический размер",
     clearLayer: "Сбросить слой", inspection: "ИНСПЕКЦИЯ", componentDetails: "Карточка компонента",
     selectComponent: "Выберите компонент", selectHint: "Выберите деталь в 3D-окне или дереве сборки, чтобы изучить её назначение и источники.",
-    identity: "ИДЕНТИФИКАЦИЯ", parent: "Родитель", geometry: "Геометрия", evidence: "ДОКАЗАТЕЛЬНОСТЬ", technicalClaims: "ТЕХНИЧЕСКИЕ УТВЕРЖДЕНИЯ", claimUnknown: "Неизвестно", yes: "Да", no: "Нет", claimSources: "Источники утверждения",
+    identity: "ИДЕНТИФИКАЦИЯ", parent: "Родитель", geometry: "Геометрия", evidence: "ДОКАЗАТЕЛЬНОСТЬ", technicalClaims: "ТЕХНИЧЕСКИЕ УТВЕРЖДЕНИЯ", claimUnknown: "Неизвестно", yes: "Да", no: "Нет", claimSources: "Источники утверждения", technicalRelationships: "ТЕХНИЧЕСКИЕ СВЯЗИ", qualitativeRelation: "Качественная связь", noRelationshipSource: "Источник не зарегистрирован",
     sources: "ИСТОЧНИКИ", accuracyFooter: "Неизвестное остаётся неизвестным. Точность CAD не подразумевается.",
     ready: "ГОТОВО", localFirst: "ЛОКАЛЬНО · БЕЗ АККАУНТА", openModel: "Открыть модель",
     noSelection: "Компонент не выбран", componentsCount: "компонентов",
@@ -544,6 +546,108 @@ function renderClaims(componentId) {
   });
 }
 
+
+function relationshipLabel(type, outgoing) {
+  const labels = {
+    contains: { out: ["Содержит", "Contains"], in: ["Входит в", "Part of"] },
+    mounted_in: { out: ["Установлен в", "Mounted in"], in: ["Содержит установленный узел", "Contains mounted component"] },
+    fastened_to: { out: ["Закреплён на", "Fastened to"], in: ["Служит точкой крепления", "Fastened by"] },
+    connected_to: { out: ["Соединён с", "Connected to"], in: ["Соединён с", "Connected to"] },
+    powered_by: { out: ["Питается от", "Powered by"], in: ["Питает", "Powers"] },
+    signals_to: { out: ["Передаёт сигнал", "Signals to"], in: ["Получает сигнал от", "Receives signal from"] },
+    drives: { out: ["Приводит в действие", "Drives"], in: ["Приводится в действие", "Driven by"] },
+    cooled_by: { out: ["Охлаждается с помощью", "Cooled by"], in: ["Охлаждает", "Cools"] },
+    transfers_heat_to: { out: ["Передаёт тепло к", "Transfers heat to"], in: ["Получает тепло от", "Receives heat from"] },
+    airflow_over: { out: ["Направляет поток на", "Moves airflow over"], in: ["Обдувается потоком от", "Receives airflow from"] },
+    depends_on: { out: ["Зависит от", "Depends on"], in: ["Является зависимостью для", "Is a dependency for"] }
+  };
+  const entry = labels[type];
+  if (!entry) return String(type ?? "").replaceAll("_", " ");
+  return entry[outgoing ? "out" : "in"][state.language === "ru" ? 0 : 1];
+}
+
+function renderRelationships(componentId) {
+  const section = $("#detail-relations-section");
+  const host = $("#relationship-list");
+  if (!section || !host) return;
+  host.replaceChildren();
+
+  const relations = (RELATIONSHIP_PACKAGE.relationships ?? []).filter((relation) =>
+    relation.from === componentId || relation.to === componentId
+  );
+  section.hidden = relations.length === 0;
+  if (!relations.length) return;
+
+  const sourceMap = new Map(MODEL.sources.map((source) => [source.id, source]));
+  relations.forEach((relation) => {
+    const outgoing = relation.from === componentId;
+    const neighborId = outgoing ? relation.to : relation.from;
+    const neighbor = state.catalog.get(neighborId);
+    const neighborObject = findNodeById(neighborId);
+    const neighborName = neighbor
+      ? (state.language === "ru" ? neighbor.ru : neighbor.en)
+      : neighborObject?.name ?? neighborId;
+
+    const card = document.createElement("article");
+    card.className = "relationship-card";
+    card.dataset.relationshipId = relation.id;
+
+    const heading = document.createElement("div");
+    heading.className = "relationship-type";
+    heading.textContent = relationshipLabel(relation.type, outgoing);
+
+    const link = document.createElement("button");
+    link.type = "button";
+    link.className = "relationship-component-link";
+    link.dataset.componentId = neighborId;
+    link.textContent = neighborName;
+    link.disabled = !neighborObject;
+    link.addEventListener("click", () => {
+      if (neighborObject) selectComponent(neighborId);
+    });
+
+    const direction = document.createElement("span");
+    direction.className = "relationship-direction";
+    direction.textContent = outgoing ? "→" : "←";
+
+    const target = document.createElement("div");
+    target.className = "relationship-target";
+    target.append(direction, link);
+    card.append(heading, target);
+
+    if (relation.certainty) {
+      const certainty = document.createElement("span");
+      certainty.className = "relationship-certainty";
+      certainty.textContent = relation.certainty === "qualitative"
+        ? t("qualitativeRelation")
+        : String(relation.certainty).replaceAll("_", " ");
+      card.append(certainty);
+    }
+
+    const sources = (relation.source_ids ?? []).map((sourceId) => sourceMap.get(sourceId)).filter((source) => source?.url);
+    if (sources.length) {
+      const sourceList = document.createElement("div");
+      sourceList.className = "relationship-sources";
+      sources.forEach((source) => {
+        const sourceLink = document.createElement("a");
+        sourceLink.href = source.url;
+        sourceLink.target = "_blank";
+        sourceLink.rel = "noopener noreferrer";
+        sourceLink.textContent = `↗ ${source.label}`;
+        sourceList.append(sourceLink);
+      });
+      card.append(sourceList);
+    } else {
+      const noSource = document.createElement("span");
+      noSource.className = "relationship-no-source";
+      noSource.textContent = t("noRelationshipSource");
+      card.append(noSource);
+    }
+
+    host.append(card);
+  });
+}
+
 function renderDetails(id) {
   state.learningMode = false;
   $("#learning-panel").hidden = true;
@@ -568,6 +672,7 @@ function renderDetails(id) {
   $("#evidence-badge").textContent = evidence[state.language].toUpperCase();
   $("#evidence-copy").textContent = evidence[state.language === "ru" ? "copyRu" : "copyEn"];
   renderClaims(id);
+  renderRelationships(id);
   $("#rotate-component").disabled = !object || !state.sceneController;
 
   const sourceHost = $("#source-links");
@@ -1228,6 +1333,7 @@ function applyPackageData(packageData) {
   LEARNING_PACKAGE = packageData.learning ?? { questions: [] };
   PROCESS_PACKAGE = packageData.process_layers ?? { process_layers: [] };
   CLAIM_PACKAGE = packageData.claims ?? { claims: [] };
+  RELATIONSHIP_PACKAGE = packageData.relationships ?? { relationships: [] };
   state.catalog = new Map(COMPONENTS.map((item) => [item.id, item]));
   state.learningMode = false;
   state.learningIndex = 0;
@@ -1259,6 +1365,7 @@ function useGenericModelData(filename) {
   LEARNING_PACKAGE = { questions: [] };
   PROCESS_PACKAGE = { process_layers: [] };
   CLAIM_PACKAGE = { claims: [] };
+  RELATIONSHIP_PACKAGE = { relationships: [] };
   state.catalog = new Map();
   state.learningMode = false;
   updateModelHeader();
@@ -1444,7 +1551,6 @@ function onCanvasClick(event) {
 }
 
 function bindUI() {
-  // Preserve the fallback scene if the optional bundled GLB resolves after interaction.
   document.addEventListener("pointerdown", () => { state.userInteracted = true; }, { capture: true });
   document.addEventListener("keydown", () => { state.userInteracted = true; }, { capture: true });
   $("#language-toggle").addEventListener("click", () => {
