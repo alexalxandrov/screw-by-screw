@@ -44,6 +44,7 @@ def sample_package():
         ]},
         "release": {"model_id": "model.demo", "part_number": "DEMO-1", "package_version": "0.1-draft",
                     "status": "draft", "geometry_status": "illustrative_proxy_not_cad", "files": []},
+        "animations": {"clips": []},
         "learning": {"questions": [
             {"id": "q.one", "prompt": {"en": "Question?", "ru": "Вопрос?"},
              "choices": [{"en": "A", "ru": "А"}, {"en": "B", "ru": "Б"}],
@@ -156,6 +157,57 @@ class ContentPackageTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp:
             with self.assertRaisesRegex(validator.PackageError, "Required package file is missing"):
                 validator.load_package(Path(temp))
+
+
+
+    def test_pilot_rotors_are_separate_proxy_components_and_animation_targets(self):
+        package_dir = ROOT / "content" / "models" / "evga-rtx3060-xc-black-12gb"
+        manifest = manifest_builder.build_manifest(package_dir)
+        self.assertIn("animations.json", {item["path"] for item in manifest["files"]})
+        package = validator.load_package(package_dir)
+        report = validator.validate_package(package, package_dir)
+        components = {item["id"]: item for item in package["components"]["components"]}
+        relationships = {item["id"]: item for item in package["relationships"]["relationships"]}
+
+        for fan_index in (1, 2):
+            fan_id = f"assembly.fan.{fan_index}"
+            rotor_id = f"{fan_id}.rotor"
+            rotor = components[rotor_id]
+            self.assertEqual(rotor["parent_id"], fan_id)
+            self.assertEqual(rotor["evidence_status"], "illustrative")
+            self.assertEqual(rotor["geometry_status"], "assembly_node")
+            self.assertEqual(rotor["source_ids"], [])
+            edge = relationships[f"rel.fan.{fan_index}.contains.rotor"]
+            self.assertEqual(edge["from"], fan_id)
+            self.assertEqual(edge["to"], rotor_id)
+
+        self.assertIn("Components: 24", report)
+        self.assertIn("Relationships: 16", report)
+        self.assertIn("Animation clips: 1", report)
+        clip = package["animations"]["clips"][0]
+        self.assertEqual(clip["evidence_status"], "educational_approximation")
+        self.assertEqual(clip["source_ids"], [])
+        self.assertEqual(
+            {track["target_id"] for track in clip["tracks"]},
+            {"assembly.fan.1.rotor", "assembly.fan.2.rotor"}
+        )
+
+    def test_source_free_animation_requires_explicit_educational_evidence(self):
+        package = sample_package()
+        package["animations"]["clips"] = [{
+            "id": "clip.unverified",
+            "title": {"en": "Unverified motion", "ru": "Неподтверждённое движение"},
+            "evidence_status": "documented_motion",
+            "source_ids": [],
+            "duration_ms": 1000,
+            "tracks": [{
+                "target_id": "part.one",
+                "property": "rotation",
+                "keyframes": [{"t": 0, "value": [0, 0, 0]}, {"t": 1, "value": [0, 1, 0]}]
+            }]
+        }]
+        with self.assertRaisesRegex(validator.PackageError, "requires source provenance"):
+            validator.validate_package(package)
 
 
 if __name__ == "__main__":

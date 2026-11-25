@@ -82,3 +82,8 @@ The component inspector renders incoming and outgoing typed relationships for th
 ## Assembly step contract
 
 An authored disassembly/assembly step must include a stable ID, a unique positive sequence number, a readable localized action or title, one or more target component instance IDs and at least one registered source ID. Optional fields include prerequisite step IDs, tool requirements, safety notes and localized descriptions. Prerequisites must resolve to another step in the same package. The viewer renders the sequence and links to targeted components; source observations (timecodes, figure/page locators and notes) remain a separate collection and are never treated as procedural steps.
+
+
+## Explicit movable subassemblies
+
+A component may expose an independently movable child node when a distinct geometric pivot exists. In the RTX 3060 pilot, assembly.fan.1.rotor and assembly.fan.2.rotor are illustrative child nodes under their respective fan assemblies. Static annular frames and hubs are outside the rotor nodes. The package animation clip targets only the rotor component IDs.

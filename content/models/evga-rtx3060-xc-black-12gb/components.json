@@ -76,6 +76,22 @@
       }
     },
     {
+      "id": "assembly.fan.1.rotor",
+      "parent_id": "assembly.fan.1",
+      "name": {
+        "en": "Fan 1 impeller",
+        "ru": "Крыльчатка вентилятора 1"
+      },
+      "category": "thermal_mechanical",
+      "evidence_status": "illustrative",
+      "geometry_status": "assembly_node",
+      "source_ids": [],
+      "description": {
+        "en": "A separate pivot for the seven-blade visual proxy. The blade profile and count are illustrative and are not a verified specification of the exact card.",
+        "ru": "Отдельный узел вращения семилопастного визуального макета. Профиль и количество лопастей условны и не являются подтверждённой спецификацией точной видеокарты."
+      }
+    },
+    {
       "id": "assembly.fan.2",
       "parent_id": "assembly.cooling",
       "name": {
@@ -92,6 +108,22 @@
       "description": {
         "en": "Second axial fan. Its centre and blade profile are illustrative placeholders.",
         "ru": "Второй осевой вентилятор. Центр и профиль лопастей заданы условно."
+      }
+    },
+    {
+      "id": "assembly.fan.2.rotor",
+      "parent_id": "assembly.fan.2",
+      "name": {
+        "en": "Fan 2 impeller",
+        "ru": "Крыльчатка вентилятора 2"
+      },
+      "category": "thermal_mechanical",
+      "evidence_status": "illustrative",
+      "geometry_status": "assembly_node",
+      "source_ids": [],
+      "description": {
+        "en": "A separate pivot for the seven-blade visual proxy. The blade profile and count are illustrative and are not a verified specification of the exact card.",
+        "ru": "Отдельный узел вращения семилопастного визуального макета. Профиль и количество лопастей условны и не являются подтверждённой спецификацией точной видеокарты."
       }
     },
     {

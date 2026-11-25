@@ -11,7 +11,7 @@ Evolve the current viewer from a model inspector into a small engineering worksp
 
 - **Camera presets:** isometric, fan side, PCB side, I/O bracket, power connector and top. Presets work on imported model scenes and preserve the current model/selection.
 - **Section view:** global Three.js clipping plane with X/Y/Z axis and 0–100% position controls. The cut is intentionally uncapped; it is a visual section, not a closed CAD section.
-- **Operating animation:** two independently rotating fan impellers, directional airflow and schematic power pulses; animation speed and reduced-motion handling are tested.
+- **Operating animation:** two independently selectable fan impeller pivots, directional airflow and schematic power pulses; a package-authored educational one-turn rotor clip is available alongside the separate procedural Power On effect. The clip is explicitly not an RPM or physical-simulation claim.
 - **Standalone operation:** the root `index.html` is rebuilt with the bundled v0.5 GLB and the new viewer controls; direct `file://` launch is part of browser testing.
 
 ## Newly added viewer capability
@@ -69,3 +69,6 @@ The viewer has a model-package-driven disassembly evidence panel. It displays au
 ## Package-authored animation playback
 
 The generic runtime now reads validated clips from animations.json and provides clip selection, play/pause, normalized seek, speed control, completion and deterministic stop/reset. The runtime is independent of GPU-specific content. The pilot package intentionally keeps clips empty until an exact-model motion sequence has an evidence basis; existing fan/airflow/power visuals are viewer-generated educational effects.
+
+
+- **Stable impeller subassemblies:** both Blender and fallback scenes expose a separate child component ID for each rotor. Only the impeller group rotates; the static frame and hub remain outside the pivot.

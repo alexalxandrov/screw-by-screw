@@ -50,6 +50,13 @@
       ]
     },
     {
+      "id": "rel.fan.1.contains.rotor",
+      "from": "assembly.fan.1",
+      "to": "assembly.fan.1.rotor",
+      "type": "contains",
+      "source_ids": []
+    },
+    {
       "id": "rel.cooling.contains.fan2",
       "from": "assembly.cooling",
       "to": "assembly.fan.2",
@@ -57,6 +64,13 @@
       "source_ids": [
         "src.lanoc.review"
       ]
+    },
+    {
+      "id": "rel.fan.2.contains.rotor",
+      "from": "assembly.fan.2",
+      "to": "assembly.fan.2.rotor",
+      "type": "contains",
+      "source_ids": []
     },
     {
       "id": "rel.cooling.contains.heatsink",
