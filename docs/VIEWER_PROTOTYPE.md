@@ -62,7 +62,7 @@ The Blender source scene uses X = card length, Y = thickness, Z = height. The Bl
 
 ## Automated browser tests
 
-The viewer CI now runs eleven Playwright tests across Chromium and Firefox, including package-driven power-layer linking and the reversible animation control, plus six Node unit tests for the reusable scene controller. The browser suite also covers component selection, the bilingual quiz, GLB external-resource rejection, two automated WCAG A/AA audits and a Firefox learning-flow smoke test.
+The viewer CI now runs eleven Playwright tests across Chromium and Firefox, including package-driven power-layer linking and the reversible animation control, plus six Node unit tests for the reusable scene controller. The browser suite also covers component selection, the bilingual quiz, GLB external-resource rejection, two automated WCAG A/AA audits and a Firefox learning-flow smoke test. The Blender workflow additionally imports the actual generated .sbsmodel archive in Chromium and checks its model title, SKU, component tree and process layer.
 
 The Blender workflow separately loads the generated v0.4 GLB into the viewer, checks all canonical component IDs and parent ancestry, verifies heatsink selection, and enforces a 1 MiB GLB size budget.
 
