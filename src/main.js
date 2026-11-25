@@ -50,7 +50,7 @@ const MAX_GLB_BYTES = MAX_SCENE_GLB_BYTES;
 
 const UI = {
   en: {
-    pilotModel: "PILOT MODEL", structure: "STRUCTURE", components: "Components",
+    modelLabel: "MODEL", structure: "STRUCTURE", components: "Components",
     searchPlaceholder: "Find a component…", assemblyTree: "ASSEMBLY TREE", showAll: "Show all",
     proxyNote: "Illustrative geometry · not CAD", explore: "Explore", disassemble: "Disassemble",
     understand: "Understand", animate: "Animate", assembledState: "ASSEMBLED STATE", demoScene: "DEMO SCENE · LOCAL",
@@ -61,17 +61,17 @@ const UI = {
     selectComponent: "Select a component", selectHint: "Choose a part in the 3D view or assembly tree to inspect its role and evidence.",
     identity: "IDENTITY", parent: "Parent", geometry: "Geometry", evidence: "EVIDENCE",
     sources: "SOURCES", accuracyFooter: "Unknown values remain unknown. No inferred CAD accuracy.",
-    ready: "READY", localFirst: "LOCAL-FIRST · NO ACCOUNT", openGlb: "Open GLB",
+    ready: "READY", localFirst: "LOCAL-FIRST · NO ACCOUNT", openModel: "Open model",
     noSelection: "No component selected", componentsCount: "components",
-    loadError: "Could not load this GLB file.", loadedGlb: "GLB LOADED · LOCAL FILE",
+    loadError: "Could not load this GLB file.", loadedGlb: "GLB LOADED · LOCAL FILE", loadedPackage: "SBS MODEL PACKAGE · LOCAL", loadedBundled: "BUNDLED MODEL · LOCAL",
     demoLoaded: "DEMO SCENE · LOCAL", loading: "LOADING MODEL…", isolate: "Isolated",
     allVisible: "All components visible", layerCooling: "Cooling layer · qualitative",
     layerPower: "Power path · qualitative", noWebgl: "WebGL is unavailable in this browser.",
     source: "Source", noSources: "No direct source linked to this component.",
-    modelLoaded: "Model ready", glbPicker: "Choose a .glb file", learn: "Learn", learning: "LEARNING", linkedComponents: "LINKED COMPONENTS", assumptions: "ASSUMPTIONS & LIMITS", processLayer: "PROCESS LAYER", fileTooLarge: "GLB exceeds the 256 MB prototype limit.", externalResources: "This GLB references external files. Only self-contained GLB files are allowed.", question: "QUESTION", checkAnswer: "Check answer", nextQuestion: "Next question", finishQuiz: "Finish", restartQuiz: "Try again", correctAnswer: "Correct", wrongAnswer: "Not quite", quizComplete: "Quiz complete", yourScore: "Your score", chooseAnswer: "Choose an answer first"
+    modelLoaded: "Model ready", glbPicker: "Choose a .glb file", learn: "Learn", learning: "LEARNING", linkedComponents: "LINKED COMPONENTS", assumptions: "ASSUMPTIONS & LIMITS", processLayer: "PROCESS LAYER", fileTooLarge: "GLB exceeds the 256 MB limit.", packageTooLarge: "SBS model package exceeds the 512 MB limit.", externalResources: "This GLB references external files. Only self-contained GLB files are allowed.", question: "QUESTION", checkAnswer: "Check answer", nextQuestion: "Next question", finishQuiz: "Finish", restartQuiz: "Try again", correctAnswer: "Correct", wrongAnswer: "Not quite", quizComplete: "Quiz complete", yourScore: "Your score", chooseAnswer: "Choose an answer first"
   },
   ru: {
-    pilotModel: "ПИЛОТНАЯ МОДЕЛЬ", structure: "СТРУКТУРА", components: "Компоненты",
+    modelLabel: "МОДЕЛЬ", structure: "СТРУКТУРА", components: "Компоненты",
     searchPlaceholder: "Найти компонент…", assemblyTree: "ДЕРЕВО СБОРКИ", showAll: "Показать все",
     proxyNote: "Условная геометрия · не CAD", explore: "Обзор", disassemble: "Разборка",
     understand: "Принцип работы", animate: "Анимировать", assembledState: "СОБРАННОЕ СОСТОЯНИЕ", demoScene: "ДЕМО-СЦЕНА · ЛОКАЛЬНО",
@@ -82,14 +82,14 @@ const UI = {
     selectComponent: "Выберите компонент", selectHint: "Выберите деталь в 3D-окне или дереве сборки, чтобы изучить её назначение и источники.",
     identity: "ИДЕНТИФИКАЦИЯ", parent: "Родитель", geometry: "Геометрия", evidence: "ДОКАЗАТЕЛЬНОСТЬ",
     sources: "ИСТОЧНИКИ", accuracyFooter: "Неизвестное остаётся неизвестным. Точность CAD не подразумевается.",
-    ready: "ГОТОВО", localFirst: "ЛОКАЛЬНО · БЕЗ АККАУНТА", openGlb: "Открыть GLB",
+    ready: "ГОТОВО", localFirst: "ЛОКАЛЬНО · БЕЗ АККАУНТА", openModel: "Открыть модель",
     noSelection: "Компонент не выбран", componentsCount: "компонентов",
-    loadError: "Не удалось загрузить этот GLB-файл.", loadedGlb: "GLB ЗАГРУЖЕН · ЛОКАЛЬНЫЙ ФАЙЛ",
+    loadError: "Не удалось загрузить этот GLB-файл.", loadedGlb: "GLB ЗАГРУЖЕН · ЛОКАЛЬНЫЙ ФАЙЛ", loadedPackage: "ПАКЕТ SBS MODEL · ЛОКАЛЬНО", loadedBundled: "ВСТРОЕННАЯ МОДЕЛЬ · ЛОКАЛЬНО",
     demoLoaded: "ДЕМО-СЦЕНА · ЛОКАЛЬНО", loading: "ЗАГРУЗКА МОДЕЛИ…", isolate: "Изолировано",
     allVisible: "Все компоненты видимы", layerCooling: "Слой охлаждения · качественно",
     layerPower: "Путь питания · качественно", noWebgl: "В этом браузере недоступен WebGL.",
     source: "Источник", noSources: "Для этого компонента нет прямой ссылки на источник.",
-    modelLoaded: "Модель готова", glbPicker: "Выберите файл .glb", learn: "Обучение", learning: "ОБУЧЕНИЕ", linkedComponents: "СВЯЗАННЫЕ КОМПОНЕНТЫ", assumptions: "ДОПУЩЕНИЯ И ОГРАНИЧЕНИЯ", processLayer: "СЛОЙ ПРОЦЕССА", fileTooLarge: "GLB превышает лимит прототипа 256 МБ.", externalResources: "Этот GLB ссылается на внешние файлы. Разрешены только самодостаточные GLB.", question: "ВОПРОС", checkAnswer: "Проверить ответ", nextQuestion: "Следующий вопрос", finishQuiz: "Завершить", restartQuiz: "Повторить", correctAnswer: "Верно", wrongAnswer: "Не совсем", quizComplete: "Тест завершён", yourScore: "Ваш результат", chooseAnswer: "Сначала выберите ответ"
+    modelLoaded: "Модель готова", glbPicker: "Выберите файл .glb", learn: "Обучение", learning: "ОБУЧЕНИЕ", linkedComponents: "СВЯЗАННЫЕ КОМПОНЕНТЫ", assumptions: "ДОПУЩЕНИЯ И ОГРАНИЧЕНИЯ", processLayer: "СЛОЙ ПРОЦЕССА", fileTooLarge: "GLB превышает лимит 256 МБ.", packageTooLarge: "Пакет SBS model превышает лимит 512 МБ.", externalResources: "Этот GLB ссылается на внешние файлы. Разрешены только самодостаточные GLB.", question: "ВОПРОС", checkAnswer: "Проверить ответ", nextQuestion: "Следующий вопрос", finishQuiz: "Завершить", restartQuiz: "Повторить", correctAnswer: "Верно", wrongAnswer: "Не совсем", quizComplete: "Тест завершён", yourScore: "Ваш результат", chooseAnswer: "Сначала выберите ответ"
   }
 };
 
@@ -724,7 +724,7 @@ function installModel(root, mode) {
   state.sceneController = new SceneController(root);
   fitModel(root);
   setExplode(0);
-  setLoadState(mode === "file" ? t("loadedGlb") : t("demoLoaded"));
+  setLoadState(mode === "package" ? t("loadedPackage") : mode === "file" ? t("loadedGlb") : mode === "bundled" ? t("loadedBundled") : t("demoLoaded"));
   setStatus(state.modelWarnings.length ? 'Duplicate component IDs: ' + [...new Set(state.modelWarnings)].join(', ') : t('modelLoaded'));
 }
 
@@ -905,15 +905,30 @@ function bindUI() {
   $("#model-file").addEventListener("change", async (event) => {
     const file = event.target.files?.[0];
     if (!file) return;
-    if (file.size > MAX_GLB_BYTES) {
+    const isPackage = /\\.sbsmodel$/i.test(file.name);
+    const sizeLimit = isPackage ? MAX_MODEL_PACKAGE_BYTES : MAX_GLB_BYTES;
+    if (file.size > sizeLimit) {
+      const message = isPackage ? t("packageTooLarge") : t("fileTooLarge");
       $("#viewer-error").hidden = false;
-      $("#viewer-error").textContent = t("fileTooLarge");
-      setStatus(t("fileTooLarge"));
+      $("#viewer-error").textContent = message;
+      setStatus(message);
       event.target.value = "";
       return;
     }
     $("#viewer-error").hidden = true;
-    loadArrayBuffer(await file.arrayBuffer(), file.name);
+    try {
+      if (isPackage) {
+        const modelPackage = await loadModelPackage(file);
+        loadArrayBuffer(modelPackage.sceneBuffer, file.name, "package", modelPackage.data);
+        setStatus(`Package validated · ${modelPackage.report.componentCount} components · ${modelPackage.report.relationshipCount} relationships`);
+      } else {
+        loadArrayBuffer(await file.arrayBuffer(), file.name, "file");
+      }
+    } catch (error) {
+      $("#viewer-error").hidden = false;
+      $("#viewer-error").textContent = error.message || t("loadError");
+      setStatus(t("loadError"));
+    }
     event.target.value = "";
   });
   $("#component-search").addEventListener("input", renderTree);
@@ -977,7 +992,7 @@ async function tryLoadBundledModel() {
     if (contentType.includes("text/html")) throw new Error("No bundled model");
     const buffer = await response.arrayBuffer();
     if (buffer.byteLength < 12 || new TextDecoder().decode(buffer.slice(0, 4)) !== "glTF") throw new Error("No bundled GLB asset");
-    loadArrayBuffer(buffer, "Bundled v0.4 GLB");
+    loadArrayBuffer(buffer, "Bundled v0.4 GLB", "bundled");
   } catch {
     loadDemo();
   }
