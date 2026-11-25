@@ -22,7 +22,12 @@
       "source_ids": [
         "src.evga.spec"
       ],
-      "evidence_status": "manufacturer_data"
+      "evidence_status": "manufacturer_data",
+      "package_part_number": "Samsung K4ZAF325BM-HC16",
+      "package_capacity_gbit": 16,
+      "package_count": 6,
+      "package_count_evidence_status": "teardown_supported",
+      "package_position_status": "photo_estimated_not_measured"
     },
     "gpu": {
       "family": "GeForce RTX 3060",
@@ -71,7 +76,8 @@
     "src.evga.spec",
     "src.lanoc.review",
     "src.gamersnexus.teardown",
-    "src.neoseeker.review"
+    "src.neoseeker.review",
+    "src.tomshardware.teardown"
   ],
   "release": {
     "version": "0.1-draft",

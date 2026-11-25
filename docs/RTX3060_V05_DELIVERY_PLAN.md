@@ -16,7 +16,8 @@
 | Subject | Supported now | Not established |
 |---|---|---|
 | Dual fans | Exact-model visual / teardown | Exact centres, RPM curve, blade profile |
-| Heatpipes / copper contact | Exact-model review and teardown | Pipe count, routing, diameter and material specification |
+| Heatpipes / copper contact | Exact-model review and teardown | Pipe count, routing, diameter, plate dimensions and contact pressure |
+| Six GDDR6 packages | Exact-model PCB teardown photo identifies Samsung K4ZAF325BM-HC16 | Package-centre coordinates are estimated from the photograph; exact BoardView remains unavailable |
 | PCB power conversion | Conceptual architecture only | Exact PCB revision, phase topology, component locations, values and nets |
 | Airflow animation | Qualitative visual path | CFD, velocity, pressure, recirculation or fan curve |
 | Current animation | Schematic directional path | Pin-level traces, amps, ripple, switching waveform or SPICE |

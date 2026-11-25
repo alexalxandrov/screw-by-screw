@@ -28,6 +28,11 @@
       "source_id": "src.gamersnexus.teardown",
       "locator": "11:00",
       "note": "Shunt resistors are discussed."
+    },
+    {
+      "source_id": "src.tomshardware.teardown",
+      "locator": "PCB front-side teardown photograph",
+      "note": "Six Samsung K4ZAF325BM-HC16 GDDR6 packages are visible around the GA106 GPU package. 3D package centres are estimated from the photo, not measured."
     }
   ]
 }

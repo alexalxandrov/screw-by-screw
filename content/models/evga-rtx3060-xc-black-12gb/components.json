@@ -265,108 +265,114 @@
       "id": "chip.memory.candidate.1",
       "parent_id": "assembly.pcb.electronics",
       "name": {
-        "en": "GDDR6 package candidate 1",
-        "ru": "Кандидат микросхемы GDDR6 1"
+        "en": "Samsung GDDR6 package 1",
+        "ru": "Микросхема Samsung GDDR6 1"
       },
       "category": "semiconductor",
-      "evidence_status": "candidate_count_requires_exact_board_confirmation",
+      "evidence_status": "teardown_supported",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
-        "src.gamersnexus.teardown"
+        "src.gamersnexus.teardown",
+        "src.tomshardware.teardown"
       ],
       "description": {
-        "en": "Candidate package proxy. Exact population and position require confirmation against the correct PCB revision.",
-        "ru": "Прокси-кандидат компонента. Количество и положение требуют подтверждения по правильной ревизии PCB."
+        "en": "Samsung K4ZAF325BM-HC16 GDDR6 package, 16 Gbit (2 GB). Six packages are visible on the exact XC BLACK teardown sample. This model's package centre is estimated from teardown photography and is not a measured PCB coordinate; PCB revision / BoardView remains unconfirmed.",
+        "ru": "Микросхема Samsung K4ZAF325BM-HC16 GDDR6, 16 Гбит (2 ГБ). На образце точной XC BLACK в разборке видны шесть таких корпусов. Координата в этой 3D-модели оценена по фотографии и не является измерением PCB; ревизия платы / BoardView пока не подтверждена."
       }
     },
     {
       "id": "chip.memory.candidate.2",
       "parent_id": "assembly.pcb.electronics",
       "name": {
-        "en": "GDDR6 package candidate 2",
-        "ru": "Кандидат микросхемы GDDR6 2"
+        "en": "Samsung GDDR6 package 2",
+        "ru": "Микросхема Samsung GDDR6 2"
       },
       "category": "semiconductor",
-      "evidence_status": "candidate_count_requires_exact_board_confirmation",
+      "evidence_status": "teardown_supported",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
-        "src.gamersnexus.teardown"
+        "src.gamersnexus.teardown",
+        "src.tomshardware.teardown"
       ],
       "description": {
-        "en": "Candidate package proxy. Exact population and position require confirmation against the correct PCB revision.",
-        "ru": "Прокси-кандидат компонента. Количество и положение требуют подтверждения по правильной ревизии PCB."
+        "en": "Samsung K4ZAF325BM-HC16 GDDR6 package, 16 Gbit (2 GB). Six packages are visible on the exact XC BLACK teardown sample. This model's package centre is estimated from teardown photography and is not a measured PCB coordinate; PCB revision / BoardView remains unconfirmed.",
+        "ru": "Микросхема Samsung K4ZAF325BM-HC16 GDDR6, 16 Гбит (2 ГБ). На образце точной XC BLACK в разборке видны шесть таких корпусов. Координата в этой 3D-модели оценена по фотографии и не является измерением PCB; ревизия платы / BoardView пока не подтверждена."
       }
     },
     {
       "id": "chip.memory.candidate.3",
       "parent_id": "assembly.pcb.electronics",
       "name": {
-        "en": "GDDR6 package candidate 3",
-        "ru": "Кандидат микросхемы GDDR6 3"
+        "en": "Samsung GDDR6 package 3",
+        "ru": "Микросхема Samsung GDDR6 3"
       },
       "category": "semiconductor",
-      "evidence_status": "candidate_count_requires_exact_board_confirmation",
+      "evidence_status": "teardown_supported",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
-        "src.gamersnexus.teardown"
+        "src.gamersnexus.teardown",
+        "src.tomshardware.teardown"
       ],
       "description": {
-        "en": "Candidate package proxy. Exact population and position require confirmation against the correct PCB revision.",
-        "ru": "Прокси-кандидат компонента. Количество и положение требуют подтверждения по правильной ревизии PCB."
+        "en": "Samsung K4ZAF325BM-HC16 GDDR6 package, 16 Gbit (2 GB). Six packages are visible on the exact XC BLACK teardown sample. This model's package centre is estimated from teardown photography and is not a measured PCB coordinate; PCB revision / BoardView remains unconfirmed.",
+        "ru": "Микросхема Samsung K4ZAF325BM-HC16 GDDR6, 16 Гбит (2 ГБ). На образце точной XC BLACK в разборке видны шесть таких корпусов. Координата в этой 3D-модели оценена по фотографии и не является измерением PCB; ревизия платы / BoardView пока не подтверждена."
       }
     },
     {
       "id": "chip.memory.candidate.4",
       "parent_id": "assembly.pcb.electronics",
       "name": {
-        "en": "GDDR6 package candidate 4",
-        "ru": "Кандидат микросхемы GDDR6 4"
+        "en": "Samsung GDDR6 package 4",
+        "ru": "Микросхема Samsung GDDR6 4"
       },
       "category": "semiconductor",
-      "evidence_status": "candidate_count_requires_exact_board_confirmation",
+      "evidence_status": "teardown_supported",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
-        "src.gamersnexus.teardown"
+        "src.gamersnexus.teardown",
+        "src.tomshardware.teardown"
       ],
       "description": {
-        "en": "Candidate package proxy. Exact population and position require confirmation against the correct PCB revision.",
-        "ru": "Прокси-кандидат компонента. Количество и положение требуют подтверждения по правильной ревизии PCB."
+        "en": "Samsung K4ZAF325BM-HC16 GDDR6 package, 16 Gbit (2 GB). Six packages are visible on the exact XC BLACK teardown sample. This model's package centre is estimated from teardown photography and is not a measured PCB coordinate; PCB revision / BoardView remains unconfirmed.",
+        "ru": "Микросхема Samsung K4ZAF325BM-HC16 GDDR6, 16 Гбит (2 ГБ). На образце точной XC BLACK в разборке видны шесть таких корпусов. Координата в этой 3D-модели оценена по фотографии и не является измерением PCB; ревизия платы / BoardView пока не подтверждена."
       }
     },
     {
       "id": "chip.memory.candidate.5",
       "parent_id": "assembly.pcb.electronics",
       "name": {
-        "en": "GDDR6 package candidate 5",
-        "ru": "Кандидат микросхемы GDDR6 5"
+        "en": "Samsung GDDR6 package 5",
+        "ru": "Микросхема Samsung GDDR6 5"
       },
       "category": "semiconductor",
-      "evidence_status": "candidate_count_requires_exact_board_confirmation",
+      "evidence_status": "teardown_supported",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
-        "src.gamersnexus.teardown"
+        "src.gamersnexus.teardown",
+        "src.tomshardware.teardown"
       ],
       "description": {
-        "en": "Candidate package proxy. Exact population and position require confirmation against the correct PCB revision.",
-        "ru": "Прокси-кандидат компонента. Количество и положение требуют подтверждения по правильной ревизии PCB."
+        "en": "Samsung K4ZAF325BM-HC16 GDDR6 package, 16 Gbit (2 GB). Six packages are visible on the exact XC BLACK teardown sample. This model's package centre is estimated from teardown photography and is not a measured PCB coordinate; PCB revision / BoardView remains unconfirmed.",
+        "ru": "Микросхема Samsung K4ZAF325BM-HC16 GDDR6, 16 Гбит (2 ГБ). На образце точной XC BLACK в разборке видны шесть таких корпусов. Координата в этой 3D-модели оценена по фотографии и не является измерением PCB; ревизия платы / BoardView пока не подтверждена."
       }
     },
     {
       "id": "chip.memory.candidate.6",
       "parent_id": "assembly.pcb.electronics",
       "name": {
-        "en": "GDDR6 package candidate 6",
-        "ru": "Кандидат микросхемы GDDR6 6"
+        "en": "Samsung GDDR6 package 6",
+        "ru": "Микросхема Samsung GDDR6 6"
       },
       "category": "semiconductor",
-      "evidence_status": "candidate_count_requires_exact_board_confirmation",
+      "evidence_status": "teardown_supported",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
-        "src.gamersnexus.teardown"
+        "src.gamersnexus.teardown",
+        "src.tomshardware.teardown"
       ],
       "description": {
-        "en": "Candidate package proxy. Exact population and position require confirmation against the correct PCB revision.",
-        "ru": "Прокси-кандидат компонента. Количество и положение требуют подтверждения по правильной ревизии PCB."
+        "en": "Samsung K4ZAF325BM-HC16 GDDR6 package, 16 Gbit (2 GB). Six packages are visible on the exact XC BLACK teardown sample. This model's package centre is estimated from teardown photography and is not a measured PCB coordinate; PCB revision / BoardView remains unconfirmed.",
+        "ru": "Микросхема Samsung K4ZAF325BM-HC16 GDDR6, 16 Гбит (2 ГБ). На образце точной XC BLACK в разборке видны шесть таких корпусов. Координата в этой 3D-модели оценена по фотографии и не является измерением PCB; ревизия платы / BoardView пока не подтверждена."
       }
     },
     {

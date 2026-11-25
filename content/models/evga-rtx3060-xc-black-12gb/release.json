@@ -8,15 +8,15 @@
   "files": [
     {
       "path": "model.json",
-      "sha256": "ee2ed5e3cf088a2b7cef19b0d1c3b531487f6dcfd596c342faf63d2c1a904e45"
+      "sha256": "f44e032a45c3304c55805a9c3db6e547a54b3728eacc74c2b2add9270f68d617"
     },
     {
       "path": "sources.json",
-      "sha256": "a1c61a6e0268b0c876fb2f9734d484df5d7dff590d24e3a5d8382e4a841d878b"
+      "sha256": "e439751044efd65fad6cebc074dd36a1df7403b7b75eede58e0e1afe60e0824f"
     },
     {
       "path": "components.json",
-      "sha256": "8b40b177b926acdc1fa7ee219ef263a8f42eeeb7b35c6e4579fd5ba49b6ce450"
+      "sha256": "c9091327b35c551745ba23d722a96864fac46e2386e44945c6577d3ecdeee695"
     },
     {
       "path": "relationships.json",
@@ -28,7 +28,7 @@
     },
     {
       "path": "assembly_steps.json",
-      "sha256": "fd0fabe119db3353989c4b8f214fca629865183de890b6e399004ea8d9769b15"
+      "sha256": "b84858f38c75cd93eeefbe83b2f1ecd5a39d91c21562f1861d158cf77e5af3bf"
     },
     {
       "path": "learning.json",
@@ -36,7 +36,7 @@
     },
     {
       "path": "claims.json",
-      "sha256": "a6c7e9162cdb203e15cd33ed5826ef7f7fea26957747b1c72bcdeb5b8ab31075"
+      "sha256": "88e491ea5f4187cd46c4cf763d73ce9b917e5fe0e4359a03a2984a5de1be9792"
     }
   ]
 }

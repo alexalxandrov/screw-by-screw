@@ -192,13 +192,14 @@
       "id": "claim.memory.population",
       "subject_id": "assembly.pcb.electronics",
       "predicate": "gddr6_package_population",
-      "value": null,
+      "value": 6,
       "unit": "packages",
-      "confidence_class": "unknown",
+      "confidence_class": "independently_verified",
       "source_ids": [
+        "src.tomshardware.teardown",
         "src.gamersnexus.teardown"
       ],
-      "notes": "Do not treat six visual proxy blocks as a verified exact-board memory count."
+      "notes": "Six Samsung GDDR6 packages are visible in the exact XC BLACK teardown photo. Package placement in the 3D reconstruction remains image-estimated."
     },
     {
       "id": "claim.cooling.fin_count",
@@ -211,6 +212,18 @@
         "src.lanoc.review"
       ],
       "notes": "24 fins in the current blockout are illustrative proxies, not a measured physical count."
+    },
+    {
+      "id": "claim.memory.package_part_number",
+      "subject_id": "assembly.pcb.electronics",
+      "predicate": "gddr6_package_part_number",
+      "value": "Samsung K4ZAF325BM-HC16",
+      "unit": null,
+      "confidence_class": "independently_verified",
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ],
+      "notes": "Tom's Hardware identifies the six GDDR6 packages on the reviewed EVGA RTX 3060 XC BLACK sample."
     }
   ]
 }
