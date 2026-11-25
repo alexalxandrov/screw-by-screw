@@ -159,7 +159,9 @@ export function validateModelPackageData(manifest, data) {
   if (!Array.isArray(data.process_layers.process_layers)) fail("process_layers array is missing");
   for (const layer of data.process_layers.process_layers) {
     assertString(layer.id, "process layer id");
+    if (!Array.isArray(layer.linked_component_ids)) fail("process layer linked_component_ids must be an array");
     assertStringArray(layer.linked_component_ids, "process layer linked_component_ids", componentIds);
+    if (!Array.isArray(layer.source_ids)) fail("process layer source_ids must be an array");
     assertStringArray(layer.source_ids, "process layer source_ids", sourceIds);
   }
   if (!Array.isArray(data.claims.claims)) fail("claims array is missing");
