@@ -1,6 +1,6 @@
 name: Model package validation
 concurrency:
-  group: model-package-validation-${{ github.head_ref || github.ref_name }}
+  group: model-package-validation-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 on:
@@ -9,8 +9,7 @@ on:
       - "tools/modeling/**"
       - "tools/content/**"
       - "content/**"
-      - "tests/test_blockout_validator.py"
-      - "tests/test_content_package.py"
+      - "tests/**"
       - ".github/workflows/blockout-validator.yml"
   pull_request:
     paths:
@@ -30,7 +29,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Compile validation tools
-        run: python -m py_compile tools/modeling/validate_blockout_package.py tools/modeling/inspect_blend_scene.py tools/content/validate_model_package.py tools/content/build_release_manifest.py tools/content/validate_glb_bindings.py
+        run: python -m py_compile tools/modeling/package_model.py tools/modeling/validate_blockout_package.py tools/modeling/inspect_blend_scene.py tools/content/validate_model_package.py tools/content/build_release_manifest.py tools/content/validate_glb_bindings.py
       - name: Run unit tests
         run: python -m unittest discover -s tests -v
       - name: Build content release manifest
