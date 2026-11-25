@@ -10,7 +10,7 @@ on:
   pull_request:
     paths:
       - "src/**"
-      - "tests/viewer-scene-controller.test.js"
+      - "tests/**"
       - "content/**"
       - "e2e/**"
       - "index.html"
