@@ -80,14 +80,16 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
-      - name: Install viewer dependencies
-        run: npm install --no-audit --no-fund
+      - name: Install locked viewer dependencies
+        run: npm ci --no-audit --no-fund
       - name: Install Chromium for GLB integration test
         run: npx playwright install --with-deps chromium
       - name: Build viewer with generated GLB
         run: npm run build
       - name: Test generated GLB inside the viewer
         run: npm run test:e2e:model
+      - name: Run full viewer and accessibility suite against generated GLB
+        run: npm run test:e2e
       - name: Collect generated artifacts
         if: always()
         run: |
