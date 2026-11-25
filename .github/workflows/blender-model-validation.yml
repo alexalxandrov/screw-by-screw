@@ -1,10 +1,27 @@
 name: Blender blockout generation
 concurrency:
-  group: blender-model-validation-${{ github.head_ref || github.ref_name }}
+  group: blender-model-validation-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 on:
   workflow_dispatch:
+  pull_request:
+    paths:
+      - "tools/modeling/build_rtx3060_xc_black_blockout.py"
+      - "tools/modeling/inspect_blend_scene.py"
+      - "tools/modeling/validate_blockout_package.py"
+      - "tools/modeling/package_model.py"
+      - "src/viewer/ModelPackageLoader.js"
+      - "tools/content/**"
+      - "content/**"
+      - "tests/**"
+      - "MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/**"
+      - "src/**"
+      - "index.html"
+      - "package.json"
+      - "playwright.config.js"
+      - "e2e/**"
+      - ".github/workflows/blender-model-validation.yml"
   push:
     paths:
       - "tools/modeling/build_rtx3060_xc_black_blockout.py"
@@ -14,7 +31,7 @@ on:
       - "src/viewer/ModelPackageLoader.js"
       - "tools/content/**"
       - "content/**"
-      - "tests/test_glb_bindings.py"
+      - "tests/**"
       - "MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/**"
       - "src/**"
       - "index.html"
