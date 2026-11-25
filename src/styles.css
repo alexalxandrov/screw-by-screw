@@ -269,3 +269,43 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); ou
 .simulation-controls input { min-width: 0; width: 100%; height: 3px; accent-color: #e9b96a; }
 .simulation-controls output { color: #e9b96a; font-size: 9px; }
 @media (max-width: 480px) { .timeline-actions { gap: 8px; flex-wrap: wrap; justify-content: flex-end; } }
+
+
+/* Point-to-point ruler. Values are explicitly model-space, not metrology. */
+.measurement-controls {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 7px 10px;
+  margin-top: 10px;
+}
+.measurement-toggle.active {
+  border-color: #819b50;
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+.measurement-toggle:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}
+.measurement-readout {
+  min-width: 0;
+  color: #c3ccd4;
+  font: 8px var(--mono);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.measurement-clear {
+  justify-self: end;
+  white-space: nowrap;
+}
+.measurement-note {
+  grid-column: 1 / -1;
+  color: var(--muted);
+  font: 8px var(--mono);
+}
+@media (max-width: 480px) {
+  .measurement-controls { grid-template-columns: auto minmax(0, 1fr) auto; gap: 7px; }
+  .measurement-readout { font-size: 7px; }
+  .measurement-clear { font-size: 9px; }
+}

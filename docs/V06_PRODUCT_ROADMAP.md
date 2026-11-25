@@ -14,10 +14,14 @@ Evolve the current viewer from a model inspector into a small engineering worksp
 - **Operating animation:** two independently rotating fan impellers, directional airflow and schematic power pulses; animation speed and reduced-motion handling are tested.
 - **Standalone operation:** the root `index.html` is rebuilt with the bundled v0.5 GLB and the new viewer controls; direct `file://` launch is part of browser testing.
 
+## Newly added viewer capability
+
+- **Model-space ruler:** two-click point-to-point measurement with visible markers and a connecting line, unit labels from package metadata, reset, keyboard exit and an explicit warning that proxy dimensions are not verified physical dimensions. The tool does not calibrate or persist measurements.
+
 ## Remaining v0.6 priorities
 
 1. **Exploded timeline:** authored, reversible steps with target component IDs, camera focus and explanatory text. No repair/disassembly step until the full exact-model teardown sequence is reviewed.
-2. **Measurement and calibration:** on-screen point-to-point measurements in model units, calibrated photo references, and an evidence class for every derived measurement.
+2. **Measurement calibration:** calibrated photo references, registered reference planes, uncertainty bounds, and an evidence class for every derived measurement. The current ruler reports model-space distances only.
 3. **Component and source search:** search by name, stable ID, package marking, claim, source and reference designator when verified.
 4. **Revision comparison:** compare exact SKUs and PCB revisions without merging geometry or claims between them.
 5. **Thermal visualization:** optional educational gradient or numeric field only when its input assumptions are visible. Separate measured sensor values, calculated estimates and illustrative gradients.
