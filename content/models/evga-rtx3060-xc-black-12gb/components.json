@@ -157,7 +157,7 @@
         "ru": "Печатная плата"
       },
       "category": "electrical_mechanical",
-      "evidence_status": "photo_estimate",
+      "evidence_status": "teardown_supported",
       "geometry_status": "photo_estimated_proxy",
       "source_ids": [
         "src.lanoc.review",
