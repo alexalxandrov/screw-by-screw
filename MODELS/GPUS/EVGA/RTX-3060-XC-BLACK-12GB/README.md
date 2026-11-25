@@ -7,8 +7,8 @@
 - Part number: 12G-P5-3655-KR
 - GPU: NVIDIA GeForce RTX 3060 (Ampere / GA106 family)
 - Memory: 12GB GDDR6
-- Content status: research / source audit
-- Geometry status: first procedural blockout generator added; not CAD
+- Content status: research / blockout pipeline
+- Geometry status: v0.3 technically accepted; v0.4 candidate pending local Blender run; not CAD
 - Rights status: not cleared for third-party media/assets
 
 This package is specific to the XC BLACK SKU. Do not merge data from the distinct EVGA XC Gaming SKU (12G-P5-3657-KR) or other RTX 3060 boards without evidence of equivalence.
@@ -29,7 +29,10 @@ This package is specific to the XC BLACK SKU. Do not merge data from the distinc
 - [sources.json](00-SOURCES/sources.json) — structured source and rights register.
 - [REFERENCE_LOG.md](01-REFERENCES/REFERENCE_LOG.md) — visual observations and open questions.
 - [GEOMETRY_PLAN.md](02-CAD/GEOMETRY_PLAN.md) — staged reconstruction plan.
-- [MEASUREMENTS.csv](02-CAD/MEASUREMENTS.csv) — evidence-ranked dimensions and unresolved measurements.\n- [BLOCKOUT_VALIDATION.md](02-CAD/BLOCKOUT_VALIDATION.md) — independent GLB/manifest validation.\n- [V04_MILESTONE.md](02-CAD/V04_MILESTONE.md) — next geometry and evidence gates.
+- [MEASUREMENTS.csv](02-CAD/MEASUREMENTS.csv) — evidence-ranked dimensions and unresolved measurements.
+- [BLOCKOUT_VALIDATION.md](02-CAD/BLOCKOUT_VALIDATION.md) — independent GLB/manifest validation.
+- [V04_MILESTONE.md](02-CAD/V04_MILESTONE.md) — geometry and evidence gates.
+- [V05_RELEASE_HARDENING.md](02-CAD/V05_RELEASE_HARDENING.md) — validation and release hardening.
 - [Blockout generator](../../../../tools/modeling/build_rtx3060_xc_black_blockout.py) — procedural Blender scene generator.
 
 ## Generate the first blockout
@@ -52,12 +55,22 @@ blender --background --python tools/modeling/build_rtx3060_xc_black_blockout.py 
 
 The script produces a Blender scene, GLB export and JSON manifest unless disabled. Generated binaries are local working artifacts and are not committed by this script.
 
-The current generator version is v0.3 and writes versioned artifacts:
-- `rtx3060_xc_black_blockout_v03.blend`
-- `rtx3060_xc_black_blockout_v03.glb`
-- `rtx3060_xc_black_blockout_v03.manifest.json`
+The current generator candidate is v0.4 and writes versioned artifacts:
+- `rtx3060_xc_black_blockout_v04.blend`
+- `rtx3060_xc_black_blockout_v04.glb`
+- `rtx3060_xc_black_blockout_v04.manifest.json`
 
-Earlier v0.1/v0.2 outputs are retained locally for comparison. v0.3 includes a pre-export transform-integrity check for fan frames, hubs, blade pivots and the nominal X/Z footprint. It passed local generation and transform-integrity checks in Blender 4.3.2. The GLB was independently validated: 43/43 component IDs matched the manifest and the assembly hierarchy was preserved. An independent standard-library validator is available at [validate_blockout_package.py](../../../../tools/modeling/validate_blockout_package.py); run it using the command in [BLOCKOUT_VALIDATION.md](02-CAD/BLOCKOUT_VALIDATION.md). Product geometry is still illustrative and has not passed the external-fidelity gate.
+Earlier v0.1/v0.2/v0.3 outputs are retained locally for comparison. v0.4 retains the fan-frame, hub and blade-pivot transform checks. The X-axis gate no longer incorrectly treats 201.8 mm as the maximum outer-shroud length; the vertical bounds remain a proxy sanity check. The v0.3 baseline passed local generation and transform-integrity checks in Blender 4.3.2. The v0.4 candidate must be run locally before acceptance. An independent standard-library validator is available at [validate_blockout_package.py](../../../../tools/modeling/validate_blockout_package.py); run it using the command in [BLOCKOUT_VALIDATION.md](02-CAD/BLOCKOUT_VALIDATION.md). Product geometry remains illustrative and has not passed the external-fidelity gate.
+
+## Text-first scene inspection
+
+After generating the Blender scene, produce a readable inventory without screenshots:
+
+```bash
+blender MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v04.blend --background --python tools/modeling/inspect_blend_scene.py -- --output /tmp/sbs-inspection.txt --json-output /tmp/sbs-inspection.json
+```
+
+The report includes component IDs, parent IDs, world-space positions, dimensions, bounds, mesh counts and evidence labels. It is intended for text-only review.
 
 **Accuracy warning:** the card length and height use manufacturer-published values; fan diameters are approximate reviewer measurements. Thickness, fan centres, shroud/PCB outlines and internal placements are illustrative or unknown. This asset is not suitable for manufacturing, fitment, repair or physical simulation.
 
