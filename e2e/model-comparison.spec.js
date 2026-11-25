@@ -118,14 +118,12 @@ test("compares a second validated package without replacing the active 3D model"
   await expect(page.locator("#comparison-identities")).toContainText("EXAMPLE-8GB-001");
   await expect(page.locator("#comparison-identities")).toContainText("Comparison Candidate GPU");
 
-  const capacity = page.locator("#comparison-specification-list .comparison-row")
-    .filter({ hasText: "memory capacity gb" });
+  const capacity = page.locator('#comparison-specification-list [data-comparison-key="memory.capacity_gb"]');
   await expect(capacity).toContainText("12");
   await expect(capacity).toContainText("8");
   await expect(capacity.locator(".comparison-status")).toContainText("различаются");
 
-  const claim = page.locator("#comparison-claim-list .comparison-row")
-    .filter({ hasText: "memory capacity" });
+  const claim = page.locator('#comparison-claim-list [data-comparison-key="memory_capacity"]');
   await expect(claim).toContainText("manufacturer_data");
   await expect(claim).toContainText("Candidate specification sheet");
   await expect(claim).toContainText("Источники А");
