@@ -3,7 +3,12 @@ import { test, expect } from "@playwright/test";
 test("loads the generated Blender v0.4 GLB and resolves content-package IDs", async ({ page }) => {
   const pageErrors = [];
   page.on("pageerror", (error) => pageErrors.push(error.message));
+  const modelResponsePromise = page.waitForResponse((response) => response.url().includes("rtx3060_xc_black_blockout_v04.glb"));
   await page.goto("/");
+  const modelResponse = await modelResponsePromise;
+  expect(modelResponse.ok()).toBeTruthy();
+  const modelBytes = await modelResponse.body();
+  expect(modelBytes.byteLength).toBeLessThan(1024 * 1024);
   await expect(page.locator("#app-status")).toHaveText("Модель готова");
   await expect(page.locator("#component-count")).toHaveText("67");
   await expect(page.getByRole("button", { name: /Видеокарта в сборе/ })).toBeVisible();
