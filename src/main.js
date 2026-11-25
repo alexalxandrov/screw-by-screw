@@ -464,7 +464,7 @@ function renderLearning() {
 }
 
 function submitLearningAnswer() {
-  const questions = LEARNING_PACKAGE.questions;
+  const questions = LEARNING_PACKAGE.questions ?? [];
   if (state.learningComplete) {
     state.learningIndex = 0;
     state.learningScore = 0;
