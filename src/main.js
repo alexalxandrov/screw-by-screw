@@ -1846,7 +1846,7 @@ function applyPackageData(packageData) {
   state.catalogLoadingId = null;
   updateModelHeader();
   renderCatalog();
-  document.querySelectorAll(".process-button").forEach((button) => {
+  document.querySelectorAll(".process-button[data-layer]").forEach((button) => {
     button.disabled = button.dataset.layer !== "clear" &&
       !PROCESS_PACKAGE.process_layers.some((layer) => layer.type === button.dataset.layer);
   });
@@ -1878,7 +1878,7 @@ function useGenericModelData(filename) {
   renderCatalog();
   state.learningMode = false;
   updateModelHeader();
-  document.querySelectorAll(".process-button").forEach((button) => {
+  document.querySelectorAll(".process-button[data-layer]").forEach((button) => {
     button.disabled = button.dataset.layer !== "clear";
   });
   document.querySelectorAll(".view-tab").forEach((button) => {
