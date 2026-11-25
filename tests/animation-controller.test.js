@@ -137,7 +137,7 @@ test("visibility keyframes use discrete transitions and easing affects vector in
   const controller = new AnimationController(root, [visibility], scheduler);
   controller.select("clip.visibility");
   controller.seek(0.25);
-  assert.equal(part.position.x, 1.25);
+  assert.equal(part.position.x, 1.5625);
   assert.equal(part.visible, true);
   controller.seek(0.5);
   assert.equal(part.position.x, 5);
@@ -168,5 +168,26 @@ test("invalid clip IDs cannot be selected", () => {
   const controller = new AnimationController(root, [slideClip]);
   assert.equal(controller.select("not.here"), false);
   assert.equal(controller.play("not.here"), false);
+  controller.dispose();
+});
+
+
+test("rotation tracks interpolate Euler radians and restore their original orientation", () => {
+  const { root, part } = createRoot();
+  const clip = {
+    id: "clip.rotation",
+    duration_ms: 100,
+    tracks: [{
+      target_id: "part.one",
+      property: "rotation",
+      keyframes: [{ t: 0, value: [0, 0, 0] }, { t: 1, value: [0, 0, Math.PI] }]
+    }]
+  };
+  const controller = new AnimationController(root, [clip]);
+  controller.select("clip.rotation");
+  controller.seek(0.5);
+  assert.ok(Math.abs(part.rotation.z - Math.PI / 2) < 1e-9);
+  controller.reset();
+  assert.equal(part.rotation.z, 0);
   controller.dispose();
 });

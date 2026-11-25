@@ -6,7 +6,8 @@ const SUPPORTED_EASING = new Set(["linear", "ease_in", "ease_out", "ease_in_out"
 function cloneProperty(object, property) {
   if (property === "visible") return Boolean(object.visible);
   const value = object[property];
-  if (!value?.isVector3) throw new TypeError("Animation target property is not a Vector3: " + property);
+  if (property === "rotation" && value?.isEuler) return value.clone();
+  if (!value?.isVector3) throw new TypeError("Animation target property is not a supported transform: " + property);
   return value.clone();
 }
 
@@ -19,7 +20,8 @@ function writeProperty(object, property, value) {
     if (!Array.isArray(value) || value.length !== 3 || !value.every(Number.isFinite)) {
       throw new TypeError("Animation vector keyframe must contain three finite numbers");
     }
-    object[property].set(value[0], value[1], value[2]);
+    if (property === "rotation") object.rotation.set(value[0], value[1], value[2], object.rotation.order);
+    else object[property].set(value[0], value[1], value[2]);
   }
 }
 
