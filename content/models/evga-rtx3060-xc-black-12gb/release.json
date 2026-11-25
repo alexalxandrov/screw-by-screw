@@ -9,9 +9,13 @@
     "sources.json",
     "components.json",
     "relationships.json",
+    "claims.json",
     "process_layers.json",
     "assembly_steps.json",
-    "learning.json"
+    "learning.json",
+    "animations.json",
+    "model-package.json",
+    "scene.glb"
   ],
   "geometry_status": "illustrative_proxy_not_cad"
 }

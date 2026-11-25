@@ -49,9 +49,9 @@ Exploded-view transforms must be reversible and deterministic. The engine captur
 ## Viewer integration milestones
 
 - Engine foundation: implemented reusable component indexing, reversible explode/reassemble, visibility-safe isolation, reset and generic rotation/explode animation primitives; Six Node unit tests cover deterministic transforms, isolation and duplicate-ID reporting.
-- Package loader: next; move GLB and JSON validation into a reusable package loader and verify cross-file references before rendering.
+- Package loader: implemented .sbsmodel ZIP import, archive path and size preflight, sidecar schema/reference checks, SHA-256 verification, self-contained GLB validation and a Python package builder.
 - Animation runtime: current UI demonstrates a reversible explode animation; package-authored clips, pause, seek and animation-track validation remain next.
-- Model catalogue: discover packages through a static catalogue manifest first; no backend is required for a local-first viewer.
+- Model catalogue: next; discover local/hosted packages through a static catalogue manifest first; no backend is required for a local-first viewer.
 - Site integration: mount the same viewer runtime in a model detail route; do not duplicate Three.js scene logic in the catalogue UI.
 
 ## Non-goals for this foundation
