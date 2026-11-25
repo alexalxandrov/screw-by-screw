@@ -1,4 +1,6 @@
 import { test, expect } from "@playwright/test";
+import { resolve } from "node:path";
+import { pathToFileURL } from "node:url";
 import { strToU8, zipSync } from "fflate";
 
 const modelId = "test.portable-device";
@@ -63,4 +65,21 @@ test("opens a complete .sbsmodel package and binds its metadata to the GLB scene
   await expect(page.locator("#component-tree")).toContainText("Модуль вентилятора");
   await expect(page.locator("#load-state")).toContainText("ПАКЕТ SBS MODEL");
   await expect(page.locator(".view-tab[data-mode=\"learn\"]")).toBeDisabled();
+});
+
+
+test("imports an .sbsmodel file after opening the root index.html directly", async ({ page }) => {
+  const pageErrors = [];
+  page.on("pageerror", (error) => pageErrors.push(error.message));
+  await page.goto(pathToFileURL(resolve(process.cwd(), "index.html")).href);
+
+  await page.locator("#model-file").setInputFiles({
+    name: "portable-test.sbsmodel",
+    mimeType: "application/zip",
+    buffer: Buffer.from(makePackage())
+  });
+  await expect(page.locator("#model-title")).toHaveText("Portable test device", { timeout: 10000 });
+  await expect(page.locator("#component-count")).toHaveText("2");
+  await expect(page.locator("#load-state")).toContainText("ПАКЕТ SBS MODEL");
+  expect(pageErrors).toEqual([]);
 });
