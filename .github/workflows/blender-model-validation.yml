@@ -34,8 +34,9 @@ jobs:
           base="https://download.blender.org/release/Blender4.3"
           curl -fL "$base/$archive" -o "$archive"
           curl -fL "$base/blender-4.3.2.sha256" -o blender-4.3.2.sha256
-          grep -F "$archive" blender-4.3.2.sha256 > blender.sha256
-          sha256sum --check blender.sha256
+          expected=$(grep -F "$archive" blender-4.3.2.sha256 | awk '{print $1}' | head -n 1)
+          test \${#expected} -eq 64
+          printf '%s  %s\n' "$expected" "$archive" | sha256sum --check -
           tar -xf "$archive"
       - name: Generate v0.4 Blender scene and GLB
         run: |
