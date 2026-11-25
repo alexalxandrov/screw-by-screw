@@ -28,6 +28,23 @@ test("shows linked components and source-backed process explanations", async ({ 
   await expect(page.locator("#detail-id")).toHaveText("cooling.heatsink");
 });
 
+test("binds the power process layer from package relationships", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "Питание" }).click();
+  await expect(page.locator("#process-details")).toBeVisible();
+  await expect(page.locator("#process-detail-title")).toHaveText("Ввод питания");
+  await expect(page.locator("#process-components button")).toHaveCount(3);
+});
+
+test("plays a reversible exploded-view animation", async ({ page }) => {
+  await page.goto("/");
+  const button = page.locator("#animate-button");
+  await button.click();
+  await expect(button).toBeDisabled();
+  await expect(button).toBeEnabled({ timeout: 5000 });
+  await expect(page.locator("#explode-slider")).toHaveValue("0");
+});
+
 test("runs the source-backed quiz in Russian and English", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("button", { name: "Обучение" }).click();
