@@ -72,3 +72,8 @@ The first structured content package is located at `content/models/evga-rtx3060-
 ## Claim presentation in the viewer
 
 The viewer renders atomic claims from the model package alongside the selected component. A claim card keeps the predicate/value/unit, confidence class, editorial note and direct source links together. Null values are displayed as unknown; booleans are localized; object values are rendered as key/value pairs. Model-level claims are shown when the top-level device assembly is selected. Generic GLB imports do not inherit the pilot's claims.
+
+
+## Relationship inspection
+
+The component inspector renders incoming and outgoing typed relationships for the selected component instance. Each edge retains its direction, neighbour component ID, relation type, optional certainty label and source IDs. Selecting the neighbour navigates to its component card. A relationship with an empty source list is labelled as unsourced; the viewer does not invent provenance. Plain GLB imports have no relationship sidecar and show no inferred edges.
