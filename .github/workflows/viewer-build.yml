@@ -1,18 +1,22 @@
 name: Viewer build
+permissions:
+  contents: write
+  actions: write
+concurrency:
+  group: viewer-build-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - "src/**"
+      - "content/**"
+      - "e2e/**"
       - "index.html"
       - "package.json"
-      - "vite.config.js"
-      - ".github/workflows/viewer-build.yml"
-  pull_request:
-    paths:
-      - "src/**"
-      - "index.html"
-      - "package.json"
+      - "package-lock.json"
+      - "playwright.config.js"
       - "vite.config.js"
       - ".github/workflows/viewer-build.yml"
 
@@ -24,7 +28,28 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
-      - name: Install dependencies
-        run: npm install --no-audit --no-fund
+      - name: Generate npm lockfile
+        run: npm install --package-lock-only --ignore-scripts --no-audit --no-fund
+      - name: Commit lockfile to feature branch
+        if: github.event_name == 'push' && github.ref_type == 'branch' && github.ref_name != 'main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package-lock.json
+          if git diff --cached --quiet; then
+            echo "Lockfile already current"
+          else
+            git commit -m "chore: add npm dependency lockfile"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
+          gh workflow run viewer-build.yml --ref "${GITHUB_REF_NAME}"
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Install Chromium and Firefox for browser tests
+        run: npx playwright install --with-deps chromium firefox
       - name: Build production viewer
         run: npm run build
+      - name: Run browser interaction tests
+        run: npm run test:e2e

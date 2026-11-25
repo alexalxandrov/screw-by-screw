@@ -1,4 +1,7 @@
 name: Model package validation
+concurrency:
+  group: model-package-validation-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
 
 on:
   push:
@@ -27,8 +30,10 @@ jobs:
         with:
           python-version: "3.12"
       - name: Compile validation tools
-        run: python -m py_compile tools/modeling/validate_blockout_package.py tools/modeling/inspect_blend_scene.py tools/content/validate_model_package.py
+        run: python -m py_compile tools/modeling/validate_blockout_package.py tools/modeling/inspect_blend_scene.py tools/content/validate_model_package.py tools/content/build_release_manifest.py tools/content/validate_glb_bindings.py
       - name: Run unit tests
         run: python -m unittest discover -s tests -v
+      - name: Build content release manifest
+        run: python tools/content/build_release_manifest.py content/models/evga-rtx3060-xc-black-12gb
       - name: Validate RTX 3060 content package
         run: python tools/content/validate_model_package.py content/models/evga-rtx3060-xc-black-12gb

@@ -11,18 +11,21 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools" / "content"))
 
 import validate_model_package as validator
+import build_release_manifest as manifest_builder
 
 
 def sample_package():
     return {
-        "model": {"id": "model.demo", "geometry_status": "illustrative_proxy_not_cad",
-                  "source_ids": ["src.demo"]},
-        "sources": {"sources": [{"id": "src.demo"}]},
+        "model": {"id": "model.demo", "part_number": "DEMO-1", "geometry_status": "illustrative_proxy_not_cad",
+                  "source_ids": ["src.demo"], "release": {"version": "0.1-draft", "status": "draft"}},
+        "sources": {"sources": [{"id": "src.demo", "title": "Demo source", "publisher": "Test", "url": "https://example.test/source", "license_status": "test_only"}]},
         "components": {"components": [
             {"id": "assembly.root", "parent_id": None, "name": {"en": "Root", "ru": "Корень"},
-             "evidence_status": "illustrative", "source_ids": ["src.demo"]},
+             "evidence_status": "illustrative", "source_ids": ["src.demo"],
+             "description": {"en": "Root description", "ru": "Описание корня"}},
             {"id": "part.one", "parent_id": "assembly.root", "name": {"en": "Part", "ru": "Деталь"},
-             "evidence_status": "visible_exact_model", "source_ids": ["src.demo"]}
+             "evidence_status": "visible_exact_model", "source_ids": ["src.demo"],
+             "description": {"en": "Part description", "ru": "Описание детали"}}
         ]},
         "relationships": {"relationships": [
             {"id": "rel.one", "from": "assembly.root", "to": "part.one",
@@ -30,9 +33,17 @@ def sample_package():
         ]},
         "process_layers": {"process_layers": [
             {"id": "layer.one", "mode": "qualitative", "linked_component_ids": ["part.one"],
-             "source_ids": ["src.demo"]}
+             "source_ids": ["src.demo"], "assumptions": [],
+             "title": {"en": "Layer", "ru": "Слой"},
+             "description": {"en": "Layer description", "ru": "Описание слоя"}}
         ]},
         "assembly_steps": {"status": "not_authored", "steps": []},
+        "claims": {"claims": [
+            {"id": "claim.demo", "subject_id": "model.demo", "predicate": "demo_value",
+             "value": 1, "confidence_class": "manufacturer_data", "source_ids": ["src.demo"]}
+        ]},
+        "release": {"model_id": "model.demo", "part_number": "DEMO-1", "package_version": "0.1-draft",
+                    "status": "draft", "geometry_status": "illustrative_proxy_not_cad", "files": []},
         "learning": {"questions": [
             {"id": "q.one", "prompt": {"en": "Question?", "ru": "Вопрос?"},
              "choices": [{"en": "A", "ru": "А"}, {"en": "B", "ru": "Б"}],
@@ -81,6 +92,64 @@ class ContentPackageTests(unittest.TestCase):
         package["assembly_steps"]["steps"] = [{"id": "step.one", "target_component_ids": [],
                                                  "source_ids": ["src.demo"]}]
         with self.assertRaisesRegex(validator.PackageError, "marked not_authored"):
+            validator.validate_package(package)
+
+    def test_unknown_claim_must_have_null_value(self):
+        package = sample_package()
+        package["claims"]["claims"][0]["confidence_class"] = "unknown"
+        with self.assertRaisesRegex(validator.PackageError, "must have a null value"):
+            validator.validate_package(package)
+
+    def test_claim_subject_must_exist(self):
+        package = sample_package()
+        package["claims"]["claims"][0]["subject_id"] = "missing"
+        with self.assertRaisesRegex(validator.PackageError, "unknown subject_id"):
+            validator.validate_package(package)
+
+    def test_build_manifest_hashes_all_content_files(self):
+        with tempfile.TemporaryDirectory() as temp:
+            directory = Path(temp)
+            package = sample_package()
+            for key, value in package.items():
+                if key == "release":
+                    continue
+                (directory / f"{key}.json").write_text(json.dumps(value), encoding="utf-8")
+            release = manifest_builder.build_manifest(directory)
+            self.assertEqual(len(release["files"]), len(manifest_builder.HASHED_FILES))
+            loaded = validator.load_package(directory)
+            report = validator.validate_package(loaded, directory)
+            self.assertIn("Release manifest and SHA-256 integrity: PASS", report)
+
+    def test_manifest_detects_tampered_content(self):
+        with tempfile.TemporaryDirectory() as temp:
+            directory = Path(temp)
+            package = sample_package()
+            for key, value in package.items():
+                if key == "release":
+                    continue
+                (directory / f"{key}.json").write_text(json.dumps(value), encoding="utf-8")
+            manifest_builder.build_manifest(directory)
+            (directory / "components.json").write_text((directory / "components.json").read_text(encoding="utf-8") + " ", encoding="utf-8")
+            loaded = validator.load_package(directory)
+            with self.assertRaisesRegex(validator.PackageError, "SHA-256 mismatch"):
+                validator.validate_package(loaded, directory)
+
+    def test_untranslated_component_description_fails(self):
+        package = sample_package()
+        package["components"]["components"][1]["description"].pop("ru")
+        with self.assertRaisesRegex(validator.PackageError, "bilingual descriptions"):
+            validator.validate_package(package)
+
+    def test_untranslated_process_layer_fails(self):
+        package = sample_package()
+        package["process_layers"]["process_layers"][0]["description"].pop("ru")
+        with self.assertRaisesRegex(validator.PackageError, "bilingual description"):
+            validator.validate_package(package)
+
+    def test_untranslated_quiz_choice_fails(self):
+        package = sample_package()
+        package["learning"]["questions"][0]["choices"][0].pop("ru")
+        with self.assertRaisesRegex(validator.PackageError, "must be bilingual"):
             validator.validate_package(package)
 
     def test_directory_loader_requires_all_files(self):

@@ -1,0 +1,93 @@
+name: Blender blockout generation
+concurrency:
+  group: blender-model-validation-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "tools/modeling/build_rtx3060_xc_black_blockout.py"
+      - "tools/modeling/inspect_blend_scene.py"
+      - "tools/modeling/validate_blockout_package.py"
+      - "tools/content/**"
+      - "content/**"
+      - "tests/test_glb_bindings.py"
+      - "MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/**"
+      - "src/**"
+      - "index.html"
+      - "package.json"
+      - "playwright.config.js"
+      - "e2e/**"
+      - ".github/workflows/blender-model-validation.yml"
+jobs:
+  build-and-inspect:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Blender runtime libraries
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libxi6 libxrender1 libxfixes3 libxkbcommon0 libsm6 libice6 libgl1 libegl1 libx11-6 libxext6 libxrandr2 libxinerama1 libxcursor1 libxcomposite1 libxdamage1
+      - name: Download and verify Blender 4.3.2
+        run: |
+          set -euo pipefail
+          archive="blender-4.3.2-linux-x64.tar.xz"
+          base="https://download.blender.org/release/Blender4.3"
+          curl -fL "$base/$archive" -o "$archive"
+          curl -fL "$base/blender-4.3.2.sha256" -o blender-4.3.2.sha256
+          expected=$(grep -F "$archive" blender-4.3.2.sha256 | awk '{print $1}' | head -n 1)
+          test ${#expected} -eq 64
+          printf '%s  %s\n' "$expected" "$archive" | sha256sum --check -
+          tar -xf "$archive"
+      - name: Generate v0.4 Blender scene and GLB
+        run: |
+          set -euo pipefail
+          ./blender-4.3.2-linux-x64/blender --version
+          ./blender-4.3.2-linux-x64/blender --background --factory-startup --python-exit-code 1 --python tools/modeling/build_rtx3060_xc_black_blockout.py
+      - name: Inspect generated scene
+        run: |
+          ./blender-4.3.2-linux-x64/blender MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v04.blend --background --python-exit-code 1 --python tools/modeling/inspect_blend_scene.py -- --output artifacts/rtx3060_v04_inspection.txt --json-output artifacts/rtx3060_v04_inspection.json
+          cat artifacts/rtx3060_v04_inspection.txt
+      - name: Validate generated GLB and manifest
+        run: |
+          python tools/modeling/validate_blockout_package.py \
+            --manifest MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v04.manifest.json \
+            --glb MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v04.glb
+          python tools/content/validate_glb_bindings.py \
+            --components content/models/evga-rtx3060-xc-black-12gb/components.json \
+            --glb MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v04.glb
+      - name: Stage generated GLB for viewer
+        run: |
+          mkdir -p public/models
+          cp MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v04.glb public/models/
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Refresh npm lock for current manifest
+        run: npm install --package-lock-only --ignore-scripts --no-audit --no-fund
+      - name: Install locked viewer dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Install Chromium for GLB integration test
+        run: npx playwright install --with-deps chromium
+      - name: Build viewer with generated GLB
+        run: npm run build
+      - name: Test generated GLB inside the viewer
+        run: npm run test:e2e:model
+      - name: Run full viewer and accessibility suite against generated GLB
+        run: npm run test:e2e:chromium
+      - name: Collect generated artifacts
+        if: always()
+        run: |
+          mkdir -p artifacts
+          cp MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v04.blend artifacts/ 2>/dev/null || true
+          cp MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v04.glb artifacts/ 2>/dev/null || true
+          cp MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v04.manifest.json artifacts/ 2>/dev/null || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: rtx3060-xc-black-v04-blender-build
+          path: artifacts/
+          if-no-files-found: warn
+          retention-days: 7
