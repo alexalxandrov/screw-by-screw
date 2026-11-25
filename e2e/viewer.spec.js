@@ -236,14 +236,17 @@ test("a missing optional bundled model does not reset active user interaction", 
 });
 
 
-test("source observations remain separate from an unauthored disassembly sequence", async ({ page }) => {
+test("partial teardown steps and source observations are both shown without conflating them", async ({ page }) => {
   await page.goto("/");
   await page.locator('#component-tree button[data-id="assembly.card.root"]').click();
 
   const section = page.locator("#detail-assembly-section");
   await expect(section).toBeVisible();
-  await expect(page.locator("#assembly-empty-note")).toContainText("Подтверждённая последовательность разборки");
-  await expect(page.locator("#assembly-step-list")).toBeHidden();
+  await expect(page.locator("#assembly-empty-note")).toBeHidden();
+  const steps = page.locator("#assembly-step-list .assembly-step-card");
+  await expect(steps).toHaveCount(2);
+  await expect(steps.nth(0)).toContainText("Вывернуть восемь задних винтов");
+  await expect(steps.nth(1)).toContainText("Отсоединить оба кабеля вентиляторов");
   await expect(page.locator("#assembly-observation-heading")).toContainText("НАБЛЮДЕНИЯ В ИСТОЧНИКАХ");
   const observation = page.locator('[data-observation-source-id="src.gamersnexus.teardown"]').first();
   await expect(observation).toContainText("01:30");
