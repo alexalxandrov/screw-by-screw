@@ -213,6 +213,25 @@ export function validateSelfContainedGlb(buffer) {
   return document;
 }
 
+async function verifyPackageChecksums(archive, manifest) {
+  if (!manifest.sha256) return false;
+  if (!manifest.sha256 || typeof manifest.sha256 !== "object" || Array.isArray(manifest.sha256)) fail("sha256 must be an object");
+  if (!globalThis.crypto?.subtle) fail("Web Crypto is required to verify package integrity");
+  for (const [path, expected] of Object.entries(manifest.sha256)) {
+    if (!isSafeArchivePath(path) || !archive[path]) fail("checksum references a missing or unsafe file");
+    if (typeof expected !== "string" || !/^[a-f0-9]{64}$/i.test(expected)) fail("invalid SHA-256 checksum");
+    const bytes = archive[path];
+    const view = bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength);
+    const digest = new Uint8Array(await globalThis.crypto.subtle.digest("SHA-256", view));
+    const actual = [...digest].map((value) => value.toString(16).padStart(2, "0")).join("");
+    if (actual.toLowerCase() !== expected.toLowerCase()) fail("SHA-256 mismatch for " + path);
+  }
+  for (const key of REQUIRED_FILE_KEYS) {
+    if (!manifest.sha256[manifest.files[key]]) fail("SHA-256 checksum is missing for " + key);
+  }
+  return true;
+}
+
 export async function loadModelPackage(file) {
   if (!file || typeof file.arrayBuffer !== "function") throw new TypeError("A local .sbsmodel file is required");
   if (file.size > MAX_MODEL_PACKAGE_BYTES) fail("archive exceeds the 512 MiB package limit");
@@ -228,6 +247,7 @@ export async function loadModelPackage(file) {
   }
   const manifest = parseJsonFile(archive, "sbs-model.json", "package manifest");
   if (!manifest.files || typeof manifest.files !== "object") fail("manifest file map is missing");
+  const integrityVerified = await verifyPackageChecksums(archive, manifest);
   const paths = {};
   for (const key of REQUIRED_FILE_KEYS) {
     const path = manifest.files[key];
@@ -243,12 +263,14 @@ export async function loadModelPackage(file) {
     process_layers: parseJsonFile(archive, paths.process_layers, "process layers"),
     assembly_steps: parseJsonFile(archive, paths.assembly_steps, "assembly steps"),
     learning: parseJsonFile(archive, paths.learning, "learning"),
-    animations: parseJsonFile(archive, paths.animations, "animations")
+    animations: parseJsonFile(archive, paths.animations, "animations"),
+    release: manifest.files.release && isSafeArchivePath(manifest.files.release) && archive[manifest.files.release]
+      ? parseJsonFile(archive, manifest.files.release, "release") : null
   };
   const report = validateModelPackageData(manifest, data);
   const sceneBytes = archive[paths.scene];
   if (!sceneBytes || sceneBytes.byteLength > MAX_SCENE_GLB_BYTES) fail("scene GLB is missing or too large");
   const sceneBuffer = sceneBytes.buffer.slice(sceneBytes.byteOffset, sceneBytes.byteOffset + sceneBytes.byteLength);
   validateSelfContainedGlb(sceneBuffer);
-  return { manifest, data, sceneBuffer, report, filename: file.name || "model.sbsmodel" };
+  return { manifest, data, sceneBuffer, report, integrityVerified, filename: file.name || "model.sbsmodel" };
 }
