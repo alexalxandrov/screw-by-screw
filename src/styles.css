@@ -98,7 +98,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); ou
 .range-labels { display: flex; justify-content: space-between; color: var(--muted); font: 8px var(--mono); letter-spacing: .1em; }
 .process-panel { padding: 12px 19px 14px; border-top: 1px solid var(--line); background: #0c1219; min-height: 0; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; }
 .process-title { display: flex; justify-content: space-between; color: var(--dim); font: 8px var(--mono); letter-spacing: .1em; margin-bottom: 9px; }
-.process-buttons { display: flex; gap: 7px; }
+.process-buttons { display: flex; flex-wrap: wrap; gap: 7px; }
 .slice-controls { display: grid; grid-template-columns: auto auto 56px minmax(70px,1fr) 34px; align-items: center; gap: 8px; margin-top: 10px; }
 .slice-controls > label, .slice-note { color: var(--muted); font: 8px var(--mono); }
 .slice-controls .slice-toggle { padding: 6px 8px; justify-content: center; }
@@ -113,6 +113,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); ou
 .process-icon { width: 15px; height: 15px; display: grid; place-items: center; border-radius: 3px; font-size: 12px; }
 .cooling-icon { color: #7bc7de; background: rgba(123,199,222,.12); }
 .power-icon { color: #e9b96a; background: rgba(233,185,106,.12); }
+.compute-icon { color: #c6a3f1; background: rgba(177,139,230,.13); }
 .clear-icon { color: #aab5bf; background: #26323d; }
 .detail-index { color: var(--dim); font: 9px var(--mono); }
 .empty-selection { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 25px; color: var(--muted); }

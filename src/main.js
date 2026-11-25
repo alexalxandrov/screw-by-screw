@@ -114,7 +114,7 @@ const UI = {
     understand: "Understand", animate: "Animate", assembledState: "ASSEMBLED STATE", demoScene: "DEMO SCENE · LOCAL",
     assemblyState: "ASSEMBLY STATE", assemble: "Assemble", explode: "Explode",
     assembled: "ASSEMBLED", exploded: "EXPLODED", processLayers: "PROCESS LAYERS",
-    qualitativeOnly: "SCHEMATIC · NOT CFD / SPICE", cooling: "Airflow", powerDelivery: "Power path",
+    qualitativeOnly: "SCHEMATIC · NOT CFD / SPICE", cooling: "Airflow", powerDelivery: "Power path", gpuCompute: "GPU architecture",
     powerOn: "Run animation", powerOff: "Stop animation", operatingState: "OPERATING VISUALIZATION", simulationSpeed: "Animation speed",
     cameraPreset: "VIEW", viewIso: "Isometric", viewFan: "Fan side", viewPcb: "PCB side", viewIo: "I/O bracket", viewPower: "Power connector", viewTop: "Top",
     sliceToggle: "Section cut", sliceAxis: "Axis", sliceNote: "Visual cut · uncapped · not CAD",
@@ -128,7 +128,7 @@ const UI = {
     loadError: "Could not load this GLB file.", loadedGlb: "GLB LOADED · LOCAL FILE", loadedPackage: "SBS MODEL PACKAGE · LOCAL", loadedBundled: "BUNDLED MODEL · LOCAL",
     demoLoaded: "DEMO SCENE · LOCAL", loading: "LOADING MODEL…", isolate: "Isolated",
     allVisible: "All components visible", layerCooling: "Cooling layer · qualitative",
-    layerPower: "Power path · qualitative", noWebgl: "WebGL is unavailable in this browser.",
+    layerPower: "Power path · qualitative", layerCompute: "GPU architecture · logical map", noWebgl: "WebGL is unavailable in this browser.",
     source: "Source", noSources: "No direct source linked to this component.",
     modelLoaded: "Model ready", glbPicker: "Choose a .glb file", learn: "Learn", learning: "LEARNING", authoredAnimations: "PACKAGE ANIMATIONS", clipSelect: "Select clip", clipTimeline: "Animation timeline", clipPlay: "Play", clipPause: "Pause", clipStop: "Stop / reset", clipReady: "Ready", clipPlaying: "Playing", clipPaused: "Paused", clipCompleted: "Completed", clipTime: "TIME", clipEvidenceNote: "Authored model motion · not a physics simulation", clipEducationalApproximation: "Educational approximation · duration is not measured RPM", clipIllustrative: "Illustrative motion · not a measured mechanism", clipDocumentedMotion: "Documented motion · source-linked", clipMeasuredMotion: "Measured motion · source and method recorded", linkedComponents: "LINKED COMPONENTS", assumptions: "ASSUMPTIONS & LIMITS", processLayer: "PROCESS LAYER", fileTooLarge: "GLB exceeds the 256 MB limit.", packageTooLarge: "SBS model package exceeds the 512 MB limit.", externalResources: "This GLB references external files. Only self-contained GLB files are allowed.", question: "QUESTION", checkAnswer: "Check answer", nextQuestion: "Next question", finishQuiz: "Finish", restartQuiz: "Try again", correctAnswer: "Correct", wrongAnswer: "Not quite", quizComplete: "Quiz complete", yourScore: "Your score", chooseAnswer: "Choose an answer first", learningProgressSaved: "Progress saved in this browser", learningProgressLocal: "Local progress · this browser", learningProgressSession: "Local storage unavailable · session only"
   },
@@ -139,7 +139,7 @@ const UI = {
     understand: "Принцип работы", animate: "Анимировать", assembledState: "СОБРАННОЕ СОСТОЯНИЕ", demoScene: "ДЕМО-СЦЕНА · ЛОКАЛЬНО",
     assemblyState: "СОСТОЯНИЕ СБОРКИ", assemble: "Собрать", explode: "Разобрать",
     assembled: "СОБРАНО", exploded: "РАЗОБРАНО", processLayers: "СЛОИ ПРОЦЕССОВ",
-    qualitativeOnly: "СХЕМА · НЕ CFD / SPICE", cooling: "Воздушный поток", powerDelivery: "Путь питания",
+    qualitativeOnly: "СХЕМА · НЕ CFD / SPICE", cooling: "Воздушный поток", powerDelivery: "Путь питания", gpuCompute: "Архитектура GPU",
     powerOn: "Включить анимацию", powerOff: "Остановить анимацию", operatingState: "ВИЗУАЛИЗАЦИЯ РАБОТЫ", simulationSpeed: "Скорость анимации",
     cameraPreset: "РАКУРС", viewIso: "Изометрия", viewFan: "Сторона вентиляторов", viewPcb: "Сторона PCB", viewIo: "Планка I/O", viewPower: "Разъём питания", viewTop: "Сверху",
     sliceToggle: "Сечение", sliceAxis: "Ось", sliceNote: "Визуальный срез · без крышек · не CAD",
@@ -153,7 +153,7 @@ const UI = {
     loadError: "Не удалось загрузить этот GLB-файл.", loadedGlb: "GLB ЗАГРУЖЕН · ЛОКАЛЬНЫЙ ФАЙЛ", loadedPackage: "ПАКЕТ SBS MODEL · ЛОКАЛЬНО", loadedBundled: "ВСТРОЕННАЯ МОДЕЛЬ · ЛОКАЛЬНО",
     demoLoaded: "ДЕМО-СЦЕНА · ЛОКАЛЬНО", loading: "ЗАГРУЗКА МОДЕЛИ…", isolate: "Изолировано",
     allVisible: "Все компоненты видимы", layerCooling: "Слой охлаждения · качественно",
-    layerPower: "Путь питания · качественно", noWebgl: "В этом браузере недоступен WebGL.",
+    layerPower: "Путь питания · качественно", layerCompute: "Архитектура GPU · логическая карта", noWebgl: "В этом браузере недоступен WebGL.",
     source: "Источник", noSources: "Для этого компонента нет прямой ссылки на источник.",
     modelLoaded: "Модель готова", glbPicker: "Выберите файл .glb", learn: "Обучение", learning: "ОБУЧЕНИЕ", authoredAnimations: "АНИМАЦИИ ПАКЕТА", clipSelect: "Выберите клип", clipTimeline: "Шкала анимации", clipPlay: "Пуск", clipPause: "Пауза", clipStop: "Стоп / сброс", clipReady: "Готово", clipPlaying: "Воспроизведение", clipPaused: "Пауза", clipCompleted: "Завершено", clipTime: "ВРЕМЯ", clipEvidenceNote: "Анимация из пакета · не физическая симуляция", clipEducationalApproximation: "Учебное приближение · длительность не является измеренным RPM", clipIllustrative: "Условное движение · не измеренный механизм", clipDocumentedMotion: "Движение подтверждено источником", clipMeasuredMotion: "Измеренное движение · источник и метод указаны", linkedComponents: "СВЯЗАННЫЕ КОМПОНЕНТЫ", assumptions: "ДОПУЩЕНИЯ И ОГРАНИЧЕНИЯ", processLayer: "СЛОЙ ПРОЦЕССА", fileTooLarge: "GLB превышает лимит 256 МБ.", packageTooLarge: "Пакет SBS model превышает лимит 512 МБ.", externalResources: "Этот GLB ссылается на внешние файлы. Разрешены только самодостаточные GLB.", question: "ВОПРОС", checkAnswer: "Проверить ответ", nextQuestion: "Следующий вопрос", finishQuiz: "Завершить", restartQuiz: "Повторить", correctAnswer: "Верно", wrongAnswer: "Не совсем", quizComplete: "Тест завершён", yourScore: "Ваш результат", chooseAnswer: "Сначала выберите ответ", learningProgressSaved: "Прогресс сохранён в этом браузере", learningProgressLocal: "ПРОГРЕСС · ЭТОТ БРАУЗЕР", learningProgressSession: "Локальное хранилище недоступно · только эта сессия"
   }
@@ -1391,7 +1391,7 @@ function renderProcessLayer() {
   assumptions.replaceChildren();
   (layer.assumptions ?? []).forEach((item) => {
     const li = document.createElement("li");
-    li.textContent = item;
+    li.textContent = localizedPackageText(item);
     assumptions.append(li);
   });
 
@@ -1768,13 +1768,15 @@ function setLayer(layer) {
     if (id && linkedIds.has(id)) matches.push(object);
   });
   matches.forEach((object) => {
-    const color = state.activeLayer === "cooling" ? 0x6bc8e8 : 0xe8b75e;
+    const layerColors = { cooling: 0x6bc8e8, power_delivery: 0xe8b75e, gpu_compute: 0xb18be6 };
+    const color = layerColors[state.activeLayer] ?? 0xc3e86d;
     if (object.isMesh) applyHighlight(object, color);
     else object.traverse((child) => { if (child.isMesh) applyHighlight(child, color); });
   });
   buildProcessVisuals();
   renderProcessLayer();
-  setStatus(t(state.activeLayer === "cooling" ? "layerCooling" : "layerPower"));
+  const layerStatus = { cooling: "layerCooling", power_delivery: "layerPower", gpu_compute: "layerCompute" };
+  setStatus(t(layerStatus[state.activeLayer] ?? "ready"));
 }
 
 function fitModel(root) {

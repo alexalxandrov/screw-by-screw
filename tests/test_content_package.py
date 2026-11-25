@@ -221,9 +221,12 @@ class ContentPackageTests(unittest.TestCase):
             self.assertEqual(edge["from"], fan_id)
             self.assertEqual(edge["to"], rotor_id)
 
-        self.assertIn("Components: 104", report)
-        self.assertIn("Relationships: 99", report)
+        self.assertIn("Components: 117", report)
+        self.assertIn("Relationships: 118", report)
         self.assertIn("Animation clips: 2", report)
+        self.assertEqual(len(package["claims"]["claims"]), 45)
+        self.assertEqual(len(package["process_layers"]["process_layers"]), 3)
+        self.assertEqual(len(package["learning"]["questions"]), 8)
         clip = package["animations"]["clips"][0]
         self.assertEqual(clip["evidence_status"], "educational_approximation")
         self.assertEqual(clip["source_ids"], [])
