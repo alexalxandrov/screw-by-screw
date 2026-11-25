@@ -223,7 +223,7 @@ class ContentPackageTests(unittest.TestCase):
 
         self.assertIn("Components: 104", report)
         self.assertIn("Relationships: 99", report)
-        self.assertIn("Animation clips: 1", report)
+        self.assertIn("Animation clips: 2", report)
         clip = package["animations"]["clips"][0]
         self.assertEqual(clip["evidence_status"], "educational_approximation")
         self.assertEqual(clip["source_ids"], [])
