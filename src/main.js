@@ -360,6 +360,7 @@ function renderDetails(id) {
   $("#detail-geometry").textContent = data.geometry ?? "unknown";
   $("#evidence-badge").textContent = evidence[state.language].toUpperCase();
   $("#evidence-copy").textContent = evidence[state.language === "ru" ? "copyRu" : "copyEn"];
+  $("#rotate-component").disabled = !object || !state.sceneController;
 
   const sourceHost = $("#source-links");
   sourceHost.replaceChildren();
@@ -953,6 +954,21 @@ function bindUI() {
   $("#assemble-button").addEventListener("click", () => setExplode(0));
   $("#explode-button").addEventListener("click", () => setExplode(100));
   $("#animate-button").addEventListener("click", animateExplodeCycle);
+  $("#rotate-component").addEventListener("click", async () => {
+    const id = state.selectedId;
+    const controller = state.sceneController;
+    const button = $("#rotate-component");
+    if (!id || !controller) return;
+    button.disabled = true;
+    try {
+      await controller.animateRotation(id, { axis: "y", turns: 1, duration: 900 });
+    } catch (error) {
+      console.error(error);
+      setStatus(t("rotationError"));
+    } finally {
+      button.disabled = false;
+    }
+  });
   document.querySelectorAll(".process-button").forEach((button) => {
     button.addEventListener("click", () => setLayer(button.dataset.layer));
   });

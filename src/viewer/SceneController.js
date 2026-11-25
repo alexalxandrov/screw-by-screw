@@ -168,7 +168,7 @@ export class SceneController {
           const eased = linear * linear * (3 - 2 * linear);
           object.rotation[axis] = startRotation + (targetRotation - startRotation) * eased;
           onUpdate(linear);
-          if (linear >= 1) finish(true);
+          if (linear >= 1) { object.rotation[axis] = startRotation; finish(true); }
           else this.animationFrame = requestAnimationFrame(tick);
         } catch (error) {
           fail(error);
@@ -176,7 +176,7 @@ export class SceneController {
       };
       this.animationTimeout = setTimeout(() => {
         try {
-          object.rotation[axis] = targetRotation;
+          object.rotation[axis] = startRotation;
           onUpdate(1);
           finish(true);
         } catch (error) {

@@ -112,6 +112,22 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); ou
 #detail-name { font-size: 17px; line-height: 1.35; letter-spacing: -.03em; margin: 0 0 9px; }
 .detail-description { color: #9aa7b2; font-size: 10px; line-height: 1.7; margin: 0 0 22px; }
 .detail-section { border-top: 1px solid var(--line); padding: 15px 0; }
+.detail-rotate-button {
+  margin-top: 10px;
+  width: 100%;
+  border: 1px solid var(--line-strong);
+  border-radius: 3px;
+  background: rgba(126, 166, 194, .08);
+  color: var(--text);
+  padding: 9px 11px;
+  text-align: left;
+  font: 9px var(--mono);
+  letter-spacing: .04em;
+  cursor: pointer;
+}
+.detail-rotate-button:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+.detail-rotate-button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.detail-rotate-button:disabled { opacity: .45; cursor: not-allowed; }
 .detail-grid { display: grid; grid-template-columns: 65px minmax(0,1fr); gap: 10px 8px; margin: 12px 0 0; font-size: 9px; }
 .detail-grid dt { color: var(--muted); }
 .detail-grid dd { color: #cbd4db; margin: 0; font-family: var(--mono); overflow-wrap: anywhere; font-size: 8px; }
