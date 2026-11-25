@@ -321,3 +321,16 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); ou
 .claim-sources { display: flex; flex-direction: column; gap: 5px; margin-top: 8px; }
 .claim-sources a { color: #91a6b5; font-size: 8px; line-height: 1.4; text-decoration: none; overflow-wrap: anywhere; }
 .claim-sources a:hover { color: var(--accent); }
+
+
+.tree-item.search-match .tree-label { color: var(--accent); }
+.tree-item.search-context { opacity: .58; }
+.tree-match-tag {
+  flex: 0 0 auto;
+  color: #8fb7c9;
+  font: 7px var(--mono);
+  letter-spacing: .06em;
+  border: 1px solid rgba(143,183,201,.24);
+  border-radius: 3px;
+  padding: 2px 4px;
+}
