@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 from pathlib import Path
 
 import bpy
@@ -79,7 +80,7 @@ def build_report():
 
 
 def main():
-    argv = bpy.app.argv[bpy.app.argv.index("--") + 1:] if "--" in bpy.app.argv else []
+    argv = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, default=Path("/tmp/sbs-inspection.txt"))
     parser.add_argument("--json-output", type=Path, default=Path("/tmp/sbs-inspection.json"))
