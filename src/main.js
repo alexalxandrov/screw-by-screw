@@ -1489,6 +1489,7 @@ function renderComparisonRows(report, rows, host, kind) {
     const card = document.createElement("article");
     card.className = "comparison-row";
     card.dataset.status = row.status;
+    card.dataset.comparisonKey = kind === "claims" ? String(row.predicate) : row.path;
     const header = document.createElement("div");
     header.className = "comparison-row-header";
     const key = document.createElement("strong");
