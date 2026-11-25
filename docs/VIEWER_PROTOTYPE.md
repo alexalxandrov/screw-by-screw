@@ -62,7 +62,7 @@ The Blender source scene uses X = card length, Y = thickness, Z = height. The Bl
 
 ## Automated browser tests
 
-The viewer CI now runs ten Playwright tests across Chromium and Firefox, including package-driven power-layer linking and the reversible animation control, plus six Node unit tests for the reusable scene controller. The browser suite also covers component selection, the bilingual quiz, GLB external-resource rejection, two automated WCAG A/AA audits and a Firefox learning-flow smoke test.
+The viewer CI now runs eleven Playwright tests across Chromium and Firefox, including package-driven power-layer linking and the reversible animation control, plus six Node unit tests for the reusable scene controller. The browser suite also covers component selection, the bilingual quiz, GLB external-resource rejection, two automated WCAG A/AA audits and a Firefox learning-flow smoke test.
 
 The Blender workflow separately loads the generated v0.4 GLB into the viewer, checks all canonical component IDs and parent ancestry, verifies heatsink selection, and enforces a 1 MiB GLB size budget.
 
@@ -77,7 +77,7 @@ npm run test:e2e
 - Imported nodes without component metadata can render but cannot receive a meaningful technical card.
 - The component inventory is a starter set, not a complete BOM.
 - Exploded view is a reversible visual separation, not a verified physical removal sequence. The animated control demonstrates the visual transition; it does not claim to be a documented repair procedure.
-- Package-authored keyframe clips and timeline scrubbing are not implemented yet; the scene controller exposes generic animation primitives.
+- Package-authored keyframe clips and timeline scrubbing are not implemented yet; the scene controller exposes generic animation primitives. Complete .sbsmodel packages can now be imported with SHA-256-checked sidecar metadata.
 - Cooling and power layers are qualitative highlighting, not CFD, thermal analysis or circuit simulation.
 - The learning quiz is a small source-backed starter set, not a complete course or assessment system.
 - CI validates the generated v0.4 model and viewer integration; local visual acceptance on the owner's machine remains pending.
