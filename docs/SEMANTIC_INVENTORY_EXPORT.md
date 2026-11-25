@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The viewer can export the currently loaded model package as an interoperable semantic inventory. The export is intended for research, review, spreadsheets and downstream tools; it does not replace the original .sbsmodel package.
+The viewer can export the currently loaded model package as an interoperable semantic inventory. The export is intended for research, review, spreadsheets and downstream tools; it does not replace the original .sbsmodel package. Its JSON contract is defined in schemas/semantic-inventory.schema.json.
 
 ## Formats
 
