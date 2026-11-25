@@ -368,6 +368,41 @@
         "en": "Candidate package proxy. Exact population and position require confirmation against the correct PCB revision.",
         "ru": "Прокси-кандидат компонента. Количество и положение требуют подтверждения по правильной ревизии PCB."
       }
+    },
+    {
+      "id": "cooling.heatpipes",
+      "parent_id": "assembly.cooling",
+      "name": {
+        "en": "Heatpipe assembly",
+        "ru": "Сборка тепловых трубок"
+      },
+      "category": "thermal_mechanical",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.lanoc.review",
+        "src.gamersnexus.teardown"
+      ],
+      "description": {
+        "en": "A separate selectable group for the heatpipes visible in exact-model teardown references. The generated count, route and diameter are illustrative, not measured.",
+        "ru": "Отдельная группа тепловых трубок, видимых в разборках точной модели. Количество, трасса и диаметр в 3D-реконструкции условны и не измерены."
+      }
+    },
+    {
+      "id": "assembly.power_stage",
+      "parent_id": "assembly.pcb.electronics",
+      "name": {
+        "en": "Power conversion zone",
+        "ru": "Зона преобразования питания"
+      },
+      "category": "power_electronics",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [],
+      "description": {
+        "en": "Unnumbered proxy group to locate the board-level power-conversion area in the learning view. PCB revision, phase topology, component positions and electrical nets are not verified.",
+        "ru": "Условная группа для обозначения зоны преобразования питания на плате. Ревизия PCB, топология фаз, координаты компонентов и электрические цепи не подтверждены."
+      }
     }
   ],
   "rules": [

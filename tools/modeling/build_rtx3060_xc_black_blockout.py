@@ -1,5 +1,5 @@
 """
-Screw by Screw — EVGA RTX 3060 XC BLACK blockout generator v0.4 candidate.
+Screw by Screw — EVGA RTX 3060 XC BLACK reconstruction blockout generator v0.5 candidate.
 
 Run from repository root:
   blender --background --python tools/modeling/build_rtx3060_xc_black_blockout.py
@@ -54,12 +54,12 @@ STATUS = {
 }
 
 manifest = {
-    "schema_version": "0.4.0",
+    "schema_version": "0.5.0",
     "model_id": "gpu.evga.12g-p5-3655-kr",
     "model": "EVGA GeForce RTX 3060 XC BLACK GAMING 12GB",
     "part_number": "12G-P5-3655-KR",
     "asset_type": "blockout",
-    "generator_version": "0.4.0",
+    "generator_version": "0.5.0",
     "geometry_status": "illustrative_proxy_not_cad",
     "units": "mm",
     "dimensions": {
@@ -97,6 +97,7 @@ manifest = {
         "Fan ring diameters use approximate reviewer measurements as a visual guide, not a verified fan manufacturer drawing.",
         "Computed geometry bounds include protruding proxy components and must not be treated as the card's official thickness.",
         "No PCB revision, BoardView, schematic or exact mechanical CAD has been confirmed.",
+        "Heatpipe routing and power-stage locations are reconstruction placeholders; do not use them as service or electrical instructions.",
         "Do not use this asset for manufacturing, fitment, repair or thermal simulation.",
     ],
 }
@@ -128,6 +129,8 @@ MAT = {
     "connector": material("Proxy | connector", (0.08, 0.08, 0.085)),
     "gpu": material("Proxy | GPU package", (0.16, 0.16, 0.17)),
     "memory": material("Proxy | memory package", (0.12, 0.12, 0.13)),
+    "heatpipe": material("Proxy | heatpipe copper", (0.68, 0.31, 0.12)),
+    "power_stage": material("Proxy | power stage", (0.34, 0.37, 0.40)),
 }
 
 
@@ -274,6 +277,24 @@ def annular_ring(name, component_id, location, outer_radius, inner_radius,
     obj["sbs_outer_diameter_mm"] = round(outer_radius * 2, 3)
     obj["sbs_inner_diameter_mm"] = round(inner_radius * 2, 3)
     return tag(obj, component_id, STATUS["reviewer_measurement"])
+
+
+def cylinder_between(name, start, end, radius, mat, collection, parent):
+    """Create an untagged mesh segment between two points; source route is illustrative."""
+    start_v, end_v = Vector(start), Vector(end)
+    direction = end_v - start_v
+    if direction.length < 0.01:
+        raise ValueError("Cylinder segment endpoints are too close")
+    bpy.ops.mesh.primitive_cylinder_add(vertices=24, radius=radius, depth=direction.length,
+        location=(start_v + end_v) / 2)
+    obj = bpy.context.object
+    obj.name = name
+    obj.rotation_mode = "QUATERNION"
+    obj.rotation_quaternion = Vector((0, 0, 1)).rotation_difference(direction.normalized())
+    obj.data.materials.append(mat)
+    move_to_collection(obj, collection)
+    set_parent_keep_world(obj, parent)
+    return obj
 
 
 def curved_fan_blade(index, blade_index, count, center, base_y, collection):
@@ -456,7 +477,7 @@ def validate_scene_transform_integrity():
         for failure in failures:
             print(" -", failure)
         raise RuntimeError(
-            "Scene transform validation failed; refusing to save/export v0.4."
+            "Scene transform validation failed; refusing to save/export v0.5."
         )
 
     print("TRANSFORM INTEGRITY CHECK: PASS")
@@ -670,6 +691,19 @@ def main():
     )
     set_parent_keep_world(contact, cooling_group)
 
+    # Teardown-supported heat pipes are present, but their exact count, routing,
+    # diameter and contact geometry are unknown. Two visual paths are proxies only.
+    heatpipes_group = make_assembly("Heatpipe group | reconstructed routes", "cooling.heatpipes",
+        (CARD_LENGTH / 2, 0, CARD_HEIGHT / 2), cool, parent=cooling_group)
+    heatpipe_paths = (
+        ((76, -4.4, 57), (67, -3.6, 59), (57, -2.1, 62), (47, -0.8, 65), (39, 0.0, 66)),
+        ((118, -4.4, 57), (128, -3.6, 59), (139, -2.1, 62), (150, -0.8, 65), (160, 0.0, 66)),
+    )
+    for pipe_index, path in enumerate(heatpipe_paths, start=1):
+        for segment_index, (start, end) in enumerate(zip(path, path[1:]), start=1):
+            cylinder_between(f"Heatpipe proxy {pipe_index} segment {segment_index}",
+                start, end, 1.6, MAT["heatpipe"], cool, heatpipes_group)
+
     # Rear-side exposed PCB proxy: exact outline and position remain unknown.
     pcb = cube(
         "PCB proxy | exposed rear",
@@ -689,6 +723,23 @@ def main():
         MAT["gpu"], pcbcol,
     )
     set_parent_keep_world(gpu_package, pcb_group)
+
+    # Selectable group for the power-conversion zone. Individual components are
+    # deliberately unnumbered placeholders pending exact PCB revision evidence.
+    power_stage_group = make_assembly("Power conversion zone | unverified proxy",
+        "assembly.power_stage", (CARD_LENGTH * 0.69, half_y - 3.0, CARD_HEIGHT * 0.70),
+        pcbcol, parent=pcb_group)
+    stage_origin = (CARD_LENGTH * 0.69, half_y - 3.0, CARD_HEIGHT * 0.70)
+    stage_blocks = (
+        ((0, 0, 0), (7.0, 5.0, 8.0)), ((10, 0, 0), (7.0, 5.0, 8.0)),
+        ((20, 0, 0), (7.0, 5.0, 8.0)), ((4, -0.5, 11), (4.0, 5.0, 5.0)),
+        ((13, -0.5, 11), (4.0, 5.0, 5.0)), ((22, -0.5, 11), (4.0, 5.0, 5.0)),
+    )
+    for index, (offset, size) in enumerate(stage_blocks, start=1):
+        world_position = tuple(stage_origin[axis] + offset[axis] for axis in range(3))
+        block = cube(f"Unidentified power-stage proxy {index}", f"power_stage.proxy.{index}",
+            world_position, size, MAT["power_stage"], pcbcol, evidence=STATUS["illustrative"])
+        set_parent_keep_world(block, power_stage_group)
 
     for i in range(6):
         x = CARD_LENGTH * 0.25 + i * 16.0
@@ -748,19 +799,19 @@ def main():
 
     validate_scene_transform_integrity()
     set_manifest_bounds()
-    manifest_path = out_dir / "rtx3060_xc_black_blockout_v04.manifest.json"
+    manifest_path = out_dir / "rtx3060_xc_black_blockout_v05.manifest.json"
     manifest_path.write_text(
         json.dumps(manifest, indent=2, ensure_ascii=False),
         encoding="utf-8",
     )
 
     if not args.no_blend:
-        blend_path = out_dir / "rtx3060_xc_black_blockout_v04.blend"
+        blend_path = out_dir / "rtx3060_xc_black_blockout_v05.blend"
         bpy.ops.wm.save_as_mainfile(filepath=str(blend_path))
         print(f"Saved Blender scene: {blend_path}")
 
     if not args.no_glb:
-        glb_path = out_dir / "rtx3060_xc_black_blockout_v04.glb"
+        glb_path = out_dir / "rtx3060_xc_black_blockout_v05.glb"
         if hasattr(bpy.ops.export_scene, "gltf"):
             # Export renderable parts and assembly empties; omit the reference
             # envelope so it cannot inflate browser-model bounds or obscure parts.

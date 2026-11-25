@@ -4,18 +4,39 @@
   "part_number": "12G-P5-3655-KR",
   "package_version": "0.1-draft",
   "status": "draft",
+  "geometry_status": "illustrative_proxy_not_cad",
   "files": [
-    "model.json",
-    "sources.json",
-    "components.json",
-    "relationships.json",
-    "claims.json",
-    "process_layers.json",
-    "assembly_steps.json",
-    "learning.json",
-    "animations.json",
-    "model-package.json",
-    "scene.glb"
-  ],
-  "geometry_status": "illustrative_proxy_not_cad"
+    {
+      "path": "model.json",
+      "sha256": "ee2ed5e3cf088a2b7cef19b0d1c3b531487f6dcfd596c342faf63d2c1a904e45"
+    },
+    {
+      "path": "sources.json",
+      "sha256": "a1c61a6e0268b0c876fb2f9734d484df5d7dff590d24e3a5d8382e4a841d878b"
+    },
+    {
+      "path": "components.json",
+      "sha256": "8b40b177b926acdc1fa7ee219ef263a8f42eeeb7b35c6e4579fd5ba49b6ce450"
+    },
+    {
+      "path": "relationships.json",
+      "sha256": "35cde9a7964e9500d0f01c43ca0850769329b21bd1926061e3e2b4205962a369"
+    },
+    {
+      "path": "process_layers.json",
+      "sha256": "65f2dd3254c057dbca1179e8bd03b48f20ab87ba1a0ba563eeab9277c15fb3a6"
+    },
+    {
+      "path": "assembly_steps.json",
+      "sha256": "fd0fabe119db3353989c4b8f214fca629865183de890b6e399004ea8d9769b15"
+    },
+    {
+      "path": "learning.json",
+      "sha256": "f4ba70777e7297989c8fc28da4b86dc149bfcc8f796b0948103a686058887b57"
+    },
+    {
+      "path": "claims.json",
+      "sha256": "a6c7e9162cdb203e15cd33ed5826ef7f7fea26957747b1c72bcdeb5b8ab31075"
+    }
+  ]
 }

@@ -14,20 +14,31 @@
         "assembly.fan.1",
         "assembly.fan.2",
         "cooling.heatsink",
-        "cooling.gpu_contact"
+        "cooling.gpu_contact",
+        "cooling.heatpipes"
       ],
       "description": {
-        "en": "Fans move air through the cooler. Heat is conducted from the GPU/memory contact area into the cooler and rejected through the fin stack. This is a conceptual explanation, not a measured airflow direction or thermal simulation.",
-        "ru": "Вентиляторы перемещают воздух через кулер. Тепло от зоны контакта GPU и памяти передаётся в систему охлаждения и отводится через рёбра радиатора. Это концептуальное объяснение, а не измеренное направление потока или тепловая симуляция."
+        "en": "Fans drive a conceptual airflow path across the cooler. Heat conducts from the GPU contact into the cooler and is rejected through the fin stack; heatpipes are shown as a selectable group. Animated particles illustrate direction only and are not CFD or measured airflow.",
+        "ru": "Вентиляторы создают условный поток через кулер. Тепло от контактной площадки GPU передаётся системе охлаждения и отводится через радиатор; тепловые трубки вынесены в отдельную группу. Движущиеся частицы показывают только направление и не являются CFD или измерением потока."
       },
       "assumptions": [
-        "No CFD or thermal model is present.",
-        "Exact fan curves, fin pitch, heatpipe routing and thermal resistance are unknown."
+        "No CFD, pressure field or thermal model is present.",
+        "Fan curves, measured rpm, fan centres, fin pitch, heatpipe count/routing and thermal resistance are not established.",
+        "Airflow particles are directional educational markers, not fluid parcels or velocity vectors."
       ],
       "source_ids": [
         "src.lanoc.review",
         "src.gamersnexus.teardown"
-      ]
+      ],
+      "visualization": {
+        "kind": "directional_particle_path",
+        "enabled_when": [
+          "cooling_layer",
+          "powered"
+        ],
+        "motion": "qualitative",
+        "not_a_simulation": true
+      }
     },
     {
       "id": "process.power.qualitative",
@@ -40,20 +51,31 @@
       "linked_component_ids": [
         "connector.power.8pin",
         "assembly.pcb.electronics",
-        "chip.gpu.ga106"
+        "chip.gpu.ga106",
+        "assembly.power_stage"
       ],
       "description": {
-        "en": "The card has a single auxiliary 8-pin power connector. The detailed VRM topology, current paths and component-level electrical values are not reconstructed in this release.",
-        "ru": "На карте установлен один дополнительный разъём питания 8-pin. Топология VRM, токовые пути и электрические параметры отдельных компонентов в этой версии не реконструированы."
+        "en": "A single auxiliary 8-pin input is shown feeding a schematic power-conversion zone and GPU package. Moving pulses are an educational direction cue; they are not routed PCB copper, pin mapping or an electrical simulation.",
+        "ru": "Показан один дополнительный вход 8-pin, условно связанный с зоной преобразования питания и корпусом GPU. Движущиеся импульсы обозначают принципиальное направление, а не реальные дорожки PCB, распиновку или электрическую симуляцию."
       },
       "assumptions": [
-        "No circuit simulation or exact-board schematic is available.",
-        "Do not infer pin-level wiring from the connector shape."
+        "No exact-board schematic, BoardView or verified PCB revision is available.",
+        "Power-stage location and the drawn connector-to-GPU path are schematic placeholders.",
+        "No voltage/current values, phase count, pin mapping, ripple or switching waveform is simulated."
       ],
       "source_ids": [
         "src.evga.spec",
         "src.lanoc.review"
-      ]
+      ],
+      "visualization": {
+        "kind": "schematic_directional_pulses",
+        "enabled_when": [
+          "power_layer",
+          "powered"
+        ],
+        "motion": "qualitative",
+        "not_a_simulation": true
+      }
     }
   ]
 }
