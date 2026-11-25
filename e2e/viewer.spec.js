@@ -282,3 +282,9 @@ test("a successful but delayed bundled model cannot replace a scene after user i
   await expect(page.locator("#detail-id")).toHaveText("assembly.fan.1");
   await expect(page.locator('#component-tree button[data-id="assembly.fan.1"]')).toBeVisible();
 });
+
+
+test("the RTX 3060 pilot does not expose authored clip controls until a sourced clip exists", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.locator("#authored-animation-panel")).toBeHidden();
+});

@@ -428,3 +428,59 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); ou
   overflow-wrap: anywhere;
 }
 .assembly-source-link:hover { color: var(--accent); }
+
+
+/* Package-authored clip controls are only shown when a validated clip exists. */
+.authored-animation-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 14px;
+  padding-top: 11px;
+  border-top: 1px solid var(--line);
+}
+.authored-animation-heading,
+.authored-animation-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.authored-animation-status,
+#authored-animation-time {
+  color: var(--muted);
+  font: 8px var(--mono);
+}
+.authored-animation-select {
+  width: 100%;
+  min-width: 0;
+  padding: 7px 8px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: #101821;
+  color: var(--text);
+  font: 9px var(--mono);
+}
+.authored-animation-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.authored-animation-controls button:disabled {
+  opacity: .38;
+  cursor: not-allowed;
+}
+.authored-animation-seek {
+  width: 100%;
+  accent-color: var(--accent);
+}
+.authored-animation-footer {
+  align-items: flex-start;
+  color: var(--muted);
+  font: 7px var(--mono);
+  line-height: 1.5;
+}
+.authored-animation-footer [data-i18n="clipAccuracy"] {
+  max-width: 65%;
+  text-align: right;
+}

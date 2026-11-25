@@ -113,6 +113,25 @@
             </div>
             <input id="explode-slider" class="range-slider" type="range" min="0" max="100" value="0" aria-label="Exploded view amount" />
             <div class="range-labels"><span data-i18n="assembled">ASSEMBLED</span><span data-i18n="exploded">EXPLODED</span></div>
+            <div id="authored-animation-panel" class="authored-animation-panel" hidden>
+              <div class="authored-animation-heading">
+                <span class="eyebrow" data-i18n="authoredClips">MODEL ANIMATIONS</span>
+                <span id="authored-animation-status" class="authored-animation-status" role="status" aria-live="polite" data-i18n="clipIdle">No clip selected</span>
+              </div>
+              <select id="authored-animation-select" class="authored-animation-select" aria-label="Select package-authored animation">
+                <option value="" data-i18n="selectAnimation">Select a clip</option>
+              </select>
+              <div class="authored-animation-controls">
+                <button id="authored-animation-play" class="text-button" type="button" data-i18n="playClip" disabled>Play</button>
+                <button id="authored-animation-pause" class="text-button" type="button" data-i18n="pauseClip" disabled>Pause</button>
+                <button id="authored-animation-stop" class="text-button" type="button" data-i18n="stopClip" disabled>Stop</button>
+              </div>
+              <input id="authored-animation-seek" class="authored-animation-seek" type="range" min="0" max="1000" step="1" value="0" aria-label="Animation timeline" disabled />
+              <div class="authored-animation-footer">
+                <span id="authored-animation-time">—</span>
+                <span data-i18n="clipAccuracy">Package-authored presentation clip · not a physics simulation</span>
+              </div>
+            </div>
           </div>
 
           <div class="process-panel">

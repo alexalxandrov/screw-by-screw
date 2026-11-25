@@ -8,6 +8,8 @@ import DEFAULT_LEARNING_PACKAGE from "../content/models/evga-rtx3060-xc-black-12
 import DEFAULT_PROCESS_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/process_layers.json";
 import DEFAULT_CLAIM_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/claims.json";
 import DEFAULT_RELATIONSHIP_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/relationships.json";
+import DEFAULT_ANIMATION_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/animations.json";
+import { AnimationController } from "./viewer/AnimationController.js";
 import DEFAULT_ASSEMBLY_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/assembly_steps.json";
 import { loadModelPackage, validateSelfContainedGlb, MAX_MODEL_PACKAGE_BYTES, MAX_SCENE_GLB_BYTES } from "./viewer/ModelPackageLoader.js";
 
@@ -17,6 +19,7 @@ let LEARNING_PACKAGE = DEFAULT_LEARNING_PACKAGE;
 let PROCESS_PACKAGE = DEFAULT_PROCESS_PACKAGE;
 let CLAIM_PACKAGE = DEFAULT_CLAIM_PACKAGE;
 let RELATIONSHIP_PACKAGE = DEFAULT_RELATIONSHIP_PACKAGE;
+let ANIMATION_PACKAGE = DEFAULT_ANIMATION_PACKAGE;
 let ASSEMBLY_PACKAGE = DEFAULT_ASSEMBLY_PACKAGE;
 
 const $ = (selector) => document.querySelector(selector);
@@ -64,6 +67,7 @@ const state = {
   slicePlane: new THREE.Plane(new THREE.Vector3(1, 0, 0), 0),
   measurementController: null,
   measurementEnabled: false,
+  authoredAnimationController: null,
   userInteracted: false
 };
 
@@ -81,6 +85,7 @@ const UI = {
     powerOn: "Run animation", powerOff: "Stop animation", operatingState: "OPERATING VISUALIZATION", simulationSpeed: "Animation speed",
     cameraPreset: "VIEW", viewIso: "Isometric", viewFan: "Fan side", viewPcb: "PCB side", viewIo: "I/O bracket", viewPower: "Power connector", viewTop: "Top",
     sliceToggle: "Section cut", sliceAxis: "Axis", sliceNote: "Visual cut · uncapped · not CAD",
+    authoredClips: "MODEL ANIMATIONS", selectAnimation: "Select a clip", playClip: "Play", pauseClip: "Pause", stopClip: "Stop", clipIdle: "No clip selected", clipPlaying: "Playing", clipPaused: "Paused", clipStopped: "Stopped", clipAccuracy: "Package-authored presentation clip · not a physics simulation",
     measure: "Measure", clearMeasurement: "Clear", measureIdle: "Measurement off · model-space only", measurePrompt: "Click a visible surface to set point 1 of 2", measureFirstPoint: "Point 1 of 2 set · select the second point", measureDistance: "Distance", measureDisclaimer: "model-space only", measureNoHit: "Click a visible model surface", measureEnabled: "Measurement enabled", measureDisabled: "Measurement disabled", modelUnits: "model units", measureNote: "Not a verified physical dimension",
     clearLayer: "Clear layer", inspection: "INSPECTION", componentDetails: "Component details",
     selectComponent: "Select a component", selectHint: "Choose a part in the 3D view or assembly tree to inspect its role and evidence.",
@@ -106,6 +111,7 @@ const UI = {
     powerOn: "Включить анимацию", powerOff: "Остановить анимацию", operatingState: "ВИЗУАЛИЗАЦИЯ РАБОТЫ", simulationSpeed: "Скорость анимации",
     cameraPreset: "РАКУРС", viewIso: "Изометрия", viewFan: "Сторона вентиляторов", viewPcb: "Сторона PCB", viewIo: "Планка I/O", viewPower: "Разъём питания", viewTop: "Сверху",
     sliceToggle: "Сечение", sliceAxis: "Ось", sliceNote: "Визуальный срез · без крышек · не CAD",
+    authoredClips: "АНИМАЦИИ МОДЕЛИ", selectAnimation: "Выберите клип", playClip: "Пуск", pauseClip: "Пауза", stopClip: "Стоп", clipIdle: "Клип не выбран", clipPlaying: "Воспроизведение", clipPaused: "Пауза", clipStopped: "Остановлено", clipAccuracy: "Авторский клип пакета · не физическая симуляция",
     measure: "Измерить", clearMeasurement: "Сброс", measureIdle: "Измерение выключено · только пространство модели", measurePrompt: "Нажмите на видимую поверхность, чтобы задать точку 1 из 2", measureFirstPoint: "Точка 1 из 2 задана · выберите вторую", measureDistance: "Расстояние", measureDisclaimer: "ед. модели", measureNoHit: "Нажмите на видимую поверхность модели", measureEnabled: "Инструмент измерения включён", measureDisabled: "Инструмент измерения выключен", modelUnits: "единицы модели", measureNote: "Не подтверждённый физический размер",
     clearLayer: "Сбросить слой", inspection: "ИНСПЕКЦИЯ", componentDetails: "Карточка компонента",
     selectComponent: "Выберите компонент", selectHint: "Выберите деталь в 3D-окне или дереве сборки, чтобы изучить её назначение и источники.",
@@ -126,6 +132,59 @@ function t(key) { return UI[state.language][key] ?? key; }
 function setStatus(message) { $("#app-status").textContent = message; }
 function setLoadState(message) { $("#load-state").textContent = message; }
 
+function localizedAnimationTitle(value) {
+  if (typeof value === "string") return value;
+  if (!value || typeof value !== "object") return "";
+  return value[state.language] ?? value.en ?? value.ru ?? "";
+}
+
+function renderAuthoredAnimationOptions() {
+  const panel = $("#authored-animation-panel");
+  const select = $("#authored-animation-select");
+  if (!panel || !select) return;
+  const clips = ANIMATION_PACKAGE?.clips ?? [];
+  panel.hidden = clips.length === 0;
+  select.replaceChildren();
+  const placeholder = document.createElement("option");
+  placeholder.value = "";
+  placeholder.textContent = t("selectAnimation");
+  select.append(placeholder);
+  clips.forEach((clip) => {
+    const option = document.createElement("option");
+    option.value = clip.id;
+    option.textContent = localizedAnimationTitle(clip.title) || clip.id;
+    select.append(option);
+  });
+  const selectedId = state.authoredAnimationController?.selectedClipId ?? "";
+  select.value = clips.some((clip) => clip.id === selectedId) ? selectedId : "";
+  updateAuthoredAnimationUI();
+}
+
+function updateAuthoredAnimationUI() {
+  const controller = state.authoredAnimationController;
+  const select = $("#authored-animation-select");
+  const playButton = $("#authored-animation-play");
+  const pauseButton = $("#authored-animation-pause");
+  const stopButton = $("#authored-animation-stop");
+  const seek = $("#authored-animation-seek");
+  const status = $("#authored-animation-status");
+  const time = $("#authored-animation-time");
+  if (!controller || !select || !playButton || !pauseButton || !stopButton || !seek || !status || !time) return;
+  const snapshot = controller.getSnapshot();
+  if (select.value !== snapshot.clipId) select.value = snapshot.clipId;
+  playButton.disabled = !snapshot.clipId || snapshot.playing;
+  pauseButton.disabled = !snapshot.playing;
+  stopButton.disabled = !snapshot.clipId || (!snapshot.playing && snapshot.elapsedMs === 0);
+  seek.disabled = !snapshot.clipId;
+  seek.value = String(Math.round(snapshot.progress * 1000));
+  status.textContent = !snapshot.clipId ? t("clipIdle")
+    : snapshot.playing ? t("clipPlaying")
+    : snapshot.elapsedMs > 0 ? t("clipPaused") : t("clipStopped");
+  time.textContent = snapshot.clipId
+    ? `${(snapshot.elapsedMs / 1000).toFixed(1)} / ${(snapshot.durationMs / 1000).toFixed(1)} s`
+    : "—";
+}
+
 function applyLanguage() {
   document.documentElement.lang = state.language;
   document.querySelectorAll("[data-i18n]").forEach((node) => {
@@ -142,6 +201,7 @@ function applyLanguage() {
   else if (state.learningMode) renderLearning();
   else if (state.selectedId) renderDetails(state.selectedId);
   updateMeasurementReadout();
+  renderAuthoredAnimationOptions();
 }
 
 function tag(object, id, evidence = "illustrative", geometry = "proxy") {
@@ -1434,6 +1494,8 @@ function disposeModel(root) {
 }
 
 function installModel(root, mode) {
+  state.authoredAnimationController?.dispose();
+  state.authoredAnimationController = null;
   if (state.sceneController) state.sceneController.reset();
   disposeProcessVisuals();
   state.measurementController?.clear();
@@ -1488,6 +1550,10 @@ function installModel(root, mode) {
   collectNodes(root);
   collectFanRotors(root);
   state.sceneController = new SceneController(root);
+  state.authoredAnimationController = new AnimationController(root, ANIMATION_PACKAGE?.clips ?? [], {
+    onUpdate: updateAuthoredAnimationUI
+  });
+  renderAuthoredAnimationOptions();
   fitModel(root);
   setExplode(0);
   setLoadState(mode === "package" ? t("loadedPackage") : mode === "file" ? t("loadedGlb") : mode === "bundled" ? t("loadedBundled") : t("demoLoaded"));
@@ -1512,6 +1578,7 @@ function applyPackageData(packageData) {
   CLAIM_PACKAGE = packageData.claims ?? { claims: [] };
   RELATIONSHIP_PACKAGE = packageData.relationships ?? { relationships: [] };
   ASSEMBLY_PACKAGE = packageData.assembly_steps ?? { steps: [], observations: [] };
+  ANIMATION_PACKAGE = packageData.animations ?? { clips: [] };
   state.catalog = new Map(COMPONENTS.map((item) => [item.id, item]));
   state.learningMode = false;
   state.learningIndex = 0;
@@ -1545,6 +1612,7 @@ function useGenericModelData(filename) {
   CLAIM_PACKAGE = { claims: [] };
   RELATIONSHIP_PACKAGE = { relationships: [] };
   ASSEMBLY_PACKAGE = { steps: [], observations: [] };
+  ANIMATION_PACKAGE = { clips: [] };
   state.catalog = new Map();
   state.learningMode = false;
   updateModelHeader();
@@ -1776,6 +1844,14 @@ function bindUI() {
   $("#slice-position").addEventListener("input", (event) => updateSlicePosition(event.target.value));
   $("#measurement-toggle").addEventListener("click", () => setMeasurementEnabled(!state.measurementEnabled));
   $("#measurement-clear").addEventListener("click", clearMeasurement);
+  $("#authored-animation-select").addEventListener("change", (event) => {
+    state.authoredAnimationController?.select(event.target.value);
+    updateAuthoredAnimationUI();
+  });
+  $("#authored-animation-play").addEventListener("click", () => state.authoredAnimationController?.play());
+  $("#authored-animation-pause").addEventListener("click", () => state.authoredAnimationController?.pause());
+  $("#authored-animation-stop").addEventListener("click", () => state.authoredAnimationController?.stop());
+  $("#authored-animation-seek").addEventListener("input", (event) => state.authoredAnimationController?.seek(Number(event.target.value) / 1000));
   $("#reset-view").addEventListener("click", resetCamera);
   $("#expand-tree").addEventListener("click", () => {
     $("#component-search").value = "";
@@ -1839,6 +1915,7 @@ function bindUI() {
       $("#component-search").focus();
     }
     if (event.key === "Escape") {
+      state.authoredAnimationController?.pause();
       setMeasurementEnabled(false);
       setIsolated(false);
       setExplode(0);

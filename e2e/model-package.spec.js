@@ -29,7 +29,7 @@ function makeGlb() {
   return bytes;
 }
 
-function makePackage() {
+function makePackage({ withAnimation = false } = {}) {
   const manifest = {
     format: "sbs-model", schema_version: "1.0.0", model_id: modelId, package_version: "1.0.0",
     files: { model: "model.json", scene: "scene.glb", components: "components.json", sources: "sources.json",
@@ -48,7 +48,16 @@ function makePackage() {
     "process_layers.json": { device_model_id: modelId, process_layers: [{ id: "layer.cooling", type: "cooling", title: { en: "Cooling", ru: "Охлаждение" }, description: { en: "Air movement", ru: "Движение воздуха" }, linked_component_ids: ["fan"], source_ids: ["src.one"], assumptions: [] }] },
     "assembly_steps.json": { steps: [] },
     "learning.json": { questions: [] },
-    "animations.json": { clips: [] }
+    "animations.json": { clips: withAnimation ? [{
+      id: "clip.fan.rotation",
+      title: { en: "Fan rotation", ru: "Вращение вентилятора" },
+      duration_ms: 4000,
+      easing: "linear",
+      evidence_status: "educational_approximation",
+      accuracy_note: { en: "Illustrative clip for a loader integration test.", ru: "Условный клип для интеграционного теста загрузчика." },
+      source_ids: ["src.one"],
+      tracks: [{ target_id: "fan", property: "rotation", keyframes: [{ t: 0, value: [0, 0, 0] }, { t: 1, value: [0, 0, 6.283185307179586] }] }]
+    }] : [] }
   };
   const entries = { "sbs-model.json": strToU8(JSON.stringify(manifest)), "scene.glb": makeGlb() };
   for (const [name, value] of Object.entries(data)) entries[name] = strToU8(JSON.stringify(value));
@@ -82,4 +91,38 @@ test("imports an .sbsmodel file after opening the root index.html directly", asy
   await expect(page.locator("#component-count")).toHaveText("2");
   await expect(page.locator("#load-state")).toContainText("ПАКЕТ SBS MODEL");
   expect(pageErrors).toEqual([]);
+});
+
+
+test("plays and seeks validated package-authored animation clips", async ({ page }) => {
+  await page.goto("/");
+  await page.locator("#model-file").setInputFiles({
+    name: "animated-test.sbsmodel",
+    mimeType: "application/zip",
+    buffer: Buffer.from(makePackage({ withAnimation: true }))
+  });
+  await expect(page.locator("#model-title")).toHaveText("Portable test device", { timeout: 10000 });
+  await expect(page.locator("#authored-animation-panel")).toBeVisible();
+  await page.locator("#authored-animation-select").selectOption("clip.fan.rotation");
+  await expect(page.locator("#authored-animation-play")).toBeEnabled();
+  await expect(page.locator("#authored-animation-status")).toContainText("Остановлено");
+  await page.locator("#authored-animation-play").click();
+  await expect(page.locator("#authored-animation-status")).toContainText("Воспроизведение");
+  await page.locator("#authored-animation-pause").click();
+  await expect(page.locator("#authored-animation-status")).toContainText("Пауза");
+  await page.locator("#authored-animation-seek").fill("750");
+  await expect(page.locator("#authored-animation-time")).toContainText("3.0 / 4.0 s");
+  await page.locator("#authored-animation-stop").click();
+  await expect(page.locator("#authored-animation-time")).toContainText("0.0 / 4.0 s");
+});
+
+test("hides authored animation controls for models with no authored clips", async ({ page }) => {
+  await page.goto("/");
+  await page.locator("#model-file").setInputFiles({
+    name: "static-test.sbsmodel",
+    mimeType: "application/zip",
+    buffer: Buffer.from(makePackage())
+  });
+  await expect(page.locator("#model-title")).toHaveText("Portable test device", { timeout: 10000 });
+  await expect(page.locator("#authored-animation-panel")).toBeHidden();
 });
