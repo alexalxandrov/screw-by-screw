@@ -1,0 +1,30 @@
+name: Viewer build
+
+on:
+  push:
+    paths:
+      - "src/**"
+      - "index.html"
+      - "package.json"
+      - "vite.config.js"
+      - ".github/workflows/viewer-build.yml"
+  pull_request:
+    paths:
+      - "src/**"
+      - "index.html"
+      - "package.json"
+      - "vite.config.js"
+      - ".github/workflows/viewer-build.yml"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Build production viewer
+        run: npm run build
