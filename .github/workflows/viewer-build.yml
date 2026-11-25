@@ -14,13 +14,6 @@ on:
       - "package.json"
       - "vite.config.js"
       - ".github/workflows/viewer-build.yml"
-  pull_request:
-    paths:
-      - "src/**"
-      - "index.html"
-      - "package.json"
-      - "vite.config.js"
-      - ".github/workflows/viewer-build.yml"
 
 jobs:
   build:
