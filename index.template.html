@@ -196,6 +196,14 @@
             <div><span class="eyebrow" id="details-heading-eyebrow" data-i18n="inspection">INSPECTION</span><h2 id="details-heading-title" data-i18n="componentDetails">Component details</h2></div>
             <span class="detail-index" id="detail-index">—</span>
           </div>
+          <section class="inventory-export" aria-label="Model data export">
+            <span class="eyebrow" data-i18n="exportData">ДАННЫЕ МОДЕЛИ</span>
+            <div class="inventory-export-buttons">
+              <button id="export-inventory-json" type="button" data-i18n="exportJson" aria-label="Export semantic inventory as JSON">Экспорт JSON</button>
+              <button id="export-inventory-csv" type="button" data-i18n="exportCsv" aria-label="Export semantic inventory tables as CSV ZIP">CSV ZIP</button>
+            </div>
+            <p class="inventory-export-note">JSON включает доказательства и источники; CSV ZIP содержит отдельные таблицы. Без CAD и BOM.</p>
+          </section>
           <div id="empty-selection" class="empty-selection">
             <div class="selection-crosshair">＋</div>
             <strong data-i18n="selectComponent">Select a component</strong>
