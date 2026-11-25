@@ -294,8 +294,10 @@ def cylinder_between(name, component_id, start, end, radius, mat, collection, pa
     obj.rotation_quaternion = Vector((0, 0, 1)).rotation_difference(direction.normalized())
     obj.data.materials.append(mat)
     move_to_collection(obj, collection)
-    set_parent_keep_world(obj, parent)
-    return tag(obj, component_id, STATUS["illustrative"])
+    tagged = tag(obj, component_id, STATUS["illustrative"],
+                 geometry="illustrative_proxy")
+    set_parent_keep_world(tagged, parent)
+    return tagged
 
 
 def curved_fan_blade(index, blade_index, count, center, base_y, collection):
@@ -722,10 +724,15 @@ def main():
         ((118, -4.4, 57), (128, -3.6, 59), (139, -2.1, 62), (150, -0.8, 65), (160, 0.0, 66)),
     )
     for pipe_index, path in enumerate(heatpipe_paths, start=1):
+        pipe_group = make_assembly(
+            "Heatpipe route candidate {}".format(pipe_index),
+            "cooling.heatpipe.candidate.{}".format(pipe_index),
+            path[0], cool, parent=heatpipes_group,
+        )
         for segment_index, (start, end) in enumerate(zip(path, path[1:]), start=1):
             cylinder_between(f"Heatpipe proxy {pipe_index} segment {segment_index}",
                 f"cooling.heatpipes.proxy.{pipe_index}.{segment_index}",
-                start, end, 1.6, MAT["heatpipe"], cool, heatpipes_group)
+                start, end, 1.6, MAT["heatpipe"], cool, pipe_group)
 
     # Rear-side exposed PCB proxy: exact outline and position remain unknown.
     pcb = cube(
@@ -888,21 +895,28 @@ def main():
         cool, parent=thermal_group,
     )
     for pad_index, (pad_x, pad_z) in enumerate(memory_centres, start=1):
-        make_detail_box(
-            f"Memory pad proxy {pad_index}",
+        pad_id = "cooling.thermal_pad.memory.{:02d}".format(pad_index)
+        pad = cube(
+            "Memory thermal pad proxy {}".format(pad_index),
+            pad_id,
             (pad_x, -5.6, pad_z), (15.0, 0.65, 13.0),
-            MAT["heatsink"], memory_pad_group, cool,
+            MAT["heatsink"], cool,
+            evidence=STATUS["illustrative"],
         )
+        set_parent_keep_world(pad, memory_pad_group)
 
     vrm_pad_group = make_assembly(
         "Power-stage thermal pad group | proxy", "cooling.thermal_pad.vrm",
         (stage_origin[0], -5.8, stage_origin[2]), cool, parent=thermal_group,
     )
-    make_detail_box(
+    vrm_pad = cube(
         "Power-stage thermal pad strip proxy",
+        "cooling.thermal_pad.vrm.01",
         (stage_origin[0] + 9.0, -5.6, stage_origin[2] + 4.0),
-        (34.0, 0.65, 18.0), MAT["heatsink"], vrm_pad_group, cool,
+        (34.0, 0.65, 18.0), MAT["heatsink"], cool,
+        evidence=STATUS["illustrative"],
     )
+    set_parent_keep_world(vrm_pad, vrm_pad_group)
 
     # Fasteners are individually selectable. Count/layout remain candidates,
     # not an exact-SKU service specification or an authored removal sequence.

@@ -79,3 +79,8 @@ The generic runtime now reads validated clips from animations.json and provides 
 The RTX 3060 pilot is being expanded from assembly-level blocks into separately selectable teaching components: GPU die proxy, thermal interface groups, fastener candidates, PCIe edge interface, fan cable headers, individual rear I/O receptacles, shunt area, unidentified passives and PCB airflow-cutout marker. This is a geometry/content integration tranche; it does not close the precision-CAD or exact-board evidence gates.
 
 The apparent EVGA232 REV 1.0 silkscreen and community-indexed PG190-A02 schematic are tracked as unverified leads only. Exact board identity, schematic applicability and rights must be resolved before any board-level electrical topology is authored.
+
+
+### Detailed cooling graph (in progress)
+
+The pilot content graph has reached 104 components / 99 relationships, including fan-frame/hub/blade nodes, individual proxy fins, heatpipe route assemblies, per-memory thermal-pad proxies, and a VRM pad strip. Counts and geometry remain illustrative where no exact fan drawing, fin metrology, thermal-pad service specification or matching board revision has been sourced.

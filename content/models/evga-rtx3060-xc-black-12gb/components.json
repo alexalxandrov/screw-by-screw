@@ -964,6 +964,956 @@
         "en": "Unidentified controller-IC marker based on the board-photo context. No manufacturer, part number, PWM channel count, telemetry interface or control topology is claimed.",
         "ru": "Маркер неидентифицированной микросхемы-контроллера по фотографии платы. Производитель, номер детали, число PWM-каналов, телеметрический интерфейс и топология управления не утверждаются."
       }
+    },
+    {
+      "id": "fan.1.frame",
+      "parent_id": "assembly.fan.1",
+      "name": {
+        "en": "Fan 1 annular frame",
+        "ru": "Кольцевая рамка вентилятора 1"
+      },
+      "category": "cooling",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "Measured-reference annular outline only: the outer opening uses the review's approximate 90 mm measurement, while the exact frame cross-section, wall thickness and mounting tabs are still proxy geometry.",
+        "ru": "Только условный контур кольцевой рамки: внешний проём опирается на приблизительное измерение обзора 90 мм; сечение, толщина стенки и крепёжные ушки остаются макетной геометрией."
+      }
+    },
+    {
+      "id": "fan.1.hub",
+      "parent_id": "assembly.fan.1",
+      "name": {
+        "en": "Fan 1 central hub",
+        "ru": "Центральная ступица вентилятора 1"
+      },
+      "category": "cooling",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "Central hub geometry is a visual proxy. Bearing construction, motor stator, rotor magnet, hub diameter and internal wiring are not documented.",
+        "ru": "Геометрия центральной ступицы задана условно. Конструкция подшипника, статор двигателя, магнит ротора, диаметр ступицы и внутренняя проводка не документированы."
+      }
+    },
+    {
+      "id": "fan.1.blade.1",
+      "parent_id": "assembly.fan.1.rotor",
+      "name": {
+        "en": "Fan 1 blade candidate 01",
+        "ru": "Кандидатная лопасть вентилятора 1 №01"
+      },
+      "category": "cooling",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "Individually selectable swept-blade proxy. Seven blades are only the current educational mesh count; exact blade count, camber, pitch, thickness and embossed texture require a calibrated fan photo or teardown measurement.",
+        "ru": "Отдельно выбираемый макет стреловидной лопасти. Семь лопастей — лишь текущее число элементов учебной сетки; фактическое количество, кривизна, шаг, толщина и рельеф требуют калиброванной фотографии или измерений разборки."
+      }
+    },
+    {
+      "id": "fan.1.blade.2",
+      "parent_id": "assembly.fan.1.rotor",
+      "name": {
+        "en": "Fan 1 blade candidate 02",
+        "ru": "Кандидатная лопасть вентилятора 1 №02"
+      },
+      "category": "cooling",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "Individually selectable swept-blade proxy. Seven blades are only the current educational mesh count; exact blade count, camber, pitch, thickness and embossed texture require a calibrated fan photo or teardown measurement.",
+        "ru": "Отдельно выбираемый макет стреловидной лопасти. Семь лопастей — лишь текущее число элементов учебной сетки; фактическое количество, кривизна, шаг, толщина и рельеф требуют калиброванной фотографии или измерений разборки."
+      }
+    },
+    {
+      "id": "fan.1.blade.3",
+      "parent_id": "assembly.fan.1.rotor",
+      "name": {
+        "en": "Fan 1 blade candidate 03",
+        "ru": "Кандидатная лопасть вентилятора 1 №03"
+      },
+      "category": "cooling",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "Individually selectable swept-blade proxy. Seven blades are only the current educational mesh count; exact blade count, camber, pitch, thickness and embossed texture require a calibrated fan photo or teardown measurement.",
+        "ru": "Отдельно выбираемый макет стреловидной лопасти. Семь лопастей — лишь текущее число элементов учебной сетки; фактическое количество, кривизна, шаг, толщина и рельеф требуют калиброванной фотографии или измерений разборки."
+      }
+    },
+    {
+      "id": "fan.1.blade.4",
+      "parent_id": "assembly.fan.1.rotor",
+      "name": {
+        "en": "Fan 1 blade candidate 04",
+        "ru": "Кандидатная лопасть вентилятора 1 №04"
+      },
+      "category": "cooling",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "Individually selectable swept-blade proxy. Seven blades are only the current educational mesh count; exact blade count, camber, pitch, thickness and embossed texture require a calibrated fan photo or teardown measurement.",
+        "ru": "Отдельно выбираемый макет стреловидной лопасти. Семь лопастей — лишь текущее число элементов учебной сетки; фактическое количество, кривизна, шаг, толщина и рельеф требуют калиброванной фотографии или измерений разборки."
+      }
+    },
+    {
+      "id": "fan.1.blade.5",
+      "parent_id": "assembly.fan.1.rotor",
+      "name": {
+        "en": "Fan 1 blade candidate 05",
+        "ru": "Кандидатная лопасть вентилятора 1 №05"
+      },
+      "category": "cooling",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "Individually selectable swept-blade proxy. Seven blades are only the current educational mesh count; exact blade count, camber, pitch, thickness and embossed texture require a calibrated fan photo or teardown measurement.",
+        "ru": "Отдельно выбираемый макет стреловидной лопасти. Семь лопастей — лишь текущее число элементов учебной сетки; фактическое количество, кривизна, шаг, толщина и рельеф требуют калиброванной фотографии или измерений разборки."
+      }
+    },
+    {
+      "id": "fan.1.blade.6",
+      "parent_id": "assembly.fan.1.rotor",
+      "name": {
+        "en": "Fan 1 blade candidate 06",
+        "ru": "Кандидатная лопасть вентилятора 1 №06"
+      },
+      "category": "cooling",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "Individually selectable swept-blade proxy. Seven blades are only the current educational mesh count; exact blade count, camber, pitch, thickness and embossed texture require a calibrated fan photo or teardown measurement.",
+        "ru": "Отдельно выбираемый макет стреловидной лопасти. Семь лопастей — лишь текущее число элементов учебной сетки; фактическое количество, кривизна, шаг, толщина и рельеф требуют калиброванной фотографии или измерений разборки."
+      }
+    },
+    {
+      "id": "fan.1.blade.7",
+      "parent_id": "assembly.fan.1.rotor",
+      "name": {
+        "en": "Fan 1 blade candidate 07",
+        "ru": "Кандидатная лопасть вентилятора 1 №07"
+      },
+      "category": "cooling",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "Individually selectable swept-blade proxy. Seven blades are only the current educational mesh count; exact blade count, camber, pitch, thickness and embossed texture require a calibrated fan photo or teardown measurement.",
+        "ru": "Отдельно выбираемый макет стреловидной лопасти. Семь лопастей — лишь текущее число элементов учебной сетки; фактическое количество, кривизна, шаг, толщина и рельеф требуют калиброванной фотографии или измерений разборки."
+      }
+    },
+    {
+      "id": "fan.2.frame",
+      "parent_id": "assembly.fan.2",
+      "name": {
+        "en": "Fan 2 annular frame",
+        "ru": "Кольцевая рамка вентилятора 2"
+      },
+      "category": "cooling",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "Measured-reference annular outline only: the outer opening uses the review's approximate 90 mm measurement, while the exact frame cross-section, wall thickness and mounting tabs are still proxy geometry.",
+        "ru": "Только условный контур кольцевой рамки: внешний проём опирается на приблизительное измерение обзора 90 мм; сечение, толщина стенки и крепёжные ушки остаются макетной геометрией."
+      }
+    },
+    {
+      "id": "fan.2.hub",
+      "parent_id": "assembly.fan.2",
+      "name": {
+        "en": "Fan 2 central hub",
+        "ru": "Центральная ступица вентилятора 2"
+      },
+      "category": "cooling",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "Central hub geometry is a visual proxy. Bearing construction, motor stator, rotor magnet, hub diameter and internal wiring are not documented.",
+        "ru": "Геометрия центральной ступицы задана условно. Конструкция подшипника, статор двигателя, магнит ротора, диаметр ступицы и внутренняя проводка не документированы."
+      }
+    },
+    {
+      "id": "fan.2.blade.1",
+      "parent_id": "assembly.fan.2.rotor",
+      "name": {
+        "en": "Fan 2 blade candidate 01",
+        "ru": "Кандидатная лопасть вентилятора 2 №01"
+      },
+      "category": "cooling",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "Individually selectable swept-blade proxy. Seven blades are only the current educational mesh count; exact blade count, camber, pitch, thickness and embossed texture require a calibrated fan photo or teardown measurement.",
+        "ru": "Отдельно выбираемый макет стреловидной лопасти. Семь лопастей — лишь текущее число элементов учебной сетки; фактическое количество, кривизна, шаг, толщина и рельеф требуют калиброванной фотографии или измерений разборки."
+      }
+    },
+    {
+      "id": "fan.2.blade.2",
+      "parent_id": "assembly.fan.2.rotor",
+      "name": {
+        "en": "Fan 2 blade candidate 02",
+        "ru": "Кандидатная лопасть вентилятора 2 №02"
+      },
+      "category": "cooling",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "Individually selectable swept-blade proxy. Seven blades are only the current educational mesh count; exact blade count, camber, pitch, thickness and embossed texture require a calibrated fan photo or teardown measurement.",
+        "ru": "Отдельно выбираемый макет стреловидной лопасти. Семь лопастей — лишь текущее число элементов учебной сетки; фактическое количество, кривизна, шаг, толщина и рельеф требуют калиброванной фотографии или измерений разборки."
+      }
+    },
+    {
+      "id": "fan.2.blade.3",
+      "parent_id": "assembly.fan.2.rotor",
+      "name": {
+        "en": "Fan 2 blade candidate 03",
+        "ru": "Кандидатная лопасть вентилятора 2 №03"
+      },
+      "category": "cooling",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "Individually selectable swept-blade proxy. Seven blades are only the current educational mesh count; exact blade count, camber, pitch, thickness and embossed texture require a calibrated fan photo or teardown measurement.",
+        "ru": "Отдельно выбираемый макет стреловидной лопасти. Семь лопастей — лишь текущее число элементов учебной сетки; фактическое количество, кривизна, шаг, толщина и рельеф требуют калиброванной фотографии или измерений разборки."
+      }
+    },
+    {
+      "id": "fan.2.blade.4",
+      "parent_id": "assembly.fan.2.rotor",
+      "name": {
+        "en": "Fan 2 blade candidate 04",
+        "ru": "Кандидатная лопасть вентилятора 2 №04"
+      },
+      "category": "cooling",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "Individually selectable swept-blade proxy. Seven blades are only the current educational mesh count; exact blade count, camber, pitch, thickness and embossed texture require a calibrated fan photo or teardown measurement.",
+        "ru": "Отдельно выбираемый макет стреловидной лопасти. Семь лопастей — лишь текущее число элементов учебной сетки; фактическое количество, кривизна, шаг, толщина и рельеф требуют калиброванной фотографии или измерений разборки."
+      }
+    },
+    {
+      "id": "fan.2.blade.5",
+      "parent_id": "assembly.fan.2.rotor",
+      "name": {
+        "en": "Fan 2 blade candidate 05",
+        "ru": "Кандидатная лопасть вентилятора 2 №05"
+      },
+      "category": "cooling",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "Individually selectable swept-blade proxy. Seven blades are only the current educational mesh count; exact blade count, camber, pitch, thickness and embossed texture require a calibrated fan photo or teardown measurement.",
+        "ru": "Отдельно выбираемый макет стреловидной лопасти. Семь лопастей — лишь текущее число элементов учебной сетки; фактическое количество, кривизна, шаг, толщина и рельеф требуют калиброванной фотографии или измерений разборки."
+      }
+    },
+    {
+      "id": "fan.2.blade.6",
+      "parent_id": "assembly.fan.2.rotor",
+      "name": {
+        "en": "Fan 2 blade candidate 06",
+        "ru": "Кандидатная лопасть вентилятора 2 №06"
+      },
+      "category": "cooling",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "Individually selectable swept-blade proxy. Seven blades are only the current educational mesh count; exact blade count, camber, pitch, thickness and embossed texture require a calibrated fan photo or teardown measurement.",
+        "ru": "Отдельно выбираемый макет стреловидной лопасти. Семь лопастей — лишь текущее число элементов учебной сетки; фактическое количество, кривизна, шаг, толщина и рельеф требуют калиброванной фотографии или измерений разборки."
+      }
+    },
+    {
+      "id": "fan.2.blade.7",
+      "parent_id": "assembly.fan.2.rotor",
+      "name": {
+        "en": "Fan 2 blade candidate 07",
+        "ru": "Кандидатная лопасть вентилятора 2 №07"
+      },
+      "category": "cooling",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "Individually selectable swept-blade proxy. Seven blades are only the current educational mesh count; exact blade count, camber, pitch, thickness and embossed texture require a calibrated fan photo or teardown measurement.",
+        "ru": "Отдельно выбираемый макет стреловидной лопасти. Семь лопастей — лишь текущее число элементов учебной сетки; фактическое количество, кривизна, шаг, толщина и рельеф требуют калиброванной фотографии или измерений разборки."
+      }
+    },
+    {
+      "id": "cooling.heatsink.fin.01",
+      "parent_id": "cooling.heatsink",
+      "name": {
+        "en": "Heatsink fin proxy 01",
+        "ru": "Макетное ребро радиатора 01"
+      },
+      "category": "cooling",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "One individually selectable fin in the current 24-fin learning blockout. The 24-object count is a modeling convenience, not a verified physical fin count; pitch, thickness, louvering and alloy are unknown.",
+        "ru": "Одно отдельно выбираемое ребро текущего 24-элементного учебного макета. Число 24 выбрано для моделирования и не является подтверждённым количеством физических рёбер; шаг, толщина, жалюзи и сплав неизвестны."
+      }
+    },
+    {
+      "id": "cooling.heatsink.fin.02",
+      "parent_id": "cooling.heatsink",
+      "name": {
+        "en": "Heatsink fin proxy 02",
+        "ru": "Макетное ребро радиатора 02"
+      },
+      "category": "cooling",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "One individually selectable fin in the current 24-fin learning blockout. The 24-object count is a modeling convenience, not a verified physical fin count; pitch, thickness, louvering and alloy are unknown.",
+        "ru": "Одно отдельно выбираемое ребро текущего 24-элементного учебного макета. Число 24 выбрано для моделирования и не является подтверждённым количеством физических рёбер; шаг, толщина, жалюзи и сплав неизвестны."
+      }
+    },
+    {
+      "id": "cooling.heatsink.fin.03",
+      "parent_id": "cooling.heatsink",
+      "name": {
+        "en": "Heatsink fin proxy 03",
+        "ru": "Макетное ребро радиатора 03"
+      },
+      "category": "cooling",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "One individually selectable fin in the current 24-fin learning blockout. The 24-object count is a modeling convenience, not a verified physical fin count; pitch, thickness, louvering and alloy are unknown.",
+        "ru": "Одно отдельно выбираемое ребро текущего 24-элементного учебного макета. Число 24 выбрано для моделирования и не является подтверждённым количеством физических рёбер; шаг, толщина, жалюзи и сплав неизвестны."
+      }
+    },
+    {
+      "id": "cooling.heatsink.fin.04",
+      "parent_id": "cooling.heatsink",
+      "name": {
+        "en": "Heatsink fin proxy 04",
+        "ru": "Макетное ребро радиатора 04"
+      },
+      "category": "cooling",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "One individually selectable fin in the current 24-fin learning blockout. The 24-object count is a modeling convenience, not a verified physical fin count; pitch, thickness, louvering and alloy are unknown.",
+        "ru": "Одно отдельно выбираемое ребро текущего 24-элементного учебного макета. Число 24 выбрано для моделирования и не является подтверждённым количеством физических рёбер; шаг, толщина, жалюзи и сплав неизвестны."
+      }
+    },
+    {
+      "id": "cooling.heatsink.fin.05",
+      "parent_id": "cooling.heatsink",
+      "name": {
+        "en": "Heatsink fin proxy 05",
+        "ru": "Макетное ребро радиатора 05"
+      },
+      "category": "cooling",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "One individually selectable fin in the current 24-fin learning blockout. The 24-object count is a modeling convenience, not a verified physical fin count; pitch, thickness, louvering and alloy are unknown.",
+        "ru": "Одно отдельно выбираемое ребро текущего 24-элементного учебного макета. Число 24 выбрано для моделирования и не является подтверждённым количеством физических рёбер; шаг, толщина, жалюзи и сплав неизвестны."
+      }
+    },
+    {
+      "id": "cooling.heatsink.fin.06",
+      "parent_id": "cooling.heatsink",
+      "name": {
+        "en": "Heatsink fin proxy 06",
+        "ru": "Макетное ребро радиатора 06"
+      },
+      "category": "cooling",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "One individually selectable fin in the current 24-fin learning blockout. The 24-object count is a modeling convenience, not a verified physical fin count; pitch, thickness, louvering and alloy are unknown.",
+        "ru": "Одно отдельно выбираемое ребро текущего 24-элементного учебного макета. Число 24 выбрано для моделирования и не является подтверждённым количеством физических рёбер; шаг, толщина, жалюзи и сплав неизвестны."
+      }
+    },
+    {
+      "id": "cooling.heatsink.fin.07",
+      "parent_id": "cooling.heatsink",
+      "name": {
+        "en": "Heatsink fin proxy 07",
+        "ru": "Макетное ребро радиатора 07"
+      },
+      "category": "cooling",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "One individually selectable fin in the current 24-fin learning blockout. The 24-object count is a modeling convenience, not a verified physical fin count; pitch, thickness, louvering and alloy are unknown.",
+        "ru": "Одно отдельно выбираемое ребро текущего 24-элементного учебного макета. Число 24 выбрано для моделирования и не является подтверждённым количеством физических рёбер; шаг, толщина, жалюзи и сплав неизвестны."
+      }
+    },
+    {
+      "id": "cooling.heatsink.fin.08",
+      "parent_id": "cooling.heatsink",
+      "name": {
+        "en": "Heatsink fin proxy 08",
+        "ru": "Макетное ребро радиатора 08"
+      },
+      "category": "cooling",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "One individually selectable fin in the current 24-fin learning blockout. The 24-object count is a modeling convenience, not a verified physical fin count; pitch, thickness, louvering and alloy are unknown.",
+        "ru": "Одно отдельно выбираемое ребро текущего 24-элементного учебного макета. Число 24 выбрано для моделирования и не является подтверждённым количеством физических рёбер; шаг, толщина, жалюзи и сплав неизвестны."
+      }
+    },
+    {
+      "id": "cooling.heatsink.fin.09",
+      "parent_id": "cooling.heatsink",
+      "name": {
+        "en": "Heatsink fin proxy 09",
+        "ru": "Макетное ребро радиатора 09"
+      },
+      "category": "cooling",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "One individually selectable fin in the current 24-fin learning blockout. The 24-object count is a modeling convenience, not a verified physical fin count; pitch, thickness, louvering and alloy are unknown.",
+        "ru": "Одно отдельно выбираемое ребро текущего 24-элементного учебного макета. Число 24 выбрано для моделирования и не является подтверждённым количеством физических рёбер; шаг, толщина, жалюзи и сплав неизвестны."
+      }
+    },
+    {
+      "id": "cooling.heatsink.fin.10",
+      "parent_id": "cooling.heatsink",
+      "name": {
+        "en": "Heatsink fin proxy 10",
+        "ru": "Макетное ребро радиатора 10"
+      },
+      "category": "cooling",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "One individually selectable fin in the current 24-fin learning blockout. The 24-object count is a modeling convenience, not a verified physical fin count; pitch, thickness, louvering and alloy are unknown.",
+        "ru": "Одно отдельно выбираемое ребро текущего 24-элементного учебного макета. Число 24 выбрано для моделирования и не является подтверждённым количеством физических рёбер; шаг, толщина, жалюзи и сплав неизвестны."
+      }
+    },
+    {
+      "id": "cooling.heatsink.fin.11",
+      "parent_id": "cooling.heatsink",
+      "name": {
+        "en": "Heatsink fin proxy 11",
+        "ru": "Макетное ребро радиатора 11"
+      },
+      "category": "cooling",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "One individually selectable fin in the current 24-fin learning blockout. The 24-object count is a modeling convenience, not a verified physical fin count; pitch, thickness, louvering and alloy are unknown.",
+        "ru": "Одно отдельно выбираемое ребро текущего 24-элементного учебного макета. Число 24 выбрано для моделирования и не является подтверждённым количеством физических рёбер; шаг, толщина, жалюзи и сплав неизвестны."
+      }
+    },
+    {
+      "id": "cooling.heatsink.fin.12",
+      "parent_id": "cooling.heatsink",
+      "name": {
+        "en": "Heatsink fin proxy 12",
+        "ru": "Макетное ребро радиатора 12"
+      },
+      "category": "cooling",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "One individually selectable fin in the current 24-fin learning blockout. The 24-object count is a modeling convenience, not a verified physical fin count; pitch, thickness, louvering and alloy are unknown.",
+        "ru": "Одно отдельно выбираемое ребро текущего 24-элементного учебного макета. Число 24 выбрано для моделирования и не является подтверждённым количеством физических рёбер; шаг, толщина, жалюзи и сплав неизвестны."
+      }
+    },
+    {
+      "id": "cooling.heatsink.fin.13",
+      "parent_id": "cooling.heatsink",
+      "name": {
+        "en": "Heatsink fin proxy 13",
+        "ru": "Макетное ребро радиатора 13"
+      },
+      "category": "cooling",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "One individually selectable fin in the current 24-fin learning blockout. The 24-object count is a modeling convenience, not a verified physical fin count; pitch, thickness, louvering and alloy are unknown.",
+        "ru": "Одно отдельно выбираемое ребро текущего 24-элементного учебного макета. Число 24 выбрано для моделирования и не является подтверждённым количеством физических рёбер; шаг, толщина, жалюзи и сплав неизвестны."
+      }
+    },
+    {
+      "id": "cooling.heatsink.fin.14",
+      "parent_id": "cooling.heatsink",
+      "name": {
+        "en": "Heatsink fin proxy 14",
+        "ru": "Макетное ребро радиатора 14"
+      },
+      "category": "cooling",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "One individually selectable fin in the current 24-fin learning blockout. The 24-object count is a modeling convenience, not a verified physical fin count; pitch, thickness, louvering and alloy are unknown.",
+        "ru": "Одно отдельно выбираемое ребро текущего 24-элементного учебного макета. Число 24 выбрано для моделирования и не является подтверждённым количеством физических рёбер; шаг, толщина, жалюзи и сплав неизвестны."
+      }
+    },
+    {
+      "id": "cooling.heatsink.fin.15",
+      "parent_id": "cooling.heatsink",
+      "name": {
+        "en": "Heatsink fin proxy 15",
+        "ru": "Макетное ребро радиатора 15"
+      },
+      "category": "cooling",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "One individually selectable fin in the current 24-fin learning blockout. The 24-object count is a modeling convenience, not a verified physical fin count; pitch, thickness, louvering and alloy are unknown.",
+        "ru": "Одно отдельно выбираемое ребро текущего 24-элементного учебного макета. Число 24 выбрано для моделирования и не является подтверждённым количеством физических рёбер; шаг, толщина, жалюзи и сплав неизвестны."
+      }
+    },
+    {
+      "id": "cooling.heatsink.fin.16",
+      "parent_id": "cooling.heatsink",
+      "name": {
+        "en": "Heatsink fin proxy 16",
+        "ru": "Макетное ребро радиатора 16"
+      },
+      "category": "cooling",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "One individually selectable fin in the current 24-fin learning blockout. The 24-object count is a modeling convenience, not a verified physical fin count; pitch, thickness, louvering and alloy are unknown.",
+        "ru": "Одно отдельно выбираемое ребро текущего 24-элементного учебного макета. Число 24 выбрано для моделирования и не является подтверждённым количеством физических рёбер; шаг, толщина, жалюзи и сплав неизвестны."
+      }
+    },
+    {
+      "id": "cooling.heatsink.fin.17",
+      "parent_id": "cooling.heatsink",
+      "name": {
+        "en": "Heatsink fin proxy 17",
+        "ru": "Макетное ребро радиатора 17"
+      },
+      "category": "cooling",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "One individually selectable fin in the current 24-fin learning blockout. The 24-object count is a modeling convenience, not a verified physical fin count; pitch, thickness, louvering and alloy are unknown.",
+        "ru": "Одно отдельно выбираемое ребро текущего 24-элементного учебного макета. Число 24 выбрано для моделирования и не является подтверждённым количеством физических рёбер; шаг, толщина, жалюзи и сплав неизвестны."
+      }
+    },
+    {
+      "id": "cooling.heatsink.fin.18",
+      "parent_id": "cooling.heatsink",
+      "name": {
+        "en": "Heatsink fin proxy 18",
+        "ru": "Макетное ребро радиатора 18"
+      },
+      "category": "cooling",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "One individually selectable fin in the current 24-fin learning blockout. The 24-object count is a modeling convenience, not a verified physical fin count; pitch, thickness, louvering and alloy are unknown.",
+        "ru": "Одно отдельно выбираемое ребро текущего 24-элементного учебного макета. Число 24 выбрано для моделирования и не является подтверждённым количеством физических рёбер; шаг, толщина, жалюзи и сплав неизвестны."
+      }
+    },
+    {
+      "id": "cooling.heatsink.fin.19",
+      "parent_id": "cooling.heatsink",
+      "name": {
+        "en": "Heatsink fin proxy 19",
+        "ru": "Макетное ребро радиатора 19"
+      },
+      "category": "cooling",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "One individually selectable fin in the current 24-fin learning blockout. The 24-object count is a modeling convenience, not a verified physical fin count; pitch, thickness, louvering and alloy are unknown.",
+        "ru": "Одно отдельно выбираемое ребро текущего 24-элементного учебного макета. Число 24 выбрано для моделирования и не является подтверждённым количеством физических рёбер; шаг, толщина, жалюзи и сплав неизвестны."
+      }
+    },
+    {
+      "id": "cooling.heatsink.fin.20",
+      "parent_id": "cooling.heatsink",
+      "name": {
+        "en": "Heatsink fin proxy 20",
+        "ru": "Макетное ребро радиатора 20"
+      },
+      "category": "cooling",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "One individually selectable fin in the current 24-fin learning blockout. The 24-object count is a modeling convenience, not a verified physical fin count; pitch, thickness, louvering and alloy are unknown.",
+        "ru": "Одно отдельно выбираемое ребро текущего 24-элементного учебного макета. Число 24 выбрано для моделирования и не является подтверждённым количеством физических рёбер; шаг, толщина, жалюзи и сплав неизвестны."
+      }
+    },
+    {
+      "id": "cooling.heatsink.fin.21",
+      "parent_id": "cooling.heatsink",
+      "name": {
+        "en": "Heatsink fin proxy 21",
+        "ru": "Макетное ребро радиатора 21"
+      },
+      "category": "cooling",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "One individually selectable fin in the current 24-fin learning blockout. The 24-object count is a modeling convenience, not a verified physical fin count; pitch, thickness, louvering and alloy are unknown.",
+        "ru": "Одно отдельно выбираемое ребро текущего 24-элементного учебного макета. Число 24 выбрано для моделирования и не является подтверждённым количеством физических рёбер; шаг, толщина, жалюзи и сплав неизвестны."
+      }
+    },
+    {
+      "id": "cooling.heatsink.fin.22",
+      "parent_id": "cooling.heatsink",
+      "name": {
+        "en": "Heatsink fin proxy 22",
+        "ru": "Макетное ребро радиатора 22"
+      },
+      "category": "cooling",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "One individually selectable fin in the current 24-fin learning blockout. The 24-object count is a modeling convenience, not a verified physical fin count; pitch, thickness, louvering and alloy are unknown.",
+        "ru": "Одно отдельно выбираемое ребро текущего 24-элементного учебного макета. Число 24 выбрано для моделирования и не является подтверждённым количеством физических рёбер; шаг, толщина, жалюзи и сплав неизвестны."
+      }
+    },
+    {
+      "id": "cooling.heatsink.fin.23",
+      "parent_id": "cooling.heatsink",
+      "name": {
+        "en": "Heatsink fin proxy 23",
+        "ru": "Макетное ребро радиатора 23"
+      },
+      "category": "cooling",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "One individually selectable fin in the current 24-fin learning blockout. The 24-object count is a modeling convenience, not a verified physical fin count; pitch, thickness, louvering and alloy are unknown.",
+        "ru": "Одно отдельно выбираемое ребро текущего 24-элементного учебного макета. Число 24 выбрано для моделирования и не является подтверждённым количеством физических рёбер; шаг, толщина, жалюзи и сплав неизвестны."
+      }
+    },
+    {
+      "id": "cooling.heatsink.fin.24",
+      "parent_id": "cooling.heatsink",
+      "name": {
+        "en": "Heatsink fin proxy 24",
+        "ru": "Макетное ребро радиатора 24"
+      },
+      "category": "cooling",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "One individually selectable fin in the current 24-fin learning blockout. The 24-object count is a modeling convenience, not a verified physical fin count; pitch, thickness, louvering and alloy are unknown.",
+        "ru": "Одно отдельно выбираемое ребро текущего 24-элементного учебного макета. Число 24 выбрано для моделирования и не является подтверждённым количеством физических рёбер; шаг, толщина, жалюзи и сплав неизвестны."
+      }
+    },
+    {
+      "id": "cooling.heatpipe.candidate.1",
+      "parent_id": "cooling.heatpipes",
+      "name": {
+        "en": "Heatpipe route candidate 1",
+        "ru": "Кандидатная трасса тепловой трубки 1"
+      },
+      "category": "cooling",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "Selectable assembly grouping the corresponding short proxy segments. The exact card's pipe count, tube diameter, flattened sections, wick, working fluid and 3D route have not been verified.",
+        "ru": "Выбираемая сборка, объединяющая соответствующие короткие макетные сегменты. Количество трубок в точной карте, диаметр, сплющенные участки, фитиль, рабочая жидкость и пространственная трасса не подтверждены."
+      }
+    },
+    {
+      "id": "cooling.heatpipe.candidate.2",
+      "parent_id": "cooling.heatpipes",
+      "name": {
+        "en": "Heatpipe route candidate 2",
+        "ru": "Кандидатная трасса тепловой трубки 2"
+      },
+      "category": "cooling",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "Selectable assembly grouping the corresponding short proxy segments. The exact card's pipe count, tube diameter, flattened sections, wick, working fluid and 3D route have not been verified.",
+        "ru": "Выбираемая сборка, объединяющая соответствующие короткие макетные сегменты. Количество трубок в точной карте, диаметр, сплющенные участки, фитиль, рабочая жидкость и пространственная трасса не подтверждены."
+      }
+    },
+    {
+      "id": "cooling.thermal_pad.memory.01",
+      "parent_id": "cooling.thermal_pad.memory",
+      "name": {
+        "en": "Memory thermal pad proxy 01",
+        "ru": "Макет термопрокладки памяти 01"
+      },
+      "category": "thermal",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.tomshardware.teardown"
+      ],
+      "description": {
+        "en": "One proxy contact patch aligned to a memory-package candidate. Thickness, hardness, material, exact footprint and compression are not measured and must not be used as a replacement-pad specification.",
+        "ru": "Один макетный участок контакта, совмещённый с кандидатом микросхемы памяти. Толщина, твёрдость, материал, точный контур и степень сжатия не измерены и не должны использоваться как спецификация запасной прокладки."
+      }
+    },
+    {
+      "id": "cooling.thermal_pad.memory.02",
+      "parent_id": "cooling.thermal_pad.memory",
+      "name": {
+        "en": "Memory thermal pad proxy 02",
+        "ru": "Макет термопрокладки памяти 02"
+      },
+      "category": "thermal",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.tomshardware.teardown"
+      ],
+      "description": {
+        "en": "One proxy contact patch aligned to a memory-package candidate. Thickness, hardness, material, exact footprint and compression are not measured and must not be used as a replacement-pad specification.",
+        "ru": "Один макетный участок контакта, совмещённый с кандидатом микросхемы памяти. Толщина, твёрдость, материал, точный контур и степень сжатия не измерены и не должны использоваться как спецификация запасной прокладки."
+      }
+    },
+    {
+      "id": "cooling.thermal_pad.memory.03",
+      "parent_id": "cooling.thermal_pad.memory",
+      "name": {
+        "en": "Memory thermal pad proxy 03",
+        "ru": "Макет термопрокладки памяти 03"
+      },
+      "category": "thermal",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.tomshardware.teardown"
+      ],
+      "description": {
+        "en": "One proxy contact patch aligned to a memory-package candidate. Thickness, hardness, material, exact footprint and compression are not measured and must not be used as a replacement-pad specification.",
+        "ru": "Один макетный участок контакта, совмещённый с кандидатом микросхемы памяти. Толщина, твёрдость, материал, точный контур и степень сжатия не измерены и не должны использоваться как спецификация запасной прокладки."
+      }
+    },
+    {
+      "id": "cooling.thermal_pad.memory.04",
+      "parent_id": "cooling.thermal_pad.memory",
+      "name": {
+        "en": "Memory thermal pad proxy 04",
+        "ru": "Макет термопрокладки памяти 04"
+      },
+      "category": "thermal",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.tomshardware.teardown"
+      ],
+      "description": {
+        "en": "One proxy contact patch aligned to a memory-package candidate. Thickness, hardness, material, exact footprint and compression are not measured and must not be used as a replacement-pad specification.",
+        "ru": "Один макетный участок контакта, совмещённый с кандидатом микросхемы памяти. Толщина, твёрдость, материал, точный контур и степень сжатия не измерены и не должны использоваться как спецификация запасной прокладки."
+      }
+    },
+    {
+      "id": "cooling.thermal_pad.memory.05",
+      "parent_id": "cooling.thermal_pad.memory",
+      "name": {
+        "en": "Memory thermal pad proxy 05",
+        "ru": "Макет термопрокладки памяти 05"
+      },
+      "category": "thermal",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.tomshardware.teardown"
+      ],
+      "description": {
+        "en": "One proxy contact patch aligned to a memory-package candidate. Thickness, hardness, material, exact footprint and compression are not measured and must not be used as a replacement-pad specification.",
+        "ru": "Один макетный участок контакта, совмещённый с кандидатом микросхемы памяти. Толщина, твёрдость, материал, точный контур и степень сжатия не измерены и не должны использоваться как спецификация запасной прокладки."
+      }
+    },
+    {
+      "id": "cooling.thermal_pad.memory.06",
+      "parent_id": "cooling.thermal_pad.memory",
+      "name": {
+        "en": "Memory thermal pad proxy 06",
+        "ru": "Макет термопрокладки памяти 06"
+      },
+      "category": "thermal",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.tomshardware.teardown"
+      ],
+      "description": {
+        "en": "One proxy contact patch aligned to a memory-package candidate. Thickness, hardness, material, exact footprint and compression are not measured and must not be used as a replacement-pad specification.",
+        "ru": "Один макетный участок контакта, совмещённый с кандидатом микросхемы памяти. Толщина, твёрдость, материал, точный контур и степень сжатия не измерены и не должны использоваться как спецификация запасной прокладки."
+      }
+    },
+    {
+      "id": "cooling.thermal_pad.vrm.01",
+      "parent_id": "cooling.thermal_pad.vrm",
+      "name": {
+        "en": "Power-stage thermal pad strip proxy",
+        "ru": "Макетная термопрокладка силовой части"
+      },
+      "category": "thermal",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "description": {
+        "en": "One generic strip proxy for a power-stage contact area. Exact coverage, thickness, material, hardness and affected reference designators are unknown.",
+        "ru": "Один общий макет полосы контакта в области силовой части. Точное покрытие, толщина, материал, твёрдость и обслуживаемые позиционные обозначения неизвестны."
+      }
     }
   ],
   "rules": [

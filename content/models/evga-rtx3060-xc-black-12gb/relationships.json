@@ -434,6 +434,497 @@
       "source_ids": [
         "src.techpowerup.pcb"
       ]
+    },
+    {
+      "id": "rel.detail.contains.fan-1-frame",
+      "from": "assembly.fan.1",
+      "to": "fan.1.frame",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.fan-1-hub",
+      "from": "assembly.fan.1",
+      "to": "fan.1.hub",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.fan-1-blade-1",
+      "from": "assembly.fan.1.rotor",
+      "to": "fan.1.blade.1",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.fan-1-blade-2",
+      "from": "assembly.fan.1.rotor",
+      "to": "fan.1.blade.2",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.fan-1-blade-3",
+      "from": "assembly.fan.1.rotor",
+      "to": "fan.1.blade.3",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.fan-1-blade-4",
+      "from": "assembly.fan.1.rotor",
+      "to": "fan.1.blade.4",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.fan-1-blade-5",
+      "from": "assembly.fan.1.rotor",
+      "to": "fan.1.blade.5",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.fan-1-blade-6",
+      "from": "assembly.fan.1.rotor",
+      "to": "fan.1.blade.6",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.fan-1-blade-7",
+      "from": "assembly.fan.1.rotor",
+      "to": "fan.1.blade.7",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.fan-2-frame",
+      "from": "assembly.fan.2",
+      "to": "fan.2.frame",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.fan-2-hub",
+      "from": "assembly.fan.2",
+      "to": "fan.2.hub",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.fan-2-blade-1",
+      "from": "assembly.fan.2.rotor",
+      "to": "fan.2.blade.1",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.fan-2-blade-2",
+      "from": "assembly.fan.2.rotor",
+      "to": "fan.2.blade.2",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.fan-2-blade-3",
+      "from": "assembly.fan.2.rotor",
+      "to": "fan.2.blade.3",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.fan-2-blade-4",
+      "from": "assembly.fan.2.rotor",
+      "to": "fan.2.blade.4",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.fan-2-blade-5",
+      "from": "assembly.fan.2.rotor",
+      "to": "fan.2.blade.5",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.fan-2-blade-6",
+      "from": "assembly.fan.2.rotor",
+      "to": "fan.2.blade.6",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.fan-2-blade-7",
+      "from": "assembly.fan.2.rotor",
+      "to": "fan.2.blade.7",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-01",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.01",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-02",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.02",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-03",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.03",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-04",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.04",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-05",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.05",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-06",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.06",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-07",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.07",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-08",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.08",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-09",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.09",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-10",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.10",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-11",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.11",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-12",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.12",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-13",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.13",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-14",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.14",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-15",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.15",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-16",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.16",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-17",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.17",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-18",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.18",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-19",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.19",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-20",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.20",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-21",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.21",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-22",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.22",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-23",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.23",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-24",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.24",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatpipe-candidate-1",
+      "from": "cooling.heatpipes",
+      "to": "cooling.heatpipe.candidate.1",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatpipe-candidate-2",
+      "from": "cooling.heatpipes",
+      "to": "cooling.heatpipe.candidate.2",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-thermal_pad-memory-01",
+      "from": "cooling.thermal_pad.memory",
+      "to": "cooling.thermal_pad.memory.01",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.tomshardware.teardown"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-thermal_pad-memory-02",
+      "from": "cooling.thermal_pad.memory",
+      "to": "cooling.thermal_pad.memory.02",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.tomshardware.teardown"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-thermal_pad-memory-03",
+      "from": "cooling.thermal_pad.memory",
+      "to": "cooling.thermal_pad.memory.03",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.tomshardware.teardown"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-thermal_pad-memory-04",
+      "from": "cooling.thermal_pad.memory",
+      "to": "cooling.thermal_pad.memory.04",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.tomshardware.teardown"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-thermal_pad-memory-05",
+      "from": "cooling.thermal_pad.memory",
+      "to": "cooling.thermal_pad.memory.05",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.tomshardware.teardown"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-thermal_pad-memory-06",
+      "from": "cooling.thermal_pad.memory",
+      "to": "cooling.thermal_pad.memory.06",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.tomshardware.teardown"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-thermal_pad-vrm-01",
+      "from": "cooling.thermal_pad.vrm",
+      "to": "cooling.thermal_pad.vrm.01",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
     }
   ]
 }

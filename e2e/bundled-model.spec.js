@@ -15,7 +15,7 @@ test("loads the generated Blender v0.5 SBS model package and resolves content-pa
   await expect(page.locator("#app-status")).toHaveText("Модель готова");
   const componentCount = Number(await page.locator("#component-count").textContent());
   expect(Number.isInteger(componentCount) && componentCount >= 85).toBeTruthy();
-  for (const id of ["chip.gpu.die", "fastener.cooler.01", "pcb.connector.pcie", "connector.fan.header.1", "connector.displayport.1", "connector.hdmi.1", "power.inductor.candidate.1", "power.capacitor.cluster", "power.switching_device.cluster", "power.controller.candidate"]) {
+  for (const id of ["chip.gpu.die", "fastener.cooler.01", "pcb.connector.pcie", "connector.fan.header.1", "connector.displayport.1", "connector.hdmi.1", "power.inductor.candidate.1", "power.capacitor.cluster", "power.switching_device.cluster", "power.controller.candidate", "fan.1.frame", "fan.1.hub", "fan.1.blade.1", "cooling.heatsink.fin.01", "cooling.heatpipe.candidate.1", "cooling.thermal_pad.memory.01"]) {
     await expect(page.locator(`#component-tree button[data-id="${id}"]`)).toBeVisible();
   }
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-fan-rotors", "2");
@@ -111,7 +111,7 @@ test("opens the self-contained root index.html directly with the embedded Blende
   await expect(page.locator("#viewer-canvas canvas"), JSON.stringify({ diagnostics, pageErrors, consoleErrors, requestFailures })).toBeVisible({ timeout: 10000 });
   const standaloneComponentCount = Number(await page.locator("#component-count").textContent());
   expect(Number.isInteger(standaloneComponentCount) && standaloneComponentCount >= 85).toBeTruthy();
-  for (const id of ["chip.gpu.die", "fastener.cooler.01", "pcb.connector.pcie", "connector.fan.header.1", "connector.displayport.1", "connector.hdmi.1", "power.inductor.candidate.1", "power.capacitor.cluster", "power.switching_device.cluster", "power.controller.candidate"]) {
+  for (const id of ["chip.gpu.die", "fastener.cooler.01", "pcb.connector.pcie", "connector.fan.header.1", "connector.displayport.1", "connector.hdmi.1", "power.inductor.candidate.1", "power.capacitor.cluster", "power.switching_device.cluster", "power.controller.candidate", "fan.1.frame", "fan.1.hub", "fan.1.blade.1", "cooling.heatsink.fin.01", "cooling.heatpipe.candidate.1", "cooling.thermal_pad.memory.01"]) {
     await expect(page.locator(`#component-tree button[data-id="${id}"]`)).toBeVisible();
   }
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-fan-rotors", "2");
