@@ -43,7 +43,6 @@ jobs:
           fi
           git commit -m "chore: add npm dependency lockfile"
           git push origin "HEAD:${GITHUB_REF_NAME}"
-          gh workflow run viewer-build.yml --ref "${GITHUB_REF_NAME}"
       - name: Install locked dependencies
         run: npm ci --no-audit --no-fund
       - name: Install Chromium for browser tests
