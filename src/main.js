@@ -1,4 +1,6 @@
 import * as THREE from "three";
+import { zipSync, strToU8 } from "fflate";
+import { createSemanticInventory, createInventoryCsvFiles } from "./data/inventory-export.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { SceneController } from "./viewer/SceneController.js";
@@ -13,6 +15,10 @@ import DEFAULT_CLAIM_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/
 import DEFAULT_RELATIONSHIP_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/relationships.json";
 import DEFAULT_ASSEMBLY_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/assembly_steps.json";
 import DEFAULT_ANIMATION_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/animations.json";
+import DEFAULT_MODEL_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/model.json";
+import DEFAULT_COMPONENT_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/components.json";
+import DEFAULT_SOURCE_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/sources.json";
+import DEFAULT_RELEASE_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/release.json";
 import { loadModelPackage, validateSelfContainedGlb, MAX_MODEL_PACKAGE_BYTES, MAX_SCENE_GLB_BYTES } from "./viewer/ModelPackageLoader.js";
 
 let MODEL = DEFAULT_MODEL;
@@ -23,6 +29,18 @@ let CLAIM_PACKAGE = DEFAULT_CLAIM_PACKAGE;
 let RELATIONSHIP_PACKAGE = DEFAULT_RELATIONSHIP_PACKAGE;
 let ASSEMBLY_PACKAGE = DEFAULT_ASSEMBLY_PACKAGE;
 let ANIMATION_PACKAGE = DEFAULT_ANIMATION_PACKAGE;
+const DEFAULT_PACKAGE_DATA = {
+  model: DEFAULT_MODEL_PACKAGE,
+  components: DEFAULT_COMPONENT_PACKAGE,
+  sources: DEFAULT_SOURCE_PACKAGE,
+  learning: DEFAULT_LEARNING_PACKAGE,
+  process_layers: DEFAULT_PROCESS_PACKAGE,
+  claims: DEFAULT_CLAIM_PACKAGE,
+  relationships: DEFAULT_RELATIONSHIP_PACKAGE,
+  assembly_steps: DEFAULT_ASSEMBLY_PACKAGE,
+  animations: DEFAULT_ANIMATION_PACKAGE,
+  release: DEFAULT_RELEASE_PACKAGE
+};
 const MODEL_CATALOG = createCatalogAdapter(CATALOG_SOURCE, { defaultPackageModelId: DEFAULT_MODEL.id });
 
 const $ = (selector) => document.querySelector(selector);
@@ -78,7 +96,8 @@ const state = {
   catalogSearch: "",
   catalogCategory: "all",
   catalogLoadingId: null,
-  catalogOpener: null
+  catalogOpener: null,
+  packageData: DEFAULT_PACKAGE_DATA
 };
 
 const MAX_GLB_BYTES = MAX_SCENE_GLB_BYTES;
@@ -98,7 +117,7 @@ const UI = {
     measure: "Measure", clearMeasurement: "Clear", measureIdle: "Measurement off · model-space only", measurePrompt: "Click a visible surface to set point 1 of 2", measureFirstPoint: "Point 1 of 2 set · select the second point", measureDistance: "Distance", measureDisclaimer: "model-space only", measureNoHit: "Click a visible model surface", measureEnabled: "Measurement enabled", measureDisabled: "Measurement disabled", modelUnits: "model units", measureNote: "Not a verified physical dimension",
     clearLayer: "Clear layer", inspection: "INSPECTION", componentDetails: "Component details",
     selectComponent: "Select a component", selectHint: "Choose a part in the 3D view or assembly tree to inspect its role and evidence.",
-    identity: "IDENTITY", parent: "Parent", geometry: "Geometry", evidence: "EVIDENCE", technicalClaims: "TECHNICAL CLAIMS", claimUnknown: "Unknown", yes: "Yes", no: "No", claimSources: "Evidence sources", technicalRelationships: "TECHNICAL RELATIONSHIPS", qualitativeRelation: "Qualitative relationship", noRelationshipSource: "No source registered", assemblyEvidence: "DISASSEMBLY EVIDENCE", noVerifiedSequence: "No verified disassembly sequence has been authored for this model.", sourceObservations: "SOURCE OBSERVATIONS · NOT DISASSEMBLY STEPS", stepLabel: "Step", toolsLabel: "Tools", safetyLabel: "Safety", prerequisitesLabel: "Prerequisites", openAtSource: "Open source",
+    identity: "IDENTITY", parent: "Parent", geometry: "Geometry", evidence: "EVIDENCE", technicalClaims: "TECHNICAL CLAIMS", claimUnknown: "Unknown", yes: "Yes", no: "No", claimSources: "Evidence sources", technicalRelationships: "TECHNICAL RELATIONSHIPS", qualitativeRelation: "Qualitative relationship", noRelationshipSource: "No source registered", exportData: "MODEL DATA", exportJson: "Export JSON", exportCsv: "CSV ZIP", exportComplete: "Export prepared · local only", exportFailed: "Export failed", assemblyEvidence: "DISASSEMBLY EVIDENCE", noVerifiedSequence: "No verified disassembly sequence has been authored for this model.", sourceObservations: "SOURCE OBSERVATIONS · NOT DISASSEMBLY STEPS", stepLabel: "Step", toolsLabel: "Tools", safetyLabel: "Safety", prerequisitesLabel: "Prerequisites", openAtSource: "Open source",
     sources: "SOURCES", accuracyFooter: "Unknown values remain unknown. No inferred CAD accuracy.",
     ready: "READY", localFirst: "LOCAL-FIRST · NO ACCOUNT", openModel: "Open model",
     noSelection: "No component selected", componentsCount: "components",
@@ -123,7 +142,7 @@ const UI = {
     measure: "Измерить", clearMeasurement: "Сброс", measureIdle: "Измерение выключено · только пространство модели", measurePrompt: "Нажмите на видимую поверхность, чтобы задать точку 1 из 2", measureFirstPoint: "Точка 1 из 2 задана · выберите вторую", measureDistance: "Расстояние", measureDisclaimer: "ед. модели", measureNoHit: "Нажмите на видимую поверхность модели", measureEnabled: "Инструмент измерения включён", measureDisabled: "Инструмент измерения выключен", modelUnits: "единицы модели", measureNote: "Не подтверждённый физический размер",
     clearLayer: "Сбросить слой", inspection: "ИНСПЕКЦИЯ", componentDetails: "Карточка компонента",
     selectComponent: "Выберите компонент", selectHint: "Выберите деталь в 3D-окне или дереве сборки, чтобы изучить её назначение и источники.",
-    identity: "ИДЕНТИФИКАЦИЯ", parent: "Родитель", geometry: "Геометрия", evidence: "ДОКАЗАТЕЛЬНОСТЬ", technicalClaims: "ТЕХНИЧЕСКИЕ УТВЕРЖДЕНИЯ", claimUnknown: "Неизвестно", yes: "Да", no: "Нет", claimSources: "Источники утверждения", technicalRelationships: "ТЕХНИЧЕСКИЕ СВЯЗИ", qualitativeRelation: "Качественная связь", noRelationshipSource: "Источник не зарегистрирован", assemblyEvidence: "ДОКАЗАТЕЛЬСТВА РАЗБОРКИ", noVerifiedSequence: "Подтверждённая последовательность разборки для этой модели пока не составлена.", sourceObservations: "НАБЛЮДЕНИЯ В ИСТОЧНИКАХ · НЕ ШАГИ РАЗБОРКИ", stepLabel: "Шаг", toolsLabel: "Инструменты", safetyLabel: "Безопасность", prerequisitesLabel: "Предварительные шаги", openAtSource: "Открыть источник",
+    identity: "ИДЕНТИФИКАЦИЯ", parent: "Родитель", geometry: "Геометрия", evidence: "ДОКАЗАТЕЛЬНОСТЬ", technicalClaims: "ТЕХНИЧЕСКИЕ УТВЕРЖДЕНИЯ", claimUnknown: "Неизвестно", yes: "Да", no: "Нет", claimSources: "Источники утверждения", technicalRelationships: "ТЕХНИЧЕСКИЕ СВЯЗИ", qualitativeRelation: "Качественная связь", noRelationshipSource: "Источник не зарегистрирован", exportData: "ДАННЫЕ МОДЕЛИ", exportJson: "Экспорт JSON", exportCsv: "CSV ZIP", exportComplete: "Экспорт подготовлен · локально", exportFailed: "Ошибка экспорта", assemblyEvidence: "ДОКАЗАТЕЛЬСТВА РАЗБОРКИ", noVerifiedSequence: "Подтверждённая последовательность разборки для этой модели пока не составлена.", sourceObservations: "НАБЛЮДЕНИЯ В ИСТОЧНИКАХ · НЕ ШАГИ РАЗБОРКИ", stepLabel: "Шаг", toolsLabel: "Инструменты", safetyLabel: "Безопасность", prerequisitesLabel: "Предварительные шаги", openAtSource: "Открыть источник",
     sources: "ИСТОЧНИКИ", accuracyFooter: "Неизвестное остаётся неизвестным. Точность CAD не подразумевается.",
     ready: "ГОТОВО", localFirst: "ЛОКАЛЬНО · БЕЗ АККАУНТА", openModel: "Открыть модель",
     noSelection: "Компонент не выбран", componentsCount: "компонентов",
@@ -1827,6 +1846,7 @@ function updateModelHeader() {
 
 function applyPackageData(packageData) {
   const adapter = createModelDataAdapter(packageData);
+  state.packageData = packageData;
   MODEL = adapter.model;
   COMPONENTS = adapter.components;
   LEARNING_PACKAGE = packageData.learning ?? { questions: [] };
@@ -1873,6 +1893,18 @@ function useGenericModelData(filename) {
   ASSEMBLY_PACKAGE = { steps: [], observations: [] };
   ANIMATION_PACKAGE = { clips: [] };
   state.catalog = new Map();
+  state.packageData = {
+    model: { id: MODEL.id, manufacturer: MODEL.manufacturer, name: MODEL.name, geometry_status: "unknown" },
+    components: { components: [] },
+    sources: { sources: [] },
+    relationships: { relationships: [] },
+    claims: { claims: [] },
+    process_layers: { process_layers: [] },
+    assembly_steps: { steps: [], observations: [] },
+    learning: { questions: [] },
+    animations: { clips: [] },
+    release: null
+  };
   state.loadedCatalogModelId = null;
   state.catalogLoadingId = null;
   renderCatalog();
@@ -2061,6 +2093,66 @@ function clearMeasurement() {
   updateMeasurementReadout();
 }
 
+function exportFileStem() {
+  const raw = state.packageData?.model?.id ?? MODEL.id ?? "model";
+  return String(raw).replace(/[^a-z0-9._-]+/gi, "-").replace(/^-+|-+$/g, "").slice(0, 80) || "model";
+}
+
+function downloadLocalFile(filename, content, mimeType) {
+  const blob = new Blob([content], { type: mimeType });
+  const objectUrl = URL.createObjectURL(blob);
+  const anchor = document.createElement("a");
+  anchor.href = objectUrl;
+  anchor.download = filename;
+  anchor.hidden = true;
+  document.body.append(anchor);
+  anchor.click();
+  anchor.remove();
+  window.setTimeout(() => URL.revokeObjectURL(objectUrl), 1500);
+}
+
+function exportSemanticInventoryJson() {
+  try {
+    const inventory = createSemanticInventory(state.packageData);
+    const filename = exportFileStem() + "-semantic-inventory.json";
+    downloadLocalFile(filename, JSON.stringify(inventory, null, 2), "application/json;charset=utf-8");
+    setStatus(t("exportComplete"));
+  } catch (error) {
+    console.error("Semantic inventory JSON export failed:", error);
+    setStatus(t("exportFailed"));
+  }
+}
+
+function exportSemanticInventoryCsv() {
+  try {
+    const inventory = createSemanticInventory(state.packageData);
+    const csvFiles = createInventoryCsvFiles(inventory);
+    const archiveFiles = {
+      "README.txt": strToU8([
+        "Screw by Screw — semantic inventory export",
+        "",
+        "This archive contains semantic data tables only.",
+        "It does not contain 3D geometry, CAD, BoardView or a complete physical BOM.",
+        "Unknown values and evidence labels are preserved; candidates are not confirmed population.",
+        "",
+        "Model: " + (inventory.model.display_name ?? inventory.model.product_name ?? inventory.model.name ?? inventory.model.id),
+        "Model ID: " + inventory.model.id,
+        "Generated: " + inventory.generated_at,
+        "",
+        "CSV tables use UTF-8 with BOM and semicolon delimiters."
+      ].join("\n")),
+      ...Object.fromEntries(Object.entries(csvFiles).map(([name, csv]) => [name, strToU8(csv)]))
+    };
+    const archive = zipSync(archiveFiles, { level: 6 });
+    const filename = exportFileStem() + "-semantic-inventory-csv.zip";
+    downloadLocalFile(filename, archive, "application/zip");
+    setStatus(t("exportComplete"));
+  } catch (error) {
+    console.error("Semantic inventory CSV export failed:", error);
+    setStatus(t("exportFailed"));
+  }
+}
+
 function onCanvasClick(event) {
   const rect = state.renderer.domElement.getBoundingClientRect();
   state.pointer.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
@@ -2085,6 +2177,8 @@ function onCanvasClick(event) {
 function bindUI() {
   document.addEventListener("pointerdown", () => { state.userInteracted = true; }, { capture: true });
   document.addEventListener("keydown", () => { state.userInteracted = true; }, { capture: true });
+  $("#export-inventory-json").addEventListener("click", exportSemanticInventoryJson);
+  $("#export-inventory-csv").addEventListener("click", exportSemanticInventoryCsv);
   $("#catalog-open").addEventListener("click", openCatalog);
   $("#catalog-close").addEventListener("click", closeCatalog);
   $("#catalog-search").addEventListener("input", (event) => { state.catalogSearch = event.target.value; renderCatalog(); });
