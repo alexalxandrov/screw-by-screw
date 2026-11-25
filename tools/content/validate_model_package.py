@@ -258,11 +258,23 @@ def validate_package(package: dict, package_dir: Path | None = None) -> list[str
         missing = sorted(set(linked) - component_ids)
         if missing:
             raise PackageError(f"Process layer {layer['id']} has unknown components: {missing}")
-        if layer.get("mode") not in {"qualitative", "quantitative"}:
+        if layer.get("mode") not in {"qualitative", "quantitative", "logical_architecture"}:
             raise PackageError(f"Process layer {layer['id']} has invalid mode")
         require_source_ids(layer.get("source_ids"), source_ids, f"process layer {layer['id']}")
-        if not isinstance(layer.get("assumptions"), list) or any(not isinstance(value, str) for value in layer["assumptions"]):
-            raise PackageError(f"Process layer {layer['id']} assumptions must be an array of strings")
+        assumptions = layer.get("assumptions")
+        if not isinstance(assumptions, list):
+            raise PackageError(f"Process layer {layer['id']} assumptions must be an array")
+        for value in assumptions:
+            if isinstance(value, str) and value.strip():
+                continue
+            if isinstance(value, dict) and all(
+                isinstance(value.get(lang), str) and value[lang].strip()
+                for lang in ("en", "ru")
+            ):
+                continue
+            raise PackageError(
+                f"Process layer {layer['id']} assumptions must contain strings or bilingual objects"
+            )
         for field in ("title", "description"):
             localized = layer.get(field)
             if not isinstance(localized, dict) or not all(isinstance(localized.get(lang), str) and localized[lang] for lang in ("en", "ru")):

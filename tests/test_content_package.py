@@ -187,6 +187,23 @@ class ContentPackageTests(unittest.TestCase):
         with self.assertRaisesRegex(validator.PackageError, "bilingual description"):
             validator.validate_package(package)
 
+    def test_logical_architecture_process_layer_accepts_bilingual_assumptions(self):
+        package = sample_package()
+        layer = package["process_layers"]["process_layers"][0]
+        layer["mode"] = "logical_architecture"
+        layer["assumptions"] = [
+            {"en": "Logical nodes are not physical layout.", "ru": "Логические узлы не являются физической компоновкой."}
+        ]
+        validator.validate_package(package)
+
+    def test_process_layer_rejects_untranslated_assumption_object(self):
+        package = sample_package()
+        package["process_layers"]["process_layers"][0]["assumptions"] = [
+            {"en": "Logical nodes are not physical layout."}
+        ]
+        with self.assertRaisesRegex(validator.PackageError, "bilingual objects"):
+            validator.validate_package(package)
+
     def test_untranslated_quiz_choice_fails(self):
         package = sample_package()
         package["learning"]["questions"][0]["choices"][0].pop("ru")
