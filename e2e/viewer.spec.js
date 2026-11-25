@@ -159,3 +159,33 @@ test("shows model-level specifications when the top-level device is selected", a
   await page.locator('#component-tree button[data-id="assembly.shroud"]').click();
   await expect(page.locator('[data-claim-id="claim.card.outer_shroud_length"]')).toContainText("Неизвестно");
 });
+
+
+test("search finds components by package marking and source title", async ({ page }) => {
+  await page.goto("/");
+  const search = page.locator("#component-search");
+
+  await search.fill("K4ZAF325BM-HC16");
+  const electronics = page.locator('#component-tree button[data-id="assembly.pcb.electronics"]');
+  await expect(electronics).toBeVisible();
+  await expect(electronics).toHaveClass(/search-match/);
+  await expect(page.locator('#component-tree button[data-id="assembly.card.root"]')).toBeVisible();
+
+  await search.fill("Tom's Hardware");
+  await expect(electronics).toBeVisible();
+  await expect(electronics).toHaveClass(/search-match/);
+
+  await search.fill("3584");
+  const device = page.locator('#component-tree button[data-id="assembly.card.root"]');
+  await expect(device).toBeVisible();
+  await expect(device).toHaveClass(/search-match/);
+});
+
+test("component search keeps ordinary name and stable-ID lookup", async ({ page }) => {
+  await page.goto("/");
+  const search = page.locator("#component-search");
+  await search.fill("cooling.heatsink");
+  await expect(page.locator('#component-tree button[data-id="cooling.heatsink"]')).toBeVisible();
+  await search.fill("Радиатор с рёбрами");
+  await expect(page.locator('#component-tree button[data-id="cooling.heatsink"]')).toBeVisible();
+});
