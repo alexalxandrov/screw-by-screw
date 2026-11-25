@@ -643,8 +643,8 @@ function setLayer(layer) {
     setStatus(t("ready"));
     return;
   }
-  const layer = PROCESS_PACKAGE.process_layers.find((item) => item.type === state.activeLayer);
-  const linkedIds = new Set(layer?.linked_component_ids ?? []);
+  const layerData = PROCESS_PACKAGE.process_layers.find((item) => item.type === state.activeLayer);
+  const linkedIds = new Set(layerData?.linked_component_ids ?? []);
   const matches = [];
   state.modelRoot.traverse((object) => {
     const id = object.userData?.sbs_component_id;
