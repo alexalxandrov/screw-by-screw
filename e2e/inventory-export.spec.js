@@ -32,7 +32,7 @@ test("exports the active model as semantic JSON and a CSV ZIP without geometry",
   expect(Object.keys(archive)).toContain("sources.csv");
   expect(Object.keys(archive)).toContain("source_observations.csv");
   const componentsCsv = strFromU8(archive["components.csv"]);
-  expect(componentsCsv.charCodeAt(0)).toBe(0xfeff);
+  expect([...archive["components.csv"].slice(0, 3)]).toEqual([0xef, 0xbb, 0xbf]);
   expect(componentsCsv).toContain("evidence_status");
   expect(componentsCsv).toContain("geometry_status");
 });
