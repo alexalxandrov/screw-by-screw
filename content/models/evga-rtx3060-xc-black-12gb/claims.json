@@ -261,7 +261,7 @@
       "source_ids": [
         "src.tomshardware.teardown"
       ],
-      "notes": "Tom's Hardware reports eight rear screws on its EVGA RTX 3060 XC teardown sample. Exact PCB/cooler revision matching to 12G-P5-3655-KR is not established; do not treat this as an exact-SKU service specification."
+      "notes": "Tom's Hardware reports eight retention screws on a related EVGA GeForce RTX 3060 XC teardown sample, but the article does not identify the 12G-P5-3655-KR XC BLACK. This count is variant context only and is not used as the exact model's screw count or service instruction."
     },
     {
       "id": "claim.memory.effective_clock",
@@ -544,6 +544,18 @@
         "src.samsung.gddr6.catalog"
       ],
       "notes": "The 512M × 32 organization corresponds to a 32-bit aggregate interface per package; logical channel representation only."
+    },
+    {
+      "id": "claim.cooler.gpu_mounting_screw_count.visible",
+      "subject_id": "assembly.fasteners",
+      "predicate": "visible_gpu_area_heatsink_mounting_screw_count",
+      "value": 4,
+      "unit": "screws",
+      "confidence_class": "independently_verified",
+      "source_ids": [
+        "src.lanoc.review"
+      ],
+      "notes": "LanOC's explicit XC BLACK review identifies four heatsink mounting screws in the centre around the GPU in its 12G-P5-3655-KR sample. This is the visible GPU-area mounting set only, not a count of every screw retaining the shroud/cooler."
     }
   ]
 }

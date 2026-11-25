@@ -539,94 +539,95 @@
         "ru": "Комплект крепежа"
       },
       "category": "mechanical",
-      "evidence_status": "candidate_count_requires_exact_board_confirmation",
+      "evidence_status": "visible_exact_model",
       "geometry_status": "assembly_node",
       "source_ids": [
+        "src.lanoc.review",
         "src.tomshardware.teardown"
       ],
       "description": {
-        "en": "Candidate fastener grouping for teardown study. The cited EVGA RTX 3060 XC teardown reports eight rear hold-down screws, but the exact PCB/cooler revision match is not proven; positions in this model are illustrative.",
-        "ru": "Кандидатная группа крепежа для изучения разборки. В приведённой разборке EVGA RTX 3060 XC указаны восемь задних крепёжных винтов, но совпадение ревизии PCB/кулера не доказано; положения в этой модели условные."
+        "en": "The exact XC BLACK review shows four heatsink mounting screws around the GPU. Four additional rear-edge placeholders are retained only as unverified candidates from a related EVGA RTX 3060 XC teardown; they are not asserted as installed screws on this SKU.",
+        "ru": "В обзоре точной XC BLACK показаны четыре винта крепления радиатора вокруг GPU. Ещё четыре макета крепежа у заднего края оставлены только как неподтверждённые кандидаты из разборки родственной EVGA RTX 3060 XC; их наличие на этом SKU не утверждается."
       }
     },
     {
       "id": "fastener.cooler.01",
       "parent_id": "assembly.fasteners",
       "name": {
-        "en": "Cooler screw candidate 01",
-        "ru": "Кандидатный винт кулера 01"
+        "en": "GPU heatsink mounting screw 1",
+        "ru": "Винт крепления радиатора GPU 1"
       },
       "category": "fastener",
-      "evidence_status": "candidate_count_requires_exact_board_confirmation",
+      "evidence_status": "visible_exact_model",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
-        "src.tomshardware.teardown"
+        "src.lanoc.review"
       ],
       "description": {
-        "en": "Individual visual screw placeholder. Head style, thread, length, washer, torque and exact mounting location are not verified for this retail SKU.",
-        "ru": "Отдельный визуальный макет винта. Тип головки, резьба, длина, шайба, момент затяжки и точное место крепления для этого розничного SKU не проверены."
+        "en": "One of the four heatsink mounting screws explicitly visible around the GPU in the exact EVGA RTX 3060 XC BLACK review sample. Approximate photo-derived position only; head profile, thread, length, spring specification and torque are not measured.",
+        "ru": "Один из четырёх винтов крепления радиатора, явно показанных вокруг GPU на образце точной EVGA RTX 3060 XC BLACK. Положение приблизительно восстановлено по фотографии; профиль головки, резьба, длина, параметры пружины и момент затяжки не измерены."
       }
     },
     {
       "id": "fastener.cooler.02",
       "parent_id": "assembly.fasteners",
       "name": {
-        "en": "Cooler screw candidate 02",
-        "ru": "Кандидатный винт кулера 02"
+        "en": "GPU heatsink mounting screw 2",
+        "ru": "Винт крепления радиатора GPU 2"
       },
       "category": "fastener",
-      "evidence_status": "candidate_count_requires_exact_board_confirmation",
+      "evidence_status": "visible_exact_model",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
-        "src.tomshardware.teardown"
+        "src.lanoc.review"
       ],
       "description": {
-        "en": "Individual visual screw placeholder. Head style, thread, length, washer, torque and exact mounting location are not verified for this retail SKU.",
-        "ru": "Отдельный визуальный макет винта. Тип головки, резьба, длина, шайба, момент затяжки и точное место крепления для этого розничного SKU не проверены."
+        "en": "One of the four heatsink mounting screws explicitly visible around the GPU in the exact EVGA RTX 3060 XC BLACK review sample. Approximate photo-derived position only; head profile, thread, length, spring specification and torque are not measured.",
+        "ru": "Один из четырёх винтов крепления радиатора, явно показанных вокруг GPU на образце точной EVGA RTX 3060 XC BLACK. Положение приблизительно восстановлено по фотографии; профиль головки, резьба, длина, параметры пружины и момент затяжки не измерены."
       }
     },
     {
       "id": "fastener.cooler.03",
       "parent_id": "assembly.fasteners",
       "name": {
-        "en": "Cooler screw candidate 03",
-        "ru": "Кандидатный винт кулера 03"
+        "en": "GPU heatsink mounting screw 3",
+        "ru": "Винт крепления радиатора GPU 3"
       },
       "category": "fastener",
-      "evidence_status": "candidate_count_requires_exact_board_confirmation",
+      "evidence_status": "visible_exact_model",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
-        "src.tomshardware.teardown"
+        "src.lanoc.review"
       ],
       "description": {
-        "en": "Individual visual screw placeholder. Head style, thread, length, washer, torque and exact mounting location are not verified for this retail SKU.",
-        "ru": "Отдельный визуальный макет винта. Тип головки, резьба, длина, шайба, момент затяжки и точное место крепления для этого розничного SKU не проверены."
+        "en": "One of the four heatsink mounting screws explicitly visible around the GPU in the exact EVGA RTX 3060 XC BLACK review sample. Approximate photo-derived position only; head profile, thread, length, spring specification and torque are not measured.",
+        "ru": "Один из четырёх винтов крепления радиатора, явно показанных вокруг GPU на образце точной EVGA RTX 3060 XC BLACK. Положение приблизительно восстановлено по фотографии; профиль головки, резьба, длина, параметры пружины и момент затяжки не измерены."
       }
     },
     {
       "id": "fastener.cooler.04",
       "parent_id": "assembly.fasteners",
       "name": {
-        "en": "Cooler screw candidate 04",
-        "ru": "Кандидатный винт кулера 04"
+        "en": "GPU heatsink mounting screw 4",
+        "ru": "Винт крепления радиатора GPU 4"
       },
       "category": "fastener",
-      "evidence_status": "candidate_count_requires_exact_board_confirmation",
+      "evidence_status": "visible_exact_model",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
-        "src.tomshardware.teardown"
+        "src.lanoc.review"
       ],
       "description": {
-        "en": "Individual visual screw placeholder. Head style, thread, length, washer, torque and exact mounting location are not verified for this retail SKU.",
-        "ru": "Отдельный визуальный макет винта. Тип головки, резьба, длина, шайба, момент затяжки и точное место крепления для этого розничного SKU не проверены."
+        "en": "One of the four heatsink mounting screws explicitly visible around the GPU in the exact EVGA RTX 3060 XC BLACK review sample. Approximate photo-derived position only; head profile, thread, length, spring specification and torque are not measured.",
+        "ru": "Один из четырёх винтов крепления радиатора, явно показанных вокруг GPU на образце точной EVGA RTX 3060 XC BLACK. Положение приблизительно восстановлено по фотографии; профиль головки, резьба, длина, параметры пружины и момент затяжки не измерены."
       }
     },
     {
       "id": "fastener.cooler.05",
       "parent_id": "assembly.fasteners",
       "name": {
-        "en": "Cooler screw candidate 05",
-        "ru": "Кандидатный винт кулера 05"
+        "en": "Unverified rear retention screw candidate 1",
+        "ru": "Неподтверждённый кандидат заднего крепежа 1"
       },
       "category": "fastener",
       "evidence_status": "candidate_count_requires_exact_board_confirmation",
@@ -635,16 +636,16 @@
         "src.tomshardware.teardown"
       ],
       "description": {
-        "en": "Individual visual screw placeholder. Head style, thread, length, washer, torque and exact mounting location are not verified for this retail SKU.",
-        "ru": "Отдельный визуальный макет винта. Тип головки, резьба, длина, шайба, момент затяжки и точное место крепления для этого розничного SKU не проверены."
+        "en": "Unverified rear-edge retention-screw candidate retained from a related EVGA RTX 3060 XC teardown. The article does not establish that this screw or its position belongs to the XC BLACK 12G-P5-3655-KR sample. It is not represented as an installed exact-SKU fastener.",
+        "ru": "Неподтверждённый кандидат винта крепления у заднего края, сохранённый по разборке родственной EVGA RTX 3060 XC. Статья не доказывает, что этот винт или его положение относятся к образцу XC BLACK 12G-P5-3655-KR. Он не представлен как установленный крепёж точного SKU."
       }
     },
     {
       "id": "fastener.cooler.06",
       "parent_id": "assembly.fasteners",
       "name": {
-        "en": "Cooler screw candidate 06",
-        "ru": "Кандидатный винт кулера 06"
+        "en": "Unverified rear retention screw candidate 2",
+        "ru": "Неподтверждённый кандидат заднего крепежа 2"
       },
       "category": "fastener",
       "evidence_status": "candidate_count_requires_exact_board_confirmation",
@@ -653,16 +654,16 @@
         "src.tomshardware.teardown"
       ],
       "description": {
-        "en": "Individual visual screw placeholder. Head style, thread, length, washer, torque and exact mounting location are not verified for this retail SKU.",
-        "ru": "Отдельный визуальный макет винта. Тип головки, резьба, длина, шайба, момент затяжки и точное место крепления для этого розничного SKU не проверены."
+        "en": "Unverified rear-edge retention-screw candidate retained from a related EVGA RTX 3060 XC teardown. The article does not establish that this screw or its position belongs to the XC BLACK 12G-P5-3655-KR sample. It is not represented as an installed exact-SKU fastener.",
+        "ru": "Неподтверждённый кандидат винта крепления у заднего края, сохранённый по разборке родственной EVGA RTX 3060 XC. Статья не доказывает, что этот винт или его положение относятся к образцу XC BLACK 12G-P5-3655-KR. Он не представлен как установленный крепёж точного SKU."
       }
     },
     {
       "id": "fastener.cooler.07",
       "parent_id": "assembly.fasteners",
       "name": {
-        "en": "Cooler screw candidate 07",
-        "ru": "Кандидатный винт кулера 07"
+        "en": "Unverified rear retention screw candidate 3",
+        "ru": "Неподтверждённый кандидат заднего крепежа 3"
       },
       "category": "fastener",
       "evidence_status": "candidate_count_requires_exact_board_confirmation",
@@ -671,16 +672,16 @@
         "src.tomshardware.teardown"
       ],
       "description": {
-        "en": "Individual visual screw placeholder. Head style, thread, length, washer, torque and exact mounting location are not verified for this retail SKU.",
-        "ru": "Отдельный визуальный макет винта. Тип головки, резьба, длина, шайба, момент затяжки и точное место крепления для этого розничного SKU не проверены."
+        "en": "Unverified rear-edge retention-screw candidate retained from a related EVGA RTX 3060 XC teardown. The article does not establish that this screw or its position belongs to the XC BLACK 12G-P5-3655-KR sample. It is not represented as an installed exact-SKU fastener.",
+        "ru": "Неподтверждённый кандидат винта крепления у заднего края, сохранённый по разборке родственной EVGA RTX 3060 XC. Статья не доказывает, что этот винт или его положение относятся к образцу XC BLACK 12G-P5-3655-KR. Он не представлен как установленный крепёж точного SKU."
       }
     },
     {
       "id": "fastener.cooler.08",
       "parent_id": "assembly.fasteners",
       "name": {
-        "en": "Cooler screw candidate 08",
-        "ru": "Кандидатный винт кулера 08"
+        "en": "Unverified rear retention screw candidate 4",
+        "ru": "Неподтверждённый кандидат заднего крепежа 4"
       },
       "category": "fastener",
       "evidence_status": "candidate_count_requires_exact_board_confirmation",
@@ -689,8 +690,8 @@
         "src.tomshardware.teardown"
       ],
       "description": {
-        "en": "Individual visual screw placeholder. Head style, thread, length, washer, torque and exact mounting location are not verified for this retail SKU.",
-        "ru": "Отдельный визуальный макет винта. Тип головки, резьба, длина, шайба, момент затяжки и точное место крепления для этого розничного SKU не проверены."
+        "en": "Unverified rear-edge retention-screw candidate retained from a related EVGA RTX 3060 XC teardown. The article does not establish that this screw or its position belongs to the XC BLACK 12G-P5-3655-KR sample. It is not represented as an installed exact-SKU fastener.",
+        "ru": "Неподтверждённый кандидат винта крепления у заднего края, сохранённый по разборке родственной EVGA RTX 3060 XC. Статья не доказывает, что этот винт или его положение относятся к образцу XC BLACK 12G-P5-3655-KR. Он не представлен как установленный крепёж точного SKU."
       }
     },
     {

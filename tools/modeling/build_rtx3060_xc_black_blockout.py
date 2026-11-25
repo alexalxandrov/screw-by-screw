@@ -52,6 +52,8 @@ STATUS = {
     "teardown_supported": "teardown_supported",
     "illustrative": "illustrative",
     "photo_estimate": "photo_estimate",
+    "visible_exact_model": "visible_exact_model",
+    "candidate_count_requires_exact_board_confirmation": "candidate_count_requires_exact_board_confirmation",
 }
 
 manifest = {
@@ -967,27 +969,38 @@ def main():
         (CARD_LENGTH / 2, half_y + 0.5, CARD_HEIGHT / 2),
         ext, parent=card_root,
     )
+    # Four GPU-area mounting screws are photo-positioned from the exact XC BLACK review.
+    # The remaining related-XC fastener candidates stay as unmeshed logical markers.
     screw_positions = (
-        (12.0, 9.0), (12.0, 101.0),
-        (55.0, 10.0), (55.0, 101.0),
-        (120.0, 10.0), (120.0, 101.0),
-        (190.0, 9.0), (190.0, 101.0),
+        (59.0, 27.0), (108.0, 27.0),
+        (56.0, 62.0), (108.0, 62.0),
     )
     for screw_index, (sx, sz) in enumerate(screw_positions, start=1):
         screw_id = "fastener.cooler.{:02d}".format(screw_index)
         screw_group = make_assembly(
-            "Cooler screw candidate {:02d}".format(screw_index), screw_id,
+            "GPU heatsink mounting screw {:02d}".format(screw_index), screw_id,
             (sx, half_y + 0.45, sz), ext, parent=fasteners_group,
+            evidence=STATUS["visible_exact_model"], geometry="illustrative_proxy",
         )
         make_detail_cylinder(
-            "Cooler screw head proxy {:02d}".format(screw_index),
+            "GPU screw head proxy {:02d}".format(screw_index),
             (sx, half_y + 0.65, sz), 2.1, 0.7,
             MAT["metal"], screw_group, ext, vertices=24,
         )
         make_detail_box(
-            "Cooler screw slot proxy {:02d}".format(screw_index),
+            "GPU screw slot proxy {:02d}".format(screw_index),
             (sx, half_y + 1.02, sz), (1.7, 0.16, 0.35),
             MAT["connector"], screw_group, ext,
+        )
+
+    for candidate_index in range(5, 9):
+        candidate_id = "fastener.cooler.{:02d}".format(candidate_index)
+        make_assembly(
+            "Unverified rear retention candidate {:02d}".format(candidate_index - 4),
+            candidate_id,
+            (0.0, half_y + 0.45, 0.0), ext, parent=fasteners_group,
+            evidence=STATUS["candidate_count_requires_exact_board_confirmation"],
+            geometry="illustrative_proxy",
         )
 
     # PCIe edge contact field: representative segmented pads, not a pin-count drawing.
