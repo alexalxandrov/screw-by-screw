@@ -1,17 +1,21 @@
-name: Blockout validator tests
+name: Model package validation
 
 on:
   push:
     paths:
-      - "tools/modeling/validate_blockout_package.py"
-      - "tools/modeling/inspect_blend_scene.py"
+      - "tools/modeling/**"
+      - "tools/content/**"
+      - "content/**"
       - "tests/test_blockout_validator.py"
+      - "tests/test_content_package.py"
       - ".github/workflows/blockout-validator.yml"
   pull_request:
     paths:
-      - "tools/modeling/validate_blockout_package.py"
-      - "tools/modeling/inspect_blend_scene.py"
+      - "tools/modeling/**"
+      - "tools/content/**"
+      - "content/**"
       - "tests/test_blockout_validator.py"
+      - "tests/test_content_package.py"
       - ".github/workflows/blockout-validator.yml"
 
 jobs:
@@ -22,7 +26,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Compile modeling tools
-        run: python -m py_compile tools/modeling/validate_blockout_package.py tools/modeling/inspect_blend_scene.py
+      - name: Compile validation tools
+        run: python -m py_compile tools/modeling/validate_blockout_package.py tools/modeling/inspect_blend_scene.py tools/content/validate_model_package.py
       - name: Run unit tests
         run: python -m unittest discover -s tests -v
+      - name: Validate RTX 3060 content package
+        run: python tools/content/validate_model_package.py content/models/evga-rtx3060-xc-black-12gb

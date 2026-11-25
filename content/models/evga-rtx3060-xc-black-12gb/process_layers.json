@@ -1,0 +1,59 @@
+{
+  "schema_version": "0.1.0",
+  "device_model_id": "gpu.evga.12g-p5-3655-kr",
+  "process_layers": [
+    {
+      "id": "process.cooling.qualitative",
+      "type": "cooling",
+      "title": {
+        "en": "Cooling and airflow",
+        "ru": "Охлаждение и воздушный поток"
+      },
+      "mode": "qualitative",
+      "linked_component_ids": [
+        "assembly.fan.1",
+        "assembly.fan.2",
+        "cooling.heatsink",
+        "cooling.gpu_contact"
+      ],
+      "description": {
+        "en": "Fans move air through the cooler. Heat is conducted from the GPU/memory contact area into the cooler and rejected through the fin stack. This is a conceptual explanation, not a measured airflow direction or thermal simulation.",
+        "ru": "Вентиляторы перемещают воздух через кулер. Тепло от зоны контакта GPU и памяти передаётся в систему охлаждения и отводится через рёбра радиатора. Это концептуальное объяснение, а не измеренное направление потока или тепловая симуляция."
+      },
+      "assumptions": [
+        "No CFD or thermal model is present.",
+        "Exact fan curves, fin pitch, heatpipe routing and thermal resistance are unknown."
+      ],
+      "source_ids": [
+        "src.lanoc.review",
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "process.power.qualitative",
+      "type": "power_delivery",
+      "title": {
+        "en": "Power input",
+        "ru": "Ввод питания"
+      },
+      "mode": "qualitative",
+      "linked_component_ids": [
+        "connector.power.8pin",
+        "assembly.pcb.electronics",
+        "chip.gpu.ga106"
+      ],
+      "description": {
+        "en": "The card has a single auxiliary 8-pin power connector. The detailed VRM topology, current paths and component-level electrical values are not reconstructed in this release.",
+        "ru": "На карте установлен один дополнительный разъём питания 8-pin. Топология VRM, токовые пути и электрические параметры отдельных компонентов в этой версии не реконструированы."
+      },
+      "assumptions": [
+        "No circuit simulation or exact-board schematic is available.",
+        "Do not infer pin-level wiring from the connector shape."
+      ],
+      "source_ids": [
+        "src.evga.spec",
+        "src.lanoc.review"
+      ]
+    }
+  ]
+}
