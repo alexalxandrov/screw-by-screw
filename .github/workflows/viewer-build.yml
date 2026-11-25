@@ -1,6 +1,7 @@
 name: Viewer build
 permissions:
   contents: write
+  actions: write
 concurrency:
   group: viewer-build-${{ github.head_ref || github.ref_name }}
   cancel-in-progress: true
@@ -39,10 +40,11 @@ jobs:
           git add package-lock.json
           if git diff --cached --quiet; then
             echo "Lockfile already current"
-            exit 0
+          else
+            git commit -m "chore: add npm dependency lockfile"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
           fi
-          git commit -m "chore: add npm dependency lockfile"
-          git push origin "HEAD:${GITHUB_REF_NAME}"
+          gh workflow run viewer-build.yml --ref "${GITHUB_REF_NAME}"
       - name: Install locked dependencies
         run: npm ci --no-audit --no-fund
       - name: Install Chromium for browser tests
