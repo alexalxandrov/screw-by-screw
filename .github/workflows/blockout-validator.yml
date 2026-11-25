@@ -1,6 +1,6 @@
 name: Model package validation
 concurrency:
-  group: model-package-validation-${{ github.ref }}
+  group: model-package-validation-${{ github.head_ref || github.ref_name }}
   cancel-in-progress: true
 
 on:
