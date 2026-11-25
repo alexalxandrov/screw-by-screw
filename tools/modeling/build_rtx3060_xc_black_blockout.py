@@ -682,11 +682,13 @@ def main():
         )
         set_parent_keep_world(fin, heatsink_group)
 
+    # Exact-model review shows the copper contact plate spans GPU and memory;
+    # its full dimensions and contact geometry remain an illustrative proxy.
     contact = cube(
-        "GPU contact proxy | copper",
+        "GPU and memory contact proxy | copper",
         "cooling.gpu_contact",
-        (CARD_LENGTH * 0.48, -3.0, CARD_HEIGHT * 0.52),
-        (48.0, 3.0, 42.0),
+        (CARD_LENGTH * 0.54, -3.0, CARD_HEIGHT * 0.52),
+        (100.0, 3.0, 78.0),
         MAT["copper"], cool,
     )
     set_parent_keep_world(contact, cooling_group)
@@ -742,15 +744,23 @@ def main():
             world_position, size, MAT["power_stage"], pcbcol, evidence=STATUS["illustrative"])
         set_parent_keep_world(block, power_stage_group)
 
-    for i in range(6):
-        x = CARD_LENGTH * 0.25 + i * 16.0
+    # Six Samsung 16-Gbit packages are confirmed in the exact-model teardown.
+    # Their centres below are image-estimated; the board revision / BoardView
+    # and metrology-grade coordinates have not been obtained.
+    memory_centres = (
+        (134.0, 78.0), (154.0, 58.0), (134.0, 40.0),
+        (75.0, 25.0), (100.0, 22.0), (125.0, 25.0),
+    )
+    for i, (x, z) in enumerate(memory_centres, start=1):
         memory = cube(
-            f"GDDR6 candidate {i + 1}",
-            f"chip.memory.candidate.{i + 1}",
-            (x, half_y - 4.0, CARD_HEIGHT * 0.52),
+            f"Samsung GDDR6 K4ZAF325BM-HC16 package {i}",
+            f"chip.memory.candidate.{i}",
+            (x, half_y - 4.0, z),
             (14.0, 4.0, 12.0),
             MAT["memory"], pcbcol,
+            evidence=STATUS["teardown_supported"],
         )
+        memory["sbs_position_status"] = "image_estimated_not_measured"
         set_parent_keep_world(memory, pcb_group)
 
     # Single 8-pin connector and bracket/port area are symbolic, not measured.

@@ -54,6 +54,8 @@ The inspection report must show no missing or duplicate component IDs. The packa
 
 - Added a selectable heatpipe assembly. Its presence is teardown-supported, while the generated count, path and diameter remain illustrative.
 - Added a selectable power-conversion zone made of unnumbered proxy objects. It must not be read as an exact VRM phase layout.
+- Repositioned the six Samsung K4ZAF325BM-HC16 memory packages around the GPU based on exact-model teardown photography. Locations are image-estimated, not measured.
+- Expanded the copper contact proxy to visually cover the GPU and memory area, matching the reviewed cooler construction; exact plate dimensions are still unmeasured.
 - Added a viewer-only operating state: fan rotation plus qualitative airflow and power-path particles, with a speed control and reduced-motion handling.
 - All moving paths are explicitly schematic; no CFD, SPICE, pin mapping or measured fan rpm is claimed.
 - v0.5 exports 84 Blender objects: 74 meshes and 10 assembly nodes. All 83 non-reference GLB nodes have unique IDs; 22 are canonical content components and the remaining IDs label unverified proxy geometry.
