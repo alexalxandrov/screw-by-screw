@@ -1,4 +1,7 @@
 name: Viewer build
+concurrency:
+  group: viewer-build-${{ github.ref }}
+  cancel-in-progress: true
 
 on:
   push:
