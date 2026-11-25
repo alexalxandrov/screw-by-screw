@@ -2,10 +2,16 @@ import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { SceneController } from "./viewer/SceneController.js";
-import { MODEL, COMPONENTS, EVIDENCE } from "./data/model.js";
-import LEARNING_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/learning.json";
-import PROCESS_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/process_layers.json";
+import { MODEL as DEFAULT_MODEL, COMPONENTS as DEFAULT_COMPONENTS, EVIDENCE, createModelDataAdapter } from "./data/model.js";
+import DEFAULT_LEARNING_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/learning.json";
+import DEFAULT_PROCESS_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/process_layers.json";
+import { loadModelPackage, validateSelfContainedGlb, MAX_MODEL_PACKAGE_BYTES, MAX_SCENE_GLB_BYTES } from "./viewer/ModelPackageLoader.js";
 import "./styles.css";
+
+let MODEL = DEFAULT_MODEL;
+let COMPONENTS = DEFAULT_COMPONENTS;
+let LEARNING_PACKAGE = DEFAULT_LEARNING_PACKAGE;
+let PROCESS_PACKAGE = DEFAULT_PROCESS_PACKAGE;
 
 const $ = (selector) => document.querySelector(selector);
 const canvasHost = $("#viewer-canvas");
@@ -40,7 +46,7 @@ const state = {
   modelWarnings: []
 };
 
-const MAX_GLB_BYTES = 256 * 1024 * 1024;
+const MAX_GLB_BYTES = MAX_SCENE_GLB_BYTES;
 
 const UI = {
   en: {
