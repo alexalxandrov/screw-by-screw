@@ -1,22 +1,27 @@
 # Screw by Screw — v0.6 product and engineering roadmap
 
 **Base:** RTX 3060 XC BLACK v0.5.  
-**Status:** proposed next iteration; no precision-CAD or numerical-simulation claim.
+**Status:** v0.6 interaction slice implemented on the RTX 3060 pilot; visual owner acceptance remains pending. No precision-CAD or numerical-simulation claim.
 
 ## Product direction
 
 Evolve the current viewer from a model inspector into a small engineering workspace. Retain the local-first standalone HTML launch, stable model packages, source/provenance graph and exact-SKU identity.
 
-## v0.6 interaction priorities
+## Delivered in the current v0.6 interaction slice
 
-1. **Camera presets:** front/fan side, rear/PCB side, I/O bracket edge, connector edge, top and isometric. Each preset must preserve the current model and selection.
-2. **Section view:** adjustable X/Y/Z clipping plane and position control. Distinguish a visual section from a physically closed CAD section; do not fabricate cap surfaces through incomplete meshes.
-3. **Exploded timeline:** authored, reversible steps with target component IDs, camera focus and explanatory text. No repair/disassembly step until the full exact-model teardown sequence is reviewed.
-4. **Measurement and calibration:** on-screen point-to-point measurements in model units, calibrated photo references, and an evidence class for every derived measurement.
-5. **Component and source search:** search by name, stable ID, package marking, claim, source and reference designator when verified.
-6. **Revision comparison:** compare exact SKUs and PCB revisions without merging geometry or claims between them.
-7. **Thermal visualization:** optional educational gradient or numeric field only when its input assumptions are visible. Separate measured sensor values, calculated estimates and illustrative gradients.
-8. **Package and data export:** canonical component inventory and BOM export only where a source-backed BOM exists.
+- **Camera presets:** isometric, fan side, PCB side, I/O bracket, power connector and top. Presets work on imported model scenes and preserve the current model/selection.
+- **Section view:** global Three.js clipping plane with X/Y/Z axis and 0–100% position controls. The cut is intentionally uncapped; it is a visual section, not a closed CAD section.
+- **Operating animation:** two independently rotating fan impellers, directional airflow and schematic power pulses; animation speed and reduced-motion handling are tested.
+- **Standalone operation:** the root `index.html` is rebuilt with the bundled v0.5 GLB and the new viewer controls; direct `file://` launch is part of browser testing.
+
+## Remaining v0.6 priorities
+
+1. **Exploded timeline:** authored, reversible steps with target component IDs, camera focus and explanatory text. No repair/disassembly step until the full exact-model teardown sequence is reviewed.
+2. **Measurement and calibration:** on-screen point-to-point measurements in model units, calibrated photo references, and an evidence class for every derived measurement.
+3. **Component and source search:** search by name, stable ID, package marking, claim, source and reference designator when verified.
+4. **Revision comparison:** compare exact SKUs and PCB revisions without merging geometry or claims between them.
+5. **Thermal visualization:** optional educational gradient or numeric field only when its input assumptions are visible. Separate measured sensor values, calculated estimates and illustrative gradients.
+6. **Package and data export:** canonical component inventory and BOM export only where a source-backed BOM exists.
 
 ## Competitor-derived interaction patterns
 
