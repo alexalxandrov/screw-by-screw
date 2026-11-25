@@ -159,3 +159,82 @@ test("shows model-level specifications when the top-level device is selected", a
   await page.locator('#component-tree button[data-id="assembly.shroud"]').click();
   await expect(page.locator('[data-claim-id="claim.card.outer_shroud_length"]')).toContainText("Неизвестно");
 });
+
+
+test("search finds components by package marking and source title", async ({ page }) => {
+  await page.goto("/");
+  const search = page.locator("#component-search");
+
+  await search.fill("K4ZAF325BM-HC16");
+  const electronics = page.locator('#component-tree button[data-id="assembly.pcb.electronics"]');
+  await expect(electronics).toBeVisible();
+  await expect(electronics).toHaveClass(/search-match/);
+  await expect(page.locator('#component-tree button[data-id="assembly.card.root"]')).toBeVisible();
+
+  await search.fill("Tom's Hardware");
+  await expect(electronics).toBeVisible();
+  await expect(electronics).toHaveClass(/search-match/);
+
+  await search.fill("3584");
+  const device = page.locator('#component-tree button[data-id="assembly.card.root"]');
+  await expect(device).toBeVisible();
+  await expect(device).toHaveClass(/search-match/);
+});
+
+test("component search keeps ordinary name and stable-ID lookup", async ({ page }) => {
+  await page.goto("/");
+  const search = page.locator("#component-search");
+  await search.fill("cooling.heatsink");
+  await expect(page.locator('#component-tree button[data-id="cooling.heatsink"]')).toBeVisible();
+  await search.fill("Радиатор с рёбрами");
+  await expect(page.locator('#component-tree button[data-id="cooling.heatsink"]')).toBeVisible();
+});
+
+
+test("a missing optional bundled model does not reset active user interaction", async ({ page }) => {
+  await page.route("**/models/rtx3060_xc_black_blockout_v04.glb", async (route) => {
+    await new Promise((resolve) => setTimeout(resolve, 750));
+    await route.fulfill({ status: 404, body: "not found" });
+  });
+  await page.goto("/");
+  const toggle = page.locator("#measurement-toggle");
+  await expect(toggle).toBeEnabled();
+  await toggle.click();
+  await expect(toggle).toHaveAttribute("aria-pressed", "true");
+  await page.waitForTimeout(850);
+  await expect(toggle).toHaveAttribute("aria-pressed", "true");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-measurement-enabled", "true");
+});
+
+test("a successful but delayed bundled model cannot replace a scene after user interaction", async ({ page }) => {
+  await page.route("**/models/rtx3060_xc_black_blockout_v05.glb", async (route) => {
+    await new Promise((resolve) => setTimeout(resolve, 1200));
+    const document = {
+      asset: { version: "2.0" },
+      scene: 0,
+      scenes: [{ nodes: [0] }],
+      nodes: [{ name: "Late bundled root", extras: { sbs_component_id: "assembly.card.root" } }]
+    };
+    const json = Buffer.from(JSON.stringify(document), "utf8");
+    const paddedLength = Math.ceil(json.length / 4) * 4;
+    const glb = Buffer.alloc(20 + paddedLength);
+    glb.writeUInt32LE(0x46546c67, 0);
+    glb.writeUInt32LE(2, 4);
+    glb.writeUInt32LE(glb.length, 8);
+    glb.writeUInt32LE(paddedLength, 12);
+    glb.writeUInt32LE(0x4e4f534a, 16);
+    json.copy(glb, 20);
+    glb.fill(0x20, 20 + json.length);
+    await route.fulfill({ status: 200, contentType: "model/gltf-binary", body: glb });
+  });
+
+  await page.goto("/");
+  await expect(page.locator("#component-count")).not.toHaveText("—");
+  const fan = page.locator('#component-tree button[data-id="assembly.fan.1"]');
+  await expect(fan).toBeVisible();
+  await fan.click();
+  await expect(page.locator("#detail-id")).toHaveText("assembly.fan.1");
+  await page.waitForTimeout(1450);
+  await expect(page.locator("#detail-id")).toHaveText("assembly.fan.1");
+  await expect(page.locator('#component-tree button[data-id="assembly.fan.1"]')).toBeVisible();
+});
