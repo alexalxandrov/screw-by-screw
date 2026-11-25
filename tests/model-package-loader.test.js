@@ -116,6 +116,12 @@ test("loads a valid portable model package and validates all references", async 
   assert.equal(pkg.sceneBuffer.byteLength, makeGlb().byteLength);
 });
 
+test("rejects duplicate paths in the package manifest", async () => {
+  const files = { ...testManifest().files, components: "model.json" };
+  const bytes = makeArchive({ manifestOverrides: { files } });
+  await assert.rejects(() => loadModelPackage(asFile(bytes)), /same archive file/);
+});
+
 test("rejects path traversal entries before extraction", async () => {
   const bytes = makeArchive({ extraFiles: { "../outside.json": strToU8("{}") } });
   await assert.rejects(() => loadModelPackage(asFile(bytes)), /unsafe archive path/);
