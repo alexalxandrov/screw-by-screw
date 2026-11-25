@@ -428,3 +428,56 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); ou
   overflow-wrap: anywhere;
 }
 .assembly-source-link:hover { color: var(--accent); }
+
+
+/* Model-package-authored animation player; hidden when a package has no clips. */
+.clip-player {
+  margin-top: 14px;
+  padding-top: 11px;
+  border-top: 1px solid var(--line);
+}
+.clip-player-heading, .clip-player-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+.clip-status, #animation-time {
+  color: var(--muted);
+  font: 8px var(--mono);
+  white-space: nowrap;
+}
+.clip-status[data-status="playing"] { color: var(--accent); }
+.clip-player-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto auto;
+  align-items: center;
+  gap: 6px;
+  margin-top: 9px;
+}
+#animation-clip-select {
+  min-width: 0;
+  width: 100%;
+  padding: 6px 7px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: #0b1219;
+  color: var(--text);
+  font: 9px var(--mono);
+}
+.clip-player-controls .text-button { padding: 5px 6px; font-size: 8px; }
+.clip-player-controls .text-button:disabled { opacity: .35; cursor: not-allowed; }
+.clip-seek {
+  width: 100%;
+  margin: 9px 0 7px;
+  accent-color: var(--accent);
+}
+.clip-player-footer .eyebrow {
+  font-size: 7px;
+  line-height: 1.4;
+}
+@media (max-width: 560px) {
+  .clip-player-controls { grid-template-columns: 1fr 1fr 1fr; }
+  #animation-clip-select { grid-column: 1 / -1; }
+  .clip-player-footer { align-items: flex-start; flex-direction: column; }
+}
