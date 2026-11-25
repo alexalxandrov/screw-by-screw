@@ -110,7 +110,10 @@ test("plays and seeks validated package-authored animation clips", async ({ page
   await expect(page.locator("#authored-animation-status")).toContainText("Воспроизведение");
   await page.locator("#authored-animation-pause").click();
   await expect(page.locator("#authored-animation-status")).toContainText("Пауза");
-  await page.locator("#authored-animation-seek").fill("750");
+  await page.locator("#authored-animation-seek").evaluate((element) => {
+    element.value = "750";
+    element.dispatchEvent(new Event("input", { bubbles: true }));
+  });
   await expect(page.locator("#authored-animation-time")).toContainText("3.0 / 4.0 s");
   await page.locator("#authored-animation-stop").click();
   await expect(page.locator("#authored-animation-time")).toContainText("0.0 / 4.0 s");

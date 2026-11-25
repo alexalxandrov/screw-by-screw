@@ -179,7 +179,7 @@ function updateAuthoredAnimationUI() {
   seek.value = String(Math.round(snapshot.progress * 1000));
   status.textContent = !snapshot.clipId ? t("clipIdle")
     : snapshot.playing ? t("clipPlaying")
-    : snapshot.elapsedMs > 0 ? t("clipPaused") : t("clipStopped");
+    : snapshot.paused ? t("clipPaused") : t("clipStopped");
   time.textContent = snapshot.clipId
     ? `${(snapshot.elapsedMs / 1000).toFixed(1)} / ${(snapshot.durationMs / 1000).toFixed(1)} s`
     : "—";

@@ -76,6 +76,7 @@ export class AnimationController {
     this.selectedClip = null;
     this.currentTimeMs = 0;
     this.playing = false;
+    this.paused = false;
     this.frameHandle = null;
     this.lastTimestamp = null;
     this._tick = this._tick.bind(this);
@@ -126,6 +127,7 @@ export class AnimationController {
     return {
       clipId: this.selectedClipId,
       playing: this.playing,
+      paused: this.paused,
       elapsedMs: this.elapsedMs,
       durationMs: this.durationMs,
       progress: this.progress
@@ -141,6 +143,7 @@ export class AnimationController {
     this.currentTimeMs = 0;
     this.lastTimestamp = null;
     this.playing = false;
+    this.paused = false;
     this._applyCurrentTime();
     this._emit();
     return true;
@@ -158,6 +161,7 @@ export class AnimationController {
     }
     if (this.playing) return true;
     this.playing = true;
+    this.paused = false;
     this.lastTimestamp = null;
     this._schedule();
     this._emit();
@@ -167,6 +171,7 @@ export class AnimationController {
   pause() {
     if (!this.playing) return false;
     this.playing = false;
+    this.paused = true;
     this.lastTimestamp = null;
     this._cancelFrame();
     this._emit();
@@ -190,6 +195,7 @@ export class AnimationController {
   stop() {
     this._cancelFrame();
     this.playing = false;
+    this.paused = false;
     this.lastTimestamp = null;
     if (!this.selectedClip) {
       this.currentTimeMs = 0;
@@ -248,6 +254,7 @@ export class AnimationController {
     this._emit();
     if (this.currentTimeMs >= this.durationMs) {
       this.playing = false;
+      this.paused = false;
       this.lastTimestamp = null;
       this._emit();
       return;
