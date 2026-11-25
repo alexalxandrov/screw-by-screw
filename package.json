@@ -16,7 +16,8 @@
     "test:unit": "node --test tests/viewer-scene-controller.test.js"
   },
   "dependencies": {
-    "three": "0.187.0"
+    "three": "0.187.0",
+    "fflate": "0.8.2"
   },
   "devDependencies": {
     "vite": "8.3.8",
