@@ -234,6 +234,22 @@ test("a missing optional bundled model does not reset active user interaction", 
 });
 
 
+test("source observations remain separate from an unauthored disassembly sequence", async ({ page }) => {
+  await page.goto("/");
+  await page.locator('#component-tree button[data-id="assembly.card.root"]').click();
+
+  const section = page.locator("#detail-assembly-section");
+  await expect(section).toBeVisible();
+  await expect(page.locator("#assembly-empty-note")).toContainText("Подтверждённая последовательность разборки");
+  await expect(page.locator("#assembly-step-list")).toBeHidden();
+  await expect(page.locator("#assembly-observation-heading")).toContainText("НАБЛЮДЕНИЯ В ИСТОЧНИКАХ");
+  const observation = page.locator('[data-observation-source-id="src.gamersnexus.teardown"]').first();
+  await expect(observation).toContainText("01:30");
+  await expect(observation).toContainText("эта отметка времени не является полным описанием шага");
+  await expect(observation.locator("a")).toHaveAttribute("href", /t=90s/);
+});
+
+
 test("a successful but delayed bundled model cannot replace a scene after user interaction", async ({ page }) => {
   await page.route("**/models/rtx3060_xc_black_blockout_v05.glb", async (route) => {
     await new Promise((resolve) => setTimeout(resolve, 1200));
