@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import { strToU8, zipSync } from "fflate";
 import { loadModelPackage, validateModelPackageData } from "../src/viewer/ModelPackageLoader.js";
 
@@ -71,6 +72,27 @@ function asFile(bytes) {
   const buffer = bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength);
   return { name: "test.sbsmodel", size: bytes.byteLength, arrayBuffer: async () => buffer };
 }
+
+test("validates the committed RTX 3060 model package sidecars", () => {
+  const base = new URL("../content/models/evga-rtx3060-xc-black-12gb/", import.meta.url);
+  const read = (name) => JSON.parse(readFileSync(new URL(name, base), "utf8"));
+  const manifest = read("model-package.json");
+  const data = {
+    model: read("model.json"),
+    components: read("components.json"),
+    sources: read("sources.json"),
+    relationships: read("relationships.json"),
+    claims: read("claims.json"),
+    process_layers: read("process_layers.json"),
+    assembly_steps: read("assembly_steps.json"),
+    learning: read("learning.json"),
+    animations: read("animations.json")
+  };
+  const report = validateModelPackageData(manifest, data);
+  assert.equal(report.modelId, "gpu.evga.12g-p5-3655-kr");
+  assert.ok(report.componentCount >= 20);
+  assert.equal(report.sourceCount, 4);
+});
 
 test("loads a valid portable model package and validates all references", async () => {
   const pkg = await loadModelPackage(asFile(makeArchive()));
