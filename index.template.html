@@ -29,11 +29,40 @@
         </div>
         <div class="topbar-actions">
           <span class="build-tag">PROTOTYPE 0.9</span>
+          <button class="quiet-button" id="catalog-open" type="button" data-i18n="catalogOpen">Library</button>
           <button class="quiet-button" id="language-toggle" type="button" aria-label="RU / EN — Switch language">RU / EN</button>
           <button class="primary-button" id="open-model" type="button" data-i18n="openModel">Open model</button>
           <input id="model-file" type="file" accept=".glb,.sbsmodel,model/gltf-binary" hidden />
         </div>
       </header>
+
+
+      <dialog id="model-catalog-dialog" class="catalog-dialog" aria-labelledby="catalog-title">
+        <div class="catalog-header">
+          <div class="catalog-heading">
+            <span class="eyebrow" data-i18n="catalogSubtitle">Offline-ready model packages</span>
+            <h2 id="catalog-title" data-i18n="catalogTitle">MODEL LIBRARY</h2>
+          </div>
+          <div class="catalog-header-actions">
+            <span class="catalog-result-count"><output id="catalog-count">1</output> <span data-i18n="catalogEntries">MODELS</span></span>
+            <button id="catalog-close" class="catalog-close" type="button" data-i18n="catalogClose">Close library</button>
+          </div>
+        </div>
+        <div class="catalog-toolbar">
+          <label class="catalog-search-wrap" for="catalog-search">
+            <span class="eyebrow" data-i18n="catalogSearchLabel">SEARCH THE LIBRARY</span>
+            <input id="catalog-search" type="search" autocomplete="off" placeholder="Search model, manufacturer or part number…" data-i18n-placeholder="catalogSearch" />
+          </label>
+          <label class="catalog-category-wrap" for="catalog-category">
+            <span class="eyebrow" data-i18n="catalogCategoryLabel">CATEGORY</span>
+            <select id="catalog-category"><option value="all">All categories</option></select>
+          </label>
+        </div>
+        <div id="catalog-results" class="catalog-grid"></div>
+        <div class="catalog-footer">
+          <span data-i18n="catalogFooter">Model packages are stored locally. No account or remote catalogue service is required.</span>
+        </div>
+      </dialog>
 
       <main class="workspace">
         <aside class="panel left-panel">
