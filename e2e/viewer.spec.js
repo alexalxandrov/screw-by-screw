@@ -191,6 +191,33 @@ test("component search keeps ordinary name and stable-ID lookup", async ({ page 
 });
 
 
+test("component cards expose typed, source-linked relationships and navigate between components", async ({ page }) => {
+  await page.goto("/");
+  await page.locator('#component-tree button[data-id="assembly.cooling"]').click();
+  await expect(page.locator("#detail-relations-section")).toBeVisible();
+
+  const heatsinkRelation = page.locator('[data-relationship-id="rel.cooling.contains.heatsink"]');
+  await expect(heatsinkRelation).toContainText("Содержит");
+  await expect(heatsinkRelation.locator("a")).toHaveCount(1);
+  await heatsinkRelation.getByRole("button", { name: "Радиатор с рёбрами" }).click();
+  await expect(page.locator("#detail-id")).toHaveText("cooling.heatsink");
+
+  const airflow = page.locator('[data-relationship-id="rel.cooling.airflow"]');
+  await expect(airflow).toContainText("Обдувается потоком от");
+  await expect(airflow).toContainText("Качественная связь");
+  await expect(airflow.getByRole("button", { name: "Осевой вентилятор 1" })).toBeVisible();
+});
+
+test("relationships without registered sources are labelled rather than silently presented as sourced", async ({ page }) => {
+  await page.goto("/");
+  await page.locator('#component-tree button[data-id="assembly.power_stage"]').click();
+  const relation = page.locator('[data-relationship-id="rel.pcb.contains.power_stage"]');
+  await expect(relation).toBeVisible();
+  await expect(relation).toContainText("Входит в");
+  await expect(relation).toContainText("Источник не зарегистрирован");
+});
+
+
 test("a missing optional bundled model does not reset active user interaction", async ({ page }) => {
   await page.route("**/models/rtx3060_xc_black_blockout_v04.glb", async (route) => {
     await new Promise((resolve) => setTimeout(resolve, 750));
@@ -205,6 +232,7 @@ test("a missing optional bundled model does not reset active user interaction", 
   await expect(toggle).toHaveAttribute("aria-pressed", "true");
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-measurement-enabled", "true");
 });
+
 
 test("a successful but delayed bundled model cannot replace a scene after user interaction", async ({ page }) => {
   await page.route("**/models/rtx3060_xc_black_blockout_v05.glb", async (route) => {
