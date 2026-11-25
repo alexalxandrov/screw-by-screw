@@ -23,6 +23,7 @@ test("loads the generated Blender v0.5 GLB and resolves content-package IDs", as
 
   await page.locator("#slice-toggle").click();
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-slice-enabled", "true");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-slice-plane-count", "1");
   await page.locator("#slice-axis").selectOption("y");
   await page.locator("#slice-position").evaluate((element) => {
     element.value = "35";
@@ -32,6 +33,7 @@ test("loads the generated Blender v0.5 GLB and resolves content-package IDs", as
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-slice-fraction", "0.35");
   await page.locator("#slice-toggle").click();
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-slice-enabled", "false");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-slice-plane-count", "0");
 
   await page.locator('.process-button[data-layer="cooling"]').click();
   await expect(page.locator("#process-details")).toBeVisible();

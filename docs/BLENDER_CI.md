@@ -18,3 +18,6 @@ The v0.5 scene adds a teardown-supported-but-not-measured heatpipe group and an 
 The workflow runs on relevant branch pushes and can be started manually with GitHub Actions → **Blender blockout generation** → **Run workflow**.
 
 This proves reproducible generation, structural integrity and browser integration. It does not prove that proxy geometry matches a physical card or that the model's appearance is correct. Owner review of the generated model and inspection report remains required.
+
+
+The v0.6 browser interaction slice additionally tests the fan/PCB/I/O/power/top/isometric camera presets, adjustable X/Y/Z clipping plane, powered fan rotation and reduced-motion behaviour. The section is an uncapped visual clipping operation; it does not invent section caps or imply CAD topology.
