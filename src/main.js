@@ -45,7 +45,7 @@ const UI = {
     pilotModel: "PILOT MODEL", structure: "STRUCTURE", components: "Components",
     searchPlaceholder: "Find a component…", assemblyTree: "ASSEMBLY TREE", showAll: "Show all",
     proxyNote: "Illustrative geometry · not CAD", explore: "Explore", disassemble: "Disassemble",
-    understand: "Understand", assembledState: "ASSEMBLED STATE", demoScene: "DEMO SCENE · LOCAL",
+    understand: "Understand", animate: "Animate", assembledState: "ASSEMBLED STATE", demoScene: "DEMO SCENE · LOCAL",
     assemblyState: "ASSEMBLY STATE", assemble: "Assemble", explode: "Explode",
     assembled: "ASSEMBLED", exploded: "EXPLODED", processLayers: "PROCESS LAYERS",
     qualitativeOnly: "QUALITATIVE ONLY", cooling: "Cooling", powerDelivery: "Power delivery",
@@ -66,7 +66,7 @@ const UI = {
     pilotModel: "ПИЛОТНАЯ МОДЕЛЬ", structure: "СТРУКТУРА", components: "Компоненты",
     searchPlaceholder: "Найти компонент…", assemblyTree: "ДЕРЕВО СБОРКИ", showAll: "Показать все",
     proxyNote: "Условная геометрия · не CAD", explore: "Обзор", disassemble: "Разборка",
-    understand: "Принцип работы", assembledState: "СОБРАННОЕ СОСТОЯНИЕ", demoScene: "ДЕМО-СЦЕНА · ЛОКАЛЬНО",
+    understand: "Принцип работы", animate: "Анимировать", assembledState: "СОБРАННОЕ СОСТОЯНИЕ", demoScene: "ДЕМО-СЦЕНА · ЛОКАЛЬНО",
     assemblyState: "СОСТОЯНИЕ СБОРКИ", assemble: "Собрать", explode: "Разобрать",
     assembled: "СОБРАНО", exploded: "РАЗОБРАНО", processLayers: "СЛОИ ПРОЦЕССОВ",
     qualitativeOnly: "КАЧЕСТВЕННО", cooling: "Охлаждение", powerDelivery: "Питание",
@@ -905,6 +905,7 @@ function bindUI() {
   $("#quiz-next").addEventListener("click", submitLearningAnswer);
   $("#assemble-button").addEventListener("click", () => setExplode(0));
   $("#explode-button").addEventListener("click", () => setExplode(100));
+  $("#animate-button").addEventListener("click", animateExplodeCycle);
   document.querySelectorAll(".process-button").forEach((button) => {
     button.addEventListener("click", () => setLayer(button.dataset.layer));
   });
