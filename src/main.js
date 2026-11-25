@@ -1683,7 +1683,9 @@ async function tryLoadBundledModel() {
     if (state.modelRevision !== revision) return;
     loadArrayBuffer(buffer, "Bundled v0.5 GLB", "bundled");
   } catch {
-    if (state.modelRevision === revision) loadDemo();
+    // The fallback scene is installed before this optional bundle fetch starts.
+    // Reinstalling it here could erase a user's selection or active tool.
+    if (state.modelRevision === revision) setLoadState(t("demoLoaded"));
   }
 }
 
