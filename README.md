@@ -65,6 +65,7 @@ Screw by Screw — концепция публичной образовател�
 - [Blender generation in CI](docs/BLENDER_CI.md)
 - [Viewer prototype](docs/VIEWER_PROTOTYPE.md)
 - [Universal Viewer Engine](docs/UNIVERSAL_VIEWER_ENGINE.md)
+- [SBS Model Package Format](docs/MODEL_PACKAGE_FORMAT.md)
 - [Каталог моделей](MODELS/README.md)
 - [Pilot content package](content/models/evga-rtx3060-xc-black-12gb/README.md) — source claims, SHA-256 release manifest and bilingual learning data.
 

@@ -1,0 +1,7 @@
+{
+  "schema_version": "0.1.0",
+  "device_model_id": "gpu.evga.12g-p5-3655-kr",
+  "status": "not_authored",
+  "policy": "No mechanical clip is published until its motion, target component and evidence status are reviewed. Viewer-only explode/reassemble transitions are generic presentation controls, not repair instructions.",
+  "clips": []
+}
