@@ -268,13 +268,84 @@ def validate_package(package: dict, package_dir: Path | None = None) -> list[str
             if not isinstance(localized, dict) or not all(isinstance(localized.get(lang), str) and localized[lang] for lang in ("en", "ru")):
                 raise PackageError(f"Process layer {layer['id']} must have bilingual {field}")
 
+    step_status = steps_doc.get("status", "not_authored")
+    allowed_step_statuses = {"not_authored", "partial_observed_sequence", "authored"}
+    if step_status not in allowed_step_statuses:
+        raise PackageError(f"Unsupported assembly step status: {step_status}")
+    if step_status == "not_authored" and steps:
+        raise PackageError("Assembly steps marked not_authored must have an empty steps array")
+    if step_status == "partial_observed_sequence" and steps_doc.get("complete_sequence") is not False:
+        raise PackageError("Partial assembly sequence must explicitly set complete_sequence to false")
+
+    step_by_id = {}
+    step_sequences = set()
     for step in steps:
-        if not isinstance(step, dict) or not isinstance(step.get("id"), str):
+        if not isinstance(step, dict) or not isinstance(step.get("id"), str) or not step["id"]:
             raise PackageError("Every assembly step must be an object with an id")
-        targets = step.get("target_component_ids", [])
-        if not isinstance(targets, list) or set(targets) - component_ids:
-            raise PackageError(f"Assembly step {step.get('id')} has unknown targets")
-        require_source_ids(step.get("source_ids"), source_ids, f"assembly step {step['id']}")
+        sequence = step.get("sequence")
+        if isinstance(sequence, bool) or not isinstance(sequence, int) or sequence < 1 or sequence in step_sequences:
+            raise PackageError(f"Assembly step {step['id']} must have a unique positive sequence")
+        step_sequences.add(sequence)
+        step_by_id[step["id"]] = step
+
+        title = step.get("title", step.get("action"))
+        if isinstance(title, str):
+            if not title.strip():
+                raise PackageError(f"Assembly step {step['id']} title must not be empty")
+        elif not isinstance(title, dict) or not all(
+            isinstance(title.get(lang), str) and title[lang].strip() for lang in ("en", "ru")
+        ):
+            raise PackageError(f"Assembly step {step['id']} needs a bilingual title/action")
+
+        description = step.get("description")
+        if description is not None and (
+            not isinstance(description, dict) or not all(
+                isinstance(description.get(lang), str) and description[lang].strip() for lang in ("en", "ru")
+            )
+        ):
+            raise PackageError(f"Assembly step {step['id']} description must be bilingual")
+
+        targets = step.get("component_ids")
+        if not isinstance(targets, list) or not targets or any(not isinstance(value, str) for value in targets):
+            raise PackageError(f"Assembly step {step['id']} must define component_ids")
+        missing_targets = sorted(set(targets) - component_ids)
+        if missing_targets:
+            raise PackageError(f"Assembly step {step['id']} has unknown targets: {missing_targets}")
+
+        tools = step.get("tool_requirements", [])
+        if not isinstance(tools, list) or any(not isinstance(value, str) for value in tools):
+            raise PackageError(f"Assembly step {step['id']} tool_requirements must be an array of strings")
+
+        safety = step.get("safety_notes")
+        if safety is not None:
+            valid_safety = (
+                isinstance(safety, str) and bool(safety.strip())
+            ) or (
+                isinstance(safety, list) and all(isinstance(value, str) and value.strip() for value in safety)
+            ) or (
+                isinstance(safety, dict) and all(
+                    isinstance(safety.get(lang), str) and safety[lang].strip() for lang in ("en", "ru")
+                )
+            )
+            if not valid_safety:
+                raise PackageError(f"Assembly step {step['id']} safety_notes has an invalid shape")
+
+        prerequisites = step.get("prerequisite_step_ids", [])
+        if not isinstance(prerequisites, list) or any(not isinstance(value, str) for value in prerequisites):
+            raise PackageError(f"Assembly step {step['id']} prerequisite_step_ids must be an array of strings")
+        sources_for_step = step.get("source_ids")
+        if not isinstance(sources_for_step, list) or not sources_for_step:
+            raise PackageError(f"Assembly step {step['id']} needs at least one source")
+        require_source_ids(sources_for_step, source_ids, f"assembly step {step['id']}")
+
+    for step in steps:
+        for prerequisite_id in step.get("prerequisite_step_ids", []):
+            prerequisite = step_by_id.get(prerequisite_id)
+            if prerequisite is None:
+                raise PackageError(f"Assembly step {step['id']} has unknown prerequisite: {prerequisite_id}")
+            if prerequisite["sequence"] >= step["sequence"]:
+                raise PackageError(f"Assembly step {step['id']} prerequisite must precede it")
+
     observations = steps_doc.get("observations", [])
     if not isinstance(observations, list):
         raise PackageError("Assembly observations must be an array")
@@ -312,8 +383,6 @@ def validate_package(package: dict, package_dir: Path | None = None) -> list[str
             raise PackageError(f"Claim {claim['id']} needs a value or confidence_class unknown")
         require_source_ids(claim.get("source_ids"), source_ids, f"claim {claim['id']}")
 
-    if steps_doc.get("status") == "not_authored" and steps:
-        raise PackageError("Assembly steps marked not_authored must have an empty steps array")
     _validate_animation_clips(animations, component_ids, source_ids)
     _validate_release(release_doc, model, package_dir)
     return [

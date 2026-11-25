@@ -90,9 +90,49 @@ class ContentPackageTests(unittest.TestCase):
 
     def test_not_authored_steps_cannot_contain_steps(self):
         package = sample_package()
-        package["assembly_steps"]["steps"] = [{"id": "step.one", "target_component_ids": [],
-                                                 "source_ids": ["src.demo"]}]
+        package["assembly_steps"]["steps"] = [{
+            "id": "step.one", "sequence": 1,
+            "title": {"en": "Step", "ru": "Шаг"},
+            "component_ids": ["part.one"], "source_ids": ["src.demo"]
+        }]
         with self.assertRaisesRegex(validator.PackageError, "marked not_authored"):
+            validator.validate_package(package)
+
+    def test_partial_observed_sequence_uses_canonical_component_ids(self):
+        package = sample_package()
+        package["assembly_steps"] = {
+            "status": "partial_observed_sequence",
+            "complete_sequence": False,
+            "steps": [{
+                "id": "step.one", "sequence": 1,
+                "title": {"en": "Remove part", "ru": "Снять деталь"},
+                "description": {"en": "Description", "ru": "Описание"},
+                "component_ids": ["part.one"],
+                "tool_requirements": [],
+                "safety_notes": {"en": "Be careful", "ru": "Соблюдайте осторожность"},
+                "prerequisite_step_ids": [],
+                "source_ids": ["src.demo"]
+            }]
+        }
+        report = validator.validate_package(package)
+        self.assertIn("Assembly steps: 1 (partial_observed_sequence)", report)
+
+    def test_assembly_step_prerequisite_must_precede_dependent_step(self):
+        package = sample_package()
+        base = {
+            "title": {"en": "Step", "ru": "Шаг"},
+            "component_ids": ["part.one"],
+            "tool_requirements": [],
+            "source_ids": ["src.demo"]
+        }
+        package["assembly_steps"] = {
+            "status": "authored",
+            "steps": [
+                {**base, "id": "step.one", "sequence": 1, "prerequisite_step_ids": ["step.two"]},
+                {**base, "id": "step.two", "sequence": 2, "prerequisite_step_ids": []}
+            ]
+        }
+        with self.assertRaisesRegex(validator.PackageError, "prerequisite must precede it"):
             validator.validate_package(package)
 
     def test_unknown_claim_must_have_null_value(self):

@@ -40,3 +40,8 @@ This is not yet a complete engineering reconstruction. The eight fasteners are c
 ### Fine-grained cooling decomposition
 
 The development branch now expands the content graph to 104 semantic components and 99 typed relationships. Fan frames, hubs and each blade proxy are separately selectable; the illustrative heatsink has 24 separately selectable fin proxies; the two reconstructed heatpipe routes are separate assembly nodes; and six memory thermal-pad proxies plus one VRM pad strip have their own IDs. No proxy blade/fin count or thermal-pad dimensions are presented as a factory specification.
+
+
+### Partial teardown evidence
+
+The interactive assembly panel has two source-backed disassembly steps: eight rear cooler-retention screws, followed by disconnection of both fan leads before separating the cooler/shroud. This is deliberately labelled a partial observed sequence, not a complete service guide. Screw positions in the 3D scene, driver/bit, torque, connector release geometry, thermal-pad specifications and reassembly order remain unverified.

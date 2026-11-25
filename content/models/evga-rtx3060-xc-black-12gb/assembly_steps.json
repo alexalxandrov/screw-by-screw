@@ -1,8 +1,75 @@
 {
   "schema_version": "0.1.0",
-  "status": "not_authored",
-  "policy": "Do not infer a complete removal sequence from sparse video timecodes. Author steps only after reviewing the full teardown or a service procedure.",
-  "steps": [],
+  "status": "partial_observed_sequence",
+  "policy": "Only two teardown actions are authored because those are the actions explicitly described by Tom's Hardware for its EVGA GeForce RTX 3060 XC sample. This is not a complete service manual: no screw driver/bit, torque, exact per-screw coordinates, fan connector locking detail, reassembly order, thermal-pad replacement thickness or electrical repair procedure is specified. Do not infer missing steps.",
+  "steps": [
+    {
+      "id": "step.remove-rear-cooler-fasteners",
+      "sequence": 1,
+      "title": {
+        "en": "Remove the eight rear cooler-retention screws",
+        "ru": "Вывернуть восемь задних винтов крепления кулера"
+      },
+      "description": {
+        "en": "The teardown article describes eight screws on the rear of the card holding the heatsink and shroud: four around the GPU area and four nearer the rear edge. One is covered by an EVGA tamper-evident sticker. The source does not provide a verified screw map, driver size or torque value.",
+        "ru": "В статье о разборке описаны восемь винтов на обратной стороне платы, удерживающих радиатор и кожух: четыре вокруг области GPU и четыре ближе к заднему краю. Один закрыт контрольной наклейкой EVGA. Источник не даёт проверенной карты винтов, размера биты или момента затяжки."
+      },
+      "component_ids": [
+        "assembly.fasteners",
+        "fastener.cooler.01",
+        "fastener.cooler.02",
+        "fastener.cooler.03",
+        "fastener.cooler.04",
+        "fastener.cooler.05",
+        "fastener.cooler.06",
+        "fastener.cooler.07",
+        "fastener.cooler.08",
+        "assembly.cooling",
+        "assembly.shroud"
+      ],
+      "tool_requirements": [],
+      "safety_notes": {
+        "en": "Disconnect the system from mains power and remove the card before handling it. Observe ESD precautions. The eight screw objects in the 3D scene are only candidate markers; their locations are not a screw-by-screw map. Check applicable warranty terms before disturbing a tamper-evident sticker.",
+        "ru": "Отключите систему от электросети и извлеките видеокарту перед работой. Соблюдайте меры защиты от электростатического разряда. Восемь винтов в 3D-сцене — только кандидаты, а не точная карта расположения крепежа. Перед повреждением контрольной наклейки проверьте применимые условия гарантии."
+      },
+      "prerequisite_step_ids": [],
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ]
+    },
+    {
+      "id": "step.disconnect-fan-leads",
+      "sequence": 2,
+      "title": {
+        "en": "Disconnect both fan leads before separating the cooler",
+        "ru": "Отсоединить оба кабеля вентиляторов перед снятием кулера"
+      },
+      "description": {
+        "en": "After removing the rear screws, the article says to unplug the two fan connections located near the lower-left area when looking at the back of the card, then separate the cooler/shroud assembly. Connector latch details and the force required are not specified; do not pull on the wires or treat this as a detailed connector repair instruction.",
+        "ru": "После снятия задних винтов статья предписывает отсоединить два разъёма вентиляторов, расположенных ближе к нижнему левому краю при взгляде на обратную сторону карты, и затем отделить кулер с кожухом. Конструкция фиксаторов и усилие не описаны; не тяните за провода и не воспринимайте этот текст как подробную инструкцию по ремонту разъёма."
+      },
+      "component_ids": [
+        "connector.fan.header.1",
+        "connector.fan.header.2",
+        "assembly.fan.1",
+        "assembly.fan.2",
+        "assembly.cooling",
+        "assembly.shroud",
+        "assembly.pcb.electronics"
+      ],
+      "tool_requirements": [],
+      "safety_notes": {
+        "en": "Support the cooler so its weight does not load the fan wires. Stop if a connector does not release with gentle, controlled handling. The source does not specify connector release direction or a tool.",
+        "ru": "Поддерживайте кулер, чтобы его вес не нагружал провода вентиляторов. Остановитесь, если разъём не освобождается при аккуратном контролируемом воздействии. Источник не указывает направление разблокировки или инструмент."
+      },
+      "prerequisite_step_ids": [
+        "step.remove-rear-cooler-fasteners"
+      ],
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ]
+    }
+  ],
   "observations": [
     {
       "source_id": "src.gamersnexus.teardown",
@@ -52,5 +119,6 @@
         "ru": "На фотографии платы видны шесть микросхем Samsung K4ZAF325BM-HC16 GDDR6 вокруг корпуса GPU GA106. Координаты корпусов в 3D оценены по фотографии и не измерены."
       }
     }
-  ]
+  ],
+  "complete_sequence": false
 }

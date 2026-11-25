@@ -60,3 +60,8 @@ The component atlas also adds separate, individually selectable photo-estimated 
 The canonical package now exposes 104 semantic components and 99 typed relationships. This includes individually selectable fan frames, hubs and seven blade proxies per fan; 24 separate heatsink-fin proxies; two selectable heatpipe-route assemblies; six memory-side thermal-pad proxies; and a VRM-side thermal-pad strip proxy.
 
 These are independently selectable teaching meshes, not a claim that the exact hardware has seven blades per fan or 24 fins. The count and shapes are explicitly identified as proxy geometry. Thermal-pad positions are aligned to the six memory-package candidates only; pad thickness, material, hardness and service dimensions remain unverified. Heatpipe paths and cross-sections likewise remain illustrative.
+
+
+## Source-backed partial teardown sequence
+
+The assembly evidence panel now contains two partial steps grounded in the Tom's Hardware EVGA RTX 3060 XC teardown description: (1) remove the eight rear heatsink/shroud retention screws (four around the GPU and four nearer the rear edge; one is under an EVGA tamper sticker), then (2) unplug both fan connections near the lower-left PCB area when viewed from the back before separating the cooler/shroud. The sequence is explicitly marked `partial_observed_sequence` and `complete_sequence: false`. The source does not specify driver size, torque, exact screw coordinates, connector latch geometry, thermal-pad replacement dimensions or reassembly order; none are invented. Source: https://www.tomshardware.com/reviews/nvidia-geforce-rtx-3060-review/2

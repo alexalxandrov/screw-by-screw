@@ -21,7 +21,12 @@ test("loads the generated Blender v0.5 SBS model package and resolves content-pa
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-fan-rotors", "2");
   await expect(page.locator('#component-tree button[data-id="assembly.fan.1.rotor"]')).toBeVisible();
   await expect(page.locator('#component-tree button[data-id="assembly.fan.2.rotor"]')).toBeVisible();
-  await expect(page.getByRole("button", { name: /Видеокарта в сборе/ })).toBeVisible();
+  const deviceRoot = page.getByRole("button", { name: /Видеокарта в сборе/ });
+  await expect(deviceRoot).toBeVisible();
+  await deviceRoot.click();
+  await expect(page.locator("#assembly-step-list .assembly-step-card")).toHaveCount(2);
+  await expect(page.locator("#assembly-step-list")).toContainText("Вывернуть восемь задних винтов");
+  await expect(page.locator("#assembly-step-list")).toContainText("Отсоединить оба кабеля вентиляторов");
   await page.locator("#catalog-open").click();
   const loadedCard = page.locator('[data-model-id="gpu.evga.12g-p5-3655-kr"]');
   await expect(loadedCard.locator(".catalog-load-button")).toBeDisabled();
