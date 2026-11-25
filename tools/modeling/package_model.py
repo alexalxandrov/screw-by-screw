@@ -67,8 +67,12 @@ def build_package(model_dir: Path, scene_path: Path, output_path: Path) -> dict[
     if model.get("id") != manifest.get("model_id"):
         raise ValueError("model ID does not match package manifest")
     payload: dict[str, bytes] = {"model-package.json": (model_dir / "model-package.json").read_bytes()}
+    archive_names = {"model-package.json"}
     for key in REQUIRED_KEYS:
         archive_path = safe_relative_path(files[key]).as_posix()
+        if archive_path in archive_names:
+            raise ValueError(f"duplicate package archive path: {archive_path}")
+        archive_names.add(archive_path)
         source_path = scene_path if key == "scene" else (model_dir / safe_relative_path(files[key])).resolve(strict=True)
         if key != "scene" and model_dir not in source_path.parents:
             raise ValueError(f"package file escapes model directory: {source_path}")
@@ -80,10 +84,14 @@ def build_package(model_dir: Path, scene_path: Path, output_path: Path) -> dict[
         payload[archive_path] = data
     release_name = files.get("release")
     if release_name:
+        release_archive_path = safe_relative_path(release_name).as_posix()
+        if release_archive_path in archive_names:
+            raise ValueError(f"duplicate package archive path: {release_archive_path}")
+        archive_names.add(release_archive_path)
         release_path = (model_dir / safe_relative_path(release_name)).resolve(strict=True)
         if model_dir not in release_path.parents:
             raise ValueError("release file escapes model directory")
-        payload[safe_relative_path(release_name).as_posix()] = release_path.read_bytes()
+        payload[release_archive_path] = release_path.read_bytes()
     total_size = sum(len(value) for value in payload.values())
     if total_size > MAX_PACKAGE_BYTES:
         raise ValueError("expanded model package exceeds 512 MiB")
