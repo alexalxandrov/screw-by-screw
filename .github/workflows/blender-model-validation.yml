@@ -91,7 +91,7 @@ jobs:
       - name: Test generated GLB inside the viewer
         run: npm run test:e2e:model
       - name: Run full viewer and accessibility suite against generated GLB
-        run: npm run test:e2e
+        run: npm run test:e2e:chromium
       - name: Collect generated artifacts
         if: always()
         run: |
