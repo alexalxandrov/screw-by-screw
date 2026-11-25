@@ -1,0 +1,228 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Screw by Screw semantic inventory",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "schema_version",
+    "generated_at",
+    "model",
+    "scope",
+    "counts",
+    "components",
+    "sources",
+    "relationships",
+    "claims",
+    "process_layers",
+    "assembly_steps",
+    "learning",
+    "animations",
+    "release"
+  ],
+  "properties": {
+    "format": {
+      "const": "sbs-semantic-inventory"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "model": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "includes",
+        "excludes",
+        "limitations"
+      ],
+      "properties": {
+        "type": {
+          "const": "semantic_inventory"
+        },
+        "includes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "excludes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "limitations": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "components",
+        "sources",
+        "relationships",
+        "claims",
+        "process_layers",
+        "assembly_steps",
+        "source_observations",
+        "learning_questions",
+        "animation_clips"
+      ],
+      "properties": {
+        "components": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sources": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "relationships": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "claims": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "process_layers": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "assembly_steps": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "source_observations": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "learning_questions": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "animation_clips": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "components": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "relationships": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "process_layers": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "assembly_steps": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "steps",
+        "observations"
+      ],
+      "properties": {
+        "steps": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "observations": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "learning": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "questions"
+      ],
+      "properties": {
+        "questions": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "animations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "clips"
+      ],
+      "properties": {
+        "clips": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "release": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": true
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  }
+}
