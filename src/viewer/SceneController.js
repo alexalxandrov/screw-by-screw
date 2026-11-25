@@ -108,7 +108,7 @@ export class SceneController {
           const eased = linear * linear * (3 - 2 * linear);
           this.applyExplode(from + (to - from) * eased);
           onUpdate(this.explodeProgress);
-          if (linear >= 1) { object.rotation[axis] = startRotation; finish(true); }
+          if (linear >= 1) finish(true);
           else this.animationFrame = requestAnimationFrame(tick);
         } catch (error) {
           fail(error);
@@ -168,7 +168,7 @@ export class SceneController {
           const eased = linear * linear * (3 - 2 * linear);
           object.rotation[axis] = startRotation + (targetRotation - startRotation) * eased;
           onUpdate(linear);
-          if (linear >= 1) finish(true);
+          if (linear >= 1) { object.rotation[axis] = startRotation; finish(true); }
           else this.animationFrame = requestAnimationFrame(tick);
         } catch (error) {
           fail(error);
