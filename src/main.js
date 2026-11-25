@@ -2235,7 +2235,11 @@ function bindUI() {
       event.preventDefault();
       $("#component-search").focus();
     }
-    if (event.key === "Escape" && $("#model-catalog-dialog")?.open) return;
+    if (event.key === "Escape" && $("#model-catalog-dialog")?.open) {
+      event.preventDefault();
+      closeCatalog();
+      return;
+    }
     if (event.key === "Escape") {
       setMeasurementEnabled(false);
       state.animationPlayer?.stop();
