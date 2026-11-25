@@ -99,26 +99,48 @@ function assertStringArray(value, label, allowed) {
   if (!Array.isArray(value) || value.some((item) => typeof item !== "string" || (allowed && !allowed.has(item)))) fail(label + " contains an invalid reference");
 }
 
-function validateAnimationPackage(animations, componentIds) {
-  if (!Array.isArray(animations.clips)) fail("animations.clips must be an array");
+function validateAnimationPackage(animations, componentIds, sourceIds) {
+  if (!animations || !Array.isArray(animations.clips)) fail("animations.clips must be an array");
   const clipIds = new Set();
   for (const clip of animations.clips) {
     assertString(clip.id, "animation clip id");
     if (clipIds.has(clip.id)) fail("duplicate animation clip id: " + clip.id);
     clipIds.add(clip.id);
+
+    const title = clip.title;
+    if (!(typeof title === "string" && title.trim()) &&
+        !(title && typeof title === "object" && !Array.isArray(title) &&
+          ["en", "ru"].some((language) => typeof title[language] === "string" && title[language].trim()))) {
+      fail("animation clip title must contain readable text");
+    }
+    assertString(clip.evidence_status, "animation clip evidence_status");
+    assertStringArray(clip.source_ids, "animation clip source_ids", sourceIds);
+    if (!(clip.source_ids?.length) && !["illustrative", "educational_approximation"].includes(clip.evidence_status)) {
+      fail("non-illustrative animation clips require registered source provenance");
+    }
     if (!Number.isFinite(clip.duration_ms) || clip.duration_ms <= 0 || clip.duration_ms > 600000) fail("animation duration is invalid");
-    if (!Array.isArray(clip.tracks)) fail("animation tracks must be an array");
+    if (clip.easing !== undefined && !["linear", "ease_in_out"].includes(clip.easing)) fail("unsupported animation easing");
+    if (!Array.isArray(clip.tracks) || clip.tracks.length === 0) fail("animation clip needs at least one track");
+
+    const trackKeys = new Set();
     for (const track of clip.tracks) {
+      assertString(track.target_id, "animation target ID");
       if (!componentIds.has(track.target_id)) fail("animation references unknown component: " + track.target_id);
       if (!ANIMATION_PROPERTIES.has(track.property)) fail("unsupported animation property: " + track.property);
+      const trackKey = track.target_id + "::" + track.property;
+      if (trackKeys.has(trackKey)) fail("duplicate animation track for target/property: " + trackKey);
+      trackKeys.add(trackKey);
       if (!Array.isArray(track.keyframes) || track.keyframes.length < 2) fail("animation track needs at least two keyframes");
       let previous = -1;
       for (const keyframe of track.keyframes) {
         if (!Number.isFinite(keyframe.t) || keyframe.t < 0 || keyframe.t > 1 || keyframe.t <= previous) fail("animation keyframe times must increase from 0 to 1");
         previous = keyframe.t;
         const value = keyframe.value;
-        if (track.property === "visible") { if (typeof value !== "boolean") fail("visibility keyframes must be boolean"); }
-        else if (!(typeof value === "number" && Number.isFinite(value)) && !(Array.isArray(value) && value.length === (track.property === "scale" || track.property === "position" || track.property === "rotation" ? 3 : 0) && value.every(Number.isFinite))) fail("animation keyframe value is invalid");
+        if (track.property === "visible") {
+          if (typeof value !== "boolean") fail("visibility keyframes must be boolean");
+        } else if (!Array.isArray(value) || value.length !== 3 || !value.every(Number.isFinite)) {
+          fail("vector animation keyframe values must be three finite numbers");
+        }
       }
       if (track.keyframes[0].t !== 0 || track.keyframes[track.keyframes.length - 1].t !== 1) fail("animation tracks must cover normalized time 0..1");
     }
@@ -221,7 +243,7 @@ export function validateModelPackageData(manifest, data) {
     }
   }
   if (!Array.isArray(data.learning.questions)) fail("learning.questions must be an array");
-  validateAnimationPackage(data.animations, componentIds);
+  validateAnimationPackage(data.animations, componentIds, sourceIds);
   assertStringArray(data.model.source_ids, "model.source_ids", sourceIds);
   return { modelId: manifest.model_id, componentCount: componentIds.size, sourceCount: sourceIds.size, relationshipCount: relationIds.size };
 }

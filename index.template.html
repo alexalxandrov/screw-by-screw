@@ -113,6 +113,20 @@
             </div>
             <input id="explode-slider" class="range-slider" type="range" min="0" max="100" value="0" aria-label="Exploded view amount" />
             <div class="range-labels"><span data-i18n="assembled">ASSEMBLED</span><span data-i18n="exploded">EXPLODED</span></div>
+            <div id="animation-player-panel" class="clip-player" hidden>
+              <div class="clip-player-heading">
+                <label for="animation-clip-select" class="eyebrow" data-i18n="authoredAnimations">PACKAGE ANIMATIONS</label>
+                <output id="animation-status" class="clip-status" data-status="ready" aria-live="polite">Ready</output>
+              </div>
+              <div class="clip-player-controls">
+                <select id="animation-clip-select" aria-label="Animation clip"></select>
+                <button id="animation-play" class="text-button" type="button" data-i18n="clipPlay">Play</button>
+                <button id="animation-pause" class="text-button" type="button" data-i18n="clipPause" disabled>Pause</button>
+                <button id="animation-stop" class="text-button" type="button" data-i18n="clipStop" disabled>Stop / reset</button>
+              </div>
+              <input id="animation-seek" class="clip-seek" type="range" min="0" max="1000" step="1" value="0" aria-label="Animation timeline" />
+              <div class="clip-player-footer"><span class="eyebrow" data-i18n="clipEvidenceNote">Authored model motion · not a physics simulation</span><output id="animation-time">0.00 / 0.00 s</output></div>
+            </div>
           </div>
 
           <div class="process-panel">

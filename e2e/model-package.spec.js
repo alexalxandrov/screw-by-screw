@@ -29,7 +29,7 @@ function makeGlb() {
   return bytes;
 }
 
-function makePackage() {
+function makePackage({ withAnimation = false } = {}) {
   const manifest = {
     format: "sbs-model", schema_version: "1.0.0", model_id: modelId, package_version: "1.0.0",
     files: { model: "model.json", scene: "scene.glb", components: "components.json", sources: "sources.json",
@@ -48,7 +48,17 @@ function makePackage() {
     "process_layers.json": { device_model_id: modelId, process_layers: [{ id: "layer.cooling", type: "cooling", title: { en: "Cooling", ru: "Охлаждение" }, description: { en: "Air movement", ru: "Движение воздуха" }, linked_component_ids: ["fan"], source_ids: ["src.one"], assumptions: [] }] },
     "assembly_steps.json": { steps: [] },
     "learning.json": { questions: [] },
-    "animations.json": { clips: [] }
+    "animations.json": { clips: withAnimation ? [{
+      id: "clip.fan-turn",
+      title: { en: "Fan rotation", ru: "Поворот вентилятора" },
+      evidence_status: "documented_motion",
+      source_ids: ["src.one"],
+      duration_ms: 1000,
+      easing: "linear",
+      tracks: [{ target_id: "fan", property: "rotation", keyframes: [
+        { t: 0, value: [0, 0, 0] }, { t: 1, value: [0, 0, Math.PI * 2] }
+      ] }]
+    }] : [] }
   };
   const entries = { "sbs-model.json": strToU8(JSON.stringify(manifest)), "scene.glb": makeGlb() };
   for (const [name, value] of Object.entries(data)) entries[name] = strToU8(JSON.stringify(value));
@@ -65,6 +75,7 @@ test("opens a complete .sbsmodel package and binds its metadata to the GLB scene
   await expect(page.locator("#component-tree")).toContainText("Модуль вентилятора");
   await expect(page.locator("#load-state")).toContainText("ПАКЕТ SBS MODEL");
   await expect(page.locator(".view-tab[data-mode=\"learn\"]")).toBeDisabled();
+  await expect(page.locator("#animation-player-panel")).toBeHidden();
 });
 
 
@@ -81,5 +92,40 @@ test("imports an .sbsmodel file after opening the root index.html directly", asy
   await expect(page.locator("#model-title")).toHaveText("Portable test device", { timeout: 10000 });
   await expect(page.locator("#component-count")).toHaveText("2");
   await expect(page.locator("#load-state")).toContainText("ПАКЕТ SBS MODEL");
+  expect(pageErrors).toEqual([]);
+});
+
+
+test("plays, pauses, seeks and restores a model-package animation clip", async ({ page }) => {
+  const pageErrors = [];
+  page.on("pageerror", (error) => pageErrors.push(error.message));
+  await page.goto("/");
+  await page.locator("#model-file").setInputFiles({
+    name: "portable-animation-test.sbsmodel",
+    mimeType: "application/zip",
+    buffer: Buffer.from(makePackage({ withAnimation: true }))
+  });
+
+  const panel = page.locator("#animation-player-panel");
+  await expect(panel).toBeVisible();
+  const clipSelect = page.locator("#animation-clip-select");
+  await expect(clipSelect).toContainText("Поворот вентилятора");
+  await page.locator("#animation-play").click();
+  await expect(panel).toHaveAttribute("data-status", "playing");
+  await page.waitForTimeout(180);
+  await page.locator("#animation-pause").click();
+  await expect(panel).toHaveAttribute("data-status", "paused");
+
+  await page.locator("#animation-seek").evaluate((element) => {
+    element.value = "500";
+    element.dispatchEvent(new Event("input", { bubbles: true }));
+  });
+  await expect(page.locator("#animation-time")).toContainText("0.50 / 1.00");
+  await page.locator("#language-toggle").click();
+  await expect(clipSelect).toContainText("Fan rotation");
+
+  await page.locator("#animation-stop").click();
+  await expect(panel).toHaveAttribute("data-status", "ready");
+  await expect(page.locator("#animation-seek")).toHaveValue("0");
   expect(pageErrors).toEqual([]);
 });
