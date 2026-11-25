@@ -4,11 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0b0f14" />
+    <link rel="stylesheet" href="./src/styles.css" />
     <meta name="description" content="Screw by Screw — interactive technical atlas." />
     <title>Screw by Screw — Interactive Technical Atlas</title>
   </head>
   <body>
-    <div id="app">
+    <div id="app" class="app-shell">
+      <div id="startup-fallback" class="startup-fallback" role="alert" hidden>
+        <div class="startup-fallback-card">
+          <strong>Приложение не запустилось</strong>
+          <p>Не открывайте index.html напрямую. Запустите проект через Vite из корня репозитория:</p>
+          <code>npm ci</code>
+          <code>npm run dev</code>
+          <p class="startup-fallback-note">Затем откройте адрес, который покажет Vite (обычно http://127.0.0.1:5173).</p>
+        </div>
+      </div>
       <header class="topbar">
         <a class="brand" href="#">
           <span class="brand-mark">S<span>/</span>S</span>
@@ -177,6 +187,13 @@
         <div><span id="scene-stats">—</span><span class="status-separator">/</span><span data-i18n="localFirst">LOCAL-FIRST · NO ACCOUNT</span></div>
       </footer>
     </div>
-    <script type="module" src="/src/main.js"></script>
+    <script>
+      window.setTimeout(() => {
+        if (!document.documentElement.classList.contains("sbs-ready")) {
+          document.getElementById("startup-fallback")?.removeAttribute("hidden");
+        }
+      }, 7000);
+    </script>
+    <script type="module" src="./src/main.js"></script>
   </body>
 </html>
