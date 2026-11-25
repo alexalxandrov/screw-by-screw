@@ -35,6 +35,7 @@ test("restarting a completed learning quiz clears its saved progress", async ({ 
     await page.locator("#quiz-next").click();
     if (index < 4) await page.locator("#quiz-next").click();
   }
+  await page.locator("#quiz-next").click();
 
   await expect(page.locator("#quiz-question")).toHaveText("Тест завершён");
   await page.locator("#quiz-next").click();
