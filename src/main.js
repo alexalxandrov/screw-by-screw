@@ -3,6 +3,7 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { MODEL, COMPONENTS, EVIDENCE } from "./data/model.js";
 import LEARNING_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/learning.json";
+import PROCESS_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/process_layers.json";
 import "./styles.css";
 
 const $ = (selector) => document.querySelector(selector);
@@ -32,8 +33,11 @@ const state = {
   learningScore: 0,
   learningSelected: null,
   learningAnswered: false,
-  learningComplete: false
+  learningComplete: false,
+  modelWarnings: []
 };
+
+const MAX_GLB_BYTES = 256 * 1024 * 1024;
 
 const UI = {
   en: {
@@ -55,7 +59,7 @@ const UI = {
     allVisible: "All components visible", layerCooling: "Cooling layer · qualitative",
     layerPower: "Power path · qualitative", noWebgl: "WebGL is unavailable in this browser.",
     source: "Source", noSources: "No direct source linked to this component.",
-    modelLoaded: "Model ready", glbPicker: "Choose a .glb file", learn: "Learn", learning: "LEARNING", question: "QUESTION", checkAnswer: "Check answer", nextQuestion: "Next question", finishQuiz: "Finish", restartQuiz: "Try again", correctAnswer: "Correct", wrongAnswer: "Not quite", quizComplete: "Quiz complete", yourScore: "Your score", chooseAnswer: "Choose an answer first"
+    modelLoaded: "Model ready", glbPicker: "Choose a .glb file", learn: "Learn", learning: "LEARNING", linkedComponents: "LINKED COMPONENTS", assumptions: "ASSUMPTIONS & LIMITS", processLayer: "PROCESS LAYER", fileTooLarge: "GLB exceeds the 256 MB prototype limit.", question: "QUESTION", checkAnswer: "Check answer", nextQuestion: "Next question", finishQuiz: "Finish", restartQuiz: "Try again", correctAnswer: "Correct", wrongAnswer: "Not quite", quizComplete: "Quiz complete", yourScore: "Your score", chooseAnswer: "Choose an answer first"
   },
   ru: {
     pilotModel: "ПИЛОТНАЯ МОДЕЛЬ", structure: "СТРУКТУРА", components: "Компоненты",
@@ -76,7 +80,7 @@ const UI = {
     allVisible: "Все компоненты видимы", layerCooling: "Слой охлаждения · качественно",
     layerPower: "Путь питания · качественно", noWebgl: "В этом браузере недоступен WebGL.",
     source: "Источник", noSources: "Для этого компонента нет прямой ссылки на источник.",
-    modelLoaded: "Модель готова", glbPicker: "Выберите файл .glb", learn: "Обучение", learning: "ОБУЧЕНИЕ", question: "ВОПРОС", checkAnswer: "Проверить ответ", nextQuestion: "Следующий вопрос", finishQuiz: "Завершить", restartQuiz: "Повторить", correctAnswer: "Верно", wrongAnswer: "Не совсем", quizComplete: "Тест завершён", yourScore: "Ваш результат", chooseAnswer: "Сначала выберите ответ"
+    modelLoaded: "Модель готова", glbPicker: "Выберите файл .glb", learn: "Обучение", learning: "ОБУЧЕНИЕ", linkedComponents: "СВЯЗАННЫЕ КОМПОНЕНТЫ", assumptions: "ДОПУЩЕНИЯ И ОГРАНИЧЕНИЯ", processLayer: "СЛОЙ ПРОЦЕССА", fileTooLarge: "GLB превышает лимит прототипа 256 МБ.", question: "ВОПРОС", checkAnswer: "Проверить ответ", nextQuestion: "Следующий вопрос", finishQuiz: "Завершить", restartQuiz: "Повторить", correctAnswer: "Верно", wrongAnswer: "Не совсем", quizComplete: "Тест завершён", yourScore: "Ваш результат", chooseAnswer: "Сначала выберите ответ"
   }
 };
 
@@ -94,7 +98,8 @@ function applyLanguage() {
     node.placeholder = t(node.dataset.i18nPlaceholder);
   });
   renderTree();
-  if (state.learningMode) renderLearning();
+  if (state.activeLayer) renderProcessLayer();
+  else if (state.learningMode) renderLearning();
   else if (state.selectedId) renderDetails(state.selectedId);
 }
 
@@ -253,9 +258,11 @@ function findNodeById(id) {
 
 function collectNodes(root) {
   state.componentNodes.clear();
+  state.modelWarnings = [];
   root.traverse((object) => {
     const id = object.userData?.sbs_component_id;
-    if (id && !state.componentNodes.has(id)) state.componentNodes.set(id, object);
+    if (id && state.componentNodes.has(id)) state.modelWarnings.push(id);
+    else if (id) state.componentNodes.set(id, object);
   });
   $("#component-count").textContent = String(state.componentNodes.size);
   $("#scene-stats").textContent = `${state.componentNodes.size} ${t("componentsCount").toUpperCase()}`;
@@ -321,6 +328,7 @@ function renderTree() {
 function renderDetails(id) {
   state.learningMode = false;
   $("#learning-panel").hidden = true;
+  $("#process-details").hidden = true;
   $("#details-heading-eyebrow").textContent = t("inspection");
   $("#details-heading-title").textContent = t("componentDetails");
   const object = findNodeById(id);
@@ -361,6 +369,10 @@ function renderDetails(id) {
 }
 
 function showLearning() {
+  clearHighlights();
+  state.activeLayer = null;
+  document.querySelectorAll(".process-button").forEach((button) => button.classList.remove("active"));
+  $("#process-details").hidden = true;
   state.learningMode = true;
   state.learningIndex = 0;
   state.learningScore = 0;
@@ -474,6 +486,56 @@ function submitLearningAnswer() {
   renderLearning();
 }
 
+function renderProcessLayer() {
+  const layer = PROCESS_PACKAGE.process_layers.find((item) => item.type === state.activeLayer);
+  if (!layer) return;
+  state.learningMode = false;
+  $("#learning-panel").hidden = true;
+  $("#component-details").hidden = true;
+  $("#empty-selection").hidden = true;
+  $("#process-details").hidden = false;
+  $("#details-heading-eyebrow").textContent = t("processLayer");
+  $("#details-heading-title").textContent = state.language === "ru" ? layer.title.ru : layer.title.en;
+  $("#process-detail-type").textContent = layer.type.replaceAll("_", " ").toUpperCase();
+  $("#process-detail-title").textContent = state.language === "ru" ? layer.title.ru : layer.title.en;
+  $("#process-detail-description").textContent = state.language === "ru" ? layer.description.ru : layer.description.en;
+
+  const componentHost = $("#process-components");
+  componentHost.replaceChildren();
+  layer.linked_component_ids.forEach((id) => {
+    const object = findNodeById(id);
+    const data = getComponentData(id, object);
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "process-component-chip";
+    button.textContent = state.language === "ru" ? data.ru : data.en;
+    button.addEventListener("click", () => selectComponent(id));
+    componentHost.append(button);
+  });
+
+  const assumptions = $("#process-assumptions");
+  assumptions.replaceChildren();
+  layer.assumptions.forEach((item) => {
+    const li = document.createElement("li");
+    li.textContent = item;
+    assumptions.append(li);
+  });
+
+  const sourceHost = $("#process-sources");
+  sourceHost.replaceChildren();
+  const sourceMap = new Map(MODEL.sources.map((source) => [source.id, source]));
+  layer.source_ids.forEach((id) => {
+    const source = sourceMap.get(id);
+    if (!source) return;
+    const link = document.createElement("a");
+    link.href = source.url;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = `↗ ${source.label}`;
+    sourceHost.append(link);
+  });
+}
+
 function applyHighlight(object, color = 0xc3e86d) {
   if (!object || object.userData.__sbsHighlighted) return;
   object.userData.__sbsOriginalMaterial = object.material;
@@ -506,6 +568,9 @@ function selectComponent(id) {
   const object = findNodeById(id);
   if (!object) return;
   clearHighlights();
+  state.activeLayer = null;
+  document.querySelectorAll(".process-button").forEach((button) => button.classList.remove("active"));
+  $("#process-details").hidden = true;
   state.learningMode = false;
   state.selected = object;
   state.selectedId = id;
@@ -583,13 +648,19 @@ function setIsolated(isolate) {
 }
 
 function setLayer(layer) {
+  if (!state.modelRoot) return;
   clearHighlights();
   state.activeLayer = layer === "clear" || state.activeLayer === layer ? null : layer;
   document.querySelectorAll(".process-button").forEach((button) => {
     button.classList.toggle("active", button.dataset.layer === state.activeLayer);
   });
   if (!state.activeLayer) {
-    if (state.selected) applyHighlight(state.selected);
+    $("#process-details").hidden = true;
+    if (state.selectedId) renderDetails(state.selectedId);
+    else {
+      $("#empty-selection").hidden = false;
+      $("#component-details").hidden = true;
+    }
     setStatus(t("ready"));
     return;
   }
@@ -601,7 +672,12 @@ function setLayer(layer) {
       : id.includes("power") || id.includes("gpu") || id.includes("connector");
     if (match && object.userData?.sbs_component_id) matches.push(object);
   });
-  matches.forEach((object) => applyHighlight(object, state.activeLayer === "cooling" ? 0x6bc8e8 : 0xe8b75e));
+  matches.forEach((object) => {
+    const color = state.activeLayer === "cooling" ? 0x6bc8e8 : 0xe8b75e;
+    if (object.isMesh) applyHighlight(object, color);
+    else object.traverse((child) => { if (child.isMesh) applyHighlight(child, color); });
+  });
+  renderProcessLayer();
   setStatus(t(state.activeLayer === "cooling" ? "layerCooling" : "layerPower"));
 }
 
@@ -649,7 +725,7 @@ function installModel(root, mode) {
   fitModel(root);
   setExplode(0);
   setLoadState(mode === "file" ? t("loadedGlb") : t("demoLoaded"));
-  setStatus(t("modelLoaded"));
+  setStatus(state.modelWarnings.length ? 'Duplicate component IDs: ' + [...new Set(state.modelWarnings)].join(', ') : t('modelLoaded'));
 }
 
 function loadDemo() {
@@ -658,6 +734,12 @@ function loadDemo() {
 
 function loadArrayBuffer(buffer, filename) {
   setStatus(t("loading"));
+  if (buffer.byteLength > MAX_GLB_BYTES) {
+    $("#viewer-error").hidden = false;
+    $("#viewer-error").textContent = t("fileTooLarge");
+    setStatus(t("fileTooLarge"));
+    return;
+  }
   const loader = new GLTFLoader();
   loader.parse(buffer, "", (gltf) => {
     const root = new THREE.Group();
@@ -752,6 +834,13 @@ function bindUI() {
   $("#model-file").addEventListener("change", async (event) => {
     const file = event.target.files?.[0];
     if (!file) return;
+    if (file.size > MAX_GLB_BYTES) {
+      $("#viewer-error").hidden = false;
+      $("#viewer-error").textContent = t("fileTooLarge");
+      setStatus(t("fileTooLarge"));
+      event.target.value = "";
+      return;
+    }
     $("#viewer-error").hidden = true;
     loadArrayBuffer(await file.arrayBuffer(), file.name);
     event.target.value = "";
@@ -782,8 +871,8 @@ function bindUI() {
   document.querySelectorAll(".view-tab").forEach((button) => {
     button.addEventListener("click", () => {
       document.querySelectorAll(".view-tab").forEach((tab) => tab.classList.toggle("active", tab === button));
-      if (button.dataset.mode === "disassemble") setExplode(100);
-      if (button.dataset.mode === "explore") setExplode(0);
+      if (button.dataset.mode === "disassemble") { setLayer("clear"); setExplode(100); }
+      if (button.dataset.mode === "explore") { setLayer("clear"); setExplode(0); }
       if (button.dataset.mode === "understand") setLayer("cooling");
       if (button.dataset.mode === "learn") showLearning();
       else if (state.learningMode) {
@@ -824,5 +913,6 @@ applyLanguage();
 initRenderer();
 if (state.renderer) {
   canvasHost.addEventListener("dblclick", resetCamera);
+  loadDemo();
   tryLoadBundledModel();
 }
