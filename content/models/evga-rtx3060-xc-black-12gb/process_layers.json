@@ -27,12 +27,8 @@
         "Exact fan curves, fin pitch, heatpipe routing and thermal resistance are unknown.",
         "No CFD, pressure field, fan curve or measured airflow vector is available.",
         "Airflow particles are directional educational markers, not fluid parcels or velocity vectors.",
-        "No CFD, pressure field, fan curve or measured airflow vector is available.",
         "Heatpipe count, routing, diameter and thermal resistance are not verified.",
-        "Airflow particles are directional educational markers, not fluid parcels or velocity vectors.",
-        "The six-pipe count and air-through PCB feature are sourced from an exact-SKU review; individual pipe routes and the cutout contour remain photo-estimated.",
-        "No CFD, pressure field, fan curve or measured airflow vector is available.",
-        "Airflow particles are directional educational markers, not fluid parcels or velocity vectors."
+        "The six-pipe count and air-through PCB feature are sourced from an exact-SKU review; individual pipe routes and the cutout contour remain photo-estimated."
       ],
       "source_ids": [
         "src.lanoc.review",
@@ -69,8 +65,6 @@
       "assumptions": [
         "No circuit simulation or exact-board schematic is available.",
         "Do not infer pin-level wiring from the connector shape.",
-        "No exact-board schematic, BoardView, verified PCB revision, pin mapping or current values are available.",
-        "The connector-to-GPU pulse path is an educational schematic, not routed PCB copper or an electrical simulation.",
         "No exact-board schematic, BoardView, verified PCB revision, pin mapping or current values are available.",
         "The connector-to-GPU pulse path is an educational schematic, not routed PCB copper or an electrical simulation."
       ],

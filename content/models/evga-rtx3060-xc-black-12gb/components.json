@@ -454,14 +454,15 @@
       },
       "category": "thermal_mechanical",
       "evidence_status": "illustrative",
-      "geometry_status": "illustrative_proxy",
+      "geometry_status": "photo_estimated_proxy",
       "source_ids": [
         "src.lanoc.review",
-        "src.gamersnexus.teardown"
+        "src.gamersnexus.teardown",
+        "src.fpsreview.exact_sku"
       ],
       "description": {
-        "en": "A visual route reconstructed from teardown imagery. Exact path, count, diameter and internal contact are not measured.",
-        "ru": "Визуальная трасса, реконструированная по фотографиям разборки. Точный маршрут, количество, диаметр и внутренний контакт не измерены."
+        "en": "One of six visual heatpipe routes. The exact-SKU review reports four central pipes and two lateral pipes; this individual route is a photo-estimated reconstruction, not measured CAD.",
+        "ru": "Одна из шести визуальных трасс тепловых трубок. В обзоре точного SKU указаны четыре центральные и две боковые трубки; конкретная трасса реконструирована по фотографиям и не является измеренной CAD-геометрией."
       }
     },
     {
@@ -473,14 +474,15 @@
       },
       "category": "thermal_mechanical",
       "evidence_status": "illustrative",
-      "geometry_status": "illustrative_proxy",
+      "geometry_status": "photo_estimated_proxy",
       "source_ids": [
         "src.lanoc.review",
-        "src.gamersnexus.teardown"
+        "src.gamersnexus.teardown",
+        "src.fpsreview.exact_sku"
       ],
       "description": {
-        "en": "A visual route reconstructed from teardown imagery. Exact path, count, diameter and internal contact are not measured.",
-        "ru": "Визуальная трасса, реконструированная по фотографиям разборки. Точный маршрут, количество, диаметр и внутренний контакт не измерены."
+        "en": "One of six visual heatpipe routes. The exact-SKU review reports four central pipes and two lateral pipes; this individual route is a photo-estimated reconstruction, not measured CAD.",
+        "ru": "Одна из шести визуальных трасс тепловых трубок. В обзоре точного SKU указаны четыре центральные и две боковые трубки; конкретная трасса реконструирована по фотографиям и не является измеренной CAD-геометрией."
       }
     },
     {

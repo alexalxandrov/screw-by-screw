@@ -700,8 +700,8 @@ def main():
     )
     set_parent_keep_world(contact, cooling_group)
 
-    # Two visual heatpipe routes are reconstructed from teardown views;
-    # count, exact route, diameter and internal contact are not measured.
+    # Six visual heatpipe routes are reconstructed from exact-SKU review imagery;
+    # individual route, diameter, bend radii and contact geometry are not measured.
     heatpipes_group = make_assembly(
         "Heatpipe group | illustrative routes",
         "cooling.heatpipes",
