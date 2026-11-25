@@ -12,8 +12,10 @@ test("loads the generated Blender v0.5 GLB and resolves content-package IDs", as
   const modelBytes = await modelResponse.body();
   expect(modelBytes.byteLength).toBeLessThan(1024 * 1024);
   await expect(page.locator("#app-status")).toHaveText("Модель готова");
-  await expect(page.locator("#component-count")).toHaveText("83");
+  await expect(page.locator("#component-count")).toHaveText("85");
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-fan-rotors", "2");
+  await expect(page.locator('#component-tree button[data-id="assembly.fan.1.rotor"]')).toBeVisible();
+  await expect(page.locator('#component-tree button[data-id="assembly.fan.2.rotor"]')).toBeVisible();
   await expect(page.getByRole("button", { name: /Видеокарта в сборе/ })).toBeVisible();
 
   await page.locator("#camera-preset").selectOption("fan");
@@ -97,8 +99,10 @@ test("opens the self-contained root index.html directly with the embedded Blende
     })()
   }));
   await expect(page.locator("#viewer-canvas canvas"), JSON.stringify({ diagnostics, pageErrors, consoleErrors, requestFailures })).toBeVisible({ timeout: 10000 });
-  await expect(page.locator("#component-count")).toHaveText("83", { timeout: 15000 });
+  await expect(page.locator("#component-count")).toHaveText("85", { timeout: 15000 });
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-fan-rotors", "2");
+  await expect(page.locator('#component-tree button[data-id="assembly.fan.1.rotor"]')).toBeVisible();
+  await expect(page.locator('#component-tree button[data-id="assembly.fan.2.rotor"]')).toBeVisible();
   await expect(page.locator("#load-state")).toContainText("ВСТРОЕННАЯ МОДЕЛЬ");
   await page.locator("#camera-preset").selectOption("io");
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-camera-preset", "io");
