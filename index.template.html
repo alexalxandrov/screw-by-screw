@@ -93,6 +93,7 @@
               <button class="view-tab" type="button" data-mode="disassemble" data-i18n="disassemble">Disassemble</button>
               <button class="view-tab" type="button" data-mode="understand" data-i18n="understand">Understand</button>
               <button class="view-tab" type="button" data-mode="learn" data-i18n="learn">Learn</button>
+              <button class="view-tab" type="button" data-mode="compare" data-i18n="compare">Compare</button>
             </div>
             <div class="toolbar-camera">
               <label for="camera-preset" data-i18n="cameraPreset">VIEW</label>
@@ -218,6 +219,35 @@
             <div id="quiz-sources" class="quiz-sources"></div>
             <button id="quiz-next" class="primary-button quiz-next" type="button" disabled>Check answer</button>
           </div>
+          <section id="comparison-panel" class="comparison-panel" hidden aria-label="Model package comparison">
+            <div class="comparison-toolbar">
+              <span class="eyebrow" data-i18n="compareTitle">MODEL COMPARISON</span>
+              <div class="comparison-toolbar-actions">
+                <button id="compare-select-model" type="button" data-i18n="compareChoosePackage">Load a second .sbsmodel package</button>
+                <button id="compare-clear-model" type="button" data-i18n="compareClearPackage" disabled>Clear comparison</button>
+                <input id="comparison-file" type="file" accept=".sbsmodel,application/octet-stream" hidden />
+              </div>
+            </div>
+            <p id="comparison-status" class="comparison-status-message" role="status" aria-live="polite" data-i18n="compareWaiting">Load a validated .sbsmodel package to compare semantic data.</p>
+            <div id="comparison-identities" class="comparison-identities"></div>
+            <div id="comparison-summary" class="comparison-summary"></div>
+            <section class="comparison-section">
+              <span class="eyebrow" data-i18n="compareSpecifications">SPECIFICATION COMPARISON</span>
+              <div id="comparison-specification-list" class="comparison-list"></div>
+            </section>
+            <section class="comparison-section">
+              <span class="eyebrow" data-i18n="compareClaims">SOURCE-BACKED CLAIMS</span>
+              <div id="comparison-claim-list" class="comparison-list"></div>
+            </section>
+            <section class="comparison-section">
+              <span class="eyebrow" data-i18n="compareCoverage">COMPONENT INVENTORY COVERAGE</span>
+              <div id="comparison-coverage" class="comparison-summary"></div>
+            </section>
+            <section class="comparison-section">
+              <span class="eyebrow" data-i18n="compareLimitations">INTERPRETATION LIMITS</span>
+              <div id="comparison-limitations"></div>
+            </section>
+          </section>
           <div id="process-details" class="process-details" hidden>
             <div class="process-detail-type" id="process-detail-type">COOLING</div>
             <h3 id="process-detail-title">—</h3>
