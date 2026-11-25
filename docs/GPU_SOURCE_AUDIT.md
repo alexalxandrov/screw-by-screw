@@ -30,7 +30,7 @@ A closely related EVGA RTX 3060 XC Gaming SKU 12G-P5-3657-KR also appears in sou
 - Product is an EVGA dual-fan RTX 3060 XC BLACK with 12GB GDDR6.
 - EVGA's specification lists 3,584 CUDA cores, 192-bit memory interface, 15,000 MHz effective memory clock, PCIe 4.0, and 1777 MHz boost clock for this SKU.
 - Gamers Nexus has a teardown explicitly titled for the EVGA RTX 3060 XC Black and documents internal cooler/PCB layout.
-- Tom's Hardware reports eight rear screws for its EVGA RTX 3060 XC teardown and identifies six Samsung GDDR6 packages, marking K4ZAF325BM-HC16. Treat this as a cross-check until exact board matching is confirmed.
+- Tom's Hardware reports eight screws and identifies six Samsung GDDR6 packages (K4ZAF325BM-HC16) on an EVGA RTX 3060 XC teardown sample, but does not identify the XC BLACK 12G-P5-3655-KR. Treat screw layout and DRAM part number as related-variant context only.
 
 Store these as individual source-backed claims, not as unqualified global properties.
 
@@ -177,3 +177,14 @@ A separately indexed document title includes **EVGA232 / PG190-A02 / GA104-GA106
 The v0.6 development branch adds selectable visual placeholders for the GA106 die area, thermal-interface groups, candidate cooler fasteners, PCIe edge interface, two fan headers, individual display receptacles, shunt-resistor area, generic passives and the review-described PCB airflow-cutout area. The additions remain illustrative_proxy_not_cad. Candidate screw count and positions are not an exact-SKU service specification; memory/VRM pad dimensions, fan header pinout, PCIe contact field, port shell geometry and cutout boundary are not metrology data.
 
 No complete BoardView, exact-revision schematic, BOM, native STEP assembly or measured board coordinates have been obtained. The new geometry is for interactive education and navigation only.
+
+
+## 13. Exact XC BLACK fastener reconciliation
+
+The LanOC review is explicitly an EVGA RTX 3060 XC BLACK sample and shows the 12G-P5-3655-KR product label. Its text identifies four heatsink mounting screws in the center around the GPU, no backplate, dual 90 mm fan openings with approximately 85 mm impellers, 201.8 mm nominal card length, 110 mm height, and one 8-pin power input. The four GPU-area mounting screws are now the only fasteners treated as visible exact-SKU geometry.
+
+Tom's Hardware's teardown is a related EVGA RTX 3060 XC sample but does not identify the XC BLACK part number. Its eight-screw count is kept as a variant note only. Four additional model nodes are retained as uninstalled candidate placeholders, not installed screws on the XC BLACK. The service panel uses the exact LanOC four-screw observation and the exact-model Gamers Nexus fan teardown; the eight-screw procedure has been removed from the exact-SKU instructions.
+
+Sources:
+- Exact card layout and photos: https://lanoc.org/review/video-cards/evga-rtx-3060-xc-black?showall=1
+- Related EVGA RTX 3060 XC teardown (not exact SKU): https://www.tomshardware.com/reviews/nvidia-geforce-rtx-3060-review/2

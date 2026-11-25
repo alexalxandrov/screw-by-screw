@@ -34,7 +34,7 @@ The content model exposes two illustrative rotor pivot components as children of
 
 The feat/rtx3060-deep-component-atlas branch expands the pilot beyond its original 24 semantic components. It adds selectable GPU-die, thermal-interface, candidate-fastener, PCIe-edge, fan-header, individual display-port, shunt-area, generic-passive and PCB-airflow-cutout entries with matching Blender scene nodes. Every new element carries English/Russian labels and an explicit evidence/geometry status.
 
-This is not yet a complete engineering reconstruction. The eight fasteners are candidates from a related EVGA XC teardown report, not a verified exact-revision service specification. The candidate EVGA232 REV 1.0 board marking and PG190-A02 schematic lead do not establish the physical PCB identity. No pinout, VRM phase count, component values, fan RPM, screw torque or thermal-pad thickness is inferred.
+This is not yet a complete engineering reconstruction. Four GPU-area heatsink screws are photo-positioned from the exact XC BLACK review; four additional rear fastener nodes are uninstalled logical candidates from a related XC teardown and are not asserted as installed on this SKU. The candidate EVGA232 REV 1.0 board marking and PG190-A02 schematic lead do not establish the physical PCB identity. No pinout, VRM phase count, component values, fan RPM, screw torque or thermal-pad thickness is inferred.
 
 
 ### Fine-grained cooling decomposition
@@ -44,7 +44,7 @@ The development branch now expands the content graph to 104 semantic components 
 
 ### Partial teardown evidence
 
-The interactive assembly panel has two source-backed disassembly steps: eight rear cooler-retention screws, followed by disconnection of both fan leads before separating the cooler/shroud. This is deliberately labelled a partial observed sequence, not a complete service guide. Screw positions in the 3D scene, driver/bit, torque, connector release geometry, thermal-pad specifications and reassembly order remain unverified.
+The interactive assembly panel has two partial exact-model steps: four heatsink mounting screws around the GPU, followed by disconnection of both fan leads before separating the cooler/shroud. The eight-screw count from a related XC teardown is explicitly excluded from the exact-SKU procedure. The sequence is not a complete service guide; screw thread, driver/bit, torque, connector release geometry, thermal-pad specifications and reassembly order remain unverified.
 
 
 ### Reversible exploded assembly view
@@ -55,3 +55,8 @@ A second animation separates the fan shroud, cooler, PCB/electronics and connect
 ### GA106 and GDDR6 architecture
 
 The model package adds a separately selectable logical architecture tree: 28 SMs, aggregate CUDA/Tensor/RT/TMU/ROP units, the 192-bit memory interface and six logical package-channel links. A third viewer process layer exposes these nodes. Logical-only geometry means these are inspectable semantic nodes, not physical die blocks, memory-controller floorplan or PCB copper routes. K4ZAF325BM-HC16 package parameters are attributed to a secondary catalog listing; they are not promoted to primary Samsung-datasheet status.
+
+
+### Fastener evidence correction
+
+The exact 12G-P5-3655-KR XC BLACK review shows four heatsink mounting screws around the GPU. Those four screw meshes are photo-positioned proxies. Four additional nodes remain only as uninstalled logical candidates from a related EVGA RTX 3060 XC teardown whose retail SKU is not established. The viewer does not present eight screws as an exact-XC-BLACK service instruction.

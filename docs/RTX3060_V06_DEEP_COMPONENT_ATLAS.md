@@ -8,7 +8,7 @@ Status: engineering increment; not a complete card reconstruction
 
 ## What this tranche adds
 
-The canonical model package and Blender GLB gain matching stable component IDs for the GA106 silicon die proxy; thermal-interface parent group, GPU compound marker, memory pads and power-stage pad group; candidate cooler fastener set and eight individually selectable screw placeholders; PCI Express edge interface with representative segmented contacts; two independent fan-cable header nodes; three DisplayPort and one HDMI receptacle nodes; selectable shunt-resistor area and generic passive group; and PCB airflow-cutout marker.
+The canonical model package and Blender GLB gain matching stable component IDs for the GA106 silicon die proxy; thermal-interface parent group, GPU compound marker, memory pads and power-stage pad group; four photo-positioned exact-SKU GPU-area screw meshes plus four uninstalled logical candidates from a related XC teardown; PCI Express edge interface with representative segmented contacts; two independent fan-cable header nodes; three DisplayPort and one HDMI receptacle nodes; selectable shunt-resistor area and generic passive group; and PCB airflow-cutout marker.
 
 The package adds source-backed relations and claims where evidence exists, and keeps all component names and descriptions bilingual. The Blender scene uses matching sbs_component_id values and preserves the hierarchy declared in components.json.
 
@@ -64,7 +64,7 @@ These are independently selectable teaching meshes, not a claim that the exact h
 
 ## Source-backed partial teardown sequence
 
-The assembly evidence panel now contains two partial steps grounded in the Tom's Hardware EVGA RTX 3060 XC teardown description: (1) remove the eight rear heatsink/shroud retention screws (four around the GPU and four nearer the rear edge; one is under an EVGA tamper sticker), then (2) unplug both fan connections near the lower-left PCB area when viewed from the back before separating the cooler/shroud. The sequence is explicitly marked `partial_observed_sequence` and `complete_sequence: false`. The source does not specify driver size, torque, exact screw coordinates, connector latch geometry, thermal-pad replacement dimensions or reassembly order; none are invented. Source: https://www.tomshardware.com/reviews/nvidia-geforce-rtx-3060-review/2
+The assembly evidence panel contains two partial steps grounded in exact-XC-BLACK sources: (1) identify/remove the four GPU-area heatsink mounting screws explicitly shown in the LanOC review, and (2) disconnect both fan leads before separating the cooler, as shown in the exact-model Gamers Nexus teardown. The sequence is explicitly marked `partial_observed_sequence` and `complete_sequence: false`. The Tom's Hardware eight-screw description is now registered only as a related EVGA RTX 3060 XC variant reference because its article does not identify the 12G-P5-3655-KR XC BLACK. Four additional rear fastener nodes remain uninstalled logical candidates; they are not in the exact-SKU screw map. No driver size, torque, exact thread or reassembly procedure is inferred.
 
 
 ## Reversible exploded-assembly animation
@@ -77,3 +77,12 @@ A second package-authored animation clip, `clip.exploded-cooler-overview`, now m
 The semantic package now contains 117 components and 118 typed relationships. Thirteen logical-only nodes represent the 28-SM GA106 cluster, its CUDA/Tensor/RT/TMU/ROP aggregates, a 192-bit GDDR6 interface and six package-channel links to the six GDDR6 chips visible in the reviewed XC BLACK teardown. These nodes are exported as stable GLB assembly nodes so they can be selected, searched and inspected, but they carry `geometry_status: logical_only`: no physical die floorplan, shader wiring or PCB trace routing is drawn.
 
 A third process layer, `gpu_compute`, exposes this architecture map in the viewer. Claims cover the published 28 SM / 112 Tensor / 28 RT / 112 TMU / 48 ROP configuration, 276 mm² and 12-billion-transistor GA106 die figures, Samsung 8N, and memory device attributes where available. The memory-package details are explicitly sourced to a secondary catalog entry rather than a primary Samsung datasheet. The viewer labels this as a logical map, not an architecture simulation.
+
+
+## 13. Exact-SKU fastener evidence reconciliation
+
+The LanOC review explicitly identifies **four heatsink mounting screws around the GPU** on the 12G-P5-3655-KR XC BLACK sample and shows the exposed PCB without a backplate. The first four screw meshes are now placed approximately from that exact-model photo and are tagged `visible_exact_model` / `illustrative_proxy`. Their head, thread, spring and torque remain unmeasured.
+
+Tom's Hardware's eight-screw description is from an EVGA GeForce RTX 3060 XC teardown that does not identify the XC BLACK retail SKU. That source is now typed as a related-model reference. Four additional screw objects remain in the semantic package only as uninstalled logical candidates with no fabricated installed geometry. They are not counted as exact-XC-BLACK GPU retention screws.
+
+The disassembly panel now states only the four GPU-area screws and the exact-model fan-lead disconnection step. The steps remain partial and are not a complete service manual.
