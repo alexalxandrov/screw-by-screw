@@ -309,3 +309,15 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); ou
   .measurement-readout { font-size: 7px; }
   .measurement-clear { font-size: 9px; }
 }
+
+
+/* Source-backed claims: value, evidence class and source links stay together. */
+.claim-list { display: flex; flex-direction: column; gap: 8px; margin-top: 11px; }
+.claim-card { border: 1px solid var(--line); border-radius: 4px; background: #0b1219; padding: 9px 10px; }
+.claim-title { display: block; color: #cbd4db; font-size: 9px; line-height: 1.4; font-weight: 650; }
+.claim-value { margin-top: 6px; color: var(--text); font: 10px var(--mono); overflow-wrap: anywhere; }
+.claim-confidence { display: inline-block; margin-top: 7px; color: #d4bd83; font: 8px var(--mono); line-height: 1.4; }
+.claim-note { margin: 7px 0 0; color: var(--muted); font-size: 8px; line-height: 1.55; }
+.claim-sources { display: flex; flex-direction: column; gap: 5px; margin-top: 8px; }
+.claim-sources a { color: #91a6b5; font-size: 8px; line-height: 1.4; text-decoration: none; overflow-wrap: anywhere; }
+.claim-sources a:hover { color: var(--accent); }

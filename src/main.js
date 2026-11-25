@@ -6,12 +6,14 @@ import { MeasurementController } from "./viewer/MeasurementController.js";
 import { MODEL as DEFAULT_MODEL, COMPONENTS as DEFAULT_COMPONENTS, EVIDENCE, createModelDataAdapter } from "./data/model.js";
 import DEFAULT_LEARNING_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/learning.json";
 import DEFAULT_PROCESS_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/process_layers.json";
+import DEFAULT_CLAIM_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/claims.json";
 import { loadModelPackage, validateSelfContainedGlb, MAX_MODEL_PACKAGE_BYTES, MAX_SCENE_GLB_BYTES } from "./viewer/ModelPackageLoader.js";
 
 let MODEL = DEFAULT_MODEL;
 let COMPONENTS = DEFAULT_COMPONENTS;
 let LEARNING_PACKAGE = DEFAULT_LEARNING_PACKAGE;
 let PROCESS_PACKAGE = DEFAULT_PROCESS_PACKAGE;
+let CLAIM_PACKAGE = DEFAULT_CLAIM_PACKAGE;
 
 const $ = (selector) => document.querySelector(selector);
 const canvasHost = $("#viewer-canvas");
@@ -77,7 +79,7 @@ const UI = {
     measure: "Measure", clearMeasurement: "Clear", measureIdle: "Measurement off · model-space only", measurePrompt: "Click a visible surface to set point 1 of 2", measureFirstPoint: "Point 1 of 2 set · select the second point", measureDistance: "Distance", measureDisclaimer: "model-space only", measureNoHit: "Click a visible model surface", measureEnabled: "Measurement enabled", measureDisabled: "Measurement disabled", modelUnits: "model units", measureNote: "Not a verified physical dimension",
     clearLayer: "Clear layer", inspection: "INSPECTION", componentDetails: "Component details",
     selectComponent: "Select a component", selectHint: "Choose a part in the 3D view or assembly tree to inspect its role and evidence.",
-    identity: "IDENTITY", parent: "Parent", geometry: "Geometry", evidence: "EVIDENCE",
+    identity: "IDENTITY", parent: "Parent", geometry: "Geometry", evidence: "EVIDENCE", technicalClaims: "TECHNICAL CLAIMS", claimUnknown: "Unknown", yes: "Yes", no: "No", claimSources: "Evidence sources",
     sources: "SOURCES", accuracyFooter: "Unknown values remain unknown. No inferred CAD accuracy.",
     ready: "READY", localFirst: "LOCAL-FIRST · NO ACCOUNT", openModel: "Open model",
     noSelection: "No component selected", componentsCount: "components",
@@ -102,7 +104,7 @@ const UI = {
     measure: "Измерить", clearMeasurement: "Сброс", measureIdle: "Измерение выключено · только пространство модели", measurePrompt: "Нажмите на видимую поверхность, чтобы задать точку 1 из 2", measureFirstPoint: "Точка 1 из 2 задана · выберите вторую", measureDistance: "Расстояние", measureDisclaimer: "ед. модели", measureNoHit: "Нажмите на видимую поверхность модели", measureEnabled: "Инструмент измерения включён", measureDisabled: "Инструмент измерения выключен", modelUnits: "единицы модели", measureNote: "Не подтверждённый физический размер",
     clearLayer: "Сбросить слой", inspection: "ИНСПЕКЦИЯ", componentDetails: "Карточка компонента",
     selectComponent: "Выберите компонент", selectHint: "Выберите деталь в 3D-окне или дереве сборки, чтобы изучить её назначение и источники.",
-    identity: "ИДЕНТИФИКАЦИЯ", parent: "Родитель", geometry: "Геометрия", evidence: "ДОКАЗАТЕЛЬНОСТЬ",
+    identity: "ИДЕНТИФИКАЦИЯ", parent: "Родитель", geometry: "Геометрия", evidence: "ДОКАЗАТЕЛЬНОСТЬ", technicalClaims: "ТЕХНИЧЕСКИЕ УТВЕРЖДЕНИЯ", claimUnknown: "Неизвестно", yes: "Да", no: "Нет", claimSources: "Источники утверждения",
     sources: "ИСТОЧНИКИ", accuracyFooter: "Неизвестное остаётся неизвестным. Точность CAD не подразумевается.",
     ready: "ГОТОВО", localFirst: "ЛОКАЛЬНО · БЕЗ АККАУНТА", openModel: "Открыть модель",
     noSelection: "Компонент не выбран", componentsCount: "компонентов",
@@ -394,6 +396,100 @@ function renderTree() {
   });
 }
 
+
+function claimPredicateLabel(predicate) {
+  const labels = {
+    memory_capacity: ["Объём памяти", "Memory capacity"],
+    memory_type: ["Тип памяти", "Memory type"],
+    memory_bus_width: ["Ширина шины памяти", "Memory bus width"],
+    cuda_core_count: ["Количество CUDA-ядер", "CUDA core count"],
+    boost_clock: ["Boost-частота", "Boost clock"],
+    memory_bandwidth: ["Пропускная способность памяти", "Memory bandwidth"],
+    nominal_length: ["Номинальная длина", "Nominal length"],
+    overall_outer_length: ["Полная длина кожуха", "Overall outer length"],
+    height: ["Высота", "Height"],
+    axial_fan_count: ["Количество осевых вентиляторов", "Axial fan count"],
+    fan_opening_diameter: ["Диаметр отверстия вентилятора", "Fan opening diameter"],
+    fan_impeller_diameter: ["Диаметр крыльчатки", "Fan impeller diameter"],
+    auxiliary_power_connector: ["Дополнительный разъём питания", "Auxiliary power connector"],
+    display_outputs: ["Видеовыходы", "Display outputs"],
+    backplate_present: ["Наличие задней пластины", "Backplate present"],
+    pcb_revision: ["Ревизия печатной платы", "PCB revision"],
+    gddr6_package_population: ["Количество микросхем GDDR6", "GDDR6 package population"],
+    heatsink_fin_count: ["Количество рёбер радиатора", "Heatsink fin count"],
+    gddr6_package_part_number: ["Маркировка микросхем памяти", "GDDR6 package part number"]
+  };
+  const label = labels[predicate];
+  return label ? label[state.language === "ru" ? 0 : 1] : String(predicate ?? "").replaceAll("_", " ");
+}
+
+function formatClaimValue(value) {
+  if (value === null || value === undefined) return t("claimUnknown");
+  if (typeof value === "boolean") return value ? t("yes") : t("no");
+  if (typeof value === "object") {
+    return Object.entries(value).map(([key, entry]) => `${key}: ${String(entry)}`).join(" · ");
+  }
+  return String(value);
+}
+
+function renderClaims(componentId) {
+  const section = $("#detail-claims-section");
+  const host = $("#claim-list");
+  if (!section || !host) return;
+  host.replaceChildren();
+  const modelLevel = componentId === "assembly.card.root";
+  const claims = (CLAIM_PACKAGE.claims ?? []).filter((claim) =>
+    claim.subject_id === componentId || (modelLevel && claim.subject_id === MODEL.id)
+  );
+  section.hidden = claims.length === 0;
+  if (!claims.length) return;
+
+  const sourceMap = new Map(MODEL.sources.map((source) => [source.id, source]));
+  claims.forEach((claim) => {
+    const card = document.createElement("article");
+    card.className = "claim-card";
+    card.dataset.claimId = claim.id;
+
+    const heading = document.createElement("strong");
+    heading.className = "claim-title";
+    heading.textContent = claimPredicateLabel(claim.predicate);
+
+    const value = document.createElement("div");
+    value.className = "claim-value";
+    value.textContent = [formatClaimValue(claim.value), claim.unit].filter(Boolean).join(" ");
+
+    const evidence = EVIDENCE[claim.confidence_class] ?? EVIDENCE.unknown;
+    const confidence = document.createElement("span");
+    confidence.className = "claim-confidence";
+    confidence.textContent = evidence[state.language] ?? evidence.en;
+
+    card.append(heading, value, confidence);
+
+    if (claim.notes) {
+      const note = document.createElement("p");
+      note.className = "claim-note";
+      note.textContent = claim.notes;
+      card.append(note);
+    }
+
+    const sources = (claim.source_ids ?? []).map((sourceId) => sourceMap.get(sourceId)).filter((source) => source?.url);
+    if (sources.length) {
+      const sourceList = document.createElement("div");
+      sourceList.className = "claim-sources";
+      sources.forEach((source) => {
+        const link = document.createElement("a");
+        link.href = source.url;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.textContent = `↗ ${source.label}`;
+        sourceList.append(link);
+      });
+      card.append(sourceList);
+    }
+    host.append(card);
+  });
+}
+
 function renderDetails(id) {
   state.learningMode = false;
   $("#learning-panel").hidden = true;
@@ -417,6 +513,7 @@ function renderDetails(id) {
   $("#detail-geometry").textContent = data.geometry ?? "unknown";
   $("#evidence-badge").textContent = evidence[state.language].toUpperCase();
   $("#evidence-copy").textContent = evidence[state.language === "ru" ? "copyRu" : "copyEn"];
+  renderClaims(id);
   $("#rotate-component").disabled = !object || !state.sceneController;
 
   const sourceHost = $("#source-links");
@@ -1076,6 +1173,7 @@ function applyPackageData(packageData) {
   COMPONENTS = adapter.components;
   LEARNING_PACKAGE = packageData.learning ?? { questions: [] };
   PROCESS_PACKAGE = packageData.process_layers ?? { process_layers: [] };
+  CLAIM_PACKAGE = packageData.claims ?? { claims: [] };
   state.catalog = new Map(COMPONENTS.map((item) => [item.id, item]));
   state.learningMode = false;
   state.learningIndex = 0;
@@ -1106,6 +1204,7 @@ function useGenericModelData(filename) {
   COMPONENTS = [];
   LEARNING_PACKAGE = { questions: [] };
   PROCESS_PACKAGE = { process_layers: [] };
+  CLAIM_PACKAGE = { claims: [] };
   state.catalog = new Map();
   state.learningMode = false;
   updateModelHeader();

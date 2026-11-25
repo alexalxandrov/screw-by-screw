@@ -131,3 +131,31 @@ test("measurement mode is reversible, keyboard-accessible and labelled as model-
   await page.locator("#measurement-clear").click();
   await expect(readout).toContainText("Нажмите на видимую поверхность");
 });
+
+
+test("shows source-backed claims, evidence classes and explicit unknown values", async ({ page }) => {
+  await page.goto("/");
+  await page.locator('#component-tree button[data-id="assembly.pcb.board"]').click();
+  await expect(page.locator("#detail-claims-section")).toBeVisible();
+
+  const revision = page.locator('[data-claim-id="claim.pcb.revision"]');
+  await expect(revision).toContainText("Ревизия печатной платы");
+  await expect(revision).toContainText("Неизвестно");
+
+  const backplate = page.locator('[data-claim-id="claim.card.backplate"]');
+  await expect(backplate).toContainText("Наличие задней пластины");
+  await expect(backplate).toContainText("Нет");
+  await expect(backplate.locator("a")).toHaveCount(1);
+  await expect(backplate).toContainText("Независимо подтверждено");
+});
+
+test("shows model-level specifications when the top-level device is selected", async ({ page }) => {
+  await page.goto("/");
+  await page.locator('#component-tree button[data-id="assembly.card.root"]').click();
+  await expect(page.locator("#detail-claims-section")).toBeVisible();
+  await expect(page.locator('[data-claim-id="claim.memory.capacity"]')).toContainText("12 GB");
+
+  // The outer shroud length belongs to the shroud assembly, not the device-level subject.
+  await page.locator('#component-tree button[data-id="assembly.shroud"]').click();
+  await expect(page.locator('[data-claim-id="claim.card.outer_shroud_length"]')).toContainText("Неизвестно");
+});

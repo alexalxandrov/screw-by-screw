@@ -16,6 +16,8 @@ Evolve the current viewer from a model inspector into a small engineering worksp
 
 ## Newly added viewer capability
 
+- **Source-backed claim cards:** component and device cards display atomic specification claims with their value, evidence class, explicit unknown state, notes and direct source links. Claims are filtered by the selected component instance; model-level claims appear on the top-level device.
+
 - **Model-space ruler:** two-click point-to-point measurement with visible markers and a connecting line, unit labels from package metadata, reset, keyboard exit and an explicit warning that proxy dimensions are not verified physical dimensions. The tool does not calibrate or persist measurements.
 
 ## Remaining v0.6 priorities

@@ -67,3 +67,8 @@ This is an illustrative shape, not a validated schema. Add formal JSON Schema af
 ## Implemented pilot package
 
 The first structured content package is located at `content/models/evga-rtx3060-xc-black-12gb/`. It contains model identity/specifications, source register, bilingual component records, typed relationships, qualitative process layers, atomic claims with confidence classes, teardown observations, and source-backed learning questions. A deterministic SHA-256 manifest builder records the exact JSON package contents. The package validator checks stable IDs and cross-file references. Assembly steps remain intentionally empty until the full teardown sequence is reviewed; six memory candidates and all proxy geometry remain explicitly unconfirmed.
+
+
+## Claim presentation in the viewer
+
+The viewer renders atomic claims from the model package alongside the selected component. A claim card keeps the predicate/value/unit, confidence class, editorial note and direct source links together. Null values are displayed as unknown; booleans are localized; object values are rendered as key/value pairs. Model-level claims are shown when the top-level device assembly is selected. Generic GLB imports do not inherit the pilot's claims.
