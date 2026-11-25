@@ -1,6 +1,6 @@
 # Technical Architecture
 
-**Status:** proposed architecture; subject to a small technical spike
+**Status:** v0.9 static Three.js viewer implemented; reusable engine extraction in progress
 **Pilot:** EVGA GeForce RTX 3060 XC BLACK GAMING 12GB
 
 ## Goals
@@ -15,8 +15,8 @@
 
 | Layer | Candidate | Responsibility |
 |---|---|---|
-| Web client | React + TypeScript + Vite | Application shell and navigation |
-| 3D runtime | Three.js / React Three Fiber | GLB rendering, picking, transforms, layers |
+| Web client | Vanilla JavaScript + Vite (current); React + TypeScript optional later | Application shell and navigation |
+| 3D runtime | Three.js 0.187.0 (current) | GLB rendering, picking, transforms, layers and animation |
 | Content package | GLB + JSON | Geometry and device-specific data |
 | Content tools | Python + Blender Python + FreeCAD | Import, cleanup, metadata, export, validation |
 | API | FastAPI, optional for static MVP | Model catalogue and content delivery |
@@ -53,6 +53,10 @@ Each model package should contain model identity, components, relationships, sou
 ## Constraints
 
 Stable IDs, explicit units and coordinate system, semantic selection preserved when instancing/merging, avoid destructive decimation of small parts, measure browser performance before splitting/compressing assets, GLB is delivery format not sole editable source, validate all paths and JSON references.
+
+## Implemented technical baseline
+
+The current browser pilot uses Three.js + Vite, loads self-contained GLB files locally, maps stable component IDs to an assembly tree, and supports orbit controls, component selection, isolation, wireframe, reversible exploded view, qualitative process layers and a bilingual learning panel. The shared SceneController is being extracted from the GPU-specific UI so other model packages can reuse the same scene operations.
 
 ## First technical spike
 
