@@ -732,55 +732,58 @@ function loadDemo() {
   installModel(createFallbackModel(), "demo");
 }
 
-function validateSelfContainedGlb(buffer) {
-  if (buffer.byteLength < 20) throw new Error("Invalid GLB: file is too short");
-  const view = new DataView(buffer);
-  if (view.getUint32(0, true) !== 0x46546c67 || view.getUint32(4, true) !== 2 ||
-      view.getUint32(8, true) !== buffer.byteLength) {
-    throw new Error("Invalid GLB header");
-  }
-  let offset = 12;
-  let jsonCount = 0;
-  let binCount = 0;
-  let document = null;
-  while (offset < buffer.byteLength) {
-    if (offset + 8 > buffer.byteLength) throw new Error("Invalid GLB chunk header");
-    const chunkLength = view.getUint32(offset, true);
-    const chunkType = view.getUint32(offset + 4, true);
-    const chunkStart = offset + 8;
-    const chunkEnd = chunkStart + chunkLength;
-    if (chunkEnd > buffer.byteLength || chunkLength % 4 !== 0) {
-      throw new Error("Invalid GLB chunk bounds or alignment");
-    }
-    if (chunkType === 0x4e4f534a) {
-      jsonCount += 1;
-      if (jsonCount > 1 || offset !== 12) throw new Error("Invalid GLB JSON chunk order");
-      try {
-        document = JSON.parse(new TextDecoder().decode(buffer.slice(chunkStart, chunkEnd)).trimEnd());
-      } catch {
-        throw new Error("Invalid GLB JSON document");
-      }
-    } else if (chunkType === 0x004e4942) {
-      binCount += 1;
-      if (binCount > 1) throw new Error("Multiple GLB BIN chunks are not supported");
-    }
-    offset = chunkEnd;
-  }
-  if (offset !== buffer.byteLength || jsonCount !== 1 || !document || typeof document !== "object") {
-    throw new Error("Incomplete GLB container");
-  }
-  const resources = [
-    ...(Array.isArray(document.buffers) ? document.buffers : []),
-    ...(Array.isArray(document.images) ? document.images : [])
-  ];
-  const external = resources.filter((resource) =>
-    resource && typeof resource.uri === "string" && !resource.uri.startsWith("data:")
-  );
-  if (external.length) throw new Error("External resource URIs are not allowed");
-  return document;
+function updateModelHeader() {
+  $("#model-title").textContent = MODEL.name;
+  $("#model-sku").textContent = MODEL.partNumber || MODEL.manufacturer || "Imported model";
 }
 
-function loadArrayBuffer(buffer, filename) {
+function applyPackageData(packageData) {
+  const adapter = createModelDataAdapter(packageData);
+  MODEL = adapter.model;
+  COMPONENTS = adapter.components;
+  LEARNING_PACKAGE = packageData.learning ?? { questions: [] };
+  PROCESS_PACKAGE = packageData.process_layers ?? { process_layers: [] };
+  state.catalog = new Map(COMPONENTS.map((item) => [item.id, item]));
+  state.learningMode = false;
+  state.learningIndex = 0;
+  state.learningScore = 0;
+  state.learningSelected = null;
+  state.learningAnswered = false;
+  state.learningComplete = false;
+  updateModelHeader();
+  document.querySelectorAll(".process-button").forEach((button) => {
+    button.disabled = button.dataset.layer !== "clear" &&
+      !PROCESS_PACKAGE.process_layers.some((layer) => layer.type === button.dataset.layer);
+  });
+  document.querySelectorAll(".view-tab").forEach((button) => {
+    if (button.dataset.mode === "learn") button.disabled = LEARNING_PACKAGE.questions.length === 0;
+  });
+}
+
+function useGenericModelData(filename) {
+  MODEL = {
+    id: "imported.glb",
+    name: filename || "Imported GLB",
+    partNumber: "",
+    manufacturer: "Imported model",
+    status: "unknown",
+    sources: []
+  };
+  COMPONENTS = [];
+  LEARNING_PACKAGE = { questions: [] };
+  PROCESS_PACKAGE = { process_layers: [] };
+  state.catalog = new Map();
+  state.learningMode = false;
+  updateModelHeader();
+  document.querySelectorAll(".process-button").forEach((button) => {
+    button.disabled = button.dataset.layer !== "clear";
+  });
+  document.querySelectorAll(".view-tab").forEach((button) => {
+    if (button.dataset.mode === "learn") button.disabled = true;
+  });
+}
+
+function loadArrayBuffer(buffer, filename, mode = "file", packageData = null) {
   setStatus(t("loading"));
   if (buffer.byteLength > MAX_GLB_BYTES) {
     $("#viewer-error").hidden = false;
@@ -806,13 +809,19 @@ function loadArrayBuffer(buffer, filename) {
   };
   try {
     loader.parse(buffer, "", (gltf) => {
-      const root = new THREE.Group();
-      root.name = filename || "Imported GLB";
-      root.add(gltf.scene);
-      // Blender GLB export is Y-up; the atlas uses the source scene Z-up convention.
-      root.rotation.x = Math.PI / 2;
-      $("#viewer-error").hidden = true;
-      installModel(root, "file");
+      try {
+        const root = new THREE.Group();
+        root.name = filename || "Imported model";
+        root.add(gltf.scene);
+        // Blender GLB export is Y-up; the atlas uses the source scene Z-up convention.
+        root.rotation.x = Math.PI / 2;
+        if (packageData) applyPackageData(packageData);
+        else if (mode === "file") useGenericModelData(filename);
+        $("#viewer-error").hidden = true;
+        installModel(root, mode);
+      } catch (error) {
+        fail(error);
+      }
     }, fail);
   } catch (error) {
     fail(error);
