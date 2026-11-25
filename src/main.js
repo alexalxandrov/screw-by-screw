@@ -609,11 +609,15 @@ function setExplode(value) {
 
 async function animateExplodeCycle() {
   if (!state.sceneController) return;
+  const controller = state.sceneController;
   const button = $("#animate-button");
   button.disabled = true;
-  const expanded = await state.sceneController.animateExplode(100, 950, updateExplodeUi);
-  if (expanded) await state.sceneController.animateExplode(0, 950, updateExplodeUi);
-  button.disabled = false;
+  try {
+    const expanded = await controller.animateExplode(100, 950, updateExplodeUi);
+    if (expanded) await controller.animateExplode(0, 950, updateExplodeUi);
+  } finally {
+    button.disabled = false;
+  }
 }
 
 function setIsolated(isolate) {
