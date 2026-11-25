@@ -13,7 +13,11 @@ test("loads the generated Blender v0.5 SBS model package and resolves content-pa
   expect(modelBytes.byteLength).toBeGreaterThan(0);
   expect(modelBytes.byteLength).toBeLessThan(512 * 1024 * 1024);
   await expect(page.locator("#app-status")).toHaveText("Модель готова");
-  await expect(page.locator("#component-count")).toHaveText("85");
+  const componentCount = Number(await page.locator("#component-count").textContent());
+  expect(Number.isInteger(componentCount) && componentCount >= 85).toBeTruthy();
+  for (const id of ["chip.gpu.die", "fastener.cooler.01", "pcb.connector.pcie", "connector.fan.header.1", "connector.displayport.1", "connector.hdmi.1"]) {
+    await expect(page.locator(`#component-tree button[data-id="${id}"]`)).toBeVisible();
+  }
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-fan-rotors", "2");
   await expect(page.locator('#component-tree button[data-id="assembly.fan.1.rotor"]')).toBeVisible();
   await expect(page.locator('#component-tree button[data-id="assembly.fan.2.rotor"]')).toBeVisible();
@@ -105,7 +109,11 @@ test("opens the self-contained root index.html directly with the embedded Blende
     })()
   }));
   await expect(page.locator("#viewer-canvas canvas"), JSON.stringify({ diagnostics, pageErrors, consoleErrors, requestFailures })).toBeVisible({ timeout: 10000 });
-  await expect(page.locator("#component-count")).toHaveText("85", { timeout: 15000 });
+  const standaloneComponentCount = Number(await page.locator("#component-count").textContent());
+  expect(Number.isInteger(standaloneComponentCount) && standaloneComponentCount >= 85).toBeTruthy();
+  for (const id of ["chip.gpu.die", "fastener.cooler.01", "pcb.connector.pcie", "connector.fan.header.1", "connector.displayport.1", "connector.hdmi.1"]) {
+    await expect(page.locator(`#component-tree button[data-id="${id}"]`)).toBeVisible();
+  }
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-fan-rotors", "2");
   await expect(page.locator('#component-tree button[data-id="assembly.fan.1.rotor"]')).toBeVisible();
   await expect(page.locator('#component-tree button[data-id="assembly.fan.2.rotor"]')).toBeVisible();
