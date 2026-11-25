@@ -28,6 +28,13 @@ test("indexes stable IDs and identifies independently movable leaves", () => {
   assert.equal(controller.explodable.length, 2);
 });
 
+test("records duplicate stable component IDs", () => {
+  const { root, board } = makeScene();
+  board.userData.sbs_component_id = "fan.1";
+  const controller = new SceneController(root);
+  assert.deepEqual(controller.duplicateIds, ["fan.1"]);
+});
+
 test("exploded view is reversible and preserves nested hierarchy", () => {
   const { root, fan, board } = makeScene();
   const controller = new SceneController(root);
