@@ -139,6 +139,12 @@
               <input id="simulation-speed" type="range" min="0.25" max="2" step="0.25" value="1" aria-label="Animation speed" />
               <output id="simulation-speed-value">1.00×</output>
             </div>
+            <div class="measurement-controls">
+              <button id="measurement-toggle" class="process-button measurement-toggle" type="button" data-i18n="measure" aria-pressed="false" disabled>Измерить</button>
+              <output id="measurement-readout" class="measurement-readout" role="status" aria-live="polite" data-i18n="measureIdle">Измерение выключено · только пространство модели</output>
+              <button id="measurement-clear" class="text-button measurement-clear" type="button" data-i18n="clearMeasurement">Сброс</button>
+              <span class="measurement-note" data-i18n="measureNote">Не подтверждённый физический размер</span>
+            </div>
           </div>
         </section>
 
