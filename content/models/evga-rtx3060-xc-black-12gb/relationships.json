@@ -925,6 +925,194 @@
       "source_ids": [
         "src.gamersnexus.teardown"
       ]
+    },
+    {
+      "id": "rel.die.contains.sm.cluster",
+      "from": "chip.gpu.die",
+      "to": "chip.gpu.sm.cluster",
+      "type": "contains",
+      "source_ids": [
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.sm.contains.cuda_core.array",
+      "from": "chip.gpu.sm.cluster",
+      "to": "chip.gpu.cuda_core.array",
+      "type": "contains",
+      "source_ids": [
+        "src.tomshardware.rtx3060.specs",
+        "src.nvidia.rtx3060.architecture"
+      ]
+    },
+    {
+      "id": "rel.sm.contains.tensor_core.array",
+      "from": "chip.gpu.sm.cluster",
+      "to": "chip.gpu.tensor_core.array",
+      "type": "contains",
+      "source_ids": [
+        "src.tomshardware.rtx3060.specs",
+        "src.nvidia.rtx3060.architecture"
+      ]
+    },
+    {
+      "id": "rel.sm.contains.rt_core.array",
+      "from": "chip.gpu.sm.cluster",
+      "to": "chip.gpu.rt_core.array",
+      "type": "contains",
+      "source_ids": [
+        "src.tomshardware.rtx3060.specs",
+        "src.nvidia.rtx3060.architecture"
+      ]
+    },
+    {
+      "id": "rel.sm.contains.tmu.array",
+      "from": "chip.gpu.sm.cluster",
+      "to": "chip.gpu.tmu.array",
+      "type": "contains",
+      "source_ids": [
+        "src.tomshardware.rtx3060.specs",
+        "src.nvidia.rtx3060.architecture"
+      ]
+    },
+    {
+      "id": "rel.sm.contains.rop.array",
+      "from": "chip.gpu.sm.cluster",
+      "to": "chip.gpu.rop.array",
+      "type": "contains",
+      "source_ids": [
+        "src.tomshardware.rtx3060.specs",
+        "src.nvidia.rtx3060.architecture"
+      ]
+    },
+    {
+      "id": "rel.pcb.contains.gddr6.bus",
+      "from": "assembly.pcb.electronics",
+      "to": "chip.memory.gddr6.bus",
+      "type": "contains",
+      "source_ids": [
+        "src.evga.spec"
+      ]
+    },
+    {
+      "id": "rel.gddr6.bus.contains.channel.01",
+      "from": "chip.memory.gddr6.bus",
+      "to": "chip.memory.channel.01",
+      "type": "contains",
+      "source_ids": [
+        "src.evga.spec",
+        "src.samsung.gddr6.catalog"
+      ]
+    },
+    {
+      "id": "rel.channel.01.connected.package",
+      "from": "chip.memory.channel.01",
+      "to": "chip.memory.candidate.1",
+      "type": "connected_to",
+      "source_ids": [
+        "src.samsung.gddr6.catalog",
+        "src.tomshardware.teardown"
+      ]
+    },
+    {
+      "id": "rel.gddr6.bus.contains.channel.02",
+      "from": "chip.memory.gddr6.bus",
+      "to": "chip.memory.channel.02",
+      "type": "contains",
+      "source_ids": [
+        "src.evga.spec",
+        "src.samsung.gddr6.catalog"
+      ]
+    },
+    {
+      "id": "rel.channel.02.connected.package",
+      "from": "chip.memory.channel.02",
+      "to": "chip.memory.candidate.2",
+      "type": "connected_to",
+      "source_ids": [
+        "src.samsung.gddr6.catalog",
+        "src.tomshardware.teardown"
+      ]
+    },
+    {
+      "id": "rel.gddr6.bus.contains.channel.03",
+      "from": "chip.memory.gddr6.bus",
+      "to": "chip.memory.channel.03",
+      "type": "contains",
+      "source_ids": [
+        "src.evga.spec",
+        "src.samsung.gddr6.catalog"
+      ]
+    },
+    {
+      "id": "rel.channel.03.connected.package",
+      "from": "chip.memory.channel.03",
+      "to": "chip.memory.candidate.3",
+      "type": "connected_to",
+      "source_ids": [
+        "src.samsung.gddr6.catalog",
+        "src.tomshardware.teardown"
+      ]
+    },
+    {
+      "id": "rel.gddr6.bus.contains.channel.04",
+      "from": "chip.memory.gddr6.bus",
+      "to": "chip.memory.channel.04",
+      "type": "contains",
+      "source_ids": [
+        "src.evga.spec",
+        "src.samsung.gddr6.catalog"
+      ]
+    },
+    {
+      "id": "rel.channel.04.connected.package",
+      "from": "chip.memory.channel.04",
+      "to": "chip.memory.candidate.4",
+      "type": "connected_to",
+      "source_ids": [
+        "src.samsung.gddr6.catalog",
+        "src.tomshardware.teardown"
+      ]
+    },
+    {
+      "id": "rel.gddr6.bus.contains.channel.05",
+      "from": "chip.memory.gddr6.bus",
+      "to": "chip.memory.channel.05",
+      "type": "contains",
+      "source_ids": [
+        "src.evga.spec",
+        "src.samsung.gddr6.catalog"
+      ]
+    },
+    {
+      "id": "rel.channel.05.connected.package",
+      "from": "chip.memory.channel.05",
+      "to": "chip.memory.candidate.5",
+      "type": "connected_to",
+      "source_ids": [
+        "src.samsung.gddr6.catalog",
+        "src.tomshardware.teardown"
+      ]
+    },
+    {
+      "id": "rel.gddr6.bus.contains.channel.06",
+      "from": "chip.memory.gddr6.bus",
+      "to": "chip.memory.channel.06",
+      "type": "contains",
+      "source_ids": [
+        "src.evga.spec",
+        "src.samsung.gddr6.catalog"
+      ]
+    },
+    {
+      "id": "rel.channel.06.connected.package",
+      "from": "chip.memory.channel.06",
+      "to": "chip.memory.candidate.6",
+      "type": "connected_to",
+      "source_ids": [
+        "src.samsung.gddr6.catalog",
+        "src.tomshardware.teardown"
+      ]
     }
   ]
 }

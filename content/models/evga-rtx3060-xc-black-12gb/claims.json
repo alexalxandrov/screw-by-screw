@@ -337,6 +337,213 @@
         "src.evga.spec"
       ],
       "notes": "Maximum digital resolution in the manufacturer-published SKU specification."
+    },
+    {
+      "id": "claim.gpu.sm_count",
+      "subject_id": "chip.gpu.sm.cluster",
+      "predicate": "streaming_multiprocessor_count",
+      "value": 28,
+      "unit": "SM",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "notes": "GA106 RTX 3060 configuration table."
+    },
+    {
+      "id": "claim.gpu.tensor_core_count",
+      "subject_id": "chip.gpu.tensor_core.array",
+      "predicate": "tensor_core_count",
+      "value": 112,
+      "unit": "cores",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.tomshardware.rtx3060.specs",
+        "src.nvidia.rtx3060.architecture"
+      ],
+      "notes": "The 112 count is the GA106 RTX 3060 configuration; generation is covered by NVIDIA's architecture source."
+    },
+    {
+      "id": "claim.gpu.rt_core_count",
+      "subject_id": "chip.gpu.rt_core.array",
+      "predicate": "ray_tracing_core_count",
+      "value": 28,
+      "unit": "cores",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.tomshardware.rtx3060.specs",
+        "src.nvidia.rtx3060.architecture"
+      ],
+      "notes": "The 28 count is the GA106 RTX 3060 configuration."
+    },
+    {
+      "id": "claim.gpu.texture_unit_count",
+      "subject_id": "chip.gpu.tmu.array",
+      "predicate": "texture_mapping_unit_count",
+      "value": 112,
+      "unit": "TMUs",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "notes": "GA106 RTX 3060 specification table."
+    },
+    {
+      "id": "claim.gpu.rop_count",
+      "subject_id": "chip.gpu.rop.array",
+      "predicate": "render_output_unit_count",
+      "value": 48,
+      "unit": "ROPs",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "notes": "GA106 RTX 3060 specification table."
+    },
+    {
+      "id": "claim.gpu.die_area",
+      "subject_id": "chip.gpu.die",
+      "predicate": "die_area",
+      "value": 276,
+      "unit": "mm²",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "notes": "Published GA106 die area; not used as an assertion about the placeholder die mesh size."
+    },
+    {
+      "id": "claim.gpu.transistor_count",
+      "subject_id": "chip.gpu.die",
+      "predicate": "transistor_count",
+      "value": 12,
+      "unit": "billion",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "notes": "Published GA106 transistor count."
+    },
+    {
+      "id": "claim.gpu.process_node",
+      "subject_id": "chip.gpu.die",
+      "predicate": "manufacturing_process",
+      "value": "Samsung 8N",
+      "unit": null,
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "notes": "Published process node; not an assertion of die dimensions."
+    },
+    {
+      "id": "claim.gpu.base_clock",
+      "subject_id": "gpu.evga.12g-p5-3655-kr",
+      "predicate": "base_clock",
+      "value": 1320,
+      "unit": "MHz",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "notes": "Published RTX 3060 base clock. EVGA's SKU specification separately lists the boost clock."
+    },
+    {
+      "id": "claim.gpu.tensor_core_generation",
+      "subject_id": "chip.gpu.tensor_core.array",
+      "predicate": "tensor_core_generation",
+      "value": 3,
+      "unit": "generation",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.rtx3060.architecture"
+      ],
+      "notes": "NVIDIA identifies the Ampere RTX 30-series Tensor Cores as third-generation."
+    },
+    {
+      "id": "claim.gpu.rt_core_generation",
+      "subject_id": "chip.gpu.rt_core.array",
+      "predicate": "rt_core_generation",
+      "value": 2,
+      "unit": "generation",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.rtx3060.architecture"
+      ],
+      "notes": "NVIDIA identifies the Ampere RTX 30-series RT Cores as second-generation."
+    },
+    {
+      "id": "claim.memory.gddr6_package_count",
+      "subject_id": "chip.memory.gddr6.bus",
+      "predicate": "gddr6_package_count",
+      "value": 6,
+      "unit": "packages",
+      "confidence_class": "independently_verified",
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ],
+      "notes": "Six Samsung GDDR6 packages are visible in the exact-model teardown; this claim is about the reviewed sample."
+    },
+    {
+      "id": "claim.memory.package_density",
+      "subject_id": "chip.memory.gddr6.bus",
+      "predicate": "memory_package_density",
+      "value": 16,
+      "unit": "Gbit per package",
+      "confidence_class": "independently_verified",
+      "source_ids": [
+        "src.samsung.gddr6.catalog"
+      ],
+      "notes": "Secondary catalog listing identifies K4ZAF325BM-HC16 as a 16Gbit device; no primary Samsung datasheet has been obtained."
+    },
+    {
+      "id": "claim.memory.package_organization",
+      "subject_id": "chip.memory.gddr6.bus",
+      "predicate": "memory_package_organization",
+      "value": "512M × 32",
+      "unit": null,
+      "confidence_class": "independently_verified",
+      "source_ids": [
+        "src.samsung.gddr6.catalog"
+      ],
+      "notes": "Secondary catalog specification for K4ZAF325BM-HC16; not a primary Samsung datasheet."
+    },
+    {
+      "id": "claim.memory.package_data_rate",
+      "subject_id": "chip.memory.gddr6.bus",
+      "predicate": "memory_package_data_rate",
+      "value": 16,
+      "unit": "Gbps per pin",
+      "confidence_class": "independently_verified",
+      "source_ids": [
+        "src.samsung.gddr6.catalog",
+        "src.tomshardware.teardown"
+      ],
+      "notes": "Memory IC rating. The board's published effective clock is 15,000 MHz; the IC's nominal maximum rating is not the same as the card's stock effective clock."
+    },
+    {
+      "id": "claim.memory.package_type",
+      "subject_id": "chip.memory.gddr6.bus",
+      "predicate": "memory_package_type",
+      "value": "180 FBGA",
+      "unit": null,
+      "confidence_class": "independently_verified",
+      "source_ids": [
+        "src.samsung.gddr6.catalog"
+      ],
+      "notes": "Secondary catalog listing only; physical package outline and ball map are not modeled."
+    },
+    {
+      "id": "claim.memory.package_interface_width",
+      "subject_id": "chip.memory.gddr6.bus",
+      "predicate": "memory_package_interface_width",
+      "value": 32,
+      "unit": "bits",
+      "confidence_class": "independently_verified",
+      "source_ids": [
+        "src.samsung.gddr6.catalog"
+      ],
+      "notes": "The 512M × 32 organization corresponds to a 32-bit aggregate interface per package; logical channel representation only."
     }
   ]
 }

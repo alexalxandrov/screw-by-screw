@@ -189,14 +189,14 @@ def move_to_collection(obj, collection):
     collection.objects.link(obj)
 
 
-def make_assembly(name, component_id, location, collection, parent=None):
+def make_assembly(name, component_id, location, collection, parent=None,
+                  evidence=STATUS["illustrative"], geometry="assembly_node"):
     obj = bpy.data.objects.new(name, None)
     obj.empty_display_type = "PLAIN_AXES"
     obj.empty_display_size = 6.0
     obj.location = location
     collection.objects.link(obj)
-    tag(obj, component_id, STATUS["illustrative"], geometry="assembly_node",
-        export_role="assembly")
+    tag(obj, component_id, evidence, geometry=geometry, export_role="assembly")
     if parent is not None:
         set_parent_keep_world(obj, parent)
     return obj
@@ -876,6 +876,48 @@ def main():
         (CARD_LENGTH * 0.48, half_y - 7.4, CARD_HEIGHT * 0.52),
         (15.0, 0.8, 15.0), MAT["gpu"], die_group, pcbcol,
     )
+
+    # Logical architecture hierarchy: exportable EMPTY nodes only.
+    # No physical die floorplan, silicon block coordinates or shader wiring is inferred.
+    sm_cluster = make_assembly(
+        "GA106 SM cluster | logical architecture",
+        "chip.gpu.sm.cluster",
+        (CARD_LENGTH * 0.48, half_y - 7.0, CARD_HEIGHT * 0.52),
+        pcbcol, parent=die_group,
+        evidence=STATUS["manufacturer_data"], geometry="logical_only",
+    )
+    for logical_id, logical_name in (
+        ("chip.gpu.cuda_core.array", "CUDA core array · 3,584"),
+        ("chip.gpu.tensor_core.array", "Tensor Core array · 112 · generation 3"),
+        ("chip.gpu.rt_core.array", "RT Core array · 28 · generation 2"),
+        ("chip.gpu.tmu.array", "Texture mapping units · 112"),
+        ("chip.gpu.rop.array", "Raster operations units · 48"),
+    ):
+        make_assembly(
+            logical_name, logical_id,
+            (CARD_LENGTH * 0.48, half_y - 7.0, CARD_HEIGHT * 0.52),
+            pcbcol, parent=sm_cluster,
+            evidence=STATUS["manufacturer_data"], geometry="logical_only",
+        )
+
+    # Memory subsystem and six logical package channels.
+    memory_bus = make_assembly(
+        "GDDR6 memory interface · 192-bit logical node",
+        "chip.memory.gddr6.bus",
+        (CARD_LENGTH * 0.5, half_y - PCB_THICKNESS / 2, CARD_HEIGHT * 0.5),
+        pcbcol, parent=pcb_group,
+        evidence=STATUS["manufacturer_data"], geometry="logical_only",
+    )
+    for channel_index, (memory_x, memory_z) in enumerate(memory_centres, start=1):
+        channel_id = "chip.memory.channel.{:02d}".format(channel_index)
+        make_assembly(
+            "GDDR6 package channel {:02d} · 32-bit logical".format(channel_index),
+            channel_id,
+            (memory_x, half_y - PCB_THICKNESS / 2, memory_z),
+            pcbcol, parent=memory_bus,
+            evidence=STATUS["manufacturer_data"], geometry="logical_only",
+        )
+
 
     # Thermal interfaces are selectable independently from the heatsink and GPU.
     thermal_group = make_assembly(

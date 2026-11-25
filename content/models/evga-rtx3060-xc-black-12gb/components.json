@@ -1914,6 +1914,259 @@
         "en": "One generic strip proxy for a power-stage contact area. Exact coverage, thickness, material, hardness and affected reference designators are unknown.",
         "ru": "Один общий макет полосы контакта в области силовой части. Точное покрытие, толщина, материал, твёрдость и обслуживаемые позиционные обозначения неизвестны."
       }
+    },
+    {
+      "id": "chip.gpu.sm.cluster",
+      "parent_id": "chip.gpu.die",
+      "name": {
+        "en": "Ampere streaming multiprocessor cluster",
+        "ru": "Кластер потоковых мультипроцессоров Ampere"
+      },
+      "category": "semiconductor",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.tomshardware.rtx3060.specs",
+        "src.nvidia.rtx3060.architecture"
+      ],
+      "description": {
+        "en": "Logical architecture node representing the GA106 configuration with 28 streaming multiprocessors. It is not a physical package or a recovered silicon floorplan; no SM coordinates or internal layout are asserted.",
+        "ru": "Логический узел архитектуры, представляющий конфигурацию GA106 с 28 потоковыми мультипроцессорами. Это не физический корпус и не восстановленная топология кристалла; координаты SM и их внутреннее расположение не утверждаются."
+      }
+    },
+    {
+      "id": "chip.gpu.cuda_core.array",
+      "parent_id": "chip.gpu.sm.cluster",
+      "name": {
+        "en": "CUDA core array",
+        "ru": "Массив ядер CUDA"
+      },
+      "category": "semiconductor",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.tomshardware.rtx3060.specs",
+        "src.nvidia.rtx3060.architecture"
+      ],
+      "description": {
+        "en": "3,584 CUDA cores are represented as an architectural aggregate beneath the SM cluster. Individual core positions, datapaths and shader wiring are not modeled.",
+        "ru": "Логический агрегат из 3 584 ядер CUDA под кластером SM. Координаты отдельных ядер, вычислительные тракты и разводка шейдеров не моделируются."
+      }
+    },
+    {
+      "id": "chip.gpu.tensor_core.array",
+      "parent_id": "chip.gpu.sm.cluster",
+      "name": {
+        "en": "Third-generation Tensor Core array",
+        "ru": "Массив тензорных ядер третьего поколения"
+      },
+      "category": "semiconductor",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.tomshardware.rtx3060.specs",
+        "src.nvidia.rtx3060.architecture"
+      ],
+      "description": {
+        "en": "Logical aggregate for 112 third-generation Tensor Cores in the GA106 RTX 3060 configuration; no physical placement or internal datapath geometry is reconstructed.",
+        "ru": "Логический агрегат из 112 тензорных ядер третьего поколения в конфигурации GA106 RTX 3060; физическое размещение и внутренние вычислительные тракты не восстановлены."
+      }
+    },
+    {
+      "id": "chip.gpu.rt_core.array",
+      "parent_id": "chip.gpu.sm.cluster",
+      "name": {
+        "en": "Second-generation RT Core array",
+        "ru": "Массив RT-ядер второго поколения"
+      },
+      "category": "semiconductor",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.tomshardware.rtx3060.specs",
+        "src.nvidia.rtx3060.architecture"
+      ],
+      "description": {
+        "en": "Logical aggregate for 28 second-generation RT Cores; this is an architectural count, not a physical die floorplan.",
+        "ru": "Логический агрегат из 28 RT-ядер второго поколения; это архитектурное количество, а не физическая топология кристалла."
+      }
+    },
+    {
+      "id": "chip.gpu.tmu.array",
+      "parent_id": "chip.gpu.sm.cluster",
+      "name": {
+        "en": "Texture mapping unit array",
+        "ru": "Массив текстурных блоков TMU"
+      },
+      "category": "semiconductor",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.tomshardware.rtx3060.specs",
+        "src.nvidia.rtx3060.architecture"
+      ],
+      "description": {
+        "en": "Logical aggregate for 112 texture mapping units (TMUs); exact block layout and routing are not represented.",
+        "ru": "Логический агрегат из 112 текстурных блоков TMU; точная компоновка и трассировка не представлены."
+      }
+    },
+    {
+      "id": "chip.gpu.rop.array",
+      "parent_id": "chip.gpu.sm.cluster",
+      "name": {
+        "en": "Raster operations pipeline array",
+        "ru": "Массив блоков растровых операций ROP"
+      },
+      "category": "semiconductor",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.tomshardware.rtx3060.specs",
+        "src.nvidia.rtx3060.architecture"
+      ],
+      "description": {
+        "en": "Logical aggregate for 48 render output units (ROPs); no physical placement or memory-partition wiring is inferred.",
+        "ru": "Логический агрегат из 48 блоков вывода растровых операций ROP; физическое размещение и разводка к разделам памяти не выводятся."
+      }
+    },
+    {
+      "id": "chip.memory.gddr6.bus",
+      "parent_id": "assembly.pcb.electronics",
+      "name": {
+        "en": "192-bit GDDR6 memory interface",
+        "ru": "192-битный интерфейс памяти GDDR6"
+      },
+      "category": "memory_interface",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.evga.spec",
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "description": {
+        "en": "Logical memory-controller/interface node for the exact 12GB SKU's published 192-bit memory bus. It is not a copper trace, package pin map or die floorplan.",
+        "ru": "Логический узел интерфейса/контроллера памяти для опубликованной 192-битной шины точного SKU на 12 ГБ. Это не медная дорожка, не карта выводов корпуса и не топология кристалла."
+      }
+    },
+    {
+      "id": "chip.memory.channel.01",
+      "parent_id": "chip.memory.gddr6.bus",
+      "name": {
+        "en": "GDDR6 package channel 01",
+        "ru": "Канал корпуса GDDR6 01"
+      },
+      "category": "memory_interface",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.evga.spec",
+        "src.samsung.gddr6.catalog",
+        "src.tomshardware.teardown"
+      ],
+      "description": {
+        "en": "Logical 32-bit aggregate interface mapped to one of the six visible GDDR6 packages. The mapping is an educational channel model derived from the 192-bit total bus and 32-bit package organization; it does not claim physical lane routing or die-partition placement.",
+        "ru": "Логический 32-битный агрегированный интерфейс, сопоставленный одной из шести видимых микросхем GDDR6. Это учебная модель канала, выведенная из общей 192-битной шины и 32-битной организации корпуса; физическая трассировка линий и размещение разделов на кристалле не утверждаются."
+      }
+    },
+    {
+      "id": "chip.memory.channel.02",
+      "parent_id": "chip.memory.gddr6.bus",
+      "name": {
+        "en": "GDDR6 package channel 02",
+        "ru": "Канал корпуса GDDR6 02"
+      },
+      "category": "memory_interface",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.evga.spec",
+        "src.samsung.gddr6.catalog",
+        "src.tomshardware.teardown"
+      ],
+      "description": {
+        "en": "Logical 32-bit aggregate interface mapped to one of the six visible GDDR6 packages. The mapping is an educational channel model derived from the 192-bit total bus and 32-bit package organization; it does not claim physical lane routing or die-partition placement.",
+        "ru": "Логический 32-битный агрегированный интерфейс, сопоставленный одной из шести видимых микросхем GDDR6. Это учебная модель канала, выведенная из общей 192-битной шины и 32-битной организации корпуса; физическая трассировка линий и размещение разделов на кристалле не утверждаются."
+      }
+    },
+    {
+      "id": "chip.memory.channel.03",
+      "parent_id": "chip.memory.gddr6.bus",
+      "name": {
+        "en": "GDDR6 package channel 03",
+        "ru": "Канал корпуса GDDR6 03"
+      },
+      "category": "memory_interface",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.evga.spec",
+        "src.samsung.gddr6.catalog",
+        "src.tomshardware.teardown"
+      ],
+      "description": {
+        "en": "Logical 32-bit aggregate interface mapped to one of the six visible GDDR6 packages. The mapping is an educational channel model derived from the 192-bit total bus and 32-bit package organization; it does not claim physical lane routing or die-partition placement.",
+        "ru": "Логический 32-битный агрегированный интерфейс, сопоставленный одной из шести видимых микросхем GDDR6. Это учебная модель канала, выведенная из общей 192-битной шины и 32-битной организации корпуса; физическая трассировка линий и размещение разделов на кристалле не утверждаются."
+      }
+    },
+    {
+      "id": "chip.memory.channel.04",
+      "parent_id": "chip.memory.gddr6.bus",
+      "name": {
+        "en": "GDDR6 package channel 04",
+        "ru": "Канал корпуса GDDR6 04"
+      },
+      "category": "memory_interface",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.evga.spec",
+        "src.samsung.gddr6.catalog",
+        "src.tomshardware.teardown"
+      ],
+      "description": {
+        "en": "Logical 32-bit aggregate interface mapped to one of the six visible GDDR6 packages. The mapping is an educational channel model derived from the 192-bit total bus and 32-bit package organization; it does not claim physical lane routing or die-partition placement.",
+        "ru": "Логический 32-битный агрегированный интерфейс, сопоставленный одной из шести видимых микросхем GDDR6. Это учебная модель канала, выведенная из общей 192-битной шины и 32-битной организации корпуса; физическая трассировка линий и размещение разделов на кристалле не утверждаются."
+      }
+    },
+    {
+      "id": "chip.memory.channel.05",
+      "parent_id": "chip.memory.gddr6.bus",
+      "name": {
+        "en": "GDDR6 package channel 05",
+        "ru": "Канал корпуса GDDR6 05"
+      },
+      "category": "memory_interface",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.evga.spec",
+        "src.samsung.gddr6.catalog",
+        "src.tomshardware.teardown"
+      ],
+      "description": {
+        "en": "Logical 32-bit aggregate interface mapped to one of the six visible GDDR6 packages. The mapping is an educational channel model derived from the 192-bit total bus and 32-bit package organization; it does not claim physical lane routing or die-partition placement.",
+        "ru": "Логический 32-битный агрегированный интерфейс, сопоставленный одной из шести видимых микросхем GDDR6. Это учебная модель канала, выведенная из общей 192-битной шины и 32-битной организации корпуса; физическая трассировка линий и размещение разделов на кристалле не утверждаются."
+      }
+    },
+    {
+      "id": "chip.memory.channel.06",
+      "parent_id": "chip.memory.gddr6.bus",
+      "name": {
+        "en": "GDDR6 package channel 06",
+        "ru": "Канал корпуса GDDR6 06"
+      },
+      "category": "memory_interface",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.evga.spec",
+        "src.samsung.gddr6.catalog",
+        "src.tomshardware.teardown"
+      ],
+      "description": {
+        "en": "Logical 32-bit aggregate interface mapped to one of the six visible GDDR6 packages. The mapping is an educational channel model derived from the 192-bit total bus and 32-bit package organization; it does not claim physical lane routing or die-partition placement.",
+        "ru": "Логический 32-битный агрегированный интерфейс, сопоставленный одной из шести видимых микросхем GDDR6. Это учебная модель канала, выведенная из общей 192-битной шины и 32-битной организации корпуса; физическая трассировка линий и размещение разделов на кристалле не утверждаются."
+      }
     }
   ],
   "rules": [

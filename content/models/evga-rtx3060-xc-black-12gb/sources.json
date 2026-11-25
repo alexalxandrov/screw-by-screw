@@ -70,6 +70,33 @@
       "type": "unverified_schematic_candidate",
       "applicability": "Candidate document title includes EVGA232 and PG190-A02; no verified link to the exact 12G-P5-3655-KR retail sample or its PCB revision",
       "license_status": "unverified_do_not_redistribute"
+    },
+    {
+      "id": "src.nvidia.rtx3060.architecture",
+      "title": "NVIDIA GeForce RTX 3060 family — official architecture and specifications",
+      "publisher": "NVIDIA",
+      "url": "https://www.nvidia.com/en-us/geforce/graphics-cards/30-series/rtx-3060-3060ti/",
+      "type": "manufacturer_architecture_reference",
+      "applicability": "RTX 3060 Ampere architecture family; architecture generation and published family feature context, not EVGA board layout",
+      "license_status": "third_party_copyright_no_reuse_permission"
+    },
+    {
+      "id": "src.tomshardware.rtx3060.specs",
+      "title": "NVIDIA GeForce RTX 3060 review — GA106 specifications and architecture table",
+      "publisher": "Tom's Hardware",
+      "url": "https://www.tomshardware.com/reviews/nvidia-geforce-rtx-3060-review",
+      "type": "technical_review_specification_table",
+      "applicability": "GA106 RTX 3060 12GB reference GPU specification table; not an exact EVGA PCB schematic",
+      "license_status": "third_party_copyright_no_reuse_permission"
+    },
+    {
+      "id": "src.samsung.gddr6.catalog",
+      "title": "Samsung K4ZAF325BM-HC16 GDDR6 product listing (secondary catalog)",
+      "publisher": "Glochip product listing (secondary)",
+      "url": "https://www.samsung.glochip.com/en/pd.jsp?fromMid=352&id=45&recommendFromPid=0",
+      "type": "secondary_memory_component_catalog",
+      "applicability": "Secondary listing for K4ZAF325BM-HC16: 16Gb density, 512M × 32 organization, 16.0Gbps data rate and 180 FBGA package; not a primary Samsung datasheet",
+      "license_status": "metadata_reference_only_no_asset_reuse"
     }
   ]
 }

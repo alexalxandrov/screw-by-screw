@@ -147,6 +147,93 @@
       "source_ids": [
         "src.lanoc.review"
       ]
+    },
+    {
+      "id": "quiz.gpu.sm.count",
+      "prompt": {
+        "en": "How many streaming multiprocessors (SMs) are specified for the RTX 3060 GA106 configuration?",
+        "ru": "Сколько потоковых мультипроцессоров (SM) указано для конфигурации RTX 3060 на GA106?"
+      },
+      "choices": [
+        {
+          "en": "24 SMs",
+          "ru": "24 SM"
+        },
+        {
+          "en": "28 SMs",
+          "ru": "28 SM"
+        },
+        {
+          "en": "32 SMs",
+          "ru": "32 SM"
+        }
+      ],
+      "correct_index": 1,
+      "explanation": {
+        "en": "The GA106 RTX 3060 configuration contains 28 SMs. This is an architectural count, not a physical layout drawing.",
+        "ru": "Конфигурация GA106 RTX 3060 содержит 28 SM. Это архитектурное количество, а не чертёж физического размещения."
+      },
+      "source_ids": [
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "quiz.gpu.rt.generation",
+      "prompt": {
+        "en": "Which generation of RT Cores is used by the Ampere GeForce RTX 30 series?",
+        "ru": "Какое поколение RT-ядер используется в Ampere GeForce RTX 30?"
+      },
+      "choices": [
+        {
+          "en": "First generation",
+          "ru": "Первое поколение"
+        },
+        {
+          "en": "Second generation",
+          "ru": "Второе поколение"
+        },
+        {
+          "en": "Third generation",
+          "ru": "Третье поколение"
+        }
+      ],
+      "correct_index": 1,
+      "explanation": {
+        "en": "NVIDIA describes Ampere RTX 30-series RT Cores as second-generation.",
+        "ru": "NVIDIA описывает RT-ядра Ampere RTX 30 как RT-ядра второго поколения."
+      },
+      "source_ids": [
+        "src.nvidia.rtx3060.architecture"
+      ]
+    },
+    {
+      "id": "quiz.memory.package.count",
+      "prompt": {
+        "en": "How many GDDR6 memory packages are visible on the reviewed XC BLACK board?",
+        "ru": "Сколько микросхем GDDR6 видно на рассмотренной плате XC BLACK?"
+      },
+      "choices": [
+        {
+          "en": "4 packages",
+          "ru": "4 микросхемы"
+        },
+        {
+          "en": "6 packages",
+          "ru": "6 микросхем"
+        },
+        {
+          "en": "8 packages",
+          "ru": "8 микросхем"
+        }
+      ],
+      "correct_index": 1,
+      "explanation": {
+        "en": "The exact-model teardown identifies six Samsung GDDR6 packages.",
+        "ru": "В разборке точной модели указаны шесть микросхем Samsung GDDR6."
+      },
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ]
     }
   ]
 }

@@ -76,6 +76,75 @@
         "motion": "qualitative",
         "not_a_simulation": true
       }
+    },
+    {
+      "id": "process.gpu.compute.architecture",
+      "type": "gpu_compute",
+      "title": {
+        "en": "GA106 compute architecture and GDDR6 interface",
+        "ru": "Архитектура вычислений GA106 и интерфейс GDDR6"
+      },
+      "mode": "logical_architecture",
+      "linked_component_ids": [
+        "chip.gpu.ga106",
+        "chip.gpu.die",
+        "chip.gpu.sm.cluster",
+        "chip.gpu.cuda_core.array",
+        "chip.gpu.tensor_core.array",
+        "chip.gpu.rt_core.array",
+        "chip.gpu.tmu.array",
+        "chip.gpu.rop.array",
+        "chip.memory.gddr6.bus",
+        "chip.memory.channel.01",
+        "chip.memory.channel.02",
+        "chip.memory.channel.03",
+        "chip.memory.channel.04",
+        "chip.memory.channel.05",
+        "chip.memory.channel.06",
+        "chip.memory.candidate.1",
+        "chip.memory.candidate.2",
+        "chip.memory.candidate.3",
+        "chip.memory.candidate.4",
+        "chip.memory.candidate.5",
+        "chip.memory.candidate.6"
+      ],
+      "description": {
+        "en": "An evidence-linked architectural map of the GA106 RTX 3060 configuration: 28 SMs, 3,584 CUDA cores, 112 third-generation Tensor Cores, 28 second-generation RT Cores, 112 TMUs, 48 ROPs and a 192-bit GDDR6 interface. Six 16Gbit Samsung packages on the reviewed XC BLACK sample are shown as logical channel links. Logical nodes are not a die floorplan, shader wiring, physical memory-controller placement or a cycle-accurate architecture simulation.",
+        "ru": "Архитектурная карта GA106 в конфигурации RTX 3060 с привязкой к источникам: 28 SM, 3 584 ядра CUDA, 112 тензорных ядер третьего поколения, 28 RT-ядер второго поколения, 112 TMU, 48 ROP и 192-битный интерфейс GDDR6. Шесть микросхем Samsung по 16 Гбит на рассмотренном образце XC BLACK представлены логическими связями каналов. Логические узлы не являются топологией кристалла, разводкой шейдеров, физическим размещением контроллера памяти или тактово-точной симуляцией архитектуры."
+      },
+      "assumptions": [
+        {
+          "en": "Logical blocks are not to scale and do not reproduce NVIDIA's physical GA106 floorplan.",
+          "ru": "Логические блоки не выполнены в масштабе и не воспроизводят физическую топологию GA106 от NVIDIA."
+        },
+        {
+          "en": "The public specification gives aggregate unit counts; it does not locate individual SMs, Tensor Cores, RT Cores, TMUs or ROPs on the die.",
+          "ru": "Публичная спецификация даёт общие количества блоков, но не указывает размещение отдельных SM, Tensor Core, RT Core, TMU и ROP на кристалле."
+        },
+        {
+          "en": "The six memory-channel-to-package links are a logical teaching map derived from the 192-bit bus and 32-bit package organization; they are not PCB trace routing.",
+          "ru": "Связи шести логических каналов с микросхемами памяти выведены из 192-битной шины и 32-битной организации корпуса; это не трассировка дорожек PCB."
+        },
+        {
+          "en": "The K4ZAF325BM-HC16 parameters are taken from a secondary catalog listing, not a primary Samsung datasheet.",
+          "ru": "Параметры K4ZAF325BM-HC16 взяты из вторичного каталога, а не из первичного даташита Samsung."
+        },
+        {
+          "en": "No shader scheduler, cache hierarchy, clock-domain, performance, occupancy or instruction throughput simulation is implemented.",
+          "ru": "Симуляция планировщика шейдеров, иерархии кэша, тактовых доменов, производительности, occupancy или пропускной способности инструкций не реализована."
+        }
+      ],
+      "source_ids": [
+        "src.nvidia.rtx3060.architecture",
+        "src.tomshardware.rtx3060.specs",
+        "src.samsung.gddr6.catalog",
+        "src.evga.spec",
+        "src.tomshardware.teardown"
+      ],
+      "visualization": {
+        "kind": "selectable_logical_nodes",
+        "not_a_simulation": true
+      }
     }
   ]
 }
