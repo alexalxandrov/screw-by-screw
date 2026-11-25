@@ -14,6 +14,8 @@ on:
       - "content/**"
       - "e2e/**"
       - "index.html"
+      - "index.template.html"
+      - "tools/build_standalone_html.mjs"
       - "package.json"
       - "package-lock.json"
       - "playwright.config.js"
