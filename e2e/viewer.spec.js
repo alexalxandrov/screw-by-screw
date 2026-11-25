@@ -30,7 +30,7 @@ test("shows linked components and source-backed process explanations", async ({ 
 
 test("binds the power process layer from package relationships", async ({ page }) => {
   await page.goto("/");
-  await page.getByRole("button", { name: "Питание" }).click();
+  await page.locator('.process-button[data-layer="power_delivery"]').click();
   await expect(page.locator("#process-details")).toBeVisible();
   await expect(page.locator("#process-detail-title")).toHaveText("Ввод питания");
   await expect(page.locator("#process-components button")).toHaveCount(3);
