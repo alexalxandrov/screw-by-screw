@@ -679,3 +679,16 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); ou
   font-size: 9px;
   line-height: 1.5;
 }
+
+
+/* Local learning progress */
+.learning-save-status {
+  margin: -8px 0 14px;
+  color: var(--muted);
+  font: 8px var(--mono);
+  letter-spacing: .07em;
+  line-height: 1.5;
+}
+.learning-save-status[data-available="true"] {
+  color: #a9c978;
+}
