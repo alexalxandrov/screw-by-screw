@@ -122,6 +122,13 @@ test("rejects relationships that point outside the component inventory", () => {
   assert.throws(() => validateModelPackageData(manifest, data), /unknown component/);
 });
 
+test("rejects packages whose component inventory is not bound to GLB nodes", async () => {
+  const scene = makeGlb({ asset: { version: "2.0" }, scene: 0, scenes: [{ nodes: [0] }], nodes: [
+    { name: "Root", extras: { sbs_component_id: "root" } }
+  ] });
+  await assert.rejects(() => loadModelPackage(asFile(makeArchive({ scene }))), /missing component nodes: part/);
+});
+
 test("rejects GLB files with external resource URIs", async () => {
   const scene = makeGlb({ asset: { version: "2.0" }, buffers: [{ uri: "https://example.invalid/mesh.bin" }] });
   await assert.rejects(() => loadModelPackage(asFile(makeArchive({ scene }))), /External resource URIs/);
