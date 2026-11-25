@@ -29,3 +29,15 @@ These are capability milestones, not promises that every feature will be physica
 ## Non-negotiable accuracy policy
 
 A source-backed specification, reviewer measurement, calibrated photo estimate, physical measurement, illustrative placeholder and unknown value are different evidence classes. Never silently promote one class to another. Nominal product dimensions do not automatically define every exterior component's maximum extent.
+
+
+## v0.6 interaction capabilities now implemented
+
+The viewer now includes:
+- a reusable two-point model-space ruler with explicit non-metrology warnings;
+- component search across names, stable IDs, claims, package markings and source metadata;
+- source-backed claim cards and typed relationship navigation;
+- an assembly evidence panel that separates source observations from authored disassembly steps;
+- startup protection so a late optional bundled-model response cannot replace a scene after user interaction.
+
+These are viewer and data-provenance capabilities. They do not increase the physical fidelity of the RTX 3060 proxy. Owner visual acceptance, rights review and target-hardware performance testing remain required before 1.0.

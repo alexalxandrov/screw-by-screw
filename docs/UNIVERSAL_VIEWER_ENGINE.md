@@ -57,3 +57,14 @@ Exploded-view transforms must be reversible and deterministic. The engine captur
 ## Non-goals for this foundation
 
 No server-side file upload, accounts, analytics, cloud conversion, Blender replacement or CAD authoring. Blender remains the editable source for the pilot model; GLB is the browser delivery format.
+
+
+## Additional interaction and evidence layers
+
+The current viewer also exposes:
+- a model-space point-to-point ruler. Package units are display metadata; the tool is not a physical calibration system;
+- claim-driven search and component cards, with unknown values and evidence classes preserved;
+- typed relationship navigation with direction, certainty and registered sources;
+- a distinct assembly evidence panel for source observations and authored steps. The pilot's observations do not become instructions.
+
+The remaining animation-runtime milestone is specifically **package-authored clips**: generic play/pause/seek/cancel controls driven by validated `animations.json` tracks. Existing explode, fan, airflow and power effects are viewer controls and must not be conflated with source-backed mechanical steps or physics simulation.
