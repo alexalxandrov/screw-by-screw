@@ -35,7 +35,7 @@ function makePackage() {
       assembly_steps: "assembly_steps.json", learning: "learning.json", animations: "animations.json" }
   };
   const data = {
-    "model.json": { id: modelId, manufacturer: "Test Labs", product_name: "Portable test device", part_number: "TEST-001", geometry_status: "illustrative_proxy_not_cad", source_ids: ["src.one"] },
+    "model.json": { id: modelId, manufacturer: "Test Labs", product_name: "Portable test device", display_name: "Portable test device", part_number: "TEST-001", geometry_status: "illustrative_proxy_not_cad", source_ids: ["src.one"] },
     "components.json": { device_model_id: modelId, components: [
       { id: "root", parent_id: null, name: { en: "Main assembly", ru: "Главный узел" }, category: "assembly", evidence_status: "illustrative", geometry_status: "assembly_node", source_ids: [], description: { en: "Test root", ru: "Тестовый корень" } },
       { id: "fan", parent_id: "root", name: { en: "Fan module", ru: "Модуль вентилятора" }, category: "mechanical", evidence_status: "illustrative", geometry_status: "proxy", source_ids: ["src.one"], description: { en: "A test fan", ru: "Тестовый вентилятор" } }
