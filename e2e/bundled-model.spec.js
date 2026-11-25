@@ -33,10 +33,30 @@ test("loads the generated Blender v0.4 GLB and resolves content-package IDs", as
 
 test("opens the self-contained root index.html directly with the embedded Blender model", async ({ page }) => {
   const pageErrors = [];
+  const consoleErrors = [];
+  const requestFailures = [];
   page.on("pageerror", (error) => pageErrors.push(error.message));
+  page.on("console", (message) => { if (message.type() === "error") consoleErrors.push(message.text()); });
+  page.on("requestfailed", (request) => requestFailures.push({ url: request.url(), failure: request.failure()?.errorText }));
   await page.goto(pathToFileURL(resolve(process.cwd(), "index.html")).href);
+  await page.waitForTimeout(1000);
 
-  await expect(page.locator("#viewer-canvas canvas")).toBeVisible();
+  const diagnostics = await page.evaluate(() => ({
+    ready: document.documentElement.classList.contains("sbs-ready"),
+    canvasHost: Boolean(document.querySelector("#viewer-canvas")),
+    canvasCount: document.querySelectorAll("#viewer-canvas canvas").length,
+    status: document.querySelector("#app-status")?.textContent,
+    loadState: document.querySelector("#load-state")?.textContent,
+    scriptCount: document.querySelectorAll("script").length,
+    externalScripts: [...document.querySelectorAll("script[src]")].map((node) => node.src),
+    webgl: (() => {
+      try {
+        const canvas = document.createElement("canvas");
+        return Boolean(canvas.getContext("webgl2") || canvas.getContext("webgl"));
+      } catch { return false; }
+    })()
+  }));
+  await expect(page.locator("#viewer-canvas canvas"), JSON.stringify({ diagnostics, pageErrors, consoleErrors, requestFailures })).toBeVisible({ timeout: 10000 });
   await expect(page.locator("#component-count")).toHaveText("67", { timeout: 15000 });
   await expect(page.locator("#load-state")).toContainText("ВСТРОЕННАЯ МОДЕЛЬ");
   await page.getByRole("button", { name: /Охлаждение/ }).click();
