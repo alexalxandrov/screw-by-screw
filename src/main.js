@@ -810,7 +810,13 @@ function claimPredicateLabel(predicate) {
     pcb_revision: ["Ревизия печатной платы", "PCB revision"],
     gddr6_package_population: ["Количество микросхем GDDR6", "GDDR6 package population"],
     heatsink_fin_count: ["Количество рёбер радиатора", "Heatsink fin count"],
-    gddr6_package_part_number: ["Маркировка микросхем памяти", "GDDR6 package part number"]
+    gddr6_package_part_number: ["Маркировка микросхем памяти", "GDDR6 package part number"],
+    effective_memory_clock: ["Эффективная частота памяти", "Effective memory clock"],
+    total_graphics_power: ["Полная мощность видеокарты", "Total graphics power"],
+    recommended_power_supply: ["Рекомендуемая мощность БП", "Recommended power supply"],
+    display_interface_versions: ["Версии видеовыходов", "Display interface versions"],
+    slot_width: ["Ширина по слотам", "Slot width"],
+    max_digital_resolution: ["Максимальное цифровое разрешение", "Maximum digital resolution"]
   };
   const label = labels[predicate];
   return label ? label[state.language === "ru" ? 0 : 1] : String(predicate ?? "").replaceAll("_", " ");

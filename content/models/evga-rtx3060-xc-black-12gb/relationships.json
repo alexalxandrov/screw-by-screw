@@ -389,6 +389,51 @@
         "src.gamersnexus.teardown",
         "src.lanoc.review"
       ]
+    },
+    {
+      "id": "rel.powerstage.contains.inductor.1",
+      "from": "assembly.power_stage",
+      "to": "power.inductor.candidate.1",
+      "type": "contains",
+      "source_ids": [
+        "src.techpowerup.pcb"
+      ]
+    },
+    {
+      "id": "rel.powerstage.contains.inductor.2",
+      "from": "assembly.power_stage",
+      "to": "power.inductor.candidate.2",
+      "type": "contains",
+      "source_ids": [
+        "src.techpowerup.pcb"
+      ]
+    },
+    {
+      "id": "rel.powerstage.contains.capacitors",
+      "from": "assembly.power_stage",
+      "to": "power.capacitor.cluster",
+      "type": "contains",
+      "source_ids": [
+        "src.techpowerup.pcb"
+      ]
+    },
+    {
+      "id": "rel.powerstage.contains.switches",
+      "from": "assembly.power_stage",
+      "to": "power.switching_device.cluster",
+      "type": "contains",
+      "source_ids": [
+        "src.techpowerup.pcb"
+      ]
+    },
+    {
+      "id": "rel.powerstage.contains.controller",
+      "from": "assembly.power_stage",
+      "to": "power.controller.candidate",
+      "type": "contains",
+      "source_ids": [
+        "src.techpowerup.pcb"
+      ]
     }
   ]
 }

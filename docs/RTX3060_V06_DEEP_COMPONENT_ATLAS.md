@@ -46,3 +46,10 @@ Blender generation and GLB binding are exercised by the Blender blockout generat
 7. Obtain asset reuse rights, then perform visual acceptance on the generated blend, glb and sbsmodel.
 
 No exact board revision, undocumented value, repair procedure or physical simulation is invented in this tranche.
+
+
+## Additional verified specification and board-photo tranche
+
+The package now carries exact-SKU manufacturer claims for the 15,000 MHz effective memory clock, 550 W recommended system PSU, dual-slot width, 7680 × 4320 maximum digital resolution, and DisplayPort 1.4a / HDMI 2.1 output versions. The 170 W TGP claim is sourced to the Neoseeker review sample explicitly identified as 12G-P5-3655-KR. A PSU recommendation must not be confused with the card's own board power.
+
+The component atlas also adds separate, individually selectable photo-estimated groups for two inductor candidates, capacitor packages, switching-device packages and a controller-IC candidate. They are visual navigation aids derived from PCB reference photographs; no phase topology, MOSFET model, controller part number, inductance, capacitance, voltage rating, PWM mapping or net routing is inferred. Their candidate status is deliberately weaker than an exact-revision BOM or BoardView identification.

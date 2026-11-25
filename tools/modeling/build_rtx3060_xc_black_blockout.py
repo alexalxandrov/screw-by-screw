@@ -1020,6 +1020,85 @@ def main():
             (2.4, 1.2, 2.2), MAT["power_stage"], passives_group, pcbcol,
         )
 
+    # Photo-based VRM detail atlas. These groups deliberately carry no phase,
+    # part-number, electrical-net, component-value or exact-coordinate claim.
+    vrm_inductor_1 = make_assembly(
+        "Inductor candidate 1 | photo-estimated", "power.inductor.candidate.1",
+        (stage_origin[0] - 4.0, half_y - 2.5, stage_origin[2] - 5.0),
+        pcbcol, parent=power_stage_group,
+    )
+    make_detail_box(
+        "Inductor candidate 1 body proxy",
+        (stage_origin[0] - 4.0, half_y - 2.2, stage_origin[2] - 5.0),
+        (11.0, 3.0, 11.0), MAT["power_stage"], vrm_inductor_1, pcbcol,
+    )
+    make_detail_box(
+        "Inductor candidate 1 top marking proxy",
+        (stage_origin[0] - 4.0, half_y - 0.55, stage_origin[2] - 5.0),
+        (7.0, 0.25, 4.0), MAT["metal"], vrm_inductor_1, pcbcol,
+    )
+
+    vrm_inductor_2 = make_assembly(
+        "Inductor candidate 2 | photo-estimated", "power.inductor.candidate.2",
+        (stage_origin[0] + 12.0, half_y - 2.5, stage_origin[2] + 8.0),
+        pcbcol, parent=power_stage_group,
+    )
+    make_detail_box(
+        "Inductor candidate 2 body proxy",
+        (stage_origin[0] + 12.0, half_y - 2.2, stage_origin[2] + 8.0),
+        (11.0, 3.0, 11.0), MAT["power_stage"], vrm_inductor_2, pcbcol,
+    )
+    make_detail_box(
+        "Inductor candidate 2 top marking proxy",
+        (stage_origin[0] + 12.0, half_y - 0.55, stage_origin[2] + 8.0),
+        (7.0, 0.25, 4.0), MAT["metal"], vrm_inductor_2, pcbcol,
+    )
+
+    capacitor_group = make_assembly(
+        "Power-stage capacitor cluster | photo-estimated",
+        "power.capacitor.cluster",
+        (stage_origin[0] - 11.0, half_y - 2.0, stage_origin[2] + 14.0),
+        pcbcol, parent=power_stage_group,
+    )
+    capacitor_positions = (
+        (stage_origin[0] - 12.0, stage_origin[2] + 13.0),
+        (stage_origin[0] - 5.0, stage_origin[2] + 17.0),
+        (stage_origin[0] + 3.0, stage_origin[2] + 17.0),
+        (stage_origin[0] + 10.0, stage_origin[2] + 17.0),
+    )
+    for capacitor_index, (cx, cz) in enumerate(capacitor_positions, start=1):
+        make_detail_cylinder(
+            "Power capacitor candidate {}".format(capacitor_index),
+            (cx, half_y - 1.7, cz), 2.4, 3.8,
+            MAT["metal"], capacitor_group, pcbcol, vertices=24,
+        )
+
+    switching_group = make_assembly(
+        "Power switching-device cluster | photo-estimated",
+        "power.switching_device.cluster",
+        (stage_origin[0] + 2.0, half_y - 2.4, stage_origin[2] - 13.0),
+        pcbcol, parent=power_stage_group,
+    )
+    for switch_index in range(6):
+        sx = stage_origin[0] - 9.0 + switch_index * 5.0
+        make_detail_box(
+            "Unidentified switching package proxy {}".format(switch_index + 1),
+            (sx, half_y - 2.0, stage_origin[2] - 13.0),
+            (3.5, 2.0, 4.0), MAT["connector"], switching_group, pcbcol,
+        )
+
+    controller_group = make_assembly(
+        "Power controller IC candidate | photo-estimated",
+        "power.controller.candidate",
+        (stage_origin[0] + 25.0, half_y - 2.0, stage_origin[2] - 12.0),
+        pcbcol, parent=power_stage_group,
+    )
+    make_detail_box(
+        "Unidentified controller package proxy",
+        (stage_origin[0] + 25.0, half_y - 2.1, stage_origin[2] - 12.0),
+        (5.0, 1.5, 5.0), MAT["connector"], controller_group, pcbcol,
+    )
+
     # A clearly marked area identifies the review-described PCB airflow cutout.
     cutout_group = make_assembly(
         "PCB airflow cutout area | proxy", "pcb.airflow.cutout",

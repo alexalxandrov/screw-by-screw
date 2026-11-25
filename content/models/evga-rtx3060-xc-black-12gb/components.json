@@ -874,6 +874,96 @@
         "en": "Visible airflow cutout area described in the exact-model review. The current geometry is a marker, not a measured aperture boundary.",
         "ru": "Область выреза для воздушного потока, описанная в обзоре точной модели. Текущая геометрия — маркер, а не измеренный контур отверстия."
       }
+    },
+    {
+      "id": "power.inductor.candidate.1",
+      "parent_id": "assembly.power_stage",
+      "name": {
+        "en": "Inductor candidate 1",
+        "ru": "Кандидатный дроссель 1"
+      },
+      "category": "power_electronics",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.techpowerup.pcb"
+      ],
+      "description": {
+        "en": "Photo-based inductor/choke marker in the power-delivery area. The visible package is not tied to a verified board reference designator; inductance, current rating, phase assignment and exact position are unknown.",
+        "ru": "Фотомаркер дросселя в области преобразования питания. Видимый корпус не сопоставлен с подтверждённым позиционным обозначением платы; индуктивность, допустимый ток, принадлежность к фазе и точная координата неизвестны."
+      }
+    },
+    {
+      "id": "power.inductor.candidate.2",
+      "parent_id": "assembly.power_stage",
+      "name": {
+        "en": "Inductor candidate 2",
+        "ru": "Кандидатный дроссель 2"
+      },
+      "category": "power_electronics",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.techpowerup.pcb"
+      ],
+      "description": {
+        "en": "Second photo-based inductor/choke marker. It is not evidence of a two-phase or any other specific VRM topology; package identity and electrical parameters remain unknown.",
+        "ru": "Второй фотомаркер дросселя. Он не доказывает двухфазную или иную конкретную топологию VRM; тип корпуса и электрические параметры неизвестны."
+      }
+    },
+    {
+      "id": "power.capacitor.cluster",
+      "parent_id": "assembly.power_stage",
+      "name": {
+        "en": "Power-stage capacitor cluster",
+        "ru": "Группа конденсаторов силовой части"
+      },
+      "category": "power_electronics",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.techpowerup.pcb"
+      ],
+      "description": {
+        "en": "Selectable visual cluster for capacitor-like packages visible in PCB reference photographs. Capacitance, voltage rating, ESR, dielectric and designators are not asserted.",
+        "ru": "Выбираемая визуальная группа корпусов конденсаторов, видимых на фотографиях PCB. Ёмкость, рабочее напряжение, ESR, диэлектрик и позиционные обозначения не утверждаются."
+      }
+    },
+    {
+      "id": "power.switching_device.cluster",
+      "parent_id": "assembly.power_stage",
+      "name": {
+        "en": "Power switching-device cluster",
+        "ru": "Группа силовых переключающих элементов"
+      },
+      "category": "power_electronics",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.techpowerup.pcb"
+      ],
+      "description": {
+        "en": "Generic cluster marker for the low-profile switching-device packages around the power stages. No MOSFET model, phase count, gate-driver arrangement or electrical net is inferred.",
+        "ru": "Обобщённый маркер низкопрофильных корпусов силовых переключающих элементов. Модель MOSFET, число фаз, схема драйверов затворов и электрические цепи не выводятся."
+      }
+    },
+    {
+      "id": "power.controller.candidate",
+      "parent_id": "assembly.power_stage",
+      "name": {
+        "en": "Power controller candidate",
+        "ru": "Кандидатный контроллер питания"
+      },
+      "category": "power_electronics",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.techpowerup.pcb"
+      ],
+      "description": {
+        "en": "Unidentified controller-IC marker based on the board-photo context. No manufacturer, part number, PWM channel count, telemetry interface or control topology is claimed.",
+        "ru": "Маркер неидентифицированной микросхемы-контроллера по фотографии платы. Производитель, номер детали, число PWM-каналов, телеметрический интерфейс и топология управления не утверждаются."
+      }
     }
   ],
   "rules": [

@@ -262,6 +262,81 @@
         "src.tomshardware.teardown"
       ],
       "notes": "Tom's Hardware reports eight rear screws on its EVGA RTX 3060 XC teardown sample. Exact PCB/cooler revision matching to 12G-P5-3655-KR is not established; do not treat this as an exact-SKU service specification."
+    },
+    {
+      "id": "claim.memory.effective_clock",
+      "subject_id": "gpu.evga.12g-p5-3655-kr",
+      "predicate": "effective_memory_clock",
+      "value": 15000,
+      "unit": "MHz effective",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.evga.spec"
+      ],
+      "notes": "EVGA's SKU datasheet lists 15,000 MHz effective GDDR6 memory clock."
+    },
+    {
+      "id": "claim.power.total_graphics_power",
+      "subject_id": "gpu.evga.12g-p5-3655-kr",
+      "predicate": "total_graphics_power",
+      "value": 170,
+      "unit": "W",
+      "confidence_class": "independently_verified",
+      "source_ids": [
+        "src.neoseeker.review"
+      ],
+      "notes": "The review identifies its sample as 12G-P5-3655-KR and lists a 170 W TGP. Treat this as the reviewed retail-SKU specification, not a measurement of every operating workload."
+    },
+    {
+      "id": "claim.power.recommended_psu",
+      "subject_id": "gpu.evga.12g-p5-3655-kr",
+      "predicate": "recommended_power_supply",
+      "value": 550,
+      "unit": "W minimum system PSU",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.evga.spec"
+      ],
+      "notes": "Manufacturer system requirement; this is not the board's own power draw."
+    },
+    {
+      "id": "claim.display.interface_versions",
+      "subject_id": "connector.io.bracket",
+      "predicate": "display_interface_versions",
+      "value": {
+        "DisplayPort": "1.4a × 3",
+        "HDMI": "2.1 × 1"
+      },
+      "unit": null,
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.evga.spec"
+      ],
+      "notes": "Output protocol versions and counts are from the exact part-number datasheet."
+    },
+    {
+      "id": "claim.card.slot_width",
+      "subject_id": "gpu.evga.12g-p5-3655-kr",
+      "predicate": "slot_width",
+      "value": "Dual-slot",
+      "unit": null,
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.evga.spec"
+      ],
+      "notes": "Manufacturer-published slot width."
+    },
+    {
+      "id": "claim.card.max_digital_resolution",
+      "subject_id": "gpu.evga.12g-p5-3655-kr",
+      "predicate": "max_digital_resolution",
+      "value": "7680 × 4320",
+      "unit": null,
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.evga.spec"
+      ],
+      "notes": "Maximum digital resolution in the manufacturer-published SKU specification."
     }
   ]
 }
