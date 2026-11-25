@@ -441,6 +441,439 @@
         "en": "Unnumbered proxy group to locate the board-level power-conversion area in the learning view. PCB revision, phase topology, component positions and electrical nets are not verified.",
         "ru": "Условная группа для обозначения зоны преобразования питания на плате. Ревизия PCB, топология фаз, координаты компонентов и электрические цепи не подтверждены."
       }
+    },
+    {
+      "id": "chip.gpu.die",
+      "parent_id": "chip.gpu.ga106",
+      "name": {
+        "en": "GA106 silicon die",
+        "ru": "Кристалл GA106"
+      },
+      "category": "semiconductor",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [],
+      "description": {
+        "en": "Separate visual die proxy inside the GA106 package. Die outline, dimensions, substrate stack and interconnect are not measured or reconstructed from a package drawing.",
+        "ru": "Отдельный визуальный макет кристалла внутри корпуса GA106. Контур, размеры, структура подложки и межсоединения не измерены и не восстановлены по чертежу корпуса."
+      }
+    },
+    {
+      "id": "cooling.thermal_interface",
+      "parent_id": "assembly.cooling",
+      "name": {
+        "en": "Thermal interface materials",
+        "ru": "Термопрокладки и термоинтерфейсы"
+      },
+      "category": "thermal",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "description": {
+        "en": "Selectable group for the cooler thermal-interface materials. Individual pad shapes and thicknesses are visual placeholders, not a verified service kit.",
+        "ru": "Выбираемая группа термоинтерфейсов системы охлаждения. Формы и толщины прокладок заданы условно и не являются подтверждённым комплектом для обслуживания."
+      }
+    },
+    {
+      "id": "cooling.thermal_paste.gpu",
+      "parent_id": "cooling.thermal_interface",
+      "name": {
+        "en": "GPU thermal compound",
+        "ru": "Термопаста GPU"
+      },
+      "category": "thermal",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "description": {
+        "en": "Illustrative thin compound layer between the GPU die area and cooler contact. No compound brand, thickness or application pattern is asserted.",
+        "ru": "Условный тонкий слой термопасты между областью кристалла GPU и контактной поверхностью кулера. Марка, толщина и схема нанесения не утверждаются."
+      }
+    },
+    {
+      "id": "cooling.thermal_pad.memory",
+      "parent_id": "cooling.thermal_interface",
+      "name": {
+        "en": "Memory thermal pads",
+        "ru": "Термопрокладки памяти"
+      },
+      "category": "thermal",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.tomshardware.teardown"
+      ],
+      "description": {
+        "en": "Memory-side thermal pad group shown in teardown material. Exact thickness, hardness, material and per-package footprint are not established.",
+        "ru": "Группа термопрокладок со стороны памяти, видимая в материалах разборки. Точная толщина, твёрдость, материал и пятно контакта каждой микросхемы не установлены."
+      }
+    },
+    {
+      "id": "cooling.thermal_pad.vrm",
+      "parent_id": "cooling.thermal_interface",
+      "name": {
+        "en": "Power-stage thermal pads",
+        "ru": "Термопрокладки силовой части"
+      },
+      "category": "thermal",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "description": {
+        "en": "Generic thermal-pad proxy for the power-delivery area. Exact component coverage and pad specification remain unknown.",
+        "ru": "Обобщённый макет термопрокладок в области преобразования питания. Точное покрытие компонентов и спецификация прокладок неизвестны."
+      }
+    },
+    {
+      "id": "assembly.fasteners",
+      "parent_id": "assembly.card.root",
+      "name": {
+        "en": "Fastener set",
+        "ru": "Комплект крепежа"
+      },
+      "category": "mechanical",
+      "evidence_status": "candidate_count_requires_exact_board_confirmation",
+      "geometry_status": "assembly_node",
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ],
+      "description": {
+        "en": "Candidate fastener grouping for teardown study. The cited EVGA RTX 3060 XC teardown reports eight rear hold-down screws, but the exact PCB/cooler revision match is not proven; positions in this model are illustrative.",
+        "ru": "Кандидатная группа крепежа для изучения разборки. В приведённой разборке EVGA RTX 3060 XC указаны восемь задних крепёжных винтов, но совпадение ревизии PCB/кулера не доказано; положения в этой модели условные."
+      }
+    },
+    {
+      "id": "fastener.cooler.01",
+      "parent_id": "assembly.fasteners",
+      "name": {
+        "en": "Cooler screw candidate 01",
+        "ru": "Кандидатный винт кулера 01"
+      },
+      "category": "fastener",
+      "evidence_status": "candidate_count_requires_exact_board_confirmation",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ],
+      "description": {
+        "en": "Individual visual screw placeholder. Head style, thread, length, washer, torque and exact mounting location are not verified for this retail SKU.",
+        "ru": "Отдельный визуальный макет винта. Тип головки, резьба, длина, шайба, момент затяжки и точное место крепления для этого розничного SKU не проверены."
+      }
+    },
+    {
+      "id": "fastener.cooler.02",
+      "parent_id": "assembly.fasteners",
+      "name": {
+        "en": "Cooler screw candidate 02",
+        "ru": "Кандидатный винт кулера 02"
+      },
+      "category": "fastener",
+      "evidence_status": "candidate_count_requires_exact_board_confirmation",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ],
+      "description": {
+        "en": "Individual visual screw placeholder. Head style, thread, length, washer, torque and exact mounting location are not verified for this retail SKU.",
+        "ru": "Отдельный визуальный макет винта. Тип головки, резьба, длина, шайба, момент затяжки и точное место крепления для этого розничного SKU не проверены."
+      }
+    },
+    {
+      "id": "fastener.cooler.03",
+      "parent_id": "assembly.fasteners",
+      "name": {
+        "en": "Cooler screw candidate 03",
+        "ru": "Кандидатный винт кулера 03"
+      },
+      "category": "fastener",
+      "evidence_status": "candidate_count_requires_exact_board_confirmation",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ],
+      "description": {
+        "en": "Individual visual screw placeholder. Head style, thread, length, washer, torque and exact mounting location are not verified for this retail SKU.",
+        "ru": "Отдельный визуальный макет винта. Тип головки, резьба, длина, шайба, момент затяжки и точное место крепления для этого розничного SKU не проверены."
+      }
+    },
+    {
+      "id": "fastener.cooler.04",
+      "parent_id": "assembly.fasteners",
+      "name": {
+        "en": "Cooler screw candidate 04",
+        "ru": "Кандидатный винт кулера 04"
+      },
+      "category": "fastener",
+      "evidence_status": "candidate_count_requires_exact_board_confirmation",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ],
+      "description": {
+        "en": "Individual visual screw placeholder. Head style, thread, length, washer, torque and exact mounting location are not verified for this retail SKU.",
+        "ru": "Отдельный визуальный макет винта. Тип головки, резьба, длина, шайба, момент затяжки и точное место крепления для этого розничного SKU не проверены."
+      }
+    },
+    {
+      "id": "fastener.cooler.05",
+      "parent_id": "assembly.fasteners",
+      "name": {
+        "en": "Cooler screw candidate 05",
+        "ru": "Кандидатный винт кулера 05"
+      },
+      "category": "fastener",
+      "evidence_status": "candidate_count_requires_exact_board_confirmation",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ],
+      "description": {
+        "en": "Individual visual screw placeholder. Head style, thread, length, washer, torque and exact mounting location are not verified for this retail SKU.",
+        "ru": "Отдельный визуальный макет винта. Тип головки, резьба, длина, шайба, момент затяжки и точное место крепления для этого розничного SKU не проверены."
+      }
+    },
+    {
+      "id": "fastener.cooler.06",
+      "parent_id": "assembly.fasteners",
+      "name": {
+        "en": "Cooler screw candidate 06",
+        "ru": "Кандидатный винт кулера 06"
+      },
+      "category": "fastener",
+      "evidence_status": "candidate_count_requires_exact_board_confirmation",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ],
+      "description": {
+        "en": "Individual visual screw placeholder. Head style, thread, length, washer, torque and exact mounting location are not verified for this retail SKU.",
+        "ru": "Отдельный визуальный макет винта. Тип головки, резьба, длина, шайба, момент затяжки и точное место крепления для этого розничного SKU не проверены."
+      }
+    },
+    {
+      "id": "fastener.cooler.07",
+      "parent_id": "assembly.fasteners",
+      "name": {
+        "en": "Cooler screw candidate 07",
+        "ru": "Кандидатный винт кулера 07"
+      },
+      "category": "fastener",
+      "evidence_status": "candidate_count_requires_exact_board_confirmation",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ],
+      "description": {
+        "en": "Individual visual screw placeholder. Head style, thread, length, washer, torque and exact mounting location are not verified for this retail SKU.",
+        "ru": "Отдельный визуальный макет винта. Тип головки, резьба, длина, шайба, момент затяжки и точное место крепления для этого розничного SKU не проверены."
+      }
+    },
+    {
+      "id": "fastener.cooler.08",
+      "parent_id": "assembly.fasteners",
+      "name": {
+        "en": "Cooler screw candidate 08",
+        "ru": "Кандидатный винт кулера 08"
+      },
+      "category": "fastener",
+      "evidence_status": "candidate_count_requires_exact_board_confirmation",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ],
+      "description": {
+        "en": "Individual visual screw placeholder. Head style, thread, length, washer, torque and exact mounting location are not verified for this retail SKU.",
+        "ru": "Отдельный визуальный макет винта. Тип головки, резьба, длина, шайба, момент затяжки и точное место крепления для этого розничного SKU не проверены."
+      }
+    },
+    {
+      "id": "pcb.connector.pcie",
+      "parent_id": "assembly.pcb.board",
+      "name": {
+        "en": "PCI Express edge connector",
+        "ru": "Краевой разъём PCI Express"
+      },
+      "category": "electrical_io",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.evga.spec"
+      ],
+      "description": {
+        "en": "Board-edge interface represented as a geometry proxy. EVGA specifies PCI Express 4.0; contact count, pad dimensions and exact edge profile are not taken from a board drawing.",
+        "ru": "Краевой интерфейс платы представлен геометрическим макетом. EVGA указывает PCI Express 4.0; число контактов, размеры площадок и точный профиль края не взяты из чертежа платы."
+      }
+    },
+    {
+      "id": "connector.fan.header.1",
+      "parent_id": "assembly.pcb.electronics",
+      "name": {
+        "en": "Fan connector header 1",
+        "ru": "Разъём вентилятора 1"
+      },
+      "category": "electrical_io",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "description": {
+        "en": "First fan cable connection visible during exact-model teardown. Header footprint and pinout are not confirmed.",
+        "ru": "Первое подключение кабеля вентилятора, видимое в разборке точной модели. Посадочное место и распиновка разъёма не подтверждены."
+      }
+    },
+    {
+      "id": "connector.fan.header.2",
+      "parent_id": "assembly.pcb.electronics",
+      "name": {
+        "en": "Fan connector header 2",
+        "ru": "Разъём вентилятора 2"
+      },
+      "category": "electrical_io",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "description": {
+        "en": "Second fan cable connection visible during exact-model teardown. Header footprint and pinout are not confirmed.",
+        "ru": "Второе подключение кабеля вентилятора, видимое в разборке точной модели. Посадочное место и распиновка разъёма не подтверждены."
+      }
+    },
+    {
+      "id": "connector.displayport.1",
+      "parent_id": "connector.io.bracket",
+      "name": {
+        "en": "DisplayPort receptacle 1",
+        "ru": "Разъём DisplayPort 1"
+      },
+      "category": "mechanical_io",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.evga.spec",
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "One of the three documented DisplayPort outputs. Port shell and aperture dimensions are illustrative, not a manufacturing model.",
+        "ru": "Один из трёх документированных выходов DisplayPort. Корпус и размеры отверстия заданы условно и не являются производственной моделью."
+      }
+    },
+    {
+      "id": "connector.displayport.2",
+      "parent_id": "connector.io.bracket",
+      "name": {
+        "en": "DisplayPort receptacle 2",
+        "ru": "Разъём DisplayPort 2"
+      },
+      "category": "mechanical_io",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.evga.spec",
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "One of the three documented DisplayPort outputs. Port shell and aperture dimensions are illustrative, not a manufacturing model.",
+        "ru": "Один из трёх документированных выходов DisplayPort. Корпус и размеры отверстия заданы условно и не являются производственной моделью."
+      }
+    },
+    {
+      "id": "connector.displayport.3",
+      "parent_id": "connector.io.bracket",
+      "name": {
+        "en": "DisplayPort receptacle 3",
+        "ru": "Разъём DisplayPort 3"
+      },
+      "category": "mechanical_io",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.evga.spec",
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "One of the three documented DisplayPort outputs. Port shell and aperture dimensions are illustrative, not a manufacturing model.",
+        "ru": "Один из трёх документированных выходов DisplayPort. Корпус и размеры отверстия заданы условно и не являются производственной моделью."
+      }
+    },
+    {
+      "id": "connector.hdmi.1",
+      "parent_id": "connector.io.bracket",
+      "name": {
+        "en": "HDMI receptacle 1",
+        "ru": "Разъём HDMI 1"
+      },
+      "category": "mechanical_io",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.evga.spec",
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "The documented HDMI output. Port shell and aperture dimensions are illustrative, not a manufacturing model.",
+        "ru": "Документированный выход HDMI. Корпус и размеры отверстия заданы условно и не являются производственной моделью."
+      }
+    },
+    {
+      "id": "power.shunt.cluster",
+      "parent_id": "assembly.power_stage",
+      "name": {
+        "en": "Shunt resistor area",
+        "ru": "Область шунтирующих резисторов"
+      },
+      "category": "power_electronics",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "description": {
+        "en": "Selectable proxy grouping for the shunt-resistor area discussed in the exact-model teardown. No resistance, reference designator, placement coordinate or measurement is asserted.",
+        "ru": "Выбираемая группа-макет области шунтирующих резисторов, обсуждаемой в разборке точной модели. Сопротивление, позиционное обозначение, координаты и измерения не утверждаются."
+      }
+    },
+    {
+      "id": "power.passives.cluster",
+      "parent_id": "assembly.power_stage",
+      "name": {
+        "en": "Unidentified power-stage passives",
+        "ru": "Неидентифицированные пассивные элементы питания"
+      },
+      "category": "power_electronics",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [],
+      "description": {
+        "en": "Unidentified passive-component proxies grouped for visual navigation only. No MOSFET type, phase count, controller or component value is inferred.",
+        "ru": "Макеты неидентифицированных пассивных компонентов, сгруппированные только для визуальной навигации. Тип MOSFET, число фаз, контроллер и номиналы не выводятся."
+      }
+    },
+    {
+      "id": "pcb.airflow.cutout",
+      "parent_id": "assembly.pcb.board",
+      "name": {
+        "en": "PCB airflow cutout area",
+        "ru": "Область выреза для воздушного потока в PCB"
+      },
+      "category": "mechanical",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "Visible airflow cutout area described in the exact-model review. The current geometry is a marker, not a measured aperture boundary.",
+        "ru": "Область выреза для воздушного потока, описанная в обзоре точной модели. Текущая геометрия — маркер, а не измеренный контур отверстия."
+      }
     }
   ],
   "rules": [

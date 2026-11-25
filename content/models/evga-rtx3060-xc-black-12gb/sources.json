@@ -52,6 +52,24 @@
       "type": "exact_model_teardown_photo_report",
       "applicability": "EVGA_XC_BLACK_12G-P5-3655-KR_sample_PCB_photo",
       "license_status": "third_party_copyright_no_reuse_permission"
+    },
+    {
+      "id": "src.techpowerup.pcb",
+      "title": "TechPowerUp EVGA RTX 3060 XC BLACK GPU specification and PCB reference image",
+      "publisher": "TechPowerUp",
+      "url": "https://www.techpowerup.com/gpu-specs/evga-rtx-3060-xc-black.b8621",
+      "type": "visual_reference_candidate",
+      "applicability": "EVGA RTX 3060 XC BLACK product page; apparent EVGA232 REV 1.0 PCB marking is a candidate observation only and is not independently matched to the exact retail sample",
+      "license_status": "third_party_copyright_no_reuse_permission"
+    },
+    {
+      "id": "src.evga232.schematic.candidate",
+      "title": "EVGA232 / PG190-A02 GA104-GA106 GPU schematic — unverified community-hosted candidate",
+      "publisher": "Community-hosted document index",
+      "url": "https://ph.i2mx.com.mx/Documents/Schematics/GPU/GPU/EVGA232%20RTX%202070%20RTX3060%20-%20PG190-A02%20-%20GA104-GA106.pdf",
+      "type": "unverified_schematic_candidate",
+      "applicability": "Candidate document title includes EVGA232 and PG190-A02; no verified link to the exact 12G-P5-3655-KR retail sample or its PCB revision",
+      "license_status": "unverified_do_not_redistribute"
     }
   ]
 }

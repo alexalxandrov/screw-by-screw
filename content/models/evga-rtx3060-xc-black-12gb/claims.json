@@ -185,8 +185,10 @@
       "value": null,
       "unit": null,
       "confidence_class": "unknown",
-      "source_ids": [],
-      "notes": "PCB silkscreen identifier/revision has not been confirmed."
+      "source_ids": [
+        "src.techpowerup.pcb"
+      ],
+      "notes": "Still unknown. A public TechPowerUp product-page image appears to show the silkscreen EVGA232 REV 1.0, but the photo/sample-to-retail-SKU and PCB-revision correlation has not been independently verified. A separately indexed EVGA232 / PG190-A02 schematic is only an unverified lead."
     },
     {
       "id": "claim.memory.population",
@@ -224,6 +226,42 @@
         "src.tomshardware.teardown"
       ],
       "notes": "Tom's Hardware identifies the six GDDR6 packages on the reviewed EVGA RTX 3060 XC BLACK sample."
+    },
+    {
+      "id": "claim.pcie.interface",
+      "subject_id": "pcb.connector.pcie",
+      "predicate": "host_interface",
+      "value": "PCI Express 4.0",
+      "unit": null,
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.evga.spec"
+      ],
+      "notes": "This claim intentionally does not assert lane wiring, pin mapping or PCB trace routing."
+    },
+    {
+      "id": "claim.fan.header.count",
+      "subject_id": "assembly.pcb.electronics",
+      "predicate": "fan_cable_connections_visible_in_teardown",
+      "value": 2,
+      "unit": "connectors",
+      "confidence_class": "independently_verified",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "notes": "Two fan connections are visible in the exact-model teardown; this does not document their pinout or control protocol."
+    },
+    {
+      "id": "claim.cooler.fastener.count.candidate",
+      "subject_id": "assembly.fasteners",
+      "predicate": "rear_cooler_hold_down_screw_count_candidate",
+      "value": 8,
+      "unit": "screws",
+      "confidence_class": "candidate_count_requires_exact_board_confirmation",
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ],
+      "notes": "Tom's Hardware reports eight rear screws on its EVGA RTX 3060 XC teardown sample. Exact PCB/cooler revision matching to 12G-P5-3655-KR is not established; do not treat this as an exact-SKU service specification."
     }
   ]
 }

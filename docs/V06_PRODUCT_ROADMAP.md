@@ -72,3 +72,10 @@ The generic runtime now reads validated clips from animations.json and provides 
 
 
 - **Stable impeller subassemblies:** both Blender and fallback scenes expose a separate child component ID for each rotor. Only the impeller group rotates; the static frame and hub remain outside the pivot.
+
+
+## Deep component atlas tranche (in development)
+
+The RTX 3060 pilot is being expanded from assembly-level blocks into separately selectable teaching components: GPU die proxy, thermal interface groups, fastener candidates, PCIe edge interface, fan cable headers, individual rear I/O receptacles, shunt area, unidentified passives and PCB airflow-cutout marker. This is a geometry/content integration tranche; it does not close the precision-CAD or exact-board evidence gates.
+
+The apparent EVGA232 REV 1.0 silkscreen and community-indexed PG190-A02 schematic are tracked as unverified leads only. Exact board identity, schematic applicability and rights must be resolved before any board-level electrical topology is authored.

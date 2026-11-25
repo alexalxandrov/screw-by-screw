@@ -143,6 +143,252 @@
       "to": "assembly.power_stage",
       "type": "contains",
       "source_ids": []
+    },
+    {
+      "id": "rel.gpu.package.contains.die",
+      "from": "chip.gpu.ga106",
+      "to": "chip.gpu.die",
+      "type": "contains",
+      "source_ids": []
+    },
+    {
+      "id": "rel.cooling.contains.thermal.interface",
+      "from": "assembly.cooling",
+      "to": "cooling.thermal_interface",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.thermal.interface.contains.gpu.paste",
+      "from": "cooling.thermal_interface",
+      "to": "cooling.thermal_paste.gpu",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.thermal.interface.contains.memory.pad",
+      "from": "cooling.thermal_interface",
+      "to": "cooling.thermal_pad.memory",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.tomshardware.teardown"
+      ]
+    },
+    {
+      "id": "rel.thermal.interface.contains.vrm.pad",
+      "from": "cooling.thermal_interface",
+      "to": "cooling.thermal_pad.vrm",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.card.contains.fasteners",
+      "from": "assembly.card.root",
+      "to": "assembly.fasteners",
+      "type": "contains",
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ]
+    },
+    {
+      "id": "rel.fasteners.contains.01",
+      "from": "assembly.fasteners",
+      "to": "fastener.cooler.01",
+      "type": "contains",
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ]
+    },
+    {
+      "id": "rel.fasteners.contains.02",
+      "from": "assembly.fasteners",
+      "to": "fastener.cooler.02",
+      "type": "contains",
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ]
+    },
+    {
+      "id": "rel.fasteners.contains.03",
+      "from": "assembly.fasteners",
+      "to": "fastener.cooler.03",
+      "type": "contains",
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ]
+    },
+    {
+      "id": "rel.fasteners.contains.04",
+      "from": "assembly.fasteners",
+      "to": "fastener.cooler.04",
+      "type": "contains",
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ]
+    },
+    {
+      "id": "rel.fasteners.contains.05",
+      "from": "assembly.fasteners",
+      "to": "fastener.cooler.05",
+      "type": "contains",
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ]
+    },
+    {
+      "id": "rel.fasteners.contains.06",
+      "from": "assembly.fasteners",
+      "to": "fastener.cooler.06",
+      "type": "contains",
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ]
+    },
+    {
+      "id": "rel.fasteners.contains.07",
+      "from": "assembly.fasteners",
+      "to": "fastener.cooler.07",
+      "type": "contains",
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ]
+    },
+    {
+      "id": "rel.fasteners.contains.08",
+      "from": "assembly.fasteners",
+      "to": "fastener.cooler.08",
+      "type": "contains",
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ]
+    },
+    {
+      "id": "rel.board.contains.pcie",
+      "from": "assembly.pcb.board",
+      "to": "pcb.connector.pcie",
+      "type": "contains",
+      "source_ids": [
+        "src.evga.spec"
+      ]
+    },
+    {
+      "id": "rel.board.contains.fan.header.1",
+      "from": "assembly.pcb.electronics",
+      "to": "connector.fan.header.1",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.board.contains.fan.header.2",
+      "from": "assembly.pcb.electronics",
+      "to": "connector.fan.header.2",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.fan.header.1.connected.fan.1",
+      "from": "connector.fan.header.1",
+      "to": "assembly.fan.1",
+      "type": "connected_to",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.fan.header.2.connected.fan.2",
+      "from": "connector.fan.header.2",
+      "to": "assembly.fan.2",
+      "type": "connected_to",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.bracket.contains.dp1",
+      "from": "connector.io.bracket",
+      "to": "connector.displayport.1",
+      "type": "contains",
+      "source_ids": [
+        "src.evga.spec",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.bracket.contains.dp2",
+      "from": "connector.io.bracket",
+      "to": "connector.displayport.2",
+      "type": "contains",
+      "source_ids": [
+        "src.evga.spec",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.bracket.contains.dp3",
+      "from": "connector.io.bracket",
+      "to": "connector.displayport.3",
+      "type": "contains",
+      "source_ids": [
+        "src.evga.spec",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.bracket.contains.hdmi",
+      "from": "connector.io.bracket",
+      "to": "connector.hdmi.1",
+      "type": "contains",
+      "source_ids": [
+        "src.evga.spec",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.powerstage.contains.shunts",
+      "from": "assembly.power_stage",
+      "to": "power.shunt.cluster",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.powerstage.contains.passives",
+      "from": "assembly.power_stage",
+      "to": "power.passives.cluster",
+      "type": "contains",
+      "source_ids": []
+    },
+    {
+      "id": "rel.board.contains.airflow.cutout",
+      "from": "assembly.pcb.board",
+      "to": "pcb.airflow.cutout",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.gpu.transfers.heat.to.contact",
+      "from": "chip.gpu.ga106",
+      "to": "cooling.gpu_contact",
+      "type": "transfers_heat_to",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
     }
   ]
 }

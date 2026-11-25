@@ -811,6 +811,217 @@ def main():
     )
     set_parent_keep_world(display_panel, connector_group)
 
+    # Deep component atlas tranche: individually selectable interfaces and service details.
+    # All dimensions and locations below are deliberately proxy geometry unless separately sourced.
+    def make_detail_box(name, position, dimensions, mat, parent, collection):
+        bpy.ops.mesh.primitive_cube_add(size=1, location=position)
+        obj = bpy.context.object
+        obj.name = name
+        obj.dimensions = dimensions
+        bpy.ops.object.transform_apply(location=False, rotation=False, scale=True)
+        obj.data.materials.append(mat)
+        move_to_collection(obj, collection)
+        set_parent_keep_world(obj, parent)
+        obj["sbs_visual_proxy"] = True
+        return obj
+
+    def make_detail_cylinder(name, position, radius, depth, mat, parent, collection, vertices=32):
+        bpy.ops.mesh.primitive_cylinder_add(
+            vertices=vertices, radius=radius, depth=depth, location=position,
+            rotation=(math.radians(90), 0, 0),
+        )
+        obj = bpy.context.object
+        obj.name = name
+        obj.data.materials.append(mat)
+        move_to_collection(obj, collection)
+        set_parent_keep_world(obj, parent)
+        obj["sbs_visual_proxy"] = True
+        return obj
+
+    # A separate die node is nested under the already selectable GA106 package.
+    die_group = make_assembly(
+        "GA106 silicon die | illustrative proxy", "chip.gpu.die",
+        (CARD_LENGTH * 0.48, half_y - 7.0, CARD_HEIGHT * 0.52),
+        pcbcol, parent=gpu_package,
+    )
+    make_detail_box(
+        "GA106 die surface proxy",
+        (CARD_LENGTH * 0.48, half_y - 7.4, CARD_HEIGHT * 0.52),
+        (15.0, 0.8, 15.0), MAT["gpu"], die_group, pcbcol,
+    )
+
+    # Thermal interfaces are selectable independently from the heatsink and GPU.
+    thermal_group = make_assembly(
+        "Thermal interface materials | proxy", "cooling.thermal_interface",
+        (CARD_LENGTH / 2, -6.0, CARD_HEIGHT / 2), cool, parent=cooling_group,
+    )
+    paste = cube(
+        "GPU thermal compound proxy", "cooling.thermal_paste.gpu",
+        (CARD_LENGTH * 0.48, -5.0, CARD_HEIGHT * 0.52),
+        (19.0, 0.35, 19.0), MAT["copper"], cool,
+    )
+    set_parent_keep_world(paste, thermal_group)
+
+    memory_pad_group = make_assembly(
+        "Memory thermal pad group | proxy", "cooling.thermal_pad.memory",
+        (CARD_LENGTH * 0.55, -5.8, CARD_HEIGHT * 0.52),
+        cool, parent=thermal_group,
+    )
+    for pad_index, (pad_x, pad_z) in enumerate(memory_centres, start=1):
+        make_detail_box(
+            f"Memory pad proxy {pad_index}",
+            (pad_x, -5.6, pad_z), (15.0, 0.65, 13.0),
+            MAT["heatsink"], memory_pad_group, cool,
+        )
+
+    vrm_pad_group = make_assembly(
+        "Power-stage thermal pad group | proxy", "cooling.thermal_pad.vrm",
+        (stage_origin[0], -5.8, stage_origin[2]), cool, parent=thermal_group,
+    )
+    make_detail_box(
+        "Power-stage thermal pad strip proxy",
+        (stage_origin[0] + 9.0, -5.6, stage_origin[2] + 4.0),
+        (34.0, 0.65, 18.0), MAT["heatsink"], vrm_pad_group, cool,
+    )
+
+    # Fasteners are individually selectable. Count/layout remain candidates,
+    # not an exact-SKU service specification or an authored removal sequence.
+    fasteners_group = make_assembly(
+        "Cooler fastener set | candidate", "assembly.fasteners",
+        (CARD_LENGTH / 2, half_y + 0.5, CARD_HEIGHT / 2),
+        ext, parent=card_root,
+    )
+    screw_positions = (
+        (12.0, 9.0), (12.0, 101.0),
+        (55.0, 10.0), (55.0, 101.0),
+        (120.0, 10.0), (120.0, 101.0),
+        (190.0, 9.0), (190.0, 101.0),
+    )
+    for screw_index, (sx, sz) in enumerate(screw_positions, start=1):
+        screw_id = "fastener.cooler.{:02d}".format(screw_index)
+        screw_group = make_assembly(
+            "Cooler screw candidate {:02d}".format(screw_index), screw_id,
+            (sx, half_y + 0.45, sz), ext, parent=fasteners_group,
+        )
+        make_detail_cylinder(
+            "Cooler screw head proxy {:02d}".format(screw_index),
+            (sx, half_y + 0.65, sz), 2.1, 0.7,
+            MAT["metal"], screw_group, ext, vertices=24,
+        )
+        make_detail_box(
+            "Cooler screw slot proxy {:02d}".format(screw_index),
+            (sx, half_y + 1.02, sz), (1.7, 0.16, 0.35),
+            MAT["connector"], screw_group, ext,
+        )
+
+    # PCIe edge contact field: representative segmented pads, not a pin-count drawing.
+    pcie_group = make_assembly(
+        "PCI Express edge connector | proxy", "pcb.connector.pcie",
+        (CARD_LENGTH / 2, half_y - 2.0, 4.0), pcbcol, parent=pcb,
+    )
+    make_detail_box(
+        "PCIe connector dielectric proxy",
+        (104.0, half_y - 2.0, 4.0), (116.0, 1.0, 8.0),
+        MAT["connector"], pcie_group, pcbcol,
+    )
+    for pad_index in range(64):
+        pad_x = 48.0 + pad_index * 1.75
+        for side, pad_y in (("front", half_y - 2.72), ("rear", half_y - 1.28)):
+            make_detail_box(
+                "PCIe {} contact proxy {:02d}".format(side, pad_index + 1),
+                (pad_x, pad_y, 4.2), (0.95, 0.16, 5.6),
+                MAT["copper"], pcie_group, pcbcol,
+            )
+
+    # Two independently selectable fan cable headers; pinout is intentionally absent.
+    header_positions = ((166.0, 15.0, 88.0), (176.0, 15.0, 88.0))
+    for header_index, (hx, hy, hz) in enumerate(header_positions, start=1):
+        header_group = make_assembly(
+            "Fan header {} | proxy".format(header_index),
+            "connector.fan.header.{}".format(header_index),
+            (hx, hy, hz), pcbcol, parent=pcb_group,
+        )
+        make_detail_box(
+            "Fan header {} socket proxy".format(header_index),
+            (hx, hy - 0.7, hz), (5.0, 2.2, 4.5),
+            MAT["connector"], header_group, pcbcol,
+        )
+        make_detail_box(
+            "Fan header {} cable shroud proxy".format(header_index),
+            (hx, hy - 1.8, hz), (5.8, 0.7, 5.2),
+            MAT["metal"], header_group, pcbcol,
+        )
+
+    # Individual rear I/O receptacles. Apertures are visual proxies, not fitment CAD.
+    port_specs = (
+        ("connector.displayport.1", "DisplayPort receptacle 1", -12.0, 6.8),
+        ("connector.displayport.2", "DisplayPort receptacle 2", -4.0, 6.8),
+        ("connector.displayport.3", "DisplayPort receptacle 3", 4.0, 6.8),
+        ("connector.hdmi.1", "HDMI receptacle 1", 12.0, 5.5),
+    )
+    for port_id, port_name, port_y, width in port_specs:
+        port_group = make_assembly(
+            "{} | proxy".format(port_name), port_id,
+            (1.2, port_y, 55.0), conn, parent=bracket,
+        )
+        make_detail_box(
+            "{} metal shell proxy".format(port_name),
+            (1.15, port_y, 55.0), (3.0, width, 12.0),
+            MAT["metal"], port_group, conn,
+        )
+        make_detail_box(
+            "{} aperture proxy".format(port_name),
+            (0.65, port_y, 55.0), (0.5, width * 0.68, 7.0),
+            MAT["connector"], port_group, conn,
+        )
+
+    # Expose the shunt discussion and generic passives without inventing a VRM topology.
+    shunt_group = make_assembly(
+        "Shunt resistor area | visual proxy", "power.shunt.cluster",
+        (stage_origin[0] - 16.0, half_y - 2.0, stage_origin[2] - 15.0),
+        pcbcol, parent=power_stage_group,
+    )
+    for shunt_index in range(3):
+        make_detail_box(
+            "Shunt resistor candidate {}".format(shunt_index + 1),
+            (stage_origin[0] - 18.0 + shunt_index * 5.0, half_y - 2.0, stage_origin[2] - 15.0),
+            (3.0, 1.2, 2.0), MAT["power_stage"], shunt_group, pcbcol,
+        )
+
+    passives_group = make_assembly(
+        "Unidentified power passives | visual proxy", "power.passives.cluster",
+        (stage_origin[0] + 15.0, half_y - 2.0, stage_origin[2] + 14.0),
+        pcbcol, parent=power_stage_group,
+    )
+    for passive_index in range(6):
+        make_detail_box(
+            "Unidentified passive proxy {}".format(passive_index + 1),
+            (stage_origin[0] + 8.0 + passive_index * 4.5, half_y - 2.0, stage_origin[2] + 14.0),
+            (2.4, 1.2, 2.2), MAT["power_stage"], passives_group, pcbcol,
+        )
+
+    # A clearly marked area identifies the review-described PCB airflow cutout.
+    cutout_group = make_assembly(
+        "PCB airflow cutout area | proxy", "pcb.airflow.cutout",
+        (184.0, half_y - 1.0, 58.0), pcbcol, parent=pcb,
+    )
+    make_detail_box(
+        "PCB airflow cutout marker",
+        (184.0, half_y - 1.2, 58.0), (10.0, 0.35, 15.0),
+        MAT["connector"], cutout_group, pcbcol,
+    )
+
+    # Eight socket recesses are shown as a generic 8-pin connector teaching aid.
+    # This does not document pin assignment, current rating or electrical routing.
+    for socket_index in range(8):
+        socket_x = CARD_LENGTH * 0.72 - 7.5 + (socket_index % 4) * 5.0
+        socket_z = CARD_HEIGHT - 5.0 + (socket_index // 4) * 2.2 - 1.1
+        make_detail_box(
+            "8-pin socket cavity proxy {}".format(socket_index + 1),
+            (socket_x, half_y - 5.25, socket_z), (2.6, 0.35, 1.5),
+            MAT["connector"], power, conn,
+        )
+
     # Scene-level provenance metadata.
     scene["sbs_model_id"] = manifest["model_id"]
     scene["sbs_asset_type"] = "blockout"

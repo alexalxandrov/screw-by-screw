@@ -164,3 +164,16 @@ Consequences for the blockout:
 LanOC also documents the dual-fan shroud, exposed rear PCB/no backplate, vertical heatsink fin orientation, copper GPU/memory contact plate, heatpipes, 8-pin power connector, and 3 DisplayPort + 1 HDMI output layout. These are useful exact-XC-Black topology cues, but the article's photographs remain copyrighted and are not automatically reusable.
 
 A separate [TweakTown XC BLACK review](https://www.tweaktown.com/reviews/9754/evga-geforce-rtx-3060-xc-black-gaming/index.html) provides another exact-model visual reference set (59-image gallery according to the indexed page). Its images are research references only until reuse rights are cleared.
+
+ 
+## 12. PCB marking and schematic leads — candidate only
+
+A TechPowerUp image on the EVGA RTX 3060 XC BLACK product page appears to show the board silkscreen **EVGA232 REV 1.0**. This is a useful discriminator for further research, but the image's sample-to-retail-SKU provenance and the exact board revision of the selected 12G-P5-3655-KR have not been independently verified. The package therefore keeps pcb_revision unknown. The observation is registered as a candidate source, not promoted to a board identity claim.
+
+A separately indexed document title includes **EVGA232 / PG190-A02 / GA104-GA106**. It is registered only as an unverified schematic lead. Its board applicability, revision, completeness, provenance and reuse rights are unknown. It is not used to create phase counts, component values, power routes, pin maps or PCB geometry, and it must not be redistributed from this repository.
+
+### Deep-detail geometry tranche
+
+The v0.6 development branch adds selectable visual placeholders for the GA106 die area, thermal-interface groups, candidate cooler fasteners, PCIe edge interface, two fan headers, individual display receptacles, shunt-resistor area, generic passives and the review-described PCB airflow-cutout area. The additions remain illustrative_proxy_not_cad. Candidate screw count and positions are not an exact-SKU service specification; memory/VRM pad dimensions, fan header pinout, PCIe contact field, port shell geometry and cutout boundary are not metrology data.
+
+No complete BoardView, exact-revision schematic, BOM, native STEP assembly or measured board coordinates have been obtained. The new geometry is for interactive education and navigation only.
