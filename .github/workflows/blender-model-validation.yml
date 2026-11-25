@@ -83,6 +83,8 @@ jobs:
           python tools/content/validate_glb_bindings.py \
             --components content/models/evga-rtx3060-xc-black-12gb/components.json \
             --glb MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v05.glb
+      - name: Build verified content release manifest
+        run: python tools/content/build_release_manifest.py content/models/evga-rtx3060-xc-black-12gb
       - name: Build portable SBS model package
         run: |
           mkdir -p artifacts
@@ -130,11 +132,11 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html
+          git add index.html content/models/evga-rtx3060-xc-black-12gb/release.json
           if git diff --cached --quiet; then
             echo "Standalone root launcher is already current"
           else
-            git commit -m "build: refresh standalone root index.html"
+            git commit -m "build: refresh standalone viewer and content manifest"
             git push origin "HEAD:${TARGET_BRANCH}"
           fi
       - name: Collect generated artifacts

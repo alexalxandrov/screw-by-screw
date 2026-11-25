@@ -1,9 +1,71 @@
 {
   "schema_version": "0.1.0",
   "device_model_id": "gpu.evga.12g-p5-3655-kr",
-  "status": "viewer_procedural_effects",
-  "policy": "No repair or mechanical service clip is published until its movement sequence, target components and exact hardware revision are reviewed. Viewer-only operating effects are educational and do not claim measured rpm, CFD or electrical simulation.",
-  "clips": [],
+  "status": "educational_clip_available",
+  "policy": "The impeller profile and blade count are visual proxies. The demonstration clip performs one visual revolution in 3.2 seconds; this duration is only a playback choice and is not a measured RPM or operating-speed claim. No repair or service sequence is published until a complete exact-revision procedure is reviewed.",
+  "clips": [
+    {
+      "id": "clip.fan-impeller-visual-turn",
+      "title": {
+        "en": "Impeller rotation demonstration",
+        "ru": "Демонстрация вращения крыльчатки"
+      },
+      "evidence_status": "educational_approximation",
+      "source_ids": [],
+      "duration_ms": 3200,
+      "easing": "linear",
+      "description": {
+        "en": "One visual revolution of the two proxy impellers over 3.2 seconds. Playback time is illustrative and must not be read as measured RPM.",
+        "ru": "Один визуальный оборот двух условных крыльчаток за 3,2 секунды. Время воспроизведения иллюстративно и не является измеренным значением RPM."
+      },
+      "tracks": [
+        {
+          "target_id": "assembly.fan.1.rotor",
+          "property": "rotation",
+          "keyframes": [
+            {
+              "t": 0,
+              "value": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "t": 1,
+              "value": [
+                0,
+                6.283185307179586,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "target_id": "assembly.fan.2.rotor",
+          "property": "rotation",
+          "keyframes": [
+            {
+              "t": 0,
+              "value": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "t": 1,
+              "value": [
+                0,
+                6.283185307179586,
+                0
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "viewer_effects": [
     {
       "id": "effect.fan.rotation",

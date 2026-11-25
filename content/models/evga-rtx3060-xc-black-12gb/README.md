@@ -23,3 +23,8 @@ The manifest builder hashes every JSON content file. The validator checks SHA-25
 - The 24 heatsink fins in the current model are illustrative proxies, not a measured fin count.
 - Assembly steps remain intentionally empty until the teardown is reviewed in sufficient detail to support an actual sequence.
 - No third-party images or video frames are redistributed in this package.
+
+
+## Fan rotor animation
+
+The content model exposes two illustrative rotor pivot components as children of the fan assemblies. The generated GLB and local fallback scene keep each annular frame and hub static while only the separate impeller node rotates. One educational clip demonstrates a single visual revolution over 3.2 seconds. The duration is a playback choice, not measured RPM; blade profile and blade count remain proxies. The package release manifest includes animations.json in its SHA-256 file set.

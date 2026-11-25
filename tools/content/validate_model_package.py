@@ -7,10 +7,11 @@ import json
 import re
 import sys
 from pathlib import Path
+import math
 
 FILES = ("model.json", "sources.json", "components.json", "relationships.json",
          "process_layers.json", "assembly_steps.json", "learning.json",
-         "claims.json", "release.json")
+         "claims.json", "animations.json", "release.json")
 HASHED_FILES = FILES[:-1]
 EVIDENCE = {"manufacturer_data", "reviewer_measurement", "visible_exact_model",
             "teardown_supported", "illustrative",
@@ -105,6 +106,70 @@ def _validate_release(release: dict, model: dict, package_dir: Path | None) -> N
                 raise PackageError(f"SHA-256 mismatch for {name}")
 
 
+
+def _validate_animation_clips(clips: list, component_ids: set[str], source_ids: set[str]) -> None:
+    allowed_evidence = {"documented_motion", "measured_motion", "illustrative", "educational_approximation"}
+    allowed_properties = {"position", "rotation", "scale", "visible"}
+    for clip in clips:
+        title = clip.get("title")
+        if not (isinstance(title, str) and title.strip()) and not (
+            isinstance(title, dict) and any(
+                isinstance(title.get(lang), str) and title[lang].strip() for lang in ("en", "ru")
+            )
+        ):
+            raise PackageError(f"Animation clip {clip['id']} needs a readable title")
+        evidence = clip.get("evidence_status")
+        if evidence not in allowed_evidence:
+            raise PackageError(f"Animation clip {clip['id']} has invalid evidence_status")
+        require_source_ids(clip.get("source_ids"), source_ids, f"animation clip {clip['id']}")
+        if not clip["source_ids"] and evidence not in {"illustrative", "educational_approximation"}:
+            raise PackageError(f"Animation clip {clip['id']} requires source provenance unless explicitly illustrative")
+        duration = clip.get("duration_ms")
+        if isinstance(duration, bool) or not isinstance(duration, (int, float)) or not math.isfinite(duration) or not 0 < duration <= 600000:
+            raise PackageError(f"Animation clip {clip['id']} has invalid duration_ms")
+        if clip.get("easing", "linear") not in {"linear", "ease_in_out"}:
+            raise PackageError(f"Animation clip {clip['id']} has unsupported easing")
+        tracks = clip.get("tracks")
+        if not isinstance(tracks, list) or not tracks:
+            raise PackageError(f"Animation clip {clip['id']} must contain at least one track")
+        track_keys = set()
+        for track in tracks:
+            if not isinstance(track, dict):
+                raise PackageError(f"Animation clip {clip['id']} track must be an object")
+            target = track.get("target_id")
+            if target not in component_ids:
+                raise PackageError(f"Animation clip {clip['id']} has unknown target component: {target}")
+            prop = track.get("property")
+            if prop not in allowed_properties:
+                raise PackageError(f"Animation clip {clip['id']} has unsupported property: {prop}")
+            key = (target, prop)
+            if key in track_keys:
+                raise PackageError(f"Animation clip {clip['id']} has duplicate target/property track: {target}/{prop}")
+            track_keys.add(key)
+            frames = track.get("keyframes")
+            if not isinstance(frames, list) or len(frames) < 2:
+                raise PackageError(f"Animation clip {clip['id']} track needs at least two keyframes")
+            previous = -1.0
+            for frame in frames:
+                if not isinstance(frame, dict):
+                    raise PackageError(f"Animation clip {clip['id']} keyframe must be an object")
+                time = frame.get("t")
+                if isinstance(time, bool) or not isinstance(time, (int, float)) or not math.isfinite(time) or not 0 <= time <= 1 or time <= previous:
+                    raise PackageError(f"Animation clip {clip['id']} keyframe times must increase from 0 to 1")
+                previous = time
+                value = frame.get("value")
+                if prop == "visible":
+                    if not isinstance(value, bool):
+                        raise PackageError(f"Animation clip {clip['id']} visibility keyframes must be boolean")
+                elif not isinstance(value, list) or len(value) != 3 or any(
+                    isinstance(item, bool) or not isinstance(item, (int, float)) or not math.isfinite(item)
+                    for item in value
+                ):
+                    raise PackageError(f"Animation clip {clip['id']} vector keyframes must contain three finite numbers")
+            if frames[0]["t"] != 0 or frames[-1]["t"] != 1:
+                raise PackageError(f"Animation clip {clip['id']} tracks must cover normalized time 0..1")
+
+
 def validate_package(package: dict, package_dir: Path | None = None) -> list[str]:
     model = package["model"]
     sources_doc = package["sources"]
@@ -114,6 +179,7 @@ def validate_package(package: dict, package_dir: Path | None = None) -> list[str
     steps_doc = package["assembly_steps"]
     learning_doc = package["learning"]
     claims_doc = package["claims"]
+    animations_doc = package["animations"]
     release_doc = package["release"]
     if not isinstance(model, dict) or not isinstance(model.get("id"), str):
         raise PackageError("model.json must define a model id")
@@ -127,9 +193,11 @@ def validate_package(package: dict, package_dir: Path | None = None) -> list[str
     steps = steps_doc.get("steps") if isinstance(steps_doc, dict) else None
     questions = learning_doc.get("questions") if isinstance(learning_doc, dict) else None
     claims = claims_doc.get("claims") if isinstance(claims_doc, dict) else None
+    animations = animations_doc.get("clips") if isinstance(animations_doc, dict) else None
     for value, label in ((sources, "sources"), (components, "components"),
                          (relationships, "relationships"), (layers, "process_layers"),
-                         (steps, "steps"), (questions, "questions"), (claims, "claims")):
+                         (steps, "steps"), (questions, "questions"), (claims, "claims"),
+                         (animations, "animation clips")):
         if not isinstance(value, list):
             raise PackageError(f"{label} must be an array")
 
@@ -139,6 +207,7 @@ def validate_package(package: dict, package_dir: Path | None = None) -> list[str
     layer_ids = unique_ids(layers, "id", "process_layers")
     question_ids = unique_ids(questions, "id", "questions")
     claim_ids = unique_ids(claims, "id", "claims")
+    animation_ids = unique_ids(animations, "id", "animation clips")
     require_source_ids(model.get("source_ids"), source_ids, "model")
     for source in sources:
         if not isinstance(source.get("url"), str) or not source["url"].startswith(("https://", "http://")):
@@ -245,6 +314,7 @@ def validate_package(package: dict, package_dir: Path | None = None) -> list[str
 
     if steps_doc.get("status") == "not_authored" and steps:
         raise PackageError("Assembly steps marked not_authored must have an empty steps array")
+    _validate_animation_clips(animations, component_ids, source_ids)
     _validate_release(release_doc, model, package_dir)
     return [
         f"Sources: {len(source_ids)}",
@@ -254,6 +324,7 @@ def validate_package(package: dict, package_dir: Path | None = None) -> list[str
         f"Process layers: {len(layer_ids)}",
         f"Learning questions: {len(question_ids)}",
         f"Assembly steps: {len(steps)} ({steps_doc.get('status', 'status missing')})",
+        f"Animation clips: {len(animation_ids)}",
         "Bilingual labels and semantic references: PASS",
         "Release manifest and SHA-256 integrity: PASS" if package_dir is not None else "Release manifest structure: PASS",
         "Accuracy status: illustrative proxy, not CAD",
