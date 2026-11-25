@@ -57,3 +57,10 @@ Exploded-view transforms must be reversible and deterministic. The engine captur
 ## Non-goals for this foundation
 
 No server-side file upload, accounts, analytics, cloud conversion, Blender replacement or CAD authoring. Blender remains the editable source for the pilot model; GLB is the browser delivery format.
+
+
+## Authored clip semantics
+
+An authored clip has a stable ID, localized title, duration in milliseconds, evidence status, source IDs or an explicit accuracy note, and one or more tracks. A track targets a stable component ID and animates one local property: position, Euler rotation in radians, scale, or visibility. Vector keyframes contain exactly three finite values. Visibility changes are discrete. Supported easing modes are linear, ease-in, ease-out and ease-in-out.
+
+The runtime interpolates presentation tracks only. It does not run dynamics, collision detection, constraint solving, or a physical simulation. Playback can be paused, resumed, sought, stopped at the first keyframe, or reset to captured base transforms. The RTX 3060 pilot intentionally has no authored clips until a real mechanical sequence has adequate evidence.

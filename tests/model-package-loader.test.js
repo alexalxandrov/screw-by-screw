@@ -221,3 +221,62 @@ test("validates teardown observations separately from assembly steps", () => {
   data.assembly_steps.observations[0].source_id = "missing";
   assert.throws(() => validateModelPackageData(testManifest(), data), /unknown source/);
 });
+
+
+function makeValidAnimationClip(overrides = {}) {
+  return {
+    id: "clip.one",
+    title: { en: "Move the fan", ru: "Переместить вентилятор" },
+    duration_ms: 1200,
+    easing: "ease_in_out",
+    evidence_status: "teardown_supported",
+    source_ids: ["src.one"],
+    tracks: [{
+      target_id: "part",
+      property: "position",
+      keyframes: [{ t: 0, value: [0, 0, 0] }, { t: 1, value: [10, 0, 0] }]
+    }],
+    ...overrides
+  };
+}
+
+test("validates source-backed authored animation clips and vector tracks", () => {
+  const data = makeData({ animations: { clips: [makeValidAnimationClip()] } });
+  assert.doesNotThrow(() => validateModelPackageData(testManifest(), data));
+});
+
+test("rejects animation vector keyframes that are scalar or have an invalid dimension", () => {
+  const scalar = makeValidAnimationClip({
+    tracks: [{ target_id: "part", property: "position", keyframes: [{ t: 0, value: 0 }, { t: 1, value: 10 }] }]
+  });
+  assert.throws(() => validateModelPackageData(testManifest(), makeData({ animations: { clips: [scalar] } })), /exactly three finite numbers/);
+
+  const twoAxis = makeValidAnimationClip({
+    tracks: [{ target_id: "part", property: "rotation", keyframes: [{ t: 0, value: [0, 0] }, { t: 1, value: [0, 1] }] }]
+  });
+  assert.throws(() => validateModelPackageData(testManifest(), makeData({ animations: { clips: [twoAxis] } })), /exactly three finite numbers/);
+});
+
+test("requires animation titles, evidence labels and source provenance or an accuracy note", () => {
+  const missingTitle = makeValidAnimationClip({ title: {} });
+  assert.throws(() => validateModelPackageData(testManifest(), makeData({ animations: { clips: [missingTitle] } })), /title must contain/);
+
+  const missingSource = makeValidAnimationClip({ source_ids: [], accuracy_note: undefined });
+  assert.throws(() => validateModelPackageData(testManifest(), makeData({ animations: { clips: [missingSource] } })), /accuracy_note/);
+
+  const invalidSource = makeValidAnimationClip({ source_ids: ["not.registered"] });
+  assert.throws(() => validateModelPackageData(testManifest(), makeData({ animations: { clips: [invalidSource] } })), /invalid reference/);
+});
+
+test("rejects unsupported easing and duplicate target property tracks", () => {
+  const badEasing = makeValidAnimationClip({ easing: "bounce" });
+  assert.throws(() => validateModelPackageData(testManifest(), makeData({ animations: { clips: [badEasing] } })), /unsupported animation easing/);
+
+  const duplicateTrack = makeValidAnimationClip({
+    tracks: [
+      { target_id: "part", property: "position", keyframes: [{ t: 0, value: [0, 0, 0] }, { t: 1, value: [1, 0, 0] }] },
+      { target_id: "part", property: "position", keyframes: [{ t: 0, value: [0, 0, 0] }, { t: 1, value: [2, 0, 0] }] }
+    ]
+  });
+  assert.throws(() => validateModelPackageData(testManifest(), makeData({ animations: { clips: [duplicateTrack] } })), /duplicate animation target/);
+});
