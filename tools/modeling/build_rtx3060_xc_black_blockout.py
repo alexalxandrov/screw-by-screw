@@ -49,6 +49,7 @@ FAN_BLADE_DEPTH = 1.8
 STATUS = {
     "manufacturer_data": "manufacturer_data",
     "reviewer_measurement": "reviewer_measurement",
+    "teardown_supported": "teardown_supported",
     "illustrative": "illustrative",
     "photo_estimate": "photo_estimate",
 }

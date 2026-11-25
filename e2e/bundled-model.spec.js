@@ -13,6 +13,7 @@ test("loads the generated Blender v0.5 GLB and resolves content-package IDs", as
   expect(modelBytes.byteLength).toBeLessThan(1024 * 1024);
   await expect(page.locator("#app-status")).toHaveText("Модель готова");
   await expect(page.locator("#component-count")).toHaveText("83");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-fan-rotors", "2");
   await expect(page.getByRole("button", { name: /Видеокарта в сборе/ })).toBeVisible();
 
   await page.locator('.process-button[data-layer="cooling"]').click();
@@ -28,7 +29,10 @@ test("loads the generated Blender v0.5 GLB and resolves content-package IDs", as
   });
   await expect(page.locator("#explode-value")).toHaveText("100%");
 
-  await page.locator("#simulation-speed").fill("1.5");
+  await page.locator("#simulation-speed").evaluate((element) => {
+    element.value = "1.5";
+    element.dispatchEvent(new Event("input", { bubbles: true }));
+  });
   await expect(page.locator("#simulation-speed-value")).toHaveText("1.50×");
   await page.locator("#power-toggle").click();
   await expect(page.locator("#power-toggle")).toHaveAttribute("aria-pressed", "true");
@@ -73,6 +77,7 @@ test("opens the self-contained root index.html directly with the embedded Blende
   }));
   await expect(page.locator("#viewer-canvas canvas"), JSON.stringify({ diagnostics, pageErrors, consoleErrors, requestFailures })).toBeVisible({ timeout: 10000 });
   await expect(page.locator("#component-count")).toHaveText("83", { timeout: 15000 });
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-fan-rotors", "2");
   await expect(page.locator("#load-state")).toContainText("ВСТРОЕННАЯ МОДЕЛЬ");
   await page.getByRole("button", { name: /Воздушный поток|Охлаждение/ }).click();
   await expect(page.locator("#process-details")).toBeVisible();
