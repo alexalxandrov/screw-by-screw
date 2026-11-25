@@ -6,7 +6,7 @@ The browser viewer is a reusable runtime, not a GPU-specific page. It loads a se
 
 ## Current baseline
 
-The merged v0.9 application is a working Three.js vertical slice. It supports orbit/zoom/pan, GLB import, component tree, selection, evidence cards, isolate, wireframe, reversible exploded view, qualitative process layers and a bilingual learning panel. It is still a single-page GPU pilot and currently imports GPU content directly in src/main.js.
+The merged v0.9 application is a working Three.js vertical slice. It supports orbit/zoom/pan, GLB import, component tree, selection, evidence cards, isolate, wireframe, reversible exploded view, qualitative process layers and a bilingual learning panel. The v1.0 foundation extracts generic transforms into src/viewer/SceneController.js. GPU metadata remains supplied by a package adapter, while the scene controller has no GPU-specific dependencies.
 
 ## Target package contract
 
@@ -48,9 +48,9 @@ Exploded-view transforms must be reversible and deterministic. The engine captur
 
 ## Viewer integration milestones
 
-- Engine foundation: extract generic scene operations from the RTX-specific page; add deterministic tests for component indexing, explode/reassemble, isolation and restoration.
-- Package loader: move GLB and JSON validation into a reusable package loader; verify cross-file references before rendering.
-- Animation runtime: add package-authored clips, playback, pause, seek and cancellation.
+- Engine foundation: implemented reusable component indexing, reversible explode/reassemble, visibility-safe isolation, reset and generic rotation/explode animation primitives; Node unit tests cover the deterministic transform paths.
+- Package loader: next; move GLB and JSON validation into a reusable package loader and verify cross-file references before rendering.
+- Animation runtime: current UI demonstrates a reversible explode animation; package-authored clips, pause, seek and animation-track validation remain next.
 - Model catalogue: discover packages through a static catalogue manifest first; no backend is required for a local-first viewer.
 - Site integration: mount the same viewer runtime in a model detail route; do not duplicate Three.js scene logic in the catalogue UI.
 
