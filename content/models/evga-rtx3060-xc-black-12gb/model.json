@@ -46,7 +46,15 @@
         "src.evga.spec",
         "src.lanoc.review"
       ],
-      "notes": "LanOC reports the shroud extends slightly beyond nominal 201.8 mm length; exact overhang is not quantified."
+      "notes": "LanOC reports the shroud extends slightly beyond nominal 201.8 mm length; exact overhang is not quantified.",
+      "backplate": {
+        "value": false,
+        "source_ids": [
+          "src.fpsreview.exact_sku",
+          "src.wccftech.exact_model"
+        ],
+        "evidence_status": "reviewer_observation"
+      }
     },
     "cooling": {
       "fan_count": 2,
@@ -54,8 +62,29 @@
       "fan_impeller_diameter_mm": 85,
       "diameter_evidence": "reviewer_measurement_approximate",
       "source_ids": [
-        "src.lanoc.review"
-      ]
+        "src.lanoc.review",
+        "src.fpsreview.exact_sku",
+        "src.evga.xc.article"
+      ],
+      "heatpipe_count": 6,
+      "heatpipe_layout": {
+        "central": 4,
+        "lateral": 2,
+        "source_ids": [
+          "src.fpsreview.exact_sku"
+        ],
+        "evidence_status": "reviewer_observation",
+        "note": "The exact-SKU review describes four central pipes contacting the GPU and two lateral pipes spreading heat. The 3D routes remain photo-estimated."
+      },
+      "air_through_pcb": {
+        "value": true,
+        "source_ids": [
+          "src.fpsreview.exact_sku",
+          "src.evga.xc.article"
+        ],
+        "evidence_status": "manufacturer_and_reviewer_observation",
+        "geometry_status": "photo_estimate"
+      }
     },
     "power_connector": "single 8-pin",
     "display_outputs": {
@@ -71,7 +100,10 @@
     "src.evga.spec",
     "src.lanoc.review",
     "src.gamersnexus.teardown",
-    "src.neoseeker.review"
+    "src.neoseeker.review",
+    "src.fpsreview.exact_sku",
+    "src.evga.xc.article",
+    "src.wccftech.exact_model"
   ],
   "release": {
     "version": "0.1-draft",

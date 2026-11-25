@@ -157,14 +157,16 @@
         "ru": "Печатная плата"
       },
       "category": "electrical_mechanical",
-      "evidence_status": "visible_exact_model",
-      "geometry_status": "illustrative_proxy",
+      "evidence_status": "photo_estimate",
+      "geometry_status": "photo_estimated_proxy",
       "source_ids": [
-        "src.lanoc.review"
+        "src.lanoc.review",
+        "src.fpsreview.exact_sku",
+        "src.evga.xc.article"
       ],
       "description": {
-        "en": "PCB outline proxy. The exact silkscreen identifier and revision remain unknown.",
-        "ru": "Прокси контура PCB. Точный идентификатор маркировки и ревизия пока неизвестны."
+        "en": "Exposed PCB proxy with a photo-estimated rear air-through notch reported for this exact SKU. The cutout's contour and dimensions are not measured.",
+        "ru": "Открытая PCB с условным вырезом для сквозного воздушного потока, показанным в обзоре точного SKU. Контур и размеры выреза не измерены."
       }
     },
     {
@@ -367,6 +369,190 @@
       "description": {
         "en": "Candidate package proxy. Exact population and position require confirmation against the correct PCB revision.",
         "ru": "Прокси-кандидат компонента. Количество и положение требуют подтверждения по правильной ревизии PCB."
+      }
+    },
+    {
+      "id": "assembly.fan.1.rotor",
+      "parent_id": "assembly.fan.1",
+      "name": {
+        "en": "Fan 1 rotor",
+        "ru": "Ротор вентилятора 1"
+      },
+      "category": "thermal_mechanical",
+      "evidence_status": "illustrative",
+      "geometry_status": "animated_assembly_node",
+      "source_ids": [
+        "src.lanoc.review",
+        "src.gamersnexus.teardown"
+      ],
+      "description": {
+        "en": "Rotating hub and blade group. Rotation is an operating-mode visual, not a measured RPM or fan-controller model.",
+        "ru": "Вращающаяся группа ступицы и лопастей. Вращение — визуальный режим, а не измеренные обороты или модель контроллера вентилятора."
+      }
+    },
+    {
+      "id": "assembly.fan.2.rotor",
+      "parent_id": "assembly.fan.2",
+      "name": {
+        "en": "Fan 2 rotor",
+        "ru": "Ротор вентилятора 2"
+      },
+      "category": "thermal_mechanical",
+      "evidence_status": "illustrative",
+      "geometry_status": "animated_assembly_node",
+      "source_ids": [
+        "src.lanoc.review",
+        "src.gamersnexus.teardown"
+      ],
+      "description": {
+        "en": "Rotating hub and blade group. Rotation is an operating-mode visual, not a measured RPM or fan-controller model.",
+        "ru": "Вращающаяся группа ступицы и лопастей. Вращение — визуальный режим, а не измеренные обороты или модель контроллера вентилятора."
+      }
+    },
+    {
+      "id": "cooling.heatpipes",
+      "parent_id": "assembly.cooling",
+      "name": {
+        "en": "Heatpipe assembly",
+        "ru": "Сборка тепловых трубок"
+      },
+      "category": "thermal_mechanical",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.lanoc.review",
+        "src.gamersnexus.teardown",
+        "src.fpsreview.exact_sku"
+      ],
+      "description": {
+        "en": "Six heatpipe routes are represented as photo-estimated proxies: four central and two lateral, following an exact-SKU review description. The exact routing, diameter, bend radii and contact geometry are not measured.",
+        "ru": "Шесть трасс тепловых трубок показаны как реконструкция по фотографиям: четыре центральные и две боковые, согласно обзору точного SKU. Точные трассы, диаметры, радиусы изгиба и геометрия контакта не измерены."
+      }
+    },
+    {
+      "id": "assembly.power_stage",
+      "parent_id": "assembly.pcb.electronics",
+      "name": {
+        "en": "Power conversion zone",
+        "ru": "Зона преобразования питания"
+      },
+      "category": "power_electronics",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [],
+      "description": {
+        "en": "Unnumbered proxy group locating the board-level power-conversion area. PCB revision, phase topology, component positions and electrical nets are not verified.",
+        "ru": "Условная группа, обозначающая зону преобразования питания на плате. Ревизия PCB, топология фаз, координаты компонентов и электрические цепи не подтверждены."
+      }
+    },
+    {
+      "id": "cooling.heatpipes.route.1",
+      "parent_id": "cooling.heatpipes",
+      "name": {
+        "en": "Heatpipe route 1 · proxy",
+        "ru": "Трасса тепловой трубки 1 · схема"
+      },
+      "category": "thermal_mechanical",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.lanoc.review",
+        "src.gamersnexus.teardown"
+      ],
+      "description": {
+        "en": "A visual route reconstructed from teardown imagery. Exact path, count, diameter and internal contact are not measured.",
+        "ru": "Визуальная трасса, реконструированная по фотографиям разборки. Точный маршрут, количество, диаметр и внутренний контакт не измерены."
+      }
+    },
+    {
+      "id": "cooling.heatpipes.route.2",
+      "parent_id": "cooling.heatpipes",
+      "name": {
+        "en": "Heatpipe route 2 · proxy",
+        "ru": "Трасса тепловой трубки 2 · схема"
+      },
+      "category": "thermal_mechanical",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.lanoc.review",
+        "src.gamersnexus.teardown"
+      ],
+      "description": {
+        "en": "A visual route reconstructed from teardown imagery. Exact path, count, diameter and internal contact are not measured.",
+        "ru": "Визуальная трасса, реконструированная по фотографиям разборки. Точный маршрут, количество, диаметр и внутренний контакт не измерены."
+      }
+    },
+    {
+      "id": "cooling.heatpipes.route.3",
+      "parent_id": "cooling.heatpipes",
+      "name": {
+        "en": "Heatpipe route 3 · proxy",
+        "ru": "Трасса тепловой трубки 3 · схема"
+      },
+      "category": "thermal_mechanical",
+      "evidence_status": "illustrative",
+      "geometry_status": "photo_estimated_proxy",
+      "source_ids": [
+        "src.fpsreview.exact_sku"
+      ],
+      "description": {
+        "en": "One of six visual heatpipe routes. The exact-SKU review reports four central pipes and two lateral pipes; this individual route is a photo-estimated reconstruction, not measured CAD.",
+        "ru": "Одна из шести визуальных трасс тепловых трубок. В обзоре точного SKU указаны четыре центральные и две боковые трубки; конкретная трасса реконструирована по фотографиям и не является измеренной CAD-геометрией."
+      }
+    },
+    {
+      "id": "cooling.heatpipes.route.4",
+      "parent_id": "cooling.heatpipes",
+      "name": {
+        "en": "Heatpipe route 4 · proxy",
+        "ru": "Трасса тепловой трубки 4 · схема"
+      },
+      "category": "thermal_mechanical",
+      "evidence_status": "illustrative",
+      "geometry_status": "photo_estimated_proxy",
+      "source_ids": [
+        "src.fpsreview.exact_sku"
+      ],
+      "description": {
+        "en": "One of six visual heatpipe routes. The exact-SKU review reports four central pipes and two lateral pipes; this individual route is a photo-estimated reconstruction, not measured CAD.",
+        "ru": "Одна из шести визуальных трасс тепловых трубок. В обзоре точного SKU указаны четыре центральные и две боковые трубки; конкретная трасса реконструирована по фотографиям и не является измеренной CAD-геометрией."
+      }
+    },
+    {
+      "id": "cooling.heatpipes.route.5",
+      "parent_id": "cooling.heatpipes",
+      "name": {
+        "en": "Heatpipe route 5 · proxy",
+        "ru": "Трасса тепловой трубки 5 · схема"
+      },
+      "category": "thermal_mechanical",
+      "evidence_status": "illustrative",
+      "geometry_status": "photo_estimated_proxy",
+      "source_ids": [
+        "src.fpsreview.exact_sku"
+      ],
+      "description": {
+        "en": "One of six visual heatpipe routes. The exact-SKU review reports four central pipes and two lateral pipes; this individual route is a photo-estimated reconstruction, not measured CAD.",
+        "ru": "Одна из шести визуальных трасс тепловых трубок. В обзоре точного SKU указаны четыре центральные и две боковые трубки; конкретная трасса реконструирована по фотографиям и не является измеренной CAD-геометрией."
+      }
+    },
+    {
+      "id": "cooling.heatpipes.route.6",
+      "parent_id": "cooling.heatpipes",
+      "name": {
+        "en": "Heatpipe route 6 · proxy",
+        "ru": "Трасса тепловой трубки 6 · схема"
+      },
+      "category": "thermal_mechanical",
+      "evidence_status": "illustrative",
+      "geometry_status": "photo_estimated_proxy",
+      "source_ids": [
+        "src.fpsreview.exact_sku"
+      ],
+      "description": {
+        "en": "One of six visual heatpipe routes. The exact-SKU review reports four central pipes and two lateral pipes; this individual route is a photo-estimated reconstruction, not measured CAD.",
+        "ru": "Одна из шести визуальных трасс тепловых трубок. В обзоре точного SKU указаны четыре центральные и две боковые трубки; конкретная трасса реконструирована по фотографиям и не является измеренной CAD-геометрией."
       }
     }
   ],

@@ -43,7 +43,13 @@ const state = {
   learningAnswered: false,
   learningComplete: false,
   modelWarnings: [],
-  modelRevision: 0
+  modelRevision: 0,
+  powered: false,
+  simulationSpeed: 1,
+  reducedMotion: false,
+  fanRotors: [],
+  processVisuals: null,
+  flowParticles: []
 };
 
 const MAX_GLB_BYTES = MAX_SCENE_GLB_BYTES;
@@ -57,6 +63,7 @@ const UI = {
     assemblyState: "ASSEMBLY STATE", assemble: "Assemble", explode: "Explode",
     assembled: "ASSEMBLED", exploded: "EXPLODED", processLayers: "PROCESS LAYERS",
     qualitativeOnly: "QUALITATIVE ONLY", cooling: "Cooling", powerDelivery: "Power delivery",
+    powerOn: "Power on", powerOff: "Power off", operatingState: "POWERED · RUNNING", simulationSpeed: "Animation speed",
     clearLayer: "Clear layer", inspection: "INSPECTION", componentDetails: "Component details",
     selectComponent: "Select a component", selectHint: "Choose a part in the 3D view or assembly tree to inspect its role and evidence.",
     identity: "IDENTITY", parent: "Parent", geometry: "Geometry", evidence: "EVIDENCE",
@@ -78,6 +85,7 @@ const UI = {
     assemblyState: "СОСТОЯНИЕ СБОРКИ", assemble: "Собрать", explode: "Разобрать",
     assembled: "СОБРАНО", exploded: "РАЗОБРАНО", processLayers: "СЛОИ ПРОЦЕССОВ",
     qualitativeOnly: "КАЧЕСТВЕННО", cooling: "Охлаждение", powerDelivery: "Питание",
+    powerOn: "Включить питание", powerOff: "Выключить питание", operatingState: "ПИТАНИЕ ВКЛЮЧЕНО · РАБОТА", simulationSpeed: "Скорость анимации",
     clearLayer: "Сбросить слой", inspection: "ИНСПЕКЦИЯ", componentDetails: "Карточка компонента",
     selectComponent: "Выберите компонент", selectHint: "Выберите деталь в 3D-окне или дереве сборки, чтобы изучить её назначение и источники.",
     identity: "ИДЕНТИФИКАЦИЯ", parent: "Родитель", geometry: "Геометрия", evidence: "ДОКАЗАТЕЛЬНОСТЬ",
@@ -107,6 +115,9 @@ function applyLanguage() {
     node.placeholder = t(node.dataset.i18nPlaceholder);
   });
   renderTree();
+  const powerToggle = $("#power-toggle");
+  if (powerToggle) powerToggle.textContent = t(state.powered ? "powerOff" : "powerOn");
+  if (state.powered) $("#model-state").textContent = t("operatingState");
   if (state.activeLayer) renderProcessLayer();
   else if (state.learningMode) renderLearning();
   else if (state.selectedId) renderDetails(state.selectedId);
@@ -151,9 +162,15 @@ function createBladeGeometry() {
 
 function createFan(parent, index, x) {
   const fan = makeGroup(parent, `assembly.fan.${index}`, `Fan ${index} assembly`, [x, -19.5, 56]);
-  const fanPlane = new THREE.Group();
-  fanPlane.rotation.x = Math.PI / 2;
-  fan.add(fanPlane);
+  const framePlane = new THREE.Group();
+  framePlane.rotation.x = Math.PI / 2;
+  fan.add(framePlane);
+  const rotorGroup = makeGroup(fan, `assembly.fan.${index}.rotor`, `Fan ${index} rotor`);
+  const rotorPlane = new THREE.Group();
+  rotorPlane.rotation.x = Math.PI / 2;
+  rotorPlane.userData.sbs_rotor = true;
+  rotorPlane.userData.sbs_rotor_axis = "z";
+  rotorGroup.add(rotorPlane);
 
   const ring = new THREE.Mesh(
     new THREE.TorusGeometry(43.5, 2.2, 10, 72),
@@ -161,7 +178,7 @@ function createFan(parent, index, x) {
   );
   ring.name = `Fan ${index} annular frame`;
   tag(ring, `fan.${index}.frame`, "reviewer_measurement", "proxy");
-  fanPlane.add(ring);
+  framePlane.add(ring);
 
   const hub = new THREE.Mesh(
     new THREE.CylinderGeometry(13, 13, 4, 48),
@@ -170,7 +187,7 @@ function createFan(parent, index, x) {
   hub.rotation.x = Math.PI / 2;
   hub.name = `Fan ${index} hub`;
   tag(hub, `fan.${index}.hub`);
-  fanPlane.add(hub);
+  rotorPlane.add(hub);
 
   for (let blade = 0; blade < 7; blade += 1) {
     const bladeMesh = new THREE.Mesh(
@@ -180,7 +197,7 @@ function createFan(parent, index, x) {
     bladeMesh.rotation.z = (Math.PI * 2 * blade) / 7;
     bladeMesh.name = `Fan ${index} blade ${blade + 1}`;
     tag(bladeMesh, `fan.${index}.blade.${blade + 1}`);
-    fanPlane.add(bladeMesh);
+    rotorPlane.add(bladeMesh);
   }
 }
 
@@ -204,8 +221,26 @@ function createFallbackModel() {
   const pcbAssembly = makeGroup(root, "assembly.pcb.electronics", "PCB and electronics assembly");
   const connectors = makeGroup(root, "assembly.connectors", "Connectors assembly");
 
-  makeMesh(pcbAssembly, "assembly.pcb.board", "Exposed PCB proxy",
-    new THREE.BoxGeometry(178, 1.6, 85), materials.pcb, [101, 16.5, 55], "visible_exact_model");
+  const pcbShape = new THREE.Shape();
+  pcbShape.moveTo(-89, -42.5);
+  pcbShape.lineTo(89, -42.5);
+  pcbShape.lineTo(89, -18);
+  pcbShape.lineTo(60, -18);
+  pcbShape.lineTo(60, 18);
+  pcbShape.lineTo(89, 18);
+  pcbShape.lineTo(89, 42.5);
+  pcbShape.lineTo(-89, 42.5);
+  pcbShape.closePath();
+  const pcbGeometry = new THREE.ExtrudeGeometry(pcbShape, { depth: 1.6, bevelEnabled: false });
+  pcbGeometry.translate(0, 0, -0.8);
+  pcbGeometry.rotateX(Math.PI / 2);
+  const pcbBoard = new THREE.Mesh(pcbGeometry, materials.pcb);
+  pcbBoard.position.set(101, 16.5, 55);
+  pcbBoard.name = "Exposed PCB proxy with photo-estimated air-through notch";
+  pcbBoard.castShadow = true;
+  pcbBoard.receiveShadow = true;
+  tag(pcbBoard, "assembly.pcb.board", "photo_estimate", "illustrative_proxy");
+  pcbAssembly.add(pcbBoard);
 
   const fasciaY = -16;
   const rails = [
@@ -234,6 +269,24 @@ function createFallbackModel() {
   makeMesh(cooling, "cooling.gpu_contact", "Copper GPU contact proxy",
     new THREE.BoxGeometry(48, 3, 42), materials.copper, [97, -3, 57]);
 
+  const heatpipes = makeGroup(cooling, "cooling.heatpipes", "Heatpipe group · illustrative");
+  heatpipes.userData.sbs_evidence_status = "illustrative";
+  heatpipes.userData.sbs_geometry_status = "illustrative_proxy";
+  const heatpipePaths = [
+    [[80, -4, 57], [76, -3, 61], [70, -1.5, 64], [63, -0.5, 66], [56, 0, 67]],
+    [[86, -4, 57], [84, -3, 61], [80, -1.5, 64], [75, -0.5, 66], [70, 0, 67]],
+    [[108, -4, 57], [112, -3, 61], [118, -1.5, 64], [125, -0.5, 66], [132, 0, 67]],
+    [[114, -4, 57], [120, -3, 61], [128, -1.5, 64], [136, -0.5, 66], [144, 0, 67]],
+    [[76, -3, 57], [63, -2, 55], [49, -0.5, 54], [38, 0, 55]],
+    [[118, -3, 57], [135, -2, 55], [151, -0.5, 54], [164, 0, 55]]
+  ];
+  heatpipePaths.forEach((path, index) => {
+    const curve = new THREE.CatmullRomCurve3(path.map((point) => new THREE.Vector3(...point)));
+    const pipe = new THREE.Mesh(new THREE.TubeGeometry(curve, 40, 1.6, 8, false), materials.copper);
+    pipe.name = `Illustrative heatpipe route ${index + 1}`;
+    heatpipes.add(pipe);
+  });
+
   makeMesh(pcbAssembly, "chip.gpu.ga106", "GPU package proxy",
     new THREE.BoxGeometry(40, 5, 40), materials.chip, [97, 14, 57], "teardown_supported");
   for (let index = 0; index < 6; index += 1) {
@@ -241,6 +294,9 @@ function createFallbackModel() {
       new THREE.BoxGeometry(14, 4, 12), materials.memory,
       [50 + index * 16, 14, 57]);
   }
+
+  makeMesh(pcbAssembly, "assembly.power_stage", "Power conversion zone · illustrative proxy",
+    new THREE.BoxGeometry(35, 5, 22), materials.chip, [145, 13.5, 78], "illustrative");
 
   makeMesh(connectors, "connector.power.8pin", "8-pin power connector proxy",
     new THREE.BoxGeometry(22, 8, 10), materials.chip, [145, 16, 105], "manufacturer_data");
@@ -635,6 +691,149 @@ function setIsolated(isolate) {
   setStatus(state.isolated ? t("isolate") : t("allVisible"));
 }
 
+function disposeProcessVisuals() {
+  if (state.processVisuals) {
+    state.scene?.remove(state.processVisuals);
+    state.processVisuals.traverse((object) => {
+      object.geometry?.dispose();
+      const materials = Array.isArray(object.material) ? object.material : [object.material];
+      materials.filter(Boolean).forEach((material) => material.dispose());
+    });
+  }
+  state.processVisuals = null;
+  state.flowParticles = [];
+  if (canvasHost) canvasHost.dataset.processVisuals = "none";
+}
+
+function addProcessPath(points, color, options = {}) {
+  if (!state.processVisuals || points.length < 2) return;
+  const { count = 5, radius = 0.6, speed = 0.16 } = options;
+  const curve = new THREE.CatmullRomCurve3(points);
+  const line = new THREE.Mesh(
+    new THREE.TubeGeometry(curve, 48, radius, 7, false),
+    new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.36, depthWrite: false })
+  );
+  line.renderOrder = 8;
+  state.processVisuals.add(line);
+  for (let index = 0; index < count; index += 1) {
+    const particle = new THREE.Mesh(
+      new THREE.SphereGeometry(radius * 1.65, 10, 8),
+      new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.95, depthWrite: false })
+    );
+    const phase = index / count;
+    particle.position.copy(curve.getPointAt(phase));
+    particle.renderOrder = 9;
+    state.processVisuals.add(particle);
+    state.flowParticles.push({ mesh: particle, curve, phase, speed });
+  }
+}
+
+function buildProcessVisuals() {
+  disposeProcessVisuals();
+  if (!state.scene || !state.modelRoot) return;
+  const showAir = state.powered || state.activeLayer === "cooling";
+  const showPower = state.powered || state.activeLayer === "power_delivery";
+  if (!showAir && !showPower) return;
+  const overlay = new THREE.Group();
+  overlay.name = "SBS qualitative process overlays";
+  overlay.userData.sbs_overlay = true;
+  state.processVisuals = overlay;
+  state.scene.add(overlay);
+
+  if (showAir) {
+    for (const fanId of ["assembly.fan.1", "assembly.fan.2"]) {
+      const fan = findNodeById(fanId);
+      if (!fan) continue;
+      const origin = fan.getWorldPosition(new THREE.Vector3());
+      const side = fanId.endsWith(".1") ? -7 : 7;
+      addProcessPath([
+        origin.clone().add(new THREE.Vector3(0, -17, 0)),
+        origin.clone().add(new THREE.Vector3(side * 0.45, -7, 2)),
+        origin.clone().add(new THREE.Vector3(side, 5, 5)),
+        origin.clone().add(new THREE.Vector3(side * 1.2, 18, 7))
+      ], 0x69c9ee, { count: 5, radius: 0.58, speed: 0.17 });
+    }
+    const fanExit = findNodeById("assembly.fan.2");
+    const pcb = findNodeById("assembly.pcb.board");
+    if (fanExit && pcb) {
+      const inlet = fanExit.getWorldPosition(new THREE.Vector3());
+      const boardCenter = pcb.getWorldPosition(new THREE.Vector3());
+      const outlet = boardCenter.clone().add(new THREE.Vector3(82, 0, 0));
+      addProcessPath([
+        inlet.clone().add(new THREE.Vector3(0, -7, 0)),
+        inlet.clone().add(new THREE.Vector3(8, 4, 2)),
+        boardCenter.clone().add(new THREE.Vector3(42, 1, 0)),
+        outlet
+      ], 0x83d9f4, { count: 6, radius: 0.5, speed: 0.2 });
+    }
+  }
+
+  if (showPower) {
+    const connector = findNodeById("connector.power.8pin");
+    const gpu = findNodeById("chip.gpu.ga106");
+    const pcb = findNodeById("assembly.pcb.electronics");
+    if (connector && gpu) {
+      const start = connector.getWorldPosition(new THREE.Vector3());
+      const finish = gpu.getWorldPosition(new THREE.Vector3());
+      const mid = pcb ? pcb.getWorldPosition(new THREE.Vector3()) : start.clone().lerp(finish, 0.55);
+      addProcessPath([
+        start,
+        start.clone().lerp(mid, 0.42).add(new THREE.Vector3(0, 0, 5)),
+        mid,
+        mid.clone().lerp(finish, 0.55).add(new THREE.Vector3(0, 0, -3)),
+        finish
+      ], 0xf0bd62, { count: 6, radius: 0.78, speed: 0.14 });
+    }
+  }
+  const visible = [showAir ? "airflow" : null, showPower ? "power" : null].filter(Boolean);
+  canvasHost.dataset.processVisuals = visible.join(",");
+}
+
+function collectFanRotors(root) {
+  state.fanRotors = [];
+  root.traverse((object) => {
+    if (object.userData?.sbs_rotor) {
+      state.fanRotors.push({
+        object,
+        axis: object.userData.sbs_rotor_axis === "z" ? "z" : "y"
+      });
+    }
+  });
+  if (canvasHost) canvasHost.dataset.fanRotors = String(state.fanRotors.length);
+}
+
+function updateOperatingEffects(delta) {
+  if (!state.powered || state.reducedMotion) return;
+  const rotation = delta * 10.5 * state.simulationSpeed;
+  state.fanRotors.forEach(({ object, axis }) => { object.rotation[axis] += rotation; });
+  state.flowParticles.forEach((particle) => {
+    particle.phase = (particle.phase + delta * particle.speed * state.simulationSpeed) % 1;
+    particle.mesh.position.copy(particle.curve.getPointAt(particle.phase));
+  });
+  if (canvasHost) canvasHost.dataset.runFrames = String((Number(canvasHost.dataset.runFrames) || 0) + 1);
+}
+
+function setPowered(enabled) {
+  state.powered = Boolean(enabled);
+  if (state.powered && state.exploded > 0) setExplode(0);
+  const button = $("#power-toggle");
+  if (button) {
+    button.textContent = t(state.powered ? "powerOff" : "powerOn");
+    button.classList.toggle("active", state.powered);
+    button.setAttribute("aria-pressed", String(state.powered));
+  }
+  document.body.dataset.sbsPowered = String(state.powered);
+  buildProcessVisuals();
+  $("#model-state").textContent = state.powered ? t("operatingState") : (state.exploded ? t("exploded") : t("assembledState"));
+  setStatus(state.powered ? "RUN MODE · qualitative animation" : t("ready"));
+}
+
+function setSimulationSpeed(value) {
+  state.simulationSpeed = THREE.MathUtils.clamp(Number(value) || 1, 0.25, 2);
+  const output = $("#simulation-speed-value");
+  if (output) output.textContent = `${state.simulationSpeed.toFixed(2)}×`;
+}
+
 function setLayer(layer) {
   if (!state.modelRoot) return;
   clearHighlights();
@@ -651,9 +850,11 @@ function setLayer(layer) {
       $("#empty-selection").hidden = false;
       $("#component-details").hidden = true;
     }
+    buildProcessVisuals();
     setStatus(t("ready"));
     return;
   }
+  buildProcessVisuals();
   const layerData = PROCESS_PACKAGE.process_layers.find((item) => item.type === state.activeLayer);
   const linkedIds = new Set(layerData?.linked_component_ids ?? []);
   const matches = [];
@@ -709,6 +910,10 @@ function disposeModel(root) {
 function installModel(root, mode) {
   if (state.sceneController) state.sceneController.reset();
   state.sceneController = null;
+  state.activeLayer = null;
+  disposeProcessVisuals();
+  setPowered(false);
+  state.fanRotors = [];
   if (state.modelRoot) disposeModel(state.modelRoot);
   state.modelRoot = root;
   state.modelRevision += 1;
@@ -723,6 +928,7 @@ function installModel(root, mode) {
   $("#empty-selection").hidden = false;
   document.querySelectorAll(".process-button").forEach((button) => button.classList.remove("active"));
   collectNodes(root);
+  collectFanRotors(root);
   state.sceneController = new SceneController(root);
   fitModel(root);
   setExplode(0);
@@ -871,8 +1077,15 @@ function initRenderer() {
     new ResizeObserver(resize).observe(canvasHost);
     resize();
 
+    state.reducedMotion = Boolean(window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches);
+    window.matchMedia?.("(prefers-reduced-motion: reduce)")?.addEventListener?.("change", (event) => {
+      state.reducedMotion = event.matches;
+    });
+    const clock = new THREE.Clock();
     const render = () => {
       state.animationFrame = requestAnimationFrame(render);
+      const delta = Math.min(clock.getDelta(), 0.05);
+      updateOperatingEffects(delta);
       state.controls.update();
       state.renderer.render(state.scene, state.camera);
     };
@@ -898,6 +1111,9 @@ function onCanvasClick(event) {
 }
 
 function bindUI() {
+  $("#power-toggle").addEventListener("click", () => setPowered(!state.powered));
+  $("#simulation-speed").addEventListener("input", (event) => setSimulationSpeed(event.target.value));
+  setSimulationSpeed($("#simulation-speed").value);
   $("#language-toggle").addEventListener("click", () => {
     state.language = state.language === "ru" ? "en" : "ru";
     applyLanguage();

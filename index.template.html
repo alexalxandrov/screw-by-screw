@@ -99,6 +99,12 @@
                 <button id="animate-button" class="text-button" type="button" data-i18n="animate">Animate</button>
               </div>
             </div>
+            <div class="run-controls">
+              <button id="power-toggle" class="text-button power-toggle" type="button" data-i18n="powerOn" aria-pressed="false">Включить питание</button>
+              <label for="simulation-speed" data-i18n="simulationSpeed">Скорость анимации</label>
+              <input id="simulation-speed" type="range" min="0.25" max="2" step="0.25" value="1" aria-label="Simulation speed" />
+              <output id="simulation-speed-value">1.00×</output>
+            </div>
             <input id="explode-slider" class="range-slider" type="range" min="0" max="100" value="0" aria-label="Exploded view amount" />
             <div class="range-labels"><span data-i18n="assembled">ASSEMBLED</span><span data-i18n="exploded">EXPLODED</span></div>
           </div>

@@ -43,6 +43,49 @@
       "type": "exact_sku_review",
       "applicability": "review_sample_part_number_12G-P5-3655-KR",
       "license_status": "third_party_copyright_no_reuse_permission"
+    },
+    {
+      "id": "src.fpsreview.exact_sku",
+      "title": "EVGA GeForce RTX 3060 XC BLACK GAMING Review — exact SKU 12G-P5-3655-KR",
+      "publisher": "The FPS Review",
+      "url": "https://www.thefpsreview.com/2021/03/03/evga-geforce-rtx-3060-xc-black-gaming-review/2",
+      "type": "exact_sku_review_and_photo_observations",
+      "applicability": "explicit_part_number_12G-P5-3655-KR",
+      "claims": [
+        "six heatpipes: four central and two lateral",
+        "air-through PCB cutout",
+        "no backplate",
+        "single 8-pin connector"
+      ],
+      "license_status": "third_party_copyright_no_reuse_permission"
+    },
+    {
+      "id": "src.evga.xc.article",
+      "title": "EVGA GeForce RTX 3060 XC / XC BLACK product overview",
+      "publisher": "EVGA",
+      "url": "https://www.evga.com/articles/01465/evga-geforce-rtx-3060",
+      "type": "manufacturer_product_overview",
+      "applicability": "XC_and_XC_BLACK_family; exact SKU-specific claims cross-checked with 12G-P5-3655-KR review",
+      "claims": [
+        "XC BLACK dual-fan cooling",
+        "air-through PCB design concept"
+      ],
+      "license_status": "manufacturer_reference_no_asset_reuse"
+    },
+    {
+      "id": "src.wccftech.exact_model",
+      "title": "EVGA GeForce RTX 3060 XC Black visual inspection",
+      "publisher": "Wccftech",
+      "url": "https://wccftech.com/review/evga-geforce-rtx-3060-xc-black-built-for-msrp-when-very-few-are/2",
+      "type": "exact_model_visual_review",
+      "applicability": "EVGA RTX 3060 XC Black; visual details cross-checked against exact SKU review",
+      "claims": [
+        "no rear backplate",
+        "rear PCB cut-outs",
+        "single 8-pin",
+        "3 DisplayPort and 1 HDMI"
+      ],
+      "license_status": "third_party_copyright_no_reuse_permission"
     }
   ]
 }

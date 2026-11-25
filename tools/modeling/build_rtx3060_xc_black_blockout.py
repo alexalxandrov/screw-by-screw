@@ -128,6 +128,8 @@ MAT = {
     "connector": material("Proxy | connector", (0.08, 0.08, 0.085)),
     "gpu": material("Proxy | GPU package", (0.16, 0.16, 0.17)),
     "memory": material("Proxy | memory package", (0.12, 0.12, 0.13)),
+    "heatpipe": material("Proxy | heatpipe copper", (0.68, 0.31, 0.12)),
+    "power_stage": material("Proxy | power stage", (0.34, 0.37, 0.40)),
 }
 
 
@@ -340,6 +342,24 @@ def curved_fan_blade(index, blade_index, count, center, base_y, collection):
     )
 
 
+def make_polyline_proxy(name, component_id, points, radius, mat, collection, parent):
+    curve_data = bpy.data.curves.new(name + " curve", "CURVE")
+    curve_data.dimensions = "3D"
+    curve_data.resolution_u = 16
+    curve_data.bevel_depth = radius
+    curve_data.bevel_resolution = 4
+    spline = curve_data.splines.new("POLY")
+    spline.points.add(len(points) - 1)
+    for point, coordinate in zip(spline.points, points):
+        point.co = (*coordinate, 1.0)
+    obj = bpy.data.objects.new(name, curve_data)
+    collection.objects.link(obj)
+    obj.data.materials.append(mat)
+    tag(obj, component_id, STATUS["illustrative"])
+    set_parent_keep_world(obj, parent)
+    return obj
+
+
 def make_fan(index, x, z, y, collection, cooling_parent):
     assembly = make_assembly(
         f"Fan {index} assembly",
@@ -351,6 +371,16 @@ def make_fan(index, x, z, y, collection, cooling_parent):
 
     # The ring is hollow: blades and hub remain visible instead of being hidden
     # behind a solid cylinder. Measured diameters remain approximate guides.
+    rotor = make_assembly(
+        f"Fan {index} rotor",
+        f"assembly.fan.{index}.rotor",
+        (x, y, z),
+        collection,
+        parent=assembly,
+    )
+    rotor["sbs_rotor"] = True
+    rotor["sbs_rotor_axis"] = "z"
+
     frame = annular_ring(
         f"Fan {index} | annular frame",
         f"fan.{index}.frame",
@@ -373,14 +403,14 @@ def make_fan(index, x, z, y, collection, cooling_parent):
         collection,
         vertices=64,
     )
-    set_parent_keep_world(hub, assembly)
+    set_parent_keep_world(hub, rotor)
 
     for blade in range(FAN_BLADE_COUNT):
         obj = curved_fan_blade(
             index, blade, FAN_BLADE_COUNT, (x, y, z),
             y - 1.5, collection,
         )
-        set_parent_keep_world(obj, assembly)
+        set_parent_keep_world(obj, rotor)
 
 
 def validate_scene_transform_integrity():
@@ -670,14 +700,57 @@ def main():
     )
     set_parent_keep_world(contact, cooling_group)
 
+    # Two visual heatpipe routes are reconstructed from teardown views;
+    # count, exact route, diameter and internal contact are not measured.
+    heatpipes_group = make_assembly(
+        "Heatpipe group | illustrative routes",
+        "cooling.heatpipes",
+        (CARD_LENGTH / 2, 0, CARD_HEIGHT / 2),
+        cool,
+        parent=cooling_group,
+    )
+    heatpipe_paths = (
+        ((80, -4.0, 57), (76, -3.0, 61), (70, -1.5, 64), (63, -0.5, 66), (56, 0.0, 67)),
+        ((86, -4.0, 57), (84, -3.0, 61), (80, -1.5, 64), (75, -0.5, 66), (70, 0.0, 67)),
+        ((108, -4.0, 57), (112, -3.0, 61), (118, -1.5, 64), (125, -0.5, 66), (132, 0.0, 67)),
+        ((114, -4.0, 57), (120, -3.0, 61), (128, -1.5, 64), (136, -0.5, 66), (144, 0.0, 67)),
+        ((76, -3.0, 57), (63, -2.0, 55), (49, -0.5, 54), (38, 0.0, 55)),
+        ((118, -3.0, 57), (135, -2.0, 55), (151, -0.5, 54), (164, 0.0, 55)),
+    )
+    for pipe_index, path in enumerate(heatpipe_paths, start=1):
+        make_polyline_proxy(
+            f"Illustrative heatpipe route {pipe_index}",
+            f"cooling.heatpipes.route.{pipe_index}", path, 1.6,
+            MAT["heatpipe"], cool, heatpipes_group,
+        )
+
     # Rear-side exposed PCB proxy: exact outline and position remain unknown.
     pcb = cube(
-        "PCB proxy | exposed rear",
+        "PCB proxy | exposed rear with air-through cutout",
         "assembly.pcb.board",
         (CARD_LENGTH / 2, half_y - 2.0, CARD_HEIGHT / 2),
         (CARD_LENGTH * 0.88, PCB_THICKNESS, CARD_HEIGHT * 0.78),
         MAT["pcb"], pcbcol,
+        evidence=STATUS["photo_estimate"],
     )
+    # Photo-estimated notch near the card's rear edge, based on exact-SKU
+    # review images. Its exact dimensions and contour are not measured.
+    bpy.ops.mesh.primitive_cube_add(
+        size=1,
+        location=(CARD_LENGTH * 0.90, half_y - 2.0, CARD_HEIGHT * 0.50),
+    )
+    cutout_tool = bpy.context.object
+    cutout_tool.name = "Temporary air-through PCB boolean cutter"
+    cutout_tool.dimensions = (34.0, PCB_THICKNESS * 4.0, 34.0)
+    bpy.ops.object.transform_apply(location=False, rotation=False, scale=True)
+    boolean = pcb.modifiers.new("Photo-estimated air-through cutout", "BOOLEAN")
+    boolean.operation = "DIFFERENCE"
+    boolean.solver = "EXACT"
+    boolean.object = cutout_tool
+    bpy.context.view_layer.objects.active = pcb
+    bpy.ops.object.modifier_apply(modifier=boolean.name)
+    bpy.data.objects.remove(cutout_tool, do_unlink=True)
+    pcb["sbs_feature_air_through_cutout"] = True
     set_parent_keep_world(pcb, pcb_group)
 
     # GPU package and memory candidates are generic proxy blocks.
@@ -689,6 +762,17 @@ def main():
         MAT["gpu"], pcbcol,
     )
     set_parent_keep_world(gpu_package, pcb_group)
+
+    # The power-conversion area is one selectable schematic proxy, not a VRM phase map.
+    power_stage = cube(
+        "Power conversion zone | illustrative proxy",
+        "assembly.power_stage",
+        (CARD_LENGTH * 0.69, half_y - 3.0, CARD_HEIGHT * 0.70),
+        (35.0, 5.0, 22.0),
+        MAT["power_stage"], pcbcol,
+        evidence=STATUS["illustrative"],
+    )
+    set_parent_keep_world(power_stage, pcb_group)
 
     for i in range(6):
         x = CARD_LENGTH * 0.25 + i * 16.0
