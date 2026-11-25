@@ -6,7 +6,6 @@ import { MODEL as DEFAULT_MODEL, COMPONENTS as DEFAULT_COMPONENTS, EVIDENCE, cre
 import DEFAULT_LEARNING_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/learning.json";
 import DEFAULT_PROCESS_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/process_layers.json";
 import { loadModelPackage, validateSelfContainedGlb, MAX_MODEL_PACKAGE_BYTES, MAX_SCENE_GLB_BYTES } from "./viewer/ModelPackageLoader.js";
-import "./styles.css";
 
 let MODEL = DEFAULT_MODEL;
 let COMPONENTS = DEFAULT_COMPONENTS;
@@ -1020,6 +1019,9 @@ async function tryLoadBundledModel() {
 bindUI();
 applyLanguage();
 initRenderer();
+document.documentElement.classList.add("sbs-ready");
+const startupFallback = $("#startup-fallback");
+if (startupFallback) startupFallback.hidden = true;
 if (state.renderer) {
   canvasHost.addEventListener("dblclick", resetCamera);
   loadDemo();
