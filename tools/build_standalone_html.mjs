@@ -52,16 +52,16 @@ for (const match of scriptTags) {
   const syntaxCheck = spawnSync(process.execPath, ["--check", syntaxCheckPath], { encoding: "utf8" });
   await unlink(syntaxCheckPath).catch(() => {});
   if (syntaxCheck.status !== 0) {
-    throw new Error("Vite JavaScript bundle failed syntax validation:\\n" + (syntaxCheck.stderr || syntaxCheck.stdout));
+    throw new Error("Vite JavaScript bundle failed syntax validation:\n" + (syntaxCheck.stderr || syntaxCheck.stdout));
   }
   // Keep the application source out of the HTML parser. A base64 data module
   // avoids accidental </script> termination inside shader strings/templates.
   const encodedModule = Buffer.from(source, "utf8").toString("base64");
-  const replacement = '<script type="module">\\n' +
-    'import("data:text/javascript;base64,' + encodedModule + '").catch((error) => {\\n' +
-    '  console.error("Screw by Screw failed to start:", error);\\n' +
-    '  document.getElementById("startup-fallback")?.removeAttribute("hidden");\\n' +
-    '});\\n</script>';
+  const replacement = '<script type="module">\n' +
+    'import("data:text/javascript;base64,' + encodedModule + '").catch((error) => {\n' +
+    '  console.error("Screw by Screw failed to start:", error);\n' +
+    '  document.getElementById("startup-fallback")?.removeAttribute("hidden");\n' +
+    '});\n</script>';
   html = html.replace(match[0], replacement);
   inlinedScripts += 1;
 }
