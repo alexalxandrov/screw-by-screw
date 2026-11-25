@@ -394,7 +394,7 @@ function showLearning() {
 }
 
 function renderLearning() {
-  const questions = LEARNING_PACKAGE.questions;
+  const questions = LEARNING_PACKAGE.questions ?? [];
   const panel = $("#learning-panel");
   if (!panel || !state.learningMode) return;
   panel.hidden = false;
@@ -446,7 +446,7 @@ function renderLearning() {
   }
 
   const sourceMap = new Map(MODEL.sources.map((source) => [source.id, source]));
-  question.source_ids.forEach((sourceId) => {
+  (question.source_ids ?? []).forEach((sourceId) => {
     const source = sourceMap.get(sourceId);
     if (!source) return;
     const link = document.createElement("a");
@@ -508,7 +508,7 @@ function renderProcessLayer() {
 
   const componentHost = $("#process-components");
   componentHost.replaceChildren();
-  layer.linked_component_ids.forEach((id) => {
+  (layer.linked_component_ids ?? []).forEach((id) => {
     const object = findNodeById(id);
     const data = getComponentData(id, object);
     const button = document.createElement("button");
@@ -521,7 +521,7 @@ function renderProcessLayer() {
 
   const assumptions = $("#process-assumptions");
   assumptions.replaceChildren();
-  layer.assumptions.forEach((item) => {
+  (layer.assumptions ?? []).forEach((item) => {
     const li = document.createElement("li");
     li.textContent = item;
     assumptions.append(li);
@@ -530,7 +530,7 @@ function renderProcessLayer() {
   const sourceHost = $("#process-sources");
   sourceHost.replaceChildren();
   const sourceMap = new Map(MODEL.sources.map((source) => [source.id, source]));
-  layer.source_ids.forEach((id) => {
+  (layer.source_ids ?? []).forEach((id) => {
     const source = sourceMap.get(id);
     if (!source) return;
     const link = document.createElement("a");
