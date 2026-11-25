@@ -36,10 +36,11 @@ export default defineConfig({
     target: "es2022",
     sourcemap: false,
     assetsInlineLimit: 512 * 1024 * 1024,
-    rollupOptions: {
+    chunkSizeWarningLimit: 1024,
+    rolldownOptions: {
       input: resolve(projectRoot, "index.template.html"),
       output: {
-        inlineDynamicImports: true
+        codeSplitting: false
       }
     }
   }
