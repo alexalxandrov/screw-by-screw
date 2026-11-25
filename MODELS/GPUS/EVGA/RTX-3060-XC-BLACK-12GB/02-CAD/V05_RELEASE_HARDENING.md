@@ -1,7 +1,7 @@
 # v0.5 — release hardening and text-first inspection
 
 **Branch:** `work/release-hardening-v05`  
-**Base generator:** v0.4 candidate  
+**Base generator:** v0.5 candidate  
 **Release status:** engineering candidate; not a public 1.0 release
 
 ## Changes
@@ -41,18 +41,28 @@ python -m unittest discover -s tests -v
 
 blender --background --python tools/modeling/build_rtx3060_xc_black_blockout.py
 
-blender MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v04.blend --background --python tools/modeling/inspect_blend_scene.py -- --output /tmp/sbs-inspection.txt --json-output /tmp/sbs-inspection.json
+blender MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v05.blend --background --python tools/modeling/inspect_blend_scene.py -- --output /tmp/sbs-inspection.txt --json-output /tmp/sbs-inspection.json
 
 python tools/modeling/validate_blockout_package.py \
-  --manifest MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v04.manifest.json \
-  --glb MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v04.glb
+  --manifest MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v05.manifest.json \
+  --glb MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v05.glb
 ```
 
 The inspection report must show no missing or duplicate component IDs. The package validator must return `RESULT: PASS`. The output must still be labelled `illustrative_proxy_not_cad`.
 
+## v0.5 process and geometry additions
+
+- Added a selectable heatpipe assembly. Its presence is teardown-supported, while the generated count, path and diameter remain illustrative.
+- Added a selectable power-conversion zone made of unnumbered proxy objects. It must not be read as an exact VRM phase layout.
+- Repositioned the six Samsung K4ZAF325BM-HC16 memory packages around the GPU based on exact-model teardown photography. Locations are image-estimated, not measured.
+- Expanded the copper contact proxy to visually cover the GPU and memory area, matching the reviewed cooler construction; exact plate dimensions are still unmeasured.
+- Added a viewer-only operating state: fan rotation plus qualitative airflow and power-path particles, with a speed control and reduced-motion handling.
+- All moving paths are explicitly schematic; no CFD, SPICE, pin mapping or measured fan rpm is claimed.
+- v0.5 exports 84 Blender objects: 74 meshes and 10 assembly nodes. All 83 non-reference GLB nodes have unique IDs; 22 are canonical content components and the remaining IDs label unverified proxy geometry.
+
 ## Remaining release blockers
 
-1. Run v0.4 in Blender 4.3.2 and return the text inspection output.
+1. Run v0.5 in Blender 4.3.2 and return the text inspection output.
 2. Review the generated GLB visually in the browser or Blender; structural validation is not visual validation.
 3. Measure fan centres, shroud outline, PCB outline, bracket openings and cooling details from calibrated exact-SKU views or a physical card.
 4. Identify the PCB silkscreen/revision before adding board-specific IC locations, reference designators or electrical traces.

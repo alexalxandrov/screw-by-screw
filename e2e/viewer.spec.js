@@ -18,7 +18,7 @@ test("renders the fallback GPU scene and selects a component", async ({ page }) 
 test("shows linked components and source-backed process explanations", async ({ page }) => {
   await page.goto("/");
   await expect(page.locator("#component-count")).not.toHaveText("—");
-  await page.getByRole("button", { name: /Охлаждение/ }).click();
+  await page.locator('.process-button[data-layer="cooling"]').click();
   await expect(page.locator("#process-details")).toBeVisible();
   await expect(page.locator("#process-detail-title")).toHaveText("Охлаждение и воздушный поток");
   const heatsink = page.locator("#process-components").getByRole("button", { name: "Радиатор с рёбрами" });
@@ -30,10 +30,10 @@ test("shows linked components and source-backed process explanations", async ({ 
 
 test("binds the power process layer from package relationships", async ({ page }) => {
   await page.goto("/");
-  await page.getByRole("button", { name: "Питание" }).click();
+  await page.locator('.process-button[data-layer="power_delivery"]').click();
   await expect(page.locator("#process-details")).toBeVisible();
   await expect(page.locator("#process-detail-title")).toHaveText("Ввод питания");
-  await expect(page.locator("#process-components button")).toHaveCount(3);
+  await expect(page.locator("#process-components button")).toHaveCount(4);
 });
 
 test("allows an animated explode sequence to be cancelled and reassembled", async ({ page }) => {

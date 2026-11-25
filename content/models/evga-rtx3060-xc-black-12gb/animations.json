@@ -1,7 +1,45 @@
 {
   "schema_version": "0.1.0",
   "device_model_id": "gpu.evga.12g-p5-3655-kr",
-  "status": "not_authored",
-  "policy": "No mechanical clip is published until its motion, target component and evidence status are reviewed. Viewer-only explode/reassemble transitions are generic presentation controls, not repair instructions.",
-  "clips": []
+  "status": "viewer_procedural_effects",
+  "policy": "No repair or mechanical service clip is published until its movement sequence, target components and exact hardware revision are reviewed. Viewer-only operating effects are educational and do not claim measured rpm, CFD or electrical simulation.",
+  "clips": [],
+  "viewer_effects": [
+    {
+      "id": "effect.fan.rotation",
+      "type": "continuous_kinematic",
+      "trigger": "power_toggle",
+      "target_component_ids": [
+        "assembly.fan.1",
+        "assembly.fan.2"
+      ],
+      "evidence_status": "educational_approximation",
+      "description": "Procedural rotation of both fan rotors; animation speed is a visual control, not an RPM readout."
+    },
+    {
+      "id": "effect.airflow.direction",
+      "type": "directional_particles",
+      "trigger": "cooling_layer_or_power_toggle",
+      "target_component_ids": [
+        "assembly.fan.1",
+        "assembly.fan.2",
+        "cooling.heatsink",
+        "cooling.heatpipes"
+      ],
+      "evidence_status": "educational_approximation",
+      "description": "Moving particles indicate conceptual airflow direction; no fluid simulation is performed."
+    },
+    {
+      "id": "effect.power.path",
+      "type": "directional_pulses",
+      "trigger": "power_layer_or_power_toggle",
+      "target_component_ids": [
+        "connector.power.8pin",
+        "assembly.power_stage",
+        "chip.gpu.ga106"
+      ],
+      "evidence_status": "educational_approximation",
+      "description": "Pulses show a schematic energy path, not PCB copper routes, pin mapping or current measurements."
+    }
+  ]
 }

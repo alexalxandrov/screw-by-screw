@@ -43,7 +43,18 @@ const state = {
   learningAnswered: false,
   learningComplete: false,
   modelWarnings: [],
-  modelRevision: 0
+  modelRevision: 0,
+  powered: false,
+  simulationSpeed: 1,
+  reducedMotion: false,
+  fanRotors: [],
+  processVisuals: null,
+  flowParticles: [],
+  cameraPreset: "isometric",
+  sliceEnabled: false,
+  sliceAxis: "x",
+  sliceFraction: 0.5,
+  slicePlane: new THREE.Plane(new THREE.Vector3(1, 0, 0), 0)
 };
 
 const MAX_GLB_BYTES = MAX_SCENE_GLB_BYTES;
@@ -56,7 +67,10 @@ const UI = {
     understand: "Understand", animate: "Animate", assembledState: "ASSEMBLED STATE", demoScene: "DEMO SCENE · LOCAL",
     assemblyState: "ASSEMBLY STATE", assemble: "Assemble", explode: "Explode",
     assembled: "ASSEMBLED", exploded: "EXPLODED", processLayers: "PROCESS LAYERS",
-    qualitativeOnly: "QUALITATIVE ONLY", cooling: "Cooling", powerDelivery: "Power delivery",
+    qualitativeOnly: "SCHEMATIC · NOT CFD / SPICE", cooling: "Airflow", powerDelivery: "Power path",
+    powerOn: "Run animation", powerOff: "Stop animation", operatingState: "OPERATING VISUALIZATION", simulationSpeed: "Animation speed",
+    cameraPreset: "VIEW", viewIso: "Isometric", viewFan: "Fan side", viewPcb: "PCB side", viewIo: "I/O bracket", viewPower: "Power connector", viewTop: "Top",
+    sliceToggle: "Section cut", sliceAxis: "Axis", sliceNote: "Visual cut · uncapped · not CAD",
     clearLayer: "Clear layer", inspection: "INSPECTION", componentDetails: "Component details",
     selectComponent: "Select a component", selectHint: "Choose a part in the 3D view or assembly tree to inspect its role and evidence.",
     identity: "IDENTITY", parent: "Parent", geometry: "Geometry", evidence: "EVIDENCE",
@@ -77,7 +91,10 @@ const UI = {
     understand: "Принцип работы", animate: "Анимировать", assembledState: "СОБРАННОЕ СОСТОЯНИЕ", demoScene: "ДЕМО-СЦЕНА · ЛОКАЛЬНО",
     assemblyState: "СОСТОЯНИЕ СБОРКИ", assemble: "Собрать", explode: "Разобрать",
     assembled: "СОБРАНО", exploded: "РАЗОБРАНО", processLayers: "СЛОИ ПРОЦЕССОВ",
-    qualitativeOnly: "КАЧЕСТВЕННО", cooling: "Охлаждение", powerDelivery: "Питание",
+    qualitativeOnly: "СХЕМА · НЕ CFD / SPICE", cooling: "Воздушный поток", powerDelivery: "Путь питания",
+    powerOn: "Включить анимацию", powerOff: "Остановить анимацию", operatingState: "ВИЗУАЛИЗАЦИЯ РАБОТЫ", simulationSpeed: "Скорость анимации",
+    cameraPreset: "РАКУРС", viewIso: "Изометрия", viewFan: "Сторона вентиляторов", viewPcb: "Сторона PCB", viewIo: "Планка I/O", viewPower: "Разъём питания", viewTop: "Сверху",
+    sliceToggle: "Сечение", sliceAxis: "Ось", sliceNote: "Визуальный срез · без крышек · не CAD",
     clearLayer: "Сбросить слой", inspection: "ИНСПЕКЦИЯ", componentDetails: "Карточка компонента",
     selectComponent: "Выберите компонент", selectHint: "Выберите деталь в 3D-окне или дереве сборки, чтобы изучить её назначение и источники.",
     identity: "ИДЕНТИФИКАЦИЯ", parent: "Родитель", geometry: "Геометрия", evidence: "ДОКАЗАТЕЛЬНОСТЬ",
@@ -103,6 +120,8 @@ function applyLanguage() {
     const value = t(node.dataset.i18n);
     if (value) node.textContent = value;
   });
+  const powerButton = $("#power-toggle");
+  if (powerButton) powerButton.textContent = t(state.powered ? "powerOff" : "powerOn");
   document.querySelectorAll("[data-i18n-placeholder]").forEach((node) => {
     node.placeholder = t(node.dataset.i18nPlaceholder);
   });
@@ -172,6 +191,13 @@ function createFan(parent, index, x) {
   tag(hub, `fan.${index}.hub`);
   fanPlane.add(hub);
 
+  // Keep the shroud ring and hub stationary; only the impeller is animated.
+  const rotor = new THREE.Group();
+  rotor.name = `Fan ${index} rotor`;
+  rotor.userData.sbs_fan_rotor = true;
+  rotor.userData.sbs_fan_axis = "z";
+  fanPlane.add(rotor);
+
   for (let blade = 0; blade < 7; blade += 1) {
     const bladeMesh = new THREE.Mesh(
       createBladeGeometry(),
@@ -180,7 +206,7 @@ function createFan(parent, index, x) {
     bladeMesh.rotation.z = (Math.PI * 2 * blade) / 7;
     bladeMesh.name = `Fan ${index} blade ${blade + 1}`;
     tag(bladeMesh, `fan.${index}.blade.${blade + 1}`);
-    fanPlane.add(bladeMesh);
+    rotor.add(bladeMesh);
   }
 }
 
@@ -234,8 +260,34 @@ function createFallbackModel() {
   makeMesh(cooling, "cooling.gpu_contact", "Copper GPU contact proxy",
     new THREE.BoxGeometry(48, 3, 42), materials.copper, [97, -3, 57]);
 
+  const heatpipes = makeGroup(cooling, "cooling.heatpipes", "Heatpipe group · illustrative");
+  const pipeMaterial = new THREE.MeshStandardMaterial({ color: 0xb97845, metalness: 0.78, roughness: 0.32 });
+  const pipeCurves = [
+    [[76, -4, 57], [62, -2.5, 61], [50, -1, 64], [40, 0, 65]],
+    [[118, -4, 57], [132, -2.5, 61], [145, -1, 64], [158, 0, 65]]
+  ];
+  pipeCurves.forEach((points, index) => {
+    const curve = new THREE.CatmullRomCurve3(points.map((point) => new THREE.Vector3(...point)));
+    const pipe = new THREE.Mesh(new THREE.TubeGeometry(curve, 36, 1.7, 8, false), pipeMaterial);
+    pipe.name = `Illustrative heatpipe ${index + 1}`;
+    heatpipes.add(pipe);
+  });
+
   makeMesh(pcbAssembly, "chip.gpu.ga106", "GPU package proxy",
     new THREE.BoxGeometry(40, 5, 40), materials.chip, [97, 14, 57], "teardown_supported");
+
+  const powerStage = makeGroup(pcbAssembly, "assembly.power_stage", "Power conversion zone · proxy", [145, 13.5, 78]);
+  const stageMaterial = new THREE.MeshStandardMaterial({ color: 0x555c64, metalness: 0.28, roughness: 0.5 });
+  const stageParts = [
+    [[-10, 0, -5], [7, 4, 8]], [[1, 0, -5], [7, 4, 8]], [[12, 0, -5], [7, 4, 8]],
+    [[-8, 0, 6], [4, 5, 5]], [[0, 0, 6], [4, 5, 5]], [[8, 0, 6], [4, 5, 5]]
+  ];
+  stageParts.forEach(([position, size]) => {
+    const part = new THREE.Mesh(new THREE.BoxGeometry(...size), stageMaterial);
+    part.position.set(...position);
+    part.name = "Unidentified power-stage proxy";
+    powerStage.add(part);
+  });
   for (let index = 0; index < 6; index += 1) {
     makeMesh(pcbAssembly, `chip.memory.candidate.${index + 1}`, `GDDR6 candidate ${index + 1}`,
       new THREE.BoxGeometry(14, 4, 12), materials.memory,
@@ -380,6 +432,7 @@ function showLearning() {
   state.activeLayer = null;
   document.querySelectorAll(".process-button").forEach((button) => button.classList.remove("active"));
   $("#process-details").hidden = true;
+  buildProcessVisuals();
   state.learningMode = true;
   state.learningIndex = 0;
   state.learningScore = 0;
@@ -576,6 +629,7 @@ function selectComponent(id) {
   if (!object) return;
   clearHighlights();
   state.activeLayer = null;
+  buildProcessVisuals();
   document.querySelectorAll(".process-button").forEach((button) => button.classList.remove("active"));
   $("#process-details").hidden = true;
   state.learningMode = false;
@@ -588,24 +642,95 @@ function selectComponent(id) {
   setStatus(id);
 }
 
-function resetCamera() {
-  if (!state.camera || !state.controls) return;
+function setCameraPreset(preset) {
+  if (!state.camera || !state.controls || !state.modelRoot) return;
+  const directions = {
+    isometric: null,
+    fan: new THREE.Vector3(0, -1, 0.08),
+    pcb: new THREE.Vector3(0, 1, 0.08),
+    io: new THREE.Vector3(-1, 0, 0.08),
+    power: new THREE.Vector3(1, 0, 0.08),
+    top: new THREE.Vector3(0, 0, 1)
+  };
+  const selected = Object.hasOwn(directions, preset) ? preset : "isometric";
   state.camera.up.set(0, 0, 1);
-  if (state.cameraHome) {
+  if (selected === "isometric" && state.cameraHome) {
     state.camera.position.copy(state.cameraHome.position);
     state.controls.target.copy(state.cameraHome.target);
   } else {
-    state.camera.position.set(300, 235, 260);
-    state.controls.target.set(101, 0, 55);
+    const bounds = new THREE.Box3().setFromObject(state.modelRoot);
+    const center = bounds.getCenter(new THREE.Vector3());
+    const size = bounds.getSize(new THREE.Vector3());
+    const span = Math.max(size.x, size.y, size.z, 100);
+    const direction = directions[selected].clone().normalize();
+    if (selected === "top") state.camera.up.set(0, -1, 0);
+    state.controls.target.copy(center);
+    state.camera.position.copy(center).addScaledVector(direction, Math.max(160, span * 1.85));
   }
+  state.camera.lookAt(state.controls.target);
+  state.camera.updateProjectionMatrix();
   state.controls.update();
+  state.cameraPreset = selected;
+  const selector = $("#camera-preset");
+  if (selector) selector.value = selected;
+  canvasHost.dataset.cameraPreset = selected;
+}
+
+function resetCamera() {
+  setCameraPreset("isometric");
+}
+
+function updateSlicePlane() {
+  if (!state.renderer || !state.modelRoot) return;
+  if (!state.sliceEnabled) {
+    state.renderer.clippingPlanes = [];
+    canvasHost.dataset.slicePlaneCount = "0";
+    canvasHost.dataset.sliceEnabled = "false";
+    return;
+  }
+  const bounds = new THREE.Box3().setFromObject(state.modelRoot);
+  const axisIndex = { x: 0, y: 1, z: 2 }[state.sliceAxis] ?? 0;
+  const minimum = bounds.min.getComponent(axisIndex);
+  const maximum = bounds.max.getComponent(axisIndex);
+  const position = minimum + (maximum - minimum) * state.sliceFraction;
+  const normal = new THREE.Vector3(
+    state.sliceAxis === "x" ? 1 : 0,
+    state.sliceAxis === "y" ? 1 : 0,
+    state.sliceAxis === "z" ? 1 : 0
+  );
+  state.slicePlane.normal.copy(normal);
+  state.slicePlane.constant = -position;
+  state.renderer.clippingPlanes = [state.slicePlane];
+  canvasHost.dataset.slicePlaneCount = "1";
+  canvasHost.dataset.sliceEnabled = "true";
+  canvasHost.dataset.sliceAxis = state.sliceAxis;
+  canvasHost.dataset.sliceFraction = String(Number(state.sliceFraction.toFixed(2)));
+}
+
+function setSliceEnabled(enabled) {
+  state.sliceEnabled = Boolean(enabled);
+  const button = $("#slice-toggle");
+  if (button) {
+    button.classList.toggle("active", state.sliceEnabled);
+    button.setAttribute("aria-pressed", String(state.sliceEnabled));
+  }
+  $("#slice-axis").disabled = !state.sliceEnabled;
+  $("#slice-position").disabled = !state.sliceEnabled;
+  updateSlicePlane();
+}
+
+function updateSlicePosition(value) {
+  state.sliceFraction = THREE.MathUtils.clamp(Number(value) / 100, 0, 1);
+  $("#slice-position").value = String(Math.round(state.sliceFraction * 100));
+  $("#slice-value").textContent = `${Math.round(state.sliceFraction * 100)}%`;
+  updateSlicePlane();
 }
 
 function updateExplodeUi(value) {
   state.exploded = Math.max(0, Math.min(100, Number(value)));
   $("#explode-slider").value = String(state.exploded);
   $("#explode-value").textContent = `${Math.round(state.exploded)}%`;
-  $("#model-state").textContent = state.exploded ? t("exploded") : t("assembledState");
+  $("#model-state").textContent = state.powered ? t("operatingState") : (state.exploded ? t("exploded") : t("assembledState"));
 }
 
 function setExplode(value) {
@@ -635,6 +760,165 @@ function setIsolated(isolate) {
   setStatus(state.isolated ? t("isolate") : t("allVisible"));
 }
 
+function disposeProcessVisuals() {
+  if (state.processVisuals) {
+    state.processVisuals.traverse((object) => {
+      object.geometry?.dispose();
+      const materials = Array.isArray(object.material) ? object.material : [object.material];
+      materials.filter(Boolean).forEach((material) => material.dispose());
+    });
+    state.scene?.remove(state.processVisuals);
+  }
+  state.processVisuals = null;
+  state.flowParticles = [];
+  if (canvasHost) canvasHost.dataset.processVisuals = "none";
+}
+
+function addProcessPath(points, color, { count = 5, radius = 0.65, speed = 0.23 } = {}) {
+  if (!state.processVisuals || points.length < 2) return;
+  const curve = new THREE.CatmullRomCurve3(points.map((point) => point.clone()));
+  const line = new THREE.Mesh(new THREE.TubeGeometry(curve, 64, radius, 7, false),
+    new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.48, depthWrite: false }));
+  line.renderOrder = 4;
+  state.processVisuals.add(line);
+  for (let index = 0; index < count; index += 1) {
+    const phase = index / count;
+    const particle = new THREE.Mesh(new THREE.SphereGeometry(radius * 1.75, 10, 8),
+      new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.95, depthWrite: false }));
+    particle.position.copy(curve.getPointAt(phase));
+    particle.renderOrder = 5;
+    state.processVisuals.add(particle);
+    state.flowParticles.push({ mesh: particle, curve, phase, speed });
+  }
+}
+
+function buildProcessVisuals() {
+  disposeProcessVisuals();
+  if (!state.scene || !state.modelRoot) return;
+  const airflowVisible = state.activeLayer === "cooling" || state.powered;
+  const powerVisible = state.activeLayer === "power_delivery" || state.powered;
+  if (!airflowVisible && !powerVisible) return;
+  const group = new THREE.Group();
+  group.name = "Screw by Screw · qualitative process overlays";
+  group.userData.sbs_overlay = true;
+  state.processVisuals = group;
+  state.scene.add(group);
+  if (airflowVisible) {
+    for (const id of ["assembly.fan.1", "assembly.fan.2"]) {
+      const fan = findNodeById(id);
+      if (!fan) continue;
+      const center = fan.getWorldPosition(new THREE.Vector3());
+      const spread = id.endsWith(".1") ? -3.5 : 3.5;
+      addProcessPath([
+        center.clone().add(new THREE.Vector3(0, -10, -2)),
+        center.clone().add(new THREE.Vector3(spread, -4, 0)),
+        center.clone().add(new THREE.Vector3(spread * 1.5, 5, 2)),
+        center.clone().add(new THREE.Vector3(spread * 1.8, 13, 5))
+      ], 0x65c9ee, { count: 5, radius: 0.58, speed: 0.25 });
+    }
+  }
+  if (powerVisible) {
+    const connector = findNodeById("connector.power.8pin");
+    const stage = findNodeById("assembly.power_stage");
+    const gpu = findNodeById("chip.gpu.ga106");
+    if (connector && gpu) {
+      const start = connector.getWorldPosition(new THREE.Vector3());
+      const finish = gpu.getWorldPosition(new THREE.Vector3());
+      const middle = stage?.getWorldPosition(new THREE.Vector3()) ?? start.clone().lerp(finish, 0.55);
+      addProcessPath([start, start.clone().lerp(middle, 0.32).add(new THREE.Vector3(0, 0, -3)), middle,
+        middle.clone().lerp(finish, 0.58).add(new THREE.Vector3(0, 0, 2)), finish],
+        0xf1bd62, { count: 6, radius: 0.82, speed: 0.2 });
+    }
+  }
+  const active = [airflowVisible ? "airflow" : null, powerVisible ? "power" : null].filter(Boolean);
+  canvasHost.dataset.processVisuals = active.join(",") || "none";
+}
+
+function collectFanRotors(root) {
+  state.fanRotors = [];
+  const authoredPivots = [];
+  root.traverse((object) => {
+    if (object.userData?.sbs_fan_rotor !== true) return;
+    const axis = String(object.userData.sbs_fan_axis ?? "y").toLowerCase();
+    if (["x", "y", "z"].includes(axis)) authoredPivots.push({ object, axis });
+  });
+
+  if (authoredPivots.length) {
+    state.fanRotors = authoredPivots;
+  } else {
+    // Older Blender GLBs contain individually tagged blade meshes. Reparent
+    // them under a runtime-only pivot at the fan centre so the shroud and hub
+    // remain still while the entire impeller rotates as one assembly.
+    for (const fanNumber of [1, 2]) {
+      const fan = findNodeById(`assembly.fan.${fanNumber}`);
+      if (!fan) continue;
+      const blades = [];
+      fan.traverse((object) => {
+        if (new RegExp(`^fan\\.${fanNumber}\\.blade\\.`).test(object.userData?.sbs_component_id ?? "")) {
+          blades.push(object);
+        }
+      });
+      if (!blades.length) continue;
+      const pivot = new THREE.Group();
+      pivot.name = `Fan ${fanNumber} runtime rotor pivot`;
+      fan.add(pivot);
+      fan.updateMatrixWorld(true);
+      blades.forEach((blade) => pivot.attach(blade));
+      state.fanRotors.push({ object: pivot, axis: "y" });
+    }
+  }
+  canvasHost.dataset.fanRotors = String(state.fanRotors.length);
+  canvasHost.dataset.fanSpin = "false";
+  canvasHost.dataset.flowMotion = "false";
+}
+
+function updateOperatingEffects(delta) {
+  if (!state.powered || state.reducedMotion) {
+    canvasHost.dataset.fanSpin = "false";
+    canvasHost.dataset.flowMotion = "false";
+    return;
+  }
+  const rotation = delta * 10.5 * state.simulationSpeed;
+  state.fanRotors.forEach(({ object, axis }) => { object.rotation[axis] += rotation; });
+  state.flowParticles.forEach((particle) => {
+    particle.phase = (particle.phase + delta * particle.speed * state.simulationSpeed) % 1;
+    particle.mesh.position.copy(particle.curve.getPointAt(particle.phase));
+  });
+  const spinning = state.fanRotors.some(({ object, axis }) => Math.abs(object.rotation[axis]) > 0.01);
+  canvasHost.dataset.fanSpin = String(spinning);
+  canvasHost.dataset.flowMotion = String(state.flowParticles.length > 0);
+}
+
+function setPowered(enabled) {
+  state.powered = Boolean(enabled);
+  const button = $("#power-toggle");
+  if (button) {
+    button.textContent = t(state.powered ? "powerOff" : "powerOn");
+    button.classList.toggle("active", state.powered);
+    button.setAttribute("aria-pressed", String(state.powered));
+  }
+  document.body.dataset.sbsPowered = String(state.powered);
+  if (!state.powered || state.reducedMotion) {
+    canvasHost.dataset.fanSpin = "false";
+    canvasHost.dataset.flowMotion = "false";
+  }
+  if (state.powered && !state.activeLayer) setLayer("cooling");
+  else buildProcessVisuals();
+  if (state.powered) {
+    $("#model-state").textContent = t("operatingState");
+    setStatus(state.reducedMotion ? "Power on · reduced motion" : "Power on · fan and flow animation");
+  } else {
+    updateExplodeUi(state.exploded);
+    setStatus(t("ready"));
+  }
+}
+
+function setSimulationSpeed(value) {
+  state.simulationSpeed = THREE.MathUtils.clamp(Number(value) || 1, 0.25, 2);
+  const output = $("#simulation-speed-value");
+  if (output) output.textContent = `${state.simulationSpeed.toFixed(2)}×`;
+}
+
 function setLayer(layer) {
   if (!state.modelRoot) return;
   clearHighlights();
@@ -651,6 +935,7 @@ function setLayer(layer) {
       $("#empty-selection").hidden = false;
       $("#component-details").hidden = true;
     }
+    buildProcessVisuals();
     setStatus(t("ready"));
     return;
   }
@@ -666,6 +951,7 @@ function setLayer(layer) {
     if (object.isMesh) applyHighlight(object, color);
     else object.traverse((child) => { if (child.isMesh) applyHighlight(child, color); });
   });
+  buildProcessVisuals();
   renderProcessLayer();
   setStatus(t(state.activeLayer === "cooling" ? "layerCooling" : "layerPower"));
 }
@@ -692,6 +978,8 @@ function fitModel(root) {
     position: state.camera.position.clone(),
     target: center.clone()
   };
+  setCameraPreset("isometric");
+  updateSlicePlane();
 }
 
 function disposeModel(root) {
@@ -708,6 +996,28 @@ function disposeModel(root) {
 
 function installModel(root, mode) {
   if (state.sceneController) state.sceneController.reset();
+  disposeProcessVisuals();
+  state.powered = false;
+  const powerButton = $("#power-toggle");
+  if (powerButton) {
+    powerButton.textContent = t("powerOn");
+    powerButton.classList.remove("active");
+    powerButton.setAttribute("aria-pressed", "false");
+  }
+  document.body.dataset.sbsPowered = "false";
+  state.cameraPreset = "isometric";
+  state.sliceEnabled = false;
+  state.sliceAxis = "x";
+  state.sliceFraction = 0.5;
+  const cameraSelector = $("#camera-preset");
+  if (cameraSelector) cameraSelector.value = "isometric";
+  const sliceAxis = $("#slice-axis");
+  const slicePosition = $("#slice-position");
+  if (sliceAxis) sliceAxis.value = "x";
+  if (slicePosition) slicePosition.value = "50";
+  const sliceValue = $("#slice-value");
+  if (sliceValue) sliceValue.textContent = "50%";
+  setSliceEnabled(false);
   state.sceneController = null;
   if (state.modelRoot) disposeModel(state.modelRoot);
   state.modelRoot = root;
@@ -723,6 +1033,7 @@ function installModel(root, mode) {
   $("#empty-selection").hidden = false;
   document.querySelectorAll(".process-button").forEach((button) => button.classList.remove("active"));
   collectNodes(root);
+  collectFanRotors(root);
   state.sceneController = new SceneController(root);
   fitModel(root);
   setExplode(0);
@@ -836,6 +1147,7 @@ function initRenderer() {
     state.camera = new THREE.PerspectiveCamera(42, 1, 0.1, 4000);
     state.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
     state.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    state.renderer.localClippingEnabled = true;
     state.renderer.outputColorSpace = THREE.SRGBColorSpace;
     state.renderer.toneMapping = THREE.ACESFilmicToneMapping;
     state.renderer.toneMappingExposure = 1.1;
@@ -871,8 +1183,18 @@ function initRenderer() {
     new ResizeObserver(resize).observe(canvasHost);
     resize();
 
+    state.reducedMotion = Boolean(window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches);
+    canvasHost.dataset.reducedMotion = String(state.reducedMotion);
+    window.matchMedia?.("(prefers-reduced-motion: reduce)")?.addEventListener?.("change", (event) => {
+      state.reducedMotion = event.matches;
+      canvasHost.dataset.reducedMotion = String(state.reducedMotion);
+      if (state.reducedMotion && state.powered) setStatus("Reduced motion preference enabled");
+    });
+    const clock = new THREE.Clock();
     const render = () => {
       state.animationFrame = requestAnimationFrame(render);
+      const delta = Math.min(clock.getDelta(), 0.05);
+      updateOperatingEffects(delta);
       state.controls.update();
       state.renderer.render(state.scene, state.camera);
     };
@@ -933,6 +1255,13 @@ function bindUI() {
     event.target.value = "";
   });
   $("#component-search").addEventListener("input", renderTree);
+  $("#camera-preset").addEventListener("change", (event) => setCameraPreset(event.target.value));
+  $("#slice-toggle").addEventListener("click", () => setSliceEnabled(!state.sliceEnabled));
+  $("#slice-axis").addEventListener("change", (event) => {
+    state.sliceAxis = event.target.value;
+    updateSlicePlane();
+  });
+  $("#slice-position").addEventListener("input", (event) => updateSlicePosition(event.target.value));
   $("#reset-view").addEventListener("click", resetCamera);
   $("#expand-tree").addEventListener("click", () => {
     $("#component-search").value = "";
@@ -949,7 +1278,10 @@ function bindUI() {
     $("#wireframe-toggle").classList.toggle("active", state.wireframe);
   });
   $("#explode-slider").addEventListener("input", (event) => setExplode(event.target.value));
+  $("#power-toggle").addEventListener("click", () => setPowered(!state.powered));
+  $("#simulation-speed").addEventListener("input", (event) => setSimulationSpeed(event.target.value));
   $("#quiz-next").addEventListener("click", submitLearningAnswer);
+  setSimulationSpeed($("#simulation-speed")?.value ?? 1);
   $("#assemble-button").addEventListener("click", () => setExplode(0));
   $("#explode-button").addEventListener("click", () => setExplode(100));
   $("#animate-button").addEventListener("click", animateExplodeCycle);
@@ -1008,7 +1340,7 @@ async function tryLoadBundledModel() {
       setLoadState(t("demoLoaded"));
       return;
     }
-    const modelUrl = embeddedModelUrl || `${import.meta.env.BASE_URL}models/rtx3060_xc_black_blockout_v04.glb`;
+    const modelUrl = embeddedModelUrl || `${import.meta.env.BASE_URL}models/rtx3060_xc_black_blockout_v05.glb`;
     const response = await fetch(modelUrl);
     if (!response.ok) throw new Error("No bundled model");
     const contentType = response.headers.get("content-type") ?? "";
@@ -1016,7 +1348,7 @@ async function tryLoadBundledModel() {
     const buffer = await response.arrayBuffer();
     if (buffer.byteLength < 12 || new TextDecoder().decode(buffer.slice(0, 4)) !== "glTF") throw new Error("No bundled GLB asset");
     if (state.modelRevision !== revision) return;
-    loadArrayBuffer(buffer, "Bundled v0.4 GLB", "bundled");
+    loadArrayBuffer(buffer, "Bundled v0.5 GLB", "bundled");
   } catch {
     if (state.modelRevision === revision) loadDemo();
   }
