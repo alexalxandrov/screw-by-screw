@@ -78,6 +78,36 @@ test("animation completes using frame timestamps and reaches the exact target", 
   }
 });
 
+test("animates a selected component around its local axis", async () => {
+  const { root, fan } = makeScene();
+  const controller = new SceneController(root);
+  const previousRequest = globalThis.requestAnimationFrame;
+  const previousCancel = globalThis.cancelAnimationFrame;
+  let nextId = 0;
+  let timestamp = 0;
+  const pending = new Map();
+  globalThis.requestAnimationFrame = (callback) => {
+    const id = ++nextId;
+    pending.set(id, callback);
+    return id;
+  };
+  globalThis.cancelAnimationFrame = (id) => pending.delete(id);
+  try {
+    const playback = controller.animateRotation("fan.1", { axis: "y", turns: 1, duration: 100 });
+    while (pending.size && timestamp < 1000) {
+      const frame = [...pending.values()];
+      pending.clear();
+      timestamp += 25;
+      frame.forEach((callback) => callback(timestamp));
+    }
+    assert.equal(await playback, true);
+    assert.ok(Math.abs(fan.rotation.y) < 1e-6);
+  } finally {
+    globalThis.requestAnimationFrame = previousRequest;
+    globalThis.cancelAnimationFrame = previousCancel;
+  }
+});
+
 test("isolation restores original visibility state", () => {
   const { root, assembly, fan, board } = makeScene();
   board.visible = false;
