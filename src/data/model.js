@@ -69,7 +69,7 @@ export function createModelDataAdapter(data) {
   return {
     model: {
       id: modelPackage.id,
-      name: modelPackage.product_name ?? modelPackage.name ?? modelPackage.id,
+      name: modelPackage.display_name ?? [modelPackage.manufacturer, modelPackage.product_name ?? modelPackage.name ?? modelPackage.id].filter(Boolean).join(" "),
       partNumber: modelPackage.part_number ?? "",
       manufacturer: modelPackage.manufacturer ?? "",
       status: modelPackage.geometry_status ?? "unknown",
