@@ -49,7 +49,12 @@ const state = {
   reducedMotion: false,
   fanRotors: [],
   processVisuals: null,
-  flowParticles: []
+  flowParticles: [],
+  cameraPreset: "isometric",
+  sliceEnabled: false,
+  sliceAxis: "x",
+  sliceFraction: 0.5,
+  slicePlane: new THREE.Plane(new THREE.Vector3(1, 0, 0), 0)
 };
 
 const MAX_GLB_BYTES = MAX_SCENE_GLB_BYTES;
@@ -64,6 +69,8 @@ const UI = {
     assembled: "ASSEMBLED", exploded: "EXPLODED", processLayers: "PROCESS LAYERS",
     qualitativeOnly: "SCHEMATIC · NOT CFD / SPICE", cooling: "Airflow", powerDelivery: "Power path",
     powerOn: "Run animation", powerOff: "Stop animation", operatingState: "OPERATING VISUALIZATION", simulationSpeed: "Animation speed",
+    cameraPreset: "VIEW", viewIso: "Isometric", viewFan: "Fan side", viewPcb: "PCB side", viewIo: "I/O bracket", viewPower: "Power connector", viewTop: "Top",
+    sliceToggle: "Section cut", sliceAxis: "Axis", sliceNote: "Visual cut · uncapped · not CAD",
     clearLayer: "Clear layer", inspection: "INSPECTION", componentDetails: "Component details",
     selectComponent: "Select a component", selectHint: "Choose a part in the 3D view or assembly tree to inspect its role and evidence.",
     identity: "IDENTITY", parent: "Parent", geometry: "Geometry", evidence: "EVIDENCE",
@@ -86,6 +93,8 @@ const UI = {
     assembled: "СОБРАНО", exploded: "РАЗОБРАНО", processLayers: "СЛОИ ПРОЦЕССОВ",
     qualitativeOnly: "СХЕМА · НЕ CFD / SPICE", cooling: "Воздушный поток", powerDelivery: "Путь питания",
     powerOn: "Включить анимацию", powerOff: "Остановить анимацию", operatingState: "ВИЗУАЛИЗАЦИЯ РАБОТЫ", simulationSpeed: "Скорость анимации",
+    cameraPreset: "РАКУРС", viewIso: "Изометрия", viewFan: "Сторона вентиляторов", viewPcb: "Сторона PCB", viewIo: "Планка I/O", viewPower: "Разъём питания", viewTop: "Сверху",
+    sliceToggle: "Сечение", sliceAxis: "Ось", sliceNote: "Визуальный срез · без крышек · не CAD",
     clearLayer: "Сбросить слой", inspection: "ИНСПЕКЦИЯ", componentDetails: "Карточка компонента",
     selectComponent: "Выберите компонент", selectHint: "Выберите деталь в 3D-окне или дереве сборки, чтобы изучить её назначение и источники.",
     identity: "ИДЕНТИФИКАЦИЯ", parent: "Родитель", geometry: "Геометрия", evidence: "ДОКАЗАТЕЛЬНОСТЬ",
@@ -633,17 +642,86 @@ function selectComponent(id) {
   setStatus(id);
 }
 
-function resetCamera() {
-  if (!state.camera || !state.controls) return;
+function setCameraPreset(preset) {
+  if (!state.camera || !state.controls || !state.modelRoot) return;
+  const directions = {
+    isometric: null,
+    fan: new THREE.Vector3(0, -1, 0.08),
+    pcb: new THREE.Vector3(0, 1, 0.08),
+    io: new THREE.Vector3(-1, 0, 0.08),
+    power: new THREE.Vector3(1, 0, 0.08),
+    top: new THREE.Vector3(0, 0, 1)
+  };
+  const selected = Object.hasOwn(directions, preset) ? preset : "isometric";
   state.camera.up.set(0, 0, 1);
-  if (state.cameraHome) {
+  if (selected === "isometric" && state.cameraHome) {
     state.camera.position.copy(state.cameraHome.position);
     state.controls.target.copy(state.cameraHome.target);
   } else {
-    state.camera.position.set(300, 235, 260);
-    state.controls.target.set(101, 0, 55);
+    const bounds = new THREE.Box3().setFromObject(state.modelRoot);
+    const center = bounds.getCenter(new THREE.Vector3());
+    const size = bounds.getSize(new THREE.Vector3());
+    const span = Math.max(size.x, size.y, size.z, 100);
+    const direction = directions[selected].clone().normalize();
+    if (selected === "top") state.camera.up.set(0, -1, 0);
+    state.controls.target.copy(center);
+    state.camera.position.copy(center).addScaledVector(direction, Math.max(160, span * 1.85));
   }
+  state.camera.lookAt(state.controls.target);
+  state.camera.updateProjectionMatrix();
   state.controls.update();
+  state.cameraPreset = selected;
+  const selector = $("#camera-preset");
+  if (selector) selector.value = selected;
+  canvasHost.dataset.cameraPreset = selected;
+}
+
+function resetCamera() {
+  setCameraPreset("isometric");
+}
+
+function updateSlicePlane() {
+  if (!state.renderer || !state.modelRoot) return;
+  if (!state.sliceEnabled) {
+    state.renderer.clippingPlanes = [];
+    canvasHost.dataset.sliceEnabled = "false";
+    return;
+  }
+  const bounds = new THREE.Box3().setFromObject(state.modelRoot);
+  const axisIndex = { x: 0, y: 1, z: 2 }[state.sliceAxis] ?? 0;
+  const minimum = bounds.min.getComponent(axisIndex);
+  const maximum = bounds.max.getComponent(axisIndex);
+  const position = minimum + (maximum - minimum) * state.sliceFraction;
+  const normal = new THREE.Vector3(
+    state.sliceAxis === "x" ? 1 : 0,
+    state.sliceAxis === "y" ? 1 : 0,
+    state.sliceAxis === "z" ? 1 : 0
+  );
+  state.slicePlane.normal.copy(normal);
+  state.slicePlane.constant = -position;
+  state.renderer.clippingPlanes = [state.slicePlane];
+  canvasHost.dataset.sliceEnabled = "true";
+  canvasHost.dataset.sliceAxis = state.sliceAxis;
+  canvasHost.dataset.sliceFraction = String(Number(state.sliceFraction.toFixed(2)));
+}
+
+function setSliceEnabled(enabled) {
+  state.sliceEnabled = Boolean(enabled);
+  const button = $("#slice-toggle");
+  if (button) {
+    button.classList.toggle("active", state.sliceEnabled);
+    button.setAttribute("aria-pressed", String(state.sliceEnabled));
+  }
+  $("#slice-axis").disabled = !state.sliceEnabled;
+  $("#slice-position").disabled = !state.sliceEnabled;
+  updateSlicePlane();
+}
+
+function updateSlicePosition(value) {
+  state.sliceFraction = THREE.MathUtils.clamp(Number(value) / 100, 0, 1);
+  $("#slice-position").value = String(Math.round(state.sliceFraction * 100));
+  $("#slice-value").textContent = `${Math.round(state.sliceFraction * 100)}%`;
+  updateSlicePlane();
 }
 
 function updateExplodeUi(value) {
@@ -885,6 +963,8 @@ function fitModel(root) {
     position: state.camera.position.clone(),
     target: center.clone()
   };
+  setCameraPreset("isometric");
+  updateSlicePlane();
 }
 
 function disposeModel(root) {
@@ -910,6 +990,19 @@ function installModel(root, mode) {
     powerButton.setAttribute("aria-pressed", "false");
   }
   document.body.dataset.sbsPowered = "false";
+  state.cameraPreset = "isometric";
+  state.sliceEnabled = false;
+  state.sliceAxis = "x";
+  state.sliceFraction = 0.5;
+  const cameraSelector = $("#camera-preset");
+  if (cameraSelector) cameraSelector.value = "isometric";
+  const sliceAxis = $("#slice-axis");
+  const slicePosition = $("#slice-position");
+  if (sliceAxis) sliceAxis.value = "x";
+  if (slicePosition) slicePosition.value = "50";
+  const sliceValue = $("#slice-value");
+  if (sliceValue) sliceValue.textContent = "50%";
+  setSliceEnabled(false);
   state.sceneController = null;
   if (state.modelRoot) disposeModel(state.modelRoot);
   state.modelRoot = root;
@@ -1039,6 +1132,7 @@ function initRenderer() {
     state.camera = new THREE.PerspectiveCamera(42, 1, 0.1, 4000);
     state.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
     state.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    state.renderer.localClippingEnabled = true;
     state.renderer.outputColorSpace = THREE.SRGBColorSpace;
     state.renderer.toneMapping = THREE.ACESFilmicToneMapping;
     state.renderer.toneMappingExposure = 1.1;
@@ -1146,6 +1240,13 @@ function bindUI() {
     event.target.value = "";
   });
   $("#component-search").addEventListener("input", renderTree);
+  $("#camera-preset").addEventListener("change", (event) => setCameraPreset(event.target.value));
+  $("#slice-toggle").addEventListener("click", () => setSliceEnabled(!state.sliceEnabled));
+  $("#slice-axis").addEventListener("change", (event) => {
+    state.sliceAxis = event.target.value;
+    updateSlicePlane();
+  });
+  $("#slice-position").addEventListener("input", (event) => updateSlicePosition(event.target.value));
   $("#reset-view").addEventListener("click", resetCamera);
   $("#expand-tree").addEventListener("click", () => {
     $("#component-search").value = "";
