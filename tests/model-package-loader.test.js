@@ -6,7 +6,7 @@ import { loadModelPackage, validateModelPackageData } from "../src/viewer/ModelP
 
 const modelId = "test.device";
 
-function makeGlb(document = { asset: { version: "2.0" }, scene: 0, scenes: [{ nodes: [] }] }) {
+function makeGlb(document = { asset: { version: "2.0" }, scene: 0, scenes: [{ nodes: [0] }], nodes: [{ extras: { sbs_component_id: "root" }, children: [1] }, { extras: { sbs_component_id: "part" } }] }) {
   const json = strToU8(JSON.stringify(document));
   const paddedLength = Math.ceil(json.length / 4) * 4;
   const buffer = new ArrayBuffer(20 + paddedLength);
