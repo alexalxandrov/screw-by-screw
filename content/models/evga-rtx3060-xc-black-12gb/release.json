@@ -16,11 +16,11 @@
     },
     {
       "path": "components.json",
-      "sha256": "c9091327b35c551745ba23d722a96864fac46e2386e44945c6577d3ecdeee695"
+      "sha256": "c1104fb6ccc48298a992841a95349208849c1d5ce3fdd6319a64497c912c690c"
     },
     {
       "path": "relationships.json",
-      "sha256": "35cde9a7964e9500d0f01c43ca0850769329b21bd1926061e3e2b4205962a369"
+      "sha256": "63f6393d5afd4003e07deb5f7bd27881e5464292cf3e4d261e98273bbe6d1d2c"
     },
     {
       "path": "process_layers.json",
@@ -37,6 +37,10 @@
     {
       "path": "claims.json",
       "sha256": "88e491ea5f4187cd46c4cf763d73ce9b917e5fe0e4359a03a2984a5de1be9792"
+    },
+    {
+      "path": "animations.json",
+      "sha256": "2e96a1d01ec960a84586c20a84fab2209ca8400a3084ef579107b97ceb470310"
     }
   ]
 }

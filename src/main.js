@@ -97,7 +97,7 @@ const UI = {
     allVisible: "All components visible", layerCooling: "Cooling layer · qualitative",
     layerPower: "Power path · qualitative", noWebgl: "WebGL is unavailable in this browser.",
     source: "Source", noSources: "No direct source linked to this component.",
-    modelLoaded: "Model ready", glbPicker: "Choose a .glb file", learn: "Learn", learning: "LEARNING", authoredAnimations: "PACKAGE ANIMATIONS", clipSelect: "Select clip", clipTimeline: "Animation timeline", clipPlay: "Play", clipPause: "Pause", clipStop: "Stop / reset", clipReady: "Ready", clipPlaying: "Playing", clipPaused: "Paused", clipCompleted: "Completed", clipTime: "TIME", clipEvidenceNote: "Authored model motion · not a physics simulation", linkedComponents: "LINKED COMPONENTS", assumptions: "ASSUMPTIONS & LIMITS", processLayer: "PROCESS LAYER", fileTooLarge: "GLB exceeds the 256 MB limit.", packageTooLarge: "SBS model package exceeds the 512 MB limit.", externalResources: "This GLB references external files. Only self-contained GLB files are allowed.", question: "QUESTION", checkAnswer: "Check answer", nextQuestion: "Next question", finishQuiz: "Finish", restartQuiz: "Try again", correctAnswer: "Correct", wrongAnswer: "Not quite", quizComplete: "Quiz complete", yourScore: "Your score", chooseAnswer: "Choose an answer first"
+    modelLoaded: "Model ready", glbPicker: "Choose a .glb file", learn: "Learn", learning: "LEARNING", authoredAnimations: "PACKAGE ANIMATIONS", clipSelect: "Select clip", clipTimeline: "Animation timeline", clipPlay: "Play", clipPause: "Pause", clipStop: "Stop / reset", clipReady: "Ready", clipPlaying: "Playing", clipPaused: "Paused", clipCompleted: "Completed", clipTime: "TIME", clipEvidenceNote: "Authored model motion · not a physics simulation", clipEducationalApproximation: "Educational approximation · duration is not measured RPM", clipIllustrative: "Illustrative motion · not a measured mechanism", clipDocumentedMotion: "Documented motion · source-linked", clipMeasuredMotion: "Measured motion · source and method recorded", linkedComponents: "LINKED COMPONENTS", assumptions: "ASSUMPTIONS & LIMITS", processLayer: "PROCESS LAYER", fileTooLarge: "GLB exceeds the 256 MB limit.", packageTooLarge: "SBS model package exceeds the 512 MB limit.", externalResources: "This GLB references external files. Only self-contained GLB files are allowed.", question: "QUESTION", checkAnswer: "Check answer", nextQuestion: "Next question", finishQuiz: "Finish", restartQuiz: "Try again", correctAnswer: "Correct", wrongAnswer: "Not quite", quizComplete: "Quiz complete", yourScore: "Your score", chooseAnswer: "Choose an answer first"
   },
   ru: {
     modelLabel: "МОДЕЛЬ", structure: "СТРУКТУРА", components: "Компоненты",
@@ -122,7 +122,7 @@ const UI = {
     allVisible: "Все компоненты видимы", layerCooling: "Слой охлаждения · качественно",
     layerPower: "Путь питания · качественно", noWebgl: "В этом браузере недоступен WebGL.",
     source: "Источник", noSources: "Для этого компонента нет прямой ссылки на источник.",
-    modelLoaded: "Модель готова", glbPicker: "Выберите файл .glb", learn: "Обучение", learning: "ОБУЧЕНИЕ", authoredAnimations: "АНИМАЦИИ ПАКЕТА", clipSelect: "Выберите клип", clipTimeline: "Шкала анимации", clipPlay: "Пуск", clipPause: "Пауза", clipStop: "Стоп / сброс", clipReady: "Готово", clipPlaying: "Воспроизведение", clipPaused: "Пауза", clipCompleted: "Завершено", clipTime: "ВРЕМЯ", clipEvidenceNote: "Анимация из пакета · не физическая симуляция", linkedComponents: "СВЯЗАННЫЕ КОМПОНЕНТЫ", assumptions: "ДОПУЩЕНИЯ И ОГРАНИЧЕНИЯ", processLayer: "СЛОЙ ПРОЦЕССА", fileTooLarge: "GLB превышает лимит 256 МБ.", packageTooLarge: "Пакет SBS model превышает лимит 512 МБ.", externalResources: "Этот GLB ссылается на внешние файлы. Разрешены только самодостаточные GLB.", question: "ВОПРОС", checkAnswer: "Проверить ответ", nextQuestion: "Следующий вопрос", finishQuiz: "Завершить", restartQuiz: "Повторить", correctAnswer: "Верно", wrongAnswer: "Не совсем", quizComplete: "Тест завершён", yourScore: "Ваш результат", chooseAnswer: "Сначала выберите ответ"
+    modelLoaded: "Модель готова", glbPicker: "Выберите файл .glb", learn: "Обучение", learning: "ОБУЧЕНИЕ", authoredAnimations: "АНИМАЦИИ ПАКЕТА", clipSelect: "Выберите клип", clipTimeline: "Шкала анимации", clipPlay: "Пуск", clipPause: "Пауза", clipStop: "Стоп / сброс", clipReady: "Готово", clipPlaying: "Воспроизведение", clipPaused: "Пауза", clipCompleted: "Завершено", clipTime: "ВРЕМЯ", clipEvidenceNote: "Анимация из пакета · не физическая симуляция", clipEducationalApproximation: "Учебное приближение · длительность не является измеренным RPM", clipIllustrative: "Условное движение · не измеренный механизм", clipDocumentedMotion: "Движение подтверждено источником", clipMeasuredMotion: "Измеренное движение · источник и метод указаны", linkedComponents: "СВЯЗАННЫЕ КОМПОНЕНТЫ", assumptions: "ДОПУЩЕНИЯ И ОГРАНИЧЕНИЯ", processLayer: "СЛОЙ ПРОЦЕССА", fileTooLarge: "GLB превышает лимит 256 МБ.", packageTooLarge: "Пакет SBS model превышает лимит 512 МБ.", externalResources: "Этот GLB ссылается на внешние файлы. Разрешены только самодостаточные GLB.", question: "ВОПРОС", checkAnswer: "Проверить ответ", nextQuestion: "Следующий вопрос", finishQuiz: "Завершить", restartQuiz: "Повторить", correctAnswer: "Верно", wrongAnswer: "Не совсем", quizComplete: "Тест завершён", yourScore: "Ваш результат", chooseAnswer: "Сначала выберите ответ"
   }
 };
 
@@ -183,6 +183,7 @@ function updateAnimationPlayerUI(snapshot = state.animationPlayer?.getSnapshot()
   const seek = $("#animation-seek");
   const status = $("#animation-status");
   const time = $("#animation-time");
+  const evidenceNote = $("#animation-evidence-note");
   if (select && select.value !== snapshot.clipId) select.value = snapshot.clipId;
   if (play) play.disabled = snapshot.status === "playing";
   if (pause) pause.disabled = snapshot.status !== "playing";
@@ -190,6 +191,15 @@ function updateAnimationPlayerUI(snapshot = state.animationPlayer?.getSnapshot()
   if (seek) {
     seek.disabled = false;
     seek.value = String(Math.round(snapshot.progress * 1000));
+  }
+  if (evidenceNote) {
+    const evidenceLabel = {
+      educational_approximation: "clipEducationalApproximation",
+      illustrative: "clipIllustrative",
+      documented_motion: "clipDocumentedMotion",
+      measured_motion: "clipMeasuredMotion"
+    }[state.animationPlayer.clip?.evidence_status] ?? "clipEvidenceNote";
+    evidenceNote.textContent = t(evidenceLabel);
   }
   if (status) {
     status.textContent = animationStatusLabel(snapshot.status);
@@ -272,7 +282,9 @@ function createBladeGeometry() {
   shape.quadraticCurveTo(39, 3, 42, 5);
   shape.quadraticCurveTo(31, 6, 23, 4);
   shape.quadraticCurveTo(16, 2, 13, -3);
-  return new THREE.ShapeGeometry(shape, 12);
+  const geometry = new THREE.ShapeGeometry(shape, 12);
+  geometry.rotateX(Math.PI / 2);
+  return geometry;
 }
 
 function createFan(parent, index, x) {
@@ -301,16 +313,18 @@ function createFan(parent, index, x) {
   // Keep the shroud ring and hub stationary; only the impeller is animated.
   const rotor = new THREE.Group();
   rotor.name = `Fan ${index} rotor`;
+  rotor.position.y = -1.5;
+  tag(rotor, `assembly.fan.${index}.rotor`, "illustrative", "assembly_node");
   rotor.userData.sbs_fan_rotor = true;
-  rotor.userData.sbs_fan_axis = "z";
-  fanPlane.add(rotor);
+  rotor.userData.sbs_fan_axis = "y";
+  fan.add(rotor);
 
   for (let blade = 0; blade < 7; blade += 1) {
     const bladeMesh = new THREE.Mesh(
       createBladeGeometry(),
       new THREE.MeshStandardMaterial({ color: 0x242c34, side: THREE.DoubleSide, roughness: 0.68 })
     );
-    bladeMesh.rotation.z = (Math.PI * 2 * blade) / 7;
+    bladeMesh.rotation.y = (Math.PI * 2 * blade) / 7;
     bladeMesh.name = `Fan ${index} blade ${blade + 1}`;
     tag(bladeMesh, `fan.${index}.blade.${blade + 1}`);
     rotor.add(bladeMesh);
@@ -1374,7 +1388,9 @@ function collectFanRotors(root) {
   state.fanRotors = [];
   const authoredPivots = [];
   root.traverse((object) => {
-    if (object.userData?.sbs_fan_rotor !== true) return;
+    const componentId = String(object.userData?.sbs_component_id ?? "");
+    const hasStableRotorId = /^assembly\\.fan\\.[12]\\.rotor$/.test(componentId);
+    if (object.userData?.sbs_fan_rotor !== true && !hasStableRotorId) return;
     const axis = String(object.userData.sbs_fan_axis ?? "y").toLowerCase();
     if (["x", "y", "z"].includes(axis)) authoredPivots.push({ object, axis });
   });
@@ -1426,6 +1442,7 @@ function updateOperatingEffects(delta) {
 }
 
 function setPowered(enabled) {
+  if (enabled) state.animationPlayer?.stop();
   state.powered = Boolean(enabled);
   const button = $("#power-toggle");
   if (button) {
@@ -1897,8 +1914,14 @@ function bindUI() {
   $("#explode-slider").addEventListener("input", (event) => setExplode(event.target.value));
   $("#power-toggle").addEventListener("click", () => setPowered(!state.powered));
   $("#simulation-speed").addEventListener("input", (event) => setSimulationSpeed(event.target.value));
-  $("#animation-clip-select").addEventListener("change", (event) => state.animationPlayer?.selectClip(event.target.value));
-  $("#animation-play").addEventListener("click", () => state.animationPlayer?.play());
+  $("#animation-clip-select").addEventListener("change", (event) => {
+    if (state.powered) setPowered(false);
+    state.animationPlayer?.selectClip(event.target.value);
+  });
+  $("#animation-play").addEventListener("click", () => {
+    if (state.powered) setPowered(false);
+    state.animationPlayer?.play();
+  });
   $("#animation-pause").addEventListener("click", () => state.animationPlayer?.pause());
   $("#animation-stop").addEventListener("click", () => state.animationPlayer?.stop());
   $("#animation-seek").addEventListener("input", (event) => state.animationPlayer?.seek(Number(event.target.value) / 1000));

@@ -45,4 +45,4 @@ These are viewer and data-provenance capabilities. They do not increase the phys
 
 ## Package-authored animation runtime
 
-The generic runtime supports clip selection, play, pause, normalized seek, playback speed, completion and stop/reset with deterministic restoration of starting transforms. Animation tracks target stable component IDs, use explicit evidence metadata, and are validated before playback. The RTX 3060 pilot currently has no authored clips; procedural fan, airflow, power and exploded-view effects remain separate viewer-generated educational effects.
+The generic runtime supports clip selection, play, pause, normalized seek, playback speed, completion and stop/reset with deterministic restoration of starting transforms. Animation tracks target stable component IDs, use explicit evidence metadata, and are validated before playback. The RTX 3060 pilot includes one educational visual rotor-turn clip bound to two stable impeller pivots. Its 3.2-second duration is not measured RPM. Procedural airflow, power and exploded-view effects remain separate viewer-generated educational effects.
