@@ -1373,6 +1373,60 @@ function renderProcessLayer() {
   $("#process-detail-type").textContent = layer.type.replaceAll("_", " ").toUpperCase();
   $("#process-detail-title").textContent = state.language === "ru" ? layer.title.ru : layer.title.en;
   $("#process-detail-description").textContent = state.language === "ru" ? layer.description.ru : layer.description.en;
+  const diagramHost = $("#process-diagram");
+  diagramHost.replaceChildren();
+  const diagram = layer.visualization?.diagram;
+  diagramHost.hidden = !diagram;
+  if (diagram) {
+    const badge = document.createElement("div");
+    badge.className = "architecture-diagram-badge";
+    badge.textContent = localizedPackageText(diagram.badge);
+    diagramHost.append(badge);
+
+    const grid = document.createElement("div");
+    grid.className = "architecture-diagram-grid";
+    (diagram.groups ?? []).forEach((group, groupIndex) => {
+      const section = document.createElement("section");
+      section.className = "architecture-diagram-group";
+      section.dataset.groupId = group.id ?? String(groupIndex);
+      const heading = document.createElement("h4");
+      heading.textContent = localizedPackageText(group.title);
+      const summary = document.createElement("p");
+      summary.className = "architecture-diagram-summary";
+      summary.textContent = localizedPackageText(group.summary);
+      const nodes = document.createElement("div");
+      nodes.className = "architecture-node-grid";
+      (group.nodes ?? []).forEach((node) => {
+        const componentId = node.component_id;
+        if (!componentId) return;
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "architecture-node";
+        button.dataset.componentId = componentId;
+        button.setAttribute("aria-label", localizedPackageText(node.title));
+        const title = document.createElement("span");
+        title.className = "architecture-node-title";
+        title.textContent = localizedPackageText(node.title);
+        const metric = document.createElement("span");
+        metric.className = "architecture-node-metric";
+        metric.textContent = localizedPackageText(node.metric);
+        button.append(title, metric);
+        button.addEventListener("click", () => selectComponent(componentId));
+        nodes.append(button);
+      });
+      section.append(heading, summary, nodes);
+      grid.append(section);
+      if (groupIndex < (diagram.groups?.length ?? 0) - 1) {
+        const connector = document.createElement("div");
+        connector.className = "architecture-diagram-connector";
+        connector.setAttribute("aria-hidden", "true");
+        connector.textContent = "↓";
+        grid.append(connector);
+      }
+    });
+    diagramHost.append(grid);
+  }
+
 
   const componentHost = $("#process-components");
   componentHost.replaceChildren();
