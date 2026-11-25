@@ -12,6 +12,7 @@ export class SceneController {
     this.duplicateIds = [];
     this.visibilitySnapshot = null;
     this.animationFrame = null;
+    this.animationTimeout = null;
     this.animationResolve = null;
     this.capture();
   }
@@ -76,17 +77,53 @@ export class SceneController {
     const to = THREE.MathUtils.clamp(Number(target) || 0, 0, 100);
     let start = null;
     const total = Math.max(1, Number(duration) || 1);
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
+      let settled = false;
+      const finish = (success) => {
+        if (settled) return;
+        settled = true;
+        if (this.animationFrame !== null) cancelAnimationFrame(this.animationFrame);
+        this.animationFrame = null;
+        if (this.animationTimeout !== null) clearTimeout(this.animationTimeout);
+        this.animationTimeout = null;
+        this.animationResolve = null;
+        resolve(success);
+      };
+      const fail = (error) => {
+        if (settled) return;
+        settled = true;
+        if (this.animationFrame !== null) cancelAnimationFrame(this.animationFrame);
+        this.animationFrame = null;
+        if (this.animationTimeout !== null) clearTimeout(this.animationTimeout);
+        this.animationTimeout = null;
+        this.animationResolve = null;
+        reject(error);
+      };
       this.animationResolve = resolve;
       const tick = (now) => {
-        if (start === null) start = now;
-        const linear = THREE.MathUtils.clamp((now - start) / total, 0, 1);
-        const eased = linear * linear * (3 - 2 * linear);
-        this.applyExplode(from + (to - from) * eased);
-        onUpdate(this.explodeProgress);
-        if (linear >= 1) { this.animationFrame = null; this.animationResolve = null; resolve(true); }
-        else this.animationFrame = requestAnimationFrame(tick);
+        if (settled) return;
+        try {
+          if (start === null) start = now;
+          const linear = THREE.MathUtils.clamp((now - start) / total, 0, 1);
+          const eased = linear * linear * (3 - 2 * linear);
+          this.applyExplode(from + (to - from) * eased);
+          onUpdate(this.explodeProgress);
+          if (linear >= 1) finish(true);
+          else this.animationFrame = requestAnimationFrame(tick);
+        } catch (error) {
+          fail(error);
+        }
       };
+      // The timeout is a completion guard for throttled/background tabs.
+      this.animationTimeout = setTimeout(() => {
+        try {
+          this.applyExplode(to);
+          onUpdate(this.explodeProgress);
+          finish(true);
+        } catch (error) {
+          fail(error);
+        }
+      }, total + 250);
       this.animationFrame = requestAnimationFrame(tick);
     });
   }
@@ -97,20 +134,55 @@ export class SceneController {
     if (!["x", "y", "z"].includes(axis)) throw new TypeError("Rotation axis must be x, y or z");
     this.cancelAnimation();
     const startRotation = object.rotation[axis];
-    const delta = Math.PI * 2 * Number(turns || 1);
+    const targetRotation = startRotation + Math.PI * 2 * Number(turns || 1);
     let start = null;
     const total = Math.max(1, Number(duration) || 1);
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
+      let settled = false;
+      const finish = (success) => {
+        if (settled) return;
+        settled = true;
+        if (this.animationFrame !== null) cancelAnimationFrame(this.animationFrame);
+        this.animationFrame = null;
+        if (this.animationTimeout !== null) clearTimeout(this.animationTimeout);
+        this.animationTimeout = null;
+        this.animationResolve = null;
+        resolve(success);
+      };
+      const fail = (error) => {
+        if (settled) return;
+        settled = true;
+        if (this.animationFrame !== null) cancelAnimationFrame(this.animationFrame);
+        this.animationFrame = null;
+        if (this.animationTimeout !== null) clearTimeout(this.animationTimeout);
+        this.animationTimeout = null;
+        this.animationResolve = null;
+        reject(error);
+      };
       this.animationResolve = resolve;
       const tick = (now) => {
-        if (start === null) start = now;
-        const linear = THREE.MathUtils.clamp((now - start) / total, 0, 1);
-        const eased = linear * linear * (3 - 2 * linear);
-        object.rotation[axis] = startRotation + delta * eased;
-        onUpdate(linear);
-        if (linear >= 1) { this.animationFrame = null; this.animationResolve = null; resolve(true); }
-        else this.animationFrame = requestAnimationFrame(tick);
+        if (settled) return;
+        try {
+          if (start === null) start = now;
+          const linear = THREE.MathUtils.clamp((now - start) / total, 0, 1);
+          const eased = linear * linear * (3 - 2 * linear);
+          object.rotation[axis] = startRotation + (targetRotation - startRotation) * eased;
+          onUpdate(linear);
+          if (linear >= 1) finish(true);
+          else this.animationFrame = requestAnimationFrame(tick);
+        } catch (error) {
+          fail(error);
+        }
       };
+      this.animationTimeout = setTimeout(() => {
+        try {
+          object.rotation[axis] = targetRotation;
+          onUpdate(1);
+          finish(true);
+        } catch (error) {
+          fail(error);
+        }
+      }, total + 250);
       this.animationFrame = requestAnimationFrame(tick);
     });
   }
@@ -118,6 +190,8 @@ export class SceneController {
   cancelAnimation() {
     if (this.animationFrame !== null) cancelAnimationFrame(this.animationFrame);
     this.animationFrame = null;
+    if (this.animationTimeout !== null) clearTimeout(this.animationTimeout);
+    this.animationTimeout = null;
     if (this.animationResolve) this.animationResolve(false);
     this.animationResolve = null;
   }
