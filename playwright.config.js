@@ -9,17 +9,30 @@ export default defineConfig({
   timeout: 45000,
   use: {
     baseURL: "http://127.0.0.1:5173",
-    browserName: "chromium",
-    headless: true,
-    launchOptions: {
-      args: [
-        "--use-gl=angle",
-        "--use-angle=swiftshader",
-        "--enable-webgl",
-        "--ignore-gpu-blocklist"
-      ]
-    }
+    headless: true
   },
+  projects: [
+    {
+      name: "chromium",
+      testMatch: ["**/viewer.spec.js", "**/accessibility.spec.js", "**/bundled-model.spec.js"],
+      use: {
+        browserName: "chromium",
+        launchOptions: {
+          args: [
+            "--use-gl=angle",
+            "--use-angle=swiftshader",
+            "--enable-webgl",
+            "--ignore-gpu-blocklist"
+          ]
+        }
+      }
+    },
+    {
+      name: "firefox-smoke",
+      testMatch: "**/firefox-smoke.spec.js",
+      use: { browserName: "firefox" }
+    }
+  ],
   webServer: {
     command: "npm run dev",
     url: "http://127.0.0.1:5173",
