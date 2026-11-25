@@ -221,3 +221,71 @@ test("validates teardown observations separately from assembly steps", () => {
   data.assembly_steps.observations[0].source_id = "missing";
   assert.throws(() => validateModelPackageData(testManifest(), data), /unknown source/);
 });
+
+
+test("validates source-backed normalized animation clips and their component tracks", () => {
+  const data = makeData();
+  data.animations.clips = [{
+    id: "clip.fan-turn",
+    title: { en: "Fan turn", ru: "Поворот вентилятора" },
+    evidence_status: "documented_motion",
+    source_ids: ["src.one"],
+    duration_ms: 1200,
+    easing: "ease_in_out",
+    tracks: [{
+      target_id: "part",
+      property: "rotation",
+      keyframes: [
+        { t: 0, value: [0, 0, 0] },
+        { t: 1, value: [0, 0, Math.PI * 2] }
+      ]
+    }]
+  }];
+  assert.doesNotThrow(() => validateModelPackageData(testManifest(), data));
+});
+
+test("rejects animation clips with missing provenance, duplicate tracks or invalid vectors", () => {
+  const data = makeData();
+  const track = {
+    target_id: "part",
+    property: "position",
+    keyframes: [{ t: 0, value: [0, 0, 0] }, { t: 1, value: [1, 2, 3] }]
+  };
+  data.animations.clips = [{
+    id: "clip.test",
+    title: "Test clip",
+    evidence_status: "documented_motion",
+    source_ids: [],
+    duration_ms: 1000,
+    tracks: [track]
+  }];
+  assert.throws(() => validateModelPackageData(testManifest(), data), /require registered source provenance/);
+
+  data.animations.clips[0].source_ids = ["src.one"];
+  data.animations.clips[0].tracks = [track, track];
+  assert.throws(() => validateModelPackageData(testManifest(), data), /duplicate animation track/);
+
+  data.animations.clips[0].tracks = [{
+    ...track,
+    keyframes: [{ t: 0, value: [0, 0] }, { t: 1, value: [1, 2, 3] }]
+  }];
+  assert.throws(() => validateModelPackageData(testManifest(), data), /three finite numbers/);
+});
+
+test("allows an explicitly educational animation without a source but requires an evidence label", () => {
+  const data = makeData();
+  data.animations.clips = [{
+    id: "clip.illustrative",
+    title: { en: "Illustrative motion", ru: "Условное движение" },
+    evidence_status: "educational_approximation",
+    duration_ms: 500,
+    tracks: [{
+      target_id: "part",
+      property: "visible",
+      keyframes: [{ t: 0, value: true }, { t: 1, value: false }]
+    }]
+  }];
+  assert.doesNotThrow(() => validateModelPackageData(testManifest(), data));
+  delete data.animations.clips[0].evidence_status;
+  assert.throws(() => validateModelPackageData(testManifest(), data), /evidence_status/);
+});

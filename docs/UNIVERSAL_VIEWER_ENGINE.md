@@ -38,6 +38,9 @@ The viewer must treat package data as untrusted input. Validate schema versions,
 
 ## Animation policy
 
+The package-authored runtime is implemented in src/viewer/AnimationPlayer.js. It supports clip selection, play, pause, normalized seek, playback speed, completion and stop/reset. It snapshots targeted properties before playback and restores them on stop or clip switch. Vector tracks interpolate; visibility uses step semantics. The timeline is driven by requestAnimationFrame, and all tracks target stable component IDs.
+
+
 Animation is not synonymous with physics simulation. The viewer may animate authored mechanical motion, fan rotation, exploded views and assembly steps. Each clip must identify its source or state that it is illustrative. Do not infer real fan RPM, airflow, thermal behavior, electrical waveforms or removal order from decorative motion.
 
 An animation clip uses normalized time and contains an ID, localized title, duration, evidence status and tracks. Each track targets a stable component ID, names a property and contains ordered keyframes with normalized time and values. Initial properties: position, rotation, scale and visible. Numeric properties interpolate; visibility uses step semantics. Quaternion interpolation can be added when needed.
@@ -50,7 +53,7 @@ Exploded-view transforms must be reversible and deterministic. The engine captur
 
 - Engine foundation: implemented reusable component indexing, reversible explode/reassemble, visibility-safe isolation, reset and generic rotation/explode animation primitives; Six Node unit tests cover deterministic transforms, isolation and duplicate-ID reporting.
 - Package loader: implemented .sbsmodel ZIP import, archive path and size preflight, sidecar schema/reference checks, SHA-256 verification, self-contained GLB validation and a Python package builder.
-- Animation runtime: current UI demonstrates a reversible explode animation; package-authored clips, pause, seek and animation-track validation remain next.
+- Animation runtime: package-authored clip selection, play/pause/seek/stop, speed, animation-track validation and deterministic transform restoration are implemented. The RTX 3060 pilot has no authored clips yet.
 - Model catalogue: next; discover local/hosted packages through a static catalogue manifest first; no backend is required for a local-first viewer.
 - Site integration: mount the same viewer runtime in a model detail route; do not duplicate Three.js scene logic in the catalogue UI.
 

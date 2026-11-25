@@ -41,3 +41,8 @@ The viewer now includes:
 - startup protection so a late optional bundled-model response cannot replace a scene after user interaction.
 
 These are viewer and data-provenance capabilities. They do not increase the physical fidelity of the RTX 3060 proxy. Owner visual acceptance, rights review and target-hardware performance testing remain required before 1.0.
+
+
+## Package-authored animation runtime
+
+The generic runtime supports clip selection, play, pause, normalized seek, playback speed, completion and stop/reset with deterministic restoration of starting transforms. Animation tracks target stable component IDs, use explicit evidence metadata, and are validated before playback. The RTX 3060 pilot currently has no authored clips; procedural fan, airflow, power and exploded-view effects remain separate viewer-generated educational effects.
