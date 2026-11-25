@@ -50,8 +50,9 @@ Or use **Open GLB** to load a local GLB file in the browser. Generated model bin
 - Isolate selected component and restore visibility.
 - Global exploded-view slider with reassembly.
 - Wireframe toggle.
-- Qualitative cooling and power-delivery highlight layers.
-- Local GLB import and fallback scene.
+- Qualitative cooling and power-delivery layers with explanations, linked components, assumptions and source links.
+- Local GLB import (256 MB prototype limit) and fallback scene.
+- Duplicate component-ID warnings for imported GLB files.
 
 ## Coordinate convention
 
