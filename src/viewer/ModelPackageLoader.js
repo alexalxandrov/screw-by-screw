@@ -254,6 +254,11 @@ export async function loadModelPackage(file) {
     if (!isSafeArchivePath(path) || !archive[path]) fail("manifest references a missing or unsafe file: " + key);
     paths[key] = path;
   }
+  let release = null;
+  if (manifest.files.release !== undefined) {
+    if (!isSafeArchivePath(manifest.files.release) || !archive[manifest.files.release]) fail("manifest references a missing or unsafe release file");
+    release = parseJsonFile(archive, manifest.files.release, "release");
+  }
   const data = {
     model: parseJsonFile(archive, paths.model, "model"),
     components: parseJsonFile(archive, paths.components, "components"),
@@ -264,8 +269,7 @@ export async function loadModelPackage(file) {
     assembly_steps: parseJsonFile(archive, paths.assembly_steps, "assembly steps"),
     learning: parseJsonFile(archive, paths.learning, "learning"),
     animations: parseJsonFile(archive, paths.animations, "animations"),
-    release: manifest.files.release && isSafeArchivePath(manifest.files.release) && archive[manifest.files.release]
-      ? parseJsonFile(archive, manifest.files.release, "release") : null
+    release
   };
   const report = validateModelPackageData(manifest, data);
   const sceneBytes = archive[paths.scene];
