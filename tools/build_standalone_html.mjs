@@ -3,7 +3,7 @@
  * Turn Vite's production HTML entry into a self-contained root index.html.
  * The generated file is designed to be opened directly with file://.
  */
-import { access, readFile, readdir, writeFile } from "node:fs/promises";
+import { access, readFile, writeFile } from "node:fs/promises";
 import { dirname, isAbsolute, relative, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -19,7 +19,7 @@ async function exists(path) {
   try { await access(path); return true; } catch { return false; }
 }
 
-function safeLocalPath(reference, preferredRoot) {
+async function safeLocalPath(reference, preferredRoot) {
   const clean = decodeURIComponent(reference.split(/[?#]/, 1)[0]);
   if (!clean || /^(?:[a-z]+:)?\/\//i.test(clean) || clean.startsWith("data:")) {
     throw new Error("Expected a local build asset, received: " + reference);
@@ -34,63 +34,63 @@ function safeLocalPath(reference, preferredRoot) {
   throw new Error("Could not find local build asset: " + reference);
 }
 
-function inlineSafe(source, closingTag) {
-  return source.replace(new RegExp(closingTag, "gi"), (match) => "<\\" + match.slice(1));
+function escapeClosingTag(source, tagName) {
+  const pattern = new RegExp("</" + tagName, "gi");
+  return source.replace(pattern, (match) => "<\\/" + match.slice(1));
 }
 
 let html = await readFile(templatePath, "utf8");
 let inlinedScripts = 0;
-const scriptTags = [...html.matchAll(/<script\\b[^>]*\\bsrc=(["'])([^"']+\\.js(?:\\?[^"']*)?)\\1[^>]*>\\s*<\\/script>/gi)];
+const scriptTags = [...html.matchAll(/<script\b[^>]*\bsrc=(["'])([^"']+\.js(?:\?[^"']*)?)\1[^>]*>\s*<\/script>/gi)];
 for (const match of scriptTags) {
   const assetPath = await safeLocalPath(match[2], distRoot);
   let source = await readFile(assetPath, "utf8");
-  source = source.replace(/^\\/\\/\\# sourceMappingURL=.*$/gm, "");
-  source = inlineSafe(source, "</script");
-  const opening = match[0].match(/^<script\\b([^>]*)>/i)?.[1] ?? "";
+  source = source.replace(/^\/\/# sourceMappingURL=.*$/gm, "");
+  source = escapeClosingTag(source, "script");
+  const opening = match[0].match(/^<script\b([^>]*)>/i)?.[1] ?? "";
   let attributes = opening
-    .replace(/\\s+src=(["']).*?\\1/i, "")
-    .replace(/\\s+crossorigin(?:=(["']).*?\\1)?/i, "")
+    .replace(/\s+src=(["']).*?\1/i, "")
+    .replace(/\s+crossorigin(?:=(["']).*?\1)?/i, "")
     .trim();
-  if (!/\\btype=(["'])module\\1/i.test(attributes)) attributes = (attributes + ' type="module"').trim();
-  const replacement = "<script " + attributes + ">\\n" + source + "\\n</script>";
+  if (!/\btype=(["'])module\1/i.test(attributes)) attributes = (attributes + ' type="module"').trim();
+  const replacement = "<script " + attributes + ">\n" + source + "\n</script>";
   html = html.replace(match[0], replacement);
   inlinedScripts += 1;
 }
 if (inlinedScripts < 1) throw new Error("Vite emitted no external JavaScript entry to inline");
 
-const stylesheetTags = [...html.matchAll(/<link\\b(?=[^>]*\\brel=(["'])stylesheet\\1)[^>]*>/gi)];
+const stylesheetTags = [...html.matchAll(/<link\b(?=[^>]*\brel=(["'])stylesheet\1)[^>]*>/gi)];
 for (const match of stylesheetTags) {
-  const href = match[0].match(/\\bhref=(["'])(.*?)\\1/i)?.[2];
+  const href = match[0].match(/\bhref=(["'])(.*?)\1/i)?.[2];
   if (!href) throw new Error("Stylesheet link has no href");
   const assetPath = await safeLocalPath(href, distRoot);
-  const css = inlineSafe(await readFile(assetPath, "utf8"), "</style");
-  html = html.replace(match[0], "<style>\\n" + css + "\\n</style>");
+  const css = escapeClosingTag(await readFile(assetPath, "utf8"), "style");
+  html = html.replace(match[0], "<style>\n" + css + "\n</style>");
 }
-html = html.replace(/<link\\b(?=[^>]*\\brel=(["'])modulepreload\\1)[^>]*>/gi, "");
+html = html.replace(/<link\b(?=[^>]*\brel=(["'])modulepreload\1)[^>]*>/gi, "");
 
 const publicGlb = resolve(projectRoot, "public/models/rtx3060_xc_black_blockout_v04.glb");
 if (await exists(publicGlb)) {
   const bytes = await readFile(publicGlb);
   const dataUrl = "data:model/gltf-binary;base64," + bytes.toString("base64");
   const preload = "<script>globalThis.SBS_BUNDLED_GLB_DATA_URL = " + JSON.stringify(dataUrl) + ";</script>";
-  html = html.replace("</head>", preload + "\\n</head>");
+  html = html.replace("</head>", preload + "\n</head>");
 }
 
-if (/<script\\b[^>]*\\bsrc=/i.test(html)) throw new Error("Standalone HTML still contains an external script");
-if (/<link\\b(?=[^>]*\\brel=(["'])stylesheet\\1)[^>]*\\bhref=/i.test(html)) throw new Error("Standalone HTML still contains an external stylesheet");
+if (/<script\b[^>]*\bsrc=/i.test(html)) throw new Error("Standalone HTML still contains an external script");
+if (/<link\b(?=[^>]*\brel=(["'])stylesheet\1)[^>]*\bhref=/i.test(html)) throw new Error("Standalone HTML still contains an external stylesheet");
 if (!html.includes('id="viewer-canvas"') || !html.includes('id="startup-fallback"')) {
   throw new Error("Generated HTML is missing required viewer shell elements");
 }
-if (!html.includes('globalThis.SBS_BUNDLED_GLB_DATA_URL') && await exists(publicGlb)) {
+if (!html.includes("SBS_BUNDLED_GLB_DATA_URL") && await exists(publicGlb)) {
   throw new Error("Generated HTML did not embed the staged Blender GLB");
 }
 for (const outputPath of htmlOutputPaths) await writeFile(outputPath, html, "utf8");
 
-const bytes = Buffer.byteLength(html);
 console.log(JSON.stringify({
   outputs: htmlOutputPaths.map((path) => relative(projectRoot, path)),
   inlinedScripts,
   stylesheetsInlined: stylesheetTags.length,
   embeddedGlb: html.includes("SBS_BUNDLED_GLB_DATA_URL"),
-  bytes
+  bytes: Buffer.byteLength(html)
 }, null, 2));
