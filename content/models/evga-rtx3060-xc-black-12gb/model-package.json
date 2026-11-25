@@ -14,6 +14,7 @@
     "process_layers": "process_layers.json",
     "assembly_steps": "assembly_steps.json",
     "learning": "learning.json",
-    "animations": "animations.json"
+    "animations": "animations.json",
+    "release": "release.json"
   }
 }
