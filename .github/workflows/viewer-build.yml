@@ -10,8 +10,12 @@ on:
   push:
     paths:
       - "src/**"
+      - "content/**"
+      - "e2e/**"
       - "index.html"
       - "package.json"
+      - "package-lock.json"
+      - "playwright.config.js"
       - "vite.config.js"
       - ".github/workflows/viewer-build.yml"
 
