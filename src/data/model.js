@@ -2,32 +2,6 @@ import MODEL_PACKAGE from "../../content/models/evga-rtx3060-xc-black-12gb/model
 import SOURCE_PACKAGE from "../../content/models/evga-rtx3060-xc-black-12gb/sources.json";
 import COMPONENT_PACKAGE from "../../content/models/evga-rtx3060-xc-black-12gb/components.json";
 
-export const MODEL = {
-  id: MODEL_PACKAGE.id,
-  name: MODEL_PACKAGE.product_name,
-  partNumber: MODEL_PACKAGE.part_number,
-  manufacturer: MODEL_PACKAGE.manufacturer,
-  status: MODEL_PACKAGE.geometry_status,
-  sources: SOURCE_PACKAGE.sources.map((source) => ({
-    id: source.id,
-    label: source.title,
-    url: source.url
-  }))
-};
-
-export const COMPONENTS = COMPONENT_PACKAGE.components.map((component) => ({
-  id: component.id,
-  parent: component.parent_id,
-  category: component.category,
-  en: component.name.en,
-  ru: component.name.ru,
-  descriptionEn: component.description.en,
-  descriptionRu: component.description.ru,
-  evidence: component.evidence_status,
-  geometry: component.geometry_status,
-  sourceIds: component.source_ids ?? []
-}));
-
 export const EVIDENCE = {
   manufacturer_data: {
     en: "Manufacturer specification",
@@ -84,3 +58,47 @@ export const EVIDENCE = {
     copyRu: "Надёжное значение отсутствует. Поле намеренно оставлено неизвестным."
   }
 };
+
+export function createModelDataAdapter(data) {
+  const modelPackage = data?.model;
+  const sourcePackage = data?.sources;
+  const componentPackage = data?.components;
+  if (!modelPackage?.id || !Array.isArray(sourcePackage?.sources) || !Array.isArray(componentPackage?.components)) {
+    throw new TypeError("Model package is missing model, sources or components data");
+  }
+  return {
+    model: {
+      id: modelPackage.id,
+      name: modelPackage.product_name ?? modelPackage.name ?? modelPackage.id,
+      partNumber: modelPackage.part_number ?? "",
+      manufacturer: modelPackage.manufacturer ?? "",
+      status: modelPackage.geometry_status ?? "unknown",
+      sources: sourcePackage.sources.map((source) => ({
+        id: source.id,
+        label: source.title ?? source.id,
+        url: source.url ?? ""
+      }))
+    },
+    components: componentPackage.components.map((component) => ({
+      id: component.id,
+      parent: component.parent_id ?? null,
+      category: component.category ?? "component",
+      en: component.name?.en ?? component.id,
+      ru: component.name?.ru ?? component.name?.en ?? component.id,
+      descriptionEn: component.description?.en ?? "",
+      descriptionRu: component.description?.ru ?? component.description?.en ?? "",
+      evidence: component.evidence_status ?? "unknown",
+      geometry: component.geometry_status ?? "unknown",
+      sourceIds: component.source_ids ?? []
+    })),
+    evidence: EVIDENCE
+  };
+}
+
+const DEFAULT_ADAPTER = createModelDataAdapter({
+  model: MODEL_PACKAGE,
+  sources: SOURCE_PACKAGE,
+  components: COMPONENT_PACKAGE
+});
+export const MODEL = DEFAULT_ADAPTER.model;
+export const COMPONENTS = DEFAULT_ADAPTER.components;
