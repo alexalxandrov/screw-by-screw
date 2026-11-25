@@ -905,7 +905,7 @@ function bindUI() {
   $("#model-file").addEventListener("change", async (event) => {
     const file = event.target.files?.[0];
     if (!file) return;
-    const isPackage = /\\.sbsmodel$/i.test(file.name);
+    const isPackage = /\.sbsmodel$/i.test(file.name);
     const sizeLimit = isPackage ? MAX_MODEL_PACKAGE_BYTES : MAX_GLB_BYTES;
     if (file.size > sizeLimit) {
       const message = isPackage ? t("packageTooLarge") : t("fileTooLarge");
