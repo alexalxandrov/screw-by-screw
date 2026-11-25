@@ -70,3 +70,10 @@ The assembly evidence panel now contains two partial steps grounded in the Tom's
 ## Reversible exploded-assembly animation
 
 A second package-authored animation clip, `clip.exploded-cooler-overview`, now moves the shroud, full cooling assembly, PCB/electronics assembly and connector assembly into separated display positions. It uses the generic `AnimationPlayer`, easing, seek, playback, stop/reset and the localized clip description. The clip is tagged `educational_approximation`; offsets are presentation coordinates and do not assert physical service clearances or a screw-by-screw removal order. A unit test checks every target's final transform and restoration, and the browser test selects, seeks and resets the clip.
+
+
+## GA106 compute and GDDR6 architecture tranche
+
+The semantic package now contains 117 components and 118 typed relationships. Thirteen logical-only nodes represent the 28-SM GA106 cluster, its CUDA/Tensor/RT/TMU/ROP aggregates, a 192-bit GDDR6 interface and six package-channel links to the six GDDR6 chips visible in the reviewed XC BLACK teardown. These nodes are exported as stable GLB assembly nodes so they can be selected, searched and inspected, but they carry `geometry_status: logical_only`: no physical die floorplan, shader wiring or PCB trace routing is drawn.
+
+A third process layer, `gpu_compute`, exposes this architecture map in the viewer. Claims cover the published 28 SM / 112 Tensor / 28 RT / 112 TMU / 48 ROP configuration, 276 mm² and 12-billion-transistor GA106 die figures, Samsung 8N, and memory device attributes where available. The memory-package details are explicitly sourced to a secondary catalog entry rather than a primary Samsung datasheet. The viewer labels this as a logical map, not an architecture simulation.

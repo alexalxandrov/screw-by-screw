@@ -50,3 +50,8 @@ The interactive assembly panel has two source-backed disassembly steps: eight re
 ### Reversible exploded assembly view
 
 A second animation separates the fan shroud, cooler, PCB/electronics and connector groups so that the card's major layers can be inspected. The animation is reversible, seekable and resettable. It is an explanatory layout, not a measured clearance or an instruction sequence.
+
+
+### GA106 and GDDR6 architecture
+
+The model package adds a separately selectable logical architecture tree: 28 SMs, aggregate CUDA/Tensor/RT/TMU/ROP units, the 192-bit memory interface and six logical package-channel links. A third viewer process layer exposes these nodes. Logical-only geometry means these are inspectable semantic nodes, not physical die blocks, memory-controller floorplan or PCB copper routes. K4ZAF325BM-HC16 package parameters are attributed to a secondary catalog listing; they are not promoted to primary Samsung-datasheet status.

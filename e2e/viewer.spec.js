@@ -236,6 +236,20 @@ test("a missing optional bundled model does not reset active user interaction", 
 });
 
 
+test("GPU architecture layer exposes source-linked logical GA106 and GDDR6 nodes", async ({ page }) => {
+  await page.goto("/");
+  await page.locator('.process-button[data-layer="gpu_compute"]').click();
+  await expect(page.locator("#process-detail-title")).toContainText("Архитектура вычислений GA106");
+  const linked = page.locator("#process-components .process-component-chip");
+  await expect(linked).toHaveCount(21);
+  await expect(linked).toContainText("Кластер потоковых мультипроцессоров Ampere");
+  await expect(linked).toContainText("Канал корпуса GDDR6 06");
+  await expect(page.locator("#process-assumptions")).toContainText("не воспроизводят физическую топологию GA106");
+  await expect(page.locator("#process-sources a")).toHaveCount(5);
+  await page.locator('.process-button[data-layer="clear"]').click();
+  await expect(page.locator("#process-details")).toBeHidden();
+});
+
 test("partial teardown steps and source observations are both shown without conflating them", async ({ page }) => {
   await page.goto("/");
   await page.locator('#component-tree button[data-id="assembly.card.root"]').click();
