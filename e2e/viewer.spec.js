@@ -113,8 +113,10 @@ test("keeps the shell styled and explains when the app entry module fails", asyn
 
 test("measurement mode is reversible, keyboard-accessible and labelled as model-space only", async ({ page }) => {
   await page.goto("/");
+  const processPanel = page.locator("#process-panel");
   const toggle = page.locator("#measurement-toggle");
   const readout = page.locator("#measurement-readout");
+  await expect(processPanel).toHaveCSS("overflow-y", "auto");
   await expect(toggle).toBeEnabled();
   await expect(toggle).toHaveAttribute("aria-pressed", "false");
   await expect(readout).toContainText("Измерение выключено");
