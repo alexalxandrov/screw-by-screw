@@ -3,7 +3,7 @@
  * Turn Vite's production HTML entry into a self-contained root index.html.
  * The generated file is designed to be opened directly with file://.
  */
-import { access, readFile, writeFile, unlink } from "node:fs/promises";
+import { access, readFile, writeFile, unlink, rename } from "node:fs/promises";
 import { dirname, isAbsolute, relative, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import { spawnSync } from "node:child_process";
@@ -93,12 +93,17 @@ if (!html.includes('id="viewer-canvas"') || !html.includes('id="startup-fallback
 if (!html.includes("SBS_BUNDLED_GLB_DATA_URL") && await exists(publicGlb)) {
   throw new Error("Generated HTML did not embed the staged Blender GLB");
 }
-for (const outputPath of htmlOutputPaths) await writeFile(outputPath, html, "utf8");
+for (const outputPath of htmlOutputPaths) {
+  const temporaryPath = outputPath + ".tmp";
+  await writeFile(temporaryPath, html, "utf8");
+  await rename(temporaryPath, outputPath);
+}
 
 console.log(JSON.stringify({
   outputs: htmlOutputPaths.map((path) => relative(projectRoot, path)),
   inlinedScripts,
   stylesheetsInlined: stylesheetTags.length,
   embeddedGlb: html.includes("SBS_BUNDLED_GLB_DATA_URL"),
+  launchMode: "file:// self-contained HTML",
   bytes: Buffer.byteLength(html)
 }, null, 2));
