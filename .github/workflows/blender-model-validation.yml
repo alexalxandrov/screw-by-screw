@@ -1,6 +1,6 @@
 name: Blender blockout generation
 concurrency:
-  group: blender-model-validation-${{ github.ref }}
+  group: blender-model-validation-${{ github.head_ref || github.ref_name }}
   cancel-in-progress: true
 
 on:
