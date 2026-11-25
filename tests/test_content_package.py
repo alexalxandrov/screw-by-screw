@@ -162,6 +162,8 @@ class ContentPackageTests(unittest.TestCase):
 
     def test_pilot_rotors_are_separate_proxy_components_and_animation_targets(self):
         package_dir = ROOT / "content" / "models" / "evga-rtx3060-xc-black-12gb"
+        manifest = manifest_builder.build_manifest(package_dir)
+        self.assertIn("animations.json", {item["path"] for item in manifest["files"]})
         package = validator.load_package(package_dir)
         report = validator.validate_package(package, package_dir)
         components = {item["id"]: item for item in package["components"]["components"]}
