@@ -74,11 +74,12 @@ export class SceneController {
     this.cancelAnimation();
     const from = this.explodeProgress;
     const to = THREE.MathUtils.clamp(Number(target) || 0, 0, 100);
-    const start = performance.now();
+    let start = null;
     const total = Math.max(1, Number(duration) || 1);
     return new Promise((resolve) => {
       this.animationResolve = resolve;
       const tick = (now) => {
+        if (start === null) start = now;
         const linear = THREE.MathUtils.clamp((now - start) / total, 0, 1);
         const eased = linear * linear * (3 - 2 * linear);
         this.applyExplode(from + (to - from) * eased);
@@ -97,11 +98,12 @@ export class SceneController {
     this.cancelAnimation();
     const startRotation = object.rotation[axis];
     const delta = Math.PI * 2 * Number(turns || 1);
-    const start = performance.now();
+    let start = null;
     const total = Math.max(1, Number(duration) || 1);
     return new Promise((resolve) => {
       this.animationResolve = resolve;
       const tick = (now) => {
+        if (start === null) start = now;
         const linear = THREE.MathUtils.clamp((now - start) / total, 0, 1);
         const eased = linear * linear * (3 - 2 * linear);
         object.rotation[axis] = startRotation + delta * eased;
