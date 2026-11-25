@@ -9,6 +9,7 @@ export class SceneController {
     this.explodeProgress = 0;
     this.explodable = [];
     this.nodesById = new Map();
+    this.duplicateIds = [];
     this.visibilitySnapshot = null;
     this.animationFrame = null;
     this.animationResolve = null;
@@ -18,11 +19,13 @@ export class SceneController {
   capture() {
     this.root.updateMatrixWorld(true);
     this.nodesById.clear();
+    this.duplicateIds = [];
     const tagged = [];
     this.root.traverse((object) => {
       const id = object.userData?.sbs_component_id;
       if (typeof id !== "string" || !id) return;
       if (!this.nodesById.has(id)) this.nodesById.set(id, object);
+      else this.duplicateIds.push(id);
       tagged.push(object);
     });
     const center = new THREE.Box3().setFromObject(this.root).getCenter(new THREE.Vector3());
