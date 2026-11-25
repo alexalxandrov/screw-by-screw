@@ -30,7 +30,9 @@ test("catalog search is bilingual and retains the query when the UI language cha
   await page.locator("#catalog-search").fill("видеокарты");
   await expect(page.locator("#catalog-results .catalog-card")).toHaveCount(1);
 
+  await page.locator("#catalog-close").click();
   await page.locator("#language-toggle").click();
+  await page.locator("#catalog-open").click();
   await expect(page.locator("#catalog-title")).toHaveText("MODEL LIBRARY");
   await expect(page.locator("#catalog-search")).toHaveValue("видеокарты");
   await expect(page.locator("#catalog-results .catalog-card")).toHaveCount(1);

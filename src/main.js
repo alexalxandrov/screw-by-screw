@@ -1928,6 +1928,10 @@ function loadArrayBuffer(buffer, filename, mode = "file", packageData = null, { 
           const materials = Array.isArray(object.material) ? object.material : [object.material];
           materials.filter(Boolean).forEach((material) => material.dispose());
         });
+        if (loadRequestId === state.loadRequestId && cancelIfInteracted && state.userInteracted) {
+          setLoadState(t("demoLoaded"));
+          setStatus(t("modelLoaded"));
+        }
         return;
       }
       try {
