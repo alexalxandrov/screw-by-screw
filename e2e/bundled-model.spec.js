@@ -54,6 +54,8 @@ test("loads the generated Blender v0.5 GLB and resolves content-package IDs", as
   await page.locator("#power-toggle").click();
   await expect(page.locator("#power-toggle")).toHaveAttribute("aria-pressed", "true");
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-process-visuals", "airflow,power");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-fan-spin", "true");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-flow-motion", "true");
   await page.locator("#power-toggle").click();
   await expect(page.locator("#power-toggle")).toHaveAttribute("aria-pressed", "false");
   expect(pageErrors).toEqual([]);
@@ -106,4 +108,15 @@ test("opens the self-contained root index.html directly with the embedded Blende
   await expect(page.locator("#power-toggle")).toHaveAttribute("aria-pressed", "true");
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-process-visuals", "airflow,power");
   expect(pageErrors).toEqual([]);
+});
+
+
+test("keeps process paths but suppresses continuous animation for reduced-motion users", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-reduced-motion", "true");
+  await page.locator("#power-toggle").click();
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-process-visuals", "airflow,power");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-fan-spin", "false");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-flow-motion", "false");
 });

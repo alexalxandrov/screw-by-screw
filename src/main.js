@@ -684,6 +684,7 @@ function updateSlicePlane() {
   if (!state.renderer || !state.modelRoot) return;
   if (!state.sliceEnabled) {
     state.renderer.clippingPlanes = [];
+    canvasHost.dataset.slicePlaneCount = "0";
     canvasHost.dataset.sliceEnabled = "false";
     return;
   }
@@ -700,6 +701,7 @@ function updateSlicePlane() {
   state.slicePlane.normal.copy(normal);
   state.slicePlane.constant = -position;
   state.renderer.clippingPlanes = [state.slicePlane];
+  canvasHost.dataset.slicePlaneCount = "1";
   canvasHost.dataset.sliceEnabled = "true";
   canvasHost.dataset.sliceAxis = state.sliceAxis;
   canvasHost.dataset.sliceFraction = String(Number(state.sliceFraction.toFixed(2)));
@@ -866,16 +868,25 @@ function collectFanRotors(root) {
     }
   }
   canvasHost.dataset.fanRotors = String(state.fanRotors.length);
+  canvasHost.dataset.fanSpin = "false";
+  canvasHost.dataset.flowMotion = "false";
 }
 
 function updateOperatingEffects(delta) {
-  if (!state.powered || state.reducedMotion) return;
+  if (!state.powered || state.reducedMotion) {
+    canvasHost.dataset.fanSpin = "false";
+    canvasHost.dataset.flowMotion = "false";
+    return;
+  }
   const rotation = delta * 10.5 * state.simulationSpeed;
   state.fanRotors.forEach(({ object, axis }) => { object.rotation[axis] += rotation; });
   state.flowParticles.forEach((particle) => {
     particle.phase = (particle.phase + delta * particle.speed * state.simulationSpeed) % 1;
     particle.mesh.position.copy(particle.curve.getPointAt(particle.phase));
   });
+  const spinning = state.fanRotors.some(({ object, axis }) => Math.abs(object.rotation[axis]) > 0.01);
+  canvasHost.dataset.fanSpin = String(spinning);
+  canvasHost.dataset.flowMotion = String(state.flowParticles.length > 0);
 }
 
 function setPowered(enabled) {
@@ -887,6 +898,10 @@ function setPowered(enabled) {
     button.setAttribute("aria-pressed", String(state.powered));
   }
   document.body.dataset.sbsPowered = String(state.powered);
+  if (!state.powered || state.reducedMotion) {
+    canvasHost.dataset.fanSpin = "false";
+    canvasHost.dataset.flowMotion = "false";
+  }
   if (state.powered && !state.activeLayer) setLayer("cooling");
   else buildProcessVisuals();
   if (state.powered) {

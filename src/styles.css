@@ -178,7 +178,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); ou
   .brand-copy small { font-size: 7px; }
   .topbar-actions { margin-left: auto; }
   .quiet-button { display: none; }
-  .viewer-toolbar { padding: 0 8px; gap: 5px; flex-wrap: wrap; height: auto; min-height: 52px; }
+  .viewer-toolbar { flex: 0 0 auto; padding: 8px; gap: 5px; flex-wrap: wrap; height: auto; min-height: 52px; }
   .view-tab { padding: 8px 7px; font-size: 9px; }
   .toolbar-camera { margin: 0 4px; }
   .camera-preset { max-width: 118px; padding: 6px 5px; font-size: 8px; }
