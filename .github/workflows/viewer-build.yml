@@ -11,6 +11,7 @@ on:
   push:
     paths:
       - "src/**"
+      - "tests/viewer-scene-controller.test.js"
       - "content/**"
       - "e2e/**"
       - "index.html"
@@ -47,6 +48,8 @@ jobs:
           gh workflow run viewer-build.yml --ref "${GITHUB_REF_NAME}"
       - name: Install locked dependencies
         run: npm ci --no-audit --no-fund
+      - name: Run viewer engine unit tests
+        run: npm run test:unit
       - name: Install Chromium and Firefox for browser tests
         run: npx playwright install --with-deps chromium firefox
       - name: Build production viewer
