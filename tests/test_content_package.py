@@ -181,8 +181,8 @@ class ContentPackageTests(unittest.TestCase):
             self.assertEqual(edge["from"], fan_id)
             self.assertEqual(edge["to"], rotor_id)
 
-        self.assertIn("Components: 48", report)
-        self.assertIn("Relationships: 43", report)
+        self.assertIn("Components: 53", report)
+        self.assertIn("Relationships: 48", report)
         self.assertIn("Animation clips: 1", report)
         clip = package["animations"]["clips"][0]
         self.assertEqual(clip["evidence_status"], "educational_approximation")
