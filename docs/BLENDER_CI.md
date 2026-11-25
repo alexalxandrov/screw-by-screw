@@ -11,7 +11,7 @@ The repository includes a reproducible headless generation workflow for the v0.5
 - Enforces a 1 MiB GLB asset-size budget.
 - Uploads the .blend, .glb, manifest and inspection reports as a seven-day workflow artifact.
 
-The latest successful end-to-end run generated 84 Blender objects (74 meshes and 10 assembly nodes) and exported 69 stable-ID GLB nodes. The 22 canonical content components all resolved to GLB nodes with the expected ancestry. The generated model loaded in the Three.js viewer, and the heatsink assembly could be selected through the cooling process layer.
+The latest successful end-to-end run generated 84 Blender objects (74 meshes and 10 assembly nodes) and exported 83 stable-ID GLB nodes. The 22 canonical content components all resolved to GLB nodes with the expected ancestry. The generated model loaded in the Three.js viewer, and the heatsink assembly could be selected through the cooling process layer.
 
 The v0.5 scene adds a teardown-supported-but-not-measured heatpipe group and an unverified power-conversion proxy group. Their geometry is deliberately labelled as illustrative. The process viewer can animate fan rotation and directional particles, but the latter are not a CFD or electrical simulation.
 

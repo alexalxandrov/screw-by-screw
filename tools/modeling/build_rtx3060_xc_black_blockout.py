@@ -279,7 +279,7 @@ def annular_ring(name, component_id, location, outer_radius, inner_radius,
     return tag(obj, component_id, STATUS["reviewer_measurement"])
 
 
-def cylinder_between(name, start, end, radius, mat, collection, parent):
+def cylinder_between(name, component_id, start, end, radius, mat, collection, parent):
     """Create an untagged mesh segment between two points; source route is illustrative."""
     start_v, end_v = Vector(start), Vector(end)
     direction = end_v - start_v
@@ -294,7 +294,7 @@ def cylinder_between(name, start, end, radius, mat, collection, parent):
     obj.data.materials.append(mat)
     move_to_collection(obj, collection)
     set_parent_keep_world(obj, parent)
-    return obj
+    return tag(obj, component_id, STATUS["illustrative"])
 
 
 def curved_fan_blade(index, blade_index, count, center, base_y, collection):
@@ -702,6 +702,7 @@ def main():
     for pipe_index, path in enumerate(heatpipe_paths, start=1):
         for segment_index, (start, end) in enumerate(zip(path, path[1:]), start=1):
             cylinder_between(f"Heatpipe proxy {pipe_index} segment {segment_index}",
+                f"cooling.heatpipes.proxy.{pipe_index}.{segment_index}",
                 start, end, 1.6, MAT["heatpipe"], cool, heatpipes_group)
 
     # Rear-side exposed PCB proxy: exact outline and position remain unknown.
