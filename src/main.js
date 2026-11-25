@@ -3,12 +3,14 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { SceneController } from "./viewer/SceneController.js";
 import { MeasurementController } from "./viewer/MeasurementController.js";
+import { AnimationPlayer } from "./viewer/AnimationPlayer.js";
 import { MODEL as DEFAULT_MODEL, COMPONENTS as DEFAULT_COMPONENTS, EVIDENCE, createModelDataAdapter } from "./data/model.js";
 import DEFAULT_LEARNING_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/learning.json";
 import DEFAULT_PROCESS_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/process_layers.json";
 import DEFAULT_CLAIM_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/claims.json";
 import DEFAULT_RELATIONSHIP_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/relationships.json";
 import DEFAULT_ASSEMBLY_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/assembly_steps.json";
+import DEFAULT_ANIMATION_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/animations.json";
 import { loadModelPackage, validateSelfContainedGlb, MAX_MODEL_PACKAGE_BYTES, MAX_SCENE_GLB_BYTES } from "./viewer/ModelPackageLoader.js";
 
 let MODEL = DEFAULT_MODEL;
@@ -18,6 +20,7 @@ let PROCESS_PACKAGE = DEFAULT_PROCESS_PACKAGE;
 let CLAIM_PACKAGE = DEFAULT_CLAIM_PACKAGE;
 let RELATIONSHIP_PACKAGE = DEFAULT_RELATIONSHIP_PACKAGE;
 let ASSEMBLY_PACKAGE = DEFAULT_ASSEMBLY_PACKAGE;
+let ANIMATION_PACKAGE = DEFAULT_ANIMATION_PACKAGE;
 
 const $ = (selector) => document.querySelector(selector);
 const canvasHost = $("#viewer-canvas");
@@ -64,7 +67,8 @@ const state = {
   slicePlane: new THREE.Plane(new THREE.Vector3(1, 0, 0), 0),
   measurementController: null,
   measurementEnabled: false,
-  userInteracted: false
+  userInteracted: false,
+  animationPlayer: null
 };
 
 const MAX_GLB_BYTES = MAX_SCENE_GLB_BYTES;
@@ -93,7 +97,7 @@ const UI = {
     allVisible: "All components visible", layerCooling: "Cooling layer · qualitative",
     layerPower: "Power path · qualitative", noWebgl: "WebGL is unavailable in this browser.",
     source: "Source", noSources: "No direct source linked to this component.",
-    modelLoaded: "Model ready", glbPicker: "Choose a .glb file", learn: "Learn", learning: "LEARNING", linkedComponents: "LINKED COMPONENTS", assumptions: "ASSUMPTIONS & LIMITS", processLayer: "PROCESS LAYER", fileTooLarge: "GLB exceeds the 256 MB limit.", packageTooLarge: "SBS model package exceeds the 512 MB limit.", externalResources: "This GLB references external files. Only self-contained GLB files are allowed.", question: "QUESTION", checkAnswer: "Check answer", nextQuestion: "Next question", finishQuiz: "Finish", restartQuiz: "Try again", correctAnswer: "Correct", wrongAnswer: "Not quite", quizComplete: "Quiz complete", yourScore: "Your score", chooseAnswer: "Choose an answer first"
+    modelLoaded: "Model ready", glbPicker: "Choose a .glb file", learn: "Learn", learning: "LEARNING", authoredAnimations: "PACKAGE ANIMATIONS", clipSelect: "Select clip", clipTimeline: "Animation timeline", clipPlay: "Play", clipPause: "Pause", clipStop: "Stop / reset", clipReady: "Ready", clipPlaying: "Playing", clipPaused: "Paused", clipCompleted: "Completed", clipTime: "TIME", clipEvidenceNote: "Authored model motion · not a physics simulation", linkedComponents: "LINKED COMPONENTS", assumptions: "ASSUMPTIONS & LIMITS", processLayer: "PROCESS LAYER", fileTooLarge: "GLB exceeds the 256 MB limit.", packageTooLarge: "SBS model package exceeds the 512 MB limit.", externalResources: "This GLB references external files. Only self-contained GLB files are allowed.", question: "QUESTION", checkAnswer: "Check answer", nextQuestion: "Next question", finishQuiz: "Finish", restartQuiz: "Try again", correctAnswer: "Correct", wrongAnswer: "Not quite", quizComplete: "Quiz complete", yourScore: "Your score", chooseAnswer: "Choose an answer first"
   },
   ru: {
     modelLabel: "МОДЕЛЬ", structure: "СТРУКТУРА", components: "Компоненты",
@@ -118,13 +122,102 @@ const UI = {
     allVisible: "Все компоненты видимы", layerCooling: "Слой охлаждения · качественно",
     layerPower: "Путь питания · качественно", noWebgl: "В этом браузере недоступен WebGL.",
     source: "Источник", noSources: "Для этого компонента нет прямой ссылки на источник.",
-    modelLoaded: "Модель готова", glbPicker: "Выберите файл .glb", learn: "Обучение", learning: "ОБУЧЕНИЕ", linkedComponents: "СВЯЗАННЫЕ КОМПОНЕНТЫ", assumptions: "ДОПУЩЕНИЯ И ОГРАНИЧЕНИЯ", processLayer: "СЛОЙ ПРОЦЕССА", fileTooLarge: "GLB превышает лимит 256 МБ.", packageTooLarge: "Пакет SBS model превышает лимит 512 МБ.", externalResources: "Этот GLB ссылается на внешние файлы. Разрешены только самодостаточные GLB.", question: "ВОПРОС", checkAnswer: "Проверить ответ", nextQuestion: "Следующий вопрос", finishQuiz: "Завершить", restartQuiz: "Повторить", correctAnswer: "Верно", wrongAnswer: "Не совсем", quizComplete: "Тест завершён", yourScore: "Ваш результат", chooseAnswer: "Сначала выберите ответ"
+    modelLoaded: "Модель готова", glbPicker: "Выберите файл .glb", learn: "Обучение", learning: "ОБУЧЕНИЕ", authoredAnimations: "АНИМАЦИИ ПАКЕТА", clipSelect: "Выберите клип", clipTimeline: "Шкала анимации", clipPlay: "Пуск", clipPause: "Пауза", clipStop: "Стоп / сброс", clipReady: "Готово", clipPlaying: "Воспроизведение", clipPaused: "Пауза", clipCompleted: "Завершено", clipTime: "ВРЕМЯ", clipEvidenceNote: "Анимация из пакета · не физическая симуляция", linkedComponents: "СВЯЗАННЫЕ КОМПОНЕНТЫ", assumptions: "ДОПУЩЕНИЯ И ОГРАНИЧЕНИЯ", processLayer: "СЛОЙ ПРОЦЕССА", fileTooLarge: "GLB превышает лимит 256 МБ.", packageTooLarge: "Пакет SBS model превышает лимит 512 МБ.", externalResources: "Этот GLB ссылается на внешние файлы. Разрешены только самодостаточные GLB.", question: "ВОПРОС", checkAnswer: "Проверить ответ", nextQuestion: "Следующий вопрос", finishQuiz: "Завершить", restartQuiz: "Повторить", correctAnswer: "Верно", wrongAnswer: "Не совсем", quizComplete: "Тест завершён", yourScore: "Ваш результат", chooseAnswer: "Сначала выберите ответ"
   }
 };
 
 function t(key) { return UI[state.language][key] ?? key; }
 function setStatus(message) { $("#app-status").textContent = message; }
 function setLoadState(message) { $("#load-state").textContent = message; }
+
+
+function renderAnimationClipOptions() {
+  const select = $("#animation-clip-select");
+  const panel = $("#animation-player-panel");
+  if (!select || !panel) return;
+  const clips = Array.isArray(ANIMATION_PACKAGE.clips) ? ANIMATION_PACKAGE.clips : [];
+  panel.hidden = clips.length === 0 || !state.animationPlayer;
+  const selectedId = state.animationPlayer?.clip?.id ?? clips[0]?.id ?? "";
+  select.replaceChildren();
+  clips.forEach((clip) => {
+    const option = document.createElement("option");
+    option.value = clip.id;
+    option.textContent = localizedPackageText(clip.title) || clip.id;
+    select.append(option);
+  });
+  select.value = selectedId;
+  select.setAttribute("aria-label", t("clipSelect"));
+  $("#animation-seek")?.setAttribute("aria-label", t("clipTimeline"));
+  updateAnimationPlayerUI();
+}
+
+function animationStatusLabel(status) {
+  const labels = {
+    idle: "clipReady",
+    ready: "clipReady",
+    playing: "clipPlaying",
+    paused: "clipPaused",
+    completed: "clipCompleted"
+  };
+  return t(labels[status] ?? "clipReady");
+}
+
+function updateAnimationPlayerUI(snapshot = state.animationPlayer?.getSnapshot()) {
+  const panel = $("#animation-player-panel");
+  if (!panel) return;
+  if (!state.animationPlayer || !snapshot?.clipId) {
+    panel.hidden = true;
+    if (canvasHost) canvasHost.dataset.animationStatus = "idle";
+    return;
+  }
+  panel.hidden = false;
+  panel.dataset.status = snapshot.status;
+  if (canvasHost) {
+    canvasHost.dataset.animationStatus = snapshot.status;
+    canvasHost.dataset.animationProgress = String(snapshot.progress);
+  }
+  const select = $("#animation-clip-select");
+  const play = $("#animation-play");
+  const pause = $("#animation-pause");
+  const stop = $("#animation-stop");
+  const seek = $("#animation-seek");
+  const status = $("#animation-status");
+  const time = $("#animation-time");
+  if (select && select.value !== snapshot.clipId) select.value = snapshot.clipId;
+  if (play) play.disabled = snapshot.status === "playing";
+  if (pause) pause.disabled = snapshot.status !== "playing";
+  if (stop) stop.disabled = snapshot.status === "ready" && snapshot.time === 0;
+  if (seek) {
+    seek.disabled = false;
+    seek.value = String(Math.round(snapshot.progress * 1000));
+  }
+  if (status) {
+    status.textContent = animationStatusLabel(snapshot.status);
+    status.dataset.status = snapshot.status;
+  }
+  if (time) time.textContent = `${(snapshot.time / 1000).toFixed(2)} / ${(snapshot.duration / 1000).toFixed(2)} s`;
+}
+
+function setupAnimationPlayer(root) {
+  state.animationPlayer?.dispose();
+  state.animationPlayer = null;
+  const clips = Array.isArray(ANIMATION_PACKAGE.clips) ? ANIMATION_PACKAGE.clips : [];
+  const panel = $("#animation-player-panel");
+  if (!clips.length || !root) {
+    if (panel) panel.hidden = true;
+    if (canvasHost) {
+      canvasHost.dataset.animationStatus = "idle";
+      canvasHost.dataset.animationProgress = "0";
+    }
+    return;
+  }
+  state.animationPlayer = new AnimationPlayer(root, clips, {
+    onChange: (snapshot) => updateAnimationPlayerUI(snapshot)
+  });
+  state.animationPlayer.setSpeed(state.simulationSpeed);
+  renderAnimationClipOptions();
+  state.animationPlayer.selectClip(clips[0].id);
+}
 
 function applyLanguage() {
   document.documentElement.lang = state.language;
@@ -142,6 +235,7 @@ function applyLanguage() {
   else if (state.learningMode) renderLearning();
   else if (state.selectedId) renderDetails(state.selectedId);
   updateMeasurementReadout();
+  renderAnimationClipOptions();
 }
 
 function tag(object, id, evidence = "illustrative", geometry = "proxy") {
@@ -1174,12 +1268,15 @@ function updateExplodeUi(value) {
 
 function setExplode(value) {
   if (!state.sceneController) return;
+  const clipState = state.animationPlayer?.getSnapshot();
+  if (clipState && clipState.status !== "idle" && clipState.status !== "ready") state.animationPlayer.stop();
   state.sceneController.setExplode(value);
   updateExplodeUi(value);
 }
 
 async function animateExplodeCycle() {
   if (!state.sceneController) return;
+  state.animationPlayer?.stop();
   const controller = state.sceneController;
   const button = $("#animate-button");
   button.disabled = true;
@@ -1354,6 +1451,7 @@ function setPowered(enabled) {
 
 function setSimulationSpeed(value) {
   state.simulationSpeed = THREE.MathUtils.clamp(Number(value) || 1, 0.25, 2);
+  state.animationPlayer?.setSpeed(state.simulationSpeed);
   const output = $("#simulation-speed-value");
   if (output) output.textContent = `${state.simulationSpeed.toFixed(2)}×`;
 }
@@ -1434,6 +1532,8 @@ function disposeModel(root) {
 }
 
 function installModel(root, mode) {
+  state.animationPlayer?.dispose();
+  state.animationPlayer = null;
   if (state.sceneController) state.sceneController.reset();
   disposeProcessVisuals();
   state.measurementController?.clear();
@@ -1490,6 +1590,7 @@ function installModel(root, mode) {
   state.sceneController = new SceneController(root);
   fitModel(root);
   setExplode(0);
+  setupAnimationPlayer(root);
   setLoadState(mode === "package" ? t("loadedPackage") : mode === "file" ? t("loadedGlb") : mode === "bundled" ? t("loadedBundled") : t("demoLoaded"));
   setStatus(state.modelWarnings.length ? 'Duplicate component IDs: ' + [...new Set(state.modelWarnings)].join(', ') : t('modelLoaded'));
 }
@@ -1512,6 +1613,7 @@ function applyPackageData(packageData) {
   CLAIM_PACKAGE = packageData.claims ?? { claims: [] };
   RELATIONSHIP_PACKAGE = packageData.relationships ?? { relationships: [] };
   ASSEMBLY_PACKAGE = packageData.assembly_steps ?? { steps: [], observations: [] };
+  ANIMATION_PACKAGE = packageData.animations ?? { clips: [] };
   state.catalog = new Map(COMPONENTS.map((item) => [item.id, item]));
   state.learningMode = false;
   state.learningIndex = 0;
@@ -1545,6 +1647,7 @@ function useGenericModelData(filename) {
   CLAIM_PACKAGE = { claims: [] };
   RELATIONSHIP_PACKAGE = { relationships: [] };
   ASSEMBLY_PACKAGE = { steps: [], observations: [] };
+  ANIMATION_PACKAGE = { clips: [] };
   state.catalog = new Map();
   state.learningMode = false;
   updateModelHeader();
@@ -1794,6 +1897,11 @@ function bindUI() {
   $("#explode-slider").addEventListener("input", (event) => setExplode(event.target.value));
   $("#power-toggle").addEventListener("click", () => setPowered(!state.powered));
   $("#simulation-speed").addEventListener("input", (event) => setSimulationSpeed(event.target.value));
+  $("#animation-clip-select").addEventListener("change", (event) => state.animationPlayer?.selectClip(event.target.value));
+  $("#animation-play").addEventListener("click", () => state.animationPlayer?.play());
+  $("#animation-pause").addEventListener("click", () => state.animationPlayer?.pause());
+  $("#animation-stop").addEventListener("click", () => state.animationPlayer?.stop());
+  $("#animation-seek").addEventListener("input", (event) => state.animationPlayer?.seek(Number(event.target.value) / 1000));
   $("#quiz-next").addEventListener("click", submitLearningAnswer);
   setSimulationSpeed($("#simulation-speed")?.value ?? 1);
   $("#assemble-button").addEventListener("click", () => setExplode(0));
@@ -1840,6 +1948,7 @@ function bindUI() {
     }
     if (event.key === "Escape") {
       setMeasurementEnabled(false);
+      state.animationPlayer?.stop();
       setIsolated(false);
       setExplode(0);
       setLayer("clear");

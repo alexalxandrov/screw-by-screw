@@ -64,3 +64,8 @@ No feature is marked complete only because its control appears. Each new interac
 ## Assembly evidence and step authoring
 
 The viewer has a model-package-driven disassembly evidence panel. It displays authored, source-backed assembly steps separately from source observations. The RTX 3060 pilot deliberately keeps the sequence empty; its current teardown timecodes are presented as localized source observations, not a verified removal order. The loader enforces unique step IDs and sequence numbers, valid component/source references, resolvable prerequisites and explicit source provenance.
+
+
+## Package-authored animation playback
+
+The generic runtime now reads validated clips from animations.json and provides clip selection, play/pause, normalized seek, speed control, completion and deterministic stop/reset. The runtime is independent of GPU-specific content. The pilot package intentionally keeps clips empty until an exact-model motion sequence has an evidence basis; existing fan/airflow/power visuals are viewer-generated educational effects.
