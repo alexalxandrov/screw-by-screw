@@ -1,4 +1,7 @@
 name: Model package validation
+concurrency:
+  group: model-package-validation-${{ github.ref }}
+  cancel-in-progress: true
 
 on:
   push:
