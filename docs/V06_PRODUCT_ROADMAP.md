@@ -27,7 +27,7 @@ Evolve the current viewer from a model inspector into a small engineering worksp
 1. **Exploded timeline:** authored, reversible steps with target component IDs, camera focus and explanatory text. No repair/disassembly step until the full exact-model teardown sequence is reviewed.
 2. **Measurement calibration:** calibrated photo references, registered reference planes, uncertainty bounds, and an evidence class for every derived measurement. The current ruler reports model-space distances only.
 3. **Component and source search:** search by name, stable ID, package marking, claim, source and reference designator when verified.
-4. **Revision comparison:** compare exact SKUs and PCB revisions without merging geometry or claims between them.
+4. **Revision comparison:** semantic Compare mode is implemented for two validated packages; exact-SKU identity, nested specifications, evidence-backed claims and package component-ID coverage remain separate. Geometry overlays and physical revision claims are explicitly out of scope until supported by exact CAD/PCB evidence.
 5. **Thermal visualization:** optional educational gradient or numeric field only when its input assumptions are visible. Separate measured sensor values, calculated estimates and illustrative gradients.
 6. **Package and data export:** canonical component inventory and BOM export only where a source-backed BOM exists.
 
