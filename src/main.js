@@ -72,6 +72,7 @@ const state = {
   measurementEnabled: false,
   userInteracted: false,
   animationPlayer: null,
+  loadRequestId: 0,
   loadedCatalogModelId: null,
   pendingCatalogModelId: null,
   catalogSearch: "",
@@ -406,6 +407,7 @@ async function openCatalogEntry(entry) {
   }
   state.catalogLoadingId = entry.id;
   renderCatalog();
+  let handedToViewer = false;
   try {
     const loaded = await fetchCatalogPackage(entry);
     if (!loaded) {
@@ -416,14 +418,16 @@ async function openCatalogEntry(entry) {
       return;
     }
     closeCatalog();
+    handedToViewer = true;
     loadArrayBuffer(loaded.modelPackage.sceneBuffer, loaded.filename, "package", loaded.modelPackage.data);
     setStatus(`Package validated · ${loaded.modelPackage.report.componentCount} components · ${loaded.modelPackage.report.relationshipCount} relationships`);
   } catch (error) {
+    state.catalogLoadingId = null;
     $("#viewer-error").hidden = false;
     $("#viewer-error").textContent = `${t("catalogError")} ${error.message || ""}`;
     setStatus(t("catalogError"));
   } finally {
-    state.catalogLoadingId = null;
+    if (!handedToViewer) state.catalogLoadingId = null;
     renderCatalog();
   }
 }
@@ -1839,6 +1843,7 @@ function applyPackageData(packageData) {
   state.learningAnswered = false;
   state.learningComplete = false;
   state.loadedCatalogModelId = MODEL_CATALOG.models.find((entry) => entry.packageModelId === MODEL.id)?.id ?? null;
+  state.catalogLoadingId = null;
   updateModelHeader();
   renderCatalog();
   document.querySelectorAll(".process-button").forEach((button) => {
@@ -1869,6 +1874,7 @@ function useGenericModelData(filename) {
   ANIMATION_PACKAGE = { clips: [] };
   state.catalog = new Map();
   state.loadedCatalogModelId = null;
+  state.catalogLoadingId = null;
   renderCatalog();
   state.learningMode = false;
   updateModelHeader();
@@ -1880,12 +1886,20 @@ function useGenericModelData(filename) {
   });
 }
 
-function loadArrayBuffer(buffer, filename, mode = "file", packageData = null) {
+function loadArrayBuffer(buffer, filename, mode = "file", packageData = null, { cancelIfInteracted = false } = {}) {
+  const loadRequestId = ++state.loadRequestId;
+  const clearCatalogLoading = () => {
+    if (state.catalogLoadingId) {
+      state.catalogLoadingId = null;
+      renderCatalog();
+    }
+  };
   setStatus(t("loading"));
   if (buffer.byteLength > MAX_GLB_BYTES) {
     $("#viewer-error").hidden = false;
     $("#viewer-error").textContent = t("fileTooLarge");
     setStatus(t("fileTooLarge"));
+    clearCatalogLoading();
     return;
   }
   try {
@@ -1894,17 +1908,28 @@ function loadArrayBuffer(buffer, filename, mode = "file", packageData = null) {
     $("#viewer-error").hidden = false;
     $("#viewer-error").textContent = error.message.includes("External resource") ? t("externalResources") : t("loadError");
     setStatus($("#viewer-error").textContent);
+    clearCatalogLoading();
     return;
   }
   const loader = new GLTFLoader();
   const fail = (error) => {
+    if (loadRequestId !== state.loadRequestId) return;
     console.error(error);
     $("#viewer-error").hidden = false;
     $("#viewer-error").textContent = t("loadError");
     setStatus(t("loadError"));
+    clearCatalogLoading();
   };
   try {
     loader.parse(buffer, "", (gltf) => {
+      if (loadRequestId !== state.loadRequestId || (cancelIfInteracted && state.userInteracted)) {
+        gltf.scene.traverse((object) => {
+          object.geometry?.dispose();
+          const materials = Array.isArray(object.material) ? object.material : [object.material];
+          materials.filter(Boolean).forEach((material) => material.dispose());
+        });
+        return;
+      }
       try {
         const root = new THREE.Group();
         root.name = filename || "Imported model";
@@ -2231,7 +2256,7 @@ async function tryLoadBundledModel() {
       if (state.modelRevision === revision) setLoadState(t("demoLoaded"));
       return;
     }
-    loadArrayBuffer(loaded.modelPackage.sceneBuffer, loaded.filename, "package", loaded.modelPackage.data);
+    loadArrayBuffer(loaded.modelPackage.sceneBuffer, loaded.filename, "package", loaded.modelPackage.data, { cancelIfInteracted: true });
   } catch (error) {
     console.warn("Optional catalogue package could not be loaded:", error);
     if (state.modelRevision === revision) setLoadState(t("demoLoaded"));
