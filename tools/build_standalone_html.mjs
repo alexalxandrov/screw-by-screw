@@ -3,9 +3,10 @@
  * Turn Vite's production HTML entry into a self-contained root index.html.
  * The generated file is designed to be opened directly with file://.
  */
-import { access, readFile, writeFile } from "node:fs/promises";
+import { access, readFile, writeFile, unlink } from "node:fs/promises";
 import { dirname, isAbsolute, relative, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
+import { spawnSync } from "node:child_process";
 
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const distRoot = resolve(projectRoot, "dist");
@@ -46,14 +47,21 @@ for (const match of scriptTags) {
   const assetPath = await safeLocalPath(match[2], distRoot);
   let source = await readFile(assetPath, "utf8");
   source = source.replace(/^\/\/# sourceMappingURL=.*$/gm, "");
-  source = escapeClosingTag(source, "script");
-  const opening = match[0].match(/^<script\b([^>]*)>/i)?.[1] ?? "";
-  let attributes = opening
-    .replace(/\s+src=(["']).*?\1/i, "")
-    .replace(/\s+crossorigin(?:=(["']).*?\1)?/i, "")
-    .trim();
-  if (!/\btype=(["'])module\1/i.test(attributes)) attributes = (attributes + ' type="module"').trim();
-  const replacement = "<script " + attributes + ">\n" + source + "\n</script>";
+  const syntaxCheckPath = resolve(distRoot, ".standalone-entry-check.mjs");
+  await writeFile(syntaxCheckPath, source, "utf8");
+  const syntaxCheck = spawnSync(process.execPath, ["--check", syntaxCheckPath], { encoding: "utf8" });
+  await unlink(syntaxCheckPath).catch(() => {});
+  if (syntaxCheck.status !== 0) {
+    throw new Error("Vite JavaScript bundle failed syntax validation:\\n" + (syntaxCheck.stderr || syntaxCheck.stdout));
+  }
+  // Keep the application source out of the HTML parser. A base64 data module
+  // avoids accidental </script> termination inside shader strings/templates.
+  const encodedModule = Buffer.from(source, "utf8").toString("base64");
+  const replacement = '<script type="module">\\n' +
+    'import("data:text/javascript;base64,' + encodedModule + '").catch((error) => {\\n' +
+    '  console.error("Screw by Screw failed to start:", error);\\n' +
+    '  document.getElementById("startup-fallback")?.removeAttribute("hidden");\\n' +
+    '});\\n</script>';
   html = html.replace(match[0], replacement);
   inlinedScripts += 1;
 }
