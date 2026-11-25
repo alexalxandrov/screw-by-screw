@@ -69,6 +69,9 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); ou
 .viewer-column { display: flex; flex-direction: column; min-width: 0; min-height: 0; background: #0a1016; }
 .viewer-toolbar { height: 52px; flex: 0 0 52px; display: flex; align-items: center; justify-content: space-between; padding: 0 18px; border-bottom: 1px solid var(--line); }
 .view-tabs, .view-actions { display: flex; align-items: center; gap: 5px; }
+.toolbar-camera { display: flex; align-items: center; gap: 7px; margin-left: auto; margin-right: 10px; color: var(--muted); font: 8px var(--mono); letter-spacing: .08em; }
+.camera-preset, .slice-axis { min-width: 0; border: 1px solid var(--line); border-radius: 4px; background: #111a23; color: #c6d0d8; padding: 7px 8px; font: 9px var(--mono); }
+.camera-preset:focus-visible, .slice-axis:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .view-tab { border: 0; border-radius: 4px; background: transparent; color: #7e8c99; padding: 8px 11px; font-size: 10px; }
 .view-tab.active { color: var(--accent); background: var(--accent-soft); }
 .icon-button { width: 30px; height: 30px; border-radius: 4px; background: #121b24; color: #aab5bf; font-size: 16px; border: 1px solid var(--line); }
@@ -96,6 +99,15 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); ou
 .process-panel { padding: 12px 19px 14px; border-top: 1px solid var(--line); background: #0c1219; }
 .process-title { display: flex; justify-content: space-between; color: var(--dim); font: 8px var(--mono); letter-spacing: .1em; margin-bottom: 9px; }
 .process-buttons { display: flex; gap: 7px; }
+.slice-controls { display: grid; grid-template-columns: auto auto 56px minmax(70px,1fr) 34px; align-items: center; gap: 8px; margin-top: 10px; }
+.slice-controls > label, .slice-note { color: var(--muted); font: 8px var(--mono); }
+.slice-controls .slice-toggle { padding: 6px 8px; justify-content: center; }
+.slice-controls .slice-toggle.active { border-color: #6a8c9f; color: #8dd4ed; background: rgba(100,196,226,.10); }
+.slice-controls .slice-toggle[aria-pressed="false"] { color: #9eabb5; }
+.slice-position { width: 100%; min-width: 0; height: 3px; accent-color: #79c9e8; }
+.slice-controls output { color: #8dd4ed; font: 9px var(--mono); text-align: right; }
+.slice-note { grid-column: 1 / -1; }
+.slice-axis:disabled, .slice-position:disabled { opacity: .4; }
 .process-button { display: flex; align-items: center; gap: 7px; border: 1px solid var(--line); background: #111a23; color: #9eabb5; border-radius: 4px; padding: 7px 10px; font-size: 9px; }
 .process-button:hover, .process-button.active { border-color: #647d3f; color: var(--accent); background: var(--accent-soft); }
 .process-icon { width: 15px; height: 15px; display: grid; place-items: center; border-radius: 3px; font-size: 12px; }
@@ -166,8 +178,13 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); ou
   .brand-copy small { font-size: 7px; }
   .topbar-actions { margin-left: auto; }
   .quiet-button { display: none; }
-  .viewer-toolbar { padding: 0 8px; }
+  .viewer-toolbar { flex: 0 0 auto; padding: 8px; gap: 5px; flex-wrap: wrap; height: auto; min-height: 52px; }
   .view-tab { padding: 8px 7px; font-size: 9px; }
+  .toolbar-camera { margin: 0 4px; }
+  .camera-preset { max-width: 118px; padding: 6px 5px; font-size: 8px; }
+  .slice-controls { grid-template-columns: auto auto 44px minmax(55px,1fr) 30px; gap: 6px; }
+  .slice-controls .slice-toggle { grid-column: 1 / span 2; }
+  .slice-note { font-size: 7px; }
   .viewport-overlay.bottom-right { display: none; }
   .process-buttons { flex-wrap: wrap; }
 }
@@ -242,3 +259,13 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); ou
   font: 11px var(--mono);
 }
 .startup-fallback-card .startup-fallback-note { margin-bottom: 0; font-size: 10px; }
+
+
+/* Operating-state and process-flow controls */
+.power-toggle { color: #e9b96a; font-weight: 800; }
+.power-toggle:hover, .power-toggle.active { color: #ffe0a1; }
+.power-toggle.active { text-shadow: 0 0 12px rgba(233,185,106,.28); }
+.simulation-controls { display: grid; grid-template-columns: auto minmax(70px,1fr) auto; align-items: center; gap: 10px; margin-top: 9px; color: var(--muted); font: 8px var(--mono); }
+.simulation-controls input { min-width: 0; width: 100%; height: 3px; accent-color: #e9b96a; }
+.simulation-controls output { color: #e9b96a; font-size: 9px; }
+@media (max-width: 480px) { .timeline-actions { gap: 8px; flex-wrap: wrap; justify-content: flex-end; } }

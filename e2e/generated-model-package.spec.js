@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 
 test("opens the real Blender-generated RTX 3060 .sbsmodel archive", async ({ page }) => {
   await page.goto("/");
-  await page.locator("#model-file").setInputFiles("public/models/rtx3060_xc_black_v04.sbsmodel");
+  await page.locator("#model-file").setInputFiles("public/models/rtx3060_xc_black_v05.sbsmodel");
   await expect(page.locator("#model-title")).toHaveText("EVGA GeForce RTX 3060 XC BLACK GAMING 12GB", { timeout: 15000 });
   await expect(page.locator("#model-sku")).toHaveText("12G-P5-3655-KR");
   await expect(page.locator("#component-tree")).toContainText("Корпус GPU · GA106");

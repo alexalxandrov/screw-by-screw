@@ -66,35 +66,35 @@ jobs:
           test ${#expected} -eq 64
           printf '%s  %s\n' "$expected" "$archive" | sha256sum --check -
           tar -xf "$archive"
-      - name: Generate v0.4 Blender scene and GLB
+      - name: Generate v0.5 Blender scene and GLB
         run: |
           set -euo pipefail
           ./blender-4.3.2-linux-x64/blender --version
           ./blender-4.3.2-linux-x64/blender --background --factory-startup --python-exit-code 1 --python tools/modeling/build_rtx3060_xc_black_blockout.py
       - name: Inspect generated scene
         run: |
-          ./blender-4.3.2-linux-x64/blender MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v04.blend --background --python-exit-code 1 --python tools/modeling/inspect_blend_scene.py -- --output artifacts/rtx3060_v04_inspection.txt --json-output artifacts/rtx3060_v04_inspection.json
-          cat artifacts/rtx3060_v04_inspection.txt
+          ./blender-4.3.2-linux-x64/blender MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v05.blend --background --python-exit-code 1 --python tools/modeling/inspect_blend_scene.py -- --output artifacts/rtx3060_v05_inspection.txt --json-output artifacts/rtx3060_v05_inspection.json
+          cat artifacts/rtx3060_v05_inspection.txt
       - name: Validate generated GLB and manifest
         run: |
           python tools/modeling/validate_blockout_package.py \
-            --manifest MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v04.manifest.json \
-            --glb MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v04.glb
+            --manifest MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v05.manifest.json \
+            --glb MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v05.glb
           python tools/content/validate_glb_bindings.py \
             --components content/models/evga-rtx3060-xc-black-12gb/components.json \
-            --glb MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v04.glb
+            --glb MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v05.glb
       - name: Build portable SBS model package
         run: |
           mkdir -p artifacts
           python tools/modeling/package_model.py \
             --model-dir content/models/evga-rtx3060-xc-black-12gb \
-            --scene MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v04.glb \
-            --output artifacts/rtx3060_xc_black_v04.sbsmodel
+            --scene MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v05.glb \
+            --output artifacts/rtx3060_xc_black_v05.sbsmodel
       - name: Stage generated GLB for viewer
         run: |
           mkdir -p public/models
-          cp MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v04.glb public/models/
-          cp artifacts/rtx3060_xc_black_v04.sbsmodel public/models/
+          cp MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v05.glb public/models/
+          cp artifacts/rtx3060_xc_black_v05.sbsmodel public/models/
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
@@ -107,9 +107,9 @@ jobs:
           node --input-type=module <<'NODE'
           import { readFile } from "node:fs/promises";
           import { loadModelPackage } from "./src/viewer/ModelPackageLoader.js";
-          const bytes = await readFile("artifacts/rtx3060_xc_black_v04.sbsmodel");
+          const bytes = await readFile("artifacts/rtx3060_xc_black_v05.sbsmodel");
           const buffer = bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength);
-          const pkg = await loadModelPackage({ name: "rtx3060_xc_black_v04.sbsmodel", size: bytes.byteLength, arrayBuffer: async () => buffer });
+          const pkg = await loadModelPackage({ name: "rtx3060_xc_black_v05.sbsmodel", size: bytes.byteLength, arrayBuffer: async () => buffer });
           console.log(JSON.stringify({ modelId: pkg.report.modelId, components: pkg.report.componentCount, relationships: pkg.report.relationshipCount, integrityVerified: pkg.integrityVerified }, null, 2));
           NODE
       - name: Install Chromium for GLB integration test
@@ -141,14 +141,14 @@ jobs:
         if: always()
         run: |
           mkdir -p artifacts
-          cp MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v04.blend artifacts/ 2>/dev/null || true
-          cp MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v04.glb artifacts/ 2>/dev/null || true
-          cp MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v04.manifest.json artifacts/ 2>/dev/null || true
-          cp artifacts/rtx3060_xc_black_v04.sbsmodel artifacts/ 2>/dev/null || true
+          cp MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v05.blend artifacts/ 2>/dev/null || true
+          cp MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v05.glb artifacts/ 2>/dev/null || true
+          cp MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v05.manifest.json artifacts/ 2>/dev/null || true
+          cp artifacts/rtx3060_xc_black_v05.sbsmodel artifacts/ 2>/dev/null || true
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: rtx3060-xc-black-v04-blender-build
+          name: rtx3060-xc-black-v05-blender-build
           path: artifacts/
           if-no-files-found: warn
           retention-days: 7

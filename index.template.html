@@ -65,6 +65,17 @@
               <button class="view-tab" type="button" data-mode="understand" data-i18n="understand">Understand</button>
               <button class="view-tab" type="button" data-mode="learn" data-i18n="learn">Learn</button>
             </div>
+            <div class="toolbar-camera">
+              <label for="camera-preset" data-i18n="cameraPreset">VIEW</label>
+              <select id="camera-preset" class="camera-preset">
+                <option value="isometric" data-i18n="viewIso">Isometric</option>
+                <option value="fan" data-i18n="viewFan">Fan side</option>
+                <option value="pcb" data-i18n="viewPcb">PCB side</option>
+                <option value="io" data-i18n="viewIo">I/O bracket</option>
+                <option value="power" data-i18n="viewPower">Power connector</option>
+                <option value="top" data-i18n="viewTop">Top</option>
+              </select>
+            </div>
             <div class="view-actions">
               <button class="icon-button" id="reset-view" type="button" title="Reset camera" aria-label="Reset camera">↺</button>
               <button class="icon-button" id="wireframe-toggle" type="button" title="Wireframe" aria-label="Wireframe">▦</button>
@@ -97,6 +108,7 @@
                 <button id="assemble-button" class="text-button" type="button" data-i18n="assemble">Assemble</button>
                 <button id="explode-button" class="text-button" type="button" data-i18n="explode">Explode</button>
                 <button id="animate-button" class="text-button" type="button" data-i18n="animate">Animate</button>
+                <button id="power-toggle" class="text-button power-toggle" type="button" data-i18n="powerOn" aria-pressed="false">Включить питание</button>
               </div>
             </div>
             <input id="explode-slider" class="range-slider" type="range" min="0" max="100" value="0" aria-label="Exploded view amount" />
@@ -109,6 +121,23 @@
               <button class="process-button" data-layer="cooling" type="button"><span class="process-icon cooling-icon">≈</span><span data-i18n="cooling">Cooling</span></button>
               <button class="process-button" data-layer="power_delivery" type="button"><span class="process-icon power-icon">ϟ</span><span data-i18n="powerDelivery">Power delivery</span></button>
               <button class="process-button" data-layer="clear" type="button"><span class="process-icon clear-icon">×</span><span data-i18n="clearLayer">Clear layer</span></button>
+            </div>
+            <div class="slice-controls">
+              <button id="slice-toggle" class="process-button slice-toggle" type="button" data-i18n="sliceToggle" aria-pressed="false">Section cut</button>
+              <label for="slice-axis" data-i18n="sliceAxis">Axis</label>
+              <select id="slice-axis" class="slice-axis" disabled>
+                <option value="x">X</option>
+                <option value="y">Y</option>
+                <option value="z">Z</option>
+              </select>
+              <input id="slice-position" class="slice-position" type="range" min="0" max="100" step="1" value="50" disabled aria-label="Section position" />
+              <output id="slice-value">50%</output>
+              <span class="slice-note" data-i18n="sliceNote">Visual cut · uncapped · not CAD</span>
+            </div>
+            <div class="simulation-controls">
+              <label for="simulation-speed" data-i18n="simulationSpeed">Скорость анимации</label>
+              <input id="simulation-speed" type="range" min="0.25" max="2" step="0.25" value="1" aria-label="Animation speed" />
+              <output id="simulation-speed-value">1.00×</output>
             </div>
           </div>
         </section>
