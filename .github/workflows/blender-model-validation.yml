@@ -11,6 +11,11 @@ on:
       - "tools/modeling/inspect_blend_scene.py"
       - "tools/modeling/validate_blockout_package.py"
       - "MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/**"
+      - "src/**"
+      - "index.html"
+      - "package.json"
+      - "playwright.config.js"
+      - "e2e/**"
       - ".github/workflows/blender-model-validation.yml"
   pull_request:
     paths:
@@ -55,6 +60,21 @@ jobs:
           python tools/modeling/validate_blockout_package.py \
             --manifest MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v04.manifest.json \
             --glb MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v04.glb
+      - name: Stage generated GLB for viewer
+        run: |
+          mkdir -p public/models
+          cp MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v04.glb public/models/
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install viewer dependencies
+        run: npm install --no-audit --no-fund
+      - name: Install Chromium for GLB integration test
+        run: npx playwright install --with-deps chromium
+      - name: Build viewer with generated GLB
+        run: npm run build
+      - name: Test generated GLB inside the viewer
+        run: npm run test:e2e:model
       - name: Collect generated artifacts
         if: always()
         run: |
