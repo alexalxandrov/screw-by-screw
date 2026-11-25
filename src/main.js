@@ -4,6 +4,8 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { SceneController } from "./viewer/SceneController.js";
 import { MeasurementController } from "./viewer/MeasurementController.js";
 import { AnimationPlayer } from "./viewer/AnimationPlayer.js";
+import { createCatalogAdapter } from "./data/catalog.js";
+import CATALOG_SOURCE from "../content/catalog/models.json";
 import { MODEL as DEFAULT_MODEL, COMPONENTS as DEFAULT_COMPONENTS, EVIDENCE, createModelDataAdapter } from "./data/model.js";
 import DEFAULT_LEARNING_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/learning.json";
 import DEFAULT_PROCESS_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/process_layers.json";
@@ -21,6 +23,7 @@ let CLAIM_PACKAGE = DEFAULT_CLAIM_PACKAGE;
 let RELATIONSHIP_PACKAGE = DEFAULT_RELATIONSHIP_PACKAGE;
 let ASSEMBLY_PACKAGE = DEFAULT_ASSEMBLY_PACKAGE;
 let ANIMATION_PACKAGE = DEFAULT_ANIMATION_PACKAGE;
+const MODEL_CATALOG = createCatalogAdapter(CATALOG_SOURCE, { defaultPackageModelId: DEFAULT_MODEL.id });
 
 const $ = (selector) => document.querySelector(selector);
 const canvasHost = $("#viewer-canvas");
@@ -68,14 +71,20 @@ const state = {
   measurementController: null,
   measurementEnabled: false,
   userInteracted: false,
-  animationPlayer: null
+  animationPlayer: null,
+  loadedCatalogModelId: null,
+  pendingCatalogModelId: null,
+  catalogSearch: "",
+  catalogCategory: "all",
+  catalogLoadingId: null,
+  catalogOpener: null
 };
 
 const MAX_GLB_BYTES = MAX_SCENE_GLB_BYTES;
 
 const UI = {
   en: {
-    modelLabel: "MODEL", structure: "STRUCTURE", components: "Components",
+    modelLabel: "MODEL", catalogOpen: "Library", catalogTitle: "MODEL LIBRARY", catalogSubtitle: "Offline-ready model packages", catalogClose: "Close library", catalogSearch: "Search model, manufacturer or part number…", catalogSearchLabel: "SEARCH THE LIBRARY", catalogCategoryLabel: "CATEGORY", catalogEntries: "MODELS", catalogFooter: "Model packages are stored locally. No account or remote catalogue service is required.", catalogAllCategories: "All categories", catalogEmpty: "No models match this search.", catalogLoad: "Open model", catalogLoaded: "Currently loaded", catalogLoading: "Loading package…", catalogStatusResearch: "RESEARCH BLOCKOUT", catalogGeometryProxy: "Illustrative proxy · not CAD", catalogPackageVersion: "Package", catalogChoosePackage: "Choose the matching .sbsmodel package to continue.", catalogError: "Could not open this catalog package.", structure: "STRUCTURE", components: "Components",
     searchPlaceholder: "Search components, claims, IDs and sources…", assemblyTree: "ASSEMBLY TREE", showAll: "Show all",
     proxyNote: "Illustrative geometry · not CAD", explore: "Explore", disassemble: "Disassemble",
     understand: "Understand", animate: "Animate", assembledState: "ASSEMBLED STATE", demoScene: "DEMO SCENE · LOCAL",
@@ -100,7 +109,7 @@ const UI = {
     modelLoaded: "Model ready", glbPicker: "Choose a .glb file", learn: "Learn", learning: "LEARNING", authoredAnimations: "PACKAGE ANIMATIONS", clipSelect: "Select clip", clipTimeline: "Animation timeline", clipPlay: "Play", clipPause: "Pause", clipStop: "Stop / reset", clipReady: "Ready", clipPlaying: "Playing", clipPaused: "Paused", clipCompleted: "Completed", clipTime: "TIME", clipEvidenceNote: "Authored model motion · not a physics simulation", clipEducationalApproximation: "Educational approximation · duration is not measured RPM", clipIllustrative: "Illustrative motion · not a measured mechanism", clipDocumentedMotion: "Documented motion · source-linked", clipMeasuredMotion: "Measured motion · source and method recorded", linkedComponents: "LINKED COMPONENTS", assumptions: "ASSUMPTIONS & LIMITS", processLayer: "PROCESS LAYER", fileTooLarge: "GLB exceeds the 256 MB limit.", packageTooLarge: "SBS model package exceeds the 512 MB limit.", externalResources: "This GLB references external files. Only self-contained GLB files are allowed.", question: "QUESTION", checkAnswer: "Check answer", nextQuestion: "Next question", finishQuiz: "Finish", restartQuiz: "Try again", correctAnswer: "Correct", wrongAnswer: "Not quite", quizComplete: "Quiz complete", yourScore: "Your score", chooseAnswer: "Choose an answer first"
   },
   ru: {
-    modelLabel: "МОДЕЛЬ", structure: "СТРУКТУРА", components: "Компоненты",
+    modelLabel: "МОДЕЛЬ", catalogOpen: "Каталог", catalogTitle: "БИБЛИОТЕКА МОДЕЛЕЙ", catalogSubtitle: "Автономные пакеты устройств", catalogClose: "Закрыть каталог", catalogSearch: "Название, производитель или part number…", catalogSearchLabel: "ПОИСК ПО БИБЛИОТЕКЕ", catalogCategoryLabel: "КАТЕГОРИЯ", catalogEntries: "МОДЕЛИ", catalogFooter: "Пакеты моделей хранятся локально. Аккаунт и удалённый сервис каталога не нужны.", catalogAllCategories: "Все категории", catalogEmpty: "Подходящих моделей не найдено.", catalogLoad: "Открыть модель", catalogLoaded: "Уже загружена", catalogLoading: "Загрузка пакета…", catalogStatusResearch: "ИССЛЕДОВАТЕЛЬСКИЙ МАКЕТ", catalogGeometryProxy: "Условная геометрия · не CAD", catalogPackageVersion: "Пакет", catalogChoosePackage: "Выберите соответствующий файл .sbsmodel.", catalogError: "Не удалось открыть пакет из каталога.", structure: "СТРУКТУРА", components: "Компоненты",
     searchPlaceholder: "Компонент, маркировка, утверждение или источник…", assemblyTree: "ДЕРЕВО СБОРКИ", showAll: "Показать все",
     proxyNote: "Условная геометрия · не CAD", explore: "Обзор", disassemble: "Разборка",
     understand: "Принцип работы", animate: "Анимировать", assembledState: "СОБРАННОЕ СОСТОЯНИЕ", demoScene: "ДЕМО-СЦЕНА · ЛОКАЛЬНО",
@@ -229,6 +238,196 @@ function setupAnimationPlayer(root) {
   state.animationPlayer.selectClip(clips[0].id);
 }
 
+function localizedCatalogValue(value) {
+  if (typeof value === "string") return value;
+  if (!value || typeof value !== "object") return "";
+  return value[state.language] ?? value.en ?? value.ru ?? "";
+}
+
+function catalogGeometryLabel(entry) {
+  return entry.geometryStatus === "illustrative_proxy_not_cad"
+    ? t("catalogGeometryProxy")
+    : entry.geometryStatus.replaceAll("_", " ");
+}
+
+function catalogStatusLabel(entry) {
+  return entry.status === "research_blockout"
+    ? t("catalogStatusResearch")
+    : entry.status.replaceAll("_", " ").toUpperCase();
+}
+
+function renderCatalog() {
+  const host = $("#catalog-results");
+  const count = $("#catalog-count");
+  const categorySelect = $("#catalog-category");
+  if (!host || !categorySelect) return;
+
+  if (categorySelect.dataset.initialized !== "true") {
+    categorySelect.replaceChildren();
+    const all = document.createElement("option");
+    all.value = "all";
+    all.textContent = t("catalogAllCategories");
+    categorySelect.append(all);
+    MODEL_CATALOG.categories.forEach((category) => {
+      const option = document.createElement("option");
+      option.value = category.id;
+      option.textContent = localizedCatalogValue(category.label);
+      categorySelect.append(option);
+    });
+    categorySelect.dataset.initialized = "true";
+  } else {
+    const all = categorySelect.options[0];
+    if (all) all.textContent = t("catalogAllCategories");
+    [...categorySelect.options].slice(1).forEach((option) => {
+      const category = MODEL_CATALOG.categories.find((item) => item.id === option.value);
+      if (category) option.textContent = localizedCatalogValue(category.label);
+    });
+  }
+  categorySelect.value = state.catalogCategory;
+
+  const query = state.catalogSearch.trim().toLocaleLowerCase();
+  const entries = MODEL_CATALOG.models.filter((entry) => {
+    if (state.catalogCategory !== "all" && entry.categoryId !== state.catalogCategory) return false;
+    const searchable = [
+      entry.id, entry.manufacturer, entry.name.en, entry.name.ru, entry.partNumber,
+      entry.category.en, entry.category.ru, entry.summary.en, entry.summary.ru, ...entry.tags
+    ].join(" ").toLocaleLowerCase();
+    return !query || searchable.includes(query);
+  });
+
+  host.replaceChildren();
+  if (count) count.textContent = String(entries.length);
+  if (!entries.length) {
+    const empty = document.createElement("p");
+    empty.className = "catalog-empty";
+    empty.textContent = t("catalogEmpty");
+    host.append(empty);
+    return;
+  }
+
+  entries.forEach((entry) => {
+    const card = document.createElement("article");
+    card.className = "catalog-card";
+    card.dataset.modelId = entry.id;
+    if (state.loadedCatalogModelId === entry.id) card.classList.add("is-loaded");
+
+    const category = document.createElement("span");
+    category.className = "catalog-card-category";
+    category.textContent = localizedCatalogValue(entry.category);
+    const title = document.createElement("h3");
+    title.textContent = localizedCatalogValue(entry.name);
+    const manufacturer = document.createElement("p");
+    manufacturer.className = "catalog-manufacturer";
+    manufacturer.textContent = entry.manufacturer;
+    const sku = document.createElement("p");
+    sku.className = "catalog-sku";
+    sku.textContent = entry.partNumber;
+    const summary = document.createElement("p");
+    summary.className = "catalog-summary";
+    summary.textContent = localizedCatalogValue(entry.summary);
+
+    const metadata = document.createElement("div");
+    metadata.className = "catalog-metadata";
+    const status = document.createElement("span");
+    status.className = "catalog-status";
+    status.textContent = catalogStatusLabel(entry);
+    const geometry = document.createElement("span");
+    geometry.className = "catalog-geometry";
+    geometry.textContent = catalogGeometryLabel(entry);
+    metadata.append(status, geometry);
+
+    const footer = document.createElement("div");
+    footer.className = "catalog-card-footer";
+    const version = document.createElement("span");
+    version.className = "catalog-version";
+    version.textContent = `${t("catalogPackageVersion")} v${entry.packageVersion}`;
+    const open = document.createElement("button");
+    open.type = "button";
+    open.className = "catalog-load-button";
+    open.dataset.openCatalogModel = entry.id;
+    if (state.loadedCatalogModelId === entry.id) {
+      open.disabled = true;
+      open.textContent = t("catalogLoaded");
+    } else if (state.catalogLoadingId === entry.id) {
+      open.disabled = true;
+      open.textContent = t("catalogLoading");
+    } else {
+      open.textContent = t("catalogLoad");
+      open.addEventListener("click", () => openCatalogEntry(entry));
+    }
+    footer.append(version, open);
+    card.append(category, title, manufacturer, sku, summary, metadata, footer);
+    host.append(card);
+  });
+}
+
+function openCatalog() {
+  const dialog = $("#model-catalog-dialog");
+  if (!dialog || dialog.open) return;
+  state.catalogOpener = document.activeElement;
+  state.catalogSearch = $("#catalog-search")?.value ?? state.catalogSearch;
+  dialog.showModal();
+  renderCatalog();
+  $("#catalog-search")?.focus();
+}
+
+function closeCatalog() {
+  const dialog = $("#model-catalog-dialog");
+  if (dialog?.open) dialog.close();
+}
+
+async function fetchCatalogPackage(entry) {
+  const embedded = globalThis.SBS_CATALOG_PACKAGE_DATA_URLS?.[entry.id];
+  if (!embedded && window.location.protocol === "file:") return null;
+
+  const packageUrl = embedded || `${import.meta.env.BASE_URL}${entry.packagePath}`;
+  const response = await fetch(packageUrl);
+  if (!response.ok) throw new Error(`Package request failed: ${response.status}`);
+  const contentType = response.headers.get("content-type") ?? "";
+  if (contentType.includes("text/html")) throw new Error("The catalogue package URL returned HTML");
+  const buffer = await response.arrayBuffer();
+  if (!buffer.byteLength || buffer.byteLength > MAX_MODEL_PACKAGE_BYTES) {
+    throw new Error("The catalogue package size is outside the allowed range");
+  }
+  const filename = entry.packagePath.split("/").pop();
+  const file = { name: filename, size: buffer.byteLength, arrayBuffer: async () => buffer };
+  const modelPackage = await loadModelPackage(file);
+  if (modelPackage.report.modelId !== entry.packageModelId) {
+    throw new Error("Catalog package ID does not match the selected model");
+  }
+  return { filename, modelPackage };
+}
+
+async function openCatalogEntry(entry) {
+  if (!entry) return;
+  if (state.loadedCatalogModelId === entry.id) {
+    closeCatalog();
+    return;
+  }
+  state.catalogLoadingId = entry.id;
+  renderCatalog();
+  try {
+    const loaded = await fetchCatalogPackage(entry);
+    if (!loaded) {
+      state.pendingCatalogModelId = entry.packageModelId;
+      closeCatalog();
+      setStatus(t("catalogChoosePackage"));
+      $("#model-file").click();
+      return;
+    }
+    closeCatalog();
+    loadArrayBuffer(loaded.modelPackage.sceneBuffer, loaded.filename, "package", loaded.modelPackage.data);
+    setStatus(`Package validated · ${loaded.modelPackage.report.componentCount} components · ${loaded.modelPackage.report.relationshipCount} relationships`);
+  } catch (error) {
+    $("#viewer-error").hidden = false;
+    $("#viewer-error").textContent = `${t("catalogError")} ${error.message || ""}`;
+    setStatus(t("catalogError"));
+  } finally {
+    state.catalogLoadingId = null;
+    renderCatalog();
+  }
+}
+
 function applyLanguage() {
   document.documentElement.lang = state.language;
   document.querySelectorAll("[data-i18n]").forEach((node) => {
@@ -241,6 +440,7 @@ function applyLanguage() {
     node.placeholder = t(node.dataset.i18nPlaceholder);
   });
   renderTree();
+  if ($("#model-catalog-dialog")?.open) renderCatalog();
   if (state.activeLayer) renderProcessLayer();
   else if (state.learningMode) renderLearning();
   else if (state.selectedId) renderDetails(state.selectedId);
@@ -1638,7 +1838,9 @@ function applyPackageData(packageData) {
   state.learningSelected = null;
   state.learningAnswered = false;
   state.learningComplete = false;
+  state.loadedCatalogModelId = MODEL_CATALOG.models.find((entry) => entry.packageModelId === MODEL.id)?.id ?? null;
   updateModelHeader();
+  renderCatalog();
   document.querySelectorAll(".process-button").forEach((button) => {
     button.disabled = button.dataset.layer !== "clear" &&
       !PROCESS_PACKAGE.process_layers.some((layer) => layer.type === button.dataset.layer);
@@ -1666,6 +1868,8 @@ function useGenericModelData(filename) {
   ASSEMBLY_PACKAGE = { steps: [], observations: [] };
   ANIMATION_PACKAGE = { clips: [] };
   state.catalog = new Map();
+  state.loadedCatalogModelId = null;
+  renderCatalog();
   state.learningMode = false;
   updateModelHeader();
   document.querySelectorAll(".process-button").forEach((button) => {
@@ -1852,21 +2056,48 @@ function onCanvasClick(event) {
 function bindUI() {
   document.addEventListener("pointerdown", () => { state.userInteracted = true; }, { capture: true });
   document.addEventListener("keydown", () => { state.userInteracted = true; }, { capture: true });
+  $("#catalog-open").addEventListener("click", openCatalog);
+  $("#catalog-close").addEventListener("click", closeCatalog);
+  $("#catalog-search").addEventListener("input", (event) => { state.catalogSearch = event.target.value; renderCatalog(); });
+  $("#catalog-category").addEventListener("change", (event) => { state.catalogCategory = event.target.value; renderCatalog(); });
+  $("#model-catalog-dialog").addEventListener("click", (event) => {
+    if (event.target === $("#model-catalog-dialog")) closeCatalog();
+  });
+  $("#model-catalog-dialog").addEventListener("close", () => {
+    const opener = state.catalogOpener;
+    state.catalogOpener = null;
+    if (opener instanceof HTMLElement && opener.isConnected) opener.focus();
+  });
   $("#language-toggle").addEventListener("click", () => {
     state.language = state.language === "ru" ? "en" : "ru";
     applyLanguage();
   });
-  $("#open-model").addEventListener("click", () => $("#model-file").click());
+  $("#open-model").addEventListener("click", () => {
+    state.pendingCatalogModelId = null;
+    $("#model-file").click();
+  });
+  $("#model-file").addEventListener("cancel", () => { state.pendingCatalogModelId = null; });
   $("#model-file").addEventListener("change", async (event) => {
     const file = event.target.files?.[0];
-    if (!file) return;
+    if (!file) { state.pendingCatalogModelId = null; return; }
+    state.userInteracted = true;
     const isPackage = /\.sbsmodel$/i.test(file.name);
+    if (state.pendingCatalogModelId && !isPackage) {
+      const message = t("catalogChoosePackage");
+      $("#viewer-error").hidden = false;
+      $("#viewer-error").textContent = message;
+      setStatus(message);
+      state.pendingCatalogModelId = null;
+      event.target.value = "";
+      return;
+    }
     const sizeLimit = isPackage ? MAX_MODEL_PACKAGE_BYTES : MAX_GLB_BYTES;
     if (file.size > sizeLimit) {
       const message = isPackage ? t("packageTooLarge") : t("fileTooLarge");
       $("#viewer-error").hidden = false;
       $("#viewer-error").textContent = message;
       setStatus(message);
+      state.pendingCatalogModelId = null;
       event.target.value = "";
       return;
     }
@@ -1874,12 +2105,18 @@ function bindUI() {
     try {
       if (isPackage) {
         const modelPackage = await loadModelPackage(file);
+        const expectedPackageModelId = state.pendingCatalogModelId;
+        if (expectedPackageModelId && modelPackage.report.modelId !== expectedPackageModelId) {
+          throw new Error("Selected package does not match the catalogue item");
+        }
+        state.pendingCatalogModelId = null;
         loadArrayBuffer(modelPackage.sceneBuffer, file.name, "package", modelPackage.data);
         setStatus(`Package validated · ${modelPackage.report.componentCount} components · ${modelPackage.report.relationshipCount} relationships`);
       } else {
         loadArrayBuffer(await file.arrayBuffer(), file.name, "file");
       }
     } catch (error) {
+      state.pendingCatalogModelId = null;
       $("#viewer-error").hidden = false;
       $("#viewer-error").textContent = error.message || t("loadError");
       setStatus(t("loadError"));
@@ -1969,6 +2206,7 @@ function bindUI() {
       event.preventDefault();
       $("#component-search").focus();
     }
+    if (event.key === "Escape" && $("#model-catalog-dialog")?.open) return;
     if (event.key === "Escape") {
       setMeasurementEnabled(false);
       state.animationPlayer?.stop();
@@ -1982,26 +2220,20 @@ function bindUI() {
 async function tryLoadBundledModel() {
   const revision = state.modelRevision;
   try {
-    const embeddedModelUrl = globalThis.SBS_BUNDLED_GLB_DATA_URL;
-    if (!embeddedModelUrl && window.location.protocol === "file:") {
+    const defaultEntry = MODEL_CATALOG.models.find((entry) => entry.defaultPackage) ?? MODEL_CATALOG.models[0];
+    if (!defaultEntry) throw new Error("The model catalogue contains no default package");
+    const loaded = await fetchCatalogPackage(defaultEntry);
+    if (!loaded) {
       setLoadState(t("demoLoaded"));
       return;
     }
-    const modelUrl = embeddedModelUrl || `${import.meta.env.BASE_URL}models/rtx3060_xc_black_blockout_v05.glb`;
-    const response = await fetch(modelUrl);
-    if (!response.ok) throw new Error("No bundled model");
-    const contentType = response.headers.get("content-type") ?? "";
-    if (contentType.includes("text/html")) throw new Error("No bundled model");
-    const buffer = await response.arrayBuffer();
-    if (buffer.byteLength < 12 || new TextDecoder().decode(buffer.slice(0, 4)) !== "glTF") throw new Error("No bundled GLB asset");
     if (state.modelRevision !== revision || state.userInteracted) {
       if (state.modelRevision === revision) setLoadState(t("demoLoaded"));
       return;
     }
-    loadArrayBuffer(buffer, "Bundled v0.5 GLB", "bundled");
-  } catch {
-    // The fallback scene is installed before this optional bundle fetch starts.
-    // Reinstalling it here could erase a user's selection or active tool.
+    loadArrayBuffer(loaded.modelPackage.sceneBuffer, loaded.filename, "package", loaded.modelPackage.data);
+  } catch (error) {
+    console.warn("Optional catalogue package could not be loaded:", error);
     if (state.modelRevision === revision) setLoadState(t("demoLoaded"));
   }
 }

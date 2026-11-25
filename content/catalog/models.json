@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0.0",
+  "title": {
+    "en": "Model library",
+    "ru": "Библиотека моделей"
+  },
+  "categories": [
+    {
+      "id": "graphics_cards",
+      "label": {
+        "en": "Graphics cards",
+        "ru": "Видеокарты"
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "gpu.evga.12g-p5-3655-kr",
+      "default_package": true,
+      "package_model_id": "gpu.evga.12g-p5-3655-kr",
+      "manufacturer": "EVGA",
+      "name": {
+        "en": "GeForce RTX 3060 XC BLACK GAMING 12GB",
+        "ru": "GeForce RTX 3060 XC BLACK GAMING 12GB"
+      },
+      "part_number": "12G-P5-3655-KR",
+      "category_id": "graphics_cards",
+      "summary": {
+        "en": "Dual-fan Ampere graphics card. Exact-SKU research blockout with source-linked component data.",
+        "ru": "Видеокарта Ampere с двумя вентиляторами. Исследовательский макет точного SKU с компонентами и ссылками на источники."
+      },
+      "tags": [
+        "GPU",
+        "NVIDIA",
+        "Ampere",
+        "RTX 3060",
+        "12 GB",
+        "GDDR6",
+        "EVGA"
+      ],
+      "status": "research_blockout",
+      "geometry_status": "illustrative_proxy_not_cad",
+      "package_version": "0.1.0",
+      "package_path": "models/rtx3060_xc_black_v05.sbsmodel"
+    }
+  ]
+}
