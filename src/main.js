@@ -63,7 +63,7 @@ const UI = {
     assemblyState: "ASSEMBLY STATE", assemble: "Assemble", explode: "Explode",
     assembled: "ASSEMBLED", exploded: "EXPLODED", processLayers: "PROCESS LAYERS",
     qualitativeOnly: "SCHEMATIC · NOT CFD / SPICE", cooling: "Airflow", powerDelivery: "Power path",
-    powerOn: "Power on", powerOff: "Power off", operatingState: "POWERED · RUNNING", simulationSpeed: "Animation speed",
+    powerOn: "Run animation", powerOff: "Stop animation", operatingState: "OPERATING VISUALIZATION", simulationSpeed: "Animation speed",
     clearLayer: "Clear layer", inspection: "INSPECTION", componentDetails: "Component details",
     selectComponent: "Select a component", selectHint: "Choose a part in the 3D view or assembly tree to inspect its role and evidence.",
     identity: "IDENTITY", parent: "Parent", geometry: "Geometry", evidence: "EVIDENCE",
@@ -85,7 +85,7 @@ const UI = {
     assemblyState: "СОСТОЯНИЕ СБОРКИ", assemble: "Собрать", explode: "Разобрать",
     assembled: "СОБРАНО", exploded: "РАЗОБРАНО", processLayers: "СЛОИ ПРОЦЕССОВ",
     qualitativeOnly: "СХЕМА · НЕ CFD / SPICE", cooling: "Воздушный поток", powerDelivery: "Путь питания",
-    powerOn: "Включить питание", powerOff: "Выключить питание", operatingState: "ПИТАНИЕ ВКЛЮЧЕНО · РАБОТА", simulationSpeed: "Скорость анимации",
+    powerOn: "Включить анимацию", powerOff: "Остановить анимацию", operatingState: "ВИЗУАЛИЗАЦИЯ РАБОТЫ", simulationSpeed: "Скорость анимации",
     clearLayer: "Сбросить слой", inspection: "ИНСПЕКЦИЯ", componentDetails: "Карточка компонента",
     selectComponent: "Выберите компонент", selectHint: "Выберите деталь в 3D-окне или дереве сборки, чтобы изучить её назначение и источники.",
     identity: "ИДЕНТИФИКАЦИЯ", parent: "Родитель", geometry: "Геометрия", evidence: "ДОКАЗАТЕЛЬНОСТЬ",
@@ -182,6 +182,13 @@ function createFan(parent, index, x) {
   tag(hub, `fan.${index}.hub`);
   fanPlane.add(hub);
 
+  // Keep the shroud ring and hub stationary; only the impeller is animated.
+  const rotor = new THREE.Group();
+  rotor.name = `Fan ${index} rotor`;
+  rotor.userData.sbs_fan_rotor = true;
+  rotor.userData.sbs_fan_axis = "z";
+  fanPlane.add(rotor);
+
   for (let blade = 0; blade < 7; blade += 1) {
     const bladeMesh = new THREE.Mesh(
       createBladeGeometry(),
@@ -190,7 +197,7 @@ function createFan(parent, index, x) {
     bladeMesh.rotation.z = (Math.PI * 2 * blade) / 7;
     bladeMesh.name = `Fan ${index} blade ${blade + 1}`;
     tag(bladeMesh, `fan.${index}.blade.${blade + 1}`);
-    fanPlane.add(bladeMesh);
+    rotor.add(bladeMesh);
   }
 }
 
@@ -749,19 +756,38 @@ function buildProcessVisuals() {
 
 function collectFanRotors(root) {
   state.fanRotors = [];
-  const blades = [];
+  const authoredPivots = [];
   root.traverse((object) => {
-    const id = object.userData?.sbs_component_id ?? "";
-    const match = /^fan\.(\d+)\.blade\./.exec(id);
-    if (match) blades.push({ object, fan: match[1] });
+    if (object.userData?.sbs_fan_rotor !== true) return;
+    const axis = String(object.userData.sbs_fan_axis ?? "y").toLowerCase();
+    if (["x", "y", "z"].includes(axis)) authoredPivots.push({ object, axis });
   });
-  const fallbackGroups = new Map();
-  for (const blade of blades) {
-    const parentId = blade.object.parent?.userData?.sbs_component_id;
-    if (parentId === `assembly.fan.${blade.fan}`) state.fanRotors.push({ object: blade.object, axis: "y" });
-    else if (blade.object.parent && !fallbackGroups.has(blade.object.parent.uuid)) fallbackGroups.set(blade.object.parent.uuid, blade.object.parent);
+
+  if (authoredPivots.length) {
+    state.fanRotors = authoredPivots;
+  } else {
+    // Older Blender GLBs contain individually tagged blade meshes. Reparent
+    // them under a runtime-only pivot at the fan centre so the shroud and hub
+    // remain still while the entire impeller rotates as one assembly.
+    for (const fanNumber of [1, 2]) {
+      const fan = findNodeById(`assembly.fan.${fanNumber}`);
+      if (!fan) continue;
+      const blades = [];
+      fan.traverse((object) => {
+        if (new RegExp(`^fan\\.${fanNumber}\\.blade\\.`).test(object.userData?.sbs_component_id ?? "")) {
+          blades.push(object);
+        }
+      });
+      if (!blades.length) continue;
+      const pivot = new THREE.Group();
+      pivot.name = `Fan ${fanNumber} runtime rotor pivot`;
+      fan.add(pivot);
+      fan.updateMatrixWorld(true);
+      blades.forEach((blade) => pivot.attach(blade));
+      state.fanRotors.push({ object: pivot, axis: "y" });
+    }
   }
-  for (const object of fallbackGroups.values()) state.fanRotors.push({ object, axis: "z" });
+  canvasHost.dataset.fanRotors = String(state.fanRotors.length);
 }
 
 function updateOperatingEffects(delta) {
@@ -1049,8 +1075,10 @@ function initRenderer() {
     resize();
 
     state.reducedMotion = Boolean(window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches);
+    canvasHost.dataset.reducedMotion = String(state.reducedMotion);
     window.matchMedia?.("(prefers-reduced-motion: reduce)")?.addEventListener?.("change", (event) => {
       state.reducedMotion = event.matches;
+      canvasHost.dataset.reducedMotion = String(state.reducedMotion);
       if (state.reducedMotion && state.powered) setStatus("Reduced motion preference enabled");
     });
     const clock = new THREE.Clock();
