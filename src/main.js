@@ -59,7 +59,8 @@ const state = {
   sliceFraction: 0.5,
   slicePlane: new THREE.Plane(new THREE.Vector3(1, 0, 0), 0),
   measurementController: null,
-  measurementEnabled: false
+  measurementEnabled: false,
+  userInteracted: false
 };
 
 const MAX_GLB_BYTES = MAX_SCENE_GLB_BYTES;
@@ -67,7 +68,7 @@ const MAX_GLB_BYTES = MAX_SCENE_GLB_BYTES;
 const UI = {
   en: {
     modelLabel: "MODEL", structure: "STRUCTURE", components: "Components",
-    searchPlaceholder: "Find a component…", assemblyTree: "ASSEMBLY TREE", showAll: "Show all",
+    searchPlaceholder: "Search components, claims, IDs and sources…", assemblyTree: "ASSEMBLY TREE", showAll: "Show all",
     proxyNote: "Illustrative geometry · not CAD", explore: "Explore", disassemble: "Disassemble",
     understand: "Understand", animate: "Animate", assembledState: "ASSEMBLED STATE", demoScene: "DEMO SCENE · LOCAL",
     assemblyState: "ASSEMBLY STATE", assemble: "Assemble", explode: "Explode",
@@ -92,7 +93,7 @@ const UI = {
   },
   ru: {
     modelLabel: "МОДЕЛЬ", structure: "СТРУКТУРА", components: "Компоненты",
-    searchPlaceholder: "Найти компонент…", assemblyTree: "ДЕРЕВО СБОРКИ", showAll: "Показать все",
+    searchPlaceholder: "Компонент, маркировка, утверждение или источник…", assemblyTree: "ДЕРЕВО СБОРКИ", showAll: "Показать все",
     proxyNote: "Условная геометрия · не CAD", explore: "Обзор", disassemble: "Разборка",
     understand: "Принцип работы", animate: "Анимировать", assembledState: "СОБРАННОЕ СОСТОЯНИЕ", demoScene: "ДЕМО-СЦЕНА · ЛОКАЛЬНО",
     assemblyState: "СОСТОЯНИЕ СБОРКИ", assemble: "Собрать", explode: "Разобрать",
@@ -360,8 +361,10 @@ function getComponentData(id, object) {
 function renderTree() {
   const host = $("#component-tree");
   if (!host) return;
-  const query = $("#component-search").value.trim().toLowerCase();
+  const query = $("#component-search").value.trim().toLocaleLowerCase();
   host.replaceChildren();
+
+  const sourceMap = new Map(MODEL.sources.map((source) => [source.id, source]));
   const entries = [...state.componentNodes.entries()].map(([id, object]) => {
     const data = getComponentData(id, object);
     const label = state.language === "ru" ? data.ru : data.en;
@@ -371,15 +374,59 @@ function renderTree() {
       if (parent.userData?.sbs_component_id) depth += 1;
       parent = parent.parent;
     }
-    return { id, object, data, label, depth };
-  }).filter((entry) => !query || entry.label.toLowerCase().includes(query) || entry.id.toLowerCase().includes(query));
-  entries.sort((a, b) => a.depth - b.depth || a.id.localeCompare(b.id));
 
-  entries.forEach((entry) => {
+    const isDeviceRoot = id === "assembly.card.root";
+    const claims = (CLAIM_PACKAGE.claims ?? []).filter((claim) =>
+      claim.subject_id === id || (isDeviceRoot && claim.subject_id === MODEL.id)
+    );
+    const claimText = claims.flatMap((claim) => [
+      claim.id,
+      claim.predicate,
+      claimPredicateLabel(claim.predicate),
+      formatClaimValue(claim.value),
+      claim.value === null || claim.value === undefined ? "" : JSON.stringify(claim.value),
+      claim.unit,
+      claim.confidence_class,
+      claim.notes,
+      ...(claim.source_ids ?? [])
+    ]);
+    const sourceIds = new Set([
+      ...(data.sourceIds ?? []),
+      ...claims.flatMap((claim) => claim.source_ids ?? [])
+    ]);
+    const sources = [...sourceIds].map((sourceId) => sourceMap.get(sourceId)).filter(Boolean);
+    const sourceText = sources.flatMap((source) => [source.id, source.label, source.url]);
+    const searchText = [
+      id, data.en, data.ru, data.descriptionEn, data.descriptionRu,
+      ...claimText, ...sourceText
+    ].filter(Boolean).join(" ").toLocaleLowerCase();
+    const matches = !query || searchText.includes(query);
+    return { id, object, data, label, depth, matches };
+  });
+
+  // Keep parent assemblies visible as context when a child matches the query.
+  const visibleIds = new Set(entries.filter((entry) => entry.matches).map((entry) => entry.id));
+  if (query) {
+    for (const entry of entries.filter((item) => item.matches)) {
+      let parent = entry.object.parent;
+      while (parent) {
+        const parentId = parent.userData?.sbs_component_id;
+        if (parentId) visibleIds.add(parentId);
+        if (parent === state.modelRoot) break;
+        parent = parent.parent;
+      }
+    }
+  }
+  const visibleEntries = entries.filter((entry) => !query || visibleIds.has(entry.id));
+  visibleEntries.sort((a, b) => a.depth - b.depth || a.id.localeCompare(b.id));
+
+  visibleEntries.forEach((entry) => {
     const button = document.createElement("button");
     button.type = "button";
     button.className = `tree-item${entry.id === state.selectedId ? " active" : ""}`;
     button.classList.add(`depth-${Math.min(entry.depth, 5)}`);
+    if (query && entry.matches) button.classList.add("search-match");
+    else if (query) button.classList.add("search-context");
     button.dataset.id = entry.id;
     const symbol = document.createElement("span");
     symbol.className = "tree-symbol";
@@ -390,7 +437,14 @@ function renderTree() {
     const kind = document.createElement("span");
     kind.className = "tree-kind";
     kind.textContent = entry.object.type === "Group" ? "ASM" : "3D";
-    button.append(symbol, label, kind);
+    if (query && entry.matches) {
+      const match = document.createElement("span");
+      match.className = "tree-match-tag";
+      match.textContent = "MATCH";
+      button.append(symbol, label, match, kind);
+    } else {
+      button.append(symbol, label, kind);
+    }
     button.addEventListener("click", () => selectComponent(entry.id));
     host.append(button);
   });
@@ -1390,6 +1444,9 @@ function onCanvasClick(event) {
 }
 
 function bindUI() {
+  // Preserve the fallback scene if the optional bundled GLB resolves after interaction.
+  document.addEventListener("pointerdown", () => { state.userInteracted = true; }, { capture: true });
+  document.addEventListener("keydown", () => { state.userInteracted = true; }, { capture: true });
   $("#language-toggle").addEventListener("click", () => {
     state.language = state.language === "ru" ? "en" : "ru";
     applyLanguage();
@@ -1520,10 +1577,15 @@ async function tryLoadBundledModel() {
     if (contentType.includes("text/html")) throw new Error("No bundled model");
     const buffer = await response.arrayBuffer();
     if (buffer.byteLength < 12 || new TextDecoder().decode(buffer.slice(0, 4)) !== "glTF") throw new Error("No bundled GLB asset");
-    if (state.modelRevision !== revision) return;
+    if (state.modelRevision !== revision || state.userInteracted) {
+      if (state.modelRevision === revision) setLoadState(t("demoLoaded"));
+      return;
+    }
     loadArrayBuffer(buffer, "Bundled v0.5 GLB", "bundled");
   } catch {
-    if (state.modelRevision === revision) loadDemo();
+    // The fallback scene is installed before this optional bundle fetch starts.
+    // Reinstalling it here could erase a user's selection or active tool.
+    if (state.modelRevision === revision) setLoadState(t("demoLoaded"));
   }
 }
 
