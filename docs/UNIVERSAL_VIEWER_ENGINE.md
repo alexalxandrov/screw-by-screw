@@ -56,6 +56,7 @@ Exploded-view transforms must be reversible and deterministic. The engine captur
 - Animation runtime: package-authored clip selection, play/pause/seek/stop, speed, animation-track validation and deterministic transform restoration are implemented. The RTX 3060 pilot includes one educational fan-rotor clip; its duration is not measured RPM.
 - Model catalogue: implemented as an offline-first bilingual static index with exact-SKU identity, safe relative package paths, package-ID binding and standalone file:// embedding; no backend is required.
 - Learning progress: browser-local quiz state is saved per model and exact ordered question-ID list; no account or server is required.
+- Model comparison: a second validated semantic package can be compared by exact identity, specifications, claims and component-inventory coverage without replacing the active 3D scene or merging evidence.
 - Site integration: mount the same viewer runtime in a model detail route; do not duplicate Three.js scene logic in the catalogue UI.
 
 ## Non-goals for this foundation
