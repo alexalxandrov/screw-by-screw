@@ -148,6 +148,50 @@ test("clip switches restore the previous clip before capturing the next baseline
   player.dispose();
 });
 
+test("exploded overview animates separate assembly groups and stop restores every baseline", () => {
+  const root = new THREE.Group();
+  const original = new Map();
+  for (const [id, position] of [
+    ["assembly.shroud", [100.9, -18, 55]],
+    ["assembly.cooling", [100.9, 0, 55]],
+    ["assembly.pcb.electronics", [100.9, 17.2, 55]],
+    ["assembly.connectors", [0, 0, 0]]
+  ]) {
+    const group = new THREE.Group();
+    group.userData.sbs_component_id = id;
+    group.position.set(...position);
+    original.set(id, position);
+    root.add(group);
+  }
+  const clip = {
+    id: "clip.exploded-cooler-overview",
+    title: { en: "Exploded assembly overview", ru: "Разнесённый вид сборки" },
+    evidence_status: "educational_approximation",
+    duration_ms: 4200,
+    easing: "ease_in_out",
+    tracks: [
+      { target_id: "assembly.shroud", property: "position", keyframes: [{ t: 0, value: [100.9,-18,55] }, { t: 1, value: [100.9,-42,55] }] },
+      { target_id: "assembly.cooling", property: "position", keyframes: [{ t: 0, value: [100.9,0,55] }, { t: 1, value: [100.9,-24,55] }] },
+      { target_id: "assembly.pcb.electronics", property: "position", keyframes: [{ t: 0, value: [100.9,17.2,55] }, { t: 1, value: [100.9,40,55] }] },
+      { target_id: "assembly.connectors", property: "position", keyframes: [{ t: 0, value: [0,0,0] }, { t: 1, value: [-24,0,0] }] }
+    ]
+  };
+  const player = new AnimationPlayer(root, [clip]);
+  assert.equal(player.selectClip(clip.id), true);
+  player.seek(1);
+  const byId = new Map();
+  root.traverse((object) => {
+    if (object.userData?.sbs_component_id) byId.set(object.userData.sbs_component_id, object);
+  });
+  assert.deepEqual(byId.get("assembly.shroud").position.toArray(), [100.9, -42, 55]);
+  assert.deepEqual(byId.get("assembly.cooling").position.toArray(), [100.9, -24, 55]);
+  assert.deepEqual(byId.get("assembly.pcb.electronics").position.toArray(), [100.9, 40, 55]);
+  assert.deepEqual(byId.get("assembly.connectors").position.toArray(), [-24, 0, 0]);
+  player.stop();
+  for (const [id, position] of original) assert.deepEqual(byId.get(id).position.toArray(), position);
+  player.dispose();
+});
+
 test("supports clip-level ease-in-out and clamps playback speed", () => {
   const { root, fan } = makeScene();
   const player = new AnimationPlayer(root, [makeClip({ easing: "ease_in_out" })]);

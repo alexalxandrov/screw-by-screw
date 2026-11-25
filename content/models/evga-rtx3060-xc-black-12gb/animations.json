@@ -64,6 +64,111 @@
           ]
         }
       ]
+    },
+    {
+      "id": "clip.exploded-cooler-overview",
+      "title": {
+        "en": "Exploded assembly overview",
+        "ru": "Разнесённый вид сборки"
+      },
+      "evidence_status": "educational_approximation",
+      "source_ids": [],
+      "duration_ms": 4200,
+      "easing": "ease_in_out",
+      "description": {
+        "en": "A reversible visual separation of the shroud, cooler, PCB/electronics and connector assembly to explain the card's major layers. Offsets are artistic presentation values, not measured service clearances or a teardown order.",
+        "ru": "Обратимое визуальное разнесение кожуха, кулера, платы с электроникой и группы разъёмов для объяснения основных слоёв карты. Смещения заданы для наглядности и не являются измеренными сервисными зазорами или порядком разборки."
+      },
+      "tracks": [
+        {
+          "target_id": "assembly.shroud",
+          "property": "position",
+          "keyframes": [
+            {
+              "t": 0,
+              "value": [
+                100.9,
+                -18,
+                55
+              ]
+            },
+            {
+              "t": 1,
+              "value": [
+                100.9,
+                -42,
+                55
+              ]
+            }
+          ]
+        },
+        {
+          "target_id": "assembly.cooling",
+          "property": "position",
+          "keyframes": [
+            {
+              "t": 0,
+              "value": [
+                100.9,
+                0,
+                55
+              ]
+            },
+            {
+              "t": 1,
+              "value": [
+                100.9,
+                -24,
+                55
+              ]
+            }
+          ]
+        },
+        {
+          "target_id": "assembly.pcb.electronics",
+          "property": "position",
+          "keyframes": [
+            {
+              "t": 0,
+              "value": [
+                100.9,
+                17.2,
+                55
+              ]
+            },
+            {
+              "t": 1,
+              "value": [
+                100.9,
+                40,
+                55
+              ]
+            }
+          ]
+        },
+        {
+          "target_id": "assembly.connectors",
+          "property": "position",
+          "keyframes": [
+            {
+              "t": 0,
+              "value": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "t": 1,
+              "value": [
+                -24,
+                0,
+                0
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "viewer_effects": [

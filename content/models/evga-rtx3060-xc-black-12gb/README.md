@@ -45,3 +45,8 @@ The development branch now expands the content graph to 104 semantic components 
 ### Partial teardown evidence
 
 The interactive assembly panel has two source-backed disassembly steps: eight rear cooler-retention screws, followed by disconnection of both fan leads before separating the cooler/shroud. This is deliberately labelled a partial observed sequence, not a complete service guide. Screw positions in the 3D scene, driver/bit, torque, connector release geometry, thermal-pad specifications and reassembly order remain unverified.
+
+
+### Reversible exploded assembly view
+
+A second animation separates the fan shroud, cooler, PCB/electronics and connector groups so that the card's major layers can be inspected. The animation is reversible, seekable and resettable. It is an explanatory layout, not a measured clearance or an instruction sequence.

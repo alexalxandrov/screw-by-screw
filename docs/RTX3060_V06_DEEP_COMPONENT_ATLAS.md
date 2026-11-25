@@ -65,3 +65,8 @@ These are independently selectable teaching meshes, not a claim that the exact h
 ## Source-backed partial teardown sequence
 
 The assembly evidence panel now contains two partial steps grounded in the Tom's Hardware EVGA RTX 3060 XC teardown description: (1) remove the eight rear heatsink/shroud retention screws (four around the GPU and four nearer the rear edge; one is under an EVGA tamper sticker), then (2) unplug both fan connections near the lower-left PCB area when viewed from the back before separating the cooler/shroud. The sequence is explicitly marked `partial_observed_sequence` and `complete_sequence: false`. The source does not specify driver size, torque, exact screw coordinates, connector latch geometry, thermal-pad replacement dimensions or reassembly order; none are invented. Source: https://www.tomshardware.com/reviews/nvidia-geforce-rtx-3060-review/2
+
+
+## Reversible exploded-assembly animation
+
+A second package-authored animation clip, `clip.exploded-cooler-overview`, now moves the shroud, full cooling assembly, PCB/electronics assembly and connector assembly into separated display positions. It uses the generic `AnimationPlayer`, easing, seek, playback, stop/reset and the localized clip description. The clip is tagged `educational_approximation`; offsets are presentation coordinates and do not assert physical service clearances or a screw-by-screw removal order. A unit test checks every target's final transform and restoration, and the browser test selects, seeks and resets the clip.

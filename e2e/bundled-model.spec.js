@@ -27,6 +27,15 @@ test("loads the generated Blender v0.5 SBS model package and resolves content-pa
   await expect(page.locator("#assembly-step-list .assembly-step-card")).toHaveCount(2);
   await expect(page.locator("#assembly-step-list")).toContainText("Вывернуть восемь задних винтов");
   await expect(page.locator("#assembly-step-list")).toContainText("Отсоединить оба кабеля вентиляторов");
+  await page.locator("#animation-clip-select").selectOption("clip.exploded-cooler-overview");
+  await expect(page.locator("#animation-evidence-note")).toContainText("визуальное разнесение");
+  await page.locator("#animation-seek").evaluate((element) => {
+    element.value = "1000";
+    element.dispatchEvent(new Event("input", { bubbles: true }));
+  });
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-animation-progress", "1");
+  await page.locator("#animation-stop").click();
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-animation-progress", "0");
   await page.locator("#catalog-open").click();
   const loadedCard = page.locator('[data-model-id="gpu.evga.12g-p5-3655-kr"]');
   await expect(loadedCard.locator(".catalog-load-button")).toBeDisabled();

@@ -232,7 +232,8 @@ function updateAnimationPlayerUI(snapshot = state.animationPlayer?.getSnapshot()
       documented_motion: "clipDocumentedMotion",
       measured_motion: "clipMeasuredMotion"
     }[state.animationPlayer.clip?.evidence_status] ?? "clipEvidenceNote";
-    evidenceNote.textContent = t(evidenceLabel);
+    const description = localizedPackageText(state.animationPlayer.clip?.description);
+    evidenceNote.textContent = description ? `${t(evidenceLabel)} · ${description}` : t(evidenceLabel);
   }
   if (status) {
     status.textContent = animationStatusLabel(snapshot.status);
