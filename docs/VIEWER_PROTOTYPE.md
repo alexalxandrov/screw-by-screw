@@ -1,4 +1,4 @@
-# Viewer prototype v0.6
+# Browser viewer v0.9
 
 ## Purpose
 
@@ -49,8 +49,10 @@ Or use **Open GLB** to load a local GLB file in the browser. Generated model bin
 - Component details with Russian/English labels and evidence status.
 - Isolate selected component and restore visibility.
 - Global exploded-view slider with reassembly.
+- Reversible animated explode/reassemble playback.
+- Reusable SceneController for stable-ID indexing, deterministic transforms, safe visibility isolation and generic component rotation.
 - Wireframe toggle.
-- Qualitative cooling and power-delivery layers with explanations, linked components, assumptions and source links.
+- Package-driven cooling and power-delivery layers with explanations, linked components, assumptions and source links.
 - Local GLB import (256 MiB limit), GLB 2.0 container checks, external-resource URI rejection and fallback scene.
 - Duplicate component-ID warnings for imported GLB files.
 
@@ -60,7 +62,7 @@ The Blender source scene uses X = card length, Y = thickness, Z = height. The Bl
 
 ## Automated browser tests
 
-The viewer CI passes eight Playwright tests across Chromium and Firefox. The suite covers component selection, process-layer explanations, the bilingual quiz, explode/reassemble, GLB external-resource rejection, two automated WCAG A/AA audits and a Firefox learning-flow smoke test.
+The viewer CI now runs ten Playwright tests across Chromium and Firefox, including package-driven power-layer linking and the reversible animation control, plus four Node unit tests for the reusable scene controller. The browser suite also covers component selection, the bilingual quiz, GLB external-resource rejection, two automated WCAG A/AA audits and a Firefox learning-flow smoke test.
 
 The Blender workflow separately loads the generated v0.4 GLB into the viewer, checks all canonical component IDs and parent ancestry, verifies heatsink selection, and enforces a 1 MiB GLB size budget.
 
@@ -74,7 +76,8 @@ npm run test:e2e
 - The 24 heatsink fin proxies, fan centres, blade profiles, thickness, PCB outline, shroud contour and internal component positions remain illustrative or unknown.
 - Imported nodes without component metadata can render but cannot receive a meaningful technical card.
 - The component inventory is a starter set, not a complete BOM.
-- Exploded view is a reversible visual separation, not a verified physical removal sequence.
+- Exploded view is a reversible visual separation, not a verified physical removal sequence. The animated control demonstrates the visual transition; it does not claim to be a documented repair procedure.
+- Package-authored keyframe clips and timeline scrubbing are not implemented yet; the scene controller exposes generic animation primitives.
 - Cooling and power layers are qualitative highlighting, not CFD, thermal analysis or circuit simulation.
 - The learning quiz is a small source-backed starter set, not a complete course or assessment system.
 - CI validates the generated v0.4 model and viewer integration; local visual acceptance on the owner's machine remains pending.
