@@ -1,5 +1,5 @@
 """
-Screw by Screw — EVGA RTX 3060 XC BLACK blockout generator v0.3.
+Screw by Screw — EVGA RTX 3060 XC BLACK blockout generator v0.4 candidate.
 
 Run from repository root:
   blender --background --python tools/modeling/build_rtx3060_xc_black_blockout.py
@@ -54,12 +54,12 @@ STATUS = {
 }
 
 manifest = {
-    "schema_version": "0.3.0",
+    "schema_version": "0.4.0",
     "model_id": "gpu.evga.12g-p5-3655-kr",
     "model": "EVGA GeForce RTX 3060 XC BLACK GAMING 12GB",
     "part_number": "12G-P5-3655-KR",
     "asset_type": "blockout",
-    "generator_version": "0.3.0",
+    "generator_version": "0.4.0",
     "geometry_status": "illustrative_proxy_not_cad",
     "units": "mm",
     "dimensions": {
@@ -438,9 +438,13 @@ def validate_scene_transform_integrity():
     if corners:
         mins = [min(v[i] for v in corners) for i in range(3)]
         maxs = [max(v[i] for v in corners) for i in range(3)]
-        if mins[0] < -1.0 or maxs[0] > CARD_LENGTH + 1.0:
+        # 201.8 mm is the manufacturer's nominal length, not a verified
+        # maximum exterior shroud extent. LanOC reports a small shroud
+        # overhang but does not quantify it. Keep only the negative-origin
+        # transform sanity check; report the positive extent without clamping.
+        if mins[0] < -1.0:
             failures.append(
-                f"Unexpected X bounds: {mins[0]:.3f} .. {maxs[0]:.3f} mm"
+                f"Unexpected negative X bounds: {mins[0]:.3f} mm"
             )
         if mins[2] < -1.0 or maxs[2] > CARD_HEIGHT + 1.0:
             failures.append(
@@ -452,7 +456,7 @@ def validate_scene_transform_integrity():
         for failure in failures:
             print(" -", failure)
         raise RuntimeError(
-            "Scene transform validation failed; refusing to save/export v0.3."
+            "Scene transform validation failed; refusing to save/export v0.4."
         )
 
     print("TRANSFORM INTEGRITY CHECK: PASS")
@@ -491,7 +495,7 @@ def set_manifest_bounds():
             round(maxs[i] - mins[i], 3) for i in range(3)
         ],
         "axis_meaning": {
-            "x": "card length",
+            "x": "nominal card-length axis; exterior shroud may overhang",
             "y": "thickness axis; includes front/rear proxy protrusions",
             "z": "card height",
         },
@@ -634,15 +638,21 @@ def main():
     for i, x in enumerate(FAN_CENTERS_X, start=1):
         make_fan(i, x, FAN_CENTER_Z, -half_y - 1.5, cool, cooling_group)
 
-    # Cooling stack: coarse blocks only, not fin-by-fin geometry.
-    heatsink = cube(
-        "Heatsink proxy | fin stack",
-        "cooling.heatsink",
-        (CARD_LENGTH / 2, 0, CARD_HEIGHT / 2),
-        (CARD_LENGTH * 0.72, HEATSINK_THICKNESS, CARD_HEIGHT * 0.48),
-        MAT["heatsink"], cool,
-    )
-    set_parent_keep_world(heatsink, cooling_group)
+    # Cooling stack: independently selectable vertical fin plates. Their
+    # count, pitch and dimensions are visual placeholders, not measured CAD.
+    fin_span = CARD_LENGTH * 0.72
+    fin_start_x = (CARD_LENGTH - fin_span) / 2
+    for fin_index in range(24):
+        fin_x = fin_start_x + fin_index * fin_span / 23
+        fin = cube(
+            f"Heatsink fin proxy {fin_index + 1:02d}",
+            f"cooling.heatsink.fin.{fin_index + 1:02d}",
+            (fin_x, 0, CARD_HEIGHT / 2),
+            (1.0, HEATSINK_THICKNESS, CARD_HEIGHT * 0.48),
+            MAT["heatsink"], cool,
+            evidence=STATUS["illustrative"],
+        )
+        set_parent_keep_world(fin, cooling_group)
 
     contact = cube(
         "GPU contact proxy | copper",
@@ -731,19 +741,19 @@ def main():
 
     validate_scene_transform_integrity()
     set_manifest_bounds()
-    manifest_path = out_dir / "rtx3060_xc_black_blockout_v03.manifest.json"
+    manifest_path = out_dir / "rtx3060_xc_black_blockout_v04.manifest.json"
     manifest_path.write_text(
         json.dumps(manifest, indent=2, ensure_ascii=False),
         encoding="utf-8",
     )
 
     if not args.no_blend:
-        blend_path = out_dir / "rtx3060_xc_black_blockout_v03.blend"
+        blend_path = out_dir / "rtx3060_xc_black_blockout_v04.blend"
         bpy.ops.wm.save_as_mainfile(filepath=str(blend_path))
         print(f"Saved Blender scene: {blend_path}")
 
     if not args.no_glb:
-        glb_path = out_dir / "rtx3060_xc_black_blockout_v03.glb"
+        glb_path = out_dir / "rtx3060_xc_black_blockout_v04.glb"
         if hasattr(bpy.ops.export_scene, "gltf"):
             # Export renderable parts and assembly empties; omit the reference
             # envelope so it cannot inflate browser-model bounds or obscure parts.
