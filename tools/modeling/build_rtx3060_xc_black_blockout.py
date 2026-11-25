@@ -821,6 +821,16 @@ def main():
         bpy.ops.object.transform_apply(location=False, rotation=False, scale=True)
         obj.data.materials.append(mat)
         move_to_collection(obj, collection)
+        slug = "".join(ch.lower() if ch.isalnum() else "." for ch in obj.name)
+        while ".." in slug:
+            slug = slug.replace("..", ".")
+        tag(
+            obj,
+            "visual.detail." + slug.strip("."),
+            STATUS["illustrative"],
+            geometry="illustrative_proxy",
+            export_role="decorative_detail",
+        )
         set_parent_keep_world(obj, parent)
         obj["sbs_visual_proxy"] = True
         return obj
@@ -834,6 +844,16 @@ def main():
         obj.name = name
         obj.data.materials.append(mat)
         move_to_collection(obj, collection)
+        slug = "".join(ch.lower() if ch.isalnum() else "." for ch in obj.name)
+        while ".." in slug:
+            slug = slug.replace("..", ".")
+        tag(
+            obj,
+            "visual.detail." + slug.strip("."),
+            STATUS["illustrative"],
+            geometry="illustrative_proxy",
+            export_role="decorative_detail",
+        )
         set_parent_keep_world(obj, parent)
         obj["sbs_visual_proxy"] = True
         return obj
