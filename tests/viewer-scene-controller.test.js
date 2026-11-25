@@ -101,7 +101,7 @@ test("animates a selected component around its local axis", async () => {
       frame.forEach((callback) => callback(timestamp));
     }
     assert.equal(await playback, true);
-    assert.ok(Math.abs(fan.rotation.y - Math.PI * 2) < 1e-6);
+    assert.ok(Math.abs(fan.rotation.y) < 1e-6);
   } finally {
     globalThis.requestAnimationFrame = previousRequest;
     globalThis.cancelAnimationFrame = previousCancel;
