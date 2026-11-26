@@ -10,6 +10,7 @@ import argparse
 import json
 import math
 import struct
+import sys
 from pathlib import Path
 from typing import Any
 
@@ -35,7 +36,8 @@ def parse_args():
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--no-glb", action="store_true")
     parser.add_argument("--no-blend", action="store_true")
-    return parser.parse_args()
+    blender_args = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
+    return parser.parse_args(blender_args)
 
 
 def material_for(cache, rgb):
