@@ -877,8 +877,8 @@
         "src.lanoc.review"
       ],
       "description": {
-        "en": "The exact-model review describes a large through-PCB airflow cutout near the card end/left side, allowing air from the front fan to pass through the PCB region. The current marker is not a traced aperture boundary; exact contour, dimensions and clearance to adjacent components remain unmeasured.",
-        "ru": "В обзоре точной модели описан крупный сквозной воздушный вырез в PCB у края платы/с левой стороны, позволяющий воздуху от переднего вентилятора проходить через область платы. Текущий маркер не является обведённым контуром отверстия; форма, размеры и зазоры до соседних компонентов не измерены."
+        "en": "The exact-model review describes a large through-PCB airflow cutout near the fan/card-end area. The Blender blockout now represents it as a rounded rectangular Boolean aperture to make the airflow path visually legible. Its 18 × 22 mm placeholder dimensions and estimated centre are modelling conveniences only, not measurements or BoardView coordinates; the exact contour and clearance remain unknown.",
+        "ru": "В обзоре точной модели описан крупный сквозной воздушный вырез в PCB в области вентилятора/края карты. В Blender-блок-ауте он теперь показан сквозным скруглённым прямоугольным отверстием, чтобы визуально обозначить путь воздуха. Его условные размеры 18 × 22 мм и примерный центр выбраны только для моделирования, это не измерения и не координаты BoardView; точный контур и зазоры неизвестны."
       }
     },
     {
