@@ -10,6 +10,8 @@ test("opens the real Blender-generated RTX 3060 .sbsmodel archive", async ({ pag
   await expect(page.locator("#load-state")).toContainText("ПАКЕТ SBS MODEL");
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-fan-rotors", "2");
   await expect(page.locator("#component-tree")).toContainText("Крыльчатка вентилятора 1");
+  await expect(page.locator('#component-tree button[data-id="fan.1.blade.8"]')).toBeVisible();
+  await expect(page.locator('#component-tree button[data-id="fan.2.blade.8"]')).toBeVisible();
   await expect(page.locator("#animation-player-panel")).toBeVisible();
   await expect(page.locator("#animation-clip-select")).toContainText("Демонстрация вращения крыльчатки");
   await expect(page.locator("#animation-evidence-note")).toContainText("не является измеренным RPM");
