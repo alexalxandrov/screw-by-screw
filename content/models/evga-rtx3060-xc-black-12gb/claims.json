@@ -198,10 +198,10 @@
       "unit": "packages",
       "confidence_class": "independently_verified",
       "source_ids": [
-        "src.tomshardware.teardown",
-        "src.gamersnexus.teardown"
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
       ],
-      "notes": "Six Samsung GDDR6 packages are visible in the exact XC BLACK teardown photo. Package placement in the 3D reconstruction remains image-estimated."
+      "notes": "Six GDDR6 memory-package positions are visible in exact XC BLACK review/teardown material. The statement establishes visible package population only; package part number and per-package bus mapping are not established."
     },
     {
       "id": "claim.cooling.fin_count",
@@ -221,11 +221,12 @@
       "predicate": "gddr6_package_part_number",
       "value": "Samsung K4ZAF325BM-HC16",
       "unit": null,
-      "confidence_class": "independently_verified",
+      "confidence_class": "illustrative",
       "source_ids": [
-        "src.tomshardware.teardown"
+        "src.tomshardware.teardown",
+        "src.samsung.gddr6.catalog"
       ],
-      "notes": "Tom's Hardware identifies the six GDDR6 packages on the reviewed EVGA RTX 3060 XC BLACK sample."
+      "notes": "K4ZAF325BM-HC16 is identified in a related EVGA RTX 3060 XC teardown and described by a secondary catalog. The Tom's Hardware sample is not identified as XC BLACK / 12G-P5-3655-KR, so this part number is a candidate lead only and is not asserted as installed on the exact retail SKU."
     },
     {
       "id": "claim.pcie.interface",
@@ -480,9 +481,10 @@
       "unit": "packages",
       "confidence_class": "independently_verified",
       "source_ids": [
-        "src.tomshardware.teardown"
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
       ],
-      "notes": "Six Samsung GDDR6 packages are visible in the exact-model teardown; this claim is about the reviewed sample."
+      "notes": "Six GDDR6 memory-package positions are visible in exact-model XC BLACK material. This is a visual population count, not proof of six independent 32-bit physical channels."
     },
     {
       "id": "claim.memory.package_density",
@@ -490,11 +492,11 @@
       "predicate": "memory_package_density",
       "value": 16,
       "unit": "Gbit per package",
-      "confidence_class": "independently_verified",
+      "confidence_class": "illustrative",
       "source_ids": [
         "src.samsung.gddr6.catalog"
       ],
-      "notes": "Secondary catalog listing identifies K4ZAF325BM-HC16 as a 16Gbit device; no primary Samsung datasheet has been obtained."
+      "notes": "16 Gbit density is a secondary-catalog attribute for the candidate K4ZAF325BM-HC16 part number only. That device identity has not been verified on the exact XC BLACK 12G-P5-3655-KR sample; these values are not model-specific board claims."
     },
     {
       "id": "claim.memory.package_organization",
@@ -502,11 +504,11 @@
       "predicate": "memory_package_organization",
       "value": "512M × 32",
       "unit": null,
-      "confidence_class": "independently_verified",
+      "confidence_class": "illustrative",
       "source_ids": [
         "src.samsung.gddr6.catalog"
       ],
-      "notes": "Secondary catalog specification for K4ZAF325BM-HC16; not a primary Samsung datasheet."
+      "notes": "512M × 32 organization is a secondary-catalog attribute for the candidate K4ZAF325BM-HC16 part number only. That device identity has not been verified on the exact XC BLACK 12G-P5-3655-KR sample; these values are not model-specific board claims."
     },
     {
       "id": "claim.memory.package_data_rate",
@@ -514,12 +516,12 @@
       "predicate": "memory_package_data_rate",
       "value": 16,
       "unit": "Gbps per pin",
-      "confidence_class": "independently_verified",
+      "confidence_class": "illustrative",
       "source_ids": [
         "src.samsung.gddr6.catalog",
         "src.tomshardware.teardown"
       ],
-      "notes": "Memory IC rating. The board's published effective clock is 15,000 MHz; the IC's nominal maximum rating is not the same as the card's stock effective clock."
+      "notes": "16 Gbps per-pin data rate is a secondary-catalog attribute for the candidate K4ZAF325BM-HC16 part number only. That device identity has not been verified on the exact XC BLACK 12G-P5-3655-KR sample; these values are not model-specific board claims."
     },
     {
       "id": "claim.memory.package_type",
@@ -527,11 +529,11 @@
       "predicate": "memory_package_type",
       "value": "180 FBGA",
       "unit": null,
-      "confidence_class": "independently_verified",
+      "confidence_class": "illustrative",
       "source_ids": [
         "src.samsung.gddr6.catalog"
       ],
-      "notes": "Secondary catalog listing only; physical package outline and ball map are not modeled."
+      "notes": "180 FBGA package type is a secondary-catalog attribute for the candidate K4ZAF325BM-HC16 part number only. That device identity has not been verified on the exact XC BLACK 12G-P5-3655-KR sample; these values are not model-specific board claims."
     },
     {
       "id": "claim.memory.package_interface_width",
@@ -539,11 +541,11 @@
       "predicate": "memory_package_interface_width",
       "value": 32,
       "unit": "bits",
-      "confidence_class": "independently_verified",
+      "confidence_class": "illustrative",
       "source_ids": [
         "src.samsung.gddr6.catalog"
       ],
-      "notes": "The 512M × 32 organization corresponds to a 32-bit aggregate interface per package; logical channel representation only."
+      "notes": "32-bit package organization is a secondary-catalog attribute for the candidate K4ZAF325BM-HC16 part number only. That device identity has not been verified on the exact XC BLACK 12G-P5-3655-KR sample; these values are not model-specific board claims."
     },
     {
       "id": "claim.cooler.gpu_mounting_screw_count.visible",
