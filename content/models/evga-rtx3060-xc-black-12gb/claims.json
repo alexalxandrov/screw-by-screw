@@ -201,7 +201,7 @@
         "src.gamersnexus.teardown",
         "src.lanoc.review"
       ],
-      "notes": "Six GDDR6 memory-package positions are visible in exact XC BLACK review/teardown material. The statement establishes visible package population only; package part number and per-package bus mapping are not established."
+      "notes": "Six GDDR6 packages are documented in exact-SKU-linked teardown and exact XC BLACK review material. Their package identity is independently identified by the same Tom's Hardware article; package coordinates remain photo-estimated and package-to-controller nets are not mapped."
     },
     {
       "id": "claim.cooling.fin_count",
@@ -221,12 +221,11 @@
       "predicate": "gddr6_package_part_number",
       "value": "Samsung K4ZAF325BM-HC16",
       "unit": null,
-      "confidence_class": "illustrative",
+      "confidence_class": "independently_verified",
       "source_ids": [
-        "src.tomshardware.teardown",
-        "src.samsung.gddr6.catalog"
+        "src.tomshardware.teardown"
       ],
-      "notes": "K4ZAF325BM-HC16 is identified in a related EVGA RTX 3060 XC teardown and described by a secondary catalog. The Tom's Hardware sample is not identified as XC BLACK / 12G-P5-3655-KR, so this part number is a candidate lead only and is not asserted as installed on the exact retail SKU."
+      "notes": "Tom's Hardware identifies six Samsung K4ZAF325BM-HC16 GDDR6 packages in the teardown; the rear-PCB identity photograph on the same review identifies the sample as P/N 12G-P5-3655-KR. This is the exact XC BLACK retail SKU. This claim identifies the device part number, not its PCB net mapping."
     },
     {
       "id": "claim.pcie.interface",
@@ -253,16 +252,16 @@
       "notes": "Two fan connections are visible in the exact-model teardown; this does not document their pinout or control protocol."
     },
     {
-      "id": "claim.cooler.fastener.count.candidate",
+      "id": "claim.cooler.fastener.count.total",
       "subject_id": "assembly.fasteners",
-      "predicate": "rear_cooler_hold_down_screw_count_candidate",
+      "predicate": "cooler_retention_screw_count",
       "value": 8,
       "unit": "screws",
-      "confidence_class": "illustrative",
+      "confidence_class": "independently_verified",
       "source_ids": [
         "src.tomshardware.teardown"
       ],
-      "notes": "Tom's Hardware reports eight retention screws on a related EVGA GeForce RTX 3060 XC teardown sample, but the article does not identify the 12G-P5-3655-KR XC BLACK. This count is variant context only and is not used as the exact model's screw count or service instruction."
+      "notes": "Tom's Hardware reports eight screws retaining the cooler/shroud on the EVGA RTX 3060 XC teardown. The same article's rear-PCB identity photo reads P/N 12G-P5-3655-KR, tying the sample to the exact XC BLACK SKU. Four are described around the GPU and four near the far end of the card. Their exact coordinates, head/thread type and torque are not documented."
     },
     {
       "id": "claim.memory.effective_clock",
@@ -484,7 +483,7 @@
         "src.gamersnexus.teardown",
         "src.lanoc.review"
       ],
-      "notes": "Six GDDR6 memory-package positions are visible in exact-model XC BLACK material. This is a visual population count, not proof of six independent 32-bit physical channels."
+      "notes": "Six GDDR6 packages are identified on the exact 12G-P5-3655-KR sample. This is a physical package population count, not a claim about controller partitions or net routing."
     },
     {
       "id": "claim.memory.package_density",
@@ -492,11 +491,12 @@
       "predicate": "memory_package_density",
       "value": 16,
       "unit": "Gbit per package",
-      "confidence_class": "illustrative",
+      "confidence_class": "secondary_catalog_data",
       "source_ids": [
-        "src.samsung.gddr6.catalog"
+        "src.samsung.gddr6.catalog",
+        "src.tomshardware.teardown"
       ],
-      "notes": "16 Gbit density is a secondary-catalog attribute for the candidate K4ZAF325BM-HC16 part number only. That device identity has not been verified on the exact XC BLACK 12G-P5-3655-KR sample; these values are not model-specific board claims."
+      "notes": "16 Gbit density is a secondary-catalog attribute for the verified K4ZAF325BM-HC16 device identity; the attribute itself is transcribed from a secondary catalog, not a primary Samsung datasheet. It is a package property, not a BoardView-derived PCB net or layout fact."
     },
     {
       "id": "claim.memory.package_organization",
@@ -504,11 +504,12 @@
       "predicate": "memory_package_organization",
       "value": "512M × 32",
       "unit": null,
-      "confidence_class": "illustrative",
+      "confidence_class": "secondary_catalog_data",
       "source_ids": [
-        "src.samsung.gddr6.catalog"
+        "src.samsung.gddr6.catalog",
+        "src.tomshardware.teardown"
       ],
-      "notes": "512M × 32 organization is a secondary-catalog attribute for the candidate K4ZAF325BM-HC16 part number only. That device identity has not been verified on the exact XC BLACK 12G-P5-3655-KR sample; these values are not model-specific board claims."
+      "notes": "512M × 32 organization is a secondary-catalog attribute for the verified K4ZAF325BM-HC16 device identity; the attribute itself is transcribed from a secondary catalog, not a primary Samsung datasheet. It is a package property, not a BoardView-derived PCB net or layout fact."
     },
     {
       "id": "claim.memory.package_data_rate",
@@ -516,12 +517,12 @@
       "predicate": "memory_package_data_rate",
       "value": 16,
       "unit": "Gbps per pin",
-      "confidence_class": "illustrative",
+      "confidence_class": "independently_verified",
       "source_ids": [
-        "src.samsung.gddr6.catalog",
-        "src.tomshardware.teardown"
+        "src.tomshardware.teardown",
+        "src.samsung.gddr6.catalog"
       ],
-      "notes": "16 Gbps per-pin data rate is a secondary-catalog attribute for the candidate K4ZAF325BM-HC16 part number only. That device identity has not been verified on the exact XC BLACK 12G-P5-3655-KR sample; these values are not model-specific board claims."
+      "notes": "The exact-SKU-linked teardown identifies K4ZAF325BM-HC16 chips rated for 16Gbps. This is the memory-device rating, not the card's stock effective memory clock (EVGA lists 15,000MHz effective)."
     },
     {
       "id": "claim.memory.package_type",
@@ -529,11 +530,12 @@
       "predicate": "memory_package_type",
       "value": "180 FBGA",
       "unit": null,
-      "confidence_class": "illustrative",
+      "confidence_class": "secondary_catalog_data",
       "source_ids": [
-        "src.samsung.gddr6.catalog"
+        "src.samsung.gddr6.catalog",
+        "src.tomshardware.teardown"
       ],
-      "notes": "180 FBGA package type is a secondary-catalog attribute for the candidate K4ZAF325BM-HC16 part number only. That device identity has not been verified on the exact XC BLACK 12G-P5-3655-KR sample; these values are not model-specific board claims."
+      "notes": "180 FBGA package type is a secondary-catalog attribute for the verified K4ZAF325BM-HC16 device identity; the attribute itself is transcribed from a secondary catalog, not a primary Samsung datasheet. It is a package property, not a BoardView-derived PCB net or layout fact."
     },
     {
       "id": "claim.memory.package_interface_width",
@@ -541,11 +543,12 @@
       "predicate": "memory_package_interface_width",
       "value": 32,
       "unit": "bits",
-      "confidence_class": "illustrative",
+      "confidence_class": "secondary_catalog_data",
       "source_ids": [
-        "src.samsung.gddr6.catalog"
+        "src.samsung.gddr6.catalog",
+        "src.tomshardware.teardown"
       ],
-      "notes": "32-bit package organization is a secondary-catalog attribute for the candidate K4ZAF325BM-HC16 part number only. That device identity has not been verified on the exact XC BLACK 12G-P5-3655-KR sample; these values are not model-specific board claims."
+      "notes": "32-bit package organization is a secondary-catalog attribute for the verified K4ZAF325BM-HC16 device identity; the attribute itself is transcribed from a secondary catalog, not a primary Samsung datasheet. It is a package property, not a BoardView-derived PCB net or layout fact."
     },
     {
       "id": "claim.cooler.gpu_mounting_screw_count.visible",
@@ -618,6 +621,18 @@
         "src.techpowerup.pcb"
       ],
       "notes": "The PCB photograph on the TechPowerUp EVGA RTX 3060 XC BLACK product page appears to show this silkscreen marking. The photographed sample has not been independently tied to the selected 12G-P5-3655-KR unit or to a specific production batch. Keep the actual PCB revision unknown; do not use this candidate alone to select a BoardView or schematic."
+    },
+    {
+      "id": "claim.cooler.fastener.count.rear",
+      "subject_id": "assembly.fasteners",
+      "predicate": "rear_area_cooler_retention_screw_count",
+      "value": 4,
+      "unit": "screws",
+      "confidence_class": "independently_verified",
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ],
+      "notes": "Tom's Hardware's exact-SKU-linked teardown identifies four of the eight cooler/shroud screws as being near the far end/rear area of the card. Individual locations are not measured or mapped."
     }
   ]
 }
