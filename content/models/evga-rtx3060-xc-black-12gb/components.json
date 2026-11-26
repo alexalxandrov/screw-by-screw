@@ -33,8 +33,8 @@
         "src.lanoc.review"
       ],
       "description": {
-        "en": "The exact XC BLACK sample uses a black plastic dual-fan shroud. LanOC describes a lightly textured upper area, dotted recesses around the fans, an EVGA logo between the fans and GeForce RTX branding at the lower edge; no RGB lighting is fitted. The outer contour, wall thickness, clips and mounting interfaces remain proxy geometry.",
-        "ru": "В точном образце XC BLACK используется чёрный пластиковый кожух двух вентиляторов. LanOC описывает лёгкую текстуру верхней части, точечные углубления вокруг вентиляторов, логотип EVGA между ними и надпись GeForce RTX у нижнего края; RGB-подсветки нет. Наружный контур, толщина стенок, защёлки и монтажные интерфейсы остаются условной геометрией."
+        "en": "The exact XC BLACK sample uses a black plastic dual-fan shroud. LanOC describes a lightly textured upper area, dotted recesses around the fans, an EVGA logo between the fans and GeForce RTX branding at the lower edge; no RGB lighting is fitted. The blockout now carries simplified raised-stroke EVGA and GEFORCE RTX wordmark proxies on the upper/lower rails. These are readability details, not exact logo vectors. The lightly textured upper surface, side recess-dot field, outer contour, wall thickness, clips and mounting interfaces remain illustrative or unmodelled.",
+        "ru": "В точном образце XC BLACK используется чёрный пластиковый кожух двух вентиляторов. LanOC описывает лёгкую текстуру верхней части, точечные углубления вокруг вентиляторов, логотип EVGA между ними и надпись GeForce RTX у нижнего края; RGB-подсветки нет. В блок-аут добавлены упрощённые рельефные надписи EVGA и GEFORCE RTX на верхней и нижней планках. Это читаемые визуальные прокси, а не точные векторные логотипы. Микротекстура верхней поверхности, поле боковых углублений, внешний контур, толщина стенок, защёлки и монтажные интерфейсы остаются условными или не смоделированы."
       }
     },
     {
@@ -1015,8 +1015,8 @@
         "src.lanoc.review"
       ],
       "description": {
-        "en": "Central hub geometry is a visual proxy. Bearing construction, motor stator, rotor magnet, hub diameter and internal wiring are not documented.",
-        "ru": "Геометрия центральной ступицы задана условно. Конструкция подшипника, статор двигателя, магнит ротора, диаметр ступицы и внутренняя проводка не документированы."
+        "en": "Central hub geometry is a visual proxy. A small raised E-like badge mark is added as a photo-informed presentation detail; its vector shape, sticker construction and dimensions are not verified. Bearing construction, motor stator, rotor magnet, hub diameter and internal wiring are not documented.",
+        "ru": "Геометрия центральной ступицы задана условно. Добавлена небольшая рельефная E-образная эмблема как визуальная интерпретация фотографии; точная форма знака, конструкция наклейки и размеры не подтверждены. Конструкция подшипника, статор двигателя, магнит ротора, диаметр ступицы и внутренняя проводка не документированы."
       }
     },
     {
@@ -1034,8 +1034,8 @@
         "src.newegg.exact_sku.product_photo"
       ],
       "description": {
-        "en": "Individually selectable swept-blade proxy. Two front-view photographs in an exact-SKU retail listing show eight visible blade surfaces per fan. The mesh does not reproduce calibrated blade geometry or LanOC's observed raised EVGA E-logo / golf-ball-like surface details; camber, pitch, thickness and embossing dimensions remain unmeasured.",
-        "ru": "Отдельно выбираемый макет изогнутой лопасти. На двух фронтальных фотографиях карточки товара с точным SKU видны восемь лопастных поверхностей на вентилятор. Сетка не воспроизводит калиброванную геометрию или отмеченный LanOC рельеф EVGA E, похожий на ямочки мяча для гольфа; кривизна, шаг, толщина и размеры рельефа не измерены."
+        "en": "Individually selectable swept-blade proxy. Two front-view photographs in an exact-SKU retail listing show eight visible blade surfaces per fan. Each mesh now includes a small four-stroke E-like raised relief as an illustrative interpretation of LanOC's observed EVGA E-logo / golf-ball-like blade details. Exact logo vector, relief height, profile, camber, pitch and thickness remain unmeasured.",
+        "ru": "Отдельно выбираемый макет изогнутой лопасти. На двух фронтальных фотографиях карточки товара с точным SKU видны восемь лопастных поверхностей на вентилятор. В каждую сетку добавлен небольшой рельефный E-образный знак из четырёх штрихов — условная интерпретация отмеченного LanOC логотипа EVGA на лопастях и текстуры, похожей на мяч для гольфа. Точный вектор логотипа, высота рельефа, профиль, кривизна, шаг и толщина не измерены."
       }
     },
     {
@@ -1053,8 +1053,8 @@
         "src.newegg.exact_sku.product_photo"
       ],
       "description": {
-        "en": "Individually selectable swept-blade proxy. Two front-view photographs in an exact-SKU retail listing show eight visible blade surfaces per fan. The mesh does not reproduce calibrated blade geometry or LanOC's observed raised EVGA E-logo / golf-ball-like surface details; camber, pitch, thickness and embossing dimensions remain unmeasured.",
-        "ru": "Отдельно выбираемый макет изогнутой лопасти. На двух фронтальных фотографиях карточки товара с точным SKU видны восемь лопастных поверхностей на вентилятор. Сетка не воспроизводит калиброванную геометрию или отмеченный LanOC рельеф EVGA E, похожий на ямочки мяча для гольфа; кривизна, шаг, толщина и размеры рельефа не измерены."
+        "en": "Individually selectable swept-blade proxy. Two front-view photographs in an exact-SKU retail listing show eight visible blade surfaces per fan. Each mesh now includes a small four-stroke E-like raised relief as an illustrative interpretation of LanOC's observed EVGA E-logo / golf-ball-like blade details. Exact logo vector, relief height, profile, camber, pitch and thickness remain unmeasured.",
+        "ru": "Отдельно выбираемый макет изогнутой лопасти. На двух фронтальных фотографиях карточки товара с точным SKU видны восемь лопастных поверхностей на вентилятор. В каждую сетку добавлен небольшой рельефный E-образный знак из четырёх штрихов — условная интерпретация отмеченного LanOC логотипа EVGA на лопастях и текстуры, похожей на мяч для гольфа. Точный вектор логотипа, высота рельефа, профиль, кривизна, шаг и толщина не измерены."
       }
     },
     {
@@ -1072,8 +1072,8 @@
         "src.newegg.exact_sku.product_photo"
       ],
       "description": {
-        "en": "Individually selectable swept-blade proxy. Two front-view photographs in an exact-SKU retail listing show eight visible blade surfaces per fan. The mesh does not reproduce calibrated blade geometry or LanOC's observed raised EVGA E-logo / golf-ball-like surface details; camber, pitch, thickness and embossing dimensions remain unmeasured.",
-        "ru": "Отдельно выбираемый макет изогнутой лопасти. На двух фронтальных фотографиях карточки товара с точным SKU видны восемь лопастных поверхностей на вентилятор. Сетка не воспроизводит калиброванную геометрию или отмеченный LanOC рельеф EVGA E, похожий на ямочки мяча для гольфа; кривизна, шаг, толщина и размеры рельефа не измерены."
+        "en": "Individually selectable swept-blade proxy. Two front-view photographs in an exact-SKU retail listing show eight visible blade surfaces per fan. Each mesh now includes a small four-stroke E-like raised relief as an illustrative interpretation of LanOC's observed EVGA E-logo / golf-ball-like blade details. Exact logo vector, relief height, profile, camber, pitch and thickness remain unmeasured.",
+        "ru": "Отдельно выбираемый макет изогнутой лопасти. На двух фронтальных фотографиях карточки товара с точным SKU видны восемь лопастных поверхностей на вентилятор. В каждую сетку добавлен небольшой рельефный E-образный знак из четырёх штрихов — условная интерпретация отмеченного LanOC логотипа EVGA на лопастях и текстуры, похожей на мяч для гольфа. Точный вектор логотипа, высота рельефа, профиль, кривизна, шаг и толщина не измерены."
       }
     },
     {
@@ -1091,8 +1091,8 @@
         "src.newegg.exact_sku.product_photo"
       ],
       "description": {
-        "en": "Individually selectable swept-blade proxy. Two front-view photographs in an exact-SKU retail listing show eight visible blade surfaces per fan. The mesh does not reproduce calibrated blade geometry or LanOC's observed raised EVGA E-logo / golf-ball-like surface details; camber, pitch, thickness and embossing dimensions remain unmeasured.",
-        "ru": "Отдельно выбираемый макет изогнутой лопасти. На двух фронтальных фотографиях карточки товара с точным SKU видны восемь лопастных поверхностей на вентилятор. Сетка не воспроизводит калиброванную геометрию или отмеченный LanOC рельеф EVGA E, похожий на ямочки мяча для гольфа; кривизна, шаг, толщина и размеры рельефа не измерены."
+        "en": "Individually selectable swept-blade proxy. Two front-view photographs in an exact-SKU retail listing show eight visible blade surfaces per fan. Each mesh now includes a small four-stroke E-like raised relief as an illustrative interpretation of LanOC's observed EVGA E-logo / golf-ball-like blade details. Exact logo vector, relief height, profile, camber, pitch and thickness remain unmeasured.",
+        "ru": "Отдельно выбираемый макет изогнутой лопасти. На двух фронтальных фотографиях карточки товара с точным SKU видны восемь лопастных поверхностей на вентилятор. В каждую сетку добавлен небольшой рельефный E-образный знак из четырёх штрихов — условная интерпретация отмеченного LanOC логотипа EVGA на лопастях и текстуры, похожей на мяч для гольфа. Точный вектор логотипа, высота рельефа, профиль, кривизна, шаг и толщина не измерены."
       }
     },
     {
@@ -1110,8 +1110,8 @@
         "src.newegg.exact_sku.product_photo"
       ],
       "description": {
-        "en": "Individually selectable swept-blade proxy. Two front-view photographs in an exact-SKU retail listing show eight visible blade surfaces per fan. The mesh does not reproduce calibrated blade geometry or LanOC's observed raised EVGA E-logo / golf-ball-like surface details; camber, pitch, thickness and embossing dimensions remain unmeasured.",
-        "ru": "Отдельно выбираемый макет изогнутой лопасти. На двух фронтальных фотографиях карточки товара с точным SKU видны восемь лопастных поверхностей на вентилятор. Сетка не воспроизводит калиброванную геометрию или отмеченный LanOC рельеф EVGA E, похожий на ямочки мяча для гольфа; кривизна, шаг, толщина и размеры рельефа не измерены."
+        "en": "Individually selectable swept-blade proxy. Two front-view photographs in an exact-SKU retail listing show eight visible blade surfaces per fan. Each mesh now includes a small four-stroke E-like raised relief as an illustrative interpretation of LanOC's observed EVGA E-logo / golf-ball-like blade details. Exact logo vector, relief height, profile, camber, pitch and thickness remain unmeasured.",
+        "ru": "Отдельно выбираемый макет изогнутой лопасти. На двух фронтальных фотографиях карточки товара с точным SKU видны восемь лопастных поверхностей на вентилятор. В каждую сетку добавлен небольшой рельефный E-образный знак из четырёх штрихов — условная интерпретация отмеченного LanOC логотипа EVGA на лопастях и текстуры, похожей на мяч для гольфа. Точный вектор логотипа, высота рельефа, профиль, кривизна, шаг и толщина не измерены."
       }
     },
     {
@@ -1129,8 +1129,8 @@
         "src.newegg.exact_sku.product_photo"
       ],
       "description": {
-        "en": "Individually selectable swept-blade proxy. Two front-view photographs in an exact-SKU retail listing show eight visible blade surfaces per fan. The mesh does not reproduce calibrated blade geometry or LanOC's observed raised EVGA E-logo / golf-ball-like surface details; camber, pitch, thickness and embossing dimensions remain unmeasured.",
-        "ru": "Отдельно выбираемый макет изогнутой лопасти. На двух фронтальных фотографиях карточки товара с точным SKU видны восемь лопастных поверхностей на вентилятор. Сетка не воспроизводит калиброванную геометрию или отмеченный LanOC рельеф EVGA E, похожий на ямочки мяча для гольфа; кривизна, шаг, толщина и размеры рельефа не измерены."
+        "en": "Individually selectable swept-blade proxy. Two front-view photographs in an exact-SKU retail listing show eight visible blade surfaces per fan. Each mesh now includes a small four-stroke E-like raised relief as an illustrative interpretation of LanOC's observed EVGA E-logo / golf-ball-like blade details. Exact logo vector, relief height, profile, camber, pitch and thickness remain unmeasured.",
+        "ru": "Отдельно выбираемый макет изогнутой лопасти. На двух фронтальных фотографиях карточки товара с точным SKU видны восемь лопастных поверхностей на вентилятор. В каждую сетку добавлен небольшой рельефный E-образный знак из четырёх штрихов — условная интерпретация отмеченного LanOC логотипа EVGA на лопастях и текстуры, похожей на мяч для гольфа. Точный вектор логотипа, высота рельефа, профиль, кривизна, шаг и толщина не измерены."
       }
     },
     {
@@ -1148,8 +1148,8 @@
         "src.newegg.exact_sku.product_photo"
       ],
       "description": {
-        "en": "Individually selectable swept-blade proxy. Two front-view photographs in an exact-SKU retail listing show eight visible blade surfaces per fan. The mesh does not reproduce calibrated blade geometry or LanOC's observed raised EVGA E-logo / golf-ball-like surface details; camber, pitch, thickness and embossing dimensions remain unmeasured.",
-        "ru": "Отдельно выбираемый макет изогнутой лопасти. На двух фронтальных фотографиях карточки товара с точным SKU видны восемь лопастных поверхностей на вентилятор. Сетка не воспроизводит калиброванную геометрию или отмеченный LanOC рельеф EVGA E, похожий на ямочки мяча для гольфа; кривизна, шаг, толщина и размеры рельефа не измерены."
+        "en": "Individually selectable swept-blade proxy. Two front-view photographs in an exact-SKU retail listing show eight visible blade surfaces per fan. Each mesh now includes a small four-stroke E-like raised relief as an illustrative interpretation of LanOC's observed EVGA E-logo / golf-ball-like blade details. Exact logo vector, relief height, profile, camber, pitch and thickness remain unmeasured.",
+        "ru": "Отдельно выбираемый макет изогнутой лопасти. На двух фронтальных фотографиях карточки товара с точным SKU видны восемь лопастных поверхностей на вентилятор. В каждую сетку добавлен небольшой рельефный E-образный знак из четырёх штрихов — условная интерпретация отмеченного LanOC логотипа EVGA на лопастях и текстуры, похожей на мяч для гольфа. Точный вектор логотипа, высота рельефа, профиль, кривизна, шаг и толщина не измерены."
       }
     },
     {
@@ -1184,8 +1184,8 @@
         "src.lanoc.review"
       ],
       "description": {
-        "en": "Central hub geometry is a visual proxy. Bearing construction, motor stator, rotor magnet, hub diameter and internal wiring are not documented.",
-        "ru": "Геометрия центральной ступицы задана условно. Конструкция подшипника, статор двигателя, магнит ротора, диаметр ступицы и внутренняя проводка не документированы."
+        "en": "Central hub geometry is a visual proxy. A small raised E-like badge mark is added as a photo-informed presentation detail; its vector shape, sticker construction and dimensions are not verified. Bearing construction, motor stator, rotor magnet, hub diameter and internal wiring are not documented.",
+        "ru": "Геометрия центральной ступицы задана условно. Добавлена небольшая рельефная E-образная эмблема как визуальная интерпретация фотографии; точная форма знака, конструкция наклейки и размеры не подтверждены. Конструкция подшипника, статор двигателя, магнит ротора, диаметр ступицы и внутренняя проводка не документированы."
       }
     },
     {
@@ -1203,8 +1203,8 @@
         "src.newegg.exact_sku.product_photo"
       ],
       "description": {
-        "en": "Individually selectable swept-blade proxy. Two front-view photographs in an exact-SKU retail listing show eight visible blade surfaces per fan. The mesh does not reproduce calibrated blade geometry or LanOC's observed raised EVGA E-logo / golf-ball-like surface details; camber, pitch, thickness and embossing dimensions remain unmeasured.",
-        "ru": "Отдельно выбираемый макет изогнутой лопасти. На двух фронтальных фотографиях карточки товара с точным SKU видны восемь лопастных поверхностей на вентилятор. Сетка не воспроизводит калиброванную геометрию или отмеченный LanOC рельеф EVGA E, похожий на ямочки мяча для гольфа; кривизна, шаг, толщина и размеры рельефа не измерены."
+        "en": "Individually selectable swept-blade proxy. Two front-view photographs in an exact-SKU retail listing show eight visible blade surfaces per fan. Each mesh now includes a small four-stroke E-like raised relief as an illustrative interpretation of LanOC's observed EVGA E-logo / golf-ball-like blade details. Exact logo vector, relief height, profile, camber, pitch and thickness remain unmeasured.",
+        "ru": "Отдельно выбираемый макет изогнутой лопасти. На двух фронтальных фотографиях карточки товара с точным SKU видны восемь лопастных поверхностей на вентилятор. В каждую сетку добавлен небольшой рельефный E-образный знак из четырёх штрихов — условная интерпретация отмеченного LanOC логотипа EVGA на лопастях и текстуры, похожей на мяч для гольфа. Точный вектор логотипа, высота рельефа, профиль, кривизна, шаг и толщина не измерены."
       }
     },
     {
@@ -1222,8 +1222,8 @@
         "src.newegg.exact_sku.product_photo"
       ],
       "description": {
-        "en": "Individually selectable swept-blade proxy. Two front-view photographs in an exact-SKU retail listing show eight visible blade surfaces per fan. The mesh does not reproduce calibrated blade geometry or LanOC's observed raised EVGA E-logo / golf-ball-like surface details; camber, pitch, thickness and embossing dimensions remain unmeasured.",
-        "ru": "Отдельно выбираемый макет изогнутой лопасти. На двух фронтальных фотографиях карточки товара с точным SKU видны восемь лопастных поверхностей на вентилятор. Сетка не воспроизводит калиброванную геометрию или отмеченный LanOC рельеф EVGA E, похожий на ямочки мяча для гольфа; кривизна, шаг, толщина и размеры рельефа не измерены."
+        "en": "Individually selectable swept-blade proxy. Two front-view photographs in an exact-SKU retail listing show eight visible blade surfaces per fan. Each mesh now includes a small four-stroke E-like raised relief as an illustrative interpretation of LanOC's observed EVGA E-logo / golf-ball-like blade details. Exact logo vector, relief height, profile, camber, pitch and thickness remain unmeasured.",
+        "ru": "Отдельно выбираемый макет изогнутой лопасти. На двух фронтальных фотографиях карточки товара с точным SKU видны восемь лопастных поверхностей на вентилятор. В каждую сетку добавлен небольшой рельефный E-образный знак из четырёх штрихов — условная интерпретация отмеченного LanOC логотипа EVGA на лопастях и текстуры, похожей на мяч для гольфа. Точный вектор логотипа, высота рельефа, профиль, кривизна, шаг и толщина не измерены."
       }
     },
     {
@@ -1241,8 +1241,8 @@
         "src.newegg.exact_sku.product_photo"
       ],
       "description": {
-        "en": "Individually selectable swept-blade proxy. Two front-view photographs in an exact-SKU retail listing show eight visible blade surfaces per fan. The mesh does not reproduce calibrated blade geometry or LanOC's observed raised EVGA E-logo / golf-ball-like surface details; camber, pitch, thickness and embossing dimensions remain unmeasured.",
-        "ru": "Отдельно выбираемый макет изогнутой лопасти. На двух фронтальных фотографиях карточки товара с точным SKU видны восемь лопастных поверхностей на вентилятор. Сетка не воспроизводит калиброванную геометрию или отмеченный LanOC рельеф EVGA E, похожий на ямочки мяча для гольфа; кривизна, шаг, толщина и размеры рельефа не измерены."
+        "en": "Individually selectable swept-blade proxy. Two front-view photographs in an exact-SKU retail listing show eight visible blade surfaces per fan. Each mesh now includes a small four-stroke E-like raised relief as an illustrative interpretation of LanOC's observed EVGA E-logo / golf-ball-like blade details. Exact logo vector, relief height, profile, camber, pitch and thickness remain unmeasured.",
+        "ru": "Отдельно выбираемый макет изогнутой лопасти. На двух фронтальных фотографиях карточки товара с точным SKU видны восемь лопастных поверхностей на вентилятор. В каждую сетку добавлен небольшой рельефный E-образный знак из четырёх штрихов — условная интерпретация отмеченного LanOC логотипа EVGA на лопастях и текстуры, похожей на мяч для гольфа. Точный вектор логотипа, высота рельефа, профиль, кривизна, шаг и толщина не измерены."
       }
     },
     {
@@ -1260,8 +1260,8 @@
         "src.newegg.exact_sku.product_photo"
       ],
       "description": {
-        "en": "Individually selectable swept-blade proxy. Two front-view photographs in an exact-SKU retail listing show eight visible blade surfaces per fan. The mesh does not reproduce calibrated blade geometry or LanOC's observed raised EVGA E-logo / golf-ball-like surface details; camber, pitch, thickness and embossing dimensions remain unmeasured.",
-        "ru": "Отдельно выбираемый макет изогнутой лопасти. На двух фронтальных фотографиях карточки товара с точным SKU видны восемь лопастных поверхностей на вентилятор. Сетка не воспроизводит калиброванную геометрию или отмеченный LanOC рельеф EVGA E, похожий на ямочки мяча для гольфа; кривизна, шаг, толщина и размеры рельефа не измерены."
+        "en": "Individually selectable swept-blade proxy. Two front-view photographs in an exact-SKU retail listing show eight visible blade surfaces per fan. Each mesh now includes a small four-stroke E-like raised relief as an illustrative interpretation of LanOC's observed EVGA E-logo / golf-ball-like blade details. Exact logo vector, relief height, profile, camber, pitch and thickness remain unmeasured.",
+        "ru": "Отдельно выбираемый макет изогнутой лопасти. На двух фронтальных фотографиях карточки товара с точным SKU видны восемь лопастных поверхностей на вентилятор. В каждую сетку добавлен небольшой рельефный E-образный знак из четырёх штрихов — условная интерпретация отмеченного LanOC логотипа EVGA на лопастях и текстуры, похожей на мяч для гольфа. Точный вектор логотипа, высота рельефа, профиль, кривизна, шаг и толщина не измерены."
       }
     },
     {
@@ -1279,8 +1279,8 @@
         "src.newegg.exact_sku.product_photo"
       ],
       "description": {
-        "en": "Individually selectable swept-blade proxy. Two front-view photographs in an exact-SKU retail listing show eight visible blade surfaces per fan. The mesh does not reproduce calibrated blade geometry or LanOC's observed raised EVGA E-logo / golf-ball-like surface details; camber, pitch, thickness and embossing dimensions remain unmeasured.",
-        "ru": "Отдельно выбираемый макет изогнутой лопасти. На двух фронтальных фотографиях карточки товара с точным SKU видны восемь лопастных поверхностей на вентилятор. Сетка не воспроизводит калиброванную геометрию или отмеченный LanOC рельеф EVGA E, похожий на ямочки мяча для гольфа; кривизна, шаг, толщина и размеры рельефа не измерены."
+        "en": "Individually selectable swept-blade proxy. Two front-view photographs in an exact-SKU retail listing show eight visible blade surfaces per fan. Each mesh now includes a small four-stroke E-like raised relief as an illustrative interpretation of LanOC's observed EVGA E-logo / golf-ball-like blade details. Exact logo vector, relief height, profile, camber, pitch and thickness remain unmeasured.",
+        "ru": "Отдельно выбираемый макет изогнутой лопасти. На двух фронтальных фотографиях карточки товара с точным SKU видны восемь лопастных поверхностей на вентилятор. В каждую сетку добавлен небольшой рельефный E-образный знак из четырёх штрихов — условная интерпретация отмеченного LanOC логотипа EVGA на лопастях и текстуры, похожей на мяч для гольфа. Точный вектор логотипа, высота рельефа, профиль, кривизна, шаг и толщина не измерены."
       }
     },
     {
@@ -1298,8 +1298,8 @@
         "src.newegg.exact_sku.product_photo"
       ],
       "description": {
-        "en": "Individually selectable swept-blade proxy. Two front-view photographs in an exact-SKU retail listing show eight visible blade surfaces per fan. The mesh does not reproduce calibrated blade geometry or LanOC's observed raised EVGA E-logo / golf-ball-like surface details; camber, pitch, thickness and embossing dimensions remain unmeasured.",
-        "ru": "Отдельно выбираемый макет изогнутой лопасти. На двух фронтальных фотографиях карточки товара с точным SKU видны восемь лопастных поверхностей на вентилятор. Сетка не воспроизводит калиброванную геометрию или отмеченный LanOC рельеф EVGA E, похожий на ямочки мяча для гольфа; кривизна, шаг, толщина и размеры рельефа не измерены."
+        "en": "Individually selectable swept-blade proxy. Two front-view photographs in an exact-SKU retail listing show eight visible blade surfaces per fan. Each mesh now includes a small four-stroke E-like raised relief as an illustrative interpretation of LanOC's observed EVGA E-logo / golf-ball-like blade details. Exact logo vector, relief height, profile, camber, pitch and thickness remain unmeasured.",
+        "ru": "Отдельно выбираемый макет изогнутой лопасти. На двух фронтальных фотографиях карточки товара с точным SKU видны восемь лопастных поверхностей на вентилятор. В каждую сетку добавлен небольшой рельефный E-образный знак из четырёх штрихов — условная интерпретация отмеченного LanOC логотипа EVGA на лопастях и текстуры, похожей на мяч для гольфа. Точный вектор логотипа, высота рельефа, профиль, кривизна, шаг и толщина не измерены."
       }
     },
     {
@@ -1317,8 +1317,8 @@
         "src.newegg.exact_sku.product_photo"
       ],
       "description": {
-        "en": "Individually selectable swept-blade proxy. Two front-view photographs in an exact-SKU retail listing show eight visible blade surfaces per fan. The mesh does not reproduce calibrated blade geometry or LanOC's observed raised EVGA E-logo / golf-ball-like surface details; camber, pitch, thickness and embossing dimensions remain unmeasured.",
-        "ru": "Отдельно выбираемый макет изогнутой лопасти. На двух фронтальных фотографиях карточки товара с точным SKU видны восемь лопастных поверхностей на вентилятор. Сетка не воспроизводит калиброванную геометрию или отмеченный LanOC рельеф EVGA E, похожий на ямочки мяча для гольфа; кривизна, шаг, толщина и размеры рельефа не измерены."
+        "en": "Individually selectable swept-blade proxy. Two front-view photographs in an exact-SKU retail listing show eight visible blade surfaces per fan. Each mesh now includes a small four-stroke E-like raised relief as an illustrative interpretation of LanOC's observed EVGA E-logo / golf-ball-like blade details. Exact logo vector, relief height, profile, camber, pitch and thickness remain unmeasured.",
+        "ru": "Отдельно выбираемый макет изогнутой лопасти. На двух фронтальных фотографиях карточки товара с точным SKU видны восемь лопастных поверхностей на вентилятор. В каждую сетку добавлен небольшой рельефный E-образный знак из четырёх штрихов — условная интерпретация отмеченного LanOC логотипа EVGA на лопастях и текстуры, похожей на мяч для гольфа. Точный вектор логотипа, высота рельефа, профиль, кривизна, шаг и толщина не измерены."
       }
     },
     {
@@ -5658,8 +5658,8 @@
         "src.newegg.exact_sku.product_photo"
       ],
       "description": {
-        "en": "Individually selectable swept-blade proxy. Two front-view photographs in an exact-SKU retail listing show eight visible blade surfaces per fan. The mesh does not reproduce calibrated blade geometry or LanOC's observed raised EVGA E-logo / golf-ball-like surface details; camber, pitch, thickness and embossing dimensions remain unmeasured.",
-        "ru": "Отдельно выбираемый макет изогнутой лопасти. На двух фронтальных фотографиях карточки товара с точным SKU видны восемь лопастных поверхностей на вентилятор. Сетка не воспроизводит калиброванную геометрию или отмеченный LanOC рельеф EVGA E, похожий на ямочки мяча для гольфа; кривизна, шаг, толщина и размеры рельефа не измерены."
+        "en": "Individually selectable swept-blade proxy. Two front-view photographs in an exact-SKU retail listing show eight visible blade surfaces per fan. Each mesh now includes a small four-stroke E-like raised relief as an illustrative interpretation of LanOC's observed EVGA E-logo / golf-ball-like blade details. Exact logo vector, relief height, profile, camber, pitch and thickness remain unmeasured.",
+        "ru": "Отдельно выбираемый макет изогнутой лопасти. На двух фронтальных фотографиях карточки товара с точным SKU видны восемь лопастных поверхностей на вентилятор. В каждую сетку добавлен небольшой рельефный E-образный знак из четырёх штрихов — условная интерпретация отмеченного LanOC логотипа EVGA на лопастях и текстуры, похожей на мяч для гольфа. Точный вектор логотипа, высота рельефа, профиль, кривизна, шаг и толщина не измерены."
       }
     },
     {
@@ -5677,8 +5677,8 @@
         "src.newegg.exact_sku.product_photo"
       ],
       "description": {
-        "en": "Individually selectable swept-blade proxy. Two front-view photographs in an exact-SKU retail listing show eight visible blade surfaces per fan. The mesh does not reproduce calibrated blade geometry or LanOC's observed raised EVGA E-logo / golf-ball-like surface details; camber, pitch, thickness and embossing dimensions remain unmeasured.",
-        "ru": "Отдельно выбираемый макет изогнутой лопасти. На двух фронтальных фотографиях карточки товара с точным SKU видны восемь лопастных поверхностей на вентилятор. Сетка не воспроизводит калиброванную геометрию или отмеченный LanOC рельеф EVGA E, похожий на ямочки мяча для гольфа; кривизна, шаг, толщина и размеры рельефа не измерены."
+        "en": "Individually selectable swept-blade proxy. Two front-view photographs in an exact-SKU retail listing show eight visible blade surfaces per fan. Each mesh now includes a small four-stroke E-like raised relief as an illustrative interpretation of LanOC's observed EVGA E-logo / golf-ball-like blade details. Exact logo vector, relief height, profile, camber, pitch and thickness remain unmeasured.",
+        "ru": "Отдельно выбираемый макет изогнутой лопасти. На двух фронтальных фотографиях карточки товара с точным SKU видны восемь лопастных поверхностей на вентилятор. В каждую сетку добавлен небольшой рельефный E-образный знак из четырёх штрихов — условная интерпретация отмеченного LanOC логотипа EVGA на лопастях и текстуры, похожей на мяч для гольфа. Точный вектор логотипа, высота рельефа, профиль, кривизна, шаг и толщина не измерены."
       }
     },
     {
