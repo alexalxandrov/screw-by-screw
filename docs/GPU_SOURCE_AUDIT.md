@@ -351,3 +351,19 @@ Sources:
 - Newegg listing for `PLD09220S12HH` and broad XC3/XC family compatibility: https://www.newegg.com/p/0SS-0236-015R9
 
 No seller image is copied into the repository. No third-party fan CAD, photograph or replacement part number is promoted to the target card's native hardware specification.
+
+
+## 24. Conflicting XC BLACK-named review samples — backplate and fan size
+
+Two further review pages use the XC BLACK product name but do not expose retail part number `12G-P5-3655-KR` in the accessible text. They are recorded as sample/variant references rather than exact-SKU evidence.
+
+**HotHardware** describes a dual-fan angular shroud, E-logo blade markings, an anodized aluminium heatsink, copper heatpipes that extend over the GPU and back above the VRM, two-slot width, and a stylized rear backplate with hexagonal ventilation cut-outs. The rear-backplate statement conflicts with the LanOC review of the target XC BLACK sample, which shows an exposed PCB and explicitly describes no backplate. Without the HotHardware sample's P/N, the apparent backplate and VRM heatpipe arrangement must not be applied to 12G-P5-3655-KR. Its reported 7.5-inch PCB length and just-under-8-inch card length are also not promoted to exact-SKU measurements.
+
+**PC Master Race Latinoamérica** describes two 80 mm fans on an XC BLACK Gaming sample. This differs from LanOC's approximate 90 mm opening / 85 mm impeller measurement on the exact XC BLACK review. These values may reflect different nominal/clear-opening/impeller conventions or a sample/variant difference; the source does not identify the retail P/N. Retain 85 mm only as LanOC's approximate reviewer measurement and flag the 80 mm statement as conflicting reference data, not as an OEM fan-size specification.
+
+The current model therefore preserves two evidence classes: exact-SKU-linked observations and XC BLACK-named but P/N-unverified review descriptions. No new backplate geometry, VRM heatpipe route, PCB length or 80 mm fan dimension is inferred from the latter.
+
+Sources:
+- HotHardware, EVGA GeForce RTX 3060 XC Black Gaming overview: https://hothardware.com/reviews/nvidia-geforce-rtx-3060-gpu-review-evga
+- PC Master Race Latinoamérica, EVGA GeForce RTX 3060 XC BLACK GAMING review: https://www.pcmrace.com/2021/04/05/evga-geforce-rtx-3060-xc-black-gaming-review/
+- LanOC, exact XC BLACK layout/measurement and exposed rear PCB: https://lanoc.org/review/video-cards/evga-rtx-3060-xc-black?showall=1
