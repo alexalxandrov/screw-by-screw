@@ -95,3 +95,6 @@ The bilingual learning quiz contains 12 source-linked questions, including the n
 ### Exterior and airflow observations
 
 The exact-SKU review documents the black plastic no-RGB shroud, vertical aluminium fin stack, copper plate broad enough to cover GPU and memory, and large through-PCB airflow cutout. Neoseeker's exact sample identifies three DisplayPort 1.4a ports and one HDMI 2.1 port. These are source-backed descriptions only; model contours and dimensions are not a manufacturing CAD reconstruction.
+
+
+The PCB airflow cutout is now a Boolean through-hole proxy rather than an overlay marker. Its 18 × 22 mm rounded-rectangle dimensions and centre remain illustrative, not measured; they are not manufacturing or BoardView data.
