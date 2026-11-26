@@ -1235,6 +1235,305 @@
       "source_ids": [
         "src.gamersnexus.teardown"
       ]
+    },
+    {
+      "id": "rel.smcluster.contains.tpccluster",
+      "from": "chip.gpu.sm.cluster",
+      "to": "chip.gpu.tpc.cluster",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.sm01",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.sm.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.sm02",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.sm.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.sm03",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.sm.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.sm04",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.sm.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.sm05",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.sm.05",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.sm06",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.sm.06",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.sm07",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.sm.07",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.sm08",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.sm.08",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.sm09",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.sm.09",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.sm10",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.sm.10",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.sm11",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.sm.11",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.sm12",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.sm.12",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.sm13",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.sm.13",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.sm14",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.sm.14",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.sm15",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.sm.15",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.sm16",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.sm.16",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.sm17",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.sm.17",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.sm18",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.sm.18",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.sm19",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.sm.19",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.sm20",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.sm.20",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.sm21",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.sm.21",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.sm22",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.sm.22",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.sm23",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.sm.23",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.sm24",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.sm.24",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.sm25",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.sm.25",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.sm26",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.sm.26",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.sm27",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.sm.27",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.sm28",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.sm.28",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.polymorph.array",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.polymorph.array",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
     }
   ]
 }
