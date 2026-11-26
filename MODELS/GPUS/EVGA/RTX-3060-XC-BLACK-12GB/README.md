@@ -76,7 +76,7 @@ The report includes component IDs, parent IDs, world-space positions, dimensions
 
 ## Canonical package and remaining evidence gates
 
-The current canonical package is linked above and contains 307 semantic components, 303 typed relationships, 85 claims and 13 registered sources, plus three partial teardown actions and two educational clips. It remains a starter engineering atlas, not a complete BOM or complete service manual. Exact PCB revision, matching BoardView/schematic, component reference designators and calibrated mechanical dimensions remain unverified.
+The current canonical package is linked above and contains 307 semantic components, 303 typed relationships, 98 claims and 17 registered sources, plus three partial teardown actions and two educational clips. It remains a starter engineering atlas, not a complete BOM or complete service manual. Exact PCB revision, matching BoardView/schematic, component reference designators and calibrated mechanical dimensions remain unverified. Heatpipe sources use different counting conventions (six route/runs, four copper heatpipes, or two central tube paths); the unique physical closed-loop count is unresolved. Original OEM fan part number is also unknown; aftermarket listings are compatibility leads only.
 
 See [GPU source audit](../../../../docs/GPU_SOURCE_AUDIT.md) and [content pipeline](../../../../docs/CONTENT_PIPELINE.md).
 
