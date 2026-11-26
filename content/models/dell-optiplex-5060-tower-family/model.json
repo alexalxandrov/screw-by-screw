@@ -471,6 +471,40 @@
       "source_ids": [
         "src.dell.5060.ports"
       ]
+    },
+    "service_hardware": {
+      "physical_reference_instances": 24,
+      "optional_fastener_references": 7,
+      "optional_fastener_schedule": [
+        {
+          "assembly": "SD card reader",
+          "screw_type": "#6-32×3.6",
+          "quantity": 1
+        },
+        {
+          "assembly": "WLAN module",
+          "screw_type": "M2×3.5",
+          "quantity": 1
+        },
+        {
+          "assembly": "M.2 PCIe SSD",
+          "screw_type": "M2×3.5",
+          "quantity": 1
+        },
+        {
+          "assembly": "Type-C with DP/HDMI/VGA cable module",
+          "screw_type": "M3×3",
+          "quantity": 2
+        },
+        {
+          "assembly": "Internal antenna",
+          "screw_type": "M3×3",
+          "quantity": 2
+        }
+      ],
+      "source_ids": [
+        "src.dell.5060.screw_table"
+      ]
     }
   },
   "source_ids": [
@@ -491,7 +525,12 @@
     "src.dell.5060.psu_removal",
     "src.dell.5060.spec_sheet",
     "src.intel.g5400",
-    "src.intel.g5500"
+    "src.intel.g5500",
+    "src.dell.5060.m2_removal",
+    "src.dell.5060.coin_cell_removal",
+    "src.dell.5060.heatsink_fan_removal",
+    "src.dell.5060.optical_drive_install",
+    "src.dell.5060.optional_video_module"
   ],
   "release": {
     "version": "0.2.0",
