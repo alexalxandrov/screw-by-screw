@@ -336,3 +336,18 @@ Source: PC Perspective, 25 February 2021: https://pcper.com/2021/02/nvidia-gefor
 ## 28. Power-process graph expanded from exact teardown observations
 
 The qualitative power layer now exposes the individual nodes already documented by the exact-model teardown: auxiliary 8-pin input, its 5 mΩ current-sense shunt, the separate PCIe-slot 12 V current-sense shunt with unknown resistance, an input fuse, two inductor packages, a MOSFET row and its copper cooling contact. The two inductors are left in a tentative functional area; the reviewer's “memory VRM” interpretation is not promoted to a confirmed rail. The layer deliberately excludes the uPI controller and phase counts from the related non-BLACK XC PCB review. Directional animation remains an educational block diagram only, with no inferred nets, pinout or switching behavior.
+
+
+## 22. OEM fan part-number research — conflicting aftermarket codes only
+
+The original fan manufacturer part number for retail SKU `12G-P5-3655-KR` remains **unknown**. Additional marketplace research found a listing titled “Graphics Card Fan PLD09220S12HH For EVGA RTX3060 3060ti XC BLACK”, while aftermarket specialist catalogues advertise `PLA09215S12H` for a broad RTX 3050 / RTX 3060 / RTX 3060 Ti XC family. These codes are not interchangeable and the sellers' compatibility labels span multiple XC and XC BLACK variants. A Newegg listing for `PLD09220S12HH` describes broad RTX 3060 Ti / RTX 3070 / RTX 3080 XC3-family use and asks buyers to verify their removed fan's physical dimensions before purchase. These records are replacement-market claims only; none shows an OEM label from the exact retail sample or an EVGA service part record.
+
+The conflict is useful negative evidence: neither `PLA09215S12H` nor `PLD09220S12HH` may be entered as the installed OEM fan identity. Published aftermarket dimensions also disagree (87 mm vs 90 mm, with 15 mm / 20 mm depth variants). The model therefore keeps `claim.fan.oem_part_identity` unknown and does not use either code to size the 3D fan. Required evidence to close this item is a legible sticker on a fan physically removed from an exact `12G-P5-3655-KR` sample, or an EVGA parts/service document that explicitly cross-references the retail SKU and fan assembly.
+
+Sources:
+- eBay marketplace listing for `PLD09220S12HH`: https://www.ebay.com/itm/198666542691
+- GPU Fan Replacement listing for `PLA09215S12H`: https://www.gpufanreplacement.com/products/evga-geforce-rtx-3060-xc-gaming-fan-replacement
+- GPUConnect listing for `PLA09215S12H` and 15 mm / 20 mm replacement variants: https://gpuconnect.com/products/evga-rtx-3050-3060-ti-xc-gaming-black-replacement-fans-15mm
+- Newegg listing for `PLD09220S12HH` and broad XC3/XC family compatibility: https://www.newegg.com/p/0SS-0236-015R9
+
+No seller image is copied into the repository. No third-party fan CAD, photograph or replacement part number is promoted to the target card's native hardware specification.
