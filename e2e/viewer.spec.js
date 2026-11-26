@@ -336,9 +336,11 @@ test("partial teardown steps and source observations are both shown without conf
   await expect(page.locator("#assembly-empty-note")).toBeHidden();
   const steps = page.locator("#assembly-step-list .assembly-step-card");
   await expect(steps).toHaveCount(5);
-  await expect(steps.nth(0)).toContainText("Вывернуть восемь винтов крепления кулера/кожуха");
-  await expect(steps.nth(1)).toContainText("Отсоединить оба кабеля вентиляторов");
-  await expect(steps.nth(2)).toContainText("Вывернуть по три крепёжных винта каждого вентилятора");
+  await expect(steps.nth(0)).toContainText("Вывернуть четыре подпружиненных винта крепления кулера вокруг GPU");
+  await expect(steps.nth(1)).toContainText("Освободить отдельный крепёж основания пакета рёбер");
+  await expect(steps.nth(2)).toContainText("Освободить крепёж I/O-планки и выходной панели");
+  await expect(steps.nth(3)).toContainText("Отсоединить оба кабеля вентиляторов перед снятием кулера");
+  await expect(steps.nth(4)).toContainText("Вывернуть по три крепёжных винта каждого вентилятора");
   const exactFastenerObservation = page.locator('[data-observation-source-id="src.lanoc.review"]').first();
   await expect(exactFastenerObservation).toContainText("вокруг GPU видны четыре винта крепления радиатора");
   await expect(page.locator("#assembly-observation-heading")).toContainText("НАБЛЮДЕНИЯ В ИСТОЧНИКАХ");
