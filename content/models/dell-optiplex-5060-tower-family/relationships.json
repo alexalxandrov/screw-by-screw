@@ -1337,6 +1337,99 @@
       "source_ids": [
         "src.dell.5060.screw_table"
       ]
+    },
+    {
+      "id": "rel.contains.storage_drive35_carrier_optional",
+      "from": "storage.assembly",
+      "to": "storage.drive35.carrier.optional",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.hdd35_assembly",
+        "src.dell.5060.service"
+      ]
+    },
+    {
+      "id": "rel.contains.storage_drive35_filler_bracket_optional",
+      "from": "storage.drive35.carrier.optional",
+      "to": "storage.drive35.filler_bracket.optional",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.hdd35_assembly"
+      ]
+    },
+    {
+      "id": "rel.contains.storage_drive35_drive_bracket_optional",
+      "from": "storage.drive35.carrier.optional",
+      "to": "storage.drive35.drive_bracket.optional",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.hdd35_bracket"
+      ]
+    },
+    {
+      "id": "rel.contains.storage_drive35_release_tab_optional",
+      "from": "storage.drive35.carrier.optional",
+      "to": "storage.drive35.release_tab.optional",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.hdd35_assembly"
+      ]
+    },
+    {
+      "id": "rel.contains.storage_drive25_carrier_optional",
+      "from": "storage.assembly",
+      "to": "storage.drive25.carrier.optional",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.hdd25_assembly",
+        "src.dell.5060.service"
+      ]
+    },
+    {
+      "id": "rel.contains.storage_drive25_drive_bracket_optional",
+      "from": "storage.drive25.carrier.optional",
+      "to": "storage.drive25.drive_bracket.optional",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.hdd25_bracket"
+      ]
+    },
+    {
+      "id": "rel.contains.storage_drive25_release_tab_left_optional",
+      "from": "storage.drive25.carrier.optional",
+      "to": "storage.drive25.release_tab.left.optional",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.hdd25_assembly"
+      ]
+    },
+    {
+      "id": "rel.contains.storage_drive25_release_tab_right_optional",
+      "from": "storage.drive25.carrier.optional",
+      "to": "storage.drive25.release_tab.right.optional",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.hdd25_assembly"
+      ]
+    },
+    {
+      "id": "rel.contains.storage_optical_drive_release_tab_optional",
+      "from": "storage.optical_drive.optional",
+      "to": "storage.optical_drive.release_tab.optional",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.odd_removal"
+      ]
+    },
+    {
+      "id": "rel.contains.storage_drive_cage_cable_retention_tabs",
+      "from": "storage.drive_cage",
+      "to": "storage.drive_cage.cable_retention_tabs",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.odd_removal",
+        "src.dell.5060.optical_drive_install"
+      ]
     }
   ]
 }
