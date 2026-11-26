@@ -670,12 +670,562 @@
     },
     {
       "id": "rel.cpu.cooling.contact",
-      "from": "cooling.cpu.heatsink",
-      "to": "motherboard.cpu_socket",
+      "from": "motherboard.cpu_socket",
+      "to": "cooling.cpu.heatsink",
       "type": "transfers_heat_to",
       "source_ids": [
         "src.dell.5060.service"
       ]
+    },
+    {
+      "id": "rel.contains.motherboard_pcie_x16_wired_x4",
+      "from": "motherboard.pcb",
+      "to": "motherboard.pcie.x16.wired_x4",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.board_connectors"
+      ]
+    },
+    {
+      "id": "rel.contains.motherboard_m2_wlan",
+      "from": "motherboard.pcb",
+      "to": "motherboard.m2.wlan",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.board_connectors"
+      ]
+    },
+    {
+      "id": "rel.contains.motherboard_cpu_fan_header",
+      "from": "motherboard.pcb",
+      "to": "motherboard.cpu_fan_header",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.board_connectors"
+      ]
+    },
+    {
+      "id": "rel.contains.motherboard_intrusion_switch_header",
+      "from": "motherboard.pcb",
+      "to": "motherboard.intrusion_switch_header",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.board_connectors"
+      ]
+    },
+    {
+      "id": "rel.contains.motherboard_sd_reader_header",
+      "from": "motherboard.pcb",
+      "to": "motherboard.sd_reader_header",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.board_connectors"
+      ]
+    },
+    {
+      "id": "rel.contains.motherboard_speaker_header",
+      "from": "motherboard.pcb",
+      "to": "motherboard.speaker_header",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.board_connectors"
+      ]
+    },
+    {
+      "id": "rel.contains.motherboard_power_switch_header",
+      "from": "motherboard.pcb",
+      "to": "motherboard.power_switch_header",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.board_connectors"
+      ]
+    },
+    {
+      "id": "rel.contains.motherboard_sata_power_header",
+      "from": "motherboard.pcb",
+      "to": "motherboard.sata_power_header",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.board_connectors"
+      ]
+    },
+    {
+      "id": "rel.contains.motherboard_clear_cmos_jumper",
+      "from": "motherboard.pcb",
+      "to": "motherboard.clear_cmos_jumper",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.board_connectors"
+      ]
+    },
+    {
+      "id": "rel.contains.motherboard_typec_header_optional",
+      "from": "motherboard.pcb",
+      "to": "motherboard.typec_header.optional",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.board_connectors"
+      ]
+    },
+    {
+      "id": "rel.contains.motherboard_video_header_optional",
+      "from": "motherboard.pcb",
+      "to": "motherboard.video_header.optional",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.board_connectors"
+      ]
+    },
+    {
+      "id": "rel.contains.motherboard_ps2_serial_header_optional",
+      "from": "motherboard.pcb",
+      "to": "motherboard.ps2_serial_header.optional",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.board_connectors"
+      ]
+    },
+    {
+      "id": "rel.contains.storage_drive25_optional",
+      "from": "storage.assembly",
+      "to": "storage.drive25.optional",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.storage"
+      ]
+    },
+    {
+      "id": "rel.contains.storage_optical_drive_optional",
+      "from": "storage.assembly",
+      "to": "storage.optical_drive.optional",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.storage",
+        "src.dell.5060.board_connectors"
+      ]
+    },
+    {
+      "id": "rel.contains.storage_sd_reader_optional",
+      "from": "storage.assembly",
+      "to": "storage.sd_reader.optional",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.board_connectors"
+      ]
+    },
+    {
+      "id": "rel.contains.front_power_indicator",
+      "from": "front.io_region",
+      "to": "front.power_indicator",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ]
+    },
+    {
+      "id": "rel.contains.front_hdd_activity_indicator",
+      "from": "front.io_region",
+      "to": "front.hdd_activity_indicator",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ]
+    },
+    {
+      "id": "rel.contains.front_optical_drive_bay_optional",
+      "from": "front.io_region",
+      "to": "front.optical_drive_bay.optional",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ]
+    },
+    {
+      "id": "rel.contains.front_sd_card_reader_slot_optional",
+      "from": "front.io_region",
+      "to": "front.sd_card_reader_slot.optional",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ]
+    },
+    {
+      "id": "rel.contains.front_audio_combo",
+      "from": "front.io_region",
+      "to": "front.audio_combo",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ]
+    },
+    {
+      "id": "rel.contains.front_usb2_powershare",
+      "from": "front.io_region",
+      "to": "front.usb2.powershare",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ]
+    },
+    {
+      "id": "rel.contains.front_usb2",
+      "from": "front.io_region",
+      "to": "front.usb2",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ]
+    },
+    {
+      "id": "rel.contains.front_usbc_gen2_powershare",
+      "from": "front.io_region",
+      "to": "front.usbc.gen2.powershare",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ]
+    },
+    {
+      "id": "rel.contains.front_usb3_gen1",
+      "from": "front.io_region",
+      "to": "front.usb3.gen1",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ]
+    },
+    {
+      "id": "rel.contains.rear_io_region",
+      "from": "chassis.rear_panel",
+      "to": "rear.io_region",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ]
+    },
+    {
+      "id": "rel.contains.rear_line_out",
+      "from": "rear.io_region",
+      "to": "rear.line_out",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ]
+    },
+    {
+      "id": "rel.contains.rear_serial_optional",
+      "from": "rear.io_region",
+      "to": "rear.serial.optional",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ]
+    },
+    {
+      "id": "rel.contains.rear_video_module_optional",
+      "from": "rear.io_region",
+      "to": "rear.video_module.optional",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ]
+    },
+    {
+      "id": "rel.contains.rear_displayport_1",
+      "from": "rear.io_region",
+      "to": "rear.displayport.1",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ]
+    },
+    {
+      "id": "rel.contains.rear_displayport_2",
+      "from": "rear.io_region",
+      "to": "rear.displayport.2",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ]
+    },
+    {
+      "id": "rel.contains.rear_usb3_gen1_1",
+      "from": "rear.io_region",
+      "to": "rear.usb3.gen1.1",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ]
+    },
+    {
+      "id": "rel.contains.rear_usb3_gen1_2",
+      "from": "rear.io_region",
+      "to": "rear.usb3.gen1.2",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ]
+    },
+    {
+      "id": "rel.contains.rear_usb3_gen1_3",
+      "from": "rear.io_region",
+      "to": "rear.usb3.gen1.3",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ]
+    },
+    {
+      "id": "rel.contains.rear_usb3_gen1_4",
+      "from": "rear.io_region",
+      "to": "rear.usb3.gen1.4",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ]
+    },
+    {
+      "id": "rel.contains.rear_usb2_smartpoweron_1",
+      "from": "rear.io_region",
+      "to": "rear.usb2.smartpoweron.1",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ]
+    },
+    {
+      "id": "rel.contains.rear_usb2_smartpoweron_2",
+      "from": "rear.io_region",
+      "to": "rear.usb2.smartpoweron.2",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ]
+    },
+    {
+      "id": "rel.contains.rear_rj45",
+      "from": "rear.io_region",
+      "to": "rear.rj45",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ]
+    },
+    {
+      "id": "rel.contains.rear_expansion_opening_1",
+      "from": "rear.io_region",
+      "to": "rear.expansion_opening.1",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ]
+    },
+    {
+      "id": "rel.contains.rear_expansion_opening_2",
+      "from": "rear.io_region",
+      "to": "rear.expansion_opening.2",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ]
+    },
+    {
+      "id": "rel.contains.rear_expansion_opening_3",
+      "from": "rear.io_region",
+      "to": "rear.expansion_opening.3",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ]
+    },
+    {
+      "id": "rel.contains.rear_expansion_opening_4",
+      "from": "rear.io_region",
+      "to": "rear.expansion_opening.4",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ]
+    },
+    {
+      "id": "rel.contains.rear_psu_inlet",
+      "from": "rear.io_region",
+      "to": "rear.psu_inlet",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ]
+    },
+    {
+      "id": "rel.contains.rear_antenna_1_optional",
+      "from": "rear.io_region",
+      "to": "rear.antenna.1.optional",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ]
+    },
+    {
+      "id": "rel.contains.rear_antenna_2_optional",
+      "from": "rear.io_region",
+      "to": "rear.antenna.2.optional",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ]
+    },
+    {
+      "id": "rel.contains.rear_psu_diagnostic_led",
+      "from": "rear.io_region",
+      "to": "rear.psu_diagnostic_led",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ]
+    },
+    {
+      "id": "rel.contains.rear_kensington_slot",
+      "from": "rear.io_region",
+      "to": "rear.kensington_slot",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ]
+    },
+    {
+      "id": "rel.contains.rear_padlock_loop",
+      "from": "rear.io_region",
+      "to": "rear.padlock_loop",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ]
+    },
+    {
+      "id": "rel.contains.rear_service_tag",
+      "from": "rear.io_region",
+      "to": "rear.service_tag",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ]
+    },
+    {
+      "id": "rel.psu.powers.cpu_header",
+      "from": "power.psu",
+      "to": "motherboard.cpu_power",
+      "type": "powers",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.power"
+      ],
+      "notes": "Power connector relationship only; no pin-level path or fitted harness is reconstructed."
+    },
+    {
+      "id": "rel.speaker.header.connected",
+      "from": "motherboard.speaker_header",
+      "to": "front.speaker",
+      "type": "connected_to",
+      "source_ids": [
+        "src.dell.5060.boardlayout"
+      ],
+      "notes": "Documented board-side internal speaker connector; wire routing is schematic."
+    },
+    {
+      "id": "rel.switch.header.connected",
+      "from": "motherboard.power_switch_header",
+      "to": "front.power_button",
+      "type": "connected_to",
+      "source_ids": [
+        "src.dell.5060.boardlayout"
+      ],
+      "notes": "Documented power-switch connector relationship; cable geometry is not reconstructed."
+    },
+    {
+      "id": "rel.intrusion.header.connected",
+      "from": "motherboard.intrusion_switch_header",
+      "to": "controls.intrusion_switch",
+      "type": "connected_to",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.system_fan"
+      ]
+    },
+    {
+      "id": "rel.cpu_fan.header.connected",
+      "from": "motherboard.cpu_fan_header",
+      "to": "cooling.cpu.fan",
+      "type": "connected_to",
+      "source_ids": [
+        "src.dell.5060.boardlayout"
+      ]
+    },
+    {
+      "id": "rel.system_fan.header.connected",
+      "from": "motherboard.fan_header",
+      "to": "cooling.system_fan",
+      "type": "connected_to",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.system_fan"
+      ]
+    },
+    {
+      "id": "rel.sata_power.header.powers.storage",
+      "from": "motherboard.sata_power_header",
+      "to": "storage.assembly",
+      "type": "powers",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.storage"
+      ],
+      "notes": "Supported SATA power interface; fitted cable and drive population are unknown."
     }
   ]
 }
