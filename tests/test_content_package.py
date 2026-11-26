@@ -235,7 +235,7 @@ class ContentPackageTests(unittest.TestCase):
         ):
             self.assertEqual(claims[claim_id]["confidence_class"], "secondary_catalog_data")
         self.assertEqual(
-            package["model"]["model"]["specifications"]["memory"]["package_identity"]["part_number"],
+            package["model"]["specifications"]["memory"]["package_identity"]["part_number"],
             "Samsung K4ZAF325BM-HC16",
         )
         self.assertEqual(
