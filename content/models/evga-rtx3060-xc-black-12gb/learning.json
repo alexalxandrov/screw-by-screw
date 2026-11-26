@@ -209,8 +209,8 @@
     {
       "id": "quiz.memory.package.count",
       "prompt": {
-        "en": "How many GDDR6 memory packages are visible on the reviewed XC BLACK board?",
-        "ru": "Сколько микросхем GDDR6 видно на рассмотренной плате XC BLACK?"
+        "en": "How many GDDR6 package positions are visible in the exact XC BLACK review/teardown material?",
+        "ru": "Сколько позиций микросхем GDDR6 видно в материалах обзора/разборки точной XC BLACK?"
       },
       "choices": [
         {
@@ -228,11 +228,12 @@
       ],
       "correct_index": 1,
       "explanation": {
-        "en": "The exact-model teardown identifies six Samsung GDDR6 packages.",
-        "ru": "В разборке точной модели указаны шесть микросхем Samsung GDDR6."
+        "en": "Six GDDR6 package positions are visible in exact XC BLACK material. The precise device part number and package-to-bus mapping have not been confirmed.",
+        "ru": "В материалах точной XC BLACK видны шесть позиций микросхем GDDR6. Точный номер микросхем и соответствие корпусов каналам шины не подтверждены."
       },
       "source_ids": [
-        "src.tomshardware.teardown"
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
       ]
     }
   ]
