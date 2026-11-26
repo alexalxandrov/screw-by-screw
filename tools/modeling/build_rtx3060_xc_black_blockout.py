@@ -163,6 +163,9 @@ def tag(obj, component_id, evidence, geometry="proxy", export_role="component"):
         "dimensions_mm": [round(float(v), 3) for v in obj.dimensions],
         "location_mm": [round(float(v), 3) for v in obj.location],
     }
+    surface_detail = obj.get("sbs_surface_detail")
+    if surface_detail:
+        record["surface_detail"] = surface_detail
     manifest["objects"].append(record)
     return obj
 
@@ -320,6 +323,9 @@ def _append_mesh_detail(obj, detail_verts, detail_faces, detail_material=None):
         if record["component_id"] == component_id:
             record["dimensions_mm"] = [round(float(v), 3) for v in obj.dimensions]
             record["location_mm"] = [round(float(v), 3) for v in obj.location]
+            surface_detail = obj.get("sbs_surface_detail")
+            if surface_detail:
+                record["surface_detail"] = surface_detail
             break
     return obj
 
@@ -553,13 +559,12 @@ def curved_fan_blade(index, blade_index, count, center, base_y, collection):
     obj.location = (center[0], base_y, center[2])
     collection.objects.link(obj)
     obj.data.materials.append(MAT["fan"])
-    tagged = tag(
+    obj["sbs_surface_detail"] = "stylized_raised_E_mark_proxy"
+    return tag(
         obj,
         f"fan.{index}.blade.{blade_index + 1}",
         STATUS["illustrative"],
     )
-    tagged["sbs_surface_detail"] = "stylized_raised_E_mark_proxy"
-    return tagged
 
 
 def make_fan(index, x, z, y, collection, cooling_parent):
