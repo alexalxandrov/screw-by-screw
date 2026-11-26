@@ -29,11 +29,6 @@ test("OptiPlex reference package passes the production package loader and checks
   assert.equal(loaded.data.model.specifications.service_hardware.optional_fastener_references, 7);
   assert.equal(loaded.data.claims.claims.find((claim) => claim.id === "claim.fasteners.optional_mounting").value.length, 5);
   assert.equal(loaded.data.model.specifications.service_hardware.physical_reference_instances, 24);
-  assert.ok(sourceIds.has("src.dell.5060.m2_removal"));
-  assert.ok(sourceIds.has("src.dell.5060.coin_cell_removal"));
-  assert.ok(sourceIds.has("src.dell.5060.heatsink_fan_removal"));
-  assert.ok(sourceIds.has("src.dell.5060.optical_drive_install"));
-  assert.ok(sourceIds.has("src.dell.5060.optional_video_module"));
   assert.equal(loaded.data.sources.sources.length, 23);
   assert.equal(loaded.data.claims.claims.length, 31);
   assert.equal(loaded.data.process_layers.process_layers.length, 6);
@@ -54,6 +49,11 @@ test("OptiPlex reference package passes the production package loader and checks
     supportedRelationshipTypes.has(relationship.type)));
   const componentIds = new Set(loaded.data.components.components.map((component) => component.id));
   const sourceIds = new Set(loaded.data.sources.sources.map((source) => source.id));
+  assert.ok(sourceIds.has("src.dell.5060.m2_removal"));
+  assert.ok(sourceIds.has("src.dell.5060.coin_cell_removal"));
+  assert.ok(sourceIds.has("src.dell.5060.heatsink_fan_removal"));
+  assert.ok(sourceIds.has("src.dell.5060.optical_drive_install"));
+  assert.ok(sourceIds.has("src.dell.5060.optional_video_module"));
   const callouts = loaded.data.model.specifications.motherboard.callouts;
   assert.deepEqual(callouts.map((entry) => entry.number), Array.from({ length: 26 }, (_, index) => index + 1));
   assert.equal(callouts.reduce((count, entry) => count + entry.component_ids.length, 0), 29);
