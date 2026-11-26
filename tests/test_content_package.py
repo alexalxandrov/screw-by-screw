@@ -217,6 +217,37 @@ class ContentPackageTests(unittest.TestCase):
 
 
 
+    def test_exact_sku_fastener_and_memory_evidence_is_preserved(self):
+        package_dir = ROOT / "content" / "models" / "evga-rtx3060-xc-black-12gb"
+        manifest_builder.build_manifest(package_dir)
+        package = validator.load_package(package_dir)
+        validator.validate_package(package, package_dir)
+        claims = {item["id"]: item for item in package["claims"]["claims"]}
+        components = {item["id"]: item for item in package["components"]["components"]}
+        self.assertEqual(claims["claim.cooler.fastener.count.total"]["value"], 8)
+        self.assertEqual(claims["claim.cooler.fastener.count.rear"]["value"], 4)
+        self.assertEqual(claims["claim.memory.package_part_number"]["value"], "Samsung K4ZAF325BM-HC16")
+        for claim_id in (
+            "claim.memory.package_density",
+            "claim.memory.package_organization",
+            "claim.memory.package_type",
+            "claim.memory.package_interface_width",
+        ):
+            self.assertEqual(claims[claim_id]["confidence_class"], "secondary_catalog_data")
+        self.assertEqual(
+            package["model"]["model"]["specifications"]["memory"]["package_identity"]["part_number"],
+            "Samsung K4ZAF325BM-HC16",
+        )
+        self.assertEqual(
+            set(package["assembly_steps"]["steps"][0]["component_ids"]),
+            {"assembly.fasteners", "assembly.cooling"}
+            | {f"fastener.cooler.{index:02d}" for index in range(1, 9)},
+        )
+        for index in range(5, 9):
+            rear = components[f"fastener.cooler.{index:02d}"]
+            self.assertEqual(rear["evidence_status"], "visible_exact_model")
+            self.assertEqual(rear["geometry_status"], "logical_only")
+
     def test_candidate_pcb_marking_does_not_confirm_revision(self):
         package_dir = ROOT / "content" / "models" / "evga-rtx3060-xc-black-12gb"
         manifest_builder.build_manifest(package_dir)
@@ -255,7 +286,7 @@ class ContentPackageTests(unittest.TestCase):
         self.assertIn("Components: 127", report)
         self.assertIn("Relationships: 122", report)
         self.assertIn("Animation clips: 2", report)
-        self.assertEqual(len(package["claims"]["claims"]), 51)
+        self.assertEqual(len(package["claims"]["claims"]), 52)
         self.assertEqual(len(package["process_layers"]["process_layers"]), 3)
         self.assertEqual(len(package["learning"]["questions"]), 8)
         clip = package["animations"]["clips"][0]
