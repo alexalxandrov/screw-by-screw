@@ -433,6 +433,13 @@ test("shows a workload-specific cooling and board-power operating point with sou
   await expect(edgeTemperature.locator(".claim-value")).toContainText("68.1 °C");
   await expect(hotspot.locator(".claim-value")).toContainText("80.5 °C");
   await expect(hotspot).toContainText("not a design target");
+  const observedPeak = page.locator('[data-claim-id="claim.gpu.frequency.peak.sample_operating_point"]');
+  await expect(observedPeak.locator(".claim-value")).toContainText("1905 MHz");
+  await expect(observedPeak).toContainText("not EVGA's published 1777 MHz boost clock");
+  await expect(observedPeak.locator(".claim-sources a")).toHaveAttribute(
+    "href",
+    "https://pcper.com/2021/02/nvidia-geforce-rtx-3060-review-evga-xc-black-tested/"
+  );
 
   await page.locator('#component-tree button[data-id="assembly.card.root"]').click();
   const boardPower = page.locator('[data-claim-id="claim.power.board_power.sample_operating_point"]');
