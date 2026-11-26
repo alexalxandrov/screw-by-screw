@@ -21,8 +21,8 @@ This is a Tower-family reference assembled from Dell's published service manual 
 | GLB box-proxy nodes | 58 |
 | Individual screws / grommets | 24 |
 | Dell motherboard callouts | 26 mapped semantically |
-| Registered source records | 15 |
-| Technical claims | 29 |
+| Registered source records | 18 |
+| Technical claims | 30 |
 | Qualitative process layers | 6 |
 | Source-backed partial system-board steps | 12 |
 | Bilingual learning questions | 9 |
@@ -81,7 +81,7 @@ Storage topology is represented as:
 - four SATA data headers: one Gen2 path assigned to ODD and three Gen3 headers;
 - optional 2.5-inch / 3.5-inch SATA drives, slim optical drive and SD-reader module, explicitly not populated in this reference.
 
-The supported processor options are listed as a platform capability only: Pentium Gold G5400/G5500, Core i3-8100/i3-8300, Core i5-8400/i5-8500/i5-8600 and Core i7-8700. No single processor is assigned as installed. Dell's service-manual and setup/specification tables differ on some thermal-power values; the model records that discrepancy and does not infer an exact configuration.
+The supported processor options are listed as a platform capability only: Pentium Gold G5400/G5500, Core i3-8100/i3-8300, Core i5-8400/i5-8500/i5-8600 and Core i7-8700. No single processor is assigned as installed. Power values are stored by source and meaning, not collapsed: Dell's data sheet lists 65 W for standard non-T options; Intel ARK gives G5400 58 W TDP and G5500 54 W TDP, while both Intel pages specify a separate 65 W thermal-solution class. The service manual's 35 W processor paragraph conflicts with the data sheet's explicit T-suffix distinction and remains recorded as unresolved evidence, not as an installed-Tower configuration. The G5500 is paired with UHD Graphics 630, while the G5400 is UHD Graphics 610.
 
 ## Power supply
 
@@ -126,6 +126,9 @@ All sources below are Dell Technologies' manufacturer service-manual or setup/sp
 | `src.dell.5060.storage` | M.2/SATA/drive options and combinations |
 | `src.dell.5060.board_connectors` | M.2, SATA, WLAN and PCIe connector capabilities |
 | `src.dell.5060.ports` | Front/rear port inventory and optional modules |
+| `src.dell.5060.spec_sheet` | Dell data sheet: CPU table, Tower I/O, storage, dimensions, bays and PSU options |
+| `src.intel.g5400` | Intel ARK: G5400 TDP, UHD Graphics 610 and thermal-solution class |
+| `src.intel.g5500` | Intel ARK: G5500 TDP, UHD Graphics 630 and thermal-solution class |
 | `src.dell.5060.power` | PSU options and AC input requirements |
 | `src.dell.5060.screw_table` | Screw types and location-specific quantities |
 | `src.dell.5060.heatsink` | Four captive heatsink screws and release order |
