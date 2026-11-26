@@ -1220,13 +1220,13 @@
     {
       "id": "rel.sata_power.header.powers.storage",
       "from": "storage.assembly",
-      "to": "motherboard.sata_power_header",
+      "to": "power.psu",
       "type": "powered_by",
       "source_ids": [
         "src.dell.5060.boardlayout",
         "src.dell.5060.storage"
       ],
-      "notes": "SATA storage power is represented at the motherboard SATA power interface; the exact fitted harness route and drive population are unknown."
+      "notes": "SATA storage receives power from the PSU through the motherboard SATA power interface. The exact fitted harness route and drive population are unknown."
     }
   ]
 }
