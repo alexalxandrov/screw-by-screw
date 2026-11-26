@@ -108,10 +108,10 @@
     },
     {
       "source_id": "src.tomshardware.teardown",
-      "locator": "PCB front-side teardown photograph",
+      "locator": "Related EVGA RTX 3060 XC PCB teardown photograph — not identified as XC BLACK",
       "note": {
-        "en": "Six Samsung K4ZAF325BM-HC16 GDDR6 packages are visible around the GA106 GPU package. 3D package centres are estimated from the photo, not measured.",
-        "ru": "На фотографии платы видны шесть микросхем Samsung K4ZAF325BM-HC16 GDDR6 вокруг корпуса GPU GA106. Координаты корпусов в 3D оценены по фотографии и не измерены."
+        "en": "A related EVGA GeForce RTX 3060 XC teardown image shows six Samsung K4ZAF325BM-HC16 GDDR6 packages around the GPU package. The article does not identify its sample as XC BLACK / 12G-P5-3655-KR. This is a candidate part-number lead only; package centres in the exact-SKU 3D model and electrical mapping are not measured from this photograph.",
+        "ru": "На фотографии разборки родственной EVGA GeForce RTX 3060 XC видны шесть микросхем Samsung K4ZAF325BM-HC16 вокруг GPU. В статье образец не идентифицирован как XC BLACK / 12G-P5-3655-KR. Это только кандидатный след для определения номера микросхемы; центры корпусов в 3D-модели точного SKU и электрическое соответствие не измерялись по этой фотографии."
       }
     },
     {
