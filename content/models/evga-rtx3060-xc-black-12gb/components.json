@@ -33,8 +33,8 @@
         "src.lanoc.review"
       ],
       "description": {
-        "en": "Outer fan shroud. The exact exterior contour is not yet measured.",
-        "ru": "Внешний кожух вентиляторов. Точный наружный контур пока не измерен."
+        "en": "The exact XC BLACK sample uses a black plastic dual-fan shroud. LanOC describes a lightly textured upper area, dotted recesses around the fans, an EVGA logo between the fans and GeForce RTX branding at the lower edge; no RGB lighting is fitted. The outer contour, wall thickness, clips and mounting interfaces remain proxy geometry.",
+        "ru": "В точном образце XC BLACK используется чёрный пластиковый кожух двух вентиляторов. LanOC описывает лёгкую текстуру верхней части, точечные углубления вокруг вентиляторов, логотип EVGA между ними и надпись GeForce RTX у нижнего края; RGB-подсветки нет. Наружный контур, толщина стенок, защёлки и монтажные интерфейсы остаются условной геометрией."
       }
     },
     {
@@ -140,8 +140,8 @@
         "src.lanoc.review"
       ],
       "description": {
-        "en": "Fin-stack topology proxy. Fin count and pitch are not measured.",
-        "ru": "Прокси структуры рёбер радиатора. Количество и шаг рёбер не измерены."
+        "en": "Exact-model review describes an aluminium heatsink with a vertical fin layout. Six heatpipes (four main GPU-contact plus two side) carry heat toward the stack. The 24 separately selectable fins are educational proxies only; actual fin count, pitch, thickness, louver geometry, alloy and brazed interfaces are not measured.",
+        "ru": "В обзоре точной модели описан алюминиевый радиатор с вертикальной ориентацией рёбер. Шесть тепловых трубок (четыре основные с контактом с GPU и две боковые) переносят тепло к радиаторному пакету. 24 отдельно выбираемых ребра — только учебные прокси; реальное число, шаг, толщина, жалюзийная геометрия, сплав и соединения пайкой не измерены."
       }
     },
     {
@@ -158,8 +158,8 @@
         "src.lanoc.review"
       ],
       "description": {
-        "en": "Copper contact plate described in the exact-model review; its dimensions are still proxy geometry.",
-        "ru": "Медная контактная пластина описана в обзоре точной модели; её размеры пока представлены условной геометрией."
+        "en": "Copper contact plate sits over the GPU and is wide enough to cover the memory packages, according to the exact-model LanOC review. The plate also participates in the cooling stack with heatpipes. Its footprint, thickness, flatness, surface finish and exact thermal-contact boundaries are not measured.",
+        "ru": "Медная контактная пластина расположена над GPU и, согласно обзору точной модели LanOC, достаточно широка, чтобы перекрывать также корпуса памяти. Пластина связана с системой тепловых трубок. Её контур, толщина, плоскостность, обработка поверхности и точные границы тепловых контактов не измерены."
       }
     },
     {
@@ -877,8 +877,8 @@
         "src.lanoc.review"
       ],
       "description": {
-        "en": "Visible airflow cutout area described in the exact-model review. The current geometry is a marker, not a measured aperture boundary.",
-        "ru": "Область выреза для воздушного потока, описанная в обзоре точной модели. Текущая геометрия — маркер, а не измеренный контур отверстия."
+        "en": "The exact-model review describes a large through-PCB airflow cutout near the card end/left side, allowing air from the front fan to pass through the PCB region. The current marker is not a traced aperture boundary; exact contour, dimensions and clearance to adjacent components remain unmeasured.",
+        "ru": "В обзоре точной модели описан крупный сквозной воздушный вырез в PCB у края платы/с левой стороны, позволяющий воздуху от переднего вентилятора проходить через область платы. Текущий маркер не является обведённым контуром отверстия; форма, размеры и зазоры до соседних компонентов не измерены."
       }
     },
     {
@@ -1024,8 +1024,8 @@
         "src.lanoc.review"
       ],
       "description": {
-        "en": "Individually selectable swept-blade proxy. Seven blades are only the current educational mesh count; exact blade count, camber, pitch, thickness and embossed texture require a calibrated fan photo or teardown measurement.",
-        "ru": "Отдельно выбираемый макет стреловидной лопасти. Семь лопастей — лишь текущее число элементов учебной сетки; фактическое количество, кривизна, шаг, толщина и рельеф требуют калиброванной фотографии или измерений разборки."
+        "en": "Individually selectable swept-blade proxy. LanOC observes raised EVGA E-logo bumps / golf-ball-like surface details on the exact sample's blades; the current mesh does not reproduce these measured surface details. Blade count, camber, pitch, thickness and embossing dimensions remain unverified.",
+        "ru": "Отдельно выбираемый прокси лопасти с изогнутым профилем. LanOC отмечает на лопастях точного образца выступы в виде логотипа EVGA E и фактуру, похожую на поверхность мяча для гольфа; текущая сетка не воспроизводит эти детали. Количество лопастей, кривизна, шаг, толщина и размеры рельефа не подтверждены."
       }
     },
     {
@@ -1042,8 +1042,8 @@
         "src.lanoc.review"
       ],
       "description": {
-        "en": "Individually selectable swept-blade proxy. Seven blades are only the current educational mesh count; exact blade count, camber, pitch, thickness and embossed texture require a calibrated fan photo or teardown measurement.",
-        "ru": "Отдельно выбираемый макет стреловидной лопасти. Семь лопастей — лишь текущее число элементов учебной сетки; фактическое количество, кривизна, шаг, толщина и рельеф требуют калиброванной фотографии или измерений разборки."
+        "en": "Individually selectable swept-blade proxy. LanOC observes raised EVGA E-logo bumps / golf-ball-like surface details on the exact sample's blades; the current mesh does not reproduce these measured surface details. Blade count, camber, pitch, thickness and embossing dimensions remain unverified.",
+        "ru": "Отдельно выбираемый прокси лопасти с изогнутым профилем. LanOC отмечает на лопастях точного образца выступы в виде логотипа EVGA E и фактуру, похожую на поверхность мяча для гольфа; текущая сетка не воспроизводит эти детали. Количество лопастей, кривизна, шаг, толщина и размеры рельефа не подтверждены."
       }
     },
     {
@@ -1060,8 +1060,8 @@
         "src.lanoc.review"
       ],
       "description": {
-        "en": "Individually selectable swept-blade proxy. Seven blades are only the current educational mesh count; exact blade count, camber, pitch, thickness and embossed texture require a calibrated fan photo or teardown measurement.",
-        "ru": "Отдельно выбираемый макет стреловидной лопасти. Семь лопастей — лишь текущее число элементов учебной сетки; фактическое количество, кривизна, шаг, толщина и рельеф требуют калиброванной фотографии или измерений разборки."
+        "en": "Individually selectable swept-blade proxy. LanOC observes raised EVGA E-logo bumps / golf-ball-like surface details on the exact sample's blades; the current mesh does not reproduce these measured surface details. Blade count, camber, pitch, thickness and embossing dimensions remain unverified.",
+        "ru": "Отдельно выбираемый прокси лопасти с изогнутым профилем. LanOC отмечает на лопастях точного образца выступы в виде логотипа EVGA E и фактуру, похожую на поверхность мяча для гольфа; текущая сетка не воспроизводит эти детали. Количество лопастей, кривизна, шаг, толщина и размеры рельефа не подтверждены."
       }
     },
     {
@@ -1078,8 +1078,8 @@
         "src.lanoc.review"
       ],
       "description": {
-        "en": "Individually selectable swept-blade proxy. Seven blades are only the current educational mesh count; exact blade count, camber, pitch, thickness and embossed texture require a calibrated fan photo or teardown measurement.",
-        "ru": "Отдельно выбираемый макет стреловидной лопасти. Семь лопастей — лишь текущее число элементов учебной сетки; фактическое количество, кривизна, шаг, толщина и рельеф требуют калиброванной фотографии или измерений разборки."
+        "en": "Individually selectable swept-blade proxy. LanOC observes raised EVGA E-logo bumps / golf-ball-like surface details on the exact sample's blades; the current mesh does not reproduce these measured surface details. Blade count, camber, pitch, thickness and embossing dimensions remain unverified.",
+        "ru": "Отдельно выбираемый прокси лопасти с изогнутым профилем. LanOC отмечает на лопастях точного образца выступы в виде логотипа EVGA E и фактуру, похожую на поверхность мяча для гольфа; текущая сетка не воспроизводит эти детали. Количество лопастей, кривизна, шаг, толщина и размеры рельефа не подтверждены."
       }
     },
     {
@@ -1096,8 +1096,8 @@
         "src.lanoc.review"
       ],
       "description": {
-        "en": "Individually selectable swept-blade proxy. Seven blades are only the current educational mesh count; exact blade count, camber, pitch, thickness and embossed texture require a calibrated fan photo or teardown measurement.",
-        "ru": "Отдельно выбираемый макет стреловидной лопасти. Семь лопастей — лишь текущее число элементов учебной сетки; фактическое количество, кривизна, шаг, толщина и рельеф требуют калиброванной фотографии или измерений разборки."
+        "en": "Individually selectable swept-blade proxy. LanOC observes raised EVGA E-logo bumps / golf-ball-like surface details on the exact sample's blades; the current mesh does not reproduce these measured surface details. Blade count, camber, pitch, thickness and embossing dimensions remain unverified.",
+        "ru": "Отдельно выбираемый прокси лопасти с изогнутым профилем. LanOC отмечает на лопастях точного образца выступы в виде логотипа EVGA E и фактуру, похожую на поверхность мяча для гольфа; текущая сетка не воспроизводит эти детали. Количество лопастей, кривизна, шаг, толщина и размеры рельефа не подтверждены."
       }
     },
     {
@@ -1114,8 +1114,8 @@
         "src.lanoc.review"
       ],
       "description": {
-        "en": "Individually selectable swept-blade proxy. Seven blades are only the current educational mesh count; exact blade count, camber, pitch, thickness and embossed texture require a calibrated fan photo or teardown measurement.",
-        "ru": "Отдельно выбираемый макет стреловидной лопасти. Семь лопастей — лишь текущее число элементов учебной сетки; фактическое количество, кривизна, шаг, толщина и рельеф требуют калиброванной фотографии или измерений разборки."
+        "en": "Individually selectable swept-blade proxy. LanOC observes raised EVGA E-logo bumps / golf-ball-like surface details on the exact sample's blades; the current mesh does not reproduce these measured surface details. Blade count, camber, pitch, thickness and embossing dimensions remain unverified.",
+        "ru": "Отдельно выбираемый прокси лопасти с изогнутым профилем. LanOC отмечает на лопастях точного образца выступы в виде логотипа EVGA E и фактуру, похожую на поверхность мяча для гольфа; текущая сетка не воспроизводит эти детали. Количество лопастей, кривизна, шаг, толщина и размеры рельефа не подтверждены."
       }
     },
     {
@@ -1132,8 +1132,8 @@
         "src.lanoc.review"
       ],
       "description": {
-        "en": "Individually selectable swept-blade proxy. Seven blades are only the current educational mesh count; exact blade count, camber, pitch, thickness and embossed texture require a calibrated fan photo or teardown measurement.",
-        "ru": "Отдельно выбираемый макет стреловидной лопасти. Семь лопастей — лишь текущее число элементов учебной сетки; фактическое количество, кривизна, шаг, толщина и рельеф требуют калиброванной фотографии или измерений разборки."
+        "en": "Individually selectable swept-blade proxy. LanOC observes raised EVGA E-logo bumps / golf-ball-like surface details on the exact sample's blades; the current mesh does not reproduce these measured surface details. Blade count, camber, pitch, thickness and embossing dimensions remain unverified.",
+        "ru": "Отдельно выбираемый прокси лопасти с изогнутым профилем. LanOC отмечает на лопастях точного образца выступы в виде логотипа EVGA E и фактуру, похожую на поверхность мяча для гольфа; текущая сетка не воспроизводит эти детали. Количество лопастей, кривизна, шаг, толщина и размеры рельефа не подтверждены."
       }
     },
     {
@@ -1186,8 +1186,8 @@
         "src.lanoc.review"
       ],
       "description": {
-        "en": "Individually selectable swept-blade proxy. Seven blades are only the current educational mesh count; exact blade count, camber, pitch, thickness and embossed texture require a calibrated fan photo or teardown measurement.",
-        "ru": "Отдельно выбираемый макет стреловидной лопасти. Семь лопастей — лишь текущее число элементов учебной сетки; фактическое количество, кривизна, шаг, толщина и рельеф требуют калиброванной фотографии или измерений разборки."
+        "en": "Individually selectable swept-blade proxy. LanOC observes raised EVGA E-logo bumps / golf-ball-like surface details on the exact sample's blades; the current mesh does not reproduce these measured surface details. Blade count, camber, pitch, thickness and embossing dimensions remain unverified.",
+        "ru": "Отдельно выбираемый прокси лопасти с изогнутым профилем. LanOC отмечает на лопастях точного образца выступы в виде логотипа EVGA E и фактуру, похожую на поверхность мяча для гольфа; текущая сетка не воспроизводит эти детали. Количество лопастей, кривизна, шаг, толщина и размеры рельефа не подтверждены."
       }
     },
     {
@@ -1204,8 +1204,8 @@
         "src.lanoc.review"
       ],
       "description": {
-        "en": "Individually selectable swept-blade proxy. Seven blades are only the current educational mesh count; exact blade count, camber, pitch, thickness and embossed texture require a calibrated fan photo or teardown measurement.",
-        "ru": "Отдельно выбираемый макет стреловидной лопасти. Семь лопастей — лишь текущее число элементов учебной сетки; фактическое количество, кривизна, шаг, толщина и рельеф требуют калиброванной фотографии или измерений разборки."
+        "en": "Individually selectable swept-blade proxy. LanOC observes raised EVGA E-logo bumps / golf-ball-like surface details on the exact sample's blades; the current mesh does not reproduce these measured surface details. Blade count, camber, pitch, thickness and embossing dimensions remain unverified.",
+        "ru": "Отдельно выбираемый прокси лопасти с изогнутым профилем. LanOC отмечает на лопастях точного образца выступы в виде логотипа EVGA E и фактуру, похожую на поверхность мяча для гольфа; текущая сетка не воспроизводит эти детали. Количество лопастей, кривизна, шаг, толщина и размеры рельефа не подтверждены."
       }
     },
     {
@@ -1222,8 +1222,8 @@
         "src.lanoc.review"
       ],
       "description": {
-        "en": "Individually selectable swept-blade proxy. Seven blades are only the current educational mesh count; exact blade count, camber, pitch, thickness and embossed texture require a calibrated fan photo or teardown measurement.",
-        "ru": "Отдельно выбираемый макет стреловидной лопасти. Семь лопастей — лишь текущее число элементов учебной сетки; фактическое количество, кривизна, шаг, толщина и рельеф требуют калиброванной фотографии или измерений разборки."
+        "en": "Individually selectable swept-blade proxy. LanOC observes raised EVGA E-logo bumps / golf-ball-like surface details on the exact sample's blades; the current mesh does not reproduce these measured surface details. Blade count, camber, pitch, thickness and embossing dimensions remain unverified.",
+        "ru": "Отдельно выбираемый прокси лопасти с изогнутым профилем. LanOC отмечает на лопастях точного образца выступы в виде логотипа EVGA E и фактуру, похожую на поверхность мяча для гольфа; текущая сетка не воспроизводит эти детали. Количество лопастей, кривизна, шаг, толщина и размеры рельефа не подтверждены."
       }
     },
     {
@@ -1240,8 +1240,8 @@
         "src.lanoc.review"
       ],
       "description": {
-        "en": "Individually selectable swept-blade proxy. Seven blades are only the current educational mesh count; exact blade count, camber, pitch, thickness and embossed texture require a calibrated fan photo or teardown measurement.",
-        "ru": "Отдельно выбираемый макет стреловидной лопасти. Семь лопастей — лишь текущее число элементов учебной сетки; фактическое количество, кривизна, шаг, толщина и рельеф требуют калиброванной фотографии или измерений разборки."
+        "en": "Individually selectable swept-blade proxy. LanOC observes raised EVGA E-logo bumps / golf-ball-like surface details on the exact sample's blades; the current mesh does not reproduce these measured surface details. Blade count, camber, pitch, thickness and embossing dimensions remain unverified.",
+        "ru": "Отдельно выбираемый прокси лопасти с изогнутым профилем. LanOC отмечает на лопастях точного образца выступы в виде логотипа EVGA E и фактуру, похожую на поверхность мяча для гольфа; текущая сетка не воспроизводит эти детали. Количество лопастей, кривизна, шаг, толщина и размеры рельефа не подтверждены."
       }
     },
     {
@@ -1258,8 +1258,8 @@
         "src.lanoc.review"
       ],
       "description": {
-        "en": "Individually selectable swept-blade proxy. Seven blades are only the current educational mesh count; exact blade count, camber, pitch, thickness and embossed texture require a calibrated fan photo or teardown measurement.",
-        "ru": "Отдельно выбираемый макет стреловидной лопасти. Семь лопастей — лишь текущее число элементов учебной сетки; фактическое количество, кривизна, шаг, толщина и рельеф требуют калиброванной фотографии или измерений разборки."
+        "en": "Individually selectable swept-blade proxy. LanOC observes raised EVGA E-logo bumps / golf-ball-like surface details on the exact sample's blades; the current mesh does not reproduce these measured surface details. Blade count, camber, pitch, thickness and embossing dimensions remain unverified.",
+        "ru": "Отдельно выбираемый прокси лопасти с изогнутым профилем. LanOC отмечает на лопастях точного образца выступы в виде логотипа EVGA E и фактуру, похожую на поверхность мяча для гольфа; текущая сетка не воспроизводит эти детали. Количество лопастей, кривизна, шаг, толщина и размеры рельефа не подтверждены."
       }
     },
     {
@@ -1276,8 +1276,8 @@
         "src.lanoc.review"
       ],
       "description": {
-        "en": "Individually selectable swept-blade proxy. Seven blades are only the current educational mesh count; exact blade count, camber, pitch, thickness and embossed texture require a calibrated fan photo or teardown measurement.",
-        "ru": "Отдельно выбираемый макет стреловидной лопасти. Семь лопастей — лишь текущее число элементов учебной сетки; фактическое количество, кривизна, шаг, толщина и рельеф требуют калиброванной фотографии или измерений разборки."
+        "en": "Individually selectable swept-blade proxy. LanOC observes raised EVGA E-logo bumps / golf-ball-like surface details on the exact sample's blades; the current mesh does not reproduce these measured surface details. Blade count, camber, pitch, thickness and embossing dimensions remain unverified.",
+        "ru": "Отдельно выбираемый прокси лопасти с изогнутым профилем. LanOC отмечает на лопастях точного образца выступы в виде логотипа EVGA E и фактуру, похожую на поверхность мяча для гольфа; текущая сетка не воспроизводит эти детали. Количество лопастей, кривизна, шаг, толщина и размеры рельефа не подтверждены."
       }
     },
     {
@@ -1294,8 +1294,8 @@
         "src.lanoc.review"
       ],
       "description": {
-        "en": "Individually selectable swept-blade proxy. Seven blades are only the current educational mesh count; exact blade count, camber, pitch, thickness and embossed texture require a calibrated fan photo or teardown measurement.",
-        "ru": "Отдельно выбираемый макет стреловидной лопасти. Семь лопастей — лишь текущее число элементов учебной сетки; фактическое количество, кривизна, шаг, толщина и рельеф требуют калиброванной фотографии или измерений разборки."
+        "en": "Individually selectable swept-blade proxy. LanOC observes raised EVGA E-logo bumps / golf-ball-like surface details on the exact sample's blades; the current mesh does not reproduce these measured surface details. Blade count, camber, pitch, thickness and embossing dimensions remain unverified.",
+        "ru": "Отдельно выбираемый прокси лопасти с изогнутым профилем. LanOC отмечает на лопастях точного образца выступы в виде логотипа EVGA E и фактуру, похожую на поверхность мяча для гольфа; текущая сетка не воспроизводит эти детали. Количество лопастей, кривизна, шаг, толщина и размеры рельефа не подтверждены."
       }
     },
     {
