@@ -411,3 +411,32 @@ test("fallback impellers have independent pivots and an evidence-labelled packag
   await expect(page.locator("#animation-player-panel")).toHaveAttribute("data-status", "ready");
   await expect(page.locator("#component-tree button[data-id=\"assembly.fan.2.rotor\"]")).toBeVisible();
 });
+
+
+test("shows a workload-specific cooling and board-power operating point with source caveats", async ({ page }) => {
+  await page.goto("/");
+
+  await page.locator('#component-tree button[data-id="assembly.cooling"]').click();
+  const fanRpm = page.locator('[data-claim-id="claim.cooling.fan.rpm.sample_operating_point"]');
+  const fanDuty = page.locator('[data-claim-id="claim.cooling.fan.pwm.sample_operating_point"]');
+  await expect(fanRpm.locator(".claim-value")).toContainText("2030 RPM");
+  await expect(fanRpm).toContainText("not the fan's maximum/nominal RPM or a factory fan curve");
+  await expect(fanDuty.locator(".claim-value")).toContainText("73 %");
+  await expect(fanRpm.locator(".claim-sources a")).toHaveAttribute(
+    "href",
+    "https://pcper.com/2021/02/nvidia-geforce-rtx-3060-review-evga-xc-black-tested/"
+  );
+
+  await page.locator('#component-tree button[data-id="chip.gpu.ga106"]').click();
+  const edgeTemperature = page.locator('[data-claim-id="claim.gpu.temperature.edge.sample_operating_point"]');
+  const hotspot = page.locator('[data-claim-id="claim.gpu.temperature.hotspot.sample_operating_point"]');
+  await expect(edgeTemperature.locator(".claim-value")).toContainText("68.1 °C");
+  await expect(hotspot.locator(".claim-value")).toContainText("80.5 °C");
+  await expect(hotspot).toContainText("not a design target");
+
+  await page.locator('#component-tree button[data-id="assembly.card.root"]').click();
+  const boardPower = page.locator('[data-claim-id="claim.power.board_power.sample_operating_point"]');
+  await expect(boardPower.locator(".claim-value")).toContainText("172.4 W");
+  await expect(boardPower).toContainText("not a revised TGP/TDP specification");
+  await expect(page.locator('[data-claim-id="claim.power.total_graphics_power"] .claim-value')).toContainText("170 W");
+});
