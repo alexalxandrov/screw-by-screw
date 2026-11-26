@@ -129,9 +129,35 @@ class TextModelPackageBuilderTests(unittest.TestCase):
                 builder.verify_envelope_equivalence(changed, built)
 
     def test_unsafe_package_paths_are_rejected(self):
-        for path in ("../escape.json", "/absolute.json", "a\\b.json"):
+        for path in ("../escape.json", "/absolute.json", "a\\b.json", "a//b.json", "a/./b.json", "C:/escape.json"):
             with self.subTest(path=path), self.assertRaises(ValueError):
                 builder.safe_package_path(path)
+
+    def test_duplicate_manifest_paths_are_rejected(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            model_dir, scene_path = make_source_tree(root, minimal_glb())
+            package_path = model_dir / "model-package.json"
+            package_doc = json.loads(package_path.read_text(encoding="utf-8"))
+            package_doc["files"]["components"] = "model.json"
+            package_path.write_text(json.dumps(package_doc), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "manifest paths are not unique"):
+                builder.build_envelope(model_dir, scene_path)
+
+    def test_symlink_escape_is_rejected(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            model_dir, scene_path = make_source_tree(root, minimal_glb())
+            outside = root / "outside.json"
+            outside.write_text('{"not":"inside"}', encoding="utf-8")
+            component_path = model_dir / "components.json"
+            component_path.unlink()
+            try:
+                component_path.symlink_to(outside)
+            except (OSError, NotImplementedError):
+                self.skipTest("symlinks are not available on this platform")
+            with self.assertRaisesRegex(ValueError, "resolves outside model directory"):
+                builder.build_envelope(model_dir, scene_path)
 
 
 if __name__ == "__main__":
