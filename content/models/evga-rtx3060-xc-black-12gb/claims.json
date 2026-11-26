@@ -899,6 +899,138 @@
         "src.tomshardware.rtx3060.specs"
       ],
       "notes": "One PolyMorph Engine per calculated logical TPC; 14 TPCs gives 14 engines."
+    },
+    {
+      "id": "claim.gpu.sm_partitions_per_sm",
+      "subject_id": "chip.gpu.sm.cluster",
+      "predicate": "processing_partitions_per_sm",
+      "value": 4,
+      "unit": "partitions/SM",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ],
+      "notes": "The GA10x SM is partitioned into four processing blocks."
+    },
+    {
+      "id": "claim.gpu.sm_partition_count",
+      "subject_id": "chip.gpu.sm.cluster",
+      "predicate": "processing_partition_count",
+      "value": 112,
+      "unit": "partitions",
+      "confidence_class": "calculated",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ],
+      "notes": "28 configured RTX 3060 SMs × four GA10x processing partitions per SM = 112 logical partitions."
+    },
+    {
+      "id": "claim.gpu.fp32_cores_per_partition",
+      "subject_id": "chip.gpu.sm.cluster",
+      "predicate": "fp32_cuda_cores_per_partition",
+      "value": 32,
+      "unit": "cores/partition",
+      "confidence_class": "calculated",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ],
+      "notes": "Each partition has one 16-FP32 datapath and a second 16-lane FP32/INT32 datapath; together these provide 32 FP32 lanes when executing FP32."
+    },
+    {
+      "id": "claim.gpu.fp32_int32_lanes_per_partition",
+      "subject_id": "chip.gpu.sm.cluster",
+      "predicate": "fp32_int32_lanes_per_partition",
+      "value": 16,
+      "unit": "lanes/partition",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ],
+      "notes": "The second datapath in each GA10x partition has 16 lanes that can execute either FP32 or INT32 operations."
+    },
+    {
+      "id": "claim.gpu.tensor_cores_per_partition",
+      "subject_id": "chip.gpu.sm.cluster",
+      "predicate": "tensor_cores_per_partition",
+      "value": 1,
+      "unit": "cores/partition",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ],
+      "notes": "One third-generation Tensor Core is present in each GA10x processing partition."
+    },
+    {
+      "id": "claim.gpu.ldst_per_partition",
+      "subject_id": "chip.gpu.sm.cluster",
+      "predicate": "load_store_units_per_partition",
+      "value": 4,
+      "unit": "units/partition",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ],
+      "notes": "Figure 3 depicts four LD/ST units per processing partition."
+    },
+    {
+      "id": "claim.gpu.sfu_per_partition",
+      "subject_id": "chip.gpu.sm.cluster",
+      "predicate": "special_function_units_per_partition",
+      "value": 1,
+      "unit": "units/partition",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ],
+      "notes": "Figure 3 depicts one SFU per processing partition."
+    },
+    {
+      "id": "claim.gpu.register_file_per_partition",
+      "subject_id": "chip.gpu.sm.cluster",
+      "predicate": "register_file_capacity_per_partition",
+      "value": 64,
+      "unit": "KB/partition",
+      "confidence_class": "calculated",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ],
+      "notes": "The Figure 3 register file is 16,384 × 32-bit = 524,288 bits = 64 KiB per partition."
+    },
+    {
+      "id": "claim.gpu.schedulers_per_partition",
+      "subject_id": "chip.gpu.sm.cluster",
+      "predicate": "warp_schedulers_per_partition",
+      "value": 1,
+      "unit": "scheduler/partition",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ],
+      "notes": "Figure 3 depicts one warp scheduler per processing partition."
+    },
+    {
+      "id": "claim.gpu.dispatch_units_per_partition",
+      "subject_id": "chip.gpu.sm.cluster",
+      "predicate": "dispatch_units_per_partition",
+      "value": 1,
+      "unit": "unit/partition",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ],
+      "notes": "Figure 3 depicts one dispatch unit per processing partition."
+    },
+    {
+      "id": "claim.gpu.l0_icache_per_partition",
+      "subject_id": "chip.gpu.sm.cluster",
+      "predicate": "l0_instruction_cache_per_partition",
+      "value": 1,
+      "unit": "cache/partition",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ],
+      "notes": "Figure 3 depicts one L0 instruction cache per processing partition."
     }
   ]
 }
