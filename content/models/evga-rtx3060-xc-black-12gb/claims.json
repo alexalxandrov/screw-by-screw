@@ -570,6 +570,42 @@
         "src.lanoc.review"
       ],
       "notes": "Four separate copper terminal faces are visible in the exact XC BLACK cooler end photograph (LanOC image 16). This does not establish four unique heatpipes; two U-shaped pipes may produce four ends. It is a visible-face count only."
+    },
+    {
+      "id": "claim.cooling.heatpipe_count",
+      "subject_id": "cooling.heatpipes",
+      "predicate": "total_heatpipe_count",
+      "value": 6,
+      "unit": "pipes",
+      "confidence_class": "independently_verified",
+      "source_ids": [
+        "src.thefpsreview.exact_sku"
+      ],
+      "notes": "The exact 12G-P5-3655-KR XC BLACK review describes four main heatpipes plus two additional side heatpipes (six total). The count is source-backed; 3D routes remain illustrative."
+    },
+    {
+      "id": "claim.cooling.main_heatpipe_count",
+      "subject_id": "cooling.heatpipes",
+      "predicate": "main_gpu_contact_heatpipe_count",
+      "value": 4,
+      "unit": "pipes",
+      "confidence_class": "independently_verified",
+      "source_ids": [
+        "src.thefpsreview.exact_sku"
+      ],
+      "notes": "The exact-SKU review describes four main central heatpipes which make contact with the GPU. Individual geometry and coordinates remain illustrative."
+    },
+    {
+      "id": "claim.cooling.side_heatpipe_count",
+      "subject_id": "cooling.heatpipes",
+      "predicate": "side_heatpipe_count",
+      "value": 2,
+      "unit": "pipes",
+      "confidence_class": "independently_verified",
+      "source_ids": [
+        "src.thefpsreview.exact_sku"
+      ],
+      "notes": "The exact-SKU review describes two additional side heatpipes which move heat toward the side of the heatsink. Individual geometry and coordinates remain illustrative."
     }
   ]
 }
