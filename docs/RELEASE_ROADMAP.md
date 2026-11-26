@@ -15,7 +15,7 @@ These are capability milestones, not promises that every feature will be physica
 
 ## Current RTX 3060 pilot data scope
 
-The current package contains **313 semantic components, 311 typed relationships, 109 atomic claims and 27 registered sources**, with three process layers, 12 bilingual learning questions and two package-authored animation clips. The component inventory includes logical-only GA106 architecture nodes and unmeasured visual proxies; its count is not a count of 313 physically reconstructed parts.
+The current package contains **313 semantic components, 311 typed relationships, 109 atomic claims and 29 registered sources**, with three process layers, 12 bilingual learning questions and two package-authored animation clips. The component inventory includes logical-only GA106 architecture nodes and unmeasured visual proxies; its count is not a count of 313 physically reconstructed parts.
 
 The pilot tracks five partial teardown observations, but no complete removal/reassembly sequence. The cooling model keeps six reviewer-described route/run proxies distinct from the unknown physical closed-loop count. The power model is qualitative and does not assert a verified exact-board VRM topology.
 
