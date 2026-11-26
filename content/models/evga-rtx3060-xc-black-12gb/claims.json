@@ -136,9 +136,10 @@
       "unit": "mm",
       "confidence_class": "measured",
       "source_ids": [
-        "src.lanoc.review"
+        "src.lanoc.review",
+        "src.pcmrace.xc_black.review"
       ],
-      "notes": "Approximate reviewer measurement; not a manufacturer drawing."
+      "notes": "LanOC's approximate reviewer measurement for the exact XC BLACK sample is ~85 mm impeller diameter within a ~90 mm fan opening. PC Master Race Latinoamérica describes its similarly named XC BLACK sample as using two 80 mm fans but does not identify retail P/N 12G-P5-3655-KR. The measurement conventions/sample identity are unresolved; retain LanOC's approximate measured value for the current model and do not treat 80 mm as a confirmed OEM size for this SKU."
     },
     {
       "id": "claim.power.connector",
@@ -174,9 +175,10 @@
       "unit": null,
       "confidence_class": "independently_verified",
       "source_ids": [
-        "src.lanoc.review"
+        "src.lanoc.review",
+        "src.hothardware.xc_black.review"
       ],
-      "notes": "Applies to the reviewed XC BLACK sample."
+      "notes": "The exact-SKU LanOC 12G-P5-3655-KR sample shows exposed rear PCB and no backplate. HotHardware's similarly named XC Black Gaming sample describes a stylized rear backplate with hexagonal cut-outs but does not publish its retail P/N; this is retained as an unresolved sample/variant conflict and is not applied to the target 3655-KR assembly."
     },
     {
       "id": "claim.pcb.revision",
