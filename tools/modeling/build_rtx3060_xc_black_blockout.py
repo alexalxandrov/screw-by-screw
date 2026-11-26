@@ -1577,6 +1577,71 @@ def main():
             MAT["connector"], power, conn,
         )
 
+    # Ensure every canonical semantic component has a stable GLB node.
+    # Logical-only records get an EMPTY marker at the nearest known parent;
+    # this deliberately adds no physical geometry or guessed coordinates.
+    canonical_components_path = REPO_ROOT / "content/models/evga-rtx3060-xc-black-12gb/components.json"
+    canonical_components_doc = json.loads(
+        canonical_components_path.read_text(encoding="utf-8")
+    )
+    canonical_components = canonical_components_doc.get("components", [])
+    scene_component_objects = {
+        obj.get("sbs_component_id"): obj
+        for obj in scene.objects
+        if isinstance(obj.get("sbs_component_id"), str)
+    }
+    pending_components = [
+        component for component in canonical_components
+        if component.get("id") not in scene_component_objects
+    ]
+    added_logical_nodes = 0
+    while pending_components:
+        deferred = []
+        made_progress = False
+        for component in pending_components:
+            component_id = component["id"]
+            parent_id = component.get("parent_id")
+            parent_object = scene_component_objects.get(parent_id) if parent_id else None
+            if parent_id and parent_object is None:
+                deferred.append(component)
+                continue
+
+            if parent_object is not None:
+                parent_location = parent_object.matrix_world.translation.copy()
+                parent_collections = list(parent_object.users_collection)
+                collection = parent_collections[0] if parent_collections else root
+            else:
+                parent_location = Vector((0.0, 0.0, 0.0))
+                collection = root
+
+            placeholder = make_assembly(
+                "Logical component | " + component_id,
+                component_id,
+                parent_location,
+                collection,
+                parent=parent_object,
+                evidence=component.get("evidence_status", STATUS["illustrative"]),
+                geometry=component.get("geometry_status", "logical_only"),
+            )
+            placeholder["sbs_logical_only"] = True
+            placeholder["sbs_physical_location_mapped"] = False
+            scene_component_objects[component_id] = placeholder
+            added_logical_nodes += 1
+            made_progress = True
+
+        if not made_progress:
+            unresolved = [item.get("id") for item in deferred]
+            raise ValueError(
+                "Cannot create logical GLB nodes; missing component parents: "
+                + ", ".join(unresolved)
+            )
+        pending_components = deferred
+
+    print(
+        "Added logical-only component nodes: "
+        + str(added_logical_nodes)
+    )
+
     # Scene-level provenance metadata.
     scene["sbs_model_id"] = manifest["model_id"]
     scene["sbs_asset_type"] = "blockout"
