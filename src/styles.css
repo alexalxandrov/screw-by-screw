@@ -217,8 +217,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); ou
   .brand { min-width: 0; }
   .brand-copy strong { font-size: 11px; }
   .brand-copy small { font-size: 10px; }
-  .topbar-actions { margin-left: auto; }
-  #catalog-open { display: none; }
+  .topbar-actions { margin-left: auto; flex-wrap: wrap; justify-content: flex-end; }
   .viewer-toolbar { flex: 0 0 auto; padding: 8px; gap: 5px; flex-wrap: wrap; height: auto; min-height: 52px; }
   .view-tab { padding: 8px 7px; font-size: 11px; }
   .toolbar-camera { margin: 0 4px; }
