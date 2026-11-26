@@ -1247,8 +1247,17 @@
       ]
     },
     {
-      "id": "rel.tpccluster.contains.sm01",
+      "id": "rel.tpccluster.contains.polymorph.array",
       "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.polymorph.array",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.tpc01.contains.sm01",
+      "from": "chip.gpu.tpc.01",
       "to": "chip.gpu.sm.01",
       "type": "contains",
       "source_ids": [
@@ -1257,8 +1266,8 @@
       ]
     },
     {
-      "id": "rel.tpccluster.contains.sm02",
-      "from": "chip.gpu.tpc.cluster",
+      "id": "rel.tpc01.contains.sm02",
+      "from": "chip.gpu.tpc.01",
       "to": "chip.gpu.sm.02",
       "type": "contains",
       "source_ids": [
@@ -1267,8 +1276,8 @@
       ]
     },
     {
-      "id": "rel.tpccluster.contains.sm03",
-      "from": "chip.gpu.tpc.cluster",
+      "id": "rel.tpc02.contains.sm03",
+      "from": "chip.gpu.tpc.02",
       "to": "chip.gpu.sm.03",
       "type": "contains",
       "source_ids": [
@@ -1277,8 +1286,8 @@
       ]
     },
     {
-      "id": "rel.tpccluster.contains.sm04",
-      "from": "chip.gpu.tpc.cluster",
+      "id": "rel.tpc02.contains.sm04",
+      "from": "chip.gpu.tpc.02",
       "to": "chip.gpu.sm.04",
       "type": "contains",
       "source_ids": [
@@ -1287,8 +1296,8 @@
       ]
     },
     {
-      "id": "rel.tpccluster.contains.sm05",
-      "from": "chip.gpu.tpc.cluster",
+      "id": "rel.tpc03.contains.sm05",
+      "from": "chip.gpu.tpc.03",
       "to": "chip.gpu.sm.05",
       "type": "contains",
       "source_ids": [
@@ -1297,8 +1306,8 @@
       ]
     },
     {
-      "id": "rel.tpccluster.contains.sm06",
-      "from": "chip.gpu.tpc.cluster",
+      "id": "rel.tpc03.contains.sm06",
+      "from": "chip.gpu.tpc.03",
       "to": "chip.gpu.sm.06",
       "type": "contains",
       "source_ids": [
@@ -1307,8 +1316,8 @@
       ]
     },
     {
-      "id": "rel.tpccluster.contains.sm07",
-      "from": "chip.gpu.tpc.cluster",
+      "id": "rel.tpc04.contains.sm07",
+      "from": "chip.gpu.tpc.04",
       "to": "chip.gpu.sm.07",
       "type": "contains",
       "source_ids": [
@@ -1317,8 +1326,8 @@
       ]
     },
     {
-      "id": "rel.tpccluster.contains.sm08",
-      "from": "chip.gpu.tpc.cluster",
+      "id": "rel.tpc04.contains.sm08",
+      "from": "chip.gpu.tpc.04",
       "to": "chip.gpu.sm.08",
       "type": "contains",
       "source_ids": [
@@ -1327,8 +1336,8 @@
       ]
     },
     {
-      "id": "rel.tpccluster.contains.sm09",
-      "from": "chip.gpu.tpc.cluster",
+      "id": "rel.tpc05.contains.sm09",
+      "from": "chip.gpu.tpc.05",
       "to": "chip.gpu.sm.09",
       "type": "contains",
       "source_ids": [
@@ -1337,8 +1346,8 @@
       ]
     },
     {
-      "id": "rel.tpccluster.contains.sm10",
-      "from": "chip.gpu.tpc.cluster",
+      "id": "rel.tpc05.contains.sm10",
+      "from": "chip.gpu.tpc.05",
       "to": "chip.gpu.sm.10",
       "type": "contains",
       "source_ids": [
@@ -1347,8 +1356,8 @@
       ]
     },
     {
-      "id": "rel.tpccluster.contains.sm11",
-      "from": "chip.gpu.tpc.cluster",
+      "id": "rel.tpc06.contains.sm11",
+      "from": "chip.gpu.tpc.06",
       "to": "chip.gpu.sm.11",
       "type": "contains",
       "source_ids": [
@@ -1357,8 +1366,8 @@
       ]
     },
     {
-      "id": "rel.tpccluster.contains.sm12",
-      "from": "chip.gpu.tpc.cluster",
+      "id": "rel.tpc06.contains.sm12",
+      "from": "chip.gpu.tpc.06",
       "to": "chip.gpu.sm.12",
       "type": "contains",
       "source_ids": [
@@ -1367,8 +1376,8 @@
       ]
     },
     {
-      "id": "rel.tpccluster.contains.sm13",
-      "from": "chip.gpu.tpc.cluster",
+      "id": "rel.tpc07.contains.sm13",
+      "from": "chip.gpu.tpc.07",
       "to": "chip.gpu.sm.13",
       "type": "contains",
       "source_ids": [
@@ -1377,8 +1386,8 @@
       ]
     },
     {
-      "id": "rel.tpccluster.contains.sm14",
-      "from": "chip.gpu.tpc.cluster",
+      "id": "rel.tpc07.contains.sm14",
+      "from": "chip.gpu.tpc.07",
       "to": "chip.gpu.sm.14",
       "type": "contains",
       "source_ids": [
@@ -1387,8 +1396,8 @@
       ]
     },
     {
-      "id": "rel.tpccluster.contains.sm15",
-      "from": "chip.gpu.tpc.cluster",
+      "id": "rel.tpc08.contains.sm15",
+      "from": "chip.gpu.tpc.08",
       "to": "chip.gpu.sm.15",
       "type": "contains",
       "source_ids": [
@@ -1397,8 +1406,8 @@
       ]
     },
     {
-      "id": "rel.tpccluster.contains.sm16",
-      "from": "chip.gpu.tpc.cluster",
+      "id": "rel.tpc08.contains.sm16",
+      "from": "chip.gpu.tpc.08",
       "to": "chip.gpu.sm.16",
       "type": "contains",
       "source_ids": [
@@ -1407,8 +1416,8 @@
       ]
     },
     {
-      "id": "rel.tpccluster.contains.sm17",
-      "from": "chip.gpu.tpc.cluster",
+      "id": "rel.tpc09.contains.sm17",
+      "from": "chip.gpu.tpc.09",
       "to": "chip.gpu.sm.17",
       "type": "contains",
       "source_ids": [
@@ -1417,8 +1426,8 @@
       ]
     },
     {
-      "id": "rel.tpccluster.contains.sm18",
-      "from": "chip.gpu.tpc.cluster",
+      "id": "rel.tpc09.contains.sm18",
+      "from": "chip.gpu.tpc.09",
       "to": "chip.gpu.sm.18",
       "type": "contains",
       "source_ids": [
@@ -1427,8 +1436,8 @@
       ]
     },
     {
-      "id": "rel.tpccluster.contains.sm19",
-      "from": "chip.gpu.tpc.cluster",
+      "id": "rel.tpc10.contains.sm19",
+      "from": "chip.gpu.tpc.10",
       "to": "chip.gpu.sm.19",
       "type": "contains",
       "source_ids": [
@@ -1437,8 +1446,8 @@
       ]
     },
     {
-      "id": "rel.tpccluster.contains.sm20",
-      "from": "chip.gpu.tpc.cluster",
+      "id": "rel.tpc10.contains.sm20",
+      "from": "chip.gpu.tpc.10",
       "to": "chip.gpu.sm.20",
       "type": "contains",
       "source_ids": [
@@ -1447,8 +1456,8 @@
       ]
     },
     {
-      "id": "rel.tpccluster.contains.sm21",
-      "from": "chip.gpu.tpc.cluster",
+      "id": "rel.tpc11.contains.sm21",
+      "from": "chip.gpu.tpc.11",
       "to": "chip.gpu.sm.21",
       "type": "contains",
       "source_ids": [
@@ -1457,8 +1466,8 @@
       ]
     },
     {
-      "id": "rel.tpccluster.contains.sm22",
-      "from": "chip.gpu.tpc.cluster",
+      "id": "rel.tpc11.contains.sm22",
+      "from": "chip.gpu.tpc.11",
       "to": "chip.gpu.sm.22",
       "type": "contains",
       "source_ids": [
@@ -1467,8 +1476,8 @@
       ]
     },
     {
-      "id": "rel.tpccluster.contains.sm23",
-      "from": "chip.gpu.tpc.cluster",
+      "id": "rel.tpc12.contains.sm23",
+      "from": "chip.gpu.tpc.12",
       "to": "chip.gpu.sm.23",
       "type": "contains",
       "source_ids": [
@@ -1477,8 +1486,8 @@
       ]
     },
     {
-      "id": "rel.tpccluster.contains.sm24",
-      "from": "chip.gpu.tpc.cluster",
+      "id": "rel.tpc12.contains.sm24",
+      "from": "chip.gpu.tpc.12",
       "to": "chip.gpu.sm.24",
       "type": "contains",
       "source_ids": [
@@ -1487,8 +1496,8 @@
       ]
     },
     {
-      "id": "rel.tpccluster.contains.sm25",
-      "from": "chip.gpu.tpc.cluster",
+      "id": "rel.tpc13.contains.sm25",
+      "from": "chip.gpu.tpc.13",
       "to": "chip.gpu.sm.25",
       "type": "contains",
       "source_ids": [
@@ -1497,8 +1506,8 @@
       ]
     },
     {
-      "id": "rel.tpccluster.contains.sm26",
-      "from": "chip.gpu.tpc.cluster",
+      "id": "rel.tpc13.contains.sm26",
+      "from": "chip.gpu.tpc.13",
       "to": "chip.gpu.sm.26",
       "type": "contains",
       "source_ids": [
@@ -1507,8 +1516,8 @@
       ]
     },
     {
-      "id": "rel.tpccluster.contains.sm27",
-      "from": "chip.gpu.tpc.cluster",
+      "id": "rel.tpc14.contains.sm27",
+      "from": "chip.gpu.tpc.14",
       "to": "chip.gpu.sm.27",
       "type": "contains",
       "source_ids": [
@@ -1517,8 +1526,8 @@
       ]
     },
     {
-      "id": "rel.tpccluster.contains.sm28",
-      "from": "chip.gpu.tpc.cluster",
+      "id": "rel.tpc14.contains.sm28",
+      "from": "chip.gpu.tpc.14",
       "to": "chip.gpu.sm.28",
       "type": "contains",
       "source_ids": [
@@ -1527,9 +1536,1274 @@
       ]
     },
     {
-      "id": "rel.tpccluster.contains.polymorph.array",
+      "id": "rel.tpccluster.contains.tpc01",
       "from": "chip.gpu.tpc.cluster",
-      "to": "chip.gpu.polymorph.array",
+      "to": "chip.gpu.tpc.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc01.contains.polymorph",
+      "from": "chip.gpu.tpc.01",
+      "to": "chip.gpu.tpc.01.polymorph",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.tpc02",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.tpc.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc02.contains.polymorph",
+      "from": "chip.gpu.tpc.02",
+      "to": "chip.gpu.tpc.02.polymorph",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.tpc03",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.tpc.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc03.contains.polymorph",
+      "from": "chip.gpu.tpc.03",
+      "to": "chip.gpu.tpc.03.polymorph",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.tpc04",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.tpc.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc04.contains.polymorph",
+      "from": "chip.gpu.tpc.04",
+      "to": "chip.gpu.tpc.04.polymorph",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.tpc05",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.tpc.05",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc05.contains.polymorph",
+      "from": "chip.gpu.tpc.05",
+      "to": "chip.gpu.tpc.05.polymorph",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.tpc06",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.tpc.06",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc06.contains.polymorph",
+      "from": "chip.gpu.tpc.06",
+      "to": "chip.gpu.tpc.06.polymorph",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.tpc07",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.tpc.07",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc07.contains.polymorph",
+      "from": "chip.gpu.tpc.07",
+      "to": "chip.gpu.tpc.07.polymorph",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.tpc08",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.tpc.08",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc08.contains.polymorph",
+      "from": "chip.gpu.tpc.08",
+      "to": "chip.gpu.tpc.08.polymorph",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.tpc09",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.tpc.09",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc09.contains.polymorph",
+      "from": "chip.gpu.tpc.09",
+      "to": "chip.gpu.tpc.09.polymorph",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.tpc10",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.tpc.10",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc10.contains.polymorph",
+      "from": "chip.gpu.tpc.10",
+      "to": "chip.gpu.tpc.10.polymorph",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.tpc11",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.tpc.11",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc11.contains.polymorph",
+      "from": "chip.gpu.tpc.11",
+      "to": "chip.gpu.tpc.11.polymorph",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.tpc12",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.tpc.12",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc12.contains.polymorph",
+      "from": "chip.gpu.tpc.12",
+      "to": "chip.gpu.tpc.12.polymorph",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.tpc13",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.tpc.13",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc13.contains.polymorph",
+      "from": "chip.gpu.tpc.13",
+      "to": "chip.gpu.tpc.13.polymorph",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.tpc14",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.tpc.14",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc14.contains.polymorph",
+      "from": "chip.gpu.tpc.14",
+      "to": "chip.gpu.tpc.14.polymorph",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm01.contains.partition01",
+      "from": "chip.gpu.sm.01",
+      "to": "chip.gpu.sm.01.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm01.contains.partition02",
+      "from": "chip.gpu.sm.01",
+      "to": "chip.gpu.sm.01.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm01.contains.partition03",
+      "from": "chip.gpu.sm.01",
+      "to": "chip.gpu.sm.01.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm01.contains.partition04",
+      "from": "chip.gpu.sm.01",
+      "to": "chip.gpu.sm.01.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm02.contains.partition01",
+      "from": "chip.gpu.sm.02",
+      "to": "chip.gpu.sm.02.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm02.contains.partition02",
+      "from": "chip.gpu.sm.02",
+      "to": "chip.gpu.sm.02.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm02.contains.partition03",
+      "from": "chip.gpu.sm.02",
+      "to": "chip.gpu.sm.02.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm02.contains.partition04",
+      "from": "chip.gpu.sm.02",
+      "to": "chip.gpu.sm.02.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm03.contains.partition01",
+      "from": "chip.gpu.sm.03",
+      "to": "chip.gpu.sm.03.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm03.contains.partition02",
+      "from": "chip.gpu.sm.03",
+      "to": "chip.gpu.sm.03.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm03.contains.partition03",
+      "from": "chip.gpu.sm.03",
+      "to": "chip.gpu.sm.03.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm03.contains.partition04",
+      "from": "chip.gpu.sm.03",
+      "to": "chip.gpu.sm.03.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm04.contains.partition01",
+      "from": "chip.gpu.sm.04",
+      "to": "chip.gpu.sm.04.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm04.contains.partition02",
+      "from": "chip.gpu.sm.04",
+      "to": "chip.gpu.sm.04.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm04.contains.partition03",
+      "from": "chip.gpu.sm.04",
+      "to": "chip.gpu.sm.04.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm04.contains.partition04",
+      "from": "chip.gpu.sm.04",
+      "to": "chip.gpu.sm.04.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm05.contains.partition01",
+      "from": "chip.gpu.sm.05",
+      "to": "chip.gpu.sm.05.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm05.contains.partition02",
+      "from": "chip.gpu.sm.05",
+      "to": "chip.gpu.sm.05.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm05.contains.partition03",
+      "from": "chip.gpu.sm.05",
+      "to": "chip.gpu.sm.05.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm05.contains.partition04",
+      "from": "chip.gpu.sm.05",
+      "to": "chip.gpu.sm.05.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm06.contains.partition01",
+      "from": "chip.gpu.sm.06",
+      "to": "chip.gpu.sm.06.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm06.contains.partition02",
+      "from": "chip.gpu.sm.06",
+      "to": "chip.gpu.sm.06.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm06.contains.partition03",
+      "from": "chip.gpu.sm.06",
+      "to": "chip.gpu.sm.06.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm06.contains.partition04",
+      "from": "chip.gpu.sm.06",
+      "to": "chip.gpu.sm.06.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm07.contains.partition01",
+      "from": "chip.gpu.sm.07",
+      "to": "chip.gpu.sm.07.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm07.contains.partition02",
+      "from": "chip.gpu.sm.07",
+      "to": "chip.gpu.sm.07.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm07.contains.partition03",
+      "from": "chip.gpu.sm.07",
+      "to": "chip.gpu.sm.07.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm07.contains.partition04",
+      "from": "chip.gpu.sm.07",
+      "to": "chip.gpu.sm.07.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm08.contains.partition01",
+      "from": "chip.gpu.sm.08",
+      "to": "chip.gpu.sm.08.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm08.contains.partition02",
+      "from": "chip.gpu.sm.08",
+      "to": "chip.gpu.sm.08.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm08.contains.partition03",
+      "from": "chip.gpu.sm.08",
+      "to": "chip.gpu.sm.08.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm08.contains.partition04",
+      "from": "chip.gpu.sm.08",
+      "to": "chip.gpu.sm.08.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm09.contains.partition01",
+      "from": "chip.gpu.sm.09",
+      "to": "chip.gpu.sm.09.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm09.contains.partition02",
+      "from": "chip.gpu.sm.09",
+      "to": "chip.gpu.sm.09.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm09.contains.partition03",
+      "from": "chip.gpu.sm.09",
+      "to": "chip.gpu.sm.09.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm09.contains.partition04",
+      "from": "chip.gpu.sm.09",
+      "to": "chip.gpu.sm.09.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm10.contains.partition01",
+      "from": "chip.gpu.sm.10",
+      "to": "chip.gpu.sm.10.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm10.contains.partition02",
+      "from": "chip.gpu.sm.10",
+      "to": "chip.gpu.sm.10.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm10.contains.partition03",
+      "from": "chip.gpu.sm.10",
+      "to": "chip.gpu.sm.10.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm10.contains.partition04",
+      "from": "chip.gpu.sm.10",
+      "to": "chip.gpu.sm.10.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm11.contains.partition01",
+      "from": "chip.gpu.sm.11",
+      "to": "chip.gpu.sm.11.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm11.contains.partition02",
+      "from": "chip.gpu.sm.11",
+      "to": "chip.gpu.sm.11.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm11.contains.partition03",
+      "from": "chip.gpu.sm.11",
+      "to": "chip.gpu.sm.11.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm11.contains.partition04",
+      "from": "chip.gpu.sm.11",
+      "to": "chip.gpu.sm.11.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm12.contains.partition01",
+      "from": "chip.gpu.sm.12",
+      "to": "chip.gpu.sm.12.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm12.contains.partition02",
+      "from": "chip.gpu.sm.12",
+      "to": "chip.gpu.sm.12.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm12.contains.partition03",
+      "from": "chip.gpu.sm.12",
+      "to": "chip.gpu.sm.12.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm12.contains.partition04",
+      "from": "chip.gpu.sm.12",
+      "to": "chip.gpu.sm.12.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm13.contains.partition01",
+      "from": "chip.gpu.sm.13",
+      "to": "chip.gpu.sm.13.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm13.contains.partition02",
+      "from": "chip.gpu.sm.13",
+      "to": "chip.gpu.sm.13.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm13.contains.partition03",
+      "from": "chip.gpu.sm.13",
+      "to": "chip.gpu.sm.13.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm13.contains.partition04",
+      "from": "chip.gpu.sm.13",
+      "to": "chip.gpu.sm.13.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm14.contains.partition01",
+      "from": "chip.gpu.sm.14",
+      "to": "chip.gpu.sm.14.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm14.contains.partition02",
+      "from": "chip.gpu.sm.14",
+      "to": "chip.gpu.sm.14.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm14.contains.partition03",
+      "from": "chip.gpu.sm.14",
+      "to": "chip.gpu.sm.14.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm14.contains.partition04",
+      "from": "chip.gpu.sm.14",
+      "to": "chip.gpu.sm.14.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm15.contains.partition01",
+      "from": "chip.gpu.sm.15",
+      "to": "chip.gpu.sm.15.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm15.contains.partition02",
+      "from": "chip.gpu.sm.15",
+      "to": "chip.gpu.sm.15.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm15.contains.partition03",
+      "from": "chip.gpu.sm.15",
+      "to": "chip.gpu.sm.15.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm15.contains.partition04",
+      "from": "chip.gpu.sm.15",
+      "to": "chip.gpu.sm.15.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm16.contains.partition01",
+      "from": "chip.gpu.sm.16",
+      "to": "chip.gpu.sm.16.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm16.contains.partition02",
+      "from": "chip.gpu.sm.16",
+      "to": "chip.gpu.sm.16.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm16.contains.partition03",
+      "from": "chip.gpu.sm.16",
+      "to": "chip.gpu.sm.16.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm16.contains.partition04",
+      "from": "chip.gpu.sm.16",
+      "to": "chip.gpu.sm.16.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm17.contains.partition01",
+      "from": "chip.gpu.sm.17",
+      "to": "chip.gpu.sm.17.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm17.contains.partition02",
+      "from": "chip.gpu.sm.17",
+      "to": "chip.gpu.sm.17.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm17.contains.partition03",
+      "from": "chip.gpu.sm.17",
+      "to": "chip.gpu.sm.17.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm17.contains.partition04",
+      "from": "chip.gpu.sm.17",
+      "to": "chip.gpu.sm.17.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm18.contains.partition01",
+      "from": "chip.gpu.sm.18",
+      "to": "chip.gpu.sm.18.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm18.contains.partition02",
+      "from": "chip.gpu.sm.18",
+      "to": "chip.gpu.sm.18.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm18.contains.partition03",
+      "from": "chip.gpu.sm.18",
+      "to": "chip.gpu.sm.18.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm18.contains.partition04",
+      "from": "chip.gpu.sm.18",
+      "to": "chip.gpu.sm.18.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm19.contains.partition01",
+      "from": "chip.gpu.sm.19",
+      "to": "chip.gpu.sm.19.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm19.contains.partition02",
+      "from": "chip.gpu.sm.19",
+      "to": "chip.gpu.sm.19.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm19.contains.partition03",
+      "from": "chip.gpu.sm.19",
+      "to": "chip.gpu.sm.19.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm19.contains.partition04",
+      "from": "chip.gpu.sm.19",
+      "to": "chip.gpu.sm.19.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm20.contains.partition01",
+      "from": "chip.gpu.sm.20",
+      "to": "chip.gpu.sm.20.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm20.contains.partition02",
+      "from": "chip.gpu.sm.20",
+      "to": "chip.gpu.sm.20.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm20.contains.partition03",
+      "from": "chip.gpu.sm.20",
+      "to": "chip.gpu.sm.20.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm20.contains.partition04",
+      "from": "chip.gpu.sm.20",
+      "to": "chip.gpu.sm.20.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm21.contains.partition01",
+      "from": "chip.gpu.sm.21",
+      "to": "chip.gpu.sm.21.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm21.contains.partition02",
+      "from": "chip.gpu.sm.21",
+      "to": "chip.gpu.sm.21.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm21.contains.partition03",
+      "from": "chip.gpu.sm.21",
+      "to": "chip.gpu.sm.21.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm21.contains.partition04",
+      "from": "chip.gpu.sm.21",
+      "to": "chip.gpu.sm.21.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm22.contains.partition01",
+      "from": "chip.gpu.sm.22",
+      "to": "chip.gpu.sm.22.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm22.contains.partition02",
+      "from": "chip.gpu.sm.22",
+      "to": "chip.gpu.sm.22.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm22.contains.partition03",
+      "from": "chip.gpu.sm.22",
+      "to": "chip.gpu.sm.22.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm22.contains.partition04",
+      "from": "chip.gpu.sm.22",
+      "to": "chip.gpu.sm.22.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm23.contains.partition01",
+      "from": "chip.gpu.sm.23",
+      "to": "chip.gpu.sm.23.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm23.contains.partition02",
+      "from": "chip.gpu.sm.23",
+      "to": "chip.gpu.sm.23.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm23.contains.partition03",
+      "from": "chip.gpu.sm.23",
+      "to": "chip.gpu.sm.23.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm23.contains.partition04",
+      "from": "chip.gpu.sm.23",
+      "to": "chip.gpu.sm.23.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm24.contains.partition01",
+      "from": "chip.gpu.sm.24",
+      "to": "chip.gpu.sm.24.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm24.contains.partition02",
+      "from": "chip.gpu.sm.24",
+      "to": "chip.gpu.sm.24.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm24.contains.partition03",
+      "from": "chip.gpu.sm.24",
+      "to": "chip.gpu.sm.24.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm24.contains.partition04",
+      "from": "chip.gpu.sm.24",
+      "to": "chip.gpu.sm.24.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm25.contains.partition01",
+      "from": "chip.gpu.sm.25",
+      "to": "chip.gpu.sm.25.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm25.contains.partition02",
+      "from": "chip.gpu.sm.25",
+      "to": "chip.gpu.sm.25.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm25.contains.partition03",
+      "from": "chip.gpu.sm.25",
+      "to": "chip.gpu.sm.25.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm25.contains.partition04",
+      "from": "chip.gpu.sm.25",
+      "to": "chip.gpu.sm.25.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm26.contains.partition01",
+      "from": "chip.gpu.sm.26",
+      "to": "chip.gpu.sm.26.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm26.contains.partition02",
+      "from": "chip.gpu.sm.26",
+      "to": "chip.gpu.sm.26.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm26.contains.partition03",
+      "from": "chip.gpu.sm.26",
+      "to": "chip.gpu.sm.26.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm26.contains.partition04",
+      "from": "chip.gpu.sm.26",
+      "to": "chip.gpu.sm.26.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm27.contains.partition01",
+      "from": "chip.gpu.sm.27",
+      "to": "chip.gpu.sm.27.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm27.contains.partition02",
+      "from": "chip.gpu.sm.27",
+      "to": "chip.gpu.sm.27.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm27.contains.partition03",
+      "from": "chip.gpu.sm.27",
+      "to": "chip.gpu.sm.27.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm27.contains.partition04",
+      "from": "chip.gpu.sm.27",
+      "to": "chip.gpu.sm.27.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm28.contains.partition01",
+      "from": "chip.gpu.sm.28",
+      "to": "chip.gpu.sm.28.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm28.contains.partition02",
+      "from": "chip.gpu.sm.28",
+      "to": "chip.gpu.sm.28.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm28.contains.partition03",
+      "from": "chip.gpu.sm.28",
+      "to": "chip.gpu.sm.28.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm28.contains.partition04",
+      "from": "chip.gpu.sm.28",
+      "to": "chip.gpu.sm.28.partition.04",
       "type": "contains",
       "source_ids": [
         "src.nvidia.ampere.whitepaper"
