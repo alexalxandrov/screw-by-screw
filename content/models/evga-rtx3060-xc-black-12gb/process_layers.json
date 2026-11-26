@@ -73,8 +73,8 @@
           "ru": "Центры вентиляторов, кривизна/шаг/профиль лопастей, внутреннее устройство ступицы, точное число контуров и трассы трубок, шаг/число рёбер, размеры термопрокладок и тепловое сопротивление не подтверждены. В карточке товара с точным SKU визуально насчитывается восемь лопастей на вентилятор; детальная геометрия остаётся макетной."
         },
         {
-          "en": "The two heatpipe routes and 24 fin meshes are illustrative proxies. Their count and geometry are not service or manufacturing specifications.",
-          "ru": "Две трассы тепловых трубок и 24 сеточных ребра радиатора — условные макеты. Их количество и геометрия не являются сервисной или производственной спецификацией."
+          "en": "The six individual heatpipe run proxies are grouped into two source-described categories (four central GPU-contact runs and two side runs); they do not establish six distinct physical heatpipe loops. The 24 fin meshes are illustrative proxies; neither their count nor geometry is a manufacturing or service specification.",
+          "ru": "Шесть отдельных макетов проходов тепловых трубок разделены на две категории по описанию источника (четыре центральных прохода с контактом GPU и два боковых); это не доказывает наличие шести отдельных физических контуров. Двадцать четыре сеточных ребра — условные прокси; их количество и геометрия не являются производственной или сервисной спецификацией."
         },
         {
           "en": "Airflow particles are directional educational markers, not CFD fluid parcels, velocity vectors or temperature measurements.",
