@@ -10,6 +10,7 @@ The following already exists:
 - This branch adds optional, validated `identity_scope` and `model_kind` fields to the catalogue adapter. `exact_sku` requires a real part number; platform-family records can leave `part_number` empty. Existing catalogue records remain backward-compatible.
 - `src/data/catalog.js` validates categories, unique catalogue IDs, duplicate manufacturer/part-number pairs, model package IDs and safe relative `.sbsmodel` paths.
 - `src/viewer/ModelPackageLoader.js` validates the portable model package and its cross-file references before loading.
+- This branch generalizes the content validator's package-level geometry fidelity field to include measured, CAD, teardown-supported, photo-estimated, mixed and unknown states; a model is no longer forced to claim illustrative proxy geometry.
 - `src/main.js` has `fetchCatalogPackage()`, `openCatalogEntry()` and `applyPackageData()`; selected catalogue packages can be loaded through the shared package loader.
 - The catalogue UI already has category filtering and text search.
 
@@ -21,8 +22,7 @@ This is a useful starting point. The application is not yet fully model-agnostic
 2. **One category in production data:** `content/catalog/models.json` currently declares only `graphics_cards` and contains only the EVGA RTX 3060 entry.
 3. **RTX-specific modeling validator:** `tools/modeling/validate_blockout_package.py` contains fixed RTX 3060 model-ID and part-number constants.
 4. **RTX-specific Blender workflow:** `.github/workflows/blender-model-validation.yml` invokes the RTX 3060 generator and stages RTX 3060 artifacts by fixed filenames/paths.
-5. **Pilot-only geometry rule:** `tools/content/validate_model_package.py` currently insists the package geometry status be `illustrative_proxy_not_cad`. That is appropriate for the current blockout, but is too restrictive as a permanent rule for every future package.
-6. **No cross-package component references yet:** the package contract is self-contained. A PC package should be able to reference a separately versioned GPU/SSD/PSU package without copying its complete component graph or confusing a shared component definition with a physical instance.
+5. **No cross-package component references yet:** the package contract is self-contained. A PC package should be able to reference a separately versioned GPU/SSD/PSU package without copying its complete component graph or confusing a shared component definition with a physical instance.
 
 ## Target information architecture
 
