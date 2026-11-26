@@ -84,6 +84,7 @@ Screw by Screw — концепция публичной образовател�
 - [Semantic inventory export](docs/SEMANTIC_INVENTORY_EXPORT.md)
 - [Local learning progress](docs/LEARNING_PROGRESS.md)
 - [Pilot content package](content/models/evga-rtx3060-xc-black-12gb/README.md) — source claims, SHA-256 release manifest and bilingual learning data.
+- [Dell OptiPlex 5060 Tower research dossier](docs/OPTIPLEX_5060_RESEARCH.md) — manufacturer source register, motherboard callout map, interfaces, service scope and unknowns.
 
 ## Рабочее название
 
