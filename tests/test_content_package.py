@@ -295,7 +295,7 @@ class ContentPackageTests(unittest.TestCase):
         self.assertIn("Components: 313", report)
         self.assertIn("Relationships: 311", report)
         self.assertIn("Animation clips: 2", report)
-        self.assertEqual(len(package["claims"]["claims"]), 109)
+        self.assertEqual(len(package["claims"]["claims"]), 110)
         self.assertEqual(len(package["process_layers"]["process_layers"]), 3)
         power_layer = next(layer for layer in package["process_layers"]["process_layers"] if layer["id"] == "process.power.qualitative")
         self.assertEqual(len(power_layer["linked_component_ids"]), 12)
@@ -313,6 +313,8 @@ class ContentPackageTests(unittest.TestCase):
         self.assertEqual(claims["claim.cooling.fan.pwm.sample_operating_point"]["value"], 73)
         self.assertEqual(claims["claim.gpu.temperature.edge.sample_operating_point"]["value"], 68.1)
         self.assertEqual(claims["claim.gpu.temperature.hotspot.sample_operating_point"]["value"], 80.5)
+        self.assertEqual(claims["claim.gpu.frequency.peak.sample_operating_point"]["value"], 1905)
+        self.assertEqual(claims["claim.gpu.frequency.peak.sample_operating_point"]["confidence_class"], "measured")
         self.assertEqual(claims["claim.power.board_power.sample_operating_point"]["value"], 172.4)
 
         sm_instances = [item for item in components.values() if item["id"].startswith("chip.gpu.sm.") and item["id"] != "chip.gpu.sm.cluster" and item["id"].count(".") == 3]
