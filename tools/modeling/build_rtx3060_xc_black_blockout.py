@@ -45,6 +45,8 @@ HEATSINK_THICKNESS = 13.0
 FAN_FRAME_DEPTH = 3.0
 FAN_HUB_RADIUS = 13.0
 FAN_BLADE_DEPTH = 1.8
+PCB_CUTOUT_PROXY_SIZE = (18.0, 22.0)  # illustrative through-hole blockout; not measured
+PCB_CUTOUT_PROXY_CENTER = (176.0, 58.0)  # visual estimate only; not a BoardView coordinate
 
 STATUS = {
     "manufacturer_data": "manufacturer_data",
@@ -92,11 +94,17 @@ manifest = {
             "status": STATUS["illustrative"],
             "note": "Visual proxy count; exact blade count not confirmed.",
         },
+        "pcb_airflow_cutout_proxy": {
+            "value": {"length": PCB_CUTOUT_PROXY_SIZE[0], "height": PCB_CUTOUT_PROXY_SIZE[1]},
+            "status": STATUS["illustrative"],
+            "note": "Rounded rectangular Boolean through-hole placeholder. Dimensions and centre are modeling estimates only, not measurements or BoardView coordinates.",
+        },
     },
     "objects": [],
     "warnings": [
         "This is a visual blockout, not dimensionally complete CAD.",
         "Fan centres, blade count/profile, shroud outline, PCB outline, thickness and internal positions are illustrative.",
+        "The PCB airflow cutout is a rounded-rectangle through-hole proxy; its 18 x 22 mm blockout and centre are not measured and must not be treated as a PCB drawing.",
         "Fan ring diameters use approximate reviewer measurements as a visual guide, not a verified fan manufacturer drawing.",
         "Computed geometry bounds include protruding proxy components and must not be treated as the card's official thickness.",
         "No PCB revision, BoardView, schematic or exact mechanical CAD has been confirmed.",
@@ -1317,16 +1325,43 @@ def main():
         (5.0, 1.5, 5.0), MAT["connector"], controller_group, pcbcol,
     )
 
-    # A clearly marked area identifies the review-described PCB airflow cutout.
+    # LanOC describes a large PCB airflow cutout near the fan/card-end area.
+    # This Boolean aperture is a rounded-rectangle VISUAL PLACEHOLDER only.
+    # Its centre and 18 x 22 mm blockout dimensions are not measured and are not
+    # taken from a BoardView. The exact aperture boundary remains unknown.
+    cutout_center = (PCB_CUTOUT_PROXY_CENTER[0], half_y - PCB_THICKNESS / 2,
+                     PCB_CUTOUT_PROXY_CENTER[1])
+    bpy.ops.mesh.primitive_cube_add(size=1, location=cutout_center)
+    cutout_cutter = bpy.context.object
+    cutout_cutter.name = "TEMP | PCB airflow cutout Boolean cutter"
+    cutout_cutter.dimensions = (
+        PCB_CUTOUT_PROXY_SIZE[0],
+        PCB_THICKNESS + 2.0,
+        PCB_CUTOUT_PROXY_SIZE[1],
+    )
+    bpy.ops.object.transform_apply(location=False, rotation=False, scale=True)
+    bevel = cutout_cutter.modifiers.new("Rounded proxy corners", "BEVEL")
+    bevel.width = 2.5
+    bevel.segments = 5
+    bpy.context.view_layer.objects.active = cutout_cutter
+    bpy.ops.object.modifier_apply(modifier=bevel.name)
+
+    boolean = pcb.modifiers.new("Illustrative PCB airflow aperture", "BOOLEAN")
+    boolean.operation = "DIFFERENCE"
+    boolean.solver = "EXACT"
+    boolean.object = cutout_cutter
+    bpy.context.view_layer.objects.active = pcb
+    bpy.ops.object.modifier_apply(modifier=boolean.name)
+    bpy.data.objects.remove(cutout_cutter, do_unlink=True)
+
+    # Stable selection node for the cutout; geometry lives in the PCB mesh above.
     cutout_group = make_assembly(
-        "PCB airflow cutout area | proxy", "pcb.airflow.cutout",
-        (184.0, half_y - 1.0, 58.0), pcbcol, parent=pcb,
+        "PCB airflow aperture | rounded proxy; size unmeasured", "pcb.airflow.cutout",
+        cutout_center, pcbcol, parent=pcb,
+        evidence=STATUS["teardown_supported"], geometry="illustrative_proxy",
     )
-    make_detail_box(
-        "PCB airflow cutout marker",
-        (184.0, half_y - 1.2, 58.0), (10.0, 0.35, 15.0),
-        MAT["connector"], cutout_group, pcbcol,
-    )
+    cutout_group["sbs_proxy_aperture_size_mm"] = list(PCB_CUTOUT_PROXY_SIZE)
+    cutout_group["sbs_proxy_aperture_dimensions_measured"] = False
 
     # Eight socket recesses are shown as a generic 8-pin connector teaching aid.
     # This does not document pin assignment, current rating or electrical routing.
