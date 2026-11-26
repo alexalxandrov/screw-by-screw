@@ -118,6 +118,34 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: Build viewer with generated GLB
         run: npm run build
+      - name: Verify standalone HTML embeds the default model package
+        run: |
+          node --input-type=module <<'NODE'
+          import { readFile } from "node:fs/promises";
+          const html = await readFile("index.html", "utf8");
+          const catalog = JSON.parse(await readFile("content/catalog/models.json", "utf8"));
+          const marker = "globalThis.SBS_CATALOG_PACKAGE_DATA_URLS = ";
+          const markerIndex = html.indexOf(marker);
+          if (markerIndex < 0) throw new Error("Standalone launcher has no embedded catalogue package map");
+          const jsonStart = markerIndex + marker.length;
+          const jsonEnd = html.indexOf("</script>", jsonStart);
+          if (jsonEnd < 0) throw new Error("Embedded catalogue package map is not closed");
+          const rawMap = html.slice(jsonStart, jsonEnd).trim().replace(/;$/, "");
+          const packages = JSON.parse(rawMap);
+          const defaults = catalog.models.filter((model) => model.default_package);
+          if (defaults.length === 0) throw new Error("Catalogue has no default model package");
+          for (const model of defaults) {
+            const dataUrl = packages[model.id];
+            if (typeof dataUrl !== "string" || !dataUrl.startsWith("data:application/octet-stream;base64,")) {
+              throw new Error("Standalone launcher is missing the default package for " + model.id);
+            }
+          }
+          console.log(JSON.stringify({
+            defaultPackagesEmbedded: defaults.map((model) => model.id),
+            packageCount: Object.keys(packages).length,
+            selfContained: true
+          }, null, 2));
+          NODE
       - name: Test generated GLB inside the viewer
         run: npm run test:e2e:model
       - name: Test real .sbsmodel import in browser
