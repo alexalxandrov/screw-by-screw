@@ -11,6 +11,13 @@
         "en": "Graphics cards",
         "ru": "Видеокарты"
       }
+    },
+    {
+      "id": "personal_computers",
+      "label": {
+        "en": "Personal computers",
+        "ru": "Персональные компьютеры"
+      }
     }
   ],
   "models": [
@@ -42,6 +49,36 @@
       "geometry_status": "illustrative_proxy_not_cad",
       "package_version": "0.1.0",
       "package_path": "models/rtx3060_xc_black_v05.sbsmodel"
+    },
+    {
+      "id": "computer.ibm.5150.1981",
+      "default_package": false,
+      "package_model_id": "computer.ibm.5150.1981",
+      "manufacturer": "IBM",
+      "name": {
+        "en": "IBM Personal Computer 5150(1981)",
+        "ru": "IBM Personal Computer 5150 (1981)"
+      },
+      "part_number": "5150",
+      "category_id": "personal_computers",
+      "summary": {
+        "en": "Launch-era 16 KB system-unit reference. Empty drive bays; five empty 8-bit expansion slots.",
+        "ru": "Эталонный сифтемный блой пероде запуска: 16 КБ ОЕУ, пустые отсеки дисководов и пять свободных 8-битных слотов."
+      },
+      "tags": [
+        "IBM",
+        "5150",
+        "1981",
+        "PC",
+        "8088",
+        "vintage computer",
+        "system unit",
+        "8-bit I/O channel"
+      ],
+      "status": "research_blockout",
+      "geometry_status": "illustrative_proxy_not_cad",
+      "package_version": "0.1.0-draft",
+      "package_path": "models/ibm_pc_5150_1981.sbsmodel"
     }
   ]
 }
