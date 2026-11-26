@@ -1136,6 +1136,105 @@
       "source_ids": [
         "src.thefpsreview.exact_sku"
       ]
+    },
+    {
+      "id": "rel.fan.1.contains.mount_screw.01",
+      "from": "assembly.fan.1",
+      "to": "fastener.fan.1.01",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.fan.1.contains.mount_screw.02",
+      "from": "assembly.fan.1",
+      "to": "fastener.fan.1.02",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.fan.1.contains.mount_screw.03",
+      "from": "assembly.fan.1",
+      "to": "fastener.fan.1.03",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.fan.2.contains.mount_screw.01",
+      "from": "assembly.fan.2",
+      "to": "fastener.fan.2.01",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.fan.2.contains.mount_screw.02",
+      "from": "assembly.fan.2",
+      "to": "fastener.fan.2.02",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.fan.2.contains.mount_screw.03",
+      "from": "assembly.fan.2",
+      "to": "fastener.fan.2.03",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.shunts.contains.8pin",
+      "from": "power.shunt.cluster",
+      "to": "power.shunt.8pin",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.shunts.contains.pcie_slot",
+      "from": "power.shunt.cluster",
+      "to": "power.shunt.pcie_slot",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.power_stage.contains.input_fuse",
+      "from": "assembly.power_stage",
+      "to": "power.fuse.input",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.thermal_interface.contains.vrm_copper_contact",
+      "from": "cooling.thermal_interface",
+      "to": "cooling.vrm.copper_contact",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.mosfet_row.cooled_by.copper_plate",
+      "from": "power.switching_device.cluster",
+      "to": "cooling.vrm.copper_contact",
+      "type": "cooled_by",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
     }
   ]
 }
