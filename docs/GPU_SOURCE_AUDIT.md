@@ -379,3 +379,14 @@ This is a distinct catalogue title from the previously indexed **EVGA232 / PG190
 The string **R10** must not be interpreted as a confirmed PCB revision, and the presence of **RTX3060** in the filename is not evidence that the file describes EVGA 12G-P5-3655-KR. It may describe another EVGA232 board population, an RTX 3070 variant, or a multi-model reference design. Do not derive phase counts, controller identities, nets, pinouts, component values, board coordinates or geometry from this listing.
 
 Status: **unverified schematic catalogue lead only**. Keep the selected card's PCB revision unknown until the physical board identifier and the schematic title block are both correlated to an exact 12G-P5-3655-KR sample.
+
+## 25. Hardwareluxx RTX 3060 XC Gaming — variant exclusion
+
+A Russian-language Hardwareluxx review titled **EVGA GeForce RTX 3060 XC Gaming** documents a board with five reported power phases, an installed rear backplate, a narrow copper power-component plate, and two heatpipes through its copper GPU/memory base:
+https://www.hardwareluxx.ru/index.php/artikel/hardware/grafikkarten/51282-test-i-obzor-evga-geforce-rtx-3060-xc-gaming-kompaktnaya-i-bystraya-videokarta.html?start=2
+
+The same review's specification page lists an 1882 MHz boost clock and a configurable power limit up to 190 W. Its product name does **not** say XC BLACK and the review does not expose a retail part number in the inspected text. This is materially different from the selected 12G-P5-3655-KR evidence set: EVGA's target-SKU specification lists a 1777 MHz boost clock and 170 W, while exact-XC-BLACK review/teardown material shows the exposed rear PCB without a backplate.
+
+This article is retained as a **related EVGA RTX 3060 XC variant reference only**. The five-phase count, backplate, two-heatpipe description, 1882 MHz boost and 190 W upper power-limit figure must not be copied into the 12G-P5-3655-KR package or Blender reconstruction. The exact retail P/N and PCB revision of the Hardwareluxx sample are not established by its article text; do not guess that it is a particular suffix based only on appearance or clock values.
+
+This cross-check reinforces the project's strict SKU boundary: family resemblance does not establish shared PCB population, cooler assembly, service parts or electrical topology.
