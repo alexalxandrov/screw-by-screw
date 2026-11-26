@@ -1,5 +1,7 @@
 # Dell OptiPlex 5060 Tower — PC model research baseline
 
+> **Historical baseline:** this document records the initial v0.1 family-research snapshot. The current package is v0.2.0 and its authoritative coverage, callout mapping, sources and fidelity limits are maintained in [OPTIPLEX_5060_RESEARCH.md](OPTIPLEX_5060_RESEARCH.md). The older 67-node / 68-relationship figures below describe the first snapshot, not the current package.
+
 **Decision:** use the Dell OptiPlex 5060 Tower (MT) as the first reference desktop-computer platform for Screw by Screw.
 
 **Research status:** documentary baseline established; exact factory configuration and physical sample are not yet frozen. This document is not a claim that every optional device is fitted to one retail unit.
