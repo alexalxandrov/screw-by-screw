@@ -422,7 +422,10 @@
           48
         ],
         "material": 3
-      }
+      },
+      "manufacturer_callout_numbers": [
+        10
+      ]
     },
     {
       "id": "motherboard.dimm.1",
@@ -455,7 +458,10 @@
           7
         ],
         "material": 3
-      }
+      },
+      "manufacturer_callout_numbers": [
+        13
+      ]
     },
     {
       "id": "motherboard.dimm.2",
@@ -488,7 +494,10 @@
           7
         ],
         "material": 3
-      }
+      },
+      "manufacturer_callout_numbers": [
+        13
+      ]
     },
     {
       "id": "motherboard.dimm.3",
@@ -521,7 +530,10 @@
           7
         ],
         "material": 3
-      }
+      },
+      "manufacturer_callout_numbers": [
+        13
+      ]
     },
     {
       "id": "motherboard.dimm.4",
@@ -554,7 +566,10 @@
           7
         ],
         "material": 3
-      }
+      },
+      "manufacturer_callout_numbers": [
+        13
+      ]
     },
     {
       "id": "motherboard.pcie.x16",
@@ -587,7 +602,10 @@
           7
         ],
         "material": 3
-      }
+      },
+      "manufacturer_callout_numbers": [
+        3
+      ]
     },
     {
       "id": "motherboard.pcie.x1.1",
@@ -620,7 +638,10 @@
           6
         ],
         "material": 3
-      }
+      },
+      "manufacturer_callout_numbers": [
+        4
+      ]
     },
     {
       "id": "motherboard.pcie.x1.2",
@@ -653,7 +674,10 @@
           6
         ],
         "material": 3
-      }
+      },
+      "manufacturer_callout_numbers": [
+        2
+      ]
     },
     {
       "id": "motherboard.m2",
@@ -687,7 +711,10 @@
           7
         ],
         "material": 3
-      }
+      },
+      "manufacturer_callout_numbers": [
+        16
+      ]
     },
     {
       "id": "motherboard.sata.1",
@@ -721,7 +748,10 @@
           12
         ],
         "material": 3
-      }
+      },
+      "manufacturer_callout_numbers": [
+        17
+      ]
     },
     {
       "id": "motherboard.sata.2",
@@ -755,7 +785,10 @@
           12
         ],
         "material": 3
-      }
+      },
+      "manufacturer_callout_numbers": [
+        18
+      ]
     },
     {
       "id": "motherboard.sata.3",
@@ -789,7 +822,10 @@
           12
         ],
         "material": 3
-      }
+      },
+      "manufacturer_callout_numbers": [
+        20
+      ]
     },
     {
       "id": "motherboard.sata.4",
@@ -823,7 +859,10 @@
           12
         ],
         "material": 3
-      }
+      },
+      "manufacturer_callout_numbers": [
+        21
+      ]
     },
     {
       "id": "motherboard.system_power",
@@ -856,7 +895,10 @@
           24
         ],
         "material": 3
-      }
+      },
+      "manufacturer_callout_numbers": [
+        22
+      ]
     },
     {
       "id": "motherboard.cpu_power",
@@ -889,7 +931,10 @@
           18
         ],
         "material": 3
-      }
+      },
+      "manufacturer_callout_numbers": [
+        11
+      ]
     },
     {
       "id": "motherboard.fan_header",
@@ -922,7 +967,10 @@
           9
         ],
         "material": 3
-      }
+      },
+      "manufacturer_callout_numbers": [
+        8
+      ]
     },
     {
       "id": "motherboard.coin_cell",
@@ -936,11 +984,12 @@
       "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.dell.5060.service",
-        "src.dell.5060.setup"
+        "src.dell.5060.setup",
+        "src.dell.5060.boardlayout"
       ],
       "description": {
-        "en": "Family-level proxy component; exact part identity and placement require confirmation.",
-        "ru": "Макетный компонент уровня семейства; точную деталь и расположение требуется подтвердить."
+        "en": "Dell motherboard callout 25: RTC coin-cell battery. Exact fitted battery manufacturer, chemistry, capacity and date code are not identified by this family package.",
+        "ru": "Обозначение Dell №25: батарейка RTC. Производитель, химический тип, ёмкость и дата выпуска установленной батарейки в пакете семейства не определены."
       },
       "visual_proxy": {
         "kind": "box",
@@ -955,7 +1004,10 @@
           20
         ],
         "material": 4
-      }
+      },
+      "manufacturer_callout_numbers": [
+        25
+      ]
     },
     {
       "id": "cooling.assembly",
@@ -2157,7 +2209,10 @@
       "description": {
         "en": "Dell callout 1: full-length x16 mechanical connector wired as PCIe x4 Revision 3.0.",
         "ru": "Обозначение Dell №1: разъём механической длины x16, электрически подключённый как PCIe x4 Revision 3.0."
-      }
+      },
+      "manufacturer_callout_numbers": [
+        1
+      ]
     },
     {
       "id": "motherboard.m2.wlan",
@@ -2176,7 +2231,10 @@
       "description": {
         "en": "Dell identifies a separate M.2 2230 WLAN connector. Supported module interfaces depend on CNVi or USB 2.0/PCIe module type; no module is populated in this reference.",
         "ru": "Dell обозначает отдельный разъём M.2 2230 WLAN. Поддержка зависит от типа модуля CNVi либо USB 2.0/PCIe; модуль в эталонной модели не установлен."
-      }
+      },
+      "manufacturer_callout_numbers": [
+        24
+      ]
     },
     {
       "id": "motherboard.cpu_fan_header",
@@ -2195,7 +2253,10 @@
       "description": {
         "en": "Dell callout 12: CPU cooler fan connector. Exact pinout and cable geometry are not reconstructed.",
         "ru": "Обозначение Dell №12: разъём вентилятора кулера CPU. Распиновка и геометрия кабеля не реконструированы."
-      }
+      },
+      "manufacturer_callout_numbers": [
+        12
+      ]
     },
     {
       "id": "motherboard.intrusion_switch_header",
@@ -2214,7 +2275,10 @@
       "description": {
         "en": "Dell callout 9: chassis-intrusion switch connector; the service procedure documents disconnecting this cable.",
         "ru": "Обозначение Dell №9: разъём датчика вскрытия корпуса; сервисная процедура документирует отключение этого кабеля."
-      }
+      },
+      "manufacturer_callout_numbers": [
+        9
+      ]
     },
     {
       "id": "motherboard.sd_reader_header",
@@ -2233,7 +2297,10 @@
       "description": {
         "en": "Dell callout 14: internal connector for the optional SD card reader.",
         "ru": "Обозначение Dell №14: внутренний разъём опционального картридера SD."
-      }
+      },
+      "manufacturer_callout_numbers": [
+        14
+      ]
     },
     {
       "id": "motherboard.speaker_header",
@@ -2252,7 +2319,10 @@
       "description": {
         "en": "Dell callout 19: internal speaker connector. Connector pinout and speaker waveform are not modeled.",
         "ru": "Обозначение Dell №19: разъём внутреннего динамика. Распиновка и форма сигнала не моделируются."
-      }
+      },
+      "manufacturer_callout_numbers": [
+        19
+      ]
     },
     {
       "id": "motherboard.power_switch_header",
@@ -2271,7 +2341,10 @@
       "description": {
         "en": "Dell callout 15: power-switch connector; the front power button is represented separately.",
         "ru": "Обозначение Dell №15: разъём кнопки питания; сама передняя кнопка представлена отдельно."
-      }
+      },
+      "manufacturer_callout_numbers": [
+        15
+      ]
     },
     {
       "id": "motherboard.sata_power_header",
@@ -2290,7 +2363,10 @@
       "description": {
         "en": "Dell callout 23: SATA power connector on the system board. The harness path is not drawn.",
         "ru": "Обозначение Dell №23: разъём питания SATA на системной плате. Трасса жгута не отображается."
-      }
+      },
+      "manufacturer_callout_numbers": [
+        23
+      ]
     },
     {
       "id": "motherboard.clear_cmos_jumper",
@@ -2309,7 +2385,10 @@
       "description": {
         "en": "Dell callout 26: service jumper with CMOS-clear, password-clear and service-mode functions. Exact jumper cap state is unknown.",
         "ru": "Обозначение Dell №26: сервисная перемычка для сброса CMOS, пароля и сервисного режима. Положение колпачка неизвестно."
-      }
+      },
+      "manufacturer_callout_numbers": [
+        26
+      ]
     },
     {
       "id": "motherboard.typec_header.optional",
@@ -2328,7 +2407,10 @@
       "description": {
         "en": "Dell callout 5: optional Type-C connector/header for a configuration-specific rear I/O module; module presence is unknown.",
         "ru": "Обозначение Dell №5: разъём опционального модуля Type-C для конфигурационной панели заднего I/O; наличие модуля неизвестно."
-      }
+      },
+      "manufacturer_callout_numbers": [
+        5
+      ]
     },
     {
       "id": "motherboard.video_header.optional",
@@ -2347,7 +2429,10 @@
       "description": {
         "en": "Dell callout 6: optional HDMI / DisplayPort / VGA connector module location, dependent on configuration.",
         "ru": "Обозначение Dell №6: место опционального модуля HDMI / DisplayPort / VGA, зависящее от комплектации."
-      }
+      },
+      "manufacturer_callout_numbers": [
+        6
+      ]
     },
     {
       "id": "motherboard.ps2_serial_header.optional",
@@ -2366,7 +2451,10 @@
       "description": {
         "en": "Dell callout 7: optional PS/2 or serial connector module location, configuration-dependent.",
         "ru": "Обозначение Dell №7: место опционального модуля PS/2 или последовательного порта, зависит от комплектации."
-      }
+      },
+      "manufacturer_callout_numbers": [
+        7
+      ]
     },
     {
       "id": "storage.drive25.optional",
