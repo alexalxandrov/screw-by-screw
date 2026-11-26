@@ -1591,6 +1591,170 @@
           ]
         }
       }
+    },
+    {
+      "id": "process.gpu.video.codec",
+      "type": "video_codec",
+      "title": {
+        "en": "Dedicated video encode and decode engines",
+        "ru": "Выделенные блоки видеокодирования и декодирования"
+      },
+      "mode": "logical_architecture",
+      "linked_component_ids": [
+        "pcb.connector.pcie",
+        "chip.gpu.ga106",
+        "chip.gpu.nvdec",
+        "chip.memory.gddr6.bus",
+        "chip.gpu.sm.cluster",
+        "chip.gpu.nvenc"
+      ],
+      "description": {
+        "en": "The desktop GeForce RTX 3060 uses separate fixed-function media engines: one 5th-generation NVDEC for decoding and one 7th-generation NVENC for encoding. NVIDIA's matrix lists H.264 and HEVC encode/decode support, AV1 decode support and no AV1 encode support for this generation. Video frames may be passed through GPU memory and optional shader/compute work before encoding, but this map does not assert an internal memory route, copy-engine path, latency, throughput, concurrency limit or codec-profile guarantee beyond the source matrix.",
+        "ru": "В настольной GeForce RTX 3060 используются отдельные специализированные медиа-блоки: один NVDEC 5-го поколения для декодирования и один NVENC 7-го поколения для кодирования. Матрица NVIDIA указывает кодирование и декодирование H.264/HEVC, декодирование AV1 и отсутствие AV1-кодирования для этого поколения. Видеокадры могут проходить через память GPU и дополнительные шейдерные/вычислительные операции до кодирования, но схема не утверждает внутреннюю разводку памяти, путь copy engine, задержки, пропускную способность, ограничения параллельности или поддержку профилей сверх матрицы источника."
+      },
+      "assumptions": [
+        {
+          "en": "NVENC/NVDEC generation and engine counts are from NVIDIA's GeForce RTX 3060 desktop-family support matrix, not an EVGA board-revision schematic.",
+          "ru": "Поколения NVENC/NVDEC и количество блоков взяты из матрицы NVIDIA для настольной GeForce RTX 3060, а не из схемы конкретной ревизии платы EVGA."
+        },
+        {
+          "en": "NVENC and NVDEC are dedicated media engines separate from CUDA cores; no physical coordinates, die floorplan or transistor-level implementation is reconstructed.",
+          "ru": "NVENC и NVDEC — выделенные медиа-блоки, отдельные от ядер CUDA; физические координаты, топология кристалла или транзисторная реализация не восстанавливаются."
+        },
+        {
+          "en": "H.264 and HEVC support is profile/format dependent. The NVIDIA matrix must be consulted for chroma subsampling, bit depth and other restrictions.",
+          "ru": "Поддержка H.264 и HEVC зависит от профиля и формата. Ограничения по цветовой субдискретизации, глубине цвета и другим параметрам нужно брать из матрицы NVIDIA."
+        },
+        {
+          "en": "AV1 is supported for decoding on the RTX 3060 NVDEC, but AV1 encoding is not listed for its 7th-generation NVENC.",
+          "ru": "RTX 3060 NVDEC поддерживает декодирование AV1, но AV1-кодирование не указано для NVENC 7-го поколения."
+        },
+        {
+          "en": "No codec throughput, bitrate, latency, power, concurrent-session or thermal simulation is implemented.",
+          "ru": "Не моделируются скорость обработки кодеков, битрейт, задержка, энергопотребление, число одновременных сессий или тепловой режим."
+        }
+      ],
+      "source_ids": [
+        "src.nvidia.video_encode_decode_matrix",
+        "src.nvidia.video_codec_sdk"
+      ],
+      "visualization": {
+        "kind": "selectable_workload_groups",
+        "not_a_simulation": true,
+        "diagram": {
+          "badge": {
+            "en": "DEDICATED MEDIA ENGINES · LOGICAL MAP · NOT INTERNAL ROUTING",
+            "ru": "ВЫДЕЛЕННЫЕ МЕДИА-БЛОКИ · ЛОГИЧЕСКАЯ КАРТА · НЕ ВНУТРЕННЯЯ РАЗВОДКА"
+          },
+          "groups": [
+            {
+              "id": "decode-input",
+              "title": {
+                "en": "1 · Compressed input and decode",
+                "ru": "1 · Сжатый поток и декодирование"
+              },
+              "summary": {
+                "en": "Compressed input arrives from the host/application and is handled by the dedicated NVDEC engine. This is a functional overview, not a bus-routing diagram.",
+                "ru": "Сжатый поток поступает от хоста/приложения и обрабатывается выделенным блоком NVDEC. Это функциональная схема, а не разводка шин."
+              },
+              "nodes": [
+                {
+                  "component_id": "pcb.connector.pcie",
+                  "title": {
+                    "en": "PCI Express host interface",
+                    "ru": "Интерфейс PCI Express"
+                  },
+                  "metric": {
+                    "en": "Host-facing data endpoint",
+                    "ru": "Внешний интерфейс передачи данных"
+                  }
+                },
+                {
+                  "component_id": "chip.gpu.ga106",
+                  "title": {
+                    "en": "GA106 media-capable GPU",
+                    "ru": "GPU GA106 с медиаблоками"
+                  },
+                  "metric": {
+                    "en": "GPU architecture context",
+                    "ru": "Архитектурный контекст GPU"
+                  }
+                },
+                {
+                  "component_id": "chip.gpu.nvdec",
+                  "title": {
+                    "en": "NVDEC 5th-generation decoder",
+                    "ru": "Декодер NVDEC 5-го поколения"
+                  },
+                  "metric": {
+                    "en": "1 dedicated decoder · AV1 decode supported",
+                    "ru": "1 выделенный декодер · декодирование AV1 поддерживается"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "frame-memory-and-compute",
+              "title": {
+                "en": "2 · Frame surfaces and optional GPU processing",
+                "ru": "2 · Поверхности кадров и дополнительные вычисления GPU"
+              },
+              "summary": {
+                "en": "Decoded surfaces may reside in GPU memory and can be consumed by shader/compute workloads. The exact surface-copy and cache path is not drawn.",
+                "ru": "Декодированные поверхности могут размещаться в памяти GPU и использоваться шейдерными/вычислительными задачами. Точный путь копирования поверхностей и кэшей не показан."
+              },
+              "nodes": [
+                {
+                  "component_id": "chip.memory.gddr6.bus",
+                  "title": {
+                    "en": "GDDR6 memory interface",
+                    "ru": "Интерфейс памяти GDDR6"
+                  },
+                  "metric": {
+                    "en": "192-bit memory interface",
+                    "ru": "Интерфейс памяти 192 бит"
+                  }
+                },
+                {
+                  "component_id": "chip.gpu.sm.cluster",
+                  "title": {
+                    "en": "Streaming multiprocessor cluster",
+                    "ru": "Кластер потоковых мультипроцессоров"
+                  },
+                  "metric": {
+                    "en": "Optional CUDA / shader processing",
+                    "ru": "Дополнительная обработка CUDA / шейдерами"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "encode-output",
+              "title": {
+                "en": "3 · Hardware encode",
+                "ru": "3 · Аппаратное кодирование"
+              },
+              "summary": {
+                "en": "The dedicated NVENC engine encodes supported output formats. RTX 3060's 7th-generation NVENC does not provide AV1 encoding.",
+                "ru": "Выделенный блок NVENC кодирует поддерживаемые выходные форматы. NVENC 7-го поколения в RTX 3060 не поддерживает кодирование AV1."
+              },
+              "nodes": [
+                {
+                  "component_id": "chip.gpu.nvenc",
+                  "title": {
+                    "en": "NVENC 7th-generation encoder",
+                    "ru": "Кодировщик NVENC 7-го поколения"
+                  },
+                  "metric": {
+                    "en": "1 dedicated encoder · H.264/HEVC encode",
+                    "ru": "1 выделенный кодировщик · кодирование H.264/HEVC"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
     }
   ]
 }

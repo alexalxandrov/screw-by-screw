@@ -1344,6 +1344,138 @@
         "src.tomshardware.teardown"
       ],
       "notes": "Tom's Hardware explicitly describes two unused memory locations on the teardown PCB. The reviewed sample is linked to retail P/N 12G-P5-3655-KR by the rear-PCB identity photograph in the same review. This count records visibly unpopulated positions only; it does not establish electrical routing, footprint compatibility, or a valid memory upgrade path."
+    },
+    {
+      "id": "claim.gpu.nvenc.count",
+      "subject_id": "chip.gpu.nvenc",
+      "predicate": "dedicated_encoder_count",
+      "value": 1,
+      "unit": "engine",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.video_encode_decode_matrix"
+      ],
+      "notes": "Transcribed from the NVIDIA GeForce RTX 3060 desktop row of the Video Encode and Decode Support Matrix. Codec support remains subject to the matrix's profile, chroma-format and bit-depth columns."
+    },
+    {
+      "id": "claim.gpu.nvenc.generation",
+      "subject_id": "chip.gpu.nvenc",
+      "predicate": "generation",
+      "value": "7th Generation",
+      "unit": null,
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.video_encode_decode_matrix"
+      ],
+      "notes": "Transcribed from the NVIDIA GeForce RTX 3060 desktop row of the Video Encode and Decode Support Matrix. Codec support remains subject to the matrix's profile, chroma-format and bit-depth columns."
+    },
+    {
+      "id": "claim.gpu.nvenc.h264_encode",
+      "subject_id": "chip.gpu.nvenc",
+      "predicate": "h264_encoding_supported",
+      "value": true,
+      "unit": null,
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.video_encode_decode_matrix"
+      ],
+      "notes": "Transcribed from the NVIDIA GeForce RTX 3060 desktop row of the Video Encode and Decode Support Matrix. Codec support remains subject to the matrix's profile, chroma-format and bit-depth columns."
+    },
+    {
+      "id": "claim.gpu.nvenc.hevc_encode",
+      "subject_id": "chip.gpu.nvenc",
+      "predicate": "hevc_encoding_supported",
+      "value": true,
+      "unit": null,
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.video_encode_decode_matrix"
+      ],
+      "notes": "Transcribed from the NVIDIA GeForce RTX 3060 desktop row of the Video Encode and Decode Support Matrix. Codec support remains subject to the matrix's profile, chroma-format and bit-depth columns."
+    },
+    {
+      "id": "claim.gpu.nvenc.av1_encode",
+      "subject_id": "chip.gpu.nvenc",
+      "predicate": "av1_encoding_supported",
+      "value": false,
+      "unit": null,
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.video_encode_decode_matrix"
+      ],
+      "notes": "Transcribed from the NVIDIA GeForce RTX 3060 desktop row of the Video Encode and Decode Support Matrix. Codec support remains subject to the matrix's profile, chroma-format and bit-depth columns."
+    },
+    {
+      "id": "claim.gpu.nvdec.count",
+      "subject_id": "chip.gpu.nvdec",
+      "predicate": "dedicated_decoder_count",
+      "value": 1,
+      "unit": "engine",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.video_encode_decode_matrix"
+      ],
+      "notes": "Transcribed from the NVIDIA GeForce RTX 3060 desktop row of the Video Encode and Decode Support Matrix. Codec support remains subject to the matrix's profile, chroma-format and bit-depth columns."
+    },
+    {
+      "id": "claim.gpu.nvdec.generation",
+      "subject_id": "chip.gpu.nvdec",
+      "predicate": "generation",
+      "value": "5th Generation",
+      "unit": null,
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.video_encode_decode_matrix"
+      ],
+      "notes": "Transcribed from the NVIDIA GeForce RTX 3060 desktop row of the Video Encode and Decode Support Matrix. Codec support remains subject to the matrix's profile, chroma-format and bit-depth columns."
+    },
+    {
+      "id": "claim.gpu.nvdec.h264_decode",
+      "subject_id": "chip.gpu.nvdec",
+      "predicate": "h264_decoding_supported",
+      "value": true,
+      "unit": null,
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.video_encode_decode_matrix"
+      ],
+      "notes": "Transcribed from the NVIDIA GeForce RTX 3060 desktop row of the Video Encode and Decode Support Matrix. Codec support remains subject to the matrix's profile, chroma-format and bit-depth columns."
+    },
+    {
+      "id": "claim.gpu.nvdec.hevc_decode",
+      "subject_id": "chip.gpu.nvdec",
+      "predicate": "hevc_decoding_supported",
+      "value": true,
+      "unit": null,
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.video_encode_decode_matrix"
+      ],
+      "notes": "Transcribed from the NVIDIA GeForce RTX 3060 desktop row of the Video Encode and Decode Support Matrix. Codec support remains subject to the matrix's profile, chroma-format and bit-depth columns."
+    },
+    {
+      "id": "claim.gpu.nvdec.vp9_decode",
+      "subject_id": "chip.gpu.nvdec",
+      "predicate": "vp9_decoding_supported",
+      "value": true,
+      "unit": null,
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.video_encode_decode_matrix"
+      ],
+      "notes": "Transcribed from the NVIDIA GeForce RTX 3060 desktop row of the Video Encode and Decode Support Matrix. Codec support remains subject to the matrix's profile, chroma-format and bit-depth columns."
+    },
+    {
+      "id": "claim.gpu.nvdec.av1_decode",
+      "subject_id": "chip.gpu.nvdec",
+      "predicate": "av1_decoding_supported",
+      "value": true,
+      "unit": null,
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.video_encode_decode_matrix"
+      ],
+      "notes": "Transcribed from the NVIDIA GeForce RTX 3060 desktop row of the Video Encode and Decode Support Matrix. Codec support remains subject to the matrix's profile, chroma-format and bit-depth columns."
     }
   ]
 }

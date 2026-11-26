@@ -340,6 +340,24 @@
       "type": "product_name_review_conflicting_fan_dimension",
       "applicability": "Article names the EVGA RTX 3060 XC BLACK GAMING and reports two 80 mm fans, but the accessible page text does not identify retail P/N 12G-P5-3655-KR. The nominal 80 mm fan statement is not reconciled with LanOC's approximate 90 mm opening / 85 mm impeller measurements. Treat it as a conflicting measurement convention or variant observation only, not an OEM fan drawing or basis to resize this exact-SKU model.",
       "license_status": "third_party_copyright_no_reuse_permission"
+    },
+    {
+      "id": "src.nvidia.video_encode_decode_matrix",
+      "title": "NVIDIA Video Encode and Decode Support Matrix — GeForce RTX 3060",
+      "publisher": "NVIDIA Developer",
+      "url": "https://developer.nvidia.com/video-encode-decode-support-matrix",
+      "type": "manufacturer_specification",
+      "applicability": "GeForce RTX 3060 desktop / Ampere family matrix: one 7th-generation NVENC and one 5th-generation NVDEC, with codec capability columns. GPU-family functionality only; not a board-revision schematic or exact PCB layout.",
+      "license_status": "redistribution_not_cleared"
+    },
+    {
+      "id": "src.nvidia.video_codec_sdk",
+      "title": "NVIDIA Video Codec SDK — hardware-based video encoder and decoder",
+      "publisher": "NVIDIA Developer",
+      "url": "https://developer.nvidia.com/video-codec-sdk",
+      "type": "manufacturer_specification",
+      "applicability": "NVIDIA documentation describes NVENC and NVDEC as dedicated hardware video encode/decode engines separate from CUDA cores. General engine role only; no GA106 die coordinates or board routing.",
+      "license_status": "redistribution_not_cleared"
     }
   ]
 }

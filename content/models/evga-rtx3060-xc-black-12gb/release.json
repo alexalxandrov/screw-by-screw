@@ -12,19 +12,19 @@
     },
     {
       "path": "sources.json",
-      "sha256": "c2a7e54d6f1dd49380cec465659b946a64ef9b32ed93aa5a69fed4353e19a73a"
+      "sha256": "d6529c5af80e6ed64b8aa1b5bb08201a3e1c5c977dbe51b552694231ffbc72a2"
     },
     {
       "path": "components.json",
-      "sha256": "17ee9cd204ec5f55786af7b1e4ee2e90b3d22b7ac422cc4eb6c5bcca96678eff"
+      "sha256": "05bb65b4fe67cdd3617d2d17f29e61a29b478f33f7bc0c98db70623b5c96d927"
     },
     {
       "path": "relationships.json",
-      "sha256": "a214b066d325852097c081ae5a66c3ca1f59b04b51ae322feb825b43d280e0b8"
+      "sha256": "443bc260bc489e46db0ace4ad4874e0f5b619ac2e35a09bba1661a68c64f9075"
     },
     {
       "path": "process_layers.json",
-      "sha256": "183e186fae538574093c647f5c9deeb8d87d6622d62629b18d5bb688dd5d721d"
+      "sha256": "2425e7a713d1ed58aac53afdf21d18fe995b714c06aa1996906d03e202ae174b"
     },
     {
       "path": "assembly_steps.json",
@@ -36,7 +36,7 @@
     },
     {
       "path": "claims.json",
-      "sha256": "cdfd94dbfbefd0772c3a7a304095fccaeb23ebfbb06c7fe3271d7861cc0a2656"
+      "sha256": "084c794068bf4f443967ef952ea0964af5d5747a9e14eb5e367f21da8cfcf7f9"
     },
     {
       "path": "animations.json",

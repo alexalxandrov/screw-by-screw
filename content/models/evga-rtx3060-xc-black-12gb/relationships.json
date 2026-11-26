@@ -2980,6 +2980,26 @@
       "source_ids": [
         "src.tomshardware.teardown"
       ]
+    },
+    {
+      "id": "rel.contains.chip.gpu.nvenc",
+      "from": "chip.gpu.die",
+      "to": "chip.gpu.nvenc",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.video_encode_decode_matrix",
+        "src.nvidia.video_codec_sdk"
+      ]
+    },
+    {
+      "id": "rel.contains.chip.gpu.nvdec",
+      "from": "chip.gpu.die",
+      "to": "chip.gpu.nvdec",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.video_encode_decode_matrix",
+        "src.nvidia.video_codec_sdk"
+      ]
     }
   ]
 }

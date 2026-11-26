@@ -5932,6 +5932,44 @@
         "en": "During the fan-removal discussion, the presenter points out additional shroud screws but is uncertain whether the set totals four or six. Candidate group only: no numeric count, individual positions, fastener type or removal sequence is asserted.",
         "ru": "При обсуждении снятия вентиляторов автор указывает на дополнительные винты кожуха, но не уверен, состоит ли группа из четырёх или шести креплений. Только кандидатная группа: точное количество, индивидуальные положения, тип крепежа и последовательность снятия не утверждаются."
       }
+    },
+    {
+      "id": "chip.gpu.nvenc",
+      "parent_id": "chip.gpu.die",
+      "name": {
+        "en": "Dedicated hardware video encoder · NVENC",
+        "ru": "Выделенный аппаратный видеокодер · NVENC"
+      },
+      "category": "semiconductor",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.nvidia.video_encode_decode_matrix",
+        "src.nvidia.video_codec_sdk"
+      ],
+      "description": {
+        "en": "The desktop GeForce RTX 3060 support matrix lists one 7th-generation NVENC engine. NVIDIA's matrix lists H.264 and HEVC encoding support and no AV1 encoding for this generation. NVENC is a dedicated media engine, separate from the CUDA shader-core array. Die coordinates, internal microarchitecture, clocking and board-level routing are not represented.",
+        "ru": "В матрице настольной GeForce RTX 3060 указан один NVENC 7-го поколения. Матрица NVIDIA показывает поддержку кодирования H.264 и HEVC и отсутствие AV1-кодирования для этого поколения. NVENC — отдельный специализированный медиа-блок, не массив шейдерных ядер CUDA. Координаты на кристалле, внутренняя микроархитектура, тактирование и разводка платы не показаны."
+      }
+    },
+    {
+      "id": "chip.gpu.nvdec",
+      "parent_id": "chip.gpu.die",
+      "name": {
+        "en": "Dedicated hardware video decoder · NVDEC",
+        "ru": "Выделенный аппаратный видеодекодер · NVDEC"
+      },
+      "category": "semiconductor",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.nvidia.video_encode_decode_matrix",
+        "src.nvidia.video_codec_sdk"
+      ],
+      "description": {
+        "en": "The desktop GeForce RTX 3060 support matrix lists one 5th-generation NVDEC engine. The matrix includes H.264, HEVC, VP9 and AV1 decoding capabilities, subject to the individual profile, chroma-format and bit-depth columns. NVDEC is a dedicated media engine, separate from CUDA shader cores. No physical die placement or board routing is asserted.",
+        "ru": "В матрице настольной GeForce RTX 3060 указан один NVDEC 5-го поколения. Матрица включает возможности декодирования H.264, HEVC, VP9 и AV1 с ограничениями, указанными в столбцах профилей, форматов цветовой субдискретизации и глубины цвета. NVDEC — отдельный специализированный медиа-блок, не шейдерные ядра CUDA. Физическое расположение на кристалле и разводка платы не утверждаются."
+      }
     }
   ],
   "rules": [
