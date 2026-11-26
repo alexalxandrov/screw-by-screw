@@ -231,6 +231,56 @@
       "locator": "Release rear metal blanking bracket, insert optional video module from inside, connect cable and secure with two M3×3 screws",
       "notes": "VGA/HDMI/DisplayPort/Type-C module is optional and configuration-dependent; not asserted as fitted.",
       "access_date": "2026-11-27"
+    },
+    {
+      "id": "src.dell.5060.hdd35_assembly",
+      "title": "Dell OptiPlex 5060 Tower removing 3.5-inch hard-drive assembly",
+      "publisher": "Dell Technologies",
+      "source_type": "manufacturer_service_procedure",
+      "url": "https://www.dell.com/support/manuals/en-us/optiplex-5060-desktop/optiplex_5060_mt_service_manual/removing-35inch-hard-drive-assembly?guid=guid-002dfa35-1f49-46ec-a018-9f59222bc7a3&lang=en-us",
+      "locator": "Disconnect SATA and power, remove HDD filler bracket, press blue tab and pull assembly",
+      "notes": "Optional 3.5-inch storage carrier. Exact fitted drive and cage configuration remain unknown.",
+      "access_date": "2026-11-27"
+    },
+    {
+      "id": "src.dell.5060.hdd35_bracket",
+      "title": "Dell OptiPlex 5060 Tower removing 3.5-inch drive from bracket",
+      "publisher": "Dell Technologies",
+      "source_type": "manufacturer_service_procedure",
+      "url": "https://www.dell.com/support/manuals/en-us/optiplex-5060-desktop/optiplex_5060_mt_service_manual/removing-35inch-hard-drive-from-the-hard-drive-bracket?guid=guid-7285aec1-874c-4930-a768-d5a5970c686b&lang=en-us",
+      "locator": "Pull one side of the HDD bracket to disengage pins from drive slots, then lift drive out",
+      "notes": "Documents a flexible pin retention method rather than a universal screw pattern.",
+      "access_date": "2026-11-27"
+    },
+    {
+      "id": "src.dell.5060.hdd25_assembly",
+      "title": "Dell OptiPlex 5060 Tower removing 2.5-inch hard-drive assembly",
+      "publisher": "Dell Technologies",
+      "source_type": "manufacturer_service_procedure",
+      "url": "https://www.dell.com/support/manuals/en-us/optiplex-5060-desktop/optiplex_5060_mt_service_manual/removing-the-25inch-hard-drive-assembly?guid=guid-440f086d-8aaa-4a51-b805-1afe4a9d3ba5&lang=en-us",
+      "locator": "Disconnect drive data/power, press blue tabs on both sides, pull assembly out",
+      "notes": "Separate removable 2.5-inch assembly; optional fitted population remains unknown.",
+      "access_date": "2026-11-27"
+    },
+    {
+      "id": "src.dell.5060.hdd25_bracket",
+      "title": "Dell OptiPlex 5060 Tower removing 2.5-inch drive from bracket",
+      "publisher": "Dell Technologies",
+      "source_type": "manufacturer_service_procedure",
+      "url": "https://www.dell.com/support/manuals/en-us/optiplex-5060-desktop/optiplex_5060_mt_service_manual/removing-the-25inch-drive-from-the-drive-bracket?guid=guid-4aabdcf4-a7c7-494a-8e0d-cad2b4b0828a&lang=en-us",
+      "locator": "Pull one side of the bracket to disengage its pins from drive slots, then lift drive out",
+      "notes": "Documents pin-based drive retention; the package does not invent dimensions or screw positions.",
+      "access_date": "2026-11-27"
+    },
+    {
+      "id": "src.dell.5060.odd_removal",
+      "title": "Dell OptiPlex 5060 Tower removing optical drive",
+      "publisher": "Dell Technologies",
+      "source_type": "manufacturer_service_procedure",
+      "url": "https://www.dell.com/support/manuals/en-us/optiplex-5060-desktop/optiplex_5060_mt_service_manual/removing-optical-drive?guid=guid-f1ff3fd0-8c0b-4cb4-9d0a-498f96f0ff86&lang=en-us",
+      "locator": "Disconnect ODD data/power, unroute cables from tabs under drive cage, press blue release tab and slide drive out",
+      "notes": "Slim ODD option is not asserted as fitted. Cable retention tabs are represented as a semantic group only.",
+      "access_date": "2026-11-27"
     }
   ]
 }
