@@ -37,7 +37,194 @@
         "src.dell.5060.board_connectors"
       ],
       "notes": "Callout count from Dell's motherboard illustration; not a component count.",
-      "callout_coverage": "semantic_reference_mapped"
+      "callout_coverage": "all_26_numbered_callouts_mapped_to_semantic_component_ids",
+      "callouts": [
+        {
+          "number": 1,
+          "label": "PCIe x16 mechanical / x4 electrical connector · Slot 4",
+          "component_ids": [
+            "motherboard.pcie.x16.wired_x4"
+          ]
+        },
+        {
+          "number": 2,
+          "label": "PCIe x1 connector · Slot 3",
+          "component_ids": [
+            "motherboard.pcie.x1.2"
+          ]
+        },
+        {
+          "number": 3,
+          "label": "PCIe x16 connector · Slot 2",
+          "component_ids": [
+            "motherboard.pcie.x16"
+          ]
+        },
+        {
+          "number": 4,
+          "label": "PCIe x1 connector · Slot 1",
+          "component_ids": [
+            "motherboard.pcie.x1.1"
+          ]
+        },
+        {
+          "number": 5,
+          "label": "Optional Type-C connector",
+          "component_ids": [
+            "motherboard.typec_header.optional"
+          ]
+        },
+        {
+          "number": 6,
+          "label": "Optional video connector (HDMI / DisplayPort / VGA)",
+          "component_ids": [
+            "motherboard.video_header.optional"
+          ]
+        },
+        {
+          "number": 7,
+          "label": "Optional PS/2 / serial port connector",
+          "component_ids": [
+            "motherboard.ps2_serial_header.optional"
+          ]
+        },
+        {
+          "number": 8,
+          "label": "System fan connector",
+          "component_ids": [
+            "motherboard.fan_header"
+          ]
+        },
+        {
+          "number": 9,
+          "label": "Intruder switch connector",
+          "component_ids": [
+            "motherboard.intrusion_switch_header"
+          ]
+        },
+        {
+          "number": 10,
+          "label": "CPU socket connector",
+          "component_ids": [
+            "motherboard.cpu_socket"
+          ]
+        },
+        {
+          "number": 11,
+          "label": "CPU power connector",
+          "component_ids": [
+            "motherboard.cpu_power"
+          ]
+        },
+        {
+          "number": 12,
+          "label": "CPU cooler fan connector",
+          "component_ids": [
+            "motherboard.cpu_fan_header"
+          ]
+        },
+        {
+          "number": 13,
+          "label": "Memory slots",
+          "component_ids": [
+            "motherboard.dimm.1",
+            "motherboard.dimm.2",
+            "motherboard.dimm.3",
+            "motherboard.dimm.4"
+          ]
+        },
+        {
+          "number": 14,
+          "label": "SD card reader connector",
+          "component_ids": [
+            "motherboard.sd_reader_header"
+          ]
+        },
+        {
+          "number": 15,
+          "label": "Power switch connector",
+          "component_ids": [
+            "motherboard.power_switch_header"
+          ]
+        },
+        {
+          "number": 16,
+          "label": "M.2 SSD connector",
+          "component_ids": [
+            "motherboard.m2"
+          ]
+        },
+        {
+          "number": 17,
+          "label": "SATA 0 connector · blue",
+          "component_ids": [
+            "motherboard.sata.1"
+          ]
+        },
+        {
+          "number": 18,
+          "label": "SATA 2 connector · white",
+          "component_ids": [
+            "motherboard.sata.2"
+          ]
+        },
+        {
+          "number": 19,
+          "label": "Internal speaker connector",
+          "component_ids": [
+            "motherboard.speaker_header"
+          ]
+        },
+        {
+          "number": 20,
+          "label": "SATA 3 connector · black",
+          "component_ids": [
+            "motherboard.sata.3"
+          ]
+        },
+        {
+          "number": 21,
+          "label": "SATA 1 connector · black",
+          "component_ids": [
+            "motherboard.sata.4"
+          ]
+        },
+        {
+          "number": 22,
+          "label": "System power connector · ATX",
+          "component_ids": [
+            "motherboard.system_power"
+          ]
+        },
+        {
+          "number": 23,
+          "label": "SATA power connector",
+          "component_ids": [
+            "motherboard.sata_power_header"
+          ]
+        },
+        {
+          "number": 24,
+          "label": "M.2 WLAN connector",
+          "component_ids": [
+            "motherboard.m2.wlan"
+          ]
+        },
+        {
+          "number": 25,
+          "label": "Coin-cell battery",
+          "component_ids": [
+            "motherboard.coin_cell"
+          ]
+        },
+        {
+          "number": 26,
+          "label": "Clear CMOS / Password / Service Mode jumper",
+          "component_ids": [
+            "motherboard.clear_cmos_jumper"
+          ]
+        }
+      ]
     },
     "fasteners": {
       "screw_table_quantity_total": 19,
