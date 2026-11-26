@@ -288,3 +288,30 @@ The repository registers both as aftermarket compatibility leads only. The origi
 ## 23. Exact-SKU fan blade visual count
 
 Newegg's retail gallery title and model field identify `12G-P5-3655-KR`. Two front-view product images show eight visible blade surfaces on each fan. The package records this as a **photo-observed visible count**, not as a manufacturer mechanical specification or examination of the installed sample. The Blender proxy and component graph now contain eight individually selectable blade meshes under each independent rotor. Blade camber, pitch, cross-section, thickness, depth, exact contour, embossed-E dimensions, RPM and OEM fan manufacturer/part number remain unverified. The retailer photographs are linked for attribution only and are not copied into the repository.
+
+
+## 24. Thermal-pad guide conflict and exclusion
+
+A search for additional pad dimensions surfaced a ThermalPad.eu guide titled for the EVGA RTX 3060 XC family. It attributes two 40 × 15 × 2 mm three-module strips and an additional 25 × 15 × 2 mm two-module strip to the RTX 3060 XC. Its own cited Reddit discussion, however, is titled around **3060 Ti XC** pad sizing. Commenters correct the model mix-up: the Gamers Nexus teardown is the RTX 3060 XC, with two banks of three VRAM packages; the 3060 Ti XC is described as adding a further two-module group. The page's mapping is therefore internally contradicted by its cited discussion and cannot safely be assigned to retail SKU **12G-P5-3655-KR**.
+
+Decision: all ThermalPad.eu thickness/footprint values are excluded from the target model. They have not been used to alter memory-pad or VRM-pad geometry, claims or replacement guidance. The exact-model Gamers Nexus teardown's two approximate thickness observations (~2.0 mm and a less certain ~1.5 mm) remain separate, with their contact locations unresolved. The thermal-pad guide and the Reddit correction are registered for audit traceability, not as accepted pad specifications.
+
+Sources:
+- ThermalPad.eu family guide: https://thermalpad.eu/thermal-pad-sizes/evga-geforce-rtx-3060-xc-gaming-12gb-gddr6
+- Linked r/TEAMEVGA discussion: https://www.reddit.com/r/TEAMEVGA/comments/ptbynd/does-anyone-know-what-is-the-thickness-of-thermal/
+- Exact-model Gamers Nexus teardown: https://www.youtube.com/watch?v=hJFJ_clQT8U
+
+## 25. Related XC board analysis and BoardView search boundary
+
+Two additional technical references were examined but are not used as exact-SKU evidence. Hardware Asylum's teardown is labelled EVGA RTX 3060 XC Gaming and describes a pair of U-shaped heatpipes plus VRM cooling details; it does not correlate its sample to **12G-P5-3655-KR**. TechPowerUp's circuit-board analysis is likewise for EVGA GeForce RTX 3060 XC, without a verified XC BLACK sample identity. It lists a 5-phase GPU rail (uPI uP9512R / Alpha & Omega DrMOS) and a two-phase memory rail (uPI uP1666Q / M3828N MOSFETs). Those identifiers are retained only as family-variant leads and have not been transferred into the exact-SKU component inventory or VRM layer.
+
+Public catalogue checks at GPU Doctor and the Badcaps RTX 3060 discussion did not reveal an exact EVGA **12G-P5-3655-KR** BoardView or a file correlated to a readable target PCB silkscreen/revision. This is a bounded search result, not proof that no file exists elsewhere. The EVGA232 / PG190-A02 lead remains uncorrelated: no exact sample photo, exact title block or primary source ties it to this retail board. Consequently, the bare-PCB outline, component coordinates, electrical nets, controller/MOSFET identities and VRM phase topology stay unresolved.
+
+Sources:
+- Hardware Asylum related XC teardown: https://www.hardwareasylum.com/reviews/video/evga_rtx3060/page3.aspx
+- TechPowerUp related XC board analysis: https://www.techpowerup.com/review/evga-geforce-rtx-3060-xc/4.html
+- GPU Doctor catalogue: https://gpudoctor.com/boardview/catalogue
+- Badcaps RTX 3060 service-file discussion: https://www.badcaps.net/forum/document-software-archive/schematics-and-boardviews/3474108-nvidia-geforce-rtx-3060-schematic-board-view
+- EVGA official 12G-P5-3655-KR specifications: https://www.evga.com/products/Specs/GPU.aspx?pn=fc6cb106-6765-4840-b472-9dba159cdc30
+
+EVGA's official page identifies 12G-P5-3655-KR and states **whole-card** dimensions of 201.8 × 110 mm and dual-slot width. Those values are not bare-PCB measurements, and they provide no component coordinate system or service drawing.

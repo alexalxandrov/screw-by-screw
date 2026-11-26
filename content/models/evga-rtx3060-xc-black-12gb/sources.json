@@ -239,6 +239,69 @@
       "type": "exact_sku_retail_listing_photographic_reference",
       "applicability": "The listing title and model field identify exact part number 12G-P5-3655-KR. Two front product photographs show eight visible impeller blade surfaces on each fan. Retained for visible blade count only; these images are not an OEM mechanical drawing or inspection of an installed sample. Blade pitch, camber, exact profile, thickness, depth and fan OEM identity remain unverified.",
       "license_status": "third_party_copyright_no_reuse_permission"
+    },
+    {
+      "id": "src.evga.product.page",
+      "title": "EVGA official product specifications — GeForce RTX 3060 XC BLACK GAMING 12G-P5-3655-KR",
+      "publisher": "EVGA",
+      "url": "https://www.evga.com/products/Specs/GPU.aspx?pn=fc6cb106-6765-4840-b472-9dba159cdc30",
+      "type": "manufacturer_product_specification",
+      "applicability": "Explicitly identifies retail part number 12G-P5-3655-KR as GeForce RTX 3060 XC BLACK GAMING. Publishes whole-card dimensions 201.8 × 110 mm and dual-slot width, but does not publish bare-PCB dimensions, component coordinates, BoardView, or cooler service data.",
+      "license_status": "manufacturer_reference_no_reuse_of_page_assets"
+    },
+    {
+      "id": "src.thermalpad.eu.xc_family",
+      "title": "ThermalPad.eu EVGA RTX 3060 XC family pad-size guide — excluded due source conflict",
+      "publisher": "ThermalPad.eu",
+      "url": "https://thermalpad.eu/thermal-pad-sizes/evga-geforce-rtx-3060-xc-gaming-12gb-gddr6",
+      "type": "conflicting_family_level_thermal_pad_guide",
+      "applicability": "The page attributes 40 × 15 × 2 mm strips for two three-module banks plus an additional 25 × 15 × 2 mm two-module strip to the RTX 3060 XC. Its linked Reddit source is a thread about 3060 Ti XC pads, and commenters explicitly correct the model distinction: the 3060 XC has two banks of three VRAM modules, while the 3060 Ti XC adds the two-module group. Because the page appears to reverse or conflate these variants, none of its pad sizes or contact-zone assignments is accepted for 12G-P5-3655-KR.",
+      "license_status": "third_party_reference_only_conflicting_not_for_geometry"
+    },
+    {
+      "id": "src.reddit.thermalpad.thread",
+      "title": "Community discussion correcting RTX 3060 XC versus RTX 3060 Ti XC thermal-pad context",
+      "publisher": "r/TEAMEVGA community discussion",
+      "url": "https://www.reddit.com/r/TEAMEVGA/comments/ptbynd/does-anyone-know-what-is-the-thickness-of-thermal/",
+      "type": "community_discussion_variant_disambiguation",
+      "applicability": "The thread title concerns 3060 Ti XC thermal-pad sizing. A comment explicitly corrects an earlier mix-up: the Gamers Nexus teardown was RTX 3060 XC; the 3060 XC shows two banks of three VRAM packages, while the 3060 Ti XC adds a further two-module group. Community discussion is used only to flag the linked ThermalPad.eu guide as internally conflicted; it is not a primary pad measurement or an exact 12G-P5-3655-KR service specification.",
+      "license_status": "community_reference_no_asset_reuse"
+    },
+    {
+      "id": "src.hardwareasylum.xc_family",
+      "title": "Hardware Asylum EVGA RTX 3060 XC Gaming cooler and PCB teardown",
+      "publisher": "Hardware Asylum",
+      "url": "https://www.hardwareasylum.com/reviews/video/evga_rtx3060/page3.aspx",
+      "type": "related_evga_xc_variant_teardown",
+      "applicability": "The page describes an EVGA RTX 3060 XC Gaming sample but does not identify retail part number 12G-P5-3655-KR. It discusses a pair of U-shaped heatpipes, VRM cooling, apparently unpopulated phase pads and PCB airflow cutout. These are family/variant observations only and are not transferred to the XC BLACK target's heatpipe loop count, VRM phase topology, PCB layout or coordinates.",
+      "license_status": "third_party_copyright_no_reuse_permission"
+    },
+    {
+      "id": "src.techpowerup.xc_family.pcb",
+      "title": "TechPowerUp EVGA GeForce RTX 3060 XC circuit-board analysis",
+      "publisher": "TechPowerUp",
+      "url": "https://www.techpowerup.com/review/evga-geforce-rtx-3060-xc/4.html",
+      "type": "related_evga_xc_variant_pcb_analysis",
+      "applicability": "The reviewed card is labelled EVGA GeForce RTX 3060 XC, with no verified 12G-P5-3655-KR sample identity. The page reports a 5-phase GPU rail with uPI uP9512R, Alpha & Omega DrMOS, a 2-phase memory rail with uPI uP1666Q and M3828N memory MOSFETs, and Samsung GDDR6 marking. These are family-variant candidates only; do not assign any controller, phase count, MOSFET, memory-rail topology or PCB coordinate to the XC BLACK target without an exact-board sample match.",
+      "license_status": "third_party_reference_variant_only_no_asset_reuse"
+    },
+    {
+      "id": "src.gpudoctor.boardview.catalog",
+      "title": "GPU Doctor public GPU BoardView catalogue",
+      "publisher": "GPU Doctor",
+      "url": "https://gpudoctor.com/boardview/catalogue",
+      "type": "boardview_catalogue_search_reference",
+      "applicability": "The visible catalogue search did not list a verified EVGA 12G-P5-3655-KR / XC BLACK board file. This is a bounded catalogue check, not proof that no such file exists elsewhere. No matching BoardView, PCB revision or board-coordinate file was obtained.",
+      "license_status": "catalogue_reference_only"
+    },
+    {
+      "id": "src.badcaps.rtx3060.boardview.thread",
+      "title": "Badcaps NVIDIA GeForce RTX 3060 schematic and BoardView discussion",
+      "publisher": "Badcaps community forum",
+      "url": "https://www.badcaps.net/forum/document-software-archive/schematics-and-boardviews/3474108-nvidia-geforce-rtx-3060-schematic-board-view",
+      "type": "generic_rtx3060_service_file_discussion",
+      "applicability": "The forum entry concerns generic RTX 3060 schematic/BoardView files and does not establish EVGA 12G-P5-3655-KR or XC BLACK PCB revision applicability. Treat any referenced board files as unrelated candidates until their silkscreen and revision are correlated to a physical target sample.",
+      "license_status": "community_reference_no_redistribution"
     }
   ]
 }

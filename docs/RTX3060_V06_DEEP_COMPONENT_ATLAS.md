@@ -157,3 +157,10 @@ Neoseeker identifies its review sample as `12G-P5-3655-KR` and documents three D
 ## 24. PCB through-airflow aperture proxy
 
 The Blender generator now subtracts a rounded-rectangle Boolean aperture from the PCB proxy, rather than placing a dark surface marker over a solid board. The placeholder is 18 × 22 mm and its visual centre is estimated from review imagery; neither value is a measurement or BoardView coordinate. The selection node `pcb.airflow.cutout` carries `geometry_status: illustrative_proxy` and explicitly records `sbs_proxy_aperture_dimensions_measured: false`. This makes the airflow feature visually legible without claiming exact PCB geometry.
+
+
+## 25. Thermal-pad evidence conflict and rejected variant PCB data
+
+The additional ThermalPad.eu guide claims two 40 × 15 × 2 mm VRAM strips plus a 25 × 15 × 2 mm two-device strip for an RTX 3060 XC. Its linked Reddit thread is actually about RTX 3060 Ti XC pad sizing, and commenters explicitly correct a model mix-up: the RTX 3060 XC sample discussed from the Gamers Nexus teardown has two three-device VRAM banks; the two-device bank is attributed to the 3060 Ti XC. The guide is internally inconsistent with its cited discussion, so none of its dimensions or locations is used in this model. Existing exact-teardown pad observations remain approximate and location-unassigned.
+
+Hardware Asylum's EVGA RTX 3060 XC teardown and TechPowerUp's XC board analysis are retained as **related-variant references only**. Their U-shaped heatpipe count and VRM controller/phase/MOSFET identifications do not have a verified 12G-P5-3655-KR sample correlation and are not copied into this SKU's component graph. Public GPU Doctor and Badcaps catalog checks did not identify an exact-SKU BoardView; absence from those catalogs is not proof of nonexistence. EVGA's official 201.8 × 110 mm dimensions describe the complete card, not the bare PCB. See docs/GPU_SOURCE_AUDIT.md sections 24–25 and the expanded source registry.
