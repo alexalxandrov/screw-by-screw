@@ -20,7 +20,7 @@
     },
     {
       "path": "relationships.json",
-      "sha256": "adcb69ab5b5da81bb5ce07a78faa1d758c15f5047b852238e64e29b79c285c8c"
+      "sha256": "f88b4e93daefe36c97f685aa728b44920bdecdd3d0f081f93db544fad55229d5"
     },
     {
       "path": "process_layers.json",
@@ -36,7 +36,7 @@
     },
     {
       "path": "claims.json",
-      "sha256": "7bb29e8dee29d4cb856aa149cea722f8bac926ceb67efb522cbe419b45804741"
+      "sha256": "7c0ef8a239ddf9066503bd69c224ac3f0c53cf7ea061ba0a53cc6adcf7f78b35"
     },
     {
       "path": "animations.json",

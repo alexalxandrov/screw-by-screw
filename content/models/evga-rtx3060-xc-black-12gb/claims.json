@@ -737,18 +737,6 @@
       "notes": "The teardown identifies a copper plate directly contacting a row of MOSFET packages. Plate dimensions and exact device coverage are not measured."
     },
     {
-      "id": "claim.cooling.heatpipe.nominal_diameter",
-      "subject_id": "cooling.heatpipes",
-      "predicate": "heatpipe_tube_diameter_approximate",
-      "value": 6,
-      "unit": "mm",
-      "confidence_class": "educational_approximation",
-      "source_ids": [
-        "src.gamersnexus.teardown"
-      ],
-      "notes": "The teardown presenter estimates the visible central heatpipe tubes at approximately 6 mm. No caliper measurement or complete tube-loop count is supplied."
-    },
-    {
       "id": "claim.cooling.central_heatpipe_tubes.observed",
       "subject_id": "cooling.heatpipes",
       "predicate": "central_heatpipe_tubes_visible",

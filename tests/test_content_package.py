@@ -293,9 +293,9 @@ class ContentPackageTests(unittest.TestCase):
             self.assertIn("src.newegg.exact_sku.product_photo", components[blade_ids[-1]]["source_ids"])
 
         self.assertIn("Components: 313", report)
-        self.assertIn("Relationships: 311", report)
+        self.assertIn("Relationships: 312", report)
         self.assertIn("Animation clips: 2", report)
-        self.assertEqual(len(package["claims"]["claims"]), 111)
+        self.assertEqual(len(package["claims"]["claims"]), 110)
         self.assertEqual(len(package["process_layers"]["process_layers"]), 3)
         power_layer = next(layer for layer in package["process_layers"]["process_layers"] if layer["id"] == "process.power.qualitative")
         self.assertEqual(len(power_layer["linked_component_ids"]), 12)
@@ -316,6 +316,10 @@ class ContentPackageTests(unittest.TestCase):
         self.assertEqual(claims["claim.gpu.frequency.peak.sample_operating_point"]["value"], 1905)
         self.assertEqual(claims["claim.cooling.heatpipe.diameter.observed_estimate"]["value"], 6)
         self.assertEqual(claims["claim.cooling.heatpipe.diameter.observed_estimate"]["confidence_class"], "teardown_supported")
+        self.assertNotIn("claim.cooling.heatpipe.nominal_diameter", claims)
+        self.assertEqual(relationships["rel.cooling.airflow.fan2"]["from"], "assembly.fan.2")
+        self.assertEqual(relationships["rel.cooling.airflow.fan2"]["to"], "cooling.heatsink")
+        self.assertEqual(relationships["rel.cooling.airflow.fan2"]["certainty"], "qualitative")
         self.assertEqual(claims["claim.gpu.frequency.peak.sample_operating_point"]["confidence_class"], "measured")
         self.assertEqual(claims["claim.power.board_power.sample_operating_point"]["value"], 172.4)
 

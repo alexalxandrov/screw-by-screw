@@ -2880,6 +2880,16 @@
       "source_ids": [
         "src.gamersnexus.teardown"
       ]
+    },
+    {
+      "id": "rel.cooling.airflow.fan2",
+      "from": "assembly.fan.2",
+      "to": "cooling.heatsink",
+      "type": "airflow_over",
+      "source_ids": [
+        "src.lanoc.review"
+      ],
+      "certainty": "qualitative"
     }
   ]
 }

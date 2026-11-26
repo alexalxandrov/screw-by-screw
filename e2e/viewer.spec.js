@@ -247,6 +247,9 @@ test("component cards expose typed, source-linked relationships and navigate bet
   await expect(airflow).toContainText("Обдувается потоком от");
   await expect(airflow).toContainText("Качественная связь");
   await expect(airflow.getByRole("button", { name: "Осевой вентилятор 1" })).toBeVisible();
+  const secondAirflow = page.locator('[data-relationship-id="rel.cooling.airflow.fan2"]');
+  await expect(secondAirflow).toContainText("Обдувается потоком от");
+  await expect(secondAirflow.getByRole("button", { name: "Осевой вентилятор 2" })).toBeVisible();
 });
 
 test("relationships without registered sources are labelled rather than silently presented as sourced", async ({ page }) => {
