@@ -57,7 +57,7 @@ The component atlas also adds separate, individually selectable photo-estimated 
 
 ## Fine-grained cooling decomposition
 
-The canonical package now exposes **137 semantic components, 133 typed relationships, 64 claims and 12 registered sources**. This includes individually selectable fan frames, hubs and seven illustrative blade proxies per fan; 24 separate illustrative heatsink-fin proxies; six selectable heatpipe-route proxies grouped as four main GPU-contact pipes plus two side pipes; six memory-side thermal-pad proxies; and a VRM-side thermal-pad strip proxy.
+The canonical package now exposes **167 semantic components, 163 typed relationships, 74 claims and 13 registered sources**. This includes individually selectable fan frames, hubs and seven illustrative blade proxies per fan; 24 separate illustrative heatsink-fin proxies; six selectable heatpipe-route proxies grouped as four main GPU-contact pipes plus two side pipes; six memory-side thermal-pad proxies; and a VRM-side thermal-pad strip proxy.
 
 These are independently selectable teaching meshes, not a claim that the exact hardware has seven blades per fan or 24 fins. The count and shapes are explicitly identified as proxy geometry. Thermal-pad position proxies are aligned to the six identified GDDR6 package positions; pad thickness, material, hardness and service dimensions remain unverified. Heatpipe paths and cross-sections likewise remain illustrative.
 
@@ -74,7 +74,7 @@ A second package-authored animation clip, `clip.exploded-cooler-overview`, now m
 
 ## GA106 compute and GDDR6 architecture tranche
 
-The semantic package now contains **137 components, 133 typed relationships, 64 claims and 12 registered sources**. Thirteen logical-only nodes represent the 28-SM GA106 cluster, its CUDA/Tensor/RT/TMU/ROP aggregates, a 192-bit GDDR6 interface and six logical interface presentation groups. Six Samsung K4ZAF325BM-HC16 GDDR6 package positions are separately selectable from exact-SKU-linked teardown/review material; no one-to-one mapping between package positions and interface presentation segments is asserted. The logical nodes carry `geometry_status: logical_only`: no physical die floorplan, shader wiring or PCB trace routing is drawn.
+The semantic package now contains **167 components, 163 typed relationships, 74 claims and 13 registered sources**. Thirteen logical-only nodes represent the 28-SM GA106 cluster, its CUDA/Tensor/RT/TMU/ROP aggregates, a 192-bit GDDR6 interface and six logical interface presentation groups. Six Samsung K4ZAF325BM-HC16 GDDR6 package positions are separately selectable from exact-SKU-linked teardown/review material; no one-to-one mapping between package positions and interface presentation segments is asserted. The logical nodes carry `geometry_status: logical_only`: no physical die floorplan, shader wiring or PCB trace routing is drawn.
 
 A third process layer, `gpu_compute`, exposes this architecture map in the viewer. Claims cover the published 28 SM / 112 Tensor / 28 RT / 112 TMU / 48 ROP configuration, 276 mm² and 12-billion-transistor GA106 die figures, Samsung 8N, and exact-SKU-linked memory package identity. Tom's Hardware identifies six Samsung K4ZAF325BM-HC16 devices on the 12G-P5-3655-KR sample; 16-Gbit density, 512M × 32 organisation and 180-FBGA package type remain secondary-catalog device attributes, not primary Samsung-datasheet claims. The viewer labels this as a logical map, not an architecture simulation.
 
@@ -117,3 +117,12 @@ Source: https://www.thefpsreview.com/2021/03/03/evga-geforce-rtx-3060-xc-black-g
 The exact-model Gamers Nexus teardown shows each independently replaceable fan retained by three screws, for six fan-to-frame screws total. The package adds six separate semantic fastener nodes, all `geometry_status: logical_only`, because the individual screw centres, head profile, thread, length and torque are not measured. These six screws are distinct from the eight cooler/shroud retention screws.
 
 The assembly panel now records a third partial action after both fan leads are disconnected: remove three screws from each fan. This extends the evidence-backed observations but does not create a complete shroud-removal or reassembly procedure. The sequence remains `partial_observed_sequence` with `complete_sequence: false`.
+
+
+## 19. GA10x TPC and individual SM architecture hierarchy
+
+The NVIDIA Ampere GA10x architecture whitepaper specifies 128 CUDA cores, four third-generation Tensor Cores, four texture units, one second-generation RT Core, a 256 KB register file and 128 KB configurable L1/shared memory per SM. It also describes two SMs and one PolyMorph Engine per TPC. The RTX 3060 configuration's 28 SMs therefore imply 14 TPCs as a calculated logical grouping (28 / 2), not as a recovered physical floorplan.
+
+The package now exposes 28 numbered logical SM entries under one TPC aggregate, plus an aggregate of 14 PolyMorph Engines. The numbers are navigation identifiers; no SM/TPC coordinates, GPC membership, disabled-unit placement, or GPC count is inferred. The process layer has 51 linked components and a 15-node diagram; it remains explicitly logical and not a cycle-accurate architecture simulation.
+
+Source: NVIDIA, *Ampere GA10x GPU Architecture*, Figure 2 and page 10 (official PDF): https://www.nvidia.com/content/PDF/nvidia-ampere-ga-102-gpu-architecture-whitepaper-v2.pdf
