@@ -394,19 +394,20 @@
       "id": "motherboard.cpu_socket",
       "parent_id": "motherboard.pcb",
       "name": {
-        "en": "CPU socket region · LGA1151 platform",
-        "ru": "Зона CPU socket · платформа LGA1151"
+        "en": "CPU socket · LGA1151 platform",
+        "ru": "Процессорный разъём · платформа LGA1151"
       },
       "category": "compute_socket",
       "evidence_status": "manufacturer_data",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
-        "src.dell.5060.service",
-        "src.dell.5060.setup"
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.processors",
+        "src.dell.5060.cpu_removal"
       ],
       "description": {
-        "en": "Socket region shown schematically for the Coffee Lake-era platform; no exact CPU is installed in this reference package.",
-        "ru": "Socket region shown schematically for the Coffee Lake-era platform; no exact CPU is installed in this reference package."
+        "en": "Dell callout 10. Socket type belongs to the Coffee Lake-era LGA1151 platform; the fitted processor and PCB revision are not selected.",
+        "ru": "Обозначение Dell №10. Тип разъёма относится к платформе LGA1151 поколения Coffee Lake; установленный процессор и ревизия PCB не определены."
       },
       "visual_proxy": {
         "kind": "box",
@@ -427,19 +428,19 @@
       "id": "motherboard.dimm.1",
       "parent_id": "motherboard.pcb",
       "name": {
-        "en": "DIMM slot 1",
-        "ru": "Слот DIMM 1"
+        "en": "DDR4 UDIMM slot 1",
+        "ru": "Слот DDR4 UDIMM 1"
       },
       "category": "memory_interface",
       "evidence_status": "manufacturer_data",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
-        "src.dell.5060.service",
-        "src.dell.5060.setup"
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.memory"
       ],
       "description": {
-        "en": "Slot position is schematic; connector geometry and exact board coordinates need an identified board revision.",
-        "ru": "Slot position is schematic; connector geometry and exact board coordinates need an identified board revision."
+        "en": "One of four manufacturer-documented UDIMM sockets. Fitted module presence and capacity are unknown.",
+        "ru": "Один из четырёх документированных разъёмов UDIMM. Наличие и ёмкость установленного модуля неизвестны."
       },
       "visual_proxy": {
         "kind": "box",
@@ -460,19 +461,19 @@
       "id": "motherboard.dimm.2",
       "parent_id": "motherboard.pcb",
       "name": {
-        "en": "DIMM slot 2",
-        "ru": "Слот DIMM 2"
+        "en": "DDR4 UDIMM slot 2",
+        "ru": "Слот DDR4 UDIMM 2"
       },
       "category": "memory_interface",
       "evidence_status": "manufacturer_data",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
-        "src.dell.5060.service",
-        "src.dell.5060.setup"
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.memory"
       ],
       "description": {
-        "en": "Slot position is schematic; connector geometry and exact board coordinates need an identified board revision.",
-        "ru": "Slot position is schematic; connector geometry and exact board coordinates need an identified board revision."
+        "en": "One of four manufacturer-documented UDIMM sockets. Fitted module presence and capacity are unknown.",
+        "ru": "Один из четырёх документированных разъёмов UDIMM. Наличие и ёмкость установленного модуля неизвестны."
       },
       "visual_proxy": {
         "kind": "box",
@@ -493,19 +494,19 @@
       "id": "motherboard.dimm.3",
       "parent_id": "motherboard.pcb",
       "name": {
-        "en": "DIMM slot 3",
-        "ru": "Слот DIMM 3"
+        "en": "DDR4 UDIMM slot 3",
+        "ru": "Слот DDR4 UDIMM 3"
       },
       "category": "memory_interface",
       "evidence_status": "manufacturer_data",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
-        "src.dell.5060.service",
-        "src.dell.5060.setup"
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.memory"
       ],
       "description": {
-        "en": "Slot position is schematic; connector geometry and exact board coordinates need an identified board revision.",
-        "ru": "Slot position is schematic; connector geometry and exact board coordinates need an identified board revision."
+        "en": "One of four manufacturer-documented UDIMM sockets. Fitted module presence and capacity are unknown.",
+        "ru": "Один из четырёх документированных разъёмов UDIMM. Наличие и ёмкость установленного модуля неизвестны."
       },
       "visual_proxy": {
         "kind": "box",
@@ -526,19 +527,19 @@
       "id": "motherboard.dimm.4",
       "parent_id": "motherboard.pcb",
       "name": {
-        "en": "DIMM slot 4",
-        "ru": "Слот DIMM 4"
+        "en": "DDR4 UDIMM slot 4",
+        "ru": "Слот DDR4 UDIMM 4"
       },
       "category": "memory_interface",
       "evidence_status": "manufacturer_data",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
-        "src.dell.5060.service",
-        "src.dell.5060.setup"
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.memory"
       ],
       "description": {
-        "en": "Slot position is schematic; connector geometry and exact board coordinates need an identified board revision.",
-        "ru": "Slot position is schematic; connector geometry and exact board coordinates need an identified board revision."
+        "en": "One of four manufacturer-documented UDIMM sockets. Fitted module presence and capacity are unknown.",
+        "ru": "Один из четырёх документированных разъёмов UDIMM. Наличие и ёмкость установленного модуля неизвестны."
       },
       "visual_proxy": {
         "kind": "box",
@@ -559,19 +560,19 @@
       "id": "motherboard.pcie.x16",
       "parent_id": "motherboard.pcb",
       "name": {
-        "en": "PCIe x16 slot",
-        "ru": "Слот PCIe x16"
+        "en": "PCIe x16 Gen3 expansion slot · Slot 2",
+        "ru": "Слот расширения PCIe x16 Gen3 · Slot 2"
       },
       "category": "expansion_interface",
       "evidence_status": "manufacturer_data",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
-        "src.dell.5060.service",
-        "src.dell.5060.setup"
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.board_connectors"
       ],
       "description": {
-        "en": "Family-level proxy component; exact part identity and placement require confirmation.",
-        "ru": "Макетный компонент уровня семейства; точную деталь и расположение требуется подтвердить."
+        "en": "Dell motherboard callout 3: one PCIe x16 Revision 3.0 slot. The installed card, if any, is configuration-dependent.",
+        "ru": "Обозначение Dell №3: один слот PCIe x16 Revision 3.0. Наличие и модель установленной платы расширения зависят от комплектации."
       },
       "visual_proxy": {
         "kind": "box",
@@ -592,19 +593,19 @@
       "id": "motherboard.pcie.x1.1",
       "parent_id": "motherboard.pcb",
       "name": {
-        "en": "PCIe x1 slot 1",
-        "ru": "Слот PCIe x1 №1"
+        "en": "PCIe x1 Gen3 expansion slot · Slot 1",
+        "ru": "Слот расширения PCIe x1 Gen3 · Slot 1"
       },
       "category": "expansion_interface",
       "evidence_status": "manufacturer_data",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
-        "src.dell.5060.service",
-        "src.dell.5060.setup"
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.board_connectors"
       ],
       "description": {
-        "en": "Family-level proxy component; exact part identity and placement require confirmation.",
-        "ru": "Макетный компонент уровня семейства; точную деталь и расположение требуется подтвердить."
+        "en": "Dell motherboard callout 4: one PCIe x1 slot. Slot placement remains schematic.",
+        "ru": "Обозначение Dell №4: один слот PCIe x1. Пространственное положение показано схематично."
       },
       "visual_proxy": {
         "kind": "box",
@@ -625,19 +626,19 @@
       "id": "motherboard.pcie.x1.2",
       "parent_id": "motherboard.pcb",
       "name": {
-        "en": "PCIe x1 slot 2",
-        "ru": "Слот PCIe x1 №2"
+        "en": "PCIe x1 Gen3 expansion slot · Slot 3",
+        "ru": "Слот расширения PCIe x1 Gen3 · Slot 3"
       },
       "category": "expansion_interface",
       "evidence_status": "manufacturer_data",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
-        "src.dell.5060.service",
-        "src.dell.5060.setup"
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.board_connectors"
       ],
       "description": {
-        "en": "Family-level proxy component; exact part identity and placement require confirmation.",
-        "ru": "Макетный компонент уровня семейства; точную деталь и расположение требуется подтвердить."
+        "en": "Dell motherboard callout 2: one PCIe x1 slot. Slot placement remains schematic.",
+        "ru": "Обозначение Dell №2: один слот PCIe x1. Пространственное положение показано схематично."
       },
       "visual_proxy": {
         "kind": "box",
@@ -658,19 +659,20 @@
       "id": "motherboard.m2",
       "parent_id": "motherboard.pcb",
       "name": {
-        "en": "M.2 PCIe SSD connector",
-        "ru": "Разъём M.2 PCIe SSD"
+        "en": "M.2 SSD socket · 2230 / 2280",
+        "ru": "Разъём M.2 SSD · 2230 / 2280"
       },
       "category": "storage_interface",
       "evidence_status": "manufacturer_data",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
-        "src.dell.5060.service",
-        "src.dell.5060.setup"
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.board_connectors",
+        "src.dell.5060.storage"
       ],
       "description": {
-        "en": "Family-level proxy component; exact part identity and placement require confirmation.",
-        "ru": "Макетный компонент уровня семейства; точную деталь и расположение требуется подтвердить."
+        "en": "Dell documents one M.2 2230/2280 SSD connector supporting SATA and PCIe interfaces. No SSD is asserted as installed.",
+        "ru": "Dell документирует один разъём M.2 2230/2280 SSD с поддержкой интерфейсов SATA и PCIe. Наличие SSD в конкретном экземпляре не утверждается."
       },
       "visual_proxy": {
         "kind": "box",
@@ -691,19 +693,20 @@
       "id": "motherboard.sata.1",
       "parent_id": "motherboard.pcb",
       "name": {
-        "en": "SATA data header 1",
-        "ru": "Разъём SATA 1"
+        "en": "SATA 0 data header · blue · Gen2 ODD path",
+        "ru": "Разъём SATA 0 · синий · Gen2 для ODD"
       },
       "category": "storage_interface",
       "evidence_status": "manufacturer_data",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
-        "src.dell.5060.service",
-        "src.dell.5060.setup"
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.board_connectors",
+        "src.dell.5060.storage"
       ],
       "description": {
-        "en": "Dell's Tower motherboard illustration identifies four SATA data headers; positions here are schematic.",
-        "ru": "Dell's Tower motherboard illustration identifies four SATA data headers; positions here are schematic."
+        "en": "Dell motherboard callout 17. One of four headers; the board connector specification assigns one Gen2 SATA port to the optical-drive path. Individual cable routing is not modeled.",
+        "ru": "Обозначение Dell №17. Один из четырёх разъёмов; спецификация назначает один порт SATA Gen2 для оптического привода. Трасса конкретного кабеля не моделируется."
       },
       "visual_proxy": {
         "kind": "box",
@@ -724,19 +727,20 @@
       "id": "motherboard.sata.2",
       "parent_id": "motherboard.pcb",
       "name": {
-        "en": "SATA data header 2",
-        "ru": "Разъём SATA 2"
+        "en": "SATA 2 data header · white · Gen3",
+        "ru": "Разъём SATA 2 · белый · Gen3"
       },
       "category": "storage_interface",
       "evidence_status": "manufacturer_data",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
-        "src.dell.5060.service",
-        "src.dell.5060.setup"
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.board_connectors",
+        "src.dell.5060.storage"
       ],
       "description": {
-        "en": "Dell's Tower motherboard illustration identifies four SATA data headers; positions here are schematic.",
-        "ru": "Dell's Tower motherboard illustration identifies four SATA data headers; positions here are schematic."
+        "en": "Dell motherboard callout 18. One of the three Gen3 SATA data headers; exact drive connection depends on installed storage.",
+        "ru": "Обозначение Dell №18. Один из трёх разъёмов SATA Gen3; подключение зависит от установленных накопителей."
       },
       "visual_proxy": {
         "kind": "box",
@@ -757,19 +761,20 @@
       "id": "motherboard.sata.3",
       "parent_id": "motherboard.pcb",
       "name": {
-        "en": "SATA data header 3",
-        "ru": "Разъём SATA 3"
+        "en": "SATA 3 data header · black · Gen3",
+        "ru": "Разъём SATA 3 · чёрный · Gen3"
       },
       "category": "storage_interface",
       "evidence_status": "manufacturer_data",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
-        "src.dell.5060.service",
-        "src.dell.5060.setup"
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.board_connectors",
+        "src.dell.5060.storage"
       ],
       "description": {
-        "en": "Dell's Tower motherboard illustration identifies four SATA data headers; positions here are schematic.",
-        "ru": "Dell's Tower motherboard illustration identifies four SATA data headers; positions here are schematic."
+        "en": "Dell motherboard callout 20. One of the three Gen3 SATA data headers; exact drive connection depends on installed storage.",
+        "ru": "Обозначение Dell №20. Один из трёх разъёмов SATA Gen3; подключение зависит от установленных накопителей."
       },
       "visual_proxy": {
         "kind": "box",
@@ -790,19 +795,20 @@
       "id": "motherboard.sata.4",
       "parent_id": "motherboard.pcb",
       "name": {
-        "en": "SATA data header 4",
-        "ru": "Разъём SATA 4"
+        "en": "SATA 1 data header · black · Gen3",
+        "ru": "Разъём SATA 1 · чёрный · Gen3"
       },
       "category": "storage_interface",
       "evidence_status": "manufacturer_data",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
-        "src.dell.5060.service",
-        "src.dell.5060.setup"
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.board_connectors",
+        "src.dell.5060.storage"
       ],
       "description": {
-        "en": "Dell's Tower motherboard illustration identifies four SATA data headers; positions here are schematic.",
-        "ru": "Dell's Tower motherboard illustration identifies four SATA data headers; positions here are schematic."
+        "en": "Dell motherboard callout 21. One of the three Gen3 SATA data headers; exact drive connection depends on installed storage.",
+        "ru": "Обозначение Dell №21. Один из трёх разъёмов SATA Gen3; подключение зависит от установленных накопителей."
       },
       "visual_proxy": {
         "kind": "box",
@@ -830,12 +836,12 @@
       "evidence_status": "manufacturer_data",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
-        "src.dell.5060.service",
-        "src.dell.5060.setup"
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.power"
       ],
       "description": {
-        "en": "Family-level proxy component; exact part identity and placement require confirmation.",
-        "ru": "Макетный компонент уровня семейства; точную деталь и расположение требуется подтвердить."
+        "en": "Dell callout 22: main ATX system-power connector. Harness and pin-level electrical mapping are not reconstructed.",
+        "ru": "Обозначение Dell №22: основной разъём ATX питания системы. Жгут и попиновая электрическая карта не реконструированы."
       },
       "visual_proxy": {
         "kind": "box",
@@ -863,12 +869,12 @@
       "evidence_status": "manufacturer_data",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
-        "src.dell.5060.service",
-        "src.dell.5060.setup"
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.power"
       ],
       "description": {
-        "en": "Family-level proxy component; exact part identity and placement require confirmation.",
-        "ru": "Макетный компонент уровня семейства; точную деталь и расположение требуется подтвердить."
+        "en": "Dell callout 11: CPU power connector. Cable routing and pin-level mapping are not reconstructed.",
+        "ru": "Обозначение Dell №11: разъём питания CPU. Трасса кабеля и попиновая карта не реконструированы."
       },
       "visual_proxy": {
         "kind": "box",
@@ -896,12 +902,12 @@
       "evidence_status": "manufacturer_data",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
-        "src.dell.5060.service",
-        "src.dell.5060.setup"
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.system_fan"
       ],
       "description": {
-        "en": "Family-level proxy component; exact part identity and placement require confirmation.",
-        "ru": "Макетный компонент уровня семейства; точную деталь и расположение требуется подтвердить."
+        "en": "Dell callout 8: system-fan connection. Its cable is documented as routed through a fan mounting grommet; exact wire geometry is not modeled.",
+        "ru": "Обозначение Dell №8: подключение системного вентилятора. В руководстве кабель проходит через монтажную втулку; геометрия провода не моделируется."
       },
       "visual_proxy": {
         "kind": "box",
@@ -982,11 +988,11 @@
       "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.dell.5060.service",
-        "src.dell.5060.setup"
+        "src.dell.5060.heatsink"
       ],
       "description": {
-        "en": "Family-level proxy component; exact part identity and placement require confirmation.",
-        "ru": "Макетный компонент уровня семейства; точную деталь и расположение требуется подтвердить."
+        "en": "CPU heatsink removed after its four captive screws are loosened in the printed 1–4 order. Exact fin geometry, material and dimensions are not measured.",
+        "ru": "Радиатор CPU снимается после ослабления четырёх невыпадающих винтов в порядке 1–4, указанном в руководстве. Геометрия рёбер, материал и размеры не измерены."
       },
       "visual_proxy": {
         "kind": "box",
@@ -1015,11 +1021,11 @@
       "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.dell.5060.service",
-        "src.dell.5060.setup"
+        "src.dell.5060.boardlayout"
       ],
       "description": {
-        "en": "Fan envelope proxy only; OEM part number, blade profile and connector are unknown.",
-        "ru": "Fan envelope proxy only; OEM part number, blade profile and connector are unknown."
+        "en": "CPU heatsink fan. Dell's system-board service prerequisites include fan removal; OEM fan part number and electrical specifications remain unknown.",
+        "ru": "Вентилятор радиатора CPU. Руководство Dell включает его снятие в подготовку к демонтажу платы; номер детали OEM и электрические параметры неизвестны."
       },
       "visual_proxy": {
         "kind": "box",
@@ -1048,11 +1054,11 @@
       "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.dell.5060.service",
-        "src.dell.5060.setup"
+        "src.dell.5060.system_fan"
       ],
       "description": {
-        "en": "Dell documents the serviceable fan and rubber mounting grommets; exact size and part number are unknown.",
-        "ru": "Dell documents the serviceable fan and rubber mounting grommets; exact size and part number are unknown."
+        "en": "Chassis system fan retained by four rubber mounting grommets. Dell documents disconnecting its cable and releasing the grommets; exact fan size and part number are unknown.",
+        "ru": "Корпусной вентилятор крепится четырьмя резиновыми втулками. Dell документирует отключение кабеля и освобождение втулок; точный размер и номер вентилятора неизвестны."
       },
       "visual_proxy": {
         "kind": "box",
@@ -1100,11 +1106,11 @@
       "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.dell.5060.service",
-        "src.dell.5060.setup"
+        "src.dell.5060.power"
       ],
       "description": {
-        "en": "Enclosure-only proxy. Exact PSU manufacturer, part number, wattage, revision and internal topology remain unknown.",
-        "ru": "Enclosure-only proxy. Exact PSU manufacturer, part number, wattage, revision and internal topology remain unknown."
+        "en": "PSU enclosure proxy. Dell lists 260 W Bronze and 260 W Platinum variants, but no exact fitted PSU option, OEM, part number or revision is known.",
+        "ru": "Макет корпуса БП. Dell указывает варианты 260 Вт Bronze и 260 Вт Platinum, но конкретный установленный вариант, OEM, номер детали и ревизия неизвестны."
       },
       "visual_proxy": {
         "kind": "box",
@@ -1233,12 +1239,12 @@
       "evidence_status": "manufacturer_data",
       "geometry_status": "unknown",
       "source_ids": [
-        "src.dell.5060.service",
-        "src.dell.5060.setup"
+        "src.dell.5060.storage",
+        "src.dell.5060.board_connectors"
       ],
       "description": {
-        "en": "M.2 SSD is supported, but no exact SSD is selected or shown as installed.",
-        "ru": "M.2 SSD is supported, but no exact SSD is selected or shown as installed."
+        "en": "Platform-supported M.2 2230/2280 SSD option using SATA or PCIe. This package does not claim that a drive is installed.",
+        "ru": "Поддерживаемый платформой SSD M.2 2230/2280 с интерфейсом SATA или PCIe. Пакет не утверждает, что накопитель установлен."
       },
       "configuration_status": "optional_not_populated"
     },
@@ -1246,19 +1252,18 @@
       "id": "storage.drive35.optional",
       "parent_id": "storage.assembly",
       "name": {
-        "en": "Optional 3.5-inch drive · not populated",
-        "ru": "Опциональный накопитель 3,5″ · не установлен"
+        "en": "Optional 3.5-inch SATA drive · not populated",
+        "ru": "Опциональный SATA-накопитель 3,5″ · не установлен"
       },
       "category": "storage_device",
       "evidence_status": "manufacturer_data",
       "geometry_status": "unknown",
       "source_ids": [
-        "src.dell.5060.service",
-        "src.dell.5060.setup"
+        "src.dell.5060.storage"
       ],
       "description": {
-        "en": "A 3.5-inch drive assembly is documented; its presence varies by factory configuration.",
-        "ru": "A 3.5-inch drive assembly is documented; its presence varies by factory configuration."
+        "en": "One documented storage option; supported drive combinations vary. No fitted capacity, model or RPM is selected.",
+        "ru": "Один из документированных вариантов хранения; поддерживаемые комбинации различаются. Ёмкость, модель и обороты установленного диска не определены."
       },
       "configuration_status": "optional_not_populated"
     },
@@ -1273,12 +1278,12 @@
       "evidence_status": "manufacturer_data",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
-        "src.dell.5060.service",
-        "src.dell.5060.setup"
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.system_fan"
       ],
       "description": {
-        "en": "Family-level proxy component; exact part identity and placement require confirmation.",
-        "ru": "Макетный компонент уровня семейства; точную деталь и расположение требуется подтвердить."
+        "en": "Chassis intrusion switch. Dell separately identifies its system-board connector and documents disconnecting its cable during system-fan service.",
+        "ru": "Датчик вскрытия корпуса. Dell отдельно обозначает разъём на системной плате и документирует отсоединение кабеля при обслуживании корпусного вентилятора."
       },
       "visual_proxy": {
         "kind": "box",
@@ -2134,6 +2139,917 @@
       },
       "mount_type": "rubber_grommet",
       "placement_status": "schematic_not_measured"
+    },
+    {
+      "id": "motherboard.pcie.x16.wired_x4",
+      "parent_id": "motherboard.pcb",
+      "name": {
+        "en": "PCIe x16 mechanical slot · wired x4 Gen3 · Slot 4",
+        "ru": "Механический слот PCIe x16 · электрически x4 Gen3 · Slot 4"
+      },
+      "category": "expansion_interface",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.board_connectors"
+      ],
+      "description": {
+        "en": "Dell callout 1: full-length x16 mechanical connector wired as PCIe x4 Revision 3.0.",
+        "ru": "Обозначение Dell №1: разъём механической длины x16, электрически подключённый как PCIe x4 Revision 3.0."
+      }
+    },
+    {
+      "id": "motherboard.m2.wlan",
+      "parent_id": "motherboard.pcb",
+      "name": {
+        "en": "M.2 WLAN socket · 2230",
+        "ru": "Разъём M.2 WLAN · 2230"
+      },
+      "category": "wireless_interface",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.board_connectors"
+      ],
+      "description": {
+        "en": "Dell identifies a separate M.2 2230 WLAN connector. Supported module interfaces depend on CNVi or USB 2.0/PCIe module type; no module is populated in this reference.",
+        "ru": "Dell обозначает отдельный разъём M.2 2230 WLAN. Поддержка зависит от типа модуля CNVi либо USB 2.0/PCIe; модуль в эталонной модели не установлен."
+      }
+    },
+    {
+      "id": "motherboard.cpu_fan_header",
+      "parent_id": "motherboard.pcb",
+      "name": {
+        "en": "CPU cooler fan header",
+        "ru": "Разъём вентилятора кулера CPU"
+      },
+      "category": "control_interface",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.board_connectors"
+      ],
+      "description": {
+        "en": "Dell callout 12: CPU cooler fan connector. Exact pinout and cable geometry are not reconstructed.",
+        "ru": "Обозначение Dell №12: разъём вентилятора кулера CPU. Распиновка и геометрия кабеля не реконструированы."
+      }
+    },
+    {
+      "id": "motherboard.intrusion_switch_header",
+      "parent_id": "motherboard.pcb",
+      "name": {
+        "en": "Chassis intrusion switch header",
+        "ru": "Разъём датчика вскрытия корпуса"
+      },
+      "category": "control_interface",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.board_connectors"
+      ],
+      "description": {
+        "en": "Dell callout 9: chassis-intrusion switch connector; the service procedure documents disconnecting this cable.",
+        "ru": "Обозначение Dell №9: разъём датчика вскрытия корпуса; сервисная процедура документирует отключение этого кабеля."
+      }
+    },
+    {
+      "id": "motherboard.sd_reader_header",
+      "parent_id": "motherboard.pcb",
+      "name": {
+        "en": "SD card reader header",
+        "ru": "Разъём картридера SD"
+      },
+      "category": "internal_interface",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.board_connectors"
+      ],
+      "description": {
+        "en": "Dell callout 14: internal connector for the optional SD card reader.",
+        "ru": "Обозначение Dell №14: внутренний разъём опционального картридера SD."
+      }
+    },
+    {
+      "id": "motherboard.speaker_header",
+      "parent_id": "motherboard.pcb",
+      "name": {
+        "en": "Internal speaker header",
+        "ru": "Разъём внутреннего динамика"
+      },
+      "category": "audio_interface",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.board_connectors"
+      ],
+      "description": {
+        "en": "Dell callout 19: internal speaker connector. Connector pinout and speaker waveform are not modeled.",
+        "ru": "Обозначение Dell №19: разъём внутреннего динамика. Распиновка и форма сигнала не моделируются."
+      }
+    },
+    {
+      "id": "motherboard.power_switch_header",
+      "parent_id": "motherboard.pcb",
+      "name": {
+        "en": "Power switch / front panel header",
+        "ru": "Разъём кнопки питания / передней панели"
+      },
+      "category": "control_interface",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.board_connectors"
+      ],
+      "description": {
+        "en": "Dell callout 15: power-switch connector; the front power button is represented separately.",
+        "ru": "Обозначение Dell №15: разъём кнопки питания; сама передняя кнопка представлена отдельно."
+      }
+    },
+    {
+      "id": "motherboard.sata_power_header",
+      "parent_id": "motherboard.pcb",
+      "name": {
+        "en": "SATA drive power header",
+        "ru": "Разъём питания SATA-накопителей"
+      },
+      "category": "power_interface",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.board_connectors"
+      ],
+      "description": {
+        "en": "Dell callout 23: SATA power connector on the system board. The harness path is not drawn.",
+        "ru": "Обозначение Dell №23: разъём питания SATA на системной плате. Трасса жгута не отображается."
+      }
+    },
+    {
+      "id": "motherboard.clear_cmos_jumper",
+      "parent_id": "motherboard.pcb",
+      "name": {
+        "en": "Clear CMOS / Password / Service Mode jumper",
+        "ru": "Перемычка Clear CMOS / Password / Service Mode"
+      },
+      "category": "service_interface",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.board_connectors"
+      ],
+      "description": {
+        "en": "Dell callout 26: service jumper with CMOS-clear, password-clear and service-mode functions. Exact jumper cap state is unknown.",
+        "ru": "Обозначение Dell №26: сервисная перемычка для сброса CMOS, пароля и сервисного режима. Положение колпачка неизвестно."
+      }
+    },
+    {
+      "id": "motherboard.typec_header.optional",
+      "parent_id": "motherboard.pcb",
+      "name": {
+        "en": "Optional Type-C port module header",
+        "ru": "Разъём опционального модуля порта Type-C"
+      },
+      "category": "internal_interface",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.board_connectors"
+      ],
+      "description": {
+        "en": "Dell callout 5: optional Type-C connector/header for a configuration-specific rear I/O module; module presence is unknown.",
+        "ru": "Обозначение Dell №5: разъём опционального модуля Type-C для конфигурационной панели заднего I/O; наличие модуля неизвестно."
+      }
+    },
+    {
+      "id": "motherboard.video_header.optional",
+      "parent_id": "motherboard.pcb",
+      "name": {
+        "en": "Optional video connector module header",
+        "ru": "Разъём опционального видеомодуля"
+      },
+      "category": "internal_interface",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.board_connectors"
+      ],
+      "description": {
+        "en": "Dell callout 6: optional HDMI / DisplayPort / VGA connector module location, dependent on configuration.",
+        "ru": "Обозначение Dell №6: место опционального модуля HDMI / DisplayPort / VGA, зависящее от комплектации."
+      }
+    },
+    {
+      "id": "motherboard.ps2_serial_header.optional",
+      "parent_id": "motherboard.pcb",
+      "name": {
+        "en": "Optional PS/2 / serial module header",
+        "ru": "Разъём опционального модуля PS/2 / Serial"
+      },
+      "category": "internal_interface",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.board_connectors"
+      ],
+      "description": {
+        "en": "Dell callout 7: optional PS/2 or serial connector module location, configuration-dependent.",
+        "ru": "Обозначение Dell №7: место опционального модуля PS/2 или последовательного порта, зависит от комплектации."
+      }
+    },
+    {
+      "id": "storage.drive25.optional",
+      "parent_id": "storage.assembly",
+      "name": {
+        "en": "Optional 2.5-inch SATA drive · not populated",
+        "ru": "Опциональный SATA-накопитель 2,5″ · не установлен"
+      },
+      "category": "storage_device",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "unknown",
+      "source_ids": [
+        "src.dell.5060.storage"
+      ],
+      "description": {
+        "en": "Dell documents 2.5-inch storage configurations; exact fitted device, capacity and carrier are unknown.",
+        "ru": "Dell документирует конфигурации с накопителем 2,5″; установленное устройство, ёмкость и салазки неизвестны."
+      }
+    },
+    {
+      "id": "storage.optical_drive.optional",
+      "parent_id": "storage.assembly",
+      "name": {
+        "en": "Optional slim optical drive · not populated",
+        "ru": "Опциональный тонкий оптический привод · не установлен"
+      },
+      "category": "storage_device",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "unknown",
+      "source_ids": [
+        "src.dell.5060.storage",
+        "src.dell.5060.board_connectors"
+      ],
+      "description": {
+        "en": "An optical-drive option is documented in the platform guide and linked to the SATA Gen2 optical-drive path. Presence is configuration-dependent.",
+        "ru": "В руководстве платформы документирован оптический привод, подключаемый к линии SATA Gen2. Наличие зависит от комплектации."
+      }
+    },
+    {
+      "id": "storage.sd_reader.optional",
+      "parent_id": "storage.assembly",
+      "name": {
+        "en": "Optional SD card reader module · not populated",
+        "ru": "Опциональный модуль картридера SD · не установлен"
+      },
+      "category": "storage_device",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "unknown",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.board_connectors"
+      ],
+      "description": {
+        "en": "Dell documents an optional SD reader module and a dedicated system-board connector. No reader is asserted as fitted.",
+        "ru": "Dell документирует опциональный картридер SD и отдельный разъём системной платы. Наличие картридера не утверждается."
+      }
+    },
+    {
+      "id": "front.power_indicator",
+      "parent_id": "front.io_region",
+      "name": {
+        "en": "Power button status indicator",
+        "ru": "Индикатор кнопки питания"
+      },
+      "category": "status_indicator",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ],
+      "description": {
+        "en": "Front power-button illumination/status is documented in the external-view legend; exact LED color behavior is not reconstructed.",
+        "ru": "Подсветка/индикация кнопки питания указана в легенде внешнего вида; точные режимы и цвета LED не реконструированы."
+      }
+    },
+    {
+      "id": "front.hdd_activity_indicator",
+      "parent_id": "front.io_region",
+      "name": {
+        "en": "Hard-drive activity indicator",
+        "ru": "Индикатор активности накопителя"
+      },
+      "category": "status_indicator",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ],
+      "description": {
+        "en": "Dell identifies a front HDD activity light. LED drive activity is not animated or connected to a live disk state.",
+        "ru": "Dell обозначает передний индикатор активности HDD. Индикация не анимируется и не связана с состоянием реального диска."
+      }
+    },
+    {
+      "id": "front.optical_drive_bay.optional",
+      "parent_id": "front.io_region",
+      "name": {
+        "en": "Optional optical-drive bay",
+        "ru": "Отсек оптического привода"
+      },
+      "category": "mechanical_io",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "unknown",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ],
+      "description": {
+        "en": "Optional front optical-drive opening shown in Dell's Tower view. Drive and bezel details vary by order configuration.",
+        "ru": "Опциональный передний отсек оптического привода на схеме Tower Dell. Привод и оформление зависят от комплектации."
+      }
+    },
+    {
+      "id": "front.sd_card_reader_slot.optional",
+      "parent_id": "front.io_region",
+      "name": {
+        "en": "Optional SD card reader slot",
+        "ru": "Слот опционального картридера SD"
+      },
+      "category": "external_port",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "unknown",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ],
+      "description": {
+        "en": "Optional SD card reader opening; module presence is not confirmed.",
+        "ru": "Отверстие опционального картридера SD; наличие модуля не подтверждено."
+      }
+    },
+    {
+      "id": "front.audio_combo",
+      "parent_id": "front.io_region",
+      "name": {
+        "en": "Universal headset / audio jack",
+        "ru": "Универсальный аудиоразъём для гарнитуры"
+      },
+      "category": "external_port",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ],
+      "description": {
+        "en": "Front universal audio/headset jack listed in the product port specification.",
+        "ru": "Передний универсальный аудиоразъём для гарнитуры, указанный в спецификации портов."
+      }
+    },
+    {
+      "id": "front.usb2.powershare",
+      "parent_id": "front.io_region",
+      "name": {
+        "en": "Front USB 2.0 port · PowerShare",
+        "ru": "Передний порт USB 2.0 · PowerShare"
+      },
+      "category": "external_port",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ],
+      "description": {
+        "en": "One front USB 2.0 Type-A port with PowerShare capability.",
+        "ru": "Один передний порт USB 2.0 Type-A с функцией PowerShare."
+      }
+    },
+    {
+      "id": "front.usb2",
+      "parent_id": "front.io_region",
+      "name": {
+        "en": "Front USB 2.0 port",
+        "ru": "Передний порт USB 2.0"
+      },
+      "category": "external_port",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ],
+      "description": {
+        "en": "One additional front USB 2.0 Type-A port without the PowerShare label.",
+        "ru": "Ещё один передний порт USB 2.0 Type-A без обозначения PowerShare."
+      }
+    },
+    {
+      "id": "front.usbc.gen2.powershare",
+      "parent_id": "front.io_region",
+      "name": {
+        "en": "Front USB 3.1 Gen 2 Type-C · PowerShare",
+        "ru": "Передний USB 3.1 Gen 2 Type-C · PowerShare"
+      },
+      "category": "external_port",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ],
+      "description": {
+        "en": "One front USB 3.1 Gen 2 Type-C port with PowerShare, as documented by Dell.",
+        "ru": "Один передний порт USB 3.1 Gen 2 Type-C с PowerShare согласно документации Dell."
+      }
+    },
+    {
+      "id": "front.usb3.gen1",
+      "parent_id": "front.io_region",
+      "name": {
+        "en": "Front USB 3.1 Gen 1 Type-A port",
+        "ru": "Передний порт USB 3.1 Gen 1 Type-A"
+      },
+      "category": "external_port",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ],
+      "description": {
+        "en": "One front USB 3.1 Gen 1 Type-A port.",
+        "ru": "Один передний порт USB 3.1 Gen 1 Type-A."
+      }
+    },
+    {
+      "id": "rear.io_region",
+      "parent_id": "chassis.rear_panel",
+      "name": {
+        "en": "Rear I/O and chassis interface region",
+        "ru": "Зона задних разъёмов и интерфейсов корпуса"
+      },
+      "category": "mechanical_io",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ],
+      "description": {
+        "en": "Semantic grouping for Dell-documented rear ports, indicators, openings and chassis locks. Individual coordinates and port module combinations are not measured.",
+        "ru": "Смысловая группа задних портов, индикаторов, отверстий и замков по документации Dell. Координаты и комбинации модулей не измерены."
+      }
+    },
+    {
+      "id": "rear.line_out",
+      "parent_id": "rear.io_region",
+      "name": {
+        "en": "Rear line-out audio jack",
+        "ru": "Задний аудиовыход Line-out"
+      },
+      "category": "external_port",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ],
+      "description": {
+        "en": "One rear line-out connector listed by Dell.",
+        "ru": "Один задний аудиовыход Line-out по документации Dell."
+      }
+    },
+    {
+      "id": "rear.serial.optional",
+      "parent_id": "rear.io_region",
+      "name": {
+        "en": "Optional serial port module",
+        "ru": "Опциональный модуль последовательного порта"
+      },
+      "category": "external_port",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "unknown",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ],
+      "description": {
+        "en": "Optional rear serial port; presence depends on the ordered I/O configuration.",
+        "ru": "Опциональный задний последовательный порт; наличие зависит от заказанной конфигурации I/O."
+      }
+    },
+    {
+      "id": "rear.video_module.optional",
+      "parent_id": "rear.io_region",
+      "name": {
+        "en": "Optional third-video-output module · one configured option",
+        "ru": "Модуль опционального третьего видеовыхода · один вариант по комплектации"
+      },
+      "category": "external_port",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "unknown",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ],
+      "description": {
+        "en": "Dell documents optional HDMI 2.0b, DisplayPort, VGA or USB-C DisplayPort Alt Mode module options. These are alternatives, not four simultaneous ports.",
+        "ru": "Dell документирует опциональные модули HDMI 2.0b, DisplayPort, VGA или USB-C DisplayPort Alt Mode. Это альтернативы, а не четыре одновременно установленных порта."
+      }
+    },
+    {
+      "id": "rear.displayport.1",
+      "parent_id": "rear.io_region",
+      "name": {
+        "en": "Rear DisplayPort 1",
+        "ru": "Задний DisplayPort 1"
+      },
+      "category": "external_port",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ],
+      "description": {
+        "en": "One of two standard rear DisplayPort outputs listed by Dell.",
+        "ru": "Один из двух штатных задних выходов DisplayPort по документации Dell."
+      }
+    },
+    {
+      "id": "rear.displayport.2",
+      "parent_id": "rear.io_region",
+      "name": {
+        "en": "Rear DisplayPort 2",
+        "ru": "Задний DisplayPort 2"
+      },
+      "category": "external_port",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ],
+      "description": {
+        "en": "One of two standard rear DisplayPort outputs listed by Dell.",
+        "ru": "Один из двух штатных задних выходов DisplayPort по документации Dell."
+      }
+    },
+    {
+      "id": "rear.usb3.gen1.1",
+      "parent_id": "rear.io_region",
+      "name": {
+        "en": "Rear USB 3.1 Gen 1 port 1",
+        "ru": "Задний USB 3.1 Gen 1 порт 1"
+      },
+      "category": "external_port",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ],
+      "description": {
+        "en": "One of four rear USB 3.1 Gen 1 Type-A ports.",
+        "ru": "Один из четырёх задних портов USB 3.1 Gen 1 Type-A."
+      }
+    },
+    {
+      "id": "rear.usb3.gen1.2",
+      "parent_id": "rear.io_region",
+      "name": {
+        "en": "Rear USB 3.1 Gen 1 port 2",
+        "ru": "Задний USB 3.1 Gen 1 порт 2"
+      },
+      "category": "external_port",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ],
+      "description": {
+        "en": "One of four rear USB 3.1 Gen 1 Type-A ports.",
+        "ru": "Один из четырёх задних портов USB 3.1 Gen 1 Type-A."
+      }
+    },
+    {
+      "id": "rear.usb3.gen1.3",
+      "parent_id": "rear.io_region",
+      "name": {
+        "en": "Rear USB 3.1 Gen 1 port 3",
+        "ru": "Задний USB 3.1 Gen 1 порт 3"
+      },
+      "category": "external_port",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ],
+      "description": {
+        "en": "One of four rear USB 3.1 Gen 1 Type-A ports.",
+        "ru": "Один из четырёх задних портов USB 3.1 Gen 1 Type-A."
+      }
+    },
+    {
+      "id": "rear.usb3.gen1.4",
+      "parent_id": "rear.io_region",
+      "name": {
+        "en": "Rear USB 3.1 Gen 1 port 4",
+        "ru": "Задний USB 3.1 Gen 1 порт 4"
+      },
+      "category": "external_port",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ],
+      "description": {
+        "en": "One of four rear USB 3.1 Gen 1 Type-A ports.",
+        "ru": "Один из четырёх задних портов USB 3.1 Gen 1 Type-A."
+      }
+    },
+    {
+      "id": "rear.usb2.smartpoweron.1",
+      "parent_id": "rear.io_region",
+      "name": {
+        "en": "Rear USB 2.0 SmartPower On port 1",
+        "ru": "Задний USB 2.0 SmartPower On порт 1"
+      },
+      "category": "external_port",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ],
+      "description": {
+        "en": "One of two rear USB 2.0 SmartPower On ports.",
+        "ru": "Один из двух задних портов USB 2.0 SmartPower On."
+      }
+    },
+    {
+      "id": "rear.usb2.smartpoweron.2",
+      "parent_id": "rear.io_region",
+      "name": {
+        "en": "Rear USB 2.0 SmartPower On port 2",
+        "ru": "Задний USB 2.0 SmartPower On порт 2"
+      },
+      "category": "external_port",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ],
+      "description": {
+        "en": "One of two rear USB 2.0 SmartPower On ports.",
+        "ru": "Один из двух задних портов USB 2.0 SmartPower On."
+      }
+    },
+    {
+      "id": "rear.rj45",
+      "parent_id": "rear.io_region",
+      "name": {
+        "en": "RJ-45 Gigabit Ethernet port",
+        "ru": "Порт Gigabit Ethernet RJ-45"
+      },
+      "category": "network_port",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ],
+      "description": {
+        "en": "One rear RJ-45 Ethernet connector; exact network controller and PHY are not identified here.",
+        "ru": "Один задний разъём Ethernet RJ-45; конкретный сетевой контроллер и PHY здесь не определяются."
+      }
+    },
+    {
+      "id": "rear.expansion_opening.1",
+      "parent_id": "rear.io_region",
+      "name": {
+        "en": "Expansion-card rear opening 1",
+        "ru": "Заднее окно платы расширения 1"
+      },
+      "category": "mechanical_io",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ],
+      "description": {
+        "en": "One of four rear expansion-card openings; card occupancy is unknown.",
+        "ru": "Одно из четырёх задних окон плат расширения; наличие плат неизвестно."
+      }
+    },
+    {
+      "id": "rear.expansion_opening.2",
+      "parent_id": "rear.io_region",
+      "name": {
+        "en": "Expansion-card rear opening 2",
+        "ru": "Заднее окно платы расширения 2"
+      },
+      "category": "mechanical_io",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ],
+      "description": {
+        "en": "One of four rear expansion-card openings; card occupancy is unknown.",
+        "ru": "Одно из четырёх задних окон плат расширения; наличие плат неизвестно."
+      }
+    },
+    {
+      "id": "rear.expansion_opening.3",
+      "parent_id": "rear.io_region",
+      "name": {
+        "en": "Expansion-card rear opening 3",
+        "ru": "Заднее окно платы расширения 3"
+      },
+      "category": "mechanical_io",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ],
+      "description": {
+        "en": "One of four rear expansion-card openings; card occupancy is unknown.",
+        "ru": "Одно из четырёх задних окон плат расширения; наличие плат неизвестно."
+      }
+    },
+    {
+      "id": "rear.expansion_opening.4",
+      "parent_id": "rear.io_region",
+      "name": {
+        "en": "Expansion-card rear opening 4",
+        "ru": "Заднее окно платы расширения 4"
+      },
+      "category": "mechanical_io",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ],
+      "description": {
+        "en": "One of four rear expansion-card openings; card occupancy is unknown.",
+        "ru": "Одно из четырёх задних окон плат расширения; наличие плат неизвестно."
+      }
+    },
+    {
+      "id": "rear.psu_inlet",
+      "parent_id": "rear.io_region",
+      "name": {
+        "en": "AC power inlet on PSU",
+        "ru": "Сетевой вход питания блока питания"
+      },
+      "category": "power_interface",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ],
+      "description": {
+        "en": "Rear AC inlet on the PSU enclosure. Exact PSU model and inlet module are unknown.",
+        "ru": "Задний сетевой вход на корпусе БП. Точная модель БП и узел входа неизвестны."
+      }
+    },
+    {
+      "id": "rear.antenna.1.optional",
+      "parent_id": "rear.io_region",
+      "name": {
+        "en": "Optional external antenna connector 1",
+        "ru": "Опциональный разъём внешней антенны 1"
+      },
+      "category": "wireless_interface",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "unknown",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ],
+      "description": {
+        "en": "Optional external antenna connection for a compatible wireless configuration.",
+        "ru": "Опциональное подключение внешней антенны для совместимой беспроводной конфигурации."
+      }
+    },
+    {
+      "id": "rear.antenna.2.optional",
+      "parent_id": "rear.io_region",
+      "name": {
+        "en": "Optional external antenna connector 2",
+        "ru": "Опциональный разъём внешней антенны 2"
+      },
+      "category": "wireless_interface",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "unknown",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ],
+      "description": {
+        "en": "Optional external antenna connection for a compatible wireless configuration.",
+        "ru": "Опциональное подключение внешней антенны для совместимой беспроводной конфигурации."
+      }
+    },
+    {
+      "id": "rear.psu_diagnostic_led",
+      "parent_id": "rear.io_region",
+      "name": {
+        "en": "PSU diagnostic indicator",
+        "ru": "Диагностический индикатор БП"
+      },
+      "category": "status_indicator",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ],
+      "description": {
+        "en": "Power-supply diagnostic light documented on the rear panel; diagnostic behavior is not simulated.",
+        "ru": "Диагностический индикатор блока питания на задней панели; поведение индикации не симулируется."
+      }
+    },
+    {
+      "id": "rear.kensington_slot",
+      "parent_id": "rear.io_region",
+      "name": {
+        "en": "Kensington security slot",
+        "ru": "Слот безопасности Kensington"
+      },
+      "category": "mechanical_io",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ],
+      "description": {
+        "en": "Chassis anti-theft cable attachment point.",
+        "ru": "Точка крепления противоугонного троса к корпусу."
+      }
+    },
+    {
+      "id": "rear.padlock_loop",
+      "parent_id": "rear.io_region",
+      "name": {
+        "en": "Padlock loop",
+        "ru": "Петля для навесного замка"
+      },
+      "category": "mechanical_io",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ],
+      "description": {
+        "en": "Chassis padlock loop identified in Dell's rear-view legend.",
+        "ru": "Петля корпуса для навесного замка по схеме задней панели Dell."
+      }
+    },
+    {
+      "id": "rear.service_tag",
+      "parent_id": "rear.io_region",
+      "name": {
+        "en": "Service Tag label location",
+        "ru": "Место наклейки Service Tag"
+      },
+      "category": "identity_marker",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.ports"
+      ],
+      "description": {
+        "en": "Service Tag location on the chassis. No real service-tag value is stored in this family package.",
+        "ru": "Место размещения Service Tag на корпусе. Реальное значение сервисного тега в пакете семейства не хранится."
+      }
     }
   ]
 }
