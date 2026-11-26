@@ -1436,6 +1436,7 @@ function renderProcessLayer() {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "process-component-chip";
+    button.dataset.componentId = id;
     button.textContent = state.language === "ru" ? data.ru : data.en;
     button.addEventListener("click", () => selectComponent(id));
     componentHost.append(button);
