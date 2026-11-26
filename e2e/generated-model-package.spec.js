@@ -35,3 +35,27 @@ test("opens the real Blender-generated RTX 3060 .sbsmodel archive", async ({ pag
   await page.locator("#catalog-close").click();
   await expect(page.locator("#process-details")).toBeVisible();
 });
+
+test("IBM PC 5150 renders the sourced branching FRU graph and replacement fragments", async ({ page }) => {
+  await page.goto("/");
+  await page.locator("#model-file").setInputFiles("public/models/ibm_pc_5150_1981.sbsmodel");
+
+  await expect(page.locator("#model-title")).toHaveText("IBM Personal Computer 5150", { timeout: 15000 });
+  await expect(page.locator("#model-sku")).toHaveText("5150");
+  await expect(page.locator("#load-state")).toContainText("ПАКЕТ SBS MODEL");
+
+  await page.locator('#component-tree button[data-id="computer.ibm.5150.1981"]').click();
+  await expect(page.locator("#assembly-policy-note")).toBeVisible();
+  await expect(page.locator("#assembly-policy-note")).toContainText("Номера шагов служат только порядком отображения");
+  await expect(page.locator("#assembly-step-list .assembly-step-card")).toHaveCount(14);
+  await expect(page.locator("#assembly-step-list .assembly-procedure-group")).toHaveCount(7);
+  await expect(page.locator("#assembly-step-list")).toContainText("Независимая ветвь FRU");
+  await expect(page.locator("#assembly-step-list")).toContainText("Сдвинуть плату примерно на 1/2 дюйма от БП");
+  await expect(page.locator("#assembly-step-list")).toContainText("извлечение самого БП");
+  await expect(page.locator("#assembly-replacement-list .assembly-replacement-card")).toHaveCount(4);
+  await expect(page.locator("#assembly-replacement-policy")).toContainText("не полная последовательность обратной сборки");
+
+  await page.locator('#component-tree button[data-id="assembly.system_board"]').click();
+  await expect(page.locator("#assembly-step-list .assembly-step-card")).toHaveCount(3);
+  await expect(page.locator("#assembly-step-list")).toContainText("единственный удерживающий винт платы");
+});
