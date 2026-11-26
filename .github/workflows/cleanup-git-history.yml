@@ -1,0 +1,147 @@
+name: One-time Git history privacy cleanup
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/cleanup-git-history.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  scrub-history:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Install git-filter-repo
+        run: |
+          python -m pip install --disable-pip-version-check --quiet git-filter-repo
+
+      - name: Rewrite author, committer, and tagger email metadata
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NOREPLY_EMAIL: "334557867+alexalxandrov@users.noreply.github.com"
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          MIRROR_DIR="$RUNNER_TEMP/screw-by-screw.git"
+          WORKTREE_DIR="$RUNNER_TEMP/screw-by-screw-main"
+
+          git clone --mirror "https://github.com/${GITHUB_REPOSITORY}.git" "$MIRROR_DIR"
+
+          # Build the mailmap from identities actually used by the repository.
+          # The old addresses are written only to RUNNER_TEMP, never committed or logged.
+          python - "$MIRROR_DIR" "$RUNNER_TEMP/sbs-mailmap" "$NOREPLY_EMAIL" <<'PY'
+          import subprocess
+          import sys
+          from pathlib import Path
+
+          repo, mailmap_path, replacement = sys.argv[1:]
+          def git(*args):
+              return subprocess.check_output(
+                  ["git", "-C", repo, *args], text=True, stderr=subprocess.DEVNULL
+              )
+
+          emails = set()
+          commit_lines = git("log", "--all", "--format=%an%x09%ae%n%cn%x09%ce").splitlines()
+          for line in commit_lines:
+              name, sep, email = line.partition("\t")
+              if sep and name == "alexalxandrov" and email and email != replacement:
+                  emails.add(email)
+
+          tag_lines = git(
+              "for-each-ref", "--format=%(taggername)%x09%(taggeremail)", "refs/tags"
+          ).splitlines()
+          for line in tag_lines:
+              name, sep, email = line.partition("\t")
+              email = email.strip("<>")
+              if sep and name == "alexalxandrov" and email and email != replacement:
+                  emails.add(email)
+
+          if not emails:
+              raise SystemExit("No non-noreply identities for the repository owner were found; refusing to rewrite.")
+
+          mailmap = "".join(
+              f"alexalxandrov <{replacement}> <{email}>\n"
+              for email in sorted(emails)
+          )
+          Path(mailmap_path).write_text(mailmap, encoding="utf-8")
+          print(f"Prepared private identity mappings: {len(emails)} (values suppressed).")
+          PY
+
+          git -C "$MIRROR_DIR" filter-repo --force --mailmap "$RUNNER_TEMP/sbs-mailmap"
+
+          # Validate all commit and annotated-tag identities before any remote ref is changed.
+          python - "$MIRROR_DIR" "$NOREPLY_EMAIL" <<'PY'
+          import subprocess
+          import sys
+
+          repo, replacement = sys.argv[1:]
+          def git(*args):
+              return subprocess.check_output(
+                  ["git", "-C", repo, *args], text=True, stderr=subprocess.DEVNULL
+              )
+
+          bad = []
+          for line in git("log", "--all", "--format=%an%x09%ae%n%cn%x09%ce").splitlines():
+              name, sep, email = line.partition("\t")
+              if sep and name == "alexalxandrov" and email != replacement:
+                  bad.append(("commit identity", name))
+          for line in git(
+              "for-each-ref", "--format=%(taggername)%x09%(taggeremail)", "refs/tags"
+          ).splitlines():
+              name, sep, email = line.partition("\t")
+              email = email.strip("<>")
+              if sep and name == "alexalxandrov" and email != replacement:
+                  bad.append(("tag identity", name))
+          if bad:
+              raise SystemExit(f"Identity validation failed for {len(bad)} metadata entries; no refs were pushed.")
+          refs = git("for-each-ref", "--format=%(refname)", "refs/heads").splitlines()
+          if len(refs) < 30:
+              raise SystemExit(f"Only {len(refs)} branches were fetched; refusing partial cleanup.")
+          print(f"Validated rewritten commit/tag metadata across {len(refs)} branches.")
+          PY
+
+          # Remove this temporary workflow from the resulting main tree.
+          git -C "$MIRROR_DIR" worktree add "$WORKTREE_DIR" main
+          git -C "$WORKTREE_DIR" rm -- .github/workflows/cleanup-git-history.yml
+          git -C "$WORKTREE_DIR" -c user.name="alexalxandrov" -c user.email="$NOREPLY_EMAIL" commit -m "chore: remove one-time history cleanup workflow"
+
+          git -C "$MIRROR_DIR" remote add origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+
+          # Dry-run the complete atomic update first. No refs change if any branch
+          # is protected or the server does not support atomic ref updates.
+          git -C "$MIRROR_DIR" push --force --atomic --dry-run origin "refs/heads/*:refs/heads/*"
+
+          # Publish the rewritten branches as one atomic ref transaction.
+          git -C "$MIRROR_DIR" push --force --atomic origin "refs/heads/*:refs/heads/*"
+
+          # Confirm the public remote now points only at rewritten history.
+          git -C "$MIRROR_DIR" fetch origin "+refs/heads/*:refs/remotes/origin/*"
+          python - "$MIRROR_DIR" "$NOREPLY_EMAIL" <<'PY'
+          import subprocess
+          import sys
+
+          repo, replacement = sys.argv[1:]
+          identities = subprocess.check_output(
+              ["git", "-C", repo, "log", "--all", "--format=%an%x09%ae%n%cn%x09%ce"],
+              text=True,
+              stderr=subprocess.DEVNULL,
+          ).splitlines()
+          old = [
+              line for line in identities
+              if "\t" in line
+              and line.split("\t", 1)[0] == "alexalxandrov"
+              and line.split("\t", 1)[1] != replacement
+          ]
+          if old:
+              raise SystemExit(f"Remote verification found {len(old)} remaining owner identity entries.")
+          print("Remote verification passed: no old owner email remains in reachable commit metadata.")
+          PY
+
+          echo "Git history email cleanup completed." >> "$GITHUB_STEP_SUMMARY"
+          echo "All repository branches were rewritten; project file contents were preserved." >> "$GITHUB_STEP_SUMMARY"
+          echo "The temporary cleanup workflow removed itself from main." >> "$GITHUB_STEP_SUMMARY"
