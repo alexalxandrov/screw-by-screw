@@ -2,7 +2,7 @@
   "format": "sbs-model",
   "schema_version": "1.0.0",
   "model_id": "pc.dell.optiplex-5060-tower.family",
-  "package_version": "0.2.0",
+  "package_version": "0.3.0",
   "status": "research_blockout",
   "files": {
     "model": "model.json",
