@@ -367,3 +367,15 @@ Sources:
 - HotHardware, EVGA GeForce RTX 3060 XC Black Gaming overview: https://hothardware.com/reviews/nvidia-geforce-rtx-3060-gpu-review-evga
 - PC Master Race Latinoamérica, EVGA GeForce RTX 3060 XC BLACK GAMING review: https://www.pcmrace.com/2021/04/05/evga-geforce-rtx-3060-xc-black-gaming-review/
 - LanOC, exact XC BLACK layout/measurement and exposed rear PCB: https://lanoc.org/review/video-cards/evga-rtx-3060-xc-black?showall=1
+
+
+## 24. Additional EVGA232 R10 schematic catalogue lead — unverified
+
+A second catalogue now lists a file named **EVGA232 R10 RTX3060 RTX3070.pdf** (12.40 MB) as a schematic PDF on a broad RTX-3070 archive page:
+https://www.vietitpro.vn/en/schematics/rtx-3070
+
+This is a distinct catalogue title from the previously indexed **EVGA232 / PG190-A02 / GA104-GA106** document. The host categorizes the new item under its combined RTX-3070 archive; the public listing does not expose the PDF title block, board revision, retail card part number, or a downloadable copy without a paid archive entitlement. The file has not been obtained or inspected.
+
+The string **R10** must not be interpreted as a confirmed PCB revision, and the presence of **RTX3060** in the filename is not evidence that the file describes EVGA 12G-P5-3655-KR. It may describe another EVGA232 board population, an RTX 3070 variant, or a multi-model reference design. Do not derive phase counts, controller identities, nets, pinouts, component values, board coordinates or geometry from this listing.
+
+Status: **unverified schematic catalogue lead only**. Keep the selected card's PCB revision unknown until the physical board identifier and the schematic title block are both correlated to an exact 12G-P5-3655-KR sample.
