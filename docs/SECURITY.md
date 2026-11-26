@@ -7,6 +7,7 @@ Screw by Screw is a static browser application. There is no application backend,
 - A user-selected GLB is read with the browser File API and parsed in the current page.
 - The application does not send the selected file to a server.
 - Source links are ordinary outbound links opened only after user interaction.
+- Imported `.sbsmodel` source links (`url`, `identity_reference_url`, and `identity_reference_image_url`) must be absolute HTTP(S) URLs; the model-data adapter also normalizes or drops non-web schemes before exposing them to the UI.
 - No remote fonts are loaded.
 - Vite development binds to `127.0.0.1`.
 
