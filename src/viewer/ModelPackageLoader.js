@@ -335,7 +335,9 @@ export async function loadModelPackage(file) {
     for (const [path, content] of Object.entries(envelope.files)) {
       if (!isSafeArchivePath(path)) fail("unsafe package path: " + path);
       if (path === "scene.glb") {
-        if (typeof content !== "string" || !/^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/.test(content)) {
+        if (typeof content !== "string") fail("scene GLB must be a base64 string");
+        if (content.length > Math.ceil(MAX_SCENE_GLB_BYTES / 3) * 4) fail("scene GLB exceeds the allowed size");
+        if (!/^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/.test(content)) {
           fail("scene GLB must be valid base64");
         }
         let decoded;
