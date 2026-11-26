@@ -66,8 +66,8 @@
       "model_kind": "system",
       "category_id": "desktop_computers",
       "summary": {
-        "en": "Expanded Tower family research package: 115 semantic components, 123 relationships, 26 mapped motherboard callouts, full front/rear I/O inventory and a source-backed partial system-board removal procedure. Optional installed parts remain unknown; geometry is illustrative, not CAD.",
-        "ru": "Расширенный исследовательский пакет семейства Tower: 115 смысловых компонентов, 123 связи, 26 обозначений системной платы, инвентаризация переднего/заднего I/O и частичная процедура снятия платы по источникам. Установленные опциональные детали неизвестны; геометрия условная, не CAD."
+        "en": "Expanded Tower family research package: 127 semantic nodes, 135 relationships, all 26 motherboard callouts mapped, 23 manufacturer source records, 31 technical claims, 12 system-board removal steps and optional service-hardware references. Optional population remains unknown; geometry is illustrative, not CAD.",
+        "ru": "Расширенный исследовательский пакет семейства Tower: 127 смысловых узлов, 135 связей, все 26 обозначений платы отображены в модели, 23 источника производителя, 31 техническое утверждение, 12 шагов снятия системной платы и ссылки на опциональный сервисный крепёж. Наличие опций не предполагается; геометрия условная, не CAD."
       },
       "tags": [
         "Dell",
@@ -85,7 +85,11 @@
         "M.2",
         "USB",
         "motherboard map",
-        "service procedure"
+        "service procedure",
+        "service hardware",
+        "optional fasteners",
+        "M2x3.5",
+        "M3x3"
       ],
       "status": "research_blockout",
       "geometry_status": "illustrative_proxy_not_cad",
