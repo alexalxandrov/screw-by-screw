@@ -964,6 +964,32 @@ def main():
             evidence=STATUS["manufacturer_data"], geometry="logical_only",
         )
 
+    # GA10x hierarchy: one logical TPC aggregate and individually selectable SM nodes.
+    # Two SMs and one PolyMorph Engine belong to each TPC. Fourteen TPCs are derived
+    # from the RTX 3060's 28 configured SMs; no GPC/floorplan locations are asserted.
+    tpc_cluster = make_assembly(
+        "GA10x TPC aggregate | 14 logical TPCs",
+        "chip.gpu.tpc.cluster",
+        (CARD_LENGTH * 0.48, half_y - 7.0, CARD_HEIGHT * 0.52),
+        pcbcol, parent=sm_cluster,
+        evidence=STATUS["manufacturer_data"], geometry="logical_only",
+    )
+    for sm_index in range(1, 29):
+        make_assembly(
+            "GA106 SM {:02d} | logical instance".format(sm_index),
+            "chip.gpu.sm.{:02d}".format(sm_index),
+            (CARD_LENGTH * 0.48, half_y - 7.0, CARD_HEIGHT * 0.52),
+            pcbcol, parent=tpc_cluster,
+            evidence=STATUS["manufacturer_data"], geometry="logical_only",
+        )
+    make_assembly(
+        "GA10x PolyMorph Engine array | 14 logical engines",
+        "chip.gpu.polymorph.array",
+        (CARD_LENGTH * 0.48, half_y - 7.0, CARD_HEIGHT * 0.52),
+        pcbcol, parent=tpc_cluster,
+        evidence=STATUS["manufacturer_data"], geometry="logical_only",
+    )
+
     # Memory subsystem and six logical presentation segments; no package/channel map is asserted.
     memory_bus = make_assembly(
         "GDDR6 memory interface · 192-bit logical node",
