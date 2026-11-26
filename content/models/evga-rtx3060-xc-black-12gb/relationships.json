@@ -1082,6 +1082,60 @@
       "source_ids": [
         "src.lanoc.review"
       ]
+    },
+    {
+      "id": "rel.heatpipe.main.group.contains.01",
+      "from": "cooling.heatpipe.candidate.1",
+      "to": "cooling.heatpipe.main.01",
+      "type": "contains",
+      "source_ids": [
+        "src.thefpsreview.exact_sku"
+      ]
+    },
+    {
+      "id": "rel.heatpipe.main.group.contains.02",
+      "from": "cooling.heatpipe.candidate.1",
+      "to": "cooling.heatpipe.main.02",
+      "type": "contains",
+      "source_ids": [
+        "src.thefpsreview.exact_sku"
+      ]
+    },
+    {
+      "id": "rel.heatpipe.main.group.contains.03",
+      "from": "cooling.heatpipe.candidate.1",
+      "to": "cooling.heatpipe.main.03",
+      "type": "contains",
+      "source_ids": [
+        "src.thefpsreview.exact_sku"
+      ]
+    },
+    {
+      "id": "rel.heatpipe.main.group.contains.04",
+      "from": "cooling.heatpipe.candidate.1",
+      "to": "cooling.heatpipe.main.04",
+      "type": "contains",
+      "source_ids": [
+        "src.thefpsreview.exact_sku"
+      ]
+    },
+    {
+      "id": "rel.heatpipe.side.group.contains.01",
+      "from": "cooling.heatpipe.candidate.2",
+      "to": "cooling.heatpipe.side.01",
+      "type": "contains",
+      "source_ids": [
+        "src.thefpsreview.exact_sku"
+      ]
+    },
+    {
+      "id": "rel.heatpipe.side.group.contains.02",
+      "from": "cooling.heatpipe.candidate.2",
+      "to": "cooling.heatpipe.side.02",
+      "type": "contains",
+      "source_ids": [
+        "src.thefpsreview.exact_sku"
+      ]
     }
   ]
 }
