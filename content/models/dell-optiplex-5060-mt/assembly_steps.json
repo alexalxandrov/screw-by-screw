@@ -1,6 +1,6 @@
 {
   "schema_version": "0.1.0",
-  "status": "partial_service_manual_sequence",
+  "status": "partial_observed_sequence",
   "policy": "Only steps explicitly described in Dell's Tower service documentation are included. This is not a complete universal repair procedure; exact prerequisites can vary by installed options.",
   "steps": [
     {
@@ -328,5 +328,6 @@
       }
     }
   ],
-  "observations": []
+  "observations": [],
+  "complete_sequence": false
 }
