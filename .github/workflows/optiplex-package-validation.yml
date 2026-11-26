@@ -9,6 +9,7 @@ on:
       - "content/models/dell-optiplex-5060-tower-family/**"
       - "content/catalog/models.json"
       - "public/models/dell_optiplex_5060_tower_v01.sbsmodel"
+      - "public/models/dell_optiplex_5060_tower_v02.sbsmodel"
       - "tools/modeling/build_device_blockout.py"
       - "tools/modeling/package_model.py"
       - "tools/content/validate_glb_bindings.py"
