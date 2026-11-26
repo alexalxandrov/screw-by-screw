@@ -38,7 +38,7 @@ test("OptiPlex reference package passes the production package loader and checks
 
 
 test("JSON model package rejects a tampered sidecar before loading", async () => {
-  const prefix = "SBSMODEL-JSON\\n";
+  const prefix = "SBSMODEL-JSON\n";
   const envelope = JSON.parse(packageBytes.toString("utf8").slice(prefix.length));
   envelope.files["model.json"] += " ";
   const tamperedBytes = Buffer.from(prefix + JSON.stringify(envelope), "utf8");
