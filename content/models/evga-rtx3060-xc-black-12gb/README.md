@@ -39,7 +39,7 @@ This is not yet a complete engineering reconstruction. Eight cooler/shroud reten
 
 ### Fine-grained cooling decomposition
 
-The development branch now expands the content graph to **137 semantic components, 133 typed relationships, 64 claims and 12 sources**. Fan frames, hubs and each blade proxy are separately selectable; the illustrative heatsink has 24 separately selectable fin proxies; six separate heatpipe route proxies are grouped as four main GPU-contact pipes plus two side pipes; and six memory thermal-pad proxies plus one VRM pad strip have their own IDs. No proxy blade/fin count or thermal-pad dimensions are presented as a factory specification.
+The development branch now expands the content graph to **167 semantic components, 163 typed relationships, 74 claims and 13 sources**. Fan frames, hubs and each blade proxy are separately selectable; the illustrative heatsink has 24 separately selectable fin proxies; six separate heatpipe route proxies are grouped as four main GPU-contact pipes plus two side pipes; and six memory thermal-pad proxies plus one VRM pad strip have their own IDs. No proxy blade/fin count or thermal-pad dimensions are presented as a factory specification.
 
 
 ### Partial teardown evidence
@@ -80,3 +80,8 @@ The FPS Review explicitly identifies its sample as 12G-P5-3655-KR and describes 
 ### Fan fastener evidence
 
 Gamers Nexus' exact-model teardown shows three retaining screws per independently replaceable fan. The model represents six fan-mount fasteners as separate semantic nodes with `geometry_status: logical_only`; their centres, thread, head, length and torque remain unknown. These are separate from the eight cooler/shroud retention screws. The new third assembly action records this limited observation without presenting a complete fan or cooler service procedure.
+
+
+### GA10x logical SM hierarchy
+
+The architecture tree now exposes 28 separately selectable logical SM entries beneath a TPC aggregate and an aggregate of 14 PolyMorph Engines. NVIDIA's GA10x whitepaper supplies per-SM counts and TPC composition: 128 CUDA, four Tensor, four texture, one RT, 256 KB register file and 128 KB L1/shared memory per SM; two SMs and one PolyMorph Engine per TPC. Fourteen TPCs is calculated from 28 configured SMs. None of these nodes has a physical die position or implies a recovered GA106 floorplan/GPC arrangement.
