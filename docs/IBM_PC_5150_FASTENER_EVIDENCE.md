@@ -17,7 +17,7 @@ The controlling service source is the **IBM Personal Computer Hardware Maintenan
 | Board supports | IBM describes plural standoffs and matching mounting slots. The cited procedure does **not** state their count, exact shape, spacing, or metric coordinates. | Four support and slot markers are shown solely as illustrative placeholders. The actual count and placement are marked unknown. |
 | Board release motion | After removing the board screw and disconnecting the relevant leads, slide the board approximately **1/2 inch (12.7 mm) away from the PSU** until the standoffs clear their slots. | Preserved in the partial service step as a manual-backed release motion. This is not a measured animation path or a complete teardown sequence. |
 
-Primary reference: [IBM Personal Computer Hardware Maintenance and Service — first edition, August 1981](https://manualzz.com/doc/74076016/ibm-5150-hardware-maintenance-manual).
+Primary reference: [IBM Personal Computer Hardware Maintenance and Service — first edition, August 1981](https://minuszerodegrees.net/manuals/IBM/IBM_5150_Hardware_Maintenance_and_Service_6025072_AUG81.pdf).
 
 ## Why some photographs show a different arrangement
 
