@@ -270,6 +270,7 @@ class ContentPackageTests(unittest.TestCase):
         report = validator.validate_package(package, package_dir)
         components = {item["id"]: item for item in package["components"]["components"]}
         relationships = {item["id"]: item for item in package["relationships"]["relationships"]}
+        claims = {item["id"]: item for item in package["claims"]["claims"]}
 
         for fan_index in (1, 2):
             fan_id = f"assembly.fan.{fan_index}"
