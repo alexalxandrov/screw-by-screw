@@ -57,7 +57,7 @@ The component atlas also adds separate, individually selectable photo-estimated 
 
 ## Fine-grained cooling decomposition
 
-The canonical package now exposes **167 semantic components, 163 typed relationships, 74 claims and 13 registered sources**. This includes individually selectable fan frames, hubs and seven illustrative blade proxies per fan; 24 separate illustrative heatsink-fin proxies; six selectable heatpipe-route proxies grouped as four main GPU-contact pipes plus two side pipes; six memory-side thermal-pad proxies; and a VRM-side thermal-pad strip proxy.
+The canonical package now exposes **307 semantic components, 303 typed relationships, 85 claims and 13 registered sources**. This includes individually selectable fan frames, hubs and seven illustrative blade proxies per fan; 24 separate illustrative heatsink-fin proxies; six selectable heatpipe-route proxies grouped as four main GPU-contact pipes plus two side pipes; six memory-side thermal-pad proxies; and a VRM-side thermal-pad strip proxy.
 
 These are independently selectable teaching meshes, not a claim that the exact hardware has seven blades per fan or 24 fins. The count and shapes are explicitly identified as proxy geometry. Thermal-pad position proxies are aligned to the six identified GDDR6 package positions; pad thickness, material, hardness and service dimensions remain unverified. Heatpipe paths and cross-sections likewise remain illustrative.
 
@@ -74,7 +74,7 @@ A second package-authored animation clip, `clip.exploded-cooler-overview`, now m
 
 ## GA106 compute and GDDR6 architecture tranche
 
-The semantic package now contains **167 components, 163 typed relationships, 74 claims and 13 registered sources**. Thirteen logical-only nodes represent the 28-SM GA106 cluster, its CUDA/Tensor/RT/TMU/ROP aggregates, a 192-bit GDDR6 interface and six logical interface presentation groups. Six Samsung K4ZAF325BM-HC16 GDDR6 package positions are separately selectable from exact-SKU-linked teardown/review material; no one-to-one mapping between package positions and interface presentation segments is asserted. The logical nodes carry `geometry_status: logical_only`: no physical die floorplan, shader wiring or PCB trace routing is drawn.
+The semantic package now contains **307 components, 303 typed relationships, 85 claims and 13 registered sources**. Thirteen logical-only nodes represent the 28-SM GA106 cluster, its CUDA/Tensor/RT/TMU/ROP aggregates, a 192-bit GDDR6 interface and six logical interface presentation groups. Six Samsung K4ZAF325BM-HC16 GDDR6 package positions are separately selectable from exact-SKU-linked teardown/review material; no one-to-one mapping between package positions and interface presentation segments is asserted. The logical nodes carry `geometry_status: logical_only`: no physical die floorplan, shader wiring or PCB trace routing is drawn.
 
 A third process layer, `gpu_compute`, exposes this architecture map in the viewer. Claims cover the published 28 SM / 112 Tensor / 28 RT / 112 TMU / 48 ROP configuration, 276 mm² and 12-billion-transistor GA106 die figures, Samsung 8N, and exact-SKU-linked memory package identity. Tom's Hardware identifies six Samsung K4ZAF325BM-HC16 devices on the 12G-P5-3655-KR sample; 16-Gbit density, 512M × 32 organisation and 180-FBGA package type remain secondary-catalog device attributes, not primary Samsung-datasheet claims. The viewer labels this as a logical map, not an architecture simulation.
 
@@ -123,6 +123,13 @@ The assembly panel now records a third partial action after both fan leads are d
 
 The NVIDIA Ampere GA10x architecture whitepaper specifies 128 CUDA cores, four third-generation Tensor Cores, four texture units, one second-generation RT Core, a 256 KB register file and 128 KB configurable L1/shared memory per SM. It also describes two SMs and one PolyMorph Engine per TPC. The RTX 3060 configuration's 28 SMs therefore imply 14 TPCs as a calculated logical grouping (28 / 2), not as a recovered physical floorplan.
 
-The package now exposes 28 numbered logical SM entries under one TPC aggregate, plus an aggregate of 14 PolyMorph Engines. The numbers are navigation identifiers; no SM/TPC coordinates, GPC membership, disabled-unit placement, or GPC count is inferred. The process layer has 51 linked components and a 15-node diagram; it remains explicitly logical and not a cycle-accurate architecture simulation.
+The package exposes 14 numbered logical TPCs, each with two SM entries and one PolyMorph Engine; the 28 SMs each contain four separately selectable processing-partition nodes (112 total). TPC/SM/partition suffixes are navigation identifiers; no SM/TPC coordinates, GPC membership, disabled-unit placement, or GPC count is inferred. The process layer now links 191 components and has a 29-node diagram; it remains explicitly logical and not a cycle-accurate architecture simulation.
 
 Source: NVIDIA, *Ampere GA10x GPU Architecture*, Figure 2 and page 10 (official PDF): https://www.nvidia.com/content/PDF/nvidia-ampere-ga-102-gpu-architecture-whitepaper-v2.pdf
+
+
+## 20. Four processing partitions per GA10x SM
+
+NVIDIA's official GA10x whitepaper describes each SM as four processing partitions (Figure 3, printed page 10). Each partition has an L0 instruction cache, one warp scheduler, one dispatch unit (32 threads per clock), a 16,384 × 32-bit register file (64 KiB), two FP32 datapaths, one third-generation Tensor Core, four LD/ST units and one SFU. The first datapath has 16 FP32 CUDA cores; the second has 16 FP32 CUDA cores and 16 INT32 lanes that may execute either FP32 or INT32. Therefore each partition can issue 32 FP32 operations per clock, or 16 FP32 plus 16 INT32 operations per clock. Four partitions yield 128 FP32 CUDA cores per SM.
+
+The content hierarchy now models all 112 logical partitions individually under their respective SM nodes. Their IDs are stable inventory handles, not coordinates. The Blender generator exports them as logical-only assembly nodes, not as physical circuit geometry. Together with 14 logical TPC nodes, 14 PolyMorph Engine instances and 28 SM nodes, the architecture inventory remains explicitly distinct from a physical die reconstruction.
