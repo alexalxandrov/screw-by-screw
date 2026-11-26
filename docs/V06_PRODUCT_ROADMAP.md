@@ -95,3 +95,8 @@ A Gamers Nexus verbal estimate of approximately 6 mm applies only to the two cen
 
 
 The GDDR6 layer now separately exposes two unused memory locations described in the exact-SKU-linked teardown sample. They are not counted as populated packages, and their electrical routing, pad geometry and compatibility remain unknown.
+
+
+### Evidence-bounded power layer
+
+The power-path layer now includes a four-group selectable map of the input connectors, two current-sense shunts and fuse, observed MOSFET/copper-contact and inductor area, and GPU/GDDR6 loads. It retains the 5 mΩ value only for the auxiliary 8-pin shunt; the PCIe-slot shunt resistance remains unknown. The map is qualitative, not a VRM phase diagram or PCB netlist.

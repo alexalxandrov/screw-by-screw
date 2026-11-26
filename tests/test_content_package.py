@@ -303,8 +303,20 @@ class ContentPackageTests(unittest.TestCase):
         self.assertEqual(len(package["claims"]["claims"]), 122)
         self.assertEqual(len(package["process_layers"]["process_layers"]), 5)
         power_layer = next(layer for layer in package["process_layers"]["process_layers"] if layer["id"] == "process.power.qualitative")
-        self.assertEqual(len(power_layer["linked_component_ids"]), 12)
+        self.assertEqual(len(power_layer["linked_component_ids"]), 17)
         self.assertIn("src.gamersnexus.teardown", power_layer["source_ids"])
+        self.assertEqual(len(power_layer["visualization"]["diagram"]["groups"]), 4)
+        power_node_ids = {
+            node["component_id"]
+            for group in power_layer["visualization"]["diagram"]["groups"]
+            for node in group["nodes"]
+        }
+        self.assertEqual(power_node_ids, set(power_layer["linked_component_ids"]))
+        self.assertTrue(power_node_ids <= set(components))
+        self.assertIn("power.shunt.8pin", power_node_ids)
+        self.assertIn("power.shunt.pcie_slot", power_node_ids)
+        self.assertIn("power.fuse.input", power_node_ids)
+        self.assertIn("chip.memory.gddr6.bus", power_node_ids)
         self.assertIn("5 mΩ current-sense shunt", power_layer["description"]["en"])
         graphics_layer = next(layer for layer in package["process_layers"]["process_layers"] if layer["type"] == "graphics_pipeline")
         self.assertEqual(graphics_layer["mode"], "logical_architecture")

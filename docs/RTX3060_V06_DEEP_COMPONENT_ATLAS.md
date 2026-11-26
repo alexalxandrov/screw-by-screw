@@ -221,3 +221,10 @@ Two logical-only media components are now represented beneath the GA106 die node
 This is the fifth selectable process layer, `video_codec`. Its three bilingual groups cover compressed input/decode, frame surfaces with optional shader/compute processing, and hardware encode output. It links the PCIe endpoint, GA106, NVDEC, GDDR6 interface, SM cluster and NVENC. Both engines are dedicated fixed-function media blocks, separate from CUDA cores.
 
 This is an architectural capability map, not an EVGA board-level circuit diagram. It does not infer die coordinates, physical engine layout, memory-copy routes, internal caches, codec throughput, bitrate, latency, session concurrency, power or thermals. No die geometry, PCB nets, shader-core implementation or additional silicon blocks are fabricated.
+
+
+## 35. Evidence-bounded power input and protection map
+
+The qualitative power layer now has four selectable groups and 17 linked nodes: external inputs/board context; the two separately identified current-sense shunts and input fuse; the teardown-observed MOSFET/copper-contact region and two inductor packages alongside explicitly illustrative controller/passive groups; and the GPU/GDDR6 functional loads.
+
+The 5 mΩ statement applies only to the auxiliary 8-pin shunt. The separate PCIe-slot 12 V shunt resistance remains unknown. The teardown's two inductors are in an area only tentatively described as memory VRM. The diagram does not assert phase count, controller identity, rail names, pinout, copper routes, current flow, switching waveform or a PCB netlist. Its group order is not a serial electrical path.

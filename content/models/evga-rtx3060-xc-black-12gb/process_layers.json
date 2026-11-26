@@ -528,17 +528,22 @@
       "mode": "qualitative",
       "linked_component_ids": [
         "connector.power.8pin",
+        "pcb.connector.pcie",
         "assembly.pcb.electronics",
-        "chip.gpu.ga106",
-        "assembly.power_stage",
         "power.shunt.cluster",
         "power.shunt.8pin",
         "power.shunt.pcie_slot",
         "power.fuse.input",
+        "assembly.power_stage",
+        "power.controller.candidate",
+        "power.switching_device.cluster",
+        "cooling.vrm.copper_contact",
         "power.inductor.candidate.1",
         "power.inductor.candidate.2",
-        "power.switching_device.cluster",
-        "cooling.vrm.copper_contact"
+        "power.capacitor.cluster",
+        "power.passives.cluster",
+        "chip.gpu.ga106",
+        "chip.memory.gddr6.bus"
       ],
       "description": {
         "en": "The 8-pin auxiliary input is shown with its separately observed 5 mΩ current-sense shunt; a second current-sense shunt belongs to the PCIe-slot 12 V input, but its resistance is unknown. The exact-model teardown also shows an input fuse, a row of MOSFETs contacted by a copper plate, and two inductor packages in an area only tentatively identified as memory VRM. The power-conversion zone and GPU connection are directional educational context, not a pin-level schematic or routed PCB net map.",
@@ -550,7 +555,15 @@
         "The teardown shows a fuse, two inductors, a MOSFET row and a copper cooling contact, but it does not provide reference designators, exact coordinates, part numbers or complete electrical nets.",
         "The presenter's identification of the two-inductor area as memory VRM is tentative and is not treated as a verified rail topology.",
         "TechPowerUp phase counts, controller and MOSFET identifications belong to a related XC variant and are deliberately excluded from this exact-SKU process layer.",
-        "The schematic direction cue is educational only; no current, voltage, switching waveform, pin mapping, ripple or thermal simulation is implemented."
+        "The schematic direction cue is educational only; no current, voltage, switching waveform, pin mapping, ripple or thermal simulation is implemented.",
+        {
+          "en": "The diagram is grouped by observed subsystem function; group order is not an electrical sequence and lines do not represent verified nets.",
+          "ru": "Схема сгруппирована по наблюдаемым функциям подсистем; порядок групп не является электрической последовательностью, а линии не представляют подтверждённые цепи."
+        },
+        {
+          "en": "The exact mapping from each input to voltage rails, controller channels, MOSFET phases, inductors and GPU/memory pins remains unknown without a matching PCB revision, schematic and BoardView.",
+          "ru": "Точное соответствие входов линиям питания, каналам контроллера, фазам MOSFET, дросселям и выводам GPU/памяти неизвестно без совпадающей ревизии PCB, схемы и BoardView."
+        }
       ],
       "source_ids": [
         "src.evga.spec",
@@ -564,7 +577,254 @@
           "powered"
         ],
         "motion": "qualitative",
-        "not_a_simulation": true
+        "not_a_simulation": true,
+        "diagram": {
+          "badge": {
+            "en": "OBSERVED SUBSYSTEM GROUPS · QUALITATIVE ONLY · NO PCB NETS OR VRM PHASE MAP",
+            "ru": "ГРУППЫ НАБЛЮДАЕМЫХ ПОДСИСТЕМ · КАЧЕСТВЕННАЯ СХЕМА · БЕЗ ЦЕПЕЙ PCB И КАРТЫ ФАЗ VRM"
+          },
+          "groups": [
+            {
+              "id": "power-inputs",
+              "title": {
+                "en": "1 · External power inputs and board context",
+                "ru": "1 · Внешние входы питания и плата"
+              },
+              "summary": {
+                "en": "The card has an auxiliary 8-pin input and a PCIe edge connector. These are shown as source interfaces only; connector pin mapping, rail sharing, current split and PCB copper routes are not reconstructed.",
+                "ru": "На карте есть дополнительный вход 8-pin и разъём PCIe. Они показаны только как интерфейсы источников питания; распиновка, разделение линий и токов и медные дорожки PCB не восстанавливаются."
+              },
+              "nodes": [
+                {
+                  "component_id": "connector.power.8pin",
+                  "title": {
+                    "en": "Auxiliary 8-pin input",
+                    "ru": "Дополнительный вход 8-pin"
+                  },
+                  "metric": {
+                    "en": "Manufacturer-listed auxiliary connector",
+                    "ru": "Дополнительный разъём по спецификации"
+                  }
+                },
+                {
+                  "component_id": "pcb.connector.pcie",
+                  "title": {
+                    "en": "PCI Express edge connector",
+                    "ru": "Краевой разъём PCI Express"
+                  },
+                  "metric": {
+                    "en": "Slot-side power/data interface · pin map unknown",
+                    "ru": "Интерфейс слота питания/данных · распиновка неизвестна"
+                  }
+                },
+                {
+                  "component_id": "assembly.pcb.electronics",
+                  "title": {
+                    "en": "PCB and electronics",
+                    "ru": "Плата PCB и электроника"
+                  },
+                  "metric": {
+                    "en": "Board revision and full layout unverified",
+                    "ru": "Ревизия и полная разводка платы не подтверждены"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "sensing-and-protection",
+              "title": {
+                "en": "2 · Current sensing and input protection",
+                "ru": "2 · Измерение тока и входная защита"
+              },
+              "summary": {
+                "en": "The teardown distinguishes two current-sense shunts. The presenter states 5 mΩ only for the auxiliary 8-pin shunt; the PCIe-slot shunt resistance and the input fuse rating remain unknown.",
+                "ru": "В разборке различаются два измерительных шунта. Значение 5 мОм автор указывает только для шунта дополнительного 8-pin; сопротивление шунта PCIe-слота и номинал входного предохранителя неизвестны."
+              },
+              "nodes": [
+                {
+                  "component_id": "power.shunt.cluster",
+                  "title": {
+                    "en": "Current-sense shunt area",
+                    "ru": "Зона измерительных шунтов"
+                  },
+                  "metric": {
+                    "en": "2 observed shunts · not a VRM phase count",
+                    "ru": "2 наблюдаемых шунта · не число фаз VRM"
+                  }
+                },
+                {
+                  "component_id": "power.shunt.8pin",
+                  "title": {
+                    "en": "Auxiliary-input shunt",
+                    "ru": "Шунт дополнительного входа"
+                  },
+                  "metric": {
+                    "en": "5 mΩ · teardown statement",
+                    "ru": "5 мОм · заявление в разборке"
+                  }
+                },
+                {
+                  "component_id": "power.shunt.pcie_slot",
+                  "title": {
+                    "en": "PCIe-slot shunt",
+                    "ru": "Шунт PCIe-слота"
+                  },
+                  "metric": {
+                    "en": "Resistance unknown",
+                    "ru": "Сопротивление неизвестно"
+                  }
+                },
+                {
+                  "component_id": "power.fuse.input",
+                  "title": {
+                    "en": "Input protection fuse",
+                    "ru": "Входной предохранитель"
+                  },
+                  "metric": {
+                    "en": "Part and rating unknown",
+                    "ru": "Тип и номинал неизвестны"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "switching-and-filtering",
+              "title": {
+                "en": "3 · Observed switching and filtering area",
+                "ru": "3 · Наблюдаемая зона коммутации и фильтрации"
+              },
+              "summary": {
+                "en": "The exact-model teardown shows a MOSFET row contacting a copper plate and discusses two inductor packages in a tentatively identified memory-VRM area. Controller/passive group nodes are illustrative placeholders. No phase count, controller identity, rail assignment or electrical net is inferred.",
+                "ru": "В разборке точной модели показан ряд MOSFET с контактом на медную пластину и обсуждаются два корпуса дросселей в зоне, предположительно относящейся к VRM памяти. Узлы контроллера и пассивных компонентов — условные группы. Число фаз, тип контроллера, назначение линий и электрические цепи не выводятся."
+              },
+              "nodes": [
+                {
+                  "component_id": "assembly.power_stage",
+                  "title": {
+                    "en": "Power conversion zone",
+                    "ru": "Зона преобразования питания"
+                  },
+                  "metric": {
+                    "en": "Schematic region only",
+                    "ru": "Только условная область схемы"
+                  }
+                },
+                {
+                  "component_id": "power.controller.candidate",
+                  "title": {
+                    "en": "Power controller candidate",
+                    "ru": "Предполагаемый контроллер питания"
+                  },
+                  "metric": {
+                    "en": "Illustrative identity placeholder",
+                    "ru": "Условный заполнитель идентификации"
+                  }
+                },
+                {
+                  "component_id": "power.switching_device.cluster",
+                  "title": {
+                    "en": "MOSFET row",
+                    "ru": "Ряд MOSFET"
+                  },
+                  "metric": {
+                    "en": "Teardown-observed · exact devices unknown",
+                    "ru": "Наблюдались в разборке · типы неизвестны"
+                  }
+                },
+                {
+                  "component_id": "cooling.vrm.copper_contact",
+                  "title": {
+                    "en": "Copper thermal contact",
+                    "ru": "Медленный тепловой контакт"
+                  },
+                  "metric": {
+                    "en": "Observed contact · dimensions unknown",
+                    "ru": "Наблюдаемый контакт · размеры неизвестны"
+                  }
+                },
+                {
+                  "component_id": "power.inductor.candidate.1",
+                  "title": {
+                    "en": "Inductor candidate 1",
+                    "ru": "Дроссель-кандидат 1"
+                  },
+                  "metric": {
+                    "en": "Observed package · role tentative",
+                    "ru": "Наблюдаемый корпус · назначение предположительно"
+                  }
+                },
+                {
+                  "component_id": "power.inductor.candidate.2",
+                  "title": {
+                    "en": "Inductor candidate 2",
+                    "ru": "Дроссель-кандидат 2"
+                  },
+                  "metric": {
+                    "en": "Observed package · role tentative",
+                    "ru": "Наблюдаемый корпус · назначение предположительно"
+                  }
+                },
+                {
+                  "component_id": "power.capacitor.cluster",
+                  "title": {
+                    "en": "Capacitor group",
+                    "ru": "Группа конденсаторов"
+                  },
+                  "metric": {
+                    "en": "Part IDs and values unknown",
+                    "ru": "Номера компонентов и номиналы неизвестны"
+                  }
+                },
+                {
+                  "component_id": "power.passives.cluster",
+                  "title": {
+                    "en": "Other passive group",
+                    "ru": "Группа прочих пассивных компонентов"
+                  },
+                  "metric": {
+                    "en": "Illustrative group · BOM unknown",
+                    "ru": "Условная группа · BOM неизвестен"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "gpu-and-memory-loads",
+              "title": {
+                "en": "4 · GPU and memory-side loads",
+                "ru": "4 · Нагрузки GPU и памяти"
+              },
+              "summary": {
+                "en": "The GPU package and GDDR6 interface are shown as functional consumers in the educational map. Their exact supply rails, voltage domains, phase allocation and PCB routes are not known from the available exact-board evidence.",
+                "ru": "Корпус GPU и интерфейс GDDR6 показаны как функциональные потребители в учебной схеме. Их точные линии питания, домены напряжения, распределение фаз и дорожки PCB неизвестны по имеющимся данным точной платы."
+              },
+              "nodes": [
+                {
+                  "component_id": "chip.gpu.ga106",
+                  "title": {
+                    "en": "GA106 GPU package",
+                    "ru": "Корпус GPU GA106"
+                  },
+                  "metric": {
+                    "en": "Device load · rail details unknown",
+                    "ru": "Потребитель питания · линии неизвестны"
+                  }
+                },
+                {
+                  "component_id": "chip.memory.gddr6.bus",
+                  "title": {
+                    "en": "GDDR6 memory interface",
+                    "ru": "Интерфейс памяти GDDR6"
+                  },
+                  "metric": {
+                    "en": "192-bit interface · rail topology unknown",
+                    "ru": "Интерфейс 192 бит · топология питания неизвестна"
+                  }
+                }
+              ]
+            }
+          ]
+        }
       }
     },
     {

@@ -33,7 +33,12 @@ test("binds the power process layer from package relationships", async ({ page }
   await page.locator('.process-button[data-layer="power_delivery"]').click();
   await expect(page.locator("#process-details")).toBeVisible();
   await expect(page.locator("#process-detail-title")).toHaveText("Ввод питания");
-  await expect(page.locator("#process-components button")).toHaveCount(4);
+  await expect(page.locator("#process-components button")).toHaveCount(17);
+  await expect(page.locator("#process-diagram .architecture-diagram-group")).toHaveCount(4);
+  const shunt = page.locator('#process-diagram .architecture-node[data-component-id="power.shunt.8pin"]');
+  await expect(shunt).toBeVisible();
+  await shunt.click();
+  await expect(page.locator("#detail-id")).toHaveText("power.shunt.8pin");
 });
 
 test("renders conceptual GPU graphics paths and selects a linked architecture node", async ({ page }) => {
