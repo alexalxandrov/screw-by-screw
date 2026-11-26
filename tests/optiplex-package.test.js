@@ -25,12 +25,39 @@ test("OptiPlex reference package passes the production package loader and checks
   assert.equal(loaded.data.model.specifications.physical.depth_mm, 274);
   assert.equal(loaded.data.components.components.filter((component) => component.category === "fastener").length, 24);
   assert.equal(loaded.data.sources.sources.length, 15);
-  assert.equal(loaded.data.claims.claims.length, 31);
+  assert.equal(loaded.data.claims.claims.length, 29);
   assert.equal(loaded.data.process_layers.process_layers.length, 6);
   assert.equal(loaded.data.assembly_steps.steps.length, 12);
   assert.equal(loaded.data.learning.questions.length, 9);
   assert.equal(loaded.data.model.specifications.motherboard.numbered_callouts, 26);
   assert.equal(loaded.data.model.specifications.motherboard.callouts.length, 26);
+  const componentIds = new Set(loaded.data.components.components.map((component) => component.id));
+  const sourceIds = new Set(loaded.data.sources.sources.map((source) => source.id));
+  const callouts = loaded.data.model.specifications.motherboard.callouts;
+  assert.deepEqual(callouts.map((entry) => entry.number), Array.from({ length: 26 }, (_, index) => index + 1));
+  assert.equal(callouts.reduce((count, entry) => count + entry.component_ids.length, 0), 29);
+  for (const callout of callouts) {
+    for (const componentId of callout.component_ids) assert.ok(componentIds.has(componentId), `unresolved callout ${callout.number}: ${componentId}`);
+  }
+  for (const component of loaded.data.components.components) {
+    if (component.parent_id) assert.ok(componentIds.has(component.parent_id), `unresolved parent for ${component.id}`);
+    for (const sourceId of component.source_ids ?? []) assert.ok(sourceIds.has(sourceId), `unresolved source for ${component.id}`);
+  }
+  for (const relationship of loaded.data.relationships.relationships) {
+    assert.ok(componentIds.has(relationship.from), `unresolved relationship source: ${relationship.id}`);
+    assert.ok(componentIds.has(relationship.to), `unresolved relationship target: ${relationship.id}`);
+    for (const sourceId of relationship.source_ids ?? []) assert.ok(sourceIds.has(sourceId), `unresolved relationship evidence: ${relationship.id}`);
+  }
+  for (const layer of loaded.data.process_layers.process_layers) {
+    for (const componentId of layer.linked_component_ids ?? []) assert.ok(componentIds.has(componentId), `unresolved process component: ${layer.id}`);
+    for (const sourceId of layer.source_ids ?? []) assert.ok(sourceIds.has(sourceId), `unresolved process evidence: ${layer.id}`);
+  }
+  const stepIds = new Set(loaded.data.assembly_steps.steps.map((step) => step.id));
+  for (const step of loaded.data.assembly_steps.steps) {
+    for (const componentId of step.component_ids ?? []) assert.ok(componentIds.has(componentId), `unresolved step component: ${step.id}`);
+    for (const sourceId of step.source_ids ?? []) assert.ok(sourceIds.has(sourceId), `unresolved step evidence: ${step.id}`);
+    for (const prerequisite of step.prerequisite_step_ids ?? []) assert.ok(stepIds.has(prerequisite), `unresolved step prerequisite: ${step.id}`);
+  }
   assert.deepEqual(loaded.data.model.specifications.motherboard.callouts.find((entry) => entry.number === 24).component_ids, ["motherboard.m2.wlan"]);
   assert.deepEqual(loaded.data.model.specifications.motherboard.callouts.find((entry) => entry.number === 25).component_ids, ["motherboard.coin_cell"]);
   assert.equal(loaded.data.animations.clips.length, 0);
