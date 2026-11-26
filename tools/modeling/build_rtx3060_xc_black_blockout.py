@@ -736,6 +736,24 @@ def main():
                 f"cooling.heatpipes.proxy.{pipe_index}.{segment_index}",
                 start, end, 1.6, MAT["heatpipe"], cool, pipe_group)
 
+    # Four copper terminal faces are visible at the cooler end in the exact XC BLACK review.
+    # The face count is not a claim of four unique pipes; positions are photo-estimated.
+    heatpipe_end_positions = (
+        heatpipe_paths[0][0], heatpipe_paths[0][-1],
+        heatpipe_paths[1][0], heatpipe_paths[1][-1],
+    )
+    for end_index, end_position in enumerate(heatpipe_end_positions, start=1):
+        end_id = "cooling.heatpipe.end.{:02d}".format(end_index)
+        end_group = make_assembly(
+            "Visible copper heatpipe terminal {:02d}".format(end_index),
+            end_id, end_position, cool, parent=heatpipes_group,
+            evidence=STATUS["visible_exact_model"], geometry="illustrative_proxy",
+        )
+        make_detail_cylinder(
+            "Copper terminal face proxy {:02d}".format(end_index),
+            end_position, 2.2, 0.55, MAT["copper"], end_group, cool, vertices=32,
+        )
+
     # Rear-side exposed PCB proxy: exact outline and position remain unknown.
     pcb = cube(
         "PCB proxy | exposed rear",
