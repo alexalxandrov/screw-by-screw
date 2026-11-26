@@ -47,6 +47,7 @@ const MODEL_CATALOG = createCatalogAdapter(CATALOG_SOURCE, { defaultPackageModel
 
 const $ = (selector) => document.querySelector(selector);
 const canvasHost = $("#viewer-canvas");
+const appShell = $("#app");
 const state = {
   language: "ru",
   scene: null,
@@ -130,7 +131,7 @@ const UI = {
     allVisible: "All components visible", layerCooling: "Cooling layer · qualitative",
     layerPower: "Power path · qualitative", layerCompute: "GPU architecture · logical map", layerGraphicsPipeline: "Graphics paths · conceptual map", layerVideoCodec: "Video codec engines · logical map", noWebgl: "WebGL is unavailable in this browser.",
     source: "Source", noSources: "No direct source linked to this component.",
-    modelLoaded: "Model ready", glbPicker: "Choose a .glb file", learn: "Learn", learning: "LEARNING", authoredAnimations: "PACKAGE ANIMATIONS", clipSelect: "Select clip", clipTimeline: "Animation timeline", clipPlay: "Play", clipPause: "Pause", clipStop: "Stop / reset", clipReady: "Ready", clipPlaying: "Playing", clipPaused: "Paused", clipCompleted: "Completed", clipTime: "TIME", clipEvidenceNote: "Authored model motion · not a physics simulation", clipEducationalApproximation: "Educational approximation · duration is not measured RPM", clipIllustrative: "Illustrative motion · not a measured mechanism", clipDocumentedMotion: "Documented motion · source-linked", clipMeasuredMotion: "Measured motion · source and method recorded", linkedComponents: "LINKED COMPONENTS", assumptions: "ASSUMPTIONS & LIMITS", processLayer: "PROCESS LAYER", fileTooLarge: "GLB exceeds the 256 MB limit.", packageTooLarge: "SBS model package exceeds the 512 MB limit.", externalResources: "This GLB references external files. Only self-contained GLB files are allowed.", question: "QUESTION", checkAnswer: "Check answer", nextQuestion: "Next question", finishQuiz: "Finish", restartQuiz: "Try again", correctAnswer: "Correct", wrongAnswer: "Not quite", quizComplete: "Quiz complete", yourScore: "Your score", chooseAnswer: "Choose an answer first", learningProgressSaved: "Progress saved in this browser", learningProgressLocal: "Local progress · this browser", learningProgressSession: "Local storage unavailable · session only"
+    modelLoaded: "Model ready", glbPicker: "Choose a .glb file", learn: "Learn", learning: "LEARNING", authoredAnimations: "PACKAGE ANIMATIONS", clipSelect: "Select clip", clipTimeline: "Animation timeline", clipPlay: "Play", clipPause: "Pause", clipStop: "Stop / reset", clipReady: "Ready", clipPlaying: "Playing", clipPaused: "Paused", clipCompleted: "Completed", clipTime: "TIME", clipEvidenceNote: "Authored model motion · not a physics simulation", clipEducationalApproximation: "Educational approximation · duration is not measured RPM", clipIllustrative: "Illustrative motion · not a measured mechanism", clipDocumentedMotion: "Documented motion · source-linked", clipMeasuredMotion: "Measured motion · source and method recorded", linkedComponents: "LINKED COMPONENTS", assumptions: "ASSUMPTIONS & LIMITS", processLayer: "PROCESS LAYER", fileTooLarge: "GLB exceeds the 256 MB limit.", packageTooLarge: "SBS model package exceeds the 512 MB limit.", externalResources: "This GLB references external files. Only self-contained GLB files are allowed.", question: "QUESTION", checkAnswer: "Check answer", nextQuestion: "Next question", finishQuiz: "Finish", restartQuiz: "Try again", correctAnswer: "Correct", wrongAnswer: "Not quite", quizComplete: "Quiz complete", yourScore: "Your score", chooseAnswer: "Choose an answer first", learningProgressSaved: "Progress saved in this browser", learningProgressLocal: "Local progress · this browser", learningProgressSession: "Local storage unavailable · session only", mobileViewer: "3D", mobileStructure: "Structure", mobileDetails: "Details"
   },
   ru: {
     modelLabel: "МОДЕЛЬ", catalogOpen: "Каталог", catalogTitle: "БИБЛИОТЕКА МОДЕЛЕЙ", catalogSubtitle: "Автономные пакеты устройств", catalogClose: "Закрыть каталог", catalogSearch: "Название, производитель или part number…", catalogSearchLabel: "ПОИСК ПО БИБЛИОТЕКЕ", catalogCategoryLabel: "КАТЕГОРИЯ", catalogEntries: "МОДЕЛИ", catalogFooter: "Пакеты моделей хранятся локально. Аккаунт и удалённый сервис каталога не нужны.", catalogAllCategories: "Все категории", catalogEmpty: "Подходящих моделей не найдено.", catalogLoad: "Открыть модель", catalogLoaded: "Уже загружена", catalogLoading: "Загрузка пакета…", catalogStatusResearch: "ИССЛЕДОВАТЕЛЬСКИЙ МАКЕТ", catalogGeometryProxy: "Условная геометрия · не CAD", catalogPackageVersion: "Пакет", catalogChoosePackage: "Выберите соответствующий файл .sbsmodel.", catalogError: "Не удалось открыть пакет из каталога.", structure: "СТРУКТУРА", components: "Компоненты",
@@ -155,13 +156,21 @@ const UI = {
     allVisible: "Все компоненты видимы", layerCooling: "Слой охлаждения · качественно",
     layerPower: "Путь питания · качественно", layerCompute: "Архитектура GPU · логическая карта", layerGraphicsPipeline: "Тракты GPU · концептуальная схема", layerVideoCodec: "NVENC / NVDEC · логическая карта", noWebgl: "В этом браузере недоступен WebGL.",
     source: "Источник", noSources: "Для этого компонента нет прямой ссылки на источник.",
-    modelLoaded: "Модель готова", glbPicker: "Выберите файл .glb", learn: "Обучение", learning: "ОБУЧЕНИЕ", authoredAnimations: "АНИМАЦИИ ПАКЕТА", clipSelect: "Выберите клип", clipTimeline: "Шкала анимации", clipPlay: "Пуск", clipPause: "Пауза", clipStop: "Стоп / сброс", clipReady: "Готово", clipPlaying: "Воспроизведение", clipPaused: "Пауза", clipCompleted: "Завершено", clipTime: "ВРЕМЯ", clipEvidenceNote: "Анимация из пакета · не физическая симуляция", clipEducationalApproximation: "Учебное приближение · длительность не является измеренным RPM", clipIllustrative: "Условное движение · не измеренный механизм", clipDocumentedMotion: "Движение подтверждено источником", clipMeasuredMotion: "Измеренное движение · источник и метод указаны", linkedComponents: "СВЯЗАННЫЕ КОМПОНЕНТЫ", assumptions: "ДОПУЩЕНИЯ И ОГРАНИЧЕНИЯ", processLayer: "СЛОЙ ПРОЦЕССА", fileTooLarge: "GLB превышает лимит 256 МБ.", packageTooLarge: "Пакет SBS model превышает лимит 512 МБ.", externalResources: "Этот GLB ссылается на внешние файлы. Разрешены только самодостаточные GLB.", question: "ВОПРОС", checkAnswer: "Проверить ответ", nextQuestion: "Следующий вопрос", finishQuiz: "Завершить", restartQuiz: "Повторить", correctAnswer: "Верно", wrongAnswer: "Не совсем", quizComplete: "Тест завершён", yourScore: "Ваш результат", chooseAnswer: "Сначала выберите ответ", learningProgressSaved: "Прогресс сохранён в этом браузере", learningProgressLocal: "ПРОГРЕСС · ЭТОТ БРАУЗЕР", learningProgressSession: "Локальное хранилище недоступно · только эта сессия"
+    modelLoaded: "Модель готова", glbPicker: "Выберите файл .glb", learn: "Обучение", learning: "ОБУЧЕНИЕ", authoredAnimations: "АНИМАЦИИ ПАКЕТА", clipSelect: "Выберите клип", clipTimeline: "Шкала анимации", clipPlay: "Пуск", clipPause: "Пауза", clipStop: "Стоп / сброс", clipReady: "Готово", clipPlaying: "Воспроизведение", clipPaused: "Пауза", clipCompleted: "Завершено", clipTime: "ВРЕМЯ", clipEvidenceNote: "Анимация из пакета · не физическая симуляция", clipEducationalApproximation: "Учебное приближение · длительность не является измеренным RPM", clipIllustrative: "Условное движение · не измеренный механизм", clipDocumentedMotion: "Движение подтверждено источником", clipMeasuredMotion: "Измеренное движение · источник и метод указаны", linkedComponents: "СВЯЗАННЫЕ КОМПОНЕНТЫ", assumptions: "ДОПУЩЕНИЯ И ОГРАНИЧЕНИЯ", processLayer: "СЛОЙ ПРОЦЕССА", fileTooLarge: "GLB превышает лимит 256 МБ.", packageTooLarge: "Пакет SBS model превышает лимит 512 МБ.", externalResources: "Этот GLB ссылается на внешние файлы. Разрешены только самодостаточные GLB.", question: "ВОПРОС", checkAnswer: "Проверить ответ", nextQuestion: "Следующий вопрос", finishQuiz: "Завершить", restartQuiz: "Повторить", correctAnswer: "Верно", wrongAnswer: "Не совсем", quizComplete: "Тест завершён", yourScore: "Ваш результат", chooseAnswer: "Сначала выберите ответ", learningProgressSaved: "Прогресс сохранён в этом браузере", learningProgressLocal: "ПРОГРЕСС · ЭТОТ БРАУЗЕР", learningProgressSession: "Локальное хранилище недоступно · только эта сессия", mobileViewer: "3D", mobileStructure: "Структура", mobileDetails: "Детали"
   }
 };
 
 function t(key) { return UI[state.language][key] ?? key; }
 function setStatus(message) { $("#app-status").textContent = message; }
 function setLoadState(message) { $("#load-state").textContent = message; }
+
+function setMobilePanel(panel) {
+  if (!["viewer", "structure", "details"].includes(panel) || !appShell) return;
+  appShell.dataset.mobilePanel = panel;
+  document.querySelectorAll(".mobile-panel-button").forEach((button) => {
+    button.setAttribute("aria-pressed", String(button.dataset.mobilePanel === panel));
+  });
+}
 
 
 function renderAnimationClipOptions() {
@@ -2390,6 +2399,10 @@ function onCanvasClick(event) {
 function bindUI() {
   document.addEventListener("pointerdown", () => { state.userInteracted = true; }, { capture: true });
   document.addEventListener("keydown", () => { state.userInteracted = true; }, { capture: true });
+  document.querySelectorAll(".mobile-panel-button").forEach((button) => {
+    button.addEventListener("click", () => setMobilePanel(button.dataset.mobilePanel));
+  });
+  setMobilePanel(appShell?.dataset.mobilePanel || "viewer");
   $("#export-inventory-json").addEventListener("click", exportSemanticInventoryJson);
   $("#export-inventory-csv").addEventListener("click", exportSemanticInventoryCsv);
   $("#catalog-open").addEventListener("click", openCatalog);
@@ -2582,6 +2595,7 @@ bindUI();
 applyLanguage();
 initRenderer();
 document.documentElement.classList.add("sbs-ready");
+document.documentElement.dispatchEvent(new Event("sbs-ready"));
 const startupFallback = $("#startup-fallback");
 if (startupFallback) startupFallback.hidden = true;
 if (state.renderer) {
