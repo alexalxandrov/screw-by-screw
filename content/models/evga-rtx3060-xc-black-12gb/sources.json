@@ -33,7 +33,57 @@
         "09:00",
         "11:00"
       ],
-      "license_status": "third_party_copyright_no_reuse_permission"
+      "license_status": "third_party_copyright_no_reuse_permission",
+      "technical_observations": [
+        {
+          "locator": "01:30–05:33",
+          "topic": "cooler_fasteners_and_fan_connectors",
+          "findings": [
+            "Four spring-loaded cooler mounting screws pass through the PCB around the GPU; the presenter uses a Phillips #0 driver.",
+            "Additional screws secure the fin-stack base and I/O/display bracket. These are distinct from the four GPU mounting screws; the video does not provide a fully calibrated board-wide screw map.",
+            "Both fan leads are separate connectors with release clips; disconnect before lifting the cooler."
+          ],
+          "confidence": "exact_model_teardown_observation",
+          "limitations": "The video does not enumerate every screw in the same grouping as Tom's Hardware's eight rear fasteners. Preserve the four GPU-area screws as a known subset; do not infer that every fan/shroud/port fastener is part of the eight."
+        },
+        {
+          "locator": "05:33–06:45",
+          "topic": "thermal_interface_and_heatpipe_layout",
+          "findings": [
+            "Two thermal-pad thickness observations are spoken: about 2.0 mm for one pad and approximately 1.5 mm for another; the second is explicitly described as harder to measure.",
+            "The presenter counts two central heatpipe tubes running through the GPU contact plate and estimates approximately 6 mm tube diameter.",
+            "The copper GPU cold plate contacts the die directly; it is joined to the fin stack, and the pipes return through the copper plate toward the memory-side region.",
+            "Six GDDR6 positions are visible, arranged three along one side and three along the other; some pipe runs cross the memory region without direct memory contact."
+          ],
+          "confidence": "exact_model_teardown_observation",
+          "limitations": "The narration does not assign the 2.0 mm and 1.5 mm observations to specific memory/VRM locations or package footprints. Heatpipe tube-loop count and exposed tube-run count are different possible counting conventions; do not collapse them without a drawing."
+        },
+        {
+          "locator": "06:45–09:00",
+          "topic": "power_stage_and_fan_service",
+          "findings": [
+            "The presenter identifies a row of MOSFETs contacted by a copper plate.",
+            "Two inductors are discussed on the opposite-side power area; the presenter tentatively calls that area the memory VRM, so that functional assignment remains tentative.",
+            "The presenter notes a thermal-pad impression on the two-inductor area but says the pad contact is incomplete for the rest of the nearby inductors.",
+            "Each fan is retained by three screws and has its own independently replaceable lead."
+          ],
+          "confidence": "exact_model_teardown_observation",
+          "limitations": "No MOSFET part number, inductor designation, inductance, VRM phase topology, controller identity, pad footprint or screw coordinates are provided."
+        },
+        {
+          "locator": "11:00–13:25",
+          "topic": "current_sense_protection_and_die_marking",
+          "findings": [
+            "Two current-sense shunts are discussed: one associated with the auxiliary power-input path and a separate one associated with PCIe-slot 12 V.",
+            "The presenter states a 5 milliohm shunt on the auxiliary power-input path; do not copy that value to the separate slot shunt.",
+            "A fuse is visible for input-protection troubleshooting.",
+            "The cleaned GPU die marking is read as NVIDIA GA106-300-A1."
+          ],
+          "confidence": "exact_model_teardown_observation",
+          "limitations": "The transcript does not provide fuse part number/rating, shunt reference designators, calibrated electrical nets or the resistance of the slot shunt."
+        }
+      ],
+      "identity_reference_url": "https://www.youtube.com/watch?v=hJFJ_clQT8U"
     },
     {
       "id": "src.neoseeker.review",
