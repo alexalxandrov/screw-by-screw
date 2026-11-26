@@ -11,7 +11,7 @@ Add a second deeply navigable reference device to Screw by Screw: the original I
 - Package format: `sbs-model`, schema 1.0.0
 - Draft package version: `0.1.0-draft`
 - Geometry state: `illustrative_proxy_not_cad`
-- 71 canonical components, 100 typed relationships, 20 source-linked claims
+- 71 canonical components, 100 typed relationships, 21 source-linked claims
 - Five process layers, 12 bilingual learning questions, five partial FRU procedures, two explanatory animations
 - Each canonical component must resolve to one GLB anchor with `extras.sbs_component_id`; parent hierarchy must remain stable.
 
@@ -19,11 +19,11 @@ Add a second deeply navigable reference device to Screw by Screw: the original I
 
 The original launch baseline is 16 KB RAM with no installed diskette drive. Model two empty drive positions, five empty expansion sockets and an unpopulated 8087 socket. Keep later 5150 motherboard revisions, later 220/240 Vac supply variants, and the IBM PC/XT 5160 outside this package.
 
-The first-edition IBM technical reference is the primary authority for the hardware architecture and electrical ratings. The first-edition IBM Hardware Maintenance and Service manual is the primary authority for documented FRU removal. The IBM corporate history is used for the launch date and retail baseline.
+The first-edition IBM technical reference is the primary authority for the hardware architecture and electrical ratings. Figure 4 (printed p. 2-13) informs relative board-component zones only; it is not a dimensioned placement drawing. The first-edition IBM Hardware Maintenance and Service manual is the primary authority for documented FRU removal. The IBM corporate history is used for the launch date and retail baseline.
 
 ## Geometry and safety
 
-The Blender generator creates a navigable proxy blockout, not measured CAD. Only the approximate 8.5 × 11 inch system-board outline is source-backed. Chassis dimensions, board-hole locations, exact part placement, screw geometry, thread, torque and fastener coordinates remain proxy or unknown.
+The Blender generator creates a navigable proxy blockout, not measured CAD. The approximate 8.5 × 11 inch system-board outline is source-backed. The FAU Informatics Collection catalogues one 1981 specimen at 494 × 410 × 140 mm; the pictured specimen has CGA and memory expansion, so this is a secondary reference envelope for that specimen, not an IBM-wide case specification or serial-matched launch measurement. Board placement now follows the relative zones in IBM Figure 4 (slots left/upper-left; J6/J7 upper-right; P1/P2 right; P3/P4 lower edge; ROM upper-middle; RAM lower-left; CPU/8087 right), but all coordinates, footprints and spacing remain proxies because the figure is not dimensioned. Board holes, sheet-metal folds, screw geometry, thread, torque and fastener coordinates remain proxy or unknown.
 
 Represent the PSU as a sealed field-replaceable unit. Never model the hazardous internal mains circuitry as a user-serviceable subsystem. Procedures must be labelled partial/conditional source sequences and must not be presented as a complete teardown.
 
