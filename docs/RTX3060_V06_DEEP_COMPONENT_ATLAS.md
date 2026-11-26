@@ -74,7 +74,7 @@ A second package-authored animation clip, `clip.exploded-cooler-overview`, now m
 
 ## GA106 compute and GDDR6 architecture tranche
 
-The semantic package now contains 117 components and 118 typed relationships. Thirteen logical-only nodes represent the 28-SM GA106 cluster, its CUDA/Tensor/RT/TMU/ROP aggregates, a 192-bit GDDR6 interface and six package-channel links to the six GDDR6 chips visible in the reviewed XC BLACK teardown. These nodes are exported as stable GLB assembly nodes so they can be selected, searched and inspected, but they carry `geometry_status: logical_only`: no physical die floorplan, shader wiring or PCB trace routing is drawn.
+The semantic package now contains 117 components and 112 typed relationships. Thirteen logical-only nodes represent the 28-SM GA106 cluster, its CUDA/Tensor/RT/TMU/ROP aggregates, a 192-bit GDDR6 interface and six logical interface presentation groups. Six GDDR6 package positions are separately selectable from exact-XC-BLACK review/teardown material, but no one-to-one mapping between package positions and interface segments is asserted. The logical nodes carry `geometry_status: logical_only`: no physical die floorplan, shader wiring or PCB trace routing is drawn.
 
 A third process layer, `gpu_compute`, exposes this architecture map in the viewer. Claims cover the published 28 SM / 112 Tensor / 28 RT / 112 TMU / 48 ROP configuration, 276 mm² and 12-billion-transistor GA106 die figures, Samsung 8N, and memory device attributes where available. The memory-package details are explicitly sourced to a secondary catalog entry rather than a primary Samsung datasheet. The viewer labels this as a logical map, not an architecture simulation.
 
@@ -86,3 +86,10 @@ The LanOC review explicitly identifies **four heatsink mounting screws around th
 Tom's Hardware's eight-screw description is from an EVGA GeForce RTX 3060 XC teardown that does not identify the XC BLACK retail SKU. That source is now typed as a related-model reference. Four additional screw objects remain in the semantic package only as uninstalled logical candidates with no fabricated installed geometry. They are not counted as exact-XC-BLACK GPU retention screws.
 
 The disassembly panel now states only the four GPU-area screws and the exact-model fan-lead disconnection step. The steps remain partial and are not a complete service manual.
+
+
+## 14. GDDR6 package identity and mapping boundary
+
+The exact XC BLACK teardown/review material supports six visible GDDR6 package positions. The available exact-SKU material does not yet establish each package's full marking. K4ZAF325BM-HC16 appears in a related EVGA RTX 3060 XC teardown and a secondary catalog, so its 16-Gbit density, 512M × 32 organization, 16-Gbps data rate and 180-FBGA package are recorded only as candidate-part attributes.
+
+The EVGA 192-bit GDDR6 bus remains an exact-SKU manufacturer specification. Six interface presentation groups remain in the architecture tree, but they are not confirmed hardware channels and are no longer connected to the six package nodes. The exact electrical partition and BoardView mapping remain unknown.
