@@ -225,6 +225,8 @@ jobs:
           cp MODELS/COMPUTERS/IBM/5150/04-WORKING/generated/ibm_pc_5150_1981.glb artifacts/ 2>/dev/null || true
           cp MODELS/COMPUTERS/IBM/5150/04-WORKING/generated/ibm_pc_5150_1981.manifest.json artifacts/ 2>/dev/null || true
           cp artifacts/ibm_pc_5150_1981.sbsmodel artifacts/ 2>/dev/null || true
+          cp tools/modeling/build_ibm_pc_5150_blockout.py artifacts/ibm_pc_5150_blockout_source.py
+          cp content/models/ibm-pc-5150-1981/components.json artifacts/ibm_pc_5150_components_source.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:
