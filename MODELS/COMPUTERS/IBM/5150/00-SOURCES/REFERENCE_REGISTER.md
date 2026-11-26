@@ -7,6 +7,7 @@
 | `src.ibm.history.personal_computer_1981` | [IBM History — The IBM PC](https://www.ibm.com/history/personal-computer) | Manufacturer historical reference | 12 August 1981 unveiling, $1,565 base configuration, 16 KB RAM and no disk drive | IBM corporate page; link only |
 | `src.conventionalmemory.ibm5150.service_recap` | [Conventional Memory — Recap and repair bench for the IBM 5150](https://conventionalmemory.io/recap/ibm5150/) | Secondary service recap | Cross-check of service-manual terminology and FRU procedures | Third-party material; link only, no reuse permission assumed |
 | `src.iser.fau.ibm5150.specimen_record_2025` | [FAU Informatics Collection — IBM PC with monitor](https://www.iser.fau.de/2025/04/25/neuzugang-ibm-pc-mit-monitor/) | Museum specimen record | One 1981 specimen; catalogued PC envelope 494 × 410 × 140 mm (L × W × H); case-photo reference. The photographed unit has CGA and memory expansion. | Museum page; link only, no image redistribution |
+| `src.pcworld.ibm5150.interior_2016` | [Inside the IBM PC 5150: The first-ever IBM PC](https://www.pcworld.com/article/416011/inside-the-ibm-pc-5150-the-first-ever-ibm-pc.html) | Secondary specimen photo report | One used, revision-unmatched machine; two board screws/four standoffs reported for that specimen only. Not applied to the August 1981 launch-board model. | Copyrighted article and photographs; link only, no redistribution |
 
 ## Applicability rules
 
@@ -18,9 +19,9 @@
 - The IBM first-edition board removal procedure identifies one board-retaining screw and a sliding standoff/slot release, but it does not state the stand-off count or exact geometry.\n- A PCWorld sample reporting two board screws/four plastic standoffs is a separate, revision-unmatched observation and is not applied to the launch baseline.\n- Screw-head marks in the 3D scene are visual proxies; no drive standard, thread, length, size or torque is inferred.\n- Do not infer physical chip count, copper routing, screws, sheet-metal dimensions, or torque from a logical diagram or museum photograph.
 - The corporate-history launch configuration is a baseline template, not proof that every 1981 retail machine shipped with identical fitted options.
 
-## Out-of-package comparison (not used to set the launch baseline)
+## Secondary comparison record (not applied to the launch baseline)
 
-[PCWorld — Inside the IBM PC 5150: The first-ever IBM PC](https://www.pcworld.com/article/416011/inside-the-ibm-pc-5150-the-first-ever-ibm-pc.html) reports two motherboard screws and four plastic standoffs on one used, revision-unmatched specimen. This is retained as a comparison note only; it is not a manufacturer source and is not applied to the August 1981 first-board geometry. The first-edition IBM procedure remains the authority for the selected one-screw removal sequence. See the [fastener evidence audit](../../../../../docs/IBM_PC_5150_FASTENER_EVIDENCE.md).
+[PCWorld — Inside the IBM PC 5150: The first-ever IBM PC](https://www.pcworld.com/article/416011/inside-the-ibm-pc-5150-the-first-ever-ibm-pc.html) reports two motherboard screws and four plastic standoffs on one used, revision-unmatched specimen. This is retained as a comparison note only; it is not a manufacturer source and is not applied to the August 1981 first-board geometry. The record is included in the package's source registry to document the revision mismatch, not to support the launch-board screw count. The first-edition IBM procedure remains the authority for the selected one-screw removal sequence. See the [fastener evidence audit](../../../../../docs/IBM_PC_5150_FASTENER_EVIDENCE.md).
 
 ## Evidence classification
 
