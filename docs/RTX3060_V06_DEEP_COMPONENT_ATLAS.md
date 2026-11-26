@@ -57,7 +57,7 @@ The component atlas also adds separate, individually selectable photo-estimated 
 
 ## Fine-grained cooling decomposition
 
-The canonical package now exposes **307 semantic components, 303 typed relationships, 85 claims and 14 registered sources**. This includes individually selectable fan frames, hubs and seven illustrative blade proxies per fan; 24 separate illustrative heatsink-fin proxies; six selectable heatpipe-route proxies grouped as four main GPU-contact pipes plus two side pipes; six memory-side thermal-pad proxies; and a VRM-side thermal-pad strip proxy.
+The canonical package now exposes **307 semantic components, 303 typed relationships, 96 claims and 14 registered sources**. This includes individually selectable fan frames, hubs and seven illustrative blade proxies per fan; 24 separate illustrative heatsink-fin proxies; six selectable heatpipe-route proxies grouped as four main GPU-contact pipes plus two side pipes; six memory-side thermal-pad proxies; and a VRM-side thermal-pad strip proxy.
 
 These are independently selectable teaching meshes, not a claim that the exact hardware has seven blades per fan or 24 fins. The count and shapes are explicitly identified as proxy geometry. Thermal-pad position proxies are aligned to the six identified GDDR6 package positions; pad thickness, material, hardness and service dimensions remain unverified. Heatpipe paths and cross-sections likewise remain illustrative.
 
@@ -74,7 +74,7 @@ A second package-authored animation clip, `clip.exploded-cooler-overview`, now m
 
 ## GA106 compute and GDDR6 architecture tranche
 
-The semantic package now contains **307 components, 303 typed relationships, 85 claims and 14 registered sources**. Thirteen logical-only nodes represent the 28-SM GA106 cluster, its CUDA/Tensor/RT/TMU/ROP aggregates, a 192-bit GDDR6 interface and six logical interface presentation groups. Six Samsung K4ZAF325BM-HC16 GDDR6 package positions are separately selectable from exact-SKU-linked teardown/review material; no one-to-one mapping between package positions and interface presentation segments is asserted. The logical nodes carry `geometry_status: logical_only`: no physical die floorplan, shader wiring or PCB trace routing is drawn.
+The semantic package now contains **307 components, 303 typed relationships, 96 claims and 14 registered sources**. Thirteen logical-only nodes represent the 28-SM GA106 cluster, its CUDA/Tensor/RT/TMU/ROP aggregates, a 192-bit GDDR6 interface and six logical interface presentation groups. Six Samsung K4ZAF325BM-HC16 GDDR6 package positions are separately selectable from exact-SKU-linked teardown/review material; no one-to-one mapping between package positions and interface presentation segments is asserted. The logical nodes carry `geometry_status: logical_only`: no physical die floorplan, shader wiring or PCB trace routing is drawn.
 
 A third process layer, `gpu_compute`, exposes this architecture map in the viewer. Claims cover the published 28 SM / 112 Tensor / 28 RT / 112 TMU / 48 ROP configuration, 276 mm² and 12-billion-transistor GA106 die figures, Samsung 8N, and exact-SKU-linked memory package identity. Tom's Hardware identifies six Samsung K4ZAF325BM-HC16 devices on the 12G-P5-3655-KR sample; 16-Gbit density, 512M × 32 organisation and 180-FBGA package type remain secondary-catalog device attributes, not primary Samsung-datasheet claims. The viewer labels this as a logical map, not an architecture simulation.
 
@@ -145,3 +145,10 @@ The bilingual package quiz now contains 12 questions. Four newly added questions
 The WIN SOURCE product page identifies EVGA `12G-P5-3655-KR` and displays an “Ultra Librarian 3D Model” label. However, the captured HTML contains no actionable `href`, file URL or download endpoint for the model. The main product image is a generic placeholder, and the page explicitly warns that product images are for reference only. The source is therefore registered as `unverified_cad_asset_lead`; no CAD file was retrieved, imported, redistributed or used to generate geometry. Exact card/PCB geometry remains unverified.
 
 Source: https://win-source.net/products/detail/evga/12g-p5-3655-kr.html
+
+
+## 23. Exterior materials, airflow cutout and I/O detail
+
+The exact-XC-BLACK LanOC review describes a black plastic shroud with a lightly textured upper zone and dotted recess areas around the fans, no RGB lighting, an aluminium vertical-fin heatsink, and a copper contact plate broad enough to cover the GPU and memory. It also describes a large through-PCB cutout near the card end/left side that lets air from the front fan pass through the board area. The model now records these as source-backed claims and expands component descriptions; the mesh contours, wall thickness, fin pitch/count, plate outline and cutout dimensions remain proxy/unknown.
+
+Neoseeker identifies its review sample as `12G-P5-3655-KR` and documents three DisplayPort 1.4a outputs plus one HDMI 2.1 output. These connector versions and counts are added as explicit claims. LanOC also notes raised EVGA E-logo bumps on the fan blades with a golf-ball-like texture; these details are documented but not yet reconstructed in the proxy mesh.
