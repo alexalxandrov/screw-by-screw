@@ -212,3 +212,12 @@ The map uses the exact-SKU display-output specification (three DisplayPort 1.4a 
 The visual group order is instructional, not a fixed serial pipeline. Shaders, texture sampling, RT and Tensor operations, memory traffic and raster output may branch, overlap or be bypassed according to workload. The map does not reconstruct the GA106 physical floorplan/GPC layout, instruction timing, cache path, memory-controller topology, display-engine internals or PCB nets. RT/Tensor paths are workload-dependent, not mandatory stages.
 
 The generic renderer reuses the existing selectable process-diagram component; package tests verify all diagram IDs and five groups; the browser suite selects the ROP node through the new layer. Latest-head GitHub Actions still needs runner allocation before these tests can be certified remotely.
+
+
+## 34. Dedicated video encode and decode engines
+
+Two logical-only media components are now represented beneath the GA106 die node: one 7th-generation NVENC hardware encoder and one 5th-generation NVDEC hardware decoder, as listed for the desktop GeForce RTX 3060 by NVIDIA. The matrix lists H.264 and HEVC encode/decode support, AV1 decoding, and no AV1 encoding for this engine generation. Codec support remains subject to the matrix's profile, chroma-format and bit-depth columns.
+
+This is the fifth selectable process layer, `video_codec`. Its three bilingual groups cover compressed input/decode, frame surfaces with optional shader/compute processing, and hardware encode output. It links the PCIe endpoint, GA106, NVDEC, GDDR6 interface, SM cluster and NVENC. Both engines are dedicated fixed-function media blocks, separate from CUDA cores.
+
+This is an architectural capability map, not an EVGA board-level circuit diagram. It does not infer die coordinates, physical engine layout, memory-copy routes, internal caches, codec throughput, bitrate, latency, session concurrency, power or thermals. No die geometry, PCB nets, shader-core implementation or additional silicon blocks are fabricated.

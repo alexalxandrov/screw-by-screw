@@ -52,6 +52,22 @@ test("renders conceptual GPU graphics paths and selects a linked architecture no
   expect(pageErrors).toEqual([]);
 });
 
+test("renders the RTX 3060 NVENC and NVDEC media-engine map", async ({ page }) => {
+  const pageErrors = [];
+  page.on("pageerror", (error) => pageErrors.push(error.message));
+  await page.goto("/");
+  await page.locator('.process-button[data-layer="video_codec"]').click();
+  await expect(page.locator("#process-details")).toBeVisible();
+  await expect(page.locator("#process-detail-title")).toHaveText("Выделенные блоки видеокодирования и декодирования");
+  await expect(page.locator("#process-diagram .architecture-diagram-group")).toHaveCount(3);
+  const nvdec = page.locator('#process-diagram .architecture-node[data-component-id="chip.gpu.nvdec"]');
+  await expect(nvdec).toBeVisible();
+  await nvdec.click();
+  await expect(page.locator("#component-details")).toBeVisible();
+  await expect(page.locator("#detail-id")).toHaveText("chip.gpu.nvdec");
+  expect(pageErrors).toEqual([]);
+});
+
 test("allows an animated explode sequence to be cancelled and reassembled", async ({ page }) => {
   await page.goto("/");
   const button = page.locator("#animate-button");

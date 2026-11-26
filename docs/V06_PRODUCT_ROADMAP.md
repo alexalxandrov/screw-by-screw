@@ -18,20 +18,20 @@ The pilot is an evidence-linked educational model. Its component inventory delib
 - **Selection and inspection:** hierarchical component selection, isolation/restoration, bilingual cards, atomic claims and typed source-linked relationships.
 - **Search:** component names, stable IDs, claim values, markings and source metadata.
 - **Model-space ruler:** two-point distance with visible markers, reset and keyboard exit; explicitly not a physical calibration tool.
-- **Process overlays:** qualitative cooling/airflow and schematic power-path presentation. Neither is CFD, thermal FEA, SPICE, electrical net tracing or telemetry.
+- **Process overlays:** qualitative cooling/airflow, schematic power-path presentation, logical GA106 graphics workloads/display paths, and dedicated NVENC/NVDEC video-codec engines. These maps are not CFD, thermal FEA, SPICE, electrical net tracing, instruction timing, codec-performance simulation or telemetry.
 - **Assembly evidence:** source observations are displayed separately from authored procedural steps.
 - **Package-authored animation:** clip selection, play/pause, seek, speed, completion and deterministic stop/reset with transform restoration. Pilot clips are a one-turn educational rotor motion and a reversible exploded-cooler overview.
 - **Standalone operation:** root `index.html` is intended to run directly from `file://`; generated model package is bundled when available at build time.
 
 ## Current RTX 3060 pilot inventory
 
-The canonical package currently contains **323 semantic components, 322 typed relationships, 111 atomic claims and 29 registered sources**. It has three process layers, 13 bilingual learning questions and two authored animation clips.
+The canonical package currently contains **325 semantic components, 324 typed relationships, 122 atomic claims and 31 registered sources**. It has five process layers, 13 bilingual learning questions and two authored animation clips.
 
 The cooling inventory includes two fans, eight photo-counted visible blade-surface proxies per fan with low-relief E-like markers, raised hub badge proxies, simplified EVGA / GEFORCE RTX shroud wordmarks, 24 illustrative fin proxies, six selectable heatpipe run proxies and separate thermal-interface markers. Fan profile, centres, exact logo vectors, OEM fan identity, fin count/pitch, pad footprint and thickness, heatpipe loop count and routing remain unverified.
 
 The power layer exposes an auxiliary-input current-sense shunt observed at 5 mΩ, a separate PCIe-slot shunt with unknown resistance, one teardown-observed fuse with unknown rating, a MOSFET/copper-contact region and two inductor packages discussed in a tentatively identified memory-VRM area. It does not infer controller identity, phase count, net routing or component values.
 
-The GPU architecture layer exposes 14 logical TPC groupings, 28 SM entries and 112 processing-partition entries, alongside aggregate CUDA/Tensor/RT/TMU/ROP resources and the 192-bit GDDR6 interface. This is a logical architecture hierarchy, not a physical GA106 floorplan. Six memory-interface presentation groups are not mapped one-to-one to six physical memory packages.
+The GPU architecture layer exposes 14 logical TPC groupings, 28 SM entries and 112 processing-partition entries, alongside aggregate CUDA/Tensor/RT/TMU/ROP resources and the 192-bit GDDR6 interface. Separate logical-only nodes represent one 7th-generation NVENC and one 5th-generation NVDEC, with NVIDIA's RTX 3060 codec capability matrix. These are logical architecture hierarchies, not a physical GA106 floorplan. Six memory-interface presentation groups are not mapped one-to-one to six physical memory packages.
 
 ## Partial teardown evidence
 

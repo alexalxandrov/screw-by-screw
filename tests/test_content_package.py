@@ -297,11 +297,11 @@ class ContentPackageTests(unittest.TestCase):
             )
             self.assertIn("src.newegg.exact_sku.product_photo", components[blade_ids[-1]]["source_ids"])
 
-        self.assertIn("Components: 323", report)
-        self.assertIn("Relationships: 322", report)
+        self.assertIn("Components: 325", report)
+        self.assertIn("Relationships: 324", report)
         self.assertIn("Animation clips: 2", report)
-        self.assertEqual(len(package["claims"]["claims"]), 111)
-        self.assertEqual(len(package["process_layers"]["process_layers"]), 4)
+        self.assertEqual(len(package["claims"]["claims"]), 122)
+        self.assertEqual(len(package["process_layers"]["process_layers"]), 5)
         power_layer = next(layer for layer in package["process_layers"]["process_layers"] if layer["id"] == "process.power.qualitative")
         self.assertEqual(len(power_layer["linked_component_ids"]), 12)
         self.assertIn("src.gamersnexus.teardown", power_layer["source_ids"])
@@ -323,6 +323,24 @@ class ContentPackageTests(unittest.TestCase):
         self.assertIn("src.nvidia.ampere.whitepaper", graphics_layer["source_ids"])
         self.assertIn("src.neoseeker.review", graphics_layer["source_ids"])
         self.assertIn("not a fixed", graphics_layer["description"]["en"])
+        video_layer = next(layer for layer in package["process_layers"]["process_layers"] if layer["type"] == "video_codec")
+        self.assertEqual(video_layer["mode"], "logical_architecture")
+        self.assertEqual(len(video_layer["visualization"]["diagram"]["groups"]), 3)
+        self.assertEqual(set(video_layer["linked_component_ids"]), {
+            "pcb.connector.pcie", "chip.gpu.ga106", "chip.gpu.nvdec",
+            "chip.memory.gddr6.bus", "chip.gpu.sm.cluster", "chip.gpu.nvenc"
+        })
+        self.assertEqual(components["chip.gpu.nvenc"]["geometry_status"], "logical_only")
+        self.assertEqual(components["chip.gpu.nvdec"]["geometry_status"], "logical_only")
+        media_claims = {item["id"]: item for item in package["claims"]["claims"]}
+        self.assertEqual(media_claims["claim.gpu.nvenc.count"]["value"], 1)
+        self.assertEqual(media_claims["claim.gpu.nvenc.generation"]["value"], "7th Generation")
+        self.assertFalse(media_claims["claim.gpu.nvenc.av1_encode"]["value"])
+        self.assertEqual(media_claims["claim.gpu.nvdec.count"]["value"], 1)
+        self.assertEqual(media_claims["claim.gpu.nvdec.generation"]["value"], "5th Generation")
+        self.assertTrue(media_claims["claim.gpu.nvdec.av1_decode"]["value"])
+        media_source_ids = {item["id"] for item in package["sources"]["sources"]}
+        self.assertIn("src.nvidia.video_encode_decode_matrix", media_source_ids)
         self.assertEqual(len(package["learning"]["questions"]), 13)
         self.assertEqual(len(package["assembly_steps"]["steps"]), 5)
         self.assertEqual(claims["claim.cooler.fin_stack_base.screw_count"]["value"], 2)

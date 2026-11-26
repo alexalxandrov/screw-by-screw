@@ -15,7 +15,7 @@ These are capability milestones, not promises that every feature will be physica
 
 ## Current RTX 3060 pilot data scope
 
-The current package contains **313 semantic components, 311 typed relationships, 111 atomic claims and 29 registered sources**, with three process layers, 12 bilingual learning questions and two package-authored animation clips. The component inventory includes logical-only GA106 architecture nodes and unmeasured visual proxies; its count is not a count of 313 physically reconstructed parts.
+The current package contains **325 semantic components, 324 typed relationships, 122 atomic claims and 31 registered sources**, with five process layers, 13 bilingual learning questions and two package-authored animation clips. The component inventory includes logical-only GA106 architecture nodes and unmeasured visual proxies; its count is not a count of 313 physically reconstructed parts.
 
 The pilot tracks five partial teardown observations, but no complete removal/reassembly sequence. The cooling model keeps six reviewer-described route/run proxies distinct from the unknown physical closed-loop count. The power model is qualitative and does not assert a verified exact-board VRM topology.
 
@@ -61,3 +61,8 @@ The PC Perspective review also reports a momentary frequency peak of **1905 MHz*
 
 
 The Gamers Nexus exact-model teardown also gives a rough verbal estimate of approximately **6 mm** for the two central heatpipe tube runs visible through the GPU contact plate. The package stores this as a teardown-supported estimate with a note that it is not calibrated and must not be applied to every route proxy.
+
+
+## Dedicated video codec engines
+
+The RTX 3060 pilot records NVIDIA's listed single 7th-generation NVENC encoder and single 5th-generation NVDEC decoder as separate logical-only components. Codec capabilities are transcribed from NVIDIA's GeForce RTX 3060 desktop support-matrix row; profile, chroma-format and bit-depth restrictions remain source-defined. The viewer's video-codec layer is an architecture map, not a measured throughput, latency, concurrency, thermal or EVGA PCB-routing model.

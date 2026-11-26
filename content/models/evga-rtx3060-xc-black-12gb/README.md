@@ -39,7 +39,7 @@ This is not yet a complete engineering reconstruction. Eight cooler/shroud reten
 
 ### Fine-grained cooling decomposition
 
-The development branch now expands the content graph to **323 semantic components, 322 typed relationships, 111 atomic claims and 29 sources**. Fan frames, hubs and eight photo-counted blade proxies per fan are separately selectable; the illustrative heatsink has 24 separately selectable fin proxies; six separate heatpipe route proxies record The FPS Review's four central plus two side runs; they do not establish six separate closed U-shaped tube loops; and six memory thermal-pad proxies plus one VRM pad strip have their own IDs. The eight-blade count is a retail-photo observation for this exact SKU, not a factory drawing; blade shape and all fin/thermal-pad dimensions remain proxies or unknown.
+The development branch now expands the content graph to **325 semantic components, 324 typed relationships, 122 atomic claims and 31 sources**. Fan frames, hubs and eight photo-counted blade proxies per fan are separately selectable; the illustrative heatsink has 24 separately selectable fin proxies; six separate heatpipe route proxies record The FPS Review's four central plus two side runs; they do not establish six separate closed U-shaped tube loops; and six memory thermal-pad proxies plus one VRM pad strip have their own IDs. The eight-blade count is a retail-photo observation for this exact SKU, not a factory drawing; blade shape and all fin/thermal-pad dimensions remain proxies or unknown.
 
 
 ### Partial teardown evidence
@@ -89,7 +89,7 @@ The architecture tree now exposes 14 logical TPC instances, each with two SMs an
 
 ### Learning module
 
-The bilingual learning quiz contains 12 source-linked questions, including the new TPC and per-SM processing-partition structure, datapath resources and register-file organization documented by NVIDIA's GA10x architecture whitepaper.
+The bilingual learning quiz contains 13 source-linked questions, including the new TPC and per-SM processing-partition structure, datapath resources and register-file organization documented by NVIDIA's GA10x architecture whitepaper.
 
 
 ### Exterior and airflow observations
@@ -109,3 +109,10 @@ The model also exposes Gamers Nexus' rough approximately 6 mm estimate for two c
 ### Unpopulated PCB memory locations
 
 Tom's Hardware reports two unused memory locations on the teardown PCB sample linked to P/N 12G-P5-3655-KR by the rear-PCB identity photograph. The package represents these as a parent group with two separate logical-only positions, distinct from the six fitted Samsung GDDR6 packages. Their pad geometry, individual coordinates, electrical routing, compatibility and population potential are unknown; this is not a memory-upgrade claim.
+
+
+### Dedicated NVENC / NVDEC media engines
+
+The canonical graph adds one logical-only NVENC node and one logical-only NVDEC node beneath the GA106 die, supported by NVIDIA's GeForce RTX 3060 desktop Video Encode and Decode Support Matrix and Video Codec SDK documentation. The matrix lists one 7th-generation NVENC and one 5th-generation NVDEC for this GPU family: H.264/HEVC encode and decode, AV1 decode, and no AV1 encode for this generation. Codec profile, chroma-format and bit-depth limits remain those in NVIDIA's matrix columns.
+
+A fifth selectable process layer presents the media-engine path from the host-facing PCIe endpoint through NVDEC, frame surfaces/GDDR6 and optional shader processing to NVENC. It is a logical architectural teaching map, not an EVGA PCB schematic or performance simulation. No physical die placement, cache path, memory-copy topology, bitrate, throughput, latency, concurrent-session limit, power or thermal behaviour is inferred.
