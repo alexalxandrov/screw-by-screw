@@ -441,6 +441,26 @@
         "src.dell.5060.heatsink"
       ],
       "notes": "Loosening order 1–4 is documented; installed screw coordinates and torque are not supplied."
+    },
+    {
+      "id": "claim.io.video",
+      "subject_id": "rear.io_region",
+      "predicate": "standard_and_optional_video_outputs",
+      "value": {
+        "standard_DisplayPort": 2,
+        "optional_module": [
+          "HDMI 2.0b",
+          "DisplayPort",
+          "VGA",
+          "USB-C DisplayPort Alt Mode"
+        ]
+      },
+      "unit": "outputs",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.5060.ports"
+      ],
+      "notes": "Optional modules are alternatives, not four guaranteed simultaneous ports."
     }
   ]
 }
