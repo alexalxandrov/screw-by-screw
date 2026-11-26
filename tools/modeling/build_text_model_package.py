@@ -12,6 +12,7 @@ import argparse
 import base64
 import hashlib
 import json
+import struct
 from pathlib import Path, PurePosixPath
 
 
@@ -101,22 +102,120 @@ def build_envelope(model_dir: Path, scene_path: Path) -> str:
     return PREFIX + json.dumps(envelope, ensure_ascii=False, separators=(",", ":"))
 
 
+
+def read_envelope(path: Path) -> dict:
+    raw = path.read_bytes()
+    prefix = PREFIX.encode("ascii")
+    if not raw.startswith(prefix):
+        raise ValueError(f"{path} is not an SBSMODEL-JSON envelope")
+    envelope = json.loads(raw[len(prefix):].decode("utf-8", errors="strict"))
+    if envelope.get("format") != "sbs-model-json" or envelope.get("schema_version") != "1.0.0":
+        raise ValueError(f"{path} has an unsupported envelope schema")
+    return envelope
+
+
+def parse_glb(encoded: str, label: str) -> tuple[dict, bytes]:
+    try:
+        raw = base64.b64decode(encoded, validate=True)
+    except (ValueError, TypeError) as error:
+        raise ValueError(f"{label}: invalid scene.glb base64") from error
+    if len(raw) < 20:
+        raise ValueError(f"{label}: GLB is truncated")
+    magic, version, declared_length = struct.unpack_from("<4sII", raw, 0)
+    if magic != b"glTF" or version != 2 or declared_length != len(raw):
+        raise ValueError(f"{label}: invalid GLB header")
+    offset = 12
+    json_doc = None
+    binary_chunk = None
+    while offset + 8 <= len(raw):
+        chunk_length, chunk_type = struct.unpack_from("<II", raw, offset)
+        offset += 8
+        end = offset + chunk_length
+        if end > len(raw):
+            raise ValueError(f"{label}: GLB chunk exceeds file size")
+        chunk = raw[offset:end]
+        offset = end
+        if chunk_type == 0x4E4F534A:
+            if json_doc is not None:
+                raise ValueError(f"{label}: duplicate GLB JSON chunk")
+            json_doc = json.loads(chunk.rstrip(b" \\0").decode("utf-8", errors="strict"))
+        elif chunk_type == 0x004E4942:
+            if binary_chunk is not None:
+                raise ValueError(f"{label}: duplicate GLB BIN chunk")
+            binary_chunk = chunk
+    if offset != len(raw) or json_doc is None or binary_chunk is None:
+        raise ValueError(f"{label}: incomplete or malformed GLB chunks")
+    return json_doc, binary_chunk
+
+
+def verify_envelope_equivalence(rebuilt_path: Path, committed_path: Path) -> None:
+    rebuilt = read_envelope(rebuilt_path)
+    committed = read_envelope(committed_path)
+    if rebuilt["manifest"].get("files") != committed["manifest"].get("files"):
+        raise ValueError("rebuilt package manifest file map differs from committed package")
+    for field in ("format", "schema_version", "model_id", "package_version", "status"):
+        if rebuilt["manifest"].get(field) != committed["manifest"].get(field):
+            raise ValueError(f"rebuilt package manifest field differs: {field}")
+    rebuilt_files = rebuilt.get("files")
+    committed_files = committed.get("files")
+    if not isinstance(rebuilt_files, dict) or not isinstance(committed_files, dict):
+        raise ValueError("package envelope files must be objects")
+    if set(rebuilt_files) != set(committed_files):
+        raise ValueError("rebuilt package file set differs from committed package")
+    rebuilt_hashes = rebuilt["manifest"].get("sha256", {})
+    committed_hashes = committed["manifest"].get("sha256", {})
+    if set(rebuilt_hashes) != set(committed_hashes):
+        raise ValueError("rebuilt package checksum paths differ from committed package")
+
+    for name in rebuilt_files:
+        if name == "scene.glb":
+            continue
+        if rebuilt_files[name] != committed_files[name]:
+            raise ValueError(f"rebuilt sidecar differs: {name}")
+        digest = hashlib.sha256(rebuilt_files[name].encode("utf-8")).hexdigest()
+        if digest != rebuilt_hashes.get(name) or digest != committed_hashes.get(name):
+            raise ValueError(f"sidecar checksum mismatch: {name}")
+
+    if "scene.glb" not in rebuilt_files:
+        raise ValueError("scene.glb is missing from package")
+    rebuilt_glb_json, rebuilt_bin = parse_glb(rebuilt_files["scene.glb"], "rebuilt package")
+    committed_glb_json, committed_bin = parse_glb(committed_files["scene.glb"], "committed package")
+    if rebuilt_glb_json != committed_glb_json:
+        raise ValueError("rebuilt GLB scene graph differs from committed package")
+    if rebuilt_bin != committed_bin:
+        raise ValueError("rebuilt GLB binary geometry differs from committed package")
+    for envelope, files in ((rebuilt, rebuilt_files), (committed, committed_files)):
+        glb_bytes = base64.b64decode(files["scene.glb"], validate=True)
+        digest = hashlib.sha256(glb_bytes).hexdigest()
+        if digest != envelope["manifest"]["sha256"].get("scene.glb"):
+            raise ValueError("scene.glb checksum does not match its package manifest")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--model-dir", type=Path, required=True)
     parser.add_argument("--scene", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument(
+        "--compare-existing",
+        type=Path,
+        help="verify exact sidecars and equivalent GLB geometry against a committed package",
+    )
     args = parser.parse_args()
 
     text = build_envelope(args.model_dir, args.scene)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(text, encoding="utf-8", newline="")
+    if args.compare_existing:
+        verify_envelope_equivalence(args.output, args.compare_existing)
     print(json.dumps({
         "output": str(args.output),
         "bytes": args.output.stat().st_size,
         "format": "SBSMODEL-JSON",
         "files": len(FILE_ORDER),
         "integrity": "SHA-256",
+        "comparison": "equivalent" if args.compare_existing else None,
+        "compared_with": str(args.compare_existing) if args.compare_existing else None,
     }, ensure_ascii=False, indent=2))
     return 0
 
