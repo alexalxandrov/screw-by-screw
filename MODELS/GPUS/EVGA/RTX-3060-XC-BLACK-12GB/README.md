@@ -76,7 +76,7 @@ The report includes component IDs, parent IDs, world-space positions, dimensions
 
 ## Canonical package and remaining evidence gates
 
-The current canonical package is linked above and contains 167 semantic components, 163 typed relationships, 74 claims and 13 registered sources, plus three partial teardown actions and two educational clips. It remains a starter engineering atlas, not a complete BOM or complete service manual. Exact PCB revision, matching BoardView/schematic, component reference designators and calibrated mechanical dimensions remain unverified.
+The current canonical package is linked above and contains 307 semantic components, 303 typed relationships, 85 claims and 13 registered sources, plus three partial teardown actions and two educational clips. It remains a starter engineering atlas, not a complete BOM or complete service manual. Exact PCB revision, matching BoardView/schematic, component reference designators and calibrated mechanical dimensions remain unverified.
 
 See [GPU source audit](../../../../docs/GPU_SOURCE_AUDIT.md) and [content pipeline](../../../../docs/CONTENT_PIPELINE.md).
 
