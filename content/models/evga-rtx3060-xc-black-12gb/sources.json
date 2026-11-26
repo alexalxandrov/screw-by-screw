@@ -313,6 +313,15 @@
       "type": "exact_product_model_thermal_performance_review",
       "applicability": "Explicitly identifies the reviewed product as EVGA GeForce RTX 3060 12GB XC BLACK. Reports a single Metro Exodus 2160/high operating observation in an open case: approximately 24 °C ambient, 68.1 °C GPU temperature (80.5 °C hotspot), fans at 73% / ~2030 RPM, and peak observed board power 172.4 W. The page does not publish retail part number 12G-P5-3655-KR; these are sample/workload measurements, not fan maximum RPM, factory fan curve, nominal board limit or universally repeatable operating values.",
       "license_status": "third_party_copyright_no_reuse_permission"
+    },
+    {
+      "id": "src.ebay.aftermarket_fan.code_candidate",
+      "title": "eBay aftermarket fan listing with PLD09220S12HH compatibility claim",
+      "publisher": "eBay marketplace seller listing",
+      "url": "https://www.ebay.com/itm/198666542691",
+      "type": "aftermarket_compatibility_listing",
+      "applicability": "Seller title claims a PLD09220S12HH replacement fan for EVGA RTX 3060 / 3060 Ti XC BLACK family cards. This is a marketplace seller's broad compatibility assertion; it does not identify the original fan fitted to retail SKU 12G-P5-3655-KR and does not show an original OEM label. Treat only as a conflicting aftermarket replacement-code lead; do not assign PLD09220S12HH to the target card's original fan.",
+      "license_status": "metadata_reference_only_no_asset_reuse"
     }
   ]
 }
