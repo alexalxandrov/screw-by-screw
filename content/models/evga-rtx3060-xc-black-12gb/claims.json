@@ -564,36 +564,36 @@
       "subject_id": "cooling.heatpipes",
       "predicate": "total_heatpipe_count",
       "value": 6,
-      "unit": "pipes",
-      "confidence_class": "independently_verified",
+      "unit": "reported heatpipe runs",
+      "confidence_class": "teardown_supported",
       "source_ids": [
         "src.thefpsreview.exact_sku"
       ],
-      "notes": "The exact 12G-P5-3655-KR XC BLACK review describes four main heatpipes plus two additional side heatpipes (six total). The count is source-backed; 3D routes remain illustrative."
+      "notes": "The exact-SKU The FPS Review describes four central GPU-contact runs plus two side runs (six described runs). This is a source-specific route/run description, not a verified count of six independent closed U-shaped tube loops. PCWorld's overview says four copper heatpipes and Gamers Nexus narrates two central ~6 mm tube paths; the sources may be counting different geometric aspects. The actual unique physical loop count remains unresolved."
     },
     {
       "id": "claim.cooling.main_heatpipe_count",
       "subject_id": "cooling.heatpipes",
       "predicate": "main_gpu_contact_heatpipe_count",
       "value": 4,
-      "unit": "pipes",
-      "confidence_class": "independently_verified",
+      "unit": "reported central runs",
+      "confidence_class": "teardown_supported",
       "source_ids": [
         "src.thefpsreview.exact_sku"
       ],
-      "notes": "The exact-SKU review describes four main central heatpipes which make contact with the GPU. Individual geometry and coordinates remain illustrative."
+      "notes": "The FPS Review describes four central GPU-contact heatpipe runs on the exact XC BLACK sample. These are route/run descriptions, not a verified count of four independent closed U-shaped tubes; individual paths remain proxies."
     },
     {
       "id": "claim.cooling.side_heatpipe_count",
       "subject_id": "cooling.heatpipes",
       "predicate": "side_heatpipe_count",
       "value": 2,
-      "unit": "pipes",
-      "confidence_class": "independently_verified",
+      "unit": "reported side runs",
+      "confidence_class": "teardown_supported",
       "source_ids": [
         "src.thefpsreview.exact_sku"
       ],
-      "notes": "The exact-SKU review describes two additional side heatpipes which move heat toward the side of the heatsink. Individual geometry and coordinates remain illustrative."
+      "notes": "The FPS Review describes two additional side heatpipe runs on the exact XC BLACK sample. These are route/run descriptions, not a verified count of two independent closed U-shaped tubes; individual paths remain proxies."
     },
     {
       "id": "claim.pcb.silkscreen_marking.candidate",
@@ -1149,6 +1149,47 @@
         "src.neoseeker.review"
       ],
       "notes": "Neoseeker specifies HDMI 2.1 for the exact 12G-P5-3655-KR sample."
+    },
+    {
+      "id": "claim.cooling.heatpipe.physical_loop_count",
+      "subject_id": "cooling.heatpipes",
+      "predicate": "unique_physical_heatpipe_loop_count",
+      "value": null,
+      "unit": "closed tube loops",
+      "confidence_class": "unknown",
+      "source_ids": [
+        "src.thefpsreview.exact_sku",
+        "src.pcworld.xc_black",
+        "src.gamersnexus.teardown"
+      ],
+      "notes": "Unknown. The FPS Review describes four central plus two side runs; PCWorld's overview describes four copper heatpipes; Gamers Nexus narrates two central tube paths through the contact plate. These statements may count route legs, tube/loop assemblies or visible central paths differently. No calibrated cooler drawing or direct loop-by-loop inspection is available to reconcile them."
+    },
+    {
+      "id": "claim.cooling.heatpipe.counting_convention",
+      "subject_id": "cooling.heatpipes",
+      "predicate": "cross_source_counting_convention",
+      "value": "Unresolved: six reported runs vs four copper heatpipes vs two central tube paths",
+      "unit": null,
+      "confidence_class": "candidate_reference_observation",
+      "source_ids": [
+        "src.thefpsreview.exact_sku",
+        "src.pcworld.xc_black",
+        "src.gamersnexus.teardown"
+      ],
+      "notes": "Keep each publication's terminology separate. Do not describe six run proxies as six confirmed independent physical pipe loops."
+    },
+    {
+      "id": "claim.fan.oem_part_identity",
+      "subject_id": "assembly.cooling",
+      "predicate": "original_fan_manufacturer_part_number",
+      "value": null,
+      "unit": null,
+      "confidence_class": "unknown",
+      "source_ids": [
+        "src.gpufanreplacement.catalog",
+        "src.gpuconnect.catalog"
+      ],
+      "notes": "Unknown. Aftermarket compatibility listings name PLA09215S12H-family replacements, but do not show the original fan label or establish the OEM part fitted to this exact sample. Seller dimensions conflict (approximately 90 mm vs 87 mm, with 15/20 mm depth variants); voltage, current, connector and mounting measurements remain aftermarket catalogue claims only."
     }
   ]
 }
