@@ -596,11 +596,151 @@
         "chip.gpu.sm.25",
         "chip.gpu.sm.26",
         "chip.gpu.sm.27",
-        "chip.gpu.sm.28"
+        "chip.gpu.sm.28",
+        "chip.gpu.tpc.01",
+        "chip.gpu.tpc.02",
+        "chip.gpu.tpc.03",
+        "chip.gpu.tpc.04",
+        "chip.gpu.tpc.05",
+        "chip.gpu.tpc.06",
+        "chip.gpu.tpc.07",
+        "chip.gpu.tpc.08",
+        "chip.gpu.tpc.09",
+        "chip.gpu.tpc.10",
+        "chip.gpu.tpc.11",
+        "chip.gpu.tpc.12",
+        "chip.gpu.tpc.13",
+        "chip.gpu.tpc.14",
+        "chip.gpu.tpc.01.polymorph",
+        "chip.gpu.tpc.02.polymorph",
+        "chip.gpu.tpc.03.polymorph",
+        "chip.gpu.tpc.04.polymorph",
+        "chip.gpu.tpc.05.polymorph",
+        "chip.gpu.tpc.06.polymorph",
+        "chip.gpu.tpc.07.polymorph",
+        "chip.gpu.tpc.08.polymorph",
+        "chip.gpu.tpc.09.polymorph",
+        "chip.gpu.tpc.10.polymorph",
+        "chip.gpu.tpc.11.polymorph",
+        "chip.gpu.tpc.12.polymorph",
+        "chip.gpu.tpc.13.polymorph",
+        "chip.gpu.tpc.14.polymorph",
+        "chip.gpu.sm.01.partition.01",
+        "chip.gpu.sm.01.partition.02",
+        "chip.gpu.sm.01.partition.03",
+        "chip.gpu.sm.01.partition.04",
+        "chip.gpu.sm.02.partition.01",
+        "chip.gpu.sm.02.partition.02",
+        "chip.gpu.sm.02.partition.03",
+        "chip.gpu.sm.02.partition.04",
+        "chip.gpu.sm.03.partition.01",
+        "chip.gpu.sm.03.partition.02",
+        "chip.gpu.sm.03.partition.03",
+        "chip.gpu.sm.03.partition.04",
+        "chip.gpu.sm.04.partition.01",
+        "chip.gpu.sm.04.partition.02",
+        "chip.gpu.sm.04.partition.03",
+        "chip.gpu.sm.04.partition.04",
+        "chip.gpu.sm.05.partition.01",
+        "chip.gpu.sm.05.partition.02",
+        "chip.gpu.sm.05.partition.03",
+        "chip.gpu.sm.05.partition.04",
+        "chip.gpu.sm.06.partition.01",
+        "chip.gpu.sm.06.partition.02",
+        "chip.gpu.sm.06.partition.03",
+        "chip.gpu.sm.06.partition.04",
+        "chip.gpu.sm.07.partition.01",
+        "chip.gpu.sm.07.partition.02",
+        "chip.gpu.sm.07.partition.03",
+        "chip.gpu.sm.07.partition.04",
+        "chip.gpu.sm.08.partition.01",
+        "chip.gpu.sm.08.partition.02",
+        "chip.gpu.sm.08.partition.03",
+        "chip.gpu.sm.08.partition.04",
+        "chip.gpu.sm.09.partition.01",
+        "chip.gpu.sm.09.partition.02",
+        "chip.gpu.sm.09.partition.03",
+        "chip.gpu.sm.09.partition.04",
+        "chip.gpu.sm.10.partition.01",
+        "chip.gpu.sm.10.partition.02",
+        "chip.gpu.sm.10.partition.03",
+        "chip.gpu.sm.10.partition.04",
+        "chip.gpu.sm.11.partition.01",
+        "chip.gpu.sm.11.partition.02",
+        "chip.gpu.sm.11.partition.03",
+        "chip.gpu.sm.11.partition.04",
+        "chip.gpu.sm.12.partition.01",
+        "chip.gpu.sm.12.partition.02",
+        "chip.gpu.sm.12.partition.03",
+        "chip.gpu.sm.12.partition.04",
+        "chip.gpu.sm.13.partition.01",
+        "chip.gpu.sm.13.partition.02",
+        "chip.gpu.sm.13.partition.03",
+        "chip.gpu.sm.13.partition.04",
+        "chip.gpu.sm.14.partition.01",
+        "chip.gpu.sm.14.partition.02",
+        "chip.gpu.sm.14.partition.03",
+        "chip.gpu.sm.14.partition.04",
+        "chip.gpu.sm.15.partition.01",
+        "chip.gpu.sm.15.partition.02",
+        "chip.gpu.sm.15.partition.03",
+        "chip.gpu.sm.15.partition.04",
+        "chip.gpu.sm.16.partition.01",
+        "chip.gpu.sm.16.partition.02",
+        "chip.gpu.sm.16.partition.03",
+        "chip.gpu.sm.16.partition.04",
+        "chip.gpu.sm.17.partition.01",
+        "chip.gpu.sm.17.partition.02",
+        "chip.gpu.sm.17.partition.03",
+        "chip.gpu.sm.17.partition.04",
+        "chip.gpu.sm.18.partition.01",
+        "chip.gpu.sm.18.partition.02",
+        "chip.gpu.sm.18.partition.03",
+        "chip.gpu.sm.18.partition.04",
+        "chip.gpu.sm.19.partition.01",
+        "chip.gpu.sm.19.partition.02",
+        "chip.gpu.sm.19.partition.03",
+        "chip.gpu.sm.19.partition.04",
+        "chip.gpu.sm.20.partition.01",
+        "chip.gpu.sm.20.partition.02",
+        "chip.gpu.sm.20.partition.03",
+        "chip.gpu.sm.20.partition.04",
+        "chip.gpu.sm.21.partition.01",
+        "chip.gpu.sm.21.partition.02",
+        "chip.gpu.sm.21.partition.03",
+        "chip.gpu.sm.21.partition.04",
+        "chip.gpu.sm.22.partition.01",
+        "chip.gpu.sm.22.partition.02",
+        "chip.gpu.sm.22.partition.03",
+        "chip.gpu.sm.22.partition.04",
+        "chip.gpu.sm.23.partition.01",
+        "chip.gpu.sm.23.partition.02",
+        "chip.gpu.sm.23.partition.03",
+        "chip.gpu.sm.23.partition.04",
+        "chip.gpu.sm.24.partition.01",
+        "chip.gpu.sm.24.partition.02",
+        "chip.gpu.sm.24.partition.03",
+        "chip.gpu.sm.24.partition.04",
+        "chip.gpu.sm.25.partition.01",
+        "chip.gpu.sm.25.partition.02",
+        "chip.gpu.sm.25.partition.03",
+        "chip.gpu.sm.25.partition.04",
+        "chip.gpu.sm.26.partition.01",
+        "chip.gpu.sm.26.partition.02",
+        "chip.gpu.sm.26.partition.03",
+        "chip.gpu.sm.26.partition.04",
+        "chip.gpu.sm.27.partition.01",
+        "chip.gpu.sm.27.partition.02",
+        "chip.gpu.sm.27.partition.03",
+        "chip.gpu.sm.27.partition.04",
+        "chip.gpu.sm.28.partition.01",
+        "chip.gpu.sm.28.partition.02",
+        "chip.gpu.sm.28.partition.03",
+        "chip.gpu.sm.28.partition.04"
       ],
       "description": {
-        "en": "An evidence-linked architectural map of the GA106 RTX 3060 configuration: 28 SMs, 14 calculated TPCs, 3,584 CUDA cores, 112 third-generation Tensor Cores, 28 second-generation RT Cores, 112 TMUs, 48 ROPs and the exact SKU's published 192-bit GDDR6 interface. The component tree exposes 28 individually selectable logical SM entries. GA10x per-SM resources are 128 CUDA, four Tensor Cores, four texture units, one RT Core, a 256 KB register file and 128 KB L1/shared memory. Each TPC contains two SMs and one PolyMorph Engine. Six GDDR6 package positions visible in XC BLACK material are separate layout nodes. No physical TPC/SM coordinates, GPC grouping, die floorplan, package-to-channel mapping or electrical net mapping are asserted.",
-        "ru": "Архитектурная карта конфигурации GA106 RTX 3060: 28 SM, 14 вычисленных TPC, 3 584 ядра CUDA, 112 тензорных ядер третьего поколения, 28 RT-ядер второго поколения, 112 TMU, 48 ROP и опубликованный для точного SKU 192-битный интерфейс GDDR6. Дерево компонентов содержит 28 отдельно выбираемых логических SM. Ресурсы каждого SM по архитектуре GA10x: 128 CUDA, четыре Tensor Core, четыре текстурных блока, одно RT-ядро, файл регистров 256 КБ и 128 КБ памяти L1/shared. Каждый TPC содержит два SM и один PolyMorph Engine. Шесть видимых позиций корпусов GDDR6 показаны отдельно. Физические координаты TPC/SM, группировка по GPC, топология кристалла, соответствие корпусов каналам и электрические сети не утверждаются."
+        "en": "An evidence-linked architecture map of the GA106 RTX 3060 configuration: 28 SMs, 14 logical TPCs, 112 logical SM processing partitions, 3,584 CUDA cores, 112 third-generation Tensor Cores, 28 second-generation RT Cores, 112 TMUs, 48 ROPs and the exact SKU's published 192-bit GDDR6 interface. Each logical TPC groups two SM entries and one PolyMorph Engine; each SM expands into four processing-partition entries. NVIDIA's GA10x whitepaper details each partition's scheduler/dispatch, register file, FP32/INT32 datapaths, Tensor Core, load/store units and SFU. These IDs describe architecture hierarchy only. No physical GPC count, die coordinates, silicon floorplan, package-to-channel mapping or electrical net mapping is asserted.",
+        "ru": "Архитектурная карта GA106 в конфигурации RTX 3060: 28 SM, 14 логических TPC, 112 логических вычислительных секций SM, 3 584 ядра CUDA, 112 тензорных ядер третьего поколения, 28 RT-ядер второго поколения, 112 TMU, 48 ROP и опубликованный для точного SKU 192-битный интерфейс GDDR6. Каждый логический TPC объединяет два узла SM и один PolyMorph Engine; каждый SM раскрывается в четыре узла вычислительных секций. В whitepaper NVIDIA GA10x описаны scheduler/dispatch, файл регистров, тракты FP32/INT32, Tensor Core, блоки load/store и SFU каждой секции. Эти идентификаторы описывают только архитектурную иерархию. Физическое число GPC, координаты на кристалле, топология кремния, соответствие корпусов памяти каналам и электрические сети не утверждаются."
       },
       "assumptions": [
         {
@@ -638,6 +778,14 @@
         {
           "en": "No GA106 GPC count, TPC-to-GPC distribution, disabled-block placement or physical die floorplan is inferred from the GA102 whitepaper diagram.",
           "ru": "По схеме кристалла GA102 из whitepaper не выводятся число GPC у GA106, распределение TPC по GPC, расположение отключённых блоков или физическая топология кристалла."
+        },
+        {
+          "en": "Each GA10x SM is partitioned into four processing blocks. The 112 child partition nodes are calculated as 28 SMs × 4; numbered partitions are inventory indices, not physical die coordinates.",
+          "ru": "Каждый SM GA10x разделён на четыре вычислительных блока. Число 112 дочерних секций рассчитано как 28 SM × 4; их номера — инвентарные индексы, а не координаты на кристалле."
+        },
+        {
+          "en": "Each partition describes logical functional resources only: scheduler/dispatch, register file, FP32 and FP32/INT32 datapaths, Tensor Core, LD/ST units and SFU. No circuit layout, transistor-level design or physical placement is reconstructed.",
+          "ru": "Каждая секция описывает только логические функциональные ресурсы: scheduler/dispatch, файл регистров, тракты FP32 и FP32/INT32, Tensor Core, блоки LD/ST и SFU. Топология цепей, транзисторная схема или физическое размещение не восстанавливаются."
         }
       ],
       "source_ids": [
@@ -698,6 +846,160 @@
                   "metric": {
                     "en": "14 logical TPCs · derived from 28 SMs / 2",
                     "ru": "14 логических TPC · расчёт 28 SM / 2"
+                  }
+                },
+                {
+                  "component_id": "chip.gpu.tpc.01",
+                  "title": {
+                    "en": "TPC 01",
+                    "ru": "TPC 01"
+                  },
+                  "metric": {
+                    "en": "2 SMs · 1 PolyMorph Engine · logical group",
+                    "ru": "2 SM · 1 PolyMorph Engine · логическая группа"
+                  }
+                },
+                {
+                  "component_id": "chip.gpu.tpc.02",
+                  "title": {
+                    "en": "TPC 02",
+                    "ru": "TPC 02"
+                  },
+                  "metric": {
+                    "en": "2 SMs · 1 PolyMorph Engine · logical group",
+                    "ru": "2 SM · 1 PolyMorph Engine · логическая группа"
+                  }
+                },
+                {
+                  "component_id": "chip.gpu.tpc.03",
+                  "title": {
+                    "en": "TPC 03",
+                    "ru": "TPC 03"
+                  },
+                  "metric": {
+                    "en": "2 SMs · 1 PolyMorph Engine · logical group",
+                    "ru": "2 SM · 1 PolyMorph Engine · логическая группа"
+                  }
+                },
+                {
+                  "component_id": "chip.gpu.tpc.04",
+                  "title": {
+                    "en": "TPC 04",
+                    "ru": "TPC 04"
+                  },
+                  "metric": {
+                    "en": "2 SMs · 1 PolyMorph Engine · logical group",
+                    "ru": "2 SM · 1 PolyMorph Engine · логическая группа"
+                  }
+                },
+                {
+                  "component_id": "chip.gpu.tpc.05",
+                  "title": {
+                    "en": "TPC 05",
+                    "ru": "TPC 05"
+                  },
+                  "metric": {
+                    "en": "2 SMs · 1 PolyMorph Engine · logical group",
+                    "ru": "2 SM · 1 PolyMorph Engine · логическая группа"
+                  }
+                },
+                {
+                  "component_id": "chip.gpu.tpc.06",
+                  "title": {
+                    "en": "TPC 06",
+                    "ru": "TPC 06"
+                  },
+                  "metric": {
+                    "en": "2 SMs · 1 PolyMorph Engine · logical group",
+                    "ru": "2 SM · 1 PolyMorph Engine · логическая группа"
+                  }
+                },
+                {
+                  "component_id": "chip.gpu.tpc.07",
+                  "title": {
+                    "en": "TPC 07",
+                    "ru": "TPC 07"
+                  },
+                  "metric": {
+                    "en": "2 SMs · 1 PolyMorph Engine · logical group",
+                    "ru": "2 SM · 1 PolyMorph Engine · логическая группа"
+                  }
+                },
+                {
+                  "component_id": "chip.gpu.tpc.08",
+                  "title": {
+                    "en": "TPC 08",
+                    "ru": "TPC 08"
+                  },
+                  "metric": {
+                    "en": "2 SMs · 1 PolyMorph Engine · logical group",
+                    "ru": "2 SM · 1 PolyMorph Engine · логическая группа"
+                  }
+                },
+                {
+                  "component_id": "chip.gpu.tpc.09",
+                  "title": {
+                    "en": "TPC 09",
+                    "ru": "TPC 09"
+                  },
+                  "metric": {
+                    "en": "2 SMs · 1 PolyMorph Engine · logical group",
+                    "ru": "2 SM · 1 PolyMorph Engine · логическая группа"
+                  }
+                },
+                {
+                  "component_id": "chip.gpu.tpc.10",
+                  "title": {
+                    "en": "TPC 10",
+                    "ru": "TPC 10"
+                  },
+                  "metric": {
+                    "en": "2 SMs · 1 PolyMorph Engine · logical group",
+                    "ru": "2 SM · 1 PolyMorph Engine · логическая группа"
+                  }
+                },
+                {
+                  "component_id": "chip.gpu.tpc.11",
+                  "title": {
+                    "en": "TPC 11",
+                    "ru": "TPC 11"
+                  },
+                  "metric": {
+                    "en": "2 SMs · 1 PolyMorph Engine · logical group",
+                    "ru": "2 SM · 1 PolyMorph Engine · логическая группа"
+                  }
+                },
+                {
+                  "component_id": "chip.gpu.tpc.12",
+                  "title": {
+                    "en": "TPC 12",
+                    "ru": "TPC 12"
+                  },
+                  "metric": {
+                    "en": "2 SMs · 1 PolyMorph Engine · logical group",
+                    "ru": "2 SM · 1 PolyMorph Engine · логическая группа"
+                  }
+                },
+                {
+                  "component_id": "chip.gpu.tpc.13",
+                  "title": {
+                    "en": "TPC 13",
+                    "ru": "TPC 13"
+                  },
+                  "metric": {
+                    "en": "2 SMs · 1 PolyMorph Engine · logical group",
+                    "ru": "2 SM · 1 PolyMorph Engine · логическая группа"
+                  }
+                },
+                {
+                  "component_id": "chip.gpu.tpc.14",
+                  "title": {
+                    "en": "TPC 14",
+                    "ru": "TPC 14"
+                  },
+                  "metric": {
+                    "en": "2 SMs · 1 PolyMorph Engine · logical group",
+                    "ru": "2 SM · 1 PolyMorph Engine · логическая группа"
                   }
                 }
               ]
