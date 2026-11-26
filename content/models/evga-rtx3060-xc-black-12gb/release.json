@@ -12,7 +12,7 @@
     },
     {
       "path": "sources.json",
-      "sha256": "d212161afe15477f5e2f4b4be8b3029319caf0c8a9037058c1756f51ba3fca66"
+      "sha256": "2bee78bfdf947047f5baf66ee585d6bc4acfbb38419731af369d8e4859eef242"
     },
     {
       "path": "components.json",
@@ -36,7 +36,7 @@
     },
     {
       "path": "claims.json",
-      "sha256": "d3822673f752a0e1d6c30b50310eb18915810c2c0207602bf18e52263c54cbe5"
+      "sha256": "ead9140749bc916e19afc3041a0fa7899783e8b71b30d1bd04b3da845b2c8108"
     },
     {
       "path": "animations.json",
