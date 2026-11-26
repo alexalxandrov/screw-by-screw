@@ -194,6 +194,15 @@
       "type": "manufacturer_architecture_whitepaper",
       "applicability": "GA10x architecture-common SM and TPC organization: 128 CUDA cores, four third-generation Tensor Cores, four texture units, one second-generation RT Core, 256 KB register file, 128 KB L1/shared memory per SM; two SMs and one PolyMorph Engine per TPC. Applied only as logical architecture to GA106 RTX 3060. The GA102 physical floorplan and GPC layout are not transferred.",
       "license_status": "redistribution_not_cleared"
+    },
+    {
+      "id": "src.winsource.ultralibrarian.lead",
+      "title": "WIN SOURCE catalogue entry for EVGA 12G-P5-3655-KR with Ultra Librarian CAD label",
+      "publisher": "WIN SOURCE",
+      "url": "https://win-source.net/products/detail/evga/12g-p5-3655-kr.html",
+      "type": "unverified_cad_asset_lead",
+      "applicability": "Catalogue page identifies EVGA 12G-P5-3655-KR and displays an 'Ultra Librarian 3D Model' label, but the captured page exposes no actionable asset URL or download endpoint. The product image is a generic placeholder and the page states that images are for reference only. No STEP/IGES/mesh asset has been retrieved or identity-checked. Do not infer card, PCB, component or cooler geometry from this catalogue entry.",
+      "license_status": "unverified_no_asset_link_or_reuse_terms"
     }
   ]
 }
