@@ -53,7 +53,7 @@ Exploded-view transforms must be reversible and deterministic. The engine captur
 
 - Engine foundation: implemented reusable component indexing, reversible explode/reassemble, visibility-safe isolation, reset and generic rotation/explode animation primitives; Six Node unit tests cover deterministic transforms, isolation and duplicate-ID reporting.
 - Package loader: implemented .sbsmodel ZIP import, archive path and size preflight, sidecar schema/reference checks, SHA-256 verification, self-contained GLB validation and a Python package builder.
-- Animation runtime: package-authored clip selection, play/pause/seek/stop, speed, animation-track validation and deterministic transform restoration are implemented. The RTX 3060 pilot includes one educational fan-rotor clip; its duration is not measured RPM.
+- Animation runtime: package-authored clip selection, play/pause/seek/stop, speed, animation-track validation and deterministic transform restoration are implemented. The RTX 3060 pilot package includes two educational clips: a fan-rotor turn (duration is not measured RPM) and a reversible exploded-cooler overview (offsets are not service clearances or removal order).
 - Model catalogue: implemented as an offline-first bilingual static index with exact-SKU identity, safe relative package paths, package-ID binding and standalone file:// embedding; no backend is required.
 - Learning progress: browser-local quiz state is saved per model and exact ordered question-ID list; no account or server is required.
 - Site integration: mount the same viewer runtime in a model detail route; do not duplicate Three.js scene logic in the catalogue UI.
