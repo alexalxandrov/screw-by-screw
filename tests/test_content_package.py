@@ -353,7 +353,13 @@ class ContentPackageTests(unittest.TestCase):
         self.assertTrue(media_claims["claim.gpu.nvdec.av1_decode"]["value"])
         media_source_ids = {item["id"] for item in package["sources"]["sources"]}
         self.assertIn("src.nvidia.video_encode_decode_matrix", media_source_ids)
-        self.assertEqual(len(package["learning"]["questions"]), 13)
+        media_questions = {item["id"]: item for item in package["learning"]["questions"]}
+        self.assertEqual(media_questions["quiz.video.nvdec.role"]["correct_index"], 1)
+        self.assertEqual(media_questions["quiz.video.nvenc.generation"]["correct_index"], 0)
+        self.assertEqual(media_questions["quiz.video.av1.encode"]["correct_index"], 1)
+        self.assertEqual(media_questions["quiz.video.av1.decode"]["correct_index"], 0)
+        self.assertTrue(all("src.nvidia.video_encode_decode_matrix" in item["source_ids"] for item in media_questions.values() if item["id"].startswith("quiz.video.")))
+        self.assertEqual(len(package["learning"]["questions"]), 17)
         self.assertEqual(len(package["assembly_steps"]["steps"]), 5)
         self.assertEqual(claims["claim.cooler.fin_stack_base.screw_count"]["value"], 2)
         self.assertEqual(claims["claim.io.bracket.mount_screw_count"]["value"], 2)

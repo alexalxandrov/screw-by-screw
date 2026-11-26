@@ -381,6 +381,123 @@
       "source_ids": [
         "src.tomshardware.teardown"
       ]
+    },
+    {
+      "id": "quiz.video.nvdec.role",
+      "prompt": {
+        "en": "Which dedicated engine decodes a compressed video stream on the RTX 3060?",
+        "ru": "Какой выделенный блок декодирует сжатый видеопоток на RTX 3060?"
+      },
+      "choices": [
+        {
+          "en": "NVENC",
+          "ru": "NVENC"
+        },
+        {
+          "en": "NVDEC",
+          "ru": "NVDEC"
+        },
+        {
+          "en": "Tensor Core",
+          "ru": "Tensor Core"
+        }
+      ],
+      "correct_index": 1,
+      "explanation": {
+        "en": "NVDEC is the dedicated video decoder. NVENC is the separate encoder.",
+        "ru": "NVDEC — выделенный видеодекодер. NVENC — отдельный кодировщик."
+      },
+      "source_ids": [
+        "src.nvidia.video_encode_decode_matrix",
+        "src.nvidia.video_codec_sdk"
+      ]
+    },
+    {
+      "id": "quiz.video.nvenc.generation",
+      "prompt": {
+        "en": "Which NVENC generation does NVIDIA list for the desktop RTX 3060?",
+        "ru": "Какое поколение NVENC NVIDIA указывает для настольной RTX 3060?"
+      },
+      "choices": [
+        {
+          "en": "7th Generation",
+          "ru": "7-е поколение"
+        },
+        {
+          "en": "5th Generation",
+          "ru": "5-е поколение"
+        },
+        {
+          "en": "3rd Generation",
+          "ru": "3-е поколение"
+        }
+      ],
+      "correct_index": 0,
+      "explanation": {
+        "en": "The NVIDIA support matrix lists one 7th-generation NVENC for the desktop RTX 3060.",
+        "ru": "В матрице NVIDIA для настольной RTX 3060 указан один NVENC 7-го поколения."
+      },
+      "source_ids": [
+        "src.nvidia.video_encode_decode_matrix"
+      ]
+    },
+    {
+      "id": "quiz.video.av1.encode",
+      "prompt": {
+        "en": "Does the RTX 3060's 7th-generation NVENC support AV1 hardware encoding?",
+        "ru": "Поддерживает ли NVENC 7-го поколения в RTX 3060 аппаратное кодирование AV1?"
+      },
+      "choices": [
+        {
+          "en": "Yes, all AV1 profiles",
+          "ru": "Да, все профили AV1"
+        },
+        {
+          "en": "No, AV1 encoding is not listed as supported",
+          "ru": "Нет, поддержка кодирования AV1 не указана"
+        },
+        {
+          "en": "Only AV1 at 8-bit",
+          "ru": "Только AV1 с глубиной 8 бит"
+        }
+      ],
+      "correct_index": 1,
+      "explanation": {
+        "en": "NVIDIA's matrix marks AV1 encoding unsupported for this NVENC generation. This does not mean AV1 decoding is unsupported.",
+        "ru": "В матрице NVIDIA для этого поколения NVENC кодирование AV1 отмечено как неподдерживаемое. Это не означает отсутствие декодирования AV1."
+      },
+      "source_ids": [
+        "src.nvidia.video_encode_decode_matrix"
+      ]
+    },
+    {
+      "id": "quiz.video.av1.decode",
+      "prompt": {
+        "en": "Does the RTX 3060's NVDEC support hardware AV1 decoding?",
+        "ru": "Поддерживает ли NVDEC в RTX 3060 аппаратное декодирование AV1?"
+      },
+      "choices": [
+        {
+          "en": "Yes, subject to the matrix's format/profile limits",
+          "ru": "Да, с ограничениями формата и профиля из матрицы"
+        },
+        {
+          "en": "No, AV1 is unsupported in both directions",
+          "ru": "Нет, AV1 не поддерживается ни для кодирования, ни для декодирования"
+        },
+        {
+          "en": "Only AV1 encoding",
+          "ru": "Только кодирование AV1"
+        }
+      ],
+      "correct_index": 0,
+      "explanation": {
+        "en": "The desktop RTX 3060 row lists AV1 decoding, while its NVENC row does not list AV1 encoding.",
+        "ru": "Для настольной RTX 3060 строка NVDEC указывает декодирование AV1, а строка NVENC не указывает его кодирование."
+      },
+      "source_ids": [
+        "src.nvidia.video_encode_decode_matrix"
+      ]
     }
   ]
 }

@@ -25,7 +25,7 @@ The pilot is an evidence-linked educational model. Its component inventory delib
 
 ## Current RTX 3060 pilot inventory
 
-The canonical package currently contains **325 semantic components, 324 typed relationships, 122 atomic claims and 31 registered sources**. It has five process layers, 13 bilingual learning questions and two authored animation clips.
+The canonical package currently contains **325 semantic components, 324 typed relationships, 122 atomic claims and 31 registered sources**. It has five process layers, 17 bilingual learning questions and two authored animation clips.
 
 The cooling inventory includes two fans, eight photo-counted visible blade-surface proxies per fan with low-relief E-like markers, raised hub badge proxies, simplified EVGA / GEFORCE RTX shroud wordmarks, 24 illustrative fin proxies, six selectable heatpipe run proxies and separate thermal-interface markers. Fan profile, centres, exact logo vectors, OEM fan identity, fin count/pitch, pad footprint and thickness, heatpipe loop count and routing remain unverified.
 

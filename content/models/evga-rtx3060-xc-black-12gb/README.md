@@ -89,7 +89,7 @@ The architecture tree now exposes 14 logical TPC instances, each with two SMs an
 
 ### Learning module
 
-The bilingual learning quiz contains 13 source-linked questions, including the new TPC and per-SM processing-partition structure, datapath resources and register-file organization documented by NVIDIA's GA10x architecture whitepaper.
+The bilingual learning quiz contains 17 source-linked questions, including the new TPC and per-SM processing-partition structure, datapath resources and register-file organization documented by NVIDIA's GA10x architecture whitepaper.
 
 
 ### Exterior and airflow observations
