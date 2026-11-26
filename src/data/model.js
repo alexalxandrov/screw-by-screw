@@ -45,6 +45,12 @@ export const EVIDENCE = {
     copyEn: "This is a candidate placement only. Exact PCB revision and component population must be confirmed.",
     copyRu: "Это только кандидат размещения. Необходимо подтвердить ревизию PCB и состав компонентов."
   },
+  candidate_reference_observation: {
+    en: "Candidate reference observation",
+    ru: "Кандидатное наблюдение по справочному изображению",
+    copyEn: "The marking is visible on a public product-page photograph, but the photographed board has not been independently tied to this exact retail sample or production batch.",
+    copyRu: "Маркировка читается на фотографии из публичной карточки продукта, но показанная плата не сопоставлена независимо с этим точным розничным экземпляром или производственной партией."
+  },
   illustrative: {
     en: "Illustrative proxy",
     ru: "Условная геометрия",
