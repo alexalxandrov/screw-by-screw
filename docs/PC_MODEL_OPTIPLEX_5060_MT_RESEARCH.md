@@ -110,3 +110,25 @@ Do not publish an exact-SKU package until one configuration is frozen and identi
 ## Decision
 
 **Proceed with Dell OptiPlex 5060 Tower (MT) as the first PC research and modeling platform.** Treat the product family as the research target, and do not register it as an exact catalogue SKU until the physical/reference configuration is frozen.
+
+
+## Implemented family-level package · v0.1.0
+
+The first package is present at `public/models/dell_optiplex_5060_tower_v01.sbsmodel` and is registered in the desktop-computer catalogue. It contains 67 stable component instances, 68 typed relationships, two primary Dell source records, manufacturer-backed dimensional claims, and a bilingual learning check. The glTF scene has 58 simple box proxies; the remaining semantic nodes preserve the assembly hierarchy without pretending that every logical or not-yet-identified item has measured geometry.
+
+Twenty-four individual mounting instances are represented: nine system-board screws, three PSU screws, four captive heatsink screws, four heatsink-fan screws and four system-fan rubber grommets. Screw-table quantities are kept separate from the additional service-manual hardware; the 19-row-table sum is not presented as the installed screw count of every PC.
+
+The package is family-level, not an exact-SKU or physical-sample model. The chassis envelope is based on Dell's published dimensions. Internal part locations, board outline, fastener placements, exact CPU, system-board revision, PSU identity, cable routing and optional installed devices remain schematic, unknown or explicitly unpopulated. The 3D output is a blockout proxy, never CAD.
+
+Rebuild commands:
+
+```bash
+python tools/modeling/build_device_blockout.py \
+  --components content/models/dell-optiplex-5060-tower-family/components.json \
+  --output /tmp/optiplex-5060-family.glb
+
+python tools/modeling/package_model.py \
+  --model-dir content/models/dell-optiplex-5060-tower-family \
+  --scene /tmp/optiplex-5060-family.glb \
+  --output /tmp/optiplex-5060-family.sbsmodel
+```

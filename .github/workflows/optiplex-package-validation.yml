@@ -1,0 +1,57 @@
+name: OptiPlex 5060 package validation
+permissions:
+  contents: read
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "content/models/dell-optiplex-5060-tower-family/**"
+      - "content/catalog/models.json"
+      - "public/models/dell_optiplex_5060_tower_v01.sbsmodel"
+      - "tools/modeling/build_device_blockout.py"
+      - "tools/modeling/package_model.py"
+      - "tools/content/validate_glb_bindings.py"
+      - "src/viewer/ModelPackageLoader.js"
+      - "tests/optiplex-package.test.js"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/optiplex-package-validation.yml"
+
+jobs:
+  validate-optiplex:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install locked viewer dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Regenerate the OptiPlex GLB from the content inventory
+        run: |
+          python tools/modeling/build_device_blockout.py \
+            --components content/models/dell-optiplex-5060-tower-family/components.json \
+            --output /tmp/optiplex-5060-family.glb
+      - name: Validate semantic component-to-GLB bindings
+        run: |
+          python tools/content/validate_glb_bindings.py \
+            --components content/models/dell-optiplex-5060-tower-family/components.json \
+            --glb /tmp/optiplex-5060-family.glb
+      - name: Build and validate a fresh portable package
+        run: |
+          python tools/modeling/package_model.py \
+            --model-dir content/models/dell-optiplex-5060-tower-family \
+            --scene /tmp/optiplex-5060-family.glb \
+            --output /tmp/optiplex-5060-family.sbsmodel
+      - name: Verify committed package using the production loader
+        run: node --test tests/optiplex-package.test.js tests/model-startup.test.js
+      - name: Run unit suite
+        run: npm run test:unit
