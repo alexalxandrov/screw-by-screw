@@ -23,7 +23,7 @@ The first-edition IBM technical reference is the primary authority for the hardw
 
 ## Geometry and safety
 
-The Blender generator creates a navigable proxy blockout, not measured CAD. The approximate 8.5 × 11 inch system-board outline is source-backed. The FAU Informatics Collection catalogues one 1981 specimen at 494 × 410 × 140 mm; the pictured specimen has CGA and memory expansion, so this is a secondary reference envelope for that specimen, not an IBM-wide case specification or serial-matched launch measurement. Board placement now follows the relative zones in IBM Figure 4 (slots left/upper-left; J6/J7 upper-right; P1/P2 right; P3/P4 lower edge; ROM upper-middle; RAM lower-left; CPU/8087 right), but all coordinates, footprints and spacing remain proxies because the figure is not dimensioned. Board holes, sheet-metal folds, screw geometry, thread, torque and fastener coordinates remain proxy or unknown.
+The Blender generator creates a navigable proxy blockout, not measured CAD. The approximate 8.5 × 11 inch system-board outline is source-backed. The FAU Informatics Collection catalogues one 1981 specimen at 494 × 410 × 140 mm; the pictured specimen has CGA and memory expansion, so this is a secondary reference envelope for that specimen, not an IBM-wide case specification or serial-matched launch measurement. Board placement now follows the relative zones in IBM Figure 4 (slots left/upper-left; J6/J7 upper-right; P1/P2 right; P3/P4 lower edge; ROM upper-middle; RAM lower-left; CPU/8087 right), but all coordinates, footprints and spacing remain proxies because the figure is not dimensioned. The system-board service sequence in the August 1981 IBM manual identifies one mounting screw, then a slide of approximately 1/2 inch away from the PSU to release plural standoffs from their slots. The manual does not specify the standoff count or coordinates. Four visible stand-off/slot markers in the blockout are display placeholders only. A later PCWorld report of two screws and four plastic standoffs on another used, revision-unmatched unit is not applied to this launch-era reference. Board holes, sheet-metal folds, screw head standard, dimensions, thread, torque and fastener coordinates remain proxy or unknown.
 
 Represent the PSU as a sealed field-replaceable unit. Never model the hazardous internal mains circuitry as a user-serviceable subsystem. Procedures must be labelled partial/conditional source sequences and must not be presented as a complete teardown.
 
@@ -36,6 +36,6 @@ Represent the PSU as a sealed field-replaceable unit. Never model the hazardous 
 5. Verify model ID, 71 components, 100 relationships, and package integrity.
 6. Include both the GPU default package and IBM reference package in the standalone offline catalogue build.
 
-## Explicit non-goals
+See [IBM PC 5150 fastener and board-mounting evidence audit](IBM_PC_5150_FASTENER_EVIDENCE.md) for the source-by-source screw and standoff matrix.\n\n## Explicit non-goals
 
 No claim of exact physical restoration, no guessed screw specifications, no complete teardown ordering, no PSU repair instructions, and no redistribution of copyrighted manuals or photographs.
