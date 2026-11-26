@@ -153,7 +153,9 @@ test("shows source-backed claims, evidence classes and explicit unknown values",
   const backplate = page.locator('[data-claim-id="claim.card.backplate"]');
   await expect(backplate).toContainText("Наличие задней пластины");
   await expect(backplate).toContainText("Нет");
-  await expect(backplate.locator("a")).toHaveCount(1);
+  await expect(backplate.locator('a[href="https://lanoc.org/review/video-cards/evga-rtx-3060-xc-black?showall=1"]')).toBeVisible();
+  await expect(backplate.locator('a[href="https://www.neoseeker.com/Articles/Hardware/Reviews/evga-geforce-rtx-3060-xc-black-gaming/"]')).toBeVisible();
+  await expect(backplate.locator("a")).toHaveCount(2);
   await expect(backplate).toContainText("Независимо подтверждено");
 });
 
