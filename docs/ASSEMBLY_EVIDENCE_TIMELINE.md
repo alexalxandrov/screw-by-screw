@@ -29,3 +29,8 @@ A step requires a unique ID, unique positive sequence integer, readable action/t
 ## Localization
 
 Observation notes accept either a plain string or an RU/EN object. The viewer selects the current language and falls back to the available translation. Localization changes presentation only; source locators, timestamps and evidence meaning remain unchanged.
+
+
+## RTX 3060 XC BLACK pilot — current partial evidence
+
+The `12G-P5-3655-KR` package currently publishes three source-backed partial actions, not a complete teardown sequence: (1) remove eight cooler/shroud retention screws (four around the GPU and four near the far end; only the GPU-area positions are photo-estimated); (2) disconnect both fan leads before separating the cooler; (3) remove three retaining screws from each independently replaceable fan (six total, individual positions unmapped). The fan screws and far-end cooler screws are represented as logical-only nodes where centres are not documented. The sequence remains `partial_observed_sequence` with `complete_sequence: false`. It must not be treated as a full repair instruction or reassembly procedure.
