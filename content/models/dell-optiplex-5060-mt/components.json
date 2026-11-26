@@ -3378,7 +3378,7 @@
       "geometry_hint": {
         "shape": "torus",
         "position_mm": [
-          85,
+          89,
           148,
           -15
         ],
@@ -3391,6 +3391,11 @@
           0.12,
           0.12,
           0.13
+        ],
+        "rotation_deg": [
+          0,
+          90,
+          0
         ]
       },
       "configuration_status": "family_level_reference",
@@ -3419,7 +3424,7 @@
       "geometry_hint": {
         "shape": "torus",
         "position_mm": [
-          85,
+          89,
           148,
           95
         ],
@@ -3432,6 +3437,11 @@
           0.12,
           0.12,
           0.13
+        ],
+        "rotation_deg": [
+          0,
+          90,
+          0
         ]
       },
       "configuration_status": "family_level_reference",
@@ -3460,8 +3470,8 @@
       "geometry_hint": {
         "shape": "torus",
         "position_mm": [
-          85,
-          148,
+          89,
+          162,
           -15
         ],
         "size_mm": [
@@ -3473,6 +3483,11 @@
           0.12,
           0.12,
           0.13
+        ],
+        "rotation_deg": [
+          0,
+          90,
+          0
         ]
       },
       "configuration_status": "family_level_reference",
@@ -3501,8 +3516,8 @@
       "geometry_hint": {
         "shape": "torus",
         "position_mm": [
-          85,
-          148,
+          89,
+          162,
           95
         ],
         "size_mm": [
@@ -3514,6 +3529,11 @@
           0.12,
           0.12,
           0.13
+        ],
+        "rotation_deg": [
+          0,
+          90,
+          0
         ]
       },
       "configuration_status": "family_level_reference",

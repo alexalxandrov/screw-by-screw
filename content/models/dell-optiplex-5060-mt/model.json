@@ -13,7 +13,7 @@
     "x": "left/right chassis width",
     "y": "front/rear chassis depth; front is negative Y",
     "z": "vertical height; up is positive Z",
-    "glb_export": "GLB transforms use metres; source geometry hints are entered in millimetres and scaled on export."
+    "glb_export": "Blender Z-up scene authored in metres; glTF export performs the standard Y-up conversion. Source geometry_hint values are expressed in millimetres before conversion."
   },
   "specifications": {
     "family": "OptiPlex 5060 Tower / Mini Tower",
