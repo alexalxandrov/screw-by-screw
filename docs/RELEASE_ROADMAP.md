@@ -15,7 +15,7 @@ These are capability milestones, not promises that every feature will be physica
 
 ## Current RTX 3060 pilot data scope
 
-The current package contains **313 semantic components, 311 typed relationships, 109 atomic claims and 29 registered sources**, with three process layers, 12 bilingual learning questions and two package-authored animation clips. The component inventory includes logical-only GA106 architecture nodes and unmeasured visual proxies; its count is not a count of 313 physically reconstructed parts.
+The current package contains **313 semantic components, 311 typed relationships, 110 atomic claims and 29 registered sources**, with three process layers, 12 bilingual learning questions and two package-authored animation clips. The component inventory includes logical-only GA106 architecture nodes and unmeasured visual proxies; its count is not a count of 313 physically reconstructed parts.
 
 The pilot tracks five partial teardown observations, but no complete removal/reassembly sequence. The cooling model keeps six reviewer-described route/run proxies distinct from the unknown physical closed-loop count. The power model is qualitative and does not assert a verified exact-board VRM topology.
 
@@ -55,3 +55,6 @@ These capabilities do not increase the physical fidelity of the RTX 3060 proxy. 
 ## Package-authored animation runtime
 
 The generic runtime supports clip selection, play, pause, normalized seek, playback speed, completion and stop/reset with deterministic restoration of starting transforms. Animation tracks target stable component IDs and carry explicit evidence metadata. The RTX 3060 pilot includes an educational visual rotor-turn clip bound to two stable impeller pivots (not measured RPM) and a reversible exploded-cooler overview (presentation offsets, not service clearances or removal order). Procedural airflow and power effects remain separate viewer-generated educational overlays.
+
+
+The PC Perspective review also reports a momentary frequency peak of **1905 MHz** during Metro Exodus at 2160/high. It is attached to the GPU as a measured review-sample observation, explicitly distinct from EVGA's published 1777 MHz boost clock; the article does not disclose the reviewed card's retail part number, so this is XC BLACK model evidence rather than an exact-P/N claim.
