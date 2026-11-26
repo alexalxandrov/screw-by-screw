@@ -41,7 +41,9 @@
       "status": "research_blockout",
       "geometry_status": "illustrative_proxy_not_cad",
       "package_version": "0.1.0",
-      "package_path": "models/rtx3060_xc_black_v05.sbsmodel"
+      "package_path": "models/rtx3060_xc_black_v05.sbsmodel",
+      "identity_scope": "exact_sku",
+      "model_kind": "component"
     }
   ]
 }
