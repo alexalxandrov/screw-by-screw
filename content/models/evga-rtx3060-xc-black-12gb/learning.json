@@ -235,6 +235,123 @@
         "src.gamersnexus.teardown",
         "src.lanoc.review"
       ]
+    },
+    {
+      "id": "quiz.gpu.tpc.organization",
+      "prompt": {
+        "en": "What does one GA10x TPC contain?",
+        "ru": "Что входит в один TPC архитектуры GA10x?"
+      },
+      "choices": [
+        {
+          "en": "One SM and two PolyMorph Engines",
+          "ru": "Один SM и два PolyMorph Engine"
+        },
+        {
+          "en": "Two SMs and one PolyMorph Engine",
+          "ru": "Два SM и один PolyMorph Engine"
+        },
+        {
+          "en": "Four SMs and one RT Core",
+          "ru": "Четыре SM и одно RT-ядро"
+        }
+      ],
+      "correct_index": 1,
+      "explanation": {
+        "en": "NVIDIA describes each GA10x TPC as two SMs and one PolyMorph Engine. The 14 TPCs in this package are a logical grouping derived from 28 configured SMs.",
+        "ru": "NVIDIA описывает каждый TPC GA10x как два SM и один PolyMorph Engine. 14 TPC в пакете — логическая группировка, выведенная из 28 активных SM."
+      },
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "quiz.gpu.sm.partition.count",
+      "prompt": {
+        "en": "Into how many processing partitions is one GA10x SM divided?",
+        "ru": "На сколько вычислительных секций разделён один SM GA10x?"
+      },
+      "choices": [
+        {
+          "en": "Two partitions",
+          "ru": "Две секции"
+        },
+        {
+          "en": "Four partitions",
+          "ru": "Четыре секции"
+        },
+        {
+          "en": "Eight partitions",
+          "ru": "Восемь секций"
+        }
+      ],
+      "correct_index": 1,
+      "explanation": {
+        "en": "NVIDIA Figure 3 depicts four processing blocks (partitions) in each GA10x SM. Across 28 RTX 3060 SMs, this gives 112 logical partition entries.",
+        "ru": "На рисунке 3 NVIDIA показаны четыре вычислительных блока (секции) в каждом SM GA10x. Для 28 SM RTX 3060 это даёт 112 логических записей секций."
+      },
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "quiz.gpu.sm.partition.register_file",
+      "prompt": {
+        "en": "What is the size of the register file in one GA10x SM processing partition?",
+        "ru": "Каков размер файла регистров одной вычислительной секции SM GA10x?"
+      },
+      "choices": [
+        {
+          "en": "32 KiB",
+          "ru": "32 КиБ"
+        },
+        {
+          "en": "64 KiB",
+          "ru": "64 КиБ"
+        },
+        {
+          "en": "128 KiB",
+          "ru": "128 КиБ"
+        }
+      ],
+      "correct_index": 1,
+      "explanation": {
+        "en": "Figure 3 labels each partition register file as 16,384 × 32-bit, which equals 64 KiB. Four partitions provide the 256 KiB register file per SM.",
+        "ru": "На рисунке 3 файл регистров секции обозначен как 16 384 × 32 бита, что равно 64 КиБ. Четыре секции дают 256 КиБ на SM."
+      },
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "quiz.gpu.sm.partition.tensor",
+      "prompt": {
+        "en": "How many third-generation Tensor Cores are assigned to each GA10x SM processing partition?",
+        "ru": "Сколько Tensor Core третьего поколения приходится на одну вычислительную секцию SM GA10x?"
+      },
+      "choices": [
+        {
+          "en": "Zero; Tensor Cores are outside the SM",
+          "ru": "Ноль; Tensor Core находятся вне SM"
+        },
+        {
+          "en": "One Tensor Core",
+          "ru": "Одно Tensor Core"
+        },
+        {
+          "en": "Four Tensor Cores",
+          "ru": "Четыре Tensor Core"
+        }
+      ],
+      "correct_index": 1,
+      "explanation": {
+        "en": "NVIDIA's GA10x SM diagram depicts one third-generation Tensor Core in each of four processing partitions, for four Tensor Cores per SM.",
+        "ru": "На схеме SM GA10x NVIDIA показано по одному Tensor Core третьего поколения в каждой из четырёх секций — всего четыре Tensor Core на SM."
+      },
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
     }
   ]
 }
