@@ -432,6 +432,63 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); ou
 .assembly-source-link:hover { color: var(--accent); }
 
 
+
+.assembly-policy-note {
+  margin: 10px 0;
+  padding: 9px 10px;
+  border: 1px solid rgba(176,138,86,.36);
+  border-radius: 4px;
+  background: rgba(176,138,86,.075);
+  color: #d0c0a7;
+  font-size: 8px;
+  line-height: 1.6;
+}
+.assembly-procedure-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 5px 9px;
+  margin: 10px 0 -3px;
+  padding: 8px 9px;
+  border-left: 2px solid rgba(158,198,213,.65);
+  background: rgba(158,198,213,.055);
+}
+.assembly-procedure-group-title {
+  color: #c9d6df;
+  font: 9px var(--mono);
+  line-height: 1.4;
+}
+.assembly-procedure-group-mode {
+  color: var(--muted);
+  font: 7px var(--mono);
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+.assembly-replacement-heading { display: block; margin-top: 16px; }
+.assembly-replacement-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+.assembly-replacement-card {
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: #0b1219;
+  padding: 9px 10px;
+}
+.assembly-replacement-steps {
+  display: grid;
+  gap: 6px;
+  margin: 8px 0 0;
+  padding-left: 20px;
+  color: var(--muted);
+  font-size: 8px;
+  line-height: 1.55;
+}
+.assembly-replacement-steps li { padding-left: 2px; }
+
 /* Model-package-authored animation player; hidden when a package has no clips. */
 .clip-player {
   margin-top: 14px;
