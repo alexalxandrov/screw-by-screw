@@ -406,7 +406,7 @@
         "src.dell.5060.cpu_removal"
       ],
       "description": {
-        "en": "Dell callout 10. Socket type belongs to the Coffee Lake-era LGA1151 platform; the fitted processor and PCB revision are not selected.",
+        "en": "Dell callout 10. Socket type belongs to the Coffee Lake-era LGA1151 platform; fitted processor and PCB revision are not selected.",
         "ru": "Обозначение Dell №10. Тип разъёма относится к платформе LGA1151 поколения Coffee Lake; установленный процессор и ревизия PCB не определены."
       },
       "visual_proxy": {
@@ -571,8 +571,8 @@
         "src.dell.5060.board_connectors"
       ],
       "description": {
-        "en": "Dell motherboard callout 3: one PCIe x16 Revision 3.0 slot. The installed card, if any, is configuration-dependent.",
-        "ru": "Обозначение Dell №3: один слот PCIe x16 Revision 3.0. Наличие и модель установленной платы расширения зависят от комплектации."
+        "en": "Dell motherboard callout 3: one PCIe x16 Revision 3.0 slot. Installed card presence is configuration-dependent.",
+        "ru": "Обозначение Dell №3: один слот PCIe x16 Revision 3.0. Наличие платы расширения зависит от комплектации."
       },
       "visual_proxy": {
         "kind": "box",
@@ -671,8 +671,8 @@
         "src.dell.5060.storage"
       ],
       "description": {
-        "en": "Dell documents one M.2 2230/2280 SSD connector supporting SATA and PCIe interfaces. No SSD is asserted as installed.",
-        "ru": "Dell документирует один разъём M.2 2230/2280 SSD с поддержкой интерфейсов SATA и PCIe. Наличие SSD в конкретном экземпляре не утверждается."
+        "en": "One M.2 2230/2280 SSD connector supporting SATA and PCIe interfaces. No SSD is asserted as installed.",
+        "ru": "Один разъём M.2 2230/2280 SSD с поддержкой SATA и PCIe. Наличие SSD в конкретном экземпляре не утверждается."
       },
       "visual_proxy": {
         "kind": "box",
@@ -705,8 +705,8 @@
         "src.dell.5060.storage"
       ],
       "description": {
-        "en": "Dell motherboard callout 17. One of four headers; the board connector specification assigns one Gen2 SATA port to the optical-drive path. Individual cable routing is not modeled.",
-        "ru": "Обозначение Dell №17. Один из четырёх разъёмов; спецификация назначает один порт SATA Gen2 для оптического привода. Трасса конкретного кабеля не моделируется."
+        "en": "Dell callout 17. One of four headers; the specification assigns one Gen2 SATA port to the optical-drive path.",
+        "ru": "Обозначение Dell №17. Один из четырёх разъёмов; спецификация назначает один SATA Gen2 для оптического привода."
       },
       "visual_proxy": {
         "kind": "box",
@@ -739,8 +739,8 @@
         "src.dell.5060.storage"
       ],
       "description": {
-        "en": "Dell motherboard callout 18. One of the three Gen3 SATA data headers; exact drive connection depends on installed storage.",
-        "ru": "Обозначение Dell №18. Один из трёх разъёмов SATA Gen3; подключение зависит от установленных накопителей."
+        "en": "Dell callout 18. One of three Gen3 SATA data headers; exact device connection depends on installed storage.",
+        "ru": "Обозначение Dell №18. Один из трёх SATA Gen3; конкретное подключение зависит от установленного накопителя."
       },
       "visual_proxy": {
         "kind": "box",
@@ -773,8 +773,8 @@
         "src.dell.5060.storage"
       ],
       "description": {
-        "en": "Dell motherboard callout 20. One of the three Gen3 SATA data headers; exact drive connection depends on installed storage.",
-        "ru": "Обозначение Dell №20. Один из трёх разъёмов SATA Gen3; подключение зависит от установленных накопителей."
+        "en": "Dell callout 20. One of three Gen3 SATA data headers; exact device connection depends on installed storage.",
+        "ru": "Обозначение Dell №20. Один из трёх SATA Gen3; конкретное подключение зависит от установленного накопителя."
       },
       "visual_proxy": {
         "kind": "box",
@@ -807,8 +807,8 @@
         "src.dell.5060.storage"
       ],
       "description": {
-        "en": "Dell motherboard callout 21. One of the three Gen3 SATA data headers; exact drive connection depends on installed storage.",
-        "ru": "Обозначение Dell №21. Один из трёх разъёмов SATA Gen3; подключение зависит от установленных накопителей."
+        "en": "Dell callout 21. One of three Gen3 SATA data headers; exact device connection depends on installed storage.",
+        "ru": "Обозначение Dell №21. Один из трёх SATA Gen3; конкретное подключение зависит от установленного накопителя."
       },
       "visual_proxy": {
         "kind": "box",
@@ -906,8 +906,8 @@
         "src.dell.5060.system_fan"
       ],
       "description": {
-        "en": "Dell callout 8: system-fan connection. Its cable is documented as routed through a fan mounting grommet; exact wire geometry is not modeled.",
-        "ru": "Обозначение Dell №8: подключение системного вентилятора. В руководстве кабель проходит через монтажную втулку; геометрия провода не моделируется."
+        "en": "Dell callout 8: system-fan connection. Dell documents the cable passing through a fan mounting grommet; exact wire geometry is not modeled.",
+        "ru": "Обозначение Dell №8: разъём системного вентилятора. Dell документирует прохождение кабеля через монтажную втулку; геометрия провода не моделируется."
       },
       "visual_proxy": {
         "kind": "box",
@@ -991,8 +991,8 @@
         "src.dell.5060.heatsink"
       ],
       "description": {
-        "en": "CPU heatsink removed after its four captive screws are loosened in the printed 1–4 order. Exact fin geometry, material and dimensions are not measured.",
-        "ru": "Радиатор CPU снимается после ослабления четырёх невыпадающих винтов в порядке 1–4, указанном в руководстве. Геометрия рёбер, материал и размеры не измерены."
+        "en": "CPU heatsink removed after four captive screws are loosened in the printed 1–4 order. Exact fin geometry, material and dimensions are not measured.",
+        "ru": "Радиатор CPU снимается после ослабления четырёх невыпадающих винтов в порядке 1–4. Геометрия рёбер, материал и размеры не измерены."
       },
       "visual_proxy": {
         "kind": "box",
@@ -1057,8 +1057,8 @@
         "src.dell.5060.system_fan"
       ],
       "description": {
-        "en": "Chassis system fan retained by four rubber mounting grommets. Dell documents disconnecting its cable and releasing the grommets; exact fan size and part number are unknown.",
-        "ru": "Корпусной вентилятор крепится четырьмя резиновыми втулками. Dell документирует отключение кабеля и освобождение втулок; точный размер и номер вентилятора неизвестны."
+        "en": "Chassis system fan retained by four rubber mounting grommets. Dell documents cable disconnection and grommet release; exact fan size and part number are unknown.",
+        "ru": "Корпусной вентилятор закреплён четырьмя резиновыми втулками. Dell документирует отключение кабеля и освобождение втулок; точный размер и номер вентилятора неизвестны."
       },
       "visual_proxy": {
         "kind": "box",
@@ -1109,8 +1109,8 @@
         "src.dell.5060.power"
       ],
       "description": {
-        "en": "PSU enclosure proxy. Dell lists 260 W Bronze and 260 W Platinum variants, but no exact fitted PSU option, OEM, part number or revision is known.",
-        "ru": "Макет корпуса БП. Dell указывает варианты 260 Вт Bronze и 260 Вт Platinum, но конкретный установленный вариант, OEM, номер детали и ревизия неизвестны."
+        "en": "PSU enclosure proxy. Dell lists 260 W Bronze and 260 W Platinum variants, but the fitted option, OEM, part number and revision remain unknown.",
+        "ru": "Макет корпуса БП. Dell указывает варианты 260 Вт Bronze и 260 Вт Platinum, но установленный вариант, OEM, номер детали и ревизия неизвестны."
       },
       "visual_proxy": {
         "kind": "box",
@@ -1243,8 +1243,8 @@
         "src.dell.5060.board_connectors"
       ],
       "description": {
-        "en": "Platform-supported M.2 2230/2280 SSD option using SATA or PCIe. This package does not claim that a drive is installed.",
-        "ru": "Поддерживаемый платформой SSD M.2 2230/2280 с интерфейсом SATA или PCIe. Пакет не утверждает, что накопитель установлен."
+        "en": "Platform-supported M.2 2230/2280 SSD using SATA or PCIe. No fitted drive is claimed.",
+        "ru": "Поддерживаемый платформой SSD M.2 2230/2280 с SATA или PCIe. Наличие накопителя не утверждается."
       },
       "configuration_status": "optional_not_populated"
     },
@@ -1262,8 +1262,8 @@
         "src.dell.5060.storage"
       ],
       "description": {
-        "en": "One documented storage option; supported drive combinations vary. No fitted capacity, model or RPM is selected.",
-        "ru": "Один из документированных вариантов хранения; поддерживаемые комбинации различаются. Ёмкость, модель и обороты установленного диска не определены."
+        "en": "Documented storage option; fitted capacity, model and RPM remain unknown.",
+        "ru": "Документированный вариант накопителя; ёмкость, модель и обороты установленного диска неизвестны."
       },
       "configuration_status": "optional_not_populated"
     },
@@ -1282,8 +1282,8 @@
         "src.dell.5060.system_fan"
       ],
       "description": {
-        "en": "Chassis intrusion switch. Dell separately identifies its system-board connector and documents disconnecting its cable during system-fan service.",
-        "ru": "Датчик вскрытия корпуса. Dell отдельно обозначает разъём на системной плате и документирует отсоединение кабеля при обслуживании корпусного вентилятора."
+        "en": "Chassis intrusion switch. Dell separately identifies its system-board connector and documents cable disconnection during fan service.",
+        "ru": "Датчик вскрытия корпуса. Dell отдельно обозначает разъём на системной плате и документирует отключение кабеля при обслуживании вентилятора."
       },
       "visual_proxy": {
         "kind": "box",
