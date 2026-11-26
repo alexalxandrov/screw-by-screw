@@ -51,7 +51,7 @@ test("IBM PC 5150 renders the sourced branching FRU graph and replacement fragme
   await expect(page.locator("#assembly-step-list .assembly-procedure-group")).toHaveCount(7);
   await expect(page.locator("#assembly-step-list")).toContainText("Независимая ветвь FRU");
   await expect(page.locator("#assembly-step-list")).toContainText("Сдвинуть плату примерно на 1/2 дюйма от БП");
-  await expect(page.locator("#assembly-step-list")).toContainText("извлечение самого БП");
+  await expect(page.locator("#assembly-policy-note")).toContainText("извлекать сам БП");
   await expect(page.locator("#assembly-replacement-list .assembly-replacement-card")).toHaveCount(4);
   await expect(page.locator("#assembly-replacement-policy")).toContainText("не полная последовательность обратной сборки");
 
