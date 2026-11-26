@@ -138,7 +138,7 @@ def parse_glb(encoded: str, label: str) -> tuple[dict, bytes]:
         if chunk_type == 0x4E4F534A:
             if json_doc is not None:
                 raise ValueError(f"{label}: duplicate GLB JSON chunk")
-            json_doc = json.loads(chunk.rstrip(b" \\0").decode("utf-8", errors="strict"))
+            json_doc = json.loads(chunk.rstrip(b" ").decode("utf-8", errors="strict"))
         elif chunk_type == 0x004E4942:
             if binary_chunk is not None:
                 raise ValueError(f"{label}: duplicate GLB BIN chunk")
