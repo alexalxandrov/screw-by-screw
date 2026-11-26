@@ -301,15 +301,15 @@
         "ru": "Позиция микросхемы памяти GDDR6 1"
       },
       "category": "semiconductor",
-      "evidence_status": "teardown_supported",
+      "evidence_status": "visible_exact_model",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.gamersnexus.teardown",
         "src.lanoc.review"
       ],
       "description": {
-        "en": "A GDDR6 memory-package position visible in exact-model XC BLACK teardown/review material. Its centre in the 3D scene is estimated from photography, not measured against a PCB drawing. The exact package manufacturer marking and part number for this 12G-P5-3655-KR sample have not been independently transcribed and verified.",
-        "ru": "Позиция корпуса памяти GDDR6, видимая в материалах разборки/обзора точной модели XC BLACK. Центр в 3D-сцене оценён по фотографии, а не измерен по чертежу PCB. Маркировка производителя и точный номер микросхемы на этом экземпляре 12G-P5-3655-KR пока не переписаны и не проверены независимо."
+        "en": "One of six GDDR6 package positions visible on the exact XC BLACK review/teardown sample. The 3D position is estimated from photographs, not measured from a BoardView or calibrated PCB drawing. The full manufacturer marking and exact part number on this 12G-P5-3655-KR sample have not been independently transcribed.",
+        "ru": "Одна из шести позиций корпусов GDDR6, видимых на образце точной XC BLACK в обзоре/разборке. Положение в 3D оценено по фотографиям, а не измерено по BoardView или калиброванному чертежу PCB. Полная маркировка производителя и точный номер микросхемы на этом экземпляре 12G-P5-3655-KR независимо не переписаны."
       }
     },
     {
@@ -320,15 +320,15 @@
         "ru": "Позиция микросхемы памяти GDDR6 2"
       },
       "category": "semiconductor",
-      "evidence_status": "teardown_supported",
+      "evidence_status": "visible_exact_model",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.gamersnexus.teardown",
         "src.lanoc.review"
       ],
       "description": {
-        "en": "A GDDR6 memory-package position visible in exact-model XC BLACK teardown/review material. Its centre in the 3D scene is estimated from photography, not measured against a PCB drawing. The exact package manufacturer marking and part number for this 12G-P5-3655-KR sample have not been independently transcribed and verified.",
-        "ru": "Позиция корпуса памяти GDDR6, видимая в материалах разборки/обзора точной модели XC BLACK. Центр в 3D-сцене оценён по фотографии, а не измерен по чертежу PCB. Маркировка производителя и точный номер микросхемы на этом экземпляре 12G-P5-3655-KR пока не переписаны и не проверены независимо."
+        "en": "One of six GDDR6 package positions visible on the exact XC BLACK review/teardown sample. The 3D position is estimated from photographs, not measured from a BoardView or calibrated PCB drawing. The full manufacturer marking and exact part number on this 12G-P5-3655-KR sample have not been independently transcribed.",
+        "ru": "Одна из шести позиций корпусов GDDR6, видимых на образце точной XC BLACK в обзоре/разборке. Положение в 3D оценено по фотографиям, а не измерено по BoardView или калиброванному чертежу PCB. Полная маркировка производителя и точный номер микросхемы на этом экземпляре 12G-P5-3655-KR независимо не переписаны."
       }
     },
     {
@@ -339,15 +339,15 @@
         "ru": "Позиция микросхемы памяти GDDR6 3"
       },
       "category": "semiconductor",
-      "evidence_status": "teardown_supported",
+      "evidence_status": "visible_exact_model",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.gamersnexus.teardown",
         "src.lanoc.review"
       ],
       "description": {
-        "en": "A GDDR6 memory-package position visible in exact-model XC BLACK teardown/review material. Its centre in the 3D scene is estimated from photography, not measured against a PCB drawing. The exact package manufacturer marking and part number for this 12G-P5-3655-KR sample have not been independently transcribed and verified.",
-        "ru": "Позиция корпуса памяти GDDR6, видимая в материалах разборки/обзора точной модели XC BLACK. Центр в 3D-сцене оценён по фотографии, а не измерен по чертежу PCB. Маркировка производителя и точный номер микросхемы на этом экземпляре 12G-P5-3655-KR пока не переписаны и не проверены независимо."
+        "en": "One of six GDDR6 package positions visible on the exact XC BLACK review/teardown sample. The 3D position is estimated from photographs, not measured from a BoardView or calibrated PCB drawing. The full manufacturer marking and exact part number on this 12G-P5-3655-KR sample have not been independently transcribed.",
+        "ru": "Одна из шести позиций корпусов GDDR6, видимых на образце точной XC BLACK в обзоре/разборке. Положение в 3D оценено по фотографиям, а не измерено по BoardView или калиброванному чертежу PCB. Полная маркировка производителя и точный номер микросхемы на этом экземпляре 12G-P5-3655-KR независимо не переписаны."
       }
     },
     {
@@ -358,15 +358,15 @@
         "ru": "Позиция микросхемы памяти GDDR6 4"
       },
       "category": "semiconductor",
-      "evidence_status": "teardown_supported",
+      "evidence_status": "visible_exact_model",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.gamersnexus.teardown",
         "src.lanoc.review"
       ],
       "description": {
-        "en": "A GDDR6 memory-package position visible in exact-model XC BLACK teardown/review material. Its centre in the 3D scene is estimated from photography, not measured against a PCB drawing. The exact package manufacturer marking and part number for this 12G-P5-3655-KR sample have not been independently transcribed and verified.",
-        "ru": "Позиция корпуса памяти GDDR6, видимая в материалах разборки/обзора точной модели XC BLACK. Центр в 3D-сцене оценён по фотографии, а не измерен по чертежу PCB. Маркировка производителя и точный номер микросхемы на этом экземпляре 12G-P5-3655-KR пока не переписаны и не проверены независимо."
+        "en": "One of six GDDR6 package positions visible on the exact XC BLACK review/teardown sample. The 3D position is estimated from photographs, not measured from a BoardView or calibrated PCB drawing. The full manufacturer marking and exact part number on this 12G-P5-3655-KR sample have not been independently transcribed.",
+        "ru": "Одна из шести позиций корпусов GDDR6, видимых на образце точной XC BLACK в обзоре/разборке. Положение в 3D оценено по фотографиям, а не измерено по BoardView или калиброванному чертежу PCB. Полная маркировка производителя и точный номер микросхемы на этом экземпляре 12G-P5-3655-KR независимо не переписаны."
       }
     },
     {
@@ -377,15 +377,15 @@
         "ru": "Позиция микросхемы памяти GDDR6 5"
       },
       "category": "semiconductor",
-      "evidence_status": "teardown_supported",
+      "evidence_status": "visible_exact_model",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.gamersnexus.teardown",
         "src.lanoc.review"
       ],
       "description": {
-        "en": "A GDDR6 memory-package position visible in exact-model XC BLACK teardown/review material. Its centre in the 3D scene is estimated from photography, not measured against a PCB drawing. The exact package manufacturer marking and part number for this 12G-P5-3655-KR sample have not been independently transcribed and verified.",
-        "ru": "Позиция корпуса памяти GDDR6, видимая в материалах разборки/обзора точной модели XC BLACK. Центр в 3D-сцене оценён по фотографии, а не измерен по чертежу PCB. Маркировка производителя и точный номер микросхемы на этом экземпляре 12G-P5-3655-KR пока не переписаны и не проверены независимо."
+        "en": "One of six GDDR6 package positions visible on the exact XC BLACK review/teardown sample. The 3D position is estimated from photographs, not measured from a BoardView or calibrated PCB drawing. The full manufacturer marking and exact part number on this 12G-P5-3655-KR sample have not been independently transcribed.",
+        "ru": "Одна из шести позиций корпусов GDDR6, видимых на образце точной XC BLACK в обзоре/разборке. Положение в 3D оценено по фотографиям, а не измерено по BoardView или калиброванному чертежу PCB. Полная маркировка производителя и точный номер микросхемы на этом экземпляре 12G-P5-3655-KR независимо не переписаны."
       }
     },
     {
@@ -396,15 +396,15 @@
         "ru": "Позиция микросхемы памяти GDDR6 6"
       },
       "category": "semiconductor",
-      "evidence_status": "teardown_supported",
+      "evidence_status": "visible_exact_model",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.gamersnexus.teardown",
         "src.lanoc.review"
       ],
       "description": {
-        "en": "A GDDR6 memory-package position visible in exact-model XC BLACK teardown/review material. Its centre in the 3D scene is estimated from photography, not measured against a PCB drawing. The exact package manufacturer marking and part number for this 12G-P5-3655-KR sample have not been independently transcribed and verified.",
-        "ru": "Позиция корпуса памяти GDDR6, видимая в материалах разборки/обзора точной модели XC BLACK. Центр в 3D-сцене оценён по фотографии, а не измерен по чертежу PCB. Маркировка производителя и точный номер микросхемы на этом экземпляре 12G-P5-3655-KR пока не переписаны и не проверены независимо."
+        "en": "One of six GDDR6 package positions visible on the exact XC BLACK review/teardown sample. The 3D position is estimated from photographs, not measured from a BoardView or calibrated PCB drawing. The full manufacturer marking and exact part number on this 12G-P5-3655-KR sample have not been independently transcribed.",
+        "ru": "Одна из шести позиций корпусов GDDR6, видимых на образце точной XC BLACK в обзоре/разборке. Положение в 3D оценено по фотографиям, а не измерено по BoardView или калиброванному чертежу PCB. Полная маркировка производителя и точный номер микросхемы на этом экземпляре 12G-P5-3655-KR независимо не переписаны."
       }
     },
     {
