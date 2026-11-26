@@ -39,7 +39,7 @@ This is not yet a complete engineering reconstruction. Eight cooler/shroud reten
 
 ### Fine-grained cooling decomposition
 
-The development branch now expands the content graph to **167 semantic components, 163 typed relationships, 74 claims and 13 sources**. Fan frames, hubs and each blade proxy are separately selectable; the illustrative heatsink has 24 separately selectable fin proxies; six separate heatpipe route proxies are grouped as four main GPU-contact pipes plus two side pipes; and six memory thermal-pad proxies plus one VRM pad strip have their own IDs. No proxy blade/fin count or thermal-pad dimensions are presented as a factory specification.
+The development branch now expands the content graph to **307 semantic components, 303 typed relationships, 85 claims and 13 sources**. Fan frames, hubs and each blade proxy are separately selectable; the illustrative heatsink has 24 separately selectable fin proxies; six separate heatpipe route proxies are grouped as four main GPU-contact pipes plus two side pipes; and six memory thermal-pad proxies plus one VRM pad strip have their own IDs. No proxy blade/fin count or thermal-pad dimensions are presented as a factory specification.
 
 
 ### Partial teardown evidence
@@ -84,4 +84,4 @@ Gamers Nexus' exact-model teardown shows three retaining screws per independentl
 
 ### GA10x logical SM hierarchy
 
-The architecture tree now exposes 28 separately selectable logical SM entries beneath a TPC aggregate and an aggregate of 14 PolyMorph Engines. NVIDIA's GA10x whitepaper supplies per-SM counts and TPC composition: 128 CUDA, four Tensor, four texture, one RT, 256 KB register file and 128 KB L1/shared memory per SM; two SMs and one PolyMorph Engine per TPC. Fourteen TPCs is calculated from 28 configured SMs. None of these nodes has a physical die position or implies a recovered GA106 floorplan/GPC arrangement.
+The architecture tree now exposes 14 logical TPC instances, each with two SMs and one PolyMorph Engine; all 28 SMs expand into four processing partitions each, for 112 individually selectable partition nodes. NVIDIA's GA10x whitepaper supplies per-SM counts and TPC composition: 128 CUDA, four Tensor, four texture, one RT, 256 KB register file and 128 KB L1/shared memory per SM; two SMs and one PolyMorph Engine per TPC. Fourteen TPCs is calculated from 28 configured SMs. None of these nodes has a physical die position or implies a recovered GA106 floorplan/GPC arrangement.
