@@ -1350,9 +1350,13 @@ def main():
     boolean.operation = "DIFFERENCE"
     boolean.solver = "EXACT"
     boolean.object = cutout_cutter
+    bpy.ops.object.select_all(action="DESELECT")
+    pcb.select_set(True)
     bpy.context.view_layer.objects.active = pcb
     bpy.ops.object.modifier_apply(modifier=boolean.name)
+    pcb["sbs_airflow_cutout_boolean_applied"] = True
     bpy.data.objects.remove(cutout_cutter, do_unlink=True)
+    bpy.ops.object.select_all(action="DESELECT")
 
     # Stable selection node for the cutout; geometry lives in the PCB mesh above.
     cutout_group = make_assembly(
