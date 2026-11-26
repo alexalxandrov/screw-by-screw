@@ -71,8 +71,25 @@
       "publisher": "Community-hosted document index",
       "url": "https://ph.i2mx.com.mx/Documents/Schematics/GPU/GPU/EVGA232%20RTX%202070%20RTX3060%20-%20PG190-A02%20-%20GA104-GA106.pdf",
       "type": "unverified_schematic_candidate",
-      "applicability": "Candidate document title includes EVGA232 and PG190-A02; no verified link to the exact 12G-P5-3655-KR retail sample or its PCB revision",
-      "license_status": "unverified_do_not_redistribute"
+      "applicability": "The community file name includes EVGA232 / RTX 2070 / RTX3060 / PG190-A02 / GA104-GA106, but the document text itself carries NVIDIA drawing number 600-1G190-BASE-A02, PCB revision PG190-A02 and BOM revision A dated 2020-06-12. Its text-layer block diagram lists NVVDD-PH1 through PH8 and FBVDDQ-PH1/PH2; this is a reference-board topology only. The PDF does not mention retail SKU 12G-P5-3655-KR or the EVGA232 silkscreen. It must not be used to assert phase count, net routing, values or pinout for the XC BLACK until a physical-board correlation is established. Rendered-page screenshots could not be fetched during this audit, so no page artwork or component-value extraction is claimed.",
+      "license_status": "unverified_do_not_redistribute",
+      "document_metadata": {
+        "page_count": 50,
+        "nvidia_drawing_number": "600-1G190-BASE-A02",
+        "pcb_revision_in_title_block": "PG190-A02",
+        "bom_revision": "A",
+        "bom_date": "2020-06-12",
+        "document_class": "NVIDIA reference design schematic",
+        "text_layer_power_block": {
+          "gpu_core_rail": "NVVDD phases 1-8",
+          "memory_rail": "FBVDDQ phases 1-2"
+        },
+        "exact_retail_sku_in_document_text": false,
+        "evga232_silkscreen_in_document_text": false,
+        "rendered_page_inspection": "unavailable_screenshot_cache_miss",
+        "boardview_included": false
+      },
+      "use_policy": "Reference-only. Do not use its reference design to populate the exact EVGA XC BLACK VRM phase count, component inventory, PCB routing, BOM or service map. The title of a third-party index is not proof of board equivalence. No PDF pages or third-party assets are redistributed."
     },
     {
       "id": "src.nvidia.rtx3060.architecture",
