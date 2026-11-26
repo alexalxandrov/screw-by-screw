@@ -46,8 +46,8 @@
         "connector.io.bracket"
       ],
       "description": {
-        "en": "The exact 12G-P5-3655-KR XC BLACK review describes six heatpipes: four main central pipes contacting the GPU and two additional side pipes carrying heat toward the side of the heatsink. All six are now separately selectable. Their modelled centrelines, diameters, bends and flattening are illustrative, not calibrated CAD. Four copper terminal faces are also separately marked from the LanOC cooler-end photo; terminal-face count is not a substitute for the unique-pipe count. The contact plate, fin stack, two fans and thermal-interface groups are separate elements. Airflow markers show direction only and are not CFD or thermal simulation. The exact-sample LanOC review further describes an aluminium vertical-fin stack, a copper plate spanning the GPU and memory, a black plastic shroud without RGB, and a through-PCB airflow cutout. These are source observations; mesh outlines remain proxy geometry.",
-        "ru": "В обзоре точной XC BLACK 12G-P5-3655-KR описаны шесть тепловых трубок: четыре основные центральные, контактирующие с GPU, и две дополнительные боковые, переносящие тепло к краям радиатора. Все шесть теперь доступны для отдельного выбора. Их моделируемые осевые линии, диаметры, изгибы и сплющенные участки заданы условно и не являются калиброванной CAD-геометрией. Четыре медных торцевых окончания также отмечены отдельно по фотографии торца кулера LanOC; количество видимых окончаний не заменяет подсчёт отдельных трубок. Контактная пластина, радиатор, два вентилятора и группы термоинтерфейсов представлены отдельными элементами. Маркеры воздушного потока показывают только направление и не являются CFD или тепловой симуляцией. В обзоре точного образца LanOC также описаны алюминиевый радиатор с вертикальными рёбрами, медная пластина над GPU и памятью, чёрный пластиковый кожух без RGB и воздушный вырез в PCB. Это наблюдения из источника; контуры сеток остаются условной геометрией."
+        "en": "The exact-SKU The FPS Review describes four central GPU-contact heatpipe runs plus two side runs; PCWorld's product-name review summarizes four copper heatpipes; Gamers Nexus narrates two central tube paths through the contact plate. These source-specific descriptions may count tube legs, full pipes or closed loops differently. Six selectable run proxies are shown for navigation only; the unique physical loop count remains unknown. Four copper terminal faces visible in LanOC's cooler-end photo are a separate observation. Heatpipe centrelines, diameters, bends and flattening remain illustrative, not calibrated CAD. The contact plate, fin stack, two fans and thermal-interface groups are separate elements. Airflow markers show direction only and are not CFD or thermal simulation. LanOC also describes the vertical aluminium fin stack, copper plate spanning GPU/memory, black plastic shroud without RGB, and PCB airflow cutout; mesh outlines remain proxies.",
+        "ru": "В обзоре точного SKU The FPS Review описаны четыре центральные трассы с контактом с GPU и две боковые; обзор PCWorld с точным названием продукта упоминает четыре медные тепловые трубки; Gamers Nexus описывает два центральных трубчатых участка у контактной пластины. Источники могут считать проходы, трубки или замкнутые контуры по-разному. Шесть выбираемых трасс представлены только как навигационные макеты; физическое число замкнутых контуров неизвестно. Четыре медных окончания, видимые на фотографии торца кулера LanOC, — отдельное наблюдение. Осевая линия, диаметр, изгибы и сплющенные участки остаются условными, не калиброванной CAD-геометрией. Контактная пластина, радиатор, два вентилятора и группы термоинтерфейсов показаны отдельно. Маркеры воздушного потока показывают только направление и не являются CFD или тепловой симуляцией. LanOC также описывает алюминиевый радиатор с вертикальными рёбрами, медную пластину над GPU/памятью, чёрный пластиковый кожух без RGB и воздушный вырез в PCB; контуры сеток остаются макетными."
       },
       "assumptions": [
         {
@@ -55,8 +55,8 @@
           "ru": "Диаметр отверстия 90 мм и приблизительно 85 мм для крыльчатки — измерения из обзора, а не чертёж производителя вентилятора."
         },
         {
-          "en": "Fan centres, blade count/profile, hub internals, heatpipe count and route, fin pitch/count, thermal-pad dimensions and thermal resistance remain unverified.",
-          "ru": "Центры вентиляторов, количество/профиль лопастей, внутреннее устройство ступицы, количество и трассы тепловых трубок, шаг/число рёбер, размеры термопрокладок и тепловое сопротивление не подтверждены."
+          "en": "Fan centres, blade count/profile, hub internals, exact heatpipe loop count and routing, fin pitch/count, thermal-pad dimensions and thermal resistance remain unverified.",
+          "ru": "Центры вентиляторов, число/профиль лопастей, устройство ступицы, точное число контуров и трассы трубок, шаг/число рёбер, размеры термопрокладок и тепловое сопротивление не подтверждены."
         },
         {
           "en": "The two heatpipe routes and 24 fin meshes are illustrative proxies. Their count and geometry are not service or manufacturing specifications.",
@@ -71,13 +71,15 @@
           "ru": "Не рассчитываются тепловое сопротивление, температура кристалла, hotspot, характеристика вентилятора, RPM или шумовая модель."
         },
         {
-          "en": "The exact-SKU review describes four central GPU-contact heatpipes and two side heatpipes. Their individual 3D routes and dimensions remain photo-estimated proxies.",
-          "ru": "Обзор точного SKU описывает четыре центральные тепловые трубки, контактирующие с GPU, и две боковые. Индивидуальные 3D-трассы и размеры остаются макетами, приблизительно восстановленными по фотографиям."
+          "en": "The FPS Review describes four central plus two side route/runs; PCWorld summarizes four copper heatpipes; Gamers Nexus narrates two central tube paths. The six visible model entries are run proxies only, not a verified count of six independent closed U-shaped pipes.",
+          "ru": "The FPS Review описывает четыре центральные и две боковые трассы/прохода; PCWorld указывает четыре медные тепловые трубки; Gamers Nexus описывает два центральных трубчатых участка. Шесть элементов модели — макеты трасс, а не подтверждённое число шести отдельных замкнутых U-образных трубок."
         }
       ],
       "source_ids": [
         "src.lanoc.review",
-        "src.gamersnexus.teardown"
+        "src.gamersnexus.teardown",
+        "src.thefpsreview.exact_sku",
+        "src.pcworld.xc_black"
       ],
       "visualization": {
         "kind": "directional_particle_path",
@@ -89,8 +91,8 @@
         "not_a_simulation": true,
         "diagram": {
           "badge": {
-            "en": "CONCEPTUAL THERMAL PATH · NOT CFD / THERMAL SIMULATION",
-            "ru": "КОНЦЕПТУАЛЬНЫЙ ТЕПЛОВОЙ ПУТЬ · НЕ CFD / ТЕПЛОВАЯ СИМУЛЯЦИЯ"
+            "en": "QUALITATIVE THERMAL PATH · NOT CFD / THERMAL SIMULATION",
+            "ru": "КАЧЕСТВЕННЫЙ ТЕПЛОВОЙ ПУТЬ · НЕ CFD / ТЕПЛОВАЯ СИМУЛЯЦИЯ"
           },
           "groups": [
             {
@@ -179,8 +181,8 @@
                 "ru": "2 · Перенос тепла"
               },
               "summary": {
-                "en": "Six heatpipes are described for this exact SKU: four main GPU-contact and two side routes; geometry remains proxy",
-                "ru": "Для точного SKU описаны шесть трубок: четыре основные с контактом GPU и две боковые; геометрия остаётся макетной"
+                "en": "The reviewed sources describe different pipe/run counts; actual closed-loop count is unresolved",
+                "ru": "Источники описывают разные способы подсчёта трубок/проходов; число замкнутых контуров неизвестно"
               },
               "nodes": [
                 {
@@ -190,8 +192,8 @@
                     "ru": "Сборка тепловых трубок"
                   },
                   "metric": {
-                    "en": "Count and geometry not verified",
-                    "ru": "Количество и геометрия не подтверждены"
+                    "en": "Multiple source-specific pipe/run descriptions · physical loop count unknown",
+                    "ru": "Разные подсчёты трубок/проходов · число физических контуров неизвестно"
                   }
                 },
                 {
@@ -201,8 +203,8 @@
                     "ru": "Кандидатная трасса трубки 1"
                   },
                   "metric": {
-                    "en": "Illustrative 3D route",
-                    "ru": "Условная 3D-трасса"
+                    "en": "Group of 4 central runs described by The FPS Review",
+                    "ru": "Группа из 4 центральных трасс по The FPS Review"
                   }
                 },
                 {
@@ -212,8 +214,8 @@
                     "ru": "Кандидатная трасса трубки 2"
                   },
                   "metric": {
-                    "en": "Illustrative 3D route",
-                    "ru": "Условная 3D-трасса"
+                    "en": "Group of 2 side runs described by The FPS Review",
+                    "ru": "Группа из 2 боковых трасс по The FPS Review"
                   }
                 },
                 {
@@ -267,8 +269,8 @@
                     "ru": "Основная тепловая трубка GPU 1"
                   },
                   "metric": {
-                    "en": "1 of 4 central GPU-contact pipes",
-                    "ru": "1 из 4 центральных трубок контакта с GPU"
+                    "en": "1 of 4 reported central GPU-contact runs",
+                    "ru": "1 из 4 описанных центральных проходов с контактом GPU"
                   }
                 },
                 {
@@ -278,8 +280,8 @@
                     "ru": "Основная тепловая трубка GPU 2"
                   },
                   "metric": {
-                    "en": "1 of 4 central GPU-contact pipes",
-                    "ru": "1 из 4 центральных трубок контакта с GPU"
+                    "en": "1 of 4 reported central GPU-contact runs",
+                    "ru": "1 из 4 описанных центральных проходов с контактом GPU"
                   }
                 },
                 {
@@ -289,8 +291,8 @@
                     "ru": "Основная тепловая трубка GPU 3"
                   },
                   "metric": {
-                    "en": "1 of 4 central GPU-contact pipes",
-                    "ru": "1 из 4 центральных трубок контакта с GPU"
+                    "en": "1 of 4 reported central GPU-contact runs",
+                    "ru": "1 из 4 описанных центральных проходов с контактом GPU"
                   }
                 },
                 {
@@ -300,8 +302,8 @@
                     "ru": "Основная тепловая трубка GPU 4"
                   },
                   "metric": {
-                    "en": "1 of 4 central GPU-contact pipes",
-                    "ru": "1 из 4 центральных трубок контакта с GPU"
+                    "en": "1 of 4 reported central GPU-contact runs",
+                    "ru": "1 из 4 описанных центральных проходов с контактом GPU"
                   }
                 },
                 {
@@ -311,8 +313,8 @@
                     "ru": "Боковая тепловая трубка 1"
                   },
                   "metric": {
-                    "en": "1 of 2 side heatpipes",
-                    "ru": "1 из 2 боковых трубок"
+                    "en": "1 of 2 reported side runs",
+                    "ru": "1 из 2 описанных боковых проходов"
                   }
                 },
                 {
@@ -322,8 +324,8 @@
                     "ru": "Боковая тепловая трубка 2"
                   },
                   "metric": {
-                    "en": "1 of 2 side heatpipes",
-                    "ru": "1 из 2 боковых трубок"
+                    "en": "1 of 2 reported side runs",
+                    "ru": "1 из 2 описанных боковых проходов"
                   }
                 }
               ]
