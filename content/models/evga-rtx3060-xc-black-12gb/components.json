@@ -843,8 +843,8 @@
         "src.gamersnexus.teardown"
       ],
       "description": {
-        "en": "Selectable proxy grouping for the shunt-resistor area discussed in the exact-model teardown. No resistance, reference designator, placement coordinate or measurement is asserted.",
-        "ru": "Выбираемая группа-макет области шунтирующих резисторов, обсуждаемой в разборке точной модели. Сопротивление, позиционное обозначение, координаты и измерения не утверждаются."
+        "en": "Selectable group for the two current-sense shunts distinguished in the exact-model teardown: one on the auxiliary 8-pin input path (stated as 5 mΩ) and another on the PCIe-slot 12 V path (resistance unknown). No full net map or reference designators are available.",
+        "ru": "Выбираемая группа двух измерительных шунтов, различённых в разборке точной модели: один во входной цепи дополнительного 8-pin (в видео указан 5 мОм), другой в линии 12 В от PCIe-слота (сопротивление неизвестно). Полной карты цепей и позиционных обозначений нет."
       }
     },
     {
@@ -885,36 +885,38 @@
       "id": "power.inductor.candidate.1",
       "parent_id": "assembly.power_stage",
       "name": {
-        "en": "Inductor candidate 1",
-        "ru": "Кандидатный дроссель 1"
+        "en": "Inductor 1 · exact-model teardown observed",
+        "ru": "Дроссель 1 · виден в разборке точной модели"
       },
       "category": "power_electronics",
-      "evidence_status": "illustrative",
+      "evidence_status": "teardown_supported",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
+        "src.gamersnexus.teardown",
         "src.techpowerup.pcb"
       ],
       "description": {
-        "en": "Photo-based inductor/choke marker in the power-delivery area. The visible package is not tied to a verified board reference designator; inductance, current rating, phase assignment and exact position are unknown.",
-        "ru": "Фотомаркер дросселя в области преобразования питания. Видимый корпус не сопоставлен с подтверждённым позиционным обозначением платы; индуктивность, допустимый ток, принадлежность к фазе и точная координата неизвестны."
+        "en": "One of two inductor packages discussed in the exact-model teardown in an area the presenter tentatively assumes may be the memory VRM. That functional assignment is explicitly tentative. No reference designator, inductance, current rating, package maker, phase assignment or calibrated coordinate is established.",
+        "ru": "Один из двух корпусов дросселей, обсуждаемых в разборке точной модели в зоне, которую автор предположительно считает VRM памяти. Это функциональное назначение прямо остаётся предположением. Позиционное обозначение, индуктивность, допустимый ток, производитель корпуса, назначение фазы и калиброванная координата не установлены."
       }
     },
     {
       "id": "power.inductor.candidate.2",
       "parent_id": "assembly.power_stage",
       "name": {
-        "en": "Inductor candidate 2",
-        "ru": "Кандидатный дроссель 2"
+        "en": "Inductor 2 · exact-model teardown observed",
+        "ru": "Дроссель 2 · виден в разборке точной модели"
       },
       "category": "power_electronics",
-      "evidence_status": "illustrative",
+      "evidence_status": "teardown_supported",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
+        "src.gamersnexus.teardown",
         "src.techpowerup.pcb"
       ],
       "description": {
-        "en": "Second photo-based inductor/choke marker. It is not evidence of a two-phase or any other specific VRM topology; package identity and electrical parameters remain unknown.",
-        "ru": "Второй фотомаркер дросселя. Он не доказывает двухфазную или иную конкретную топологию VRM; тип корпуса и электрические параметры неизвестны."
+        "en": "One of two inductor packages discussed in the exact-model teardown in an area the presenter tentatively assumes may be the memory VRM. That functional assignment is explicitly tentative. No reference designator, inductance, current rating, package maker, phase assignment or calibrated coordinate is established.",
+        "ru": "Один из двух корпусов дросселей, обсуждаемых в разборке точной модели в зоне, которую автор предположительно считает VRM памяти. Это функциональное назначение прямо остаётся предположением. Позиционное обозначение, индуктивность, допустимый ток, производитель корпуса, назначение фазы и калиброванная координата не установлены."
       }
     },
     {
@@ -939,18 +941,19 @@
       "id": "power.switching_device.cluster",
       "parent_id": "assembly.power_stage",
       "name": {
-        "en": "Power switching-device cluster",
-        "ru": "Группа силовых переключающих элементов"
+        "en": "MOSFET row · copper-contacted",
+        "ru": "Ряд MOSFET · контакт с медной пластиной"
       },
       "category": "power_electronics",
-      "evidence_status": "illustrative",
+      "evidence_status": "teardown_supported",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
+        "src.gamersnexus.teardown",
         "src.techpowerup.pcb"
       ],
       "description": {
-        "en": "Generic cluster marker for the low-profile switching-device packages around the power stages. No MOSFET model, phase count, gate-driver arrangement or electrical net is inferred.",
-        "ru": "Обобщённый маркер низкопрофильных корпусов силовых переключающих элементов. Модель MOSFET, число фаз, схема драйверов затворов и электрические цепи не выводятся."
+        "en": "A row of MOSFET packages is visible in the exact-model teardown; the presenter identifies direct thermal contact to a copper plate. Device count, package marking, manufacturer, phase mapping, gate-driver topology and electrical values are not identified.",
+        "ru": "В разборке точной модели виден ряд корпусов MOSFET; автор показывает их непосредственный тепловой контакт с медной пластиной. Количество элементов, маркировка корпусов, производитель, распределение по фазам, топология драйверов затворов и электрические параметры не определены."
       }
     },
     {
@@ -1909,8 +1912,8 @@
         "src.gamersnexus.teardown"
       ],
       "description": {
-        "en": "One generic strip proxy for a power-stage contact area. Exact coverage, thickness, material, hardness and affected reference designators are unknown.",
-        "ru": "Один общий макет полосы контакта в области силовой части. Точное покрытие, толщина, материал, твёрдость и обслуживаемые позиционные обозначения неизвестны."
+        "en": "Proxy of the single visible pad impression contacting the pair of inductor packages discussed in the teardown. The presenter notes incomplete contact/coverage around the adjacent inductors. Thickness must not be assigned from the two generic 2.0 mm / approximately 1.5 mm measurements because their locations are not identified.",
+        "ru": "Макет единственного видимого отпечатка термопрокладки, контактировавшей с парой корпусов дросселей из разборки. Автор отмечает неполный контакт/охват соседних дросселей. Нельзя назначать ей толщину по двум общим измерениям 2,0 мм и примерно 1,5 мм, поскольку их расположение не привязано."
       }
     },
     {
@@ -2332,6 +2335,186 @@
       "description": {
         "en": "One of two additional side heatpipes described on the exact XC BLACK 12G-P5-3655-KR review sample. The source says these move heat toward the side of the heatsink. This route's 3D centreline, diameter, flattening and bends remain illustrative.",
         "ru": "Одна из двух дополнительных боковых тепловых трубок, описанных в обзоре точного образца XC BLACK 12G-P5-3655-KR. Источник указывает, что они переносят тепло к боковой части радиатора. Пространственная осевая линия, диаметр, сплющенные участки и изгибы остаются условными."
+      }
+    },
+    {
+      "id": "fastener.fan.1.01",
+      "parent_id": "assembly.fan.1",
+      "name": {
+        "en": "Fan 1 mounting screw 1 · location unmapped",
+        "ru": "Крепёжный винт вентилятора 1 №1 · положение не установлено"
+      },
+      "category": "mechanical",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "description": {
+        "en": "One of three screws retaining this independently replaceable axial fan, as counted in the exact-model Gamers Nexus teardown. Its individual position, head profile, thread, length and torque are not documented; the node is logical-only and carries no invented physical coordinates.",
+        "ru": "Один из трёх винтов крепления этого отдельно заменяемого осевого вентилятора, подсчитанных в разборке точной модели Gamers Nexus. Индивидуальное положение, профиль головки, резьба, длина и момент затяжки не описаны; узел только логический, физические координаты не выдуманы."
+      }
+    },
+    {
+      "id": "fastener.fan.1.02",
+      "parent_id": "assembly.fan.1",
+      "name": {
+        "en": "Fan 1 mounting screw 2 · location unmapped",
+        "ru": "Крепёжный винт вентилятора 1 №2 · положение не установлено"
+      },
+      "category": "mechanical",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "description": {
+        "en": "One of three screws retaining this independently replaceable axial fan, as counted in the exact-model Gamers Nexus teardown. Its individual position, head profile, thread, length and torque are not documented; the node is logical-only and carries no invented physical coordinates.",
+        "ru": "Один из трёх винтов крепления этого отдельно заменяемого осевого вентилятора, подсчитанных в разборке точной модели Gamers Nexus. Индивидуальное положение, профиль головки, резьба, длина и момент затяжки не описаны; узел только логический, физические координаты не выдуманы."
+      }
+    },
+    {
+      "id": "fastener.fan.1.03",
+      "parent_id": "assembly.fan.1",
+      "name": {
+        "en": "Fan 1 mounting screw 3 · location unmapped",
+        "ru": "Крепёжный винт вентилятора 1 №3 · положение не установлено"
+      },
+      "category": "mechanical",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "description": {
+        "en": "One of three screws retaining this independently replaceable axial fan, as counted in the exact-model Gamers Nexus teardown. Its individual position, head profile, thread, length and torque are not documented; the node is logical-only and carries no invented physical coordinates.",
+        "ru": "Один из трёх винтов крепления этого отдельно заменяемого осевого вентилятора, подсчитанных в разборке точной модели Gamers Nexus. Индивидуальное положение, профиль головки, резьба, длина и момент затяжки не описаны; узел только логический, физические координаты не выдуманы."
+      }
+    },
+    {
+      "id": "fastener.fan.2.01",
+      "parent_id": "assembly.fan.2",
+      "name": {
+        "en": "Fan 2 mounting screw 1 · location unmapped",
+        "ru": "Крепёжный винт вентилятора 2 №1 · положение не установлено"
+      },
+      "category": "mechanical",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "description": {
+        "en": "One of three screws retaining this independently replaceable axial fan, as counted in the exact-model Gamers Nexus teardown. Its individual position, head profile, thread, length and torque are not documented; the node is logical-only and carries no invented physical coordinates.",
+        "ru": "Один из трёх винтов крепления этого отдельно заменяемого осевого вентилятора, подсчитанных в разборке точной модели Gamers Nexus. Индивидуальное положение, профиль головки, резьба, длина и момент затяжки не описаны; узел только логический, физические координаты не выдуманы."
+      }
+    },
+    {
+      "id": "fastener.fan.2.02",
+      "parent_id": "assembly.fan.2",
+      "name": {
+        "en": "Fan 2 mounting screw 2 · location unmapped",
+        "ru": "Крепёжный винт вентилятора 2 №2 · положение не установлено"
+      },
+      "category": "mechanical",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "description": {
+        "en": "One of three screws retaining this independently replaceable axial fan, as counted in the exact-model Gamers Nexus teardown. Its individual position, head profile, thread, length and torque are not documented; the node is logical-only and carries no invented physical coordinates.",
+        "ru": "Один из трёх винтов крепления этого отдельно заменяемого осевого вентилятора, подсчитанных в разборке точной модели Gamers Nexus. Индивидуальное положение, профиль головки, резьба, длина и момент затяжки не описаны; узел только логический, физические координаты не выдуманы."
+      }
+    },
+    {
+      "id": "fastener.fan.2.03",
+      "parent_id": "assembly.fan.2",
+      "name": {
+        "en": "Fan 2 mounting screw 3 · location unmapped",
+        "ru": "Крепёжный винт вентилятора 2 №3 · положение не установлено"
+      },
+      "category": "mechanical",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "description": {
+        "en": "One of three screws retaining this independently replaceable axial fan, as counted in the exact-model Gamers Nexus teardown. Its individual position, head profile, thread, length and torque are not documented; the node is logical-only and carries no invented physical coordinates.",
+        "ru": "Один из трёх винтов крепления этого отдельно заменяемого осевого вентилятора, подсчитанных в разборке точной модели Gamers Nexus. Индивидуальное положение, профиль головки, резьба, длина и момент затяжки не описаны; узел только логический, физические координаты не выдуманы."
+      }
+    },
+    {
+      "id": "power.shunt.8pin",
+      "parent_id": "power.shunt.cluster",
+      "name": {
+        "en": "Auxiliary 8-pin current-sense shunt · 5 mΩ",
+        "ru": "Шунт измерения тока 8-pin · 5 мОм"
+      },
+      "category": "power_electronics",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "description": {
+        "en": "Current-sense shunt associated by the teardown presenter with the auxiliary 8-pin input. The presenter states 5 mΩ. No reference designator, calibrated board coordinate, package part number or full current-sense net is established.",
+        "ru": "Измерительный шунт, который автор разборки связывает с дополнительным входом 8-pin. В видео указано 5 мОм. Позиционное обозначение, калиброванная координата на плате, номер корпуса и вся цепь измерения тока не установлены."
+      }
+    },
+    {
+      "id": "power.shunt.pcie_slot",
+      "parent_id": "power.shunt.cluster",
+      "name": {
+        "en": "PCIe-slot 12 V current-sense shunt · value unknown",
+        "ru": "Шунт измерения 12 В PCIe-слота · номинал неизвестен"
+      },
+      "category": "power_electronics",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "description": {
+        "en": "Separate current-sense shunt discussed for the PCIe-slot 12 V input. Its resistance is not stated in the teardown; do not copy the 5 mΩ value from the auxiliary 8-pin shunt.",
+        "ru": "Отдельный измерительный шунт, обсуждаемый для входа 12 В от PCIe-слота. Его сопротивление в разборке не указано; нельзя переносить на него значение 5 мОм от шунта дополнительного 8-pin входа."
+      }
+    },
+    {
+      "id": "power.fuse.input",
+      "parent_id": "assembly.power_stage",
+      "name": {
+        "en": "Input protection fuse · part/rating unknown",
+        "ru": "Предохранитель входной защиты · тип и номинал неизвестны"
+      },
+      "category": "power_electronics",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "description": {
+        "en": "A fuse is pointed out during the exact-model teardown as an input-protection/troubleshooting component. Package marking, reference designator, current rating, voltage rating, time-current curve and exact PCB coordinate are not captured.",
+        "ru": "В разборке точной модели показан предохранитель, относящийся к входной защите и диагностике. Маркировка корпуса, позиционное обозначение, токовый и вольтовый номиналы, времятоковая характеристика и точная координата на PCB не зафиксированы."
+      }
+    },
+    {
+      "id": "cooling.vrm.copper_contact",
+      "parent_id": "cooling.thermal_interface",
+      "name": {
+        "en": "Copper plate contacting MOSFET row · proxy",
+        "ru": "Медная пластина контакта с рядом MOSFET · макет"
+      },
+      "category": "thermal",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "description": {
+        "en": "The exact-model teardown shows a copper plate making direct thermal contact with a row of MOSFET packages. This node represents the observed contact concept only; plate dimensions, thickness, finish, exact device coverage and PCB coordinates remain unmeasured.",
+        "ru": "В разборке точной модели показана медная пластина, непосредственно контактирующая с рядом корпусов MOSFET. Узел отражает только наблюдаемую схему контакта; размеры, толщина, покрытие, точный охват компонентов и координаты на PCB не измерены."
       }
     }
   ],
