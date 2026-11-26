@@ -181,22 +181,27 @@ The v0.6 development branch adds selectable visual placeholders for the GA106 di
 No complete BoardView, exact-revision schematic, BOM, native STEP assembly or measured board coordinates have been obtained. The new geometry is for interactive education and navigation only.
 
 
-## 13. Exact XC BLACK fastener reconciliation
+## 13. Exact XC BLACK fastener count and location confidence
 
-The LanOC review is explicitly an EVGA RTX 3060 XC BLACK sample and shows the 12G-P5-3655-KR product label. Its text identifies four heatsink mounting screws in the center around the GPU, no backplate, dual 90 mm fan openings with approximately 85 mm impellers, 201.8 mm nominal card length, 110 mm height, and one 8-pin power input. The four GPU-area mounting screws are now the only fasteners treated as visible exact-SKU geometry.
+The main Tom's Hardware RTX 3060 review contains a rear-PCB photograph whose product sticker reads **P/N 12G-P5-3655-KR**. The corresponding teardown on page 2 describes eight cooler/shroud retention screws: four around the GPU and four near the far end of the card. The photographed sample is therefore tied to the exact XC BLACK retail SKU, despite the article's shorter prose label "EVGA GeForce RTX 3060 XC". LanOC's exact XC BLACK review independently documents the four central GPU-area screws as a visible subset.
 
-Tom's Hardware's teardown is a related EVGA RTX 3060 XC sample but does not identify the XC BLACK part number. Its eight-screw count is kept as a variant note only. Four additional model nodes are retained as uninstalled candidate placeholders, not installed screws on the XC BLACK. The service panel uses the exact LanOC four-screw observation and the exact-model Gamers Nexus fan teardown; the eight-screw procedure has been removed from the exact-SKU instructions.
+The model now records **eight exact-SKU retention screws**. Four GPU-area fasteners are separate photo-positioned visual proxies. The four rear-area screws are separate semantic nodes with `geometry_status: logical_only`: their count and general area are documented, but exact individual centres have not been measured or mapped. The first partial assembly observation now references all eight, with source and location limitations explicit. This is not a full service procedure.
+
+The article does not supply screw-head profile, driver size, thread, length, spring specification, calibrated coordinate map or torque. No values are inferred. The absence of a complete screw map and reassembly sequence remains explicit.
 
 Sources:
-- Exact card layout and photos: https://lanoc.org/review/video-cards/evga-rtx-3060-xc-black?showall=1
-- Related EVGA RTX 3060 XC teardown (not exact SKU): https://www.tomshardware.com/reviews/nvidia-geforce-rtx-3060-review/2
+- Tom's Hardware main review with sample identity photo: https://www.tomshardware.com/reviews/nvidia-geforce-rtx-3060-review
+- Tom's Hardware exact-SKU-linked teardown: https://www.tomshardware.com/reviews/nvidia-geforce-rtx-3060-review/2
+- LanOC exact XC BLACK card layout and photographs: https://lanoc.org/review/video-cards/evga-rtx-3060-xc-black?showall=1
 
 
-## 14. GDDR6 package identity and bus mapping
+## 14. Exact-SKU GDDR6 package identification and bus mapping
 
-Six GDDR6 package positions are visible in exact XC BLACK review/teardown material. The exact part marking on the selected 12G-P5-3655-KR sample has not been independently transcribed. K4ZAF325BM-HC16 appears in a related EVGA RTX 3060 XC teardown that is not identified as XC BLACK; the density, organization, data rate and package details originate from a secondary catalog. These are candidate-part attributes only, not exact-SKU BOM facts.
+The Tom's Hardware teardown identifies **six Samsung K4ZAF325BM-HC16 GDDR6 packages** on the sample. Its main-review rear-PCB photo identifies that same reviewed card as **P/N 12G-P5-3655-KR**, connecting the package marking to the exact XC BLACK retail SKU. The six individual package positions are also visible in exact-model review/teardown material. Their 3D centres remain photo-estimated, not BoardView measurements.
 
-The EVGA-published 192-bit memory interface is retained as an exact-SKU fact. The six visual interface segments in the 3D viewer are now labelled as logical presentation groups. The unverified one-to-one segment-to-package relations were removed. No package channel width, chip-select mapping, memory-controller partition or PCB net is asserted without a matching BoardView/schematic.
+The device is specified in the teardown at **16 Gbps per pin**. Do not confuse this device rating with the EVGA card's stock effective memory clock of **15,000 MHz**. The package identity is sourced to the exact-SKU-linked teardown; 16-Gbit density, 512M × 32 organisation, 180-FBGA package and 32-bit device interface are transcribed from a secondary catalog, not a primary Samsung datasheet. Six 16-Gbit devices total 96 Gbit (12 GB); the capacity multiplication is a derived consistency check, not an independent manufacturer specification.
+
+The EVGA-published **192-bit** memory interface remains the exact-SKU board claim. Six viewer interface presentation segments are logical navigation groups only. No package-to-controller net mapping, chip-select mapping, controller partition, channel assignment or PCB trace routing is inferred without an exact-revision BoardView/schematic.
 
 
 ## 15. Cooler-end heatpipe terminal evidence
@@ -216,3 +221,10 @@ The four copper circular terminal faces in LanOC image 16 remain a distinct visu
 The RM Schematics catalogue lists exactly one EVGA232 schematic with original filename `EVGA232 RTX 2070 - RTX3060 - PG190-A02 - GA104-GA106.pdf`, 12.2 MB, and a Telegram delivery reference. It labels the item as **Schematic**. Its overview also lists a separate `Files` item for the same name, but does not identify that archive as a BoardView or state that it contains board-coordinate data. The catalogue's model tags are EVGA232, RTX3060 and PG190-A02; it does not name 12G-P5-3655-KR, XC BLACK, or a confirmed EVGA232 REV 1.0 to PG190-A02 correlation.
 
 A second directory index labels a file `EVGA RTX 3060 12 GB BIOS (XC)` and a separate schematic PDF, but that does not establish that the BIOS archive contains BoardView data. This pilot therefore records an independently indexed *schematic lead*, not a usable verified boardview/CAD asset. The actual document has not been inspected or incorporated; the third-party service file is not copied into the repository.
+
+
+## 17. Tom's Hardware sample identity cross-check
+
+The Tom's Hardware review is no longer treated as a generic/related RTX 3060 XC variant source. The main review's rear-PCB label is legible as `P/N: 12G-P5-3655-KR`. The teardown discussion and images on page 2 belong to the same review sample. This is the provenance link used for the eight-screw cooler-retention count and Samsung K4ZAF325BM-HC16 package identity. It does not automatically establish the exact PCB revision, individual component coordinates or electrical nets.
+
+The source registry records the main-page identity photo URL and the direct image locator. The image itself is not copied or redistributed; the repository stores only attribution, source URL and the observed part-number text.
