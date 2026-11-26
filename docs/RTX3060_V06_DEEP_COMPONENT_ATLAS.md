@@ -41,7 +41,7 @@ Blender generation and GLB binding are exercised by the Blender blockout generat
 2. Obtain and legally validate a BoardView and schematic for that exact revision.
 3. Verify the full BOM, reference designators, VRM topology, MOSFETs, controller, shunts, passive values and connector pinouts.
 4. Replace proxy dimensions with calibrated measurement or licensed CAD for shroud, PCB, heatsink, heatpipes, fans, fasteners and all connectors.
-5. Review the complete exact-model teardown before authoring a complete service/removal sequence; the current three steps are explicitly partial observations only.
+5. Review the complete exact-model teardown before authoring a complete service/removal sequence; the current five actions are partial source observations only; they do not form a complete service or reassembly procedure.
 6. Add evidence-backed electrical and thermal diagrams; keep CFD, thermal FEA and SPICE as separate numerical projects.
 7. Obtain asset reuse rights, then perform visual acceptance on the generated blend, glb and sbsmodel.
 
@@ -57,14 +57,14 @@ The component atlas also adds separate, individually selectable photo-estimated 
 
 ## Fine-grained cooling decomposition
 
-The canonical package now exposes **309 semantic components, 305 typed relationships, 99 claims and 18 registered sources**. This includes individually selectable fan frames, hubs and eight photo-counted blade-surface proxies per fan (profile still illustrative); 24 separate illustrative heatsink-fin proxies; six selectable heatpipe route/run proxies reflecting the FPS Review's four central plus two side descriptions; the unique closed-loop count remains unknown; six memory-side thermal-pad proxies; and a VRM-side thermal-pad strip proxy.
+The current canonical package exposes **313 semantic components, 311 typed relationships, 109 atomic claims and 26 registered sources**. This includes individually selectable fan frames, hubs and eight photo-counted blade-surface proxies per fan (profile still illustrative); 24 separate illustrative heatsink-fin proxies; six selectable heatpipe route/run proxies reflecting the FPS Review's four central plus two side descriptions; the unique closed-loop count remains unknown; six memory-side thermal-pad proxies; and a VRM-side thermal-pad strip proxy.
 
-These are independently selectable teaching meshes, not a claim that the exact hardware has seven blades per fan or 24 fins. The count and shapes are explicitly identified as proxy geometry. Thermal-pad position proxies are aligned to the six identified GDDR6 package positions; pad thickness, material, hardness and service dimensions remain unverified. Heatpipe paths and cross-sections likewise remain illustrative.
+Eight visible blade surfaces per fan are counted from exact-SKU retail photographs, but the proxy meshes do not reproduce unmeasured blade profile, camber, pitch or thickness. Twenty-four fin meshes are layout proxies and do not assert the hardware's actual fin count or pitch. All mesh geometry remains illustrative. Thermal-pad position proxies are aligned to the six identified GDDR6 package positions; pad thickness, material, hardness and service dimensions remain unverified. Heatpipe paths and cross-sections likewise remain illustrative.
 
 
 ## Source-backed partial teardown sequence
 
-The assembly evidence panel contains **three partial actions** grounded in exact-SKU-linked sources: (1) remove eight cooler/shroud retention screws reported by Tom's Hardware on the review sample whose rear-PCB identity photograph reads P/N 12G-P5-3655-KR (four around GPU and four near the far end; only the four GPU-area centres are photo-positioned in 3D); (2) disconnect both fan leads before separating the cooler, as shown in the exact-model Gamers Nexus teardown; and (3) remove three retaining screws from each independently replaceable fan, also shown in the Gamers Nexus teardown. The sequence remains `partial_observed_sequence` and `complete_sequence: false`. Four rear-area cooler screws and six fan screws preserve verified counts as `logical_only`; their individual coordinates are not invented. No driver size, torque, exact thread or reassembly procedure is inferred.
+The assembly evidence panel contains **five partial observations** from exact-SKU-linked or exact-model teardown material: (1) remove the four spring-loaded GPU cooler screws; (2) release a separate pair securing the fin-stack base; (3) release two narrow I/O-bracket screws with reverse-side nuts and three display-output retaining screws (the teardown uses a Phillips #0 driver for the latter); (4) disconnect both fan leads before separating the cooler; and (5) remove three retaining screws from each independently replaceable fan. These observations are not a complete removal or reassembly sequence. Tom's Hardware separately reports an eight-screw cooler/shroud aggregate on a sample whose rear-PCB identity photo reads P/N 12G-P5-3655-KR; its overlap with the Gamers Nexus screw groups is not established, so counts are not added together. Additional shroud screws remain a 4-or-6 candidate group. Unmapped screw positions remain logical-only; no torque, thread, screw length or full service order is inferred.
 
 
 ## Reversible exploded-assembly animation
@@ -74,7 +74,7 @@ A second package-authored animation clip, `clip.exploded-cooler-overview`, now m
 
 ## GA106 compute and GDDR6 architecture tranche
 
-The semantic package now contains **309 components, 305 typed relationships, 99 claims and 18 registered sources**. Thirteen logical-only nodes represent the 28-SM GA106 cluster, its CUDA/Tensor/RT/TMU/ROP aggregates, a 192-bit GDDR6 interface and six logical interface presentation groups. Six Samsung K4ZAF325BM-HC16 GDDR6 package positions are separately selectable from exact-SKU-linked teardown/review material; no one-to-one mapping between package positions and interface presentation segments is asserted. The logical nodes carry `geometry_status: logical_only`: no physical die floorplan, shader wiring or PCB trace routing is drawn.
+The current semantic package contains **313 components, 311 typed relationships, 109 claims and 26 registered sources**. Thirteen logical-only nodes represent the 28-SM GA106 cluster, its CUDA/Tensor/RT/TMU/ROP aggregates, a 192-bit GDDR6 interface and six logical interface presentation groups. Six Samsung K4ZAF325BM-HC16 GDDR6 package positions are separately selectable from exact-SKU-linked teardown/review material; no one-to-one mapping between package positions and interface presentation segments is asserted. The logical nodes carry `geometry_status: logical_only`: no physical die floorplan, shader wiring or PCB trace routing is drawn.
 
 A third process layer, `gpu_compute`, exposes this architecture map in the viewer. Claims cover the published 28 SM / 112 Tensor / 28 RT / 112 TMU / 48 ROP configuration, 276 mm² and 12-billion-transistor GA106 die figures, Samsung 8N, and exact-SKU-linked memory package identity. Tom's Hardware identifies six Samsung K4ZAF325BM-HC16 devices on the 12G-P5-3655-KR sample; 16-Gbit density, 512M × 32 organisation and 180-FBGA package type remain secondary-catalog device attributes, not primary Samsung-datasheet claims. The viewer labels this as a logical map, not an architecture simulation.
 
@@ -85,7 +85,7 @@ The LanOC review explicitly identifies **four heatsink mounting screws around th
 
 Tom's Hardware's eight-screw description is tied to the exact retail SKU by the rear-PCB identity photograph on the same review page, which reads P/N 12G-P5-3655-KR. Four screws are located around the GPU and four near the far end. The first four have photo-estimated positions; four additional rear-area screw nodes are exact-SKU semantic entries with `geometry_status: logical_only` until individual centres can be calibrated.
 
-The disassembly panel now contains three exact-model partial actions: eight cooler/shroud retention screws (four around GPU and four near the far end), disconnecting both fan leads before cooler separation, and removing three retaining screws from each replaceable fan. Fan-screw positions are not mapped. The steps remain partial and are not a complete service manual.
+The disassembly panel now contains five partial exact-model observations, detailed in section 26. The separate eight-screw Tom's Hardware aggregate remains distinct because its overlap with the Gamers Nexus screw groups is unknown. Fan-screw positions remain unmapped. The observations are not a complete service manual.
 
 
 ## 14. GDDR6 package identity and mapping boundary
@@ -112,7 +112,7 @@ The FPS Review identifies its sample explicitly as EVGA GeForce RTX 3060 XC BLAC
 Source: https://www.thefpsreview.com/2021/03/03/evga-geforce-rtx-3060-xc-black-gaming-review/2/
 
 
-## 18. Fan-retention fasteners and three-step partial teardown
+## 18. Fan-retention fasteners and partial teardown observation
 
 The exact-model Gamers Nexus teardown shows each independently replaceable fan retained by three screws, for six fan-to-frame screws total. The package adds six separate semantic fastener nodes, all `geometry_status: logical_only`, because the individual screw centres, head profile, thread, length and torque are not measured. These six screws are distinct from the eight cooler/shroud retention screws.
 
