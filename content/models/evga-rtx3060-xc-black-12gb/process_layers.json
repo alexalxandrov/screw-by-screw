@@ -522,28 +522,40 @@
       "id": "process.power.qualitative",
       "type": "power_delivery",
       "title": {
-        "en": "Power input",
-        "ru": "Ввод питания"
+        "en": "Power input, sensing and protection",
+        "ru": "Ввод питания, измерение тока и защита"
       },
       "mode": "qualitative",
       "linked_component_ids": [
         "connector.power.8pin",
         "assembly.pcb.electronics",
         "chip.gpu.ga106",
-        "assembly.power_stage"
+        "assembly.power_stage",
+        "power.shunt.cluster",
+        "power.shunt.8pin",
+        "power.shunt.pcie_slot",
+        "power.fuse.input",
+        "power.inductor.candidate.1",
+        "power.inductor.candidate.2",
+        "power.switching_device.cluster",
+        "cooling.vrm.copper_contact"
       ],
       "description": {
-        "en": "A single auxiliary 8-pin input is shown feeding a schematic power-conversion zone and GPU package. Moving pulses are an educational direction cue; they are not routed PCB copper, pin mapping or an electrical simulation.",
-        "ru": "Показан один дополнительный вход 8-pin, условно связанный с зоной преобразования питания и корпусом GPU. Движущиеся импульсы обозначают принципиальное направление, а не реальные дорожки PCB, распиновку или электрическую симуляцию."
+        "en": "The 8-pin auxiliary input is shown with its separately observed 5 mΩ current-sense shunt; a second current-sense shunt belongs to the PCIe-slot 12 V input, but its resistance is unknown. The exact-model teardown also shows an input fuse, a row of MOSFETs contacted by a copper plate, and two inductor packages in an area only tentatively identified as memory VRM. The power-conversion zone and GPU connection are directional educational context, not a pin-level schematic or routed PCB net map.",
+        "ru": "Вход дополнительного питания 8-pin показан вместе с отдельно наблюдавшимся измерительным шунтом 5 мОм; второй измерительный шунт относится ко входу 12 В от PCIe-слота, но его сопротивление неизвестно. В разборке точной модели также видны входной предохранитель, ряд MOSFET под медной контактной пластиной и два корпуса дросселей в области, которую автор лишь предположительно называет VRM памяти. Зона преобразования и связь с GPU обозначают учебное направление, а не распиновку или карту реальных дорожек PCB."
       },
       "assumptions": [
         "No exact-board schematic, BoardView or verified PCB revision is available.",
-        "Power-stage location and the drawn connector-to-GPU path are schematic placeholders.",
-        "No voltage/current values, phase count, pin mapping, ripple or switching waveform is simulated."
+        "The 5 mΩ resistance applies only to the auxiliary 8-pin input shunt; the separate PCIe-slot 12 V shunt value is unknown.",
+        "The teardown shows a fuse, two inductors, a MOSFET row and a copper cooling contact, but it does not provide reference designators, exact coordinates, part numbers or complete electrical nets.",
+        "The presenter's identification of the two-inductor area as memory VRM is tentative and is not treated as a verified rail topology.",
+        "TechPowerUp phase counts, controller and MOSFET identifications belong to a related XC variant and are deliberately excluded from this exact-SKU process layer.",
+        "The schematic direction cue is educational only; no current, voltage, switching waveform, pin mapping, ripple or thermal simulation is implemented."
       ],
       "source_ids": [
         "src.evga.spec",
-        "src.lanoc.review"
+        "src.lanoc.review",
+        "src.gamersnexus.teardown"
       ],
       "visualization": {
         "kind": "schematic_directional_pulses",

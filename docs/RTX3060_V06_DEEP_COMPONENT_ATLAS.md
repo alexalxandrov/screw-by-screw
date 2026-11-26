@@ -174,3 +174,8 @@ The exact-model Gamers Nexus teardown now has separate semantic groups for the f
 ## 27. Sample-specific cooling and board-power operating point
 
 PC Perspective reports a single EVGA GeForce RTX 3060 12GB XC BLACK test observation: Metro Exodus 2160/high, open case, approximately 24 °C ambient, 68.1 °C GPU, 80.5 °C hotspot, 73% fan duty and about 2030 RPM; observed board power peaked at 172.4 W. The review names the XC BLACK model but does not provide the 12G-P5-3655-KR retail part number, so the data is explicitly sample/workload evidence, not a board revision or universal operating specification. The official 170 W rating remains unchanged; a measured transient/test peak is not a replacement for that rating. The RPM point is not fan maximum speed, and one duty/RPM pair is insufficient to infer the factory fan curve.
+
+
+## 28. Exact-SKU power layer detail
+
+The power input layer now links the observed shunt/fuse/inductor/MOSFET/copper-contact groups so the component atlas is navigable down to those observations. The auxiliary input shunt is 5 mΩ; the PCIe-slot 12 V shunt is explicitly unknown. The two opposite-side inductors are observed, but the presenter's memory-VRM label remains tentative. No VRM controller, phase count or MOSFET part identity from a related XC variant is imported into the target. Visual pulses remain directional teaching cues, not an electrical simulation.
