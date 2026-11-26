@@ -9,7 +9,7 @@
     <title>Screw by Screw — Interactive Technical Atlas</title>
   </head>
   <body>
-    <div id="app" class="app-shell">
+    <div id="app" class="app-shell" data-mobile-panel="viewer">
       <div id="startup-fallback" class="startup-fallback" role="alert" hidden>
         <div class="startup-fallback-card">
           <strong>Приложение не запустилось</strong>
@@ -36,6 +36,11 @@
         </div>
       </header>
 
+      <nav id="mobile-panel-switcher" class="mobile-panel-switcher" aria-label="Workspace panel">
+        <button class="mobile-panel-button" type="button" data-mobile-panel="viewer" data-i18n="mobileViewer" aria-pressed="true">3D</button>
+        <button class="mobile-panel-button" type="button" data-mobile-panel="structure" data-i18n="mobileStructure" aria-pressed="false">Структура</button>
+        <button class="mobile-panel-button" type="button" data-mobile-panel="details" data-i18n="mobileDetails" aria-pressed="false">Детали</button>
+      </nav>
 
       <dialog id="model-catalog-dialog" class="catalog-dialog" aria-labelledby="catalog-title">
         <div class="catalog-header">
@@ -291,14 +296,8 @@
         <div><span id="scene-stats">—</span><span class="status-separator">/</span><span data-i18n="localFirst">LOCAL-FIRST · NO ACCOUNT</span></div>
       </footer>
     </div>
-    <!-- Source template for the standalone root index.html build. -->
-    <script>
-      window.setTimeout(() => {
-        if (!document.documentElement.classList.contains("sbs-ready")) {
-          document.getElementById("startup-fallback")?.removeAttribute("hidden");
-        }
-      }, 7000);
-    </script>
+    <!-- The external fallback module keeps the web build compatible with a strict CSP. -->
+    <script type="module" src="./src/startup-fallback.js"></script>
     <script type="module" src="./src/main.js"></script>
   </body>
 </html>
