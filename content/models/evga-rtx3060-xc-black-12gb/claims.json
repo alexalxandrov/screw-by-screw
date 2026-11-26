@@ -136,10 +136,9 @@
       "unit": "mm",
       "confidence_class": "measured",
       "source_ids": [
-        "src.lanoc.review",
-        "src.pcmrace.xc_black.review"
+        "src.lanoc.review"
       ],
-      "notes": "LanOC's approximate reviewer measurement for the exact XC BLACK sample is ~85 mm impeller diameter within a ~90 mm fan opening. PC Master Race Latinoamérica describes its similarly named XC BLACK sample as using two 80 mm fans but does not identify retail P/N 12G-P5-3655-KR. The measurement conventions/sample identity are unresolved; retain LanOC's approximate measured value for the current model and do not treat 80 mm as a confirmed OEM size for this SKU."
+      "notes": "LanOC's approximate reviewer measurement for the exact XC BLACK sample is ~85 mm impeller diameter within a ~90 mm fan opening. PC Master Race Latinoamérica describes a similarly named XC BLACK sample as using two 80 mm fans but does not identify retail P/N 12G-P5-3655-KR; retain that as an unresolved sample/measurement-convention conflict only, not as support for the target SKU's 85 mm estimate."
     },
     {
       "id": "claim.power.connector",
@@ -176,9 +175,9 @@
       "confidence_class": "independently_verified",
       "source_ids": [
         "src.lanoc.review",
-        "src.hothardware.xc_black.review"
+        "src.neoseeker.review"
       ],
-      "notes": "The exact-SKU LanOC 12G-P5-3655-KR sample shows exposed rear PCB and no backplate. HotHardware's similarly named XC Black Gaming sample describes a stylized rear backplate with hexagonal cut-outs but does not publish its retail P/N; this is retained as an unresolved sample/variant conflict and is not applied to the target 3655-KR assembly."
+      "notes": "The exact-SKU LanOC 12G-P5-3655-KR sample shows exposed rear PCB and no backplate; Neoseeker independently identifies its sample as P/N 12G-P5-3655-KR and documents the exposed PCB/ventilation cutout. HotHardware's similarly named XC Black Gaming sample describes a rear backplate but does not publish its retail P/N; it remains a conflicting non-SKU-specific reference and is not used as evidence for this claim."
     },
     {
       "id": "claim.pcb.revision",
@@ -480,8 +479,7 @@
       "unit": "Gbit per package",
       "confidence_class": "secondary_catalog_data",
       "source_ids": [
-        "src.samsung.gddr6.catalog",
-        "src.tomshardware.teardown"
+        "src.samsung.gddr6.catalog"
       ],
       "notes": "16 Gbit density is a secondary-catalog attribute for the verified K4ZAF325BM-HC16 device identity; the attribute itself is transcribed from a secondary catalog, not a primary Samsung datasheet. It is a package property, not a BoardView-derived PCB net or layout fact."
     },
@@ -493,8 +491,7 @@
       "unit": null,
       "confidence_class": "secondary_catalog_data",
       "source_ids": [
-        "src.samsung.gddr6.catalog",
-        "src.tomshardware.teardown"
+        "src.samsung.gddr6.catalog"
       ],
       "notes": "512M × 32 organization is a secondary-catalog attribute for the verified K4ZAF325BM-HC16 device identity; the attribute itself is transcribed from a secondary catalog, not a primary Samsung datasheet. It is a package property, not a BoardView-derived PCB net or layout fact."
     },
@@ -519,8 +516,7 @@
       "unit": null,
       "confidence_class": "secondary_catalog_data",
       "source_ids": [
-        "src.samsung.gddr6.catalog",
-        "src.tomshardware.teardown"
+        "src.samsung.gddr6.catalog"
       ],
       "notes": "180 FBGA package type is a secondary-catalog attribute for the verified K4ZAF325BM-HC16 device identity; the attribute itself is transcribed from a secondary catalog, not a primary Samsung datasheet. It is a package property, not a BoardView-derived PCB net or layout fact."
     },
@@ -532,8 +528,7 @@
       "unit": "bits",
       "confidence_class": "secondary_catalog_data",
       "source_ids": [
-        "src.samsung.gddr6.catalog",
-        "src.tomshardware.teardown"
+        "src.samsung.gddr6.catalog"
       ],
       "notes": "32-bit package organization is a secondary-catalog attribute for the verified K4ZAF325BM-HC16 device identity; the attribute itself is transcribed from a secondary catalog, not a primary Samsung datasheet. It is a package property, not a BoardView-derived PCB net or layout fact."
     },
