@@ -66,8 +66,8 @@
       "model_kind": "system",
       "category_id": "desktop_computers",
       "summary": {
-        "en": "Source-linked system package with 20 individual fastener and grommet instances. Family-level illustrative geometry, not CAD or an exact retail configuration.",
-        "ru": "Пакет системной модели с источниками, 20 отдельными экземплярами крепежа и втулок. Условная геометрия семейства, не CAD и не точная розничная комплектация."
+        "en": "Expanded Tower family research package: 115 semantic components, 123 relationships, 26 mapped motherboard callouts, full front/rear I/O inventory and a source-backed partial system-board removal procedure. Optional installed parts remain unknown; geometry is illustrative, not CAD.",
+        "ru": "Расширенный исследовательский пакет семейства Tower: 115 смысловых компонентов, 123 связи, 26 обозначений системной платы, инвентаризация переднего/заднего I/O и частичная процедура снятия платы по источникам. Установленные опциональные детали неизвестны; геометрия условная, не CAD."
       },
       "tags": [
         "Dell",
@@ -76,12 +76,21 @@
         "tower",
         "PC",
         "system",
-        "family reference"
+        "family reference",
+        "LGA1151",
+        "Coffee Lake",
+        "DDR4",
+        "PCIe Gen3",
+        "SATA",
+        "M.2",
+        "USB",
+        "motherboard map",
+        "service procedure"
       ],
       "status": "research_blockout",
       "geometry_status": "illustrative_proxy_not_cad",
-      "package_version": "0.1.0",
-      "package_path": "models/dell_optiplex_5060_tower_v01.sbsmodel"
+      "package_version": "0.2.0",
+      "package_path": "models/dell_optiplex_5060_tower_v02.sbsmodel"
     }
   ]
 }
