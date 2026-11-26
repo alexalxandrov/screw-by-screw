@@ -97,6 +97,15 @@
       "type": "secondary_memory_component_catalog",
       "applicability": "Secondary listing for K4ZAF325BM-HC16: 16Gb density, 512M × 32 organization, 16.0Gbps data rate and 180 FBGA package; not a primary Samsung datasheet",
       "license_status": "metadata_reference_only_no_asset_reuse"
+    },
+    {
+      "id": "src.thefpsreview.exact_sku",
+      "title": "EVGA GeForce RTX 3060 XC BLACK GAMING review — exact part number and cooler description",
+      "publisher": "The FPS Review",
+      "url": "https://www.thefpsreview.com/2021/03/03/evga-geforce-rtx-3060-xc-black-gaming-review/2/",
+      "type": "exact_model_review",
+      "applicability": "Review sample explicitly identified as EVGA GeForce RTX 3060 XC BLACK GAMING, part number 12G-P5-3655-KR; describes four main heatpipes contacting the GPU and two additional side heatpipes",
+      "license_status": "third_party_copyright_no_reuse_permission"
     }
   ]
 }
