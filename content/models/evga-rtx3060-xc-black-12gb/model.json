@@ -24,23 +24,26 @@
       ],
       "evidence_status": "manufacturer_data",
       "visible_package_positions": 6,
-      "visible_package_positions_evidence_status": "exact_model_visual_observation",
+      "visible_package_positions_evidence_status": "exact_sku_teardown_and_review_observation",
       "package_position_status": "photo_estimated_not_measured",
-      "package_identity_candidate": {
+      "package_identity": {
         "part_number": "Samsung K4ZAF325BM-HC16",
         "capacity_gbit": 16,
         "organization": "512M × 32",
         "data_rate_gbps_per_pin": 16,
         "package_type": "180 FBGA",
         "interface_width_bits": 32,
-        "evidence_status": "related_variant_and_secondary_catalog_only",
-        "exact_sku_marking_verified": false,
+        "evidence_status": "exact_sku_part_number_review_plus_secondary_catalog_attributes",
+        "exact_sku_marking_verified": true,
         "source_ids": [
           "src.tomshardware.teardown",
           "src.samsung.gddr6.catalog"
         ],
-        "notes": "Candidate part identity and catalog attributes only. The exact 12G-P5-3655-KR XC BLACK sample marking has not been independently transcribed; do not treat these fields as an exact-SKU BOM."
-      }
+        "notes": "Tom's Hardware's teardown article names six Samsung K4ZAF325BM-HC16 devices; the rear-PCB photograph on the same review page identifies the sample as P/N 12G-P5-3655-KR. Density, organization, package type and 32-bit device interface are secondary-catalog attributes for that identified package part, not a primary Samsung datasheet. 16Gbps is the device rating, not the EVGA card's stock 15Gbps effective memory clock. Physical device centres remain photo-estimated, and package-to-controller nets are not mapped."
+      },
+      "device_rated_data_rate_gbps_per_pin": 16,
+      "package_capacity_total_gbit": 96,
+      "package_capacity_total_gbit_status": "calculated_from_six_packages_times_secondary_catalog_density"
     },
     "gpu": {
       "family": "GeForce RTX 3060",
