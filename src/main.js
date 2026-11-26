@@ -918,6 +918,23 @@ function renderClaims(componentId) {
         link.rel = "noopener noreferrer";
         link.textContent = `↗ ${source.label}`;
         sourceList.append(link);
+
+        if (source.identity_reference_url) {
+          const identityPage = document.createElement("a");
+          identityPage.href = source.identity_reference_url;
+          identityPage.target = "_blank";
+          identityPage.rel = "noopener noreferrer";
+          identityPage.textContent = state.language === "ru" ? "↗ Страница с фото наклейки SKU" : "↗ SKU identity photo page";
+          sourceList.append(identityPage);
+        }
+        if (source.identity_reference_image_url) {
+          const identityImage = document.createElement("a");
+          identityImage.href = source.identity_reference_image_url;
+          identityImage.target = "_blank";
+          identityImage.rel = "noopener noreferrer";
+          identityImage.textContent = state.language === "ru" ? "↗ Открыть фото маркировки PCB" : "↗ Open PCB label photo";
+          sourceList.append(identityImage);
+        }
       });
       card.append(sourceList);
     }
