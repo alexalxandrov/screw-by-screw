@@ -14,10 +14,10 @@
     "process_layers": 6,
     "assembly_steps": 12,
     "learning_questions": 9,
-    "documented_source_records": 15,
+    "documented_source_records": 18,
     "geometry_nodes": 58,
     "optional_population_unknown": true,
     "motherboard_callout_mappings": 26,
-    "technical_claims": 29
+    "technical_claims": 30
   }
 }
