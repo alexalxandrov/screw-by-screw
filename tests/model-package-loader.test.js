@@ -317,4 +317,37 @@ test("preserves extended source metadata for linked claim references", () => {
   assert.equal(adapter.model.sources[0].identity_reference_image_url, identityImage);
   assert.equal(adapter.model.sources[0].identity_locator, "Rear PCB product sticker");
   assert.equal(adapter.model.sources[0].applicability, source.applicability);
+
+  const unsafeAdapter = createModelDataAdapter({
+    model: { id: "test.unsafe", manufacturer: "Test" },
+    sources: { sources: [{
+      id: "src.unsafe",
+      title: "Unsafe reference",
+      url: "javascript:alert(1)",
+      identity_reference_url: "data:text/html,unsafe",
+      identity_reference_image_url: "file:///etc/passwd"
+    }] },
+    components: { components: [{ id: "root" }] }
+  });
+  assert.equal(unsafeAdapter.model.sources[0].url, "");
+  assert.equal(unsafeAdapter.model.sources[0].identity_reference_url, "");
+  assert.equal(unsafeAdapter.model.sources[0].identity_reference_image_url, "");
+});
+
+test("rejects non-HTTP source link schemes in an imported model package", () => {
+  for (const field of ["url", "identity_reference_url", "identity_reference_image_url"]) {
+    const data = makeData();
+    data.sources.sources[0][field] = "javascript:alert(1)";
+    assert.throws(
+      () => validateModelPackageData(testManifest(), data),
+      /must use HTTP or HTTPS/
+    );
+  }
+
+  const malformed = makeData();
+  malformed.sources.sources[0].identity_reference_image_url = "not a URL";
+  assert.throws(
+    () => validateModelPackageData(testManifest(), malformed),
+    /must be an absolute HTTP\(S\) URL/
+  );
 });
