@@ -6,19 +6,19 @@ test("resumes learning progress after page reload in the same browser", async ({
   await expect(learn).toBeEnabled();
   await learn.click();
 
-  await expect(page.locator("#quiz-progress")).toHaveText("01 / 05");
+  await expect(page.locator("#quiz-progress")).toHaveText("01 / 08");
   await page.locator("#quiz-choices .quiz-choice").nth(1).click();
   await page.locator("#quiz-next").click();
   await expect(page.locator("#quiz-feedback")).toContainText("Верно");
   await page.locator("#quiz-next").click();
 
-  await expect(page.locator("#quiz-progress")).toHaveText("02 / 05");
+  await expect(page.locator("#quiz-progress")).toHaveText("02 / 08");
   await expect(page.locator("#quiz-score")).toContainText("1");
   await page.locator("#quiz-choices .quiz-choice").nth(1).click();
   await page.reload();
 
   await page.locator('.view-tab[data-mode="learn"]').click();
-  await expect(page.locator("#quiz-progress")).toHaveText("02 / 05");
+  await expect(page.locator("#quiz-progress")).toHaveText("02 / 08");
   await expect(page.locator("#quiz-score")).toContainText("1");
   await expect(page.locator("#quiz-choices .quiz-choice").nth(1)).toHaveAttribute("aria-pressed", "true");
   await expect(page.locator("#learning-save-status")).toContainText("сохранён");
@@ -30,16 +30,16 @@ test("restarting a completed learning quiz clears its saved progress", async ({ 
   await page.goto("/");
   await page.locator('.view-tab[data-mode="learn"]').click();
 
-  for (let index = 0; index < 5; index += 1) {
+  for (let index = 0; index < 8; index += 1) {
     await page.locator("#quiz-choices .quiz-choice").nth(1).click();
     await page.locator("#quiz-next").click();
-    if (index < 4) await page.locator("#quiz-next").click();
+    if (index < 7) await page.locator("#quiz-next").click();
   }
   await page.locator("#quiz-next").click();
 
   await expect(page.locator("#quiz-question")).toHaveText("Тест завершён");
   await page.locator("#quiz-next").click();
-  await expect(page.locator("#quiz-progress")).toHaveText("01 / 05");
+  await expect(page.locator("#quiz-progress")).toHaveText("01 / 08");
   await expect(page.locator("#quiz-score")).toContainText("0");
   await expect(page.locator("#quiz-choices .quiz-choice").first()).toHaveAttribute("aria-pressed", "false");
 });
