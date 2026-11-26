@@ -74,7 +74,7 @@ A second package-authored animation clip, `clip.exploded-cooler-overview`, now m
 
 ## GA106 compute and GDDR6 architecture tranche
 
-The semantic package now contains 117 components and 112 typed relationships. Thirteen logical-only nodes represent the 28-SM GA106 cluster, its CUDA/Tensor/RT/TMU/ROP aggregates, a 192-bit GDDR6 interface and six logical interface presentation groups. Six GDDR6 package positions are separately selectable from exact-XC-BLACK review/teardown material, but no one-to-one mapping between package positions and interface segments is asserted. The logical nodes carry `geometry_status: logical_only`: no physical die floorplan, shader wiring or PCB trace routing is drawn.
+The semantic package now contains 121 components and 116 typed relationships. Thirteen logical-only nodes represent the 28-SM GA106 cluster, its CUDA/Tensor/RT/TMU/ROP aggregates, a 192-bit GDDR6 interface and six logical interface presentation groups. Six GDDR6 package positions are separately selectable from exact-XC-BLACK review/teardown material, but no one-to-one mapping between package positions and interface segments is asserted. The logical nodes carry `geometry_status: logical_only`: no physical die floorplan, shader wiring or PCB trace routing is drawn.
 
 A third process layer, `gpu_compute`, exposes this architecture map in the viewer. Claims cover the published 28 SM / 112 Tensor / 28 RT / 112 TMU / 48 ROP configuration, 276 mm² and 12-billion-transistor GA106 die figures, Samsung 8N, and memory device attributes where available. The memory-package details are explicitly sourced to a secondary catalog entry rather than a primary Samsung datasheet. The viewer labels this as a logical map, not an architecture simulation.
 
@@ -98,3 +98,8 @@ The EVGA 192-bit GDDR6 bus remains an exact-SKU manufacturer specification. Six 
 ## 15. Interactive thermal-path diagram
 
 The cooling process layer now exposes a four-stage clickable diagram: heat source/contact interfaces, heat transport, fin-stack rejection, and airflow/mechanical envelope. Its 22 nodes reuse the canonical component IDs and link directly to the component detail pane. The diagram records the approximate reviewer measurements for the fan opening and impeller but labels the 3D fan centres, blade meshes, two heatpipe paths, fin count, pad dimensions and outer shroud contour as illustrative or unknown. It does not calculate CFD, junction temperature, thermal resistance, fan curves, RPM, acoustics or heat-transfer performance.
+
+
+## 16. Four visible copper heatpipe terminal faces
+
+The exact XC BLACK cooler-end photograph in LanOC's review shows four separate copper terminal faces. Four individually selectable markers now exist under `cooling.heatpipes`. Their generated positions and disc dimensions are photo-estimated proxies. The claim deliberately counts **visible terminal faces**, not unique U-shaped heatpipes: two pipes can have four ends. The model's two illustrative route candidates remain unverified internal routing and are not promoted to an exact pipe-count or manufacturing specification.
