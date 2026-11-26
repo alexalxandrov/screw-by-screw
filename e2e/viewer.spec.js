@@ -5,6 +5,8 @@ test("mobile workspace switches panels instead of stacking the whole application
   await page.goto("/");
   const switcher = page.locator("#mobile-panel-switcher");
   await expect(switcher).toBeVisible();
+  await expect(page.locator("#catalog-open")).toBeVisible();
+  await expect(page.locator("#language-toggle")).toBeVisible();
   await expect(page.locator(".viewer-column")).toBeVisible();
   await expect(page.locator(".left-panel")).toBeHidden();
   await expect(page.locator(".details-panel")).toBeHidden();
