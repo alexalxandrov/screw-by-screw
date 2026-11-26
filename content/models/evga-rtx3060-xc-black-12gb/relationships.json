@@ -1046,6 +1046,42 @@
         "src.evga.spec",
         "src.samsung.gddr6.catalog"
       ]
+    },
+    {
+      "id": "rel.heatpipes.contains.visible-end.01",
+      "from": "cooling.heatpipes",
+      "to": "cooling.heatpipe.end.01",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.heatpipes.contains.visible-end.02",
+      "from": "cooling.heatpipes",
+      "to": "cooling.heatpipe.end.02",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.heatpipes.contains.visible-end.03",
+      "from": "cooling.heatpipes",
+      "to": "cooling.heatpipe.end.03",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.heatpipes.contains.visible-end.04",
+      "from": "cooling.heatpipes",
+      "to": "cooling.heatpipe.end.04",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
     }
   ]
 }
