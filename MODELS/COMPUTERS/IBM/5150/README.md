@@ -10,7 +10,7 @@ This is the second reference model in Screw by Screw. Scope is the **system unit
 
 The modeled baseline is the August 1981 launch configuration: 16 KB RAM, no installed diskette drive, two empty drive positions, five unpopulated expansion sockets, and an unpopulated optional 8087 socket. The first-edition technical reference and service manuals define the hardware family; later 5150 board revisions and the IBM PC/XT 5160 are excluded.
 
-The package currently contains 71 canonical semantic components, 100 typed relationships, 21 source-linked claims, five functional layers, 12 bilingual learning questions, five partial FRU service procedures, and two explanatory animation clips.
+The package currently contains 71 canonical semantic components, 100 typed relationships, 21 source-linked claims, six registered sources, five functional layers and 12 bilingual learning questions. Service documentation is encoded as 14 granular disassembly actions in seven groups, four partial replacement fragments and five educational animation clips.
 
 ## Evidence limits
 
@@ -21,7 +21,7 @@ The 14 actions form a source-backed branching dependency graph, not a universal 
 See [IBM 5150 disassembly sequence](../../../../docs/IBM_PC_5150_DISASSEMBLY_SEQUENCE.md), [IBM 5150 fastener and board-mounting evidence audit](../../../../docs/IBM_PC_5150_FASTENER_EVIDENCE.md).\n\n## Sources
 
 - [IBM Personal Computer Technical Reference, first edition, August 1981](https://ps2.infania.net/IBM_5150_Technical_Reference_6025005_AUG81.pdf) — primary hardware, board, I/O, timing and PSU reference.
-- [IBM Personal Computer Hardware Maintenance and Service, first edition, August 1981](https://manualzz.com/doc/74076016/ibm-5150-hardware-maintenance-manual) — primary field-replaceable-unit procedures.
+- [IBM Personal Computer Hardware Maintenance and Service, first edition, August 1981](https://minuszerodegrees.net/manuals/IBM/IBM_5150_Hardware_Maintenance_and_Service_6025072_AUG81.pdf) — primary field-replaceable-unit procedures.
 - [IBM corporate history: Personal Computer](https://www.ibm.com/history/personal-computer) — launch date and original configuration.
 
 Copyrighted manuals and photographs are linked, not redistributed. See the evidence register in the package's source data.
