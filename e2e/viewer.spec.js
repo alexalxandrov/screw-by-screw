@@ -32,7 +32,7 @@ test("binds the power process layer from package relationships", async ({ page }
   await page.goto("/");
   await page.locator('.process-button[data-layer="power_delivery"]').click();
   await expect(page.locator("#process-details")).toBeVisible();
-  await expect(page.locator("#process-detail-title")).toHaveText("Ввод питания");
+  await expect(page.locator("#process-detail-title")).toHaveText("Ввод питания, измерение тока и защита");
   await expect(page.locator("#process-components button")).toHaveCount(17);
   await expect(page.locator("#process-diagram .architecture-diagram-group")).toHaveCount(4);
   const shunt = page.locator('#process-diagram .architecture-node[data-component-id="power.shunt.8pin"]');
