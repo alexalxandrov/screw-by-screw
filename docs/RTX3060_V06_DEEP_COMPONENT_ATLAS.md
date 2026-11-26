@@ -133,3 +133,8 @@ Source: NVIDIA, *Ampere GA10x GPU Architecture*, Figure 2 and page 10 (official 
 NVIDIA's official GA10x whitepaper describes each SM as four processing partitions (Figure 3, printed page 10). Each partition has an L0 instruction cache, one warp scheduler, one dispatch unit (32 threads per clock), a 16,384 × 32-bit register file (64 KiB), two FP32 datapaths, one third-generation Tensor Core, four LD/ST units and one SFU. The first datapath has 16 FP32 CUDA cores; the second has 16 FP32 CUDA cores and 16 INT32 lanes that may execute either FP32 or INT32. Therefore each partition can issue 32 FP32 operations per clock, or 16 FP32 plus 16 INT32 operations per clock. Four partitions yield 128 FP32 CUDA cores per SM.
 
 The content hierarchy now models all 112 logical partitions individually under their respective SM nodes. Their IDs are stable inventory handles, not coordinates. The Blender generator exports them as logical-only assembly nodes, not as physical circuit geometry. Together with 14 logical TPC nodes, 14 PolyMorph Engine instances and 28 SM nodes, the architecture inventory remains explicitly distinct from a physical die reconstruction.
+
+
+## 21. Expanded learning module
+
+The bilingual package quiz now contains 12 questions. Four newly added questions cover the GA10x TPC composition (two SMs + one PolyMorph Engine), the four-way SM partition structure, the 64 KiB register file per partition (16,384 × 32-bit), and one third-generation Tensor Core per partition. They are source-linked to NVIDIA's architecture whitepaper and keep the distinction between a logical architecture model and a physical die layout.
