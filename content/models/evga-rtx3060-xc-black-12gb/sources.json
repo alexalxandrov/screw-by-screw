@@ -203,6 +203,33 @@
       "type": "unverified_cad_asset_lead",
       "applicability": "Catalogue page identifies EVGA 12G-P5-3655-KR and displays an 'Ultra Librarian 3D Model' label, but the captured page exposes no actionable asset URL or download endpoint. The product image is a generic placeholder and the page states that images are for reference only. No STEP/IGES/mesh asset has been retrieved or identity-checked. Do not infer card, PCB, component or cooler geometry from this catalogue entry.",
       "license_status": "unverified_no_asset_link_or_reuse_terms"
+    },
+    {
+      "id": "src.pcworld.xc_black",
+      "title": "NVIDIA GeForce RTX 3060 review — EVGA XC Black Gaming cooler summary",
+      "publisher": "PCWorld",
+      "url": "https://www.pcworld.com/article/394228/nvidia-geforce-rtx-3060-review.html",
+      "type": "exact_product_name_review_secondary_cooler_summary",
+      "applicability": "The article explicitly identifies its tested sample as EVGA GeForce RTX 3060 XC Black Gaming, but the accessible text does not provide retail part number 12G-P5-3655-KR. Its cooler overview describes four copper heatpipes. This is retained as a source-specific summary, not a calibrated count of tube legs, loops or exact-board routing.",
+      "license_status": "third_party_copyright_no_reuse_permission"
+    },
+    {
+      "id": "src.gpufanreplacement.catalog",
+      "title": "EVGA GeForce RTX 3060 XC Gaming replacement fan listing",
+      "publisher": "GPU Fan Replacement",
+      "url": "https://www.gpufanreplacement.com/products/evga-geforce-rtx-3060-xc-gaming-fan-replacement",
+      "type": "aftermarket_compatibility_listing",
+      "applicability": "Aftermarket seller listing names fan code PLA09215S12H and advertises broad EVGA RTX 3050/3060/3060 Ti XC-family compatibility, including XC BLACK. The listing's claimed 90 mm size, 12 V, 0.55 A, 4-pin connector and 42 mm mounting spacing are seller specifications only. No original fan label or exact-card fitment measurement has been verified.",
+      "license_status": "metadata_reference_only_no_asset_reuse"
+    },
+    {
+      "id": "src.gpuconnect.catalog",
+      "title": "EVGA RTX 3050 / 3060 / 3060 Ti XC Gaming Black replacement fan listing",
+      "publisher": "GPUConnect",
+      "url": "https://gpuconnect.com/products/evga-rtx-3050-3060-ti-xc-gaming-black-replacement-fans-15mm",
+      "type": "aftermarket_compatibility_listing",
+      "applicability": "Aftermarket replacement listing advertises broad compatibility across multiple EVGA XC Gaming Black variants and lists PLA09215S12H-family fans. The catalog material gives an approximately 87 mm size and 15 mm / 20 mm depth variants, plus seller-claimed 12 V, 0.55 A, 4-pin and 42 mm mounting spacing. These are catalogue claims, not an OEM label or confirmed fitment for 12G-P5-3655-KR; its dimensions also differ from another seller's 90 mm claim.",
+      "license_status": "metadata_reference_only_no_asset_reuse"
     }
   ]
 }
