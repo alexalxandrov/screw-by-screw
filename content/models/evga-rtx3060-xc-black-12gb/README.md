@@ -39,7 +39,7 @@ This is not yet a complete engineering reconstruction. Four GPU-area heatsink sc
 
 ### Fine-grained cooling decomposition
 
-The development branch now expands the content graph to 104 semantic components and 99 typed relationships. Fan frames, hubs and each blade proxy are separately selectable; the illustrative heatsink has 24 separately selectable fin proxies; the two reconstructed heatpipe routes are separate assembly nodes; and six memory thermal-pad proxies plus one VRM pad strip have their own IDs. No proxy blade/fin count or thermal-pad dimensions are presented as a factory specification.
+The development branch now expands the content graph to 117 semantic components and 112 typed relationships. Fan frames, hubs and each blade proxy are separately selectable; the illustrative heatsink has 24 separately selectable fin proxies; the two reconstructed heatpipe routes are separate assembly nodes; and six memory thermal-pad proxies plus one VRM pad strip have their own IDs. No proxy blade/fin count or thermal-pad dimensions are presented as a factory specification.
 
 
 ### Partial teardown evidence
@@ -54,9 +54,14 @@ A second animation separates the fan shroud, cooler, PCB/electronics and connect
 
 ### GA106 and GDDR6 architecture
 
-The model package adds a separately selectable logical architecture tree: 28 SMs, aggregate CUDA/Tensor/RT/TMU/ROP units, the 192-bit memory interface and six logical package-channel links. A third viewer process layer exposes these nodes. Logical-only geometry means these are inspectable semantic nodes, not physical die blocks, memory-controller floorplan or PCB copper routes. K4ZAF325BM-HC16 package parameters are attributed to a secondary catalog listing; they are not promoted to primary Samsung-datasheet status.
+The model package adds a separately selectable logical architecture tree: 28 SMs, aggregate CUDA/Tensor/RT/TMU/ROP units, and the published 192-bit memory interface. Six GDDR6 package positions are visible on the exact XC BLACK card, but the exact package marking is not verified. The K4ZAF325BM-HC16 identity and its catalog attributes come from a related XC teardown and a secondary catalog, so they remain candidate details rather than exact-SKU BOM facts. Six interface presentation segments are logical navigation groups only; they are not mapped to physical packages or PCB nets.
 
 
 ### Fastener evidence correction
 
 The exact 12G-P5-3655-KR XC BLACK review shows four heatsink mounting screws around the GPU. Those four screw meshes are photo-positioned proxies. Four additional nodes remain only as uninstalled logical candidates from a related EVGA RTX 3060 XC teardown whose retail SKU is not established. The viewer does not present eight screws as an exact-XC-BLACK service instruction.
+
+
+### GDDR6 identity and bus mapping boundary
+
+The exact card has six visible GDDR6 package positions and a manufacturer-published 192-bit memory interface. The individual device markings and electrical mapping have not been confirmed from an exact-revision BoardView or schematic. The viewer separates the package positions from the logical interface presentation groups; no one-to-one channel mapping is claimed.
