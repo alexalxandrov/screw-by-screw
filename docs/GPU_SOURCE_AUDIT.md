@@ -170,7 +170,9 @@ A separate [TweakTown XC BLACK review](https://www.tweaktown.com/reviews/9754/ev
 
 A TechPowerUp image on the EVGA RTX 3060 XC BLACK product page appears to show the board silkscreen **EVGA232 REV 1.0**. This is a useful discriminator for further research, but the image's sample-to-retail-SKU provenance and the exact board revision of the selected 12G-P5-3655-KR have not been independently verified. The package therefore keeps pcb_revision unknown. The observation is registered as a candidate source, not promoted to a board identity claim.
 
-A separately indexed document title includes **EVGA232 / PG190-A02 / GA104-GA106**. It is registered only as an unverified schematic lead. Its board applicability, revision, completeness, provenance and reuse rights are unknown. It is not used to create phase counts, component values, power routes, pin maps or PCB geometry, and it must not be redistributed from this repository.
+A separately indexed document title includes **EVGA232 / PG190-A02 / GA104-GA106**. Follow-up catalog checks found the same named 12.2 MB schematic in RM Schematics, alongside the earlier i2mx index and repair-forum listings. The RM entry classifies the file as a **schematic** (not a BoardView), says it is delivered through a Telegram post, and does not name the EVGA XC BLACK retail part number **12G-P5-3655-KR**. These are multiple catalogue references to one candidate document, not independent confirmation that it matches this retail SKU.
+
+It remains an unverified schematic lead. The TechPowerUp reference image's apparent **EVGA232 REV 1.0** silkscreen and the document's **EVGA232 / PG190-A02** title are suggestive family-level clues, but no inspected primary schematic title block or exact-board sample establishes that PG190-A02 is the PCB in the selected XC BLACK retail card. The marking **EVGA232 REV 1.0** must not be conflated with schematic identifier **PG190-A02**; these may describe different identifier systems. No board-level topology, phase counts, component values, power routes, pin maps or PCB geometry is derived from this candidate. The schematic and any service-file mirrors must not be redistributed from this repository.
 
 ### Deep-detail geometry tranche
 
@@ -207,3 +209,10 @@ LanOC's exact XC BLACK cooler-end photograph (image 16) shows four copper termin
 The FPS Review article identifies the tested card as EVGA GeForce RTX 3060 XC BLACK GAMING, part number 12G-P5-3655-KR. Its page 2 cooler description specifies four main heatpipes in the centre contacting the GPU and two additional heatpipes at the side moving heat toward the edge of the heatsink. The repository now records six unique heatpipes as four main plus two side. This exact-SKU source supersedes the earlier cautious statement that the unique pipe count was unknown.
 
 The four copper circular terminal faces in LanOC image 16 remain a distinct visual-face count; they are not used as the unique pipe count. Six 3D paths have been created as selectable educational proxies, but their individual coordinates, diameter, flattened areas and bends are not measured.
+
+
+### 12.1. Additional EVGA232 catalogue cross-check
+
+The RM Schematics catalogue lists exactly one EVGA232 schematic with original filename `EVGA232 RTX 2070 - RTX3060 - PG190-A02 - GA104-GA106.pdf`, 12.2 MB, and a Telegram delivery reference. It labels the item as **Schematic**. Its overview also lists a separate `Files` item for the same name, but does not identify that archive as a BoardView or state that it contains board-coordinate data. The catalogue's model tags are EVGA232, RTX3060 and PG190-A02; it does not name 12G-P5-3655-KR, XC BLACK, or a confirmed EVGA232 REV 1.0 to PG190-A02 correlation.
+
+A second directory index labels a file `EVGA RTX 3060 12 GB BIOS (XC)` and a separate schematic PDF, but that does not establish that the BIOS archive contains BoardView data. This pilot therefore records an independently indexed *schematic lead*, not a usable verified boardview/CAD asset. The actual document has not been inspected or incorporated; the third-party service file is not copied into the repository.
