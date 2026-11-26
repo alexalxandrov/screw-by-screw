@@ -297,114 +297,114 @@
       "id": "chip.memory.candidate.1",
       "parent_id": "assembly.pcb.electronics",
       "name": {
-        "en": "Samsung GDDR6 package 1",
-        "ru": "Микросхема Samsung GDDR6 1"
+        "en": "GDDR6 memory package position 1",
+        "ru": "Позиция микросхемы памяти GDDR6 1"
       },
       "category": "semiconductor",
       "evidence_status": "teardown_supported",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.gamersnexus.teardown",
-        "src.tomshardware.teardown"
+        "src.lanoc.review"
       ],
       "description": {
-        "en": "Samsung K4ZAF325BM-HC16 GDDR6 package, 16 Gbit (2 GB). Six packages are visible on the exact XC BLACK teardown sample. This model's package centre is estimated from teardown photography and is not a measured PCB coordinate; PCB revision / BoardView remains unconfirmed.",
-        "ru": "Микросхема Samsung K4ZAF325BM-HC16 GDDR6, 16 Гбит (2 ГБ). На образце точной XC BLACK в разборке видны шесть таких корпусов. Координата в этой 3D-модели оценена по фотографии и не является измерением PCB; ревизия платы / BoardView пока не подтверждена."
+        "en": "A GDDR6 memory-package position visible in exact-model XC BLACK teardown/review material. Its centre in the 3D scene is estimated from photography, not measured against a PCB drawing. The exact package manufacturer marking and part number for this 12G-P5-3655-KR sample have not been independently transcribed and verified.",
+        "ru": "Позиция корпуса памяти GDDR6, видимая в материалах разборки/обзора точной модели XC BLACK. Центр в 3D-сцене оценён по фотографии, а не измерен по чертежу PCB. Маркировка производителя и точный номер микросхемы на этом экземпляре 12G-P5-3655-KR пока не переписаны и не проверены независимо."
       }
     },
     {
       "id": "chip.memory.candidate.2",
       "parent_id": "assembly.pcb.electronics",
       "name": {
-        "en": "Samsung GDDR6 package 2",
-        "ru": "Микросхема Samsung GDDR6 2"
+        "en": "GDDR6 memory package position 2",
+        "ru": "Позиция микросхемы памяти GDDR6 2"
       },
       "category": "semiconductor",
       "evidence_status": "teardown_supported",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.gamersnexus.teardown",
-        "src.tomshardware.teardown"
+        "src.lanoc.review"
       ],
       "description": {
-        "en": "Samsung K4ZAF325BM-HC16 GDDR6 package, 16 Gbit (2 GB). Six packages are visible on the exact XC BLACK teardown sample. This model's package centre is estimated from teardown photography and is not a measured PCB coordinate; PCB revision / BoardView remains unconfirmed.",
-        "ru": "Микросхема Samsung K4ZAF325BM-HC16 GDDR6, 16 Гбит (2 ГБ). На образце точной XC BLACK в разборке видны шесть таких корпусов. Координата в этой 3D-модели оценена по фотографии и не является измерением PCB; ревизия платы / BoardView пока не подтверждена."
+        "en": "A GDDR6 memory-package position visible in exact-model XC BLACK teardown/review material. Its centre in the 3D scene is estimated from photography, not measured against a PCB drawing. The exact package manufacturer marking and part number for this 12G-P5-3655-KR sample have not been independently transcribed and verified.",
+        "ru": "Позиция корпуса памяти GDDR6, видимая в материалах разборки/обзора точной модели XC BLACK. Центр в 3D-сцене оценён по фотографии, а не измерен по чертежу PCB. Маркировка производителя и точный номер микросхемы на этом экземпляре 12G-P5-3655-KR пока не переписаны и не проверены независимо."
       }
     },
     {
       "id": "chip.memory.candidate.3",
       "parent_id": "assembly.pcb.electronics",
       "name": {
-        "en": "Samsung GDDR6 package 3",
-        "ru": "Микросхема Samsung GDDR6 3"
+        "en": "GDDR6 memory package position 3",
+        "ru": "Позиция микросхемы памяти GDDR6 3"
       },
       "category": "semiconductor",
       "evidence_status": "teardown_supported",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.gamersnexus.teardown",
-        "src.tomshardware.teardown"
+        "src.lanoc.review"
       ],
       "description": {
-        "en": "Samsung K4ZAF325BM-HC16 GDDR6 package, 16 Gbit (2 GB). Six packages are visible on the exact XC BLACK teardown sample. This model's package centre is estimated from teardown photography and is not a measured PCB coordinate; PCB revision / BoardView remains unconfirmed.",
-        "ru": "Микросхема Samsung K4ZAF325BM-HC16 GDDR6, 16 Гбит (2 ГБ). На образце точной XC BLACK в разборке видны шесть таких корпусов. Координата в этой 3D-модели оценена по фотографии и не является измерением PCB; ревизия платы / BoardView пока не подтверждена."
+        "en": "A GDDR6 memory-package position visible in exact-model XC BLACK teardown/review material. Its centre in the 3D scene is estimated from photography, not measured against a PCB drawing. The exact package manufacturer marking and part number for this 12G-P5-3655-KR sample have not been independently transcribed and verified.",
+        "ru": "Позиция корпуса памяти GDDR6, видимая в материалах разборки/обзора точной модели XC BLACK. Центр в 3D-сцене оценён по фотографии, а не измерен по чертежу PCB. Маркировка производителя и точный номер микросхемы на этом экземпляре 12G-P5-3655-KR пока не переписаны и не проверены независимо."
       }
     },
     {
       "id": "chip.memory.candidate.4",
       "parent_id": "assembly.pcb.electronics",
       "name": {
-        "en": "Samsung GDDR6 package 4",
-        "ru": "Микросхема Samsung GDDR6 4"
+        "en": "GDDR6 memory package position 4",
+        "ru": "Позиция микросхемы памяти GDDR6 4"
       },
       "category": "semiconductor",
       "evidence_status": "teardown_supported",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.gamersnexus.teardown",
-        "src.tomshardware.teardown"
+        "src.lanoc.review"
       ],
       "description": {
-        "en": "Samsung K4ZAF325BM-HC16 GDDR6 package, 16 Gbit (2 GB). Six packages are visible on the exact XC BLACK teardown sample. This model's package centre is estimated from teardown photography and is not a measured PCB coordinate; PCB revision / BoardView remains unconfirmed.",
-        "ru": "Микросхема Samsung K4ZAF325BM-HC16 GDDR6, 16 Гбит (2 ГБ). На образце точной XC BLACK в разборке видны шесть таких корпусов. Координата в этой 3D-модели оценена по фотографии и не является измерением PCB; ревизия платы / BoardView пока не подтверждена."
+        "en": "A GDDR6 memory-package position visible in exact-model XC BLACK teardown/review material. Its centre in the 3D scene is estimated from photography, not measured against a PCB drawing. The exact package manufacturer marking and part number for this 12G-P5-3655-KR sample have not been independently transcribed and verified.",
+        "ru": "Позиция корпуса памяти GDDR6, видимая в материалах разборки/обзора точной модели XC BLACK. Центр в 3D-сцене оценён по фотографии, а не измерен по чертежу PCB. Маркировка производителя и точный номер микросхемы на этом экземпляре 12G-P5-3655-KR пока не переписаны и не проверены независимо."
       }
     },
     {
       "id": "chip.memory.candidate.5",
       "parent_id": "assembly.pcb.electronics",
       "name": {
-        "en": "Samsung GDDR6 package 5",
-        "ru": "Микросхема Samsung GDDR6 5"
+        "en": "GDDR6 memory package position 5",
+        "ru": "Позиция микросхемы памяти GDDR6 5"
       },
       "category": "semiconductor",
       "evidence_status": "teardown_supported",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.gamersnexus.teardown",
-        "src.tomshardware.teardown"
+        "src.lanoc.review"
       ],
       "description": {
-        "en": "Samsung K4ZAF325BM-HC16 GDDR6 package, 16 Gbit (2 GB). Six packages are visible on the exact XC BLACK teardown sample. This model's package centre is estimated from teardown photography and is not a measured PCB coordinate; PCB revision / BoardView remains unconfirmed.",
-        "ru": "Микросхема Samsung K4ZAF325BM-HC16 GDDR6, 16 Гбит (2 ГБ). На образце точной XC BLACK в разборке видны шесть таких корпусов. Координата в этой 3D-модели оценена по фотографии и не является измерением PCB; ревизия платы / BoardView пока не подтверждена."
+        "en": "A GDDR6 memory-package position visible in exact-model XC BLACK teardown/review material. Its centre in the 3D scene is estimated from photography, not measured against a PCB drawing. The exact package manufacturer marking and part number for this 12G-P5-3655-KR sample have not been independently transcribed and verified.",
+        "ru": "Позиция корпуса памяти GDDR6, видимая в материалах разборки/обзора точной модели XC BLACK. Центр в 3D-сцене оценён по фотографии, а не измерен по чертежу PCB. Маркировка производителя и точный номер микросхемы на этом экземпляре 12G-P5-3655-KR пока не переписаны и не проверены независимо."
       }
     },
     {
       "id": "chip.memory.candidate.6",
       "parent_id": "assembly.pcb.electronics",
       "name": {
-        "en": "Samsung GDDR6 package 6",
-        "ru": "Микросхема Samsung GDDR6 6"
+        "en": "GDDR6 memory package position 6",
+        "ru": "Позиция микросхемы памяти GDDR6 6"
       },
       "category": "semiconductor",
       "evidence_status": "teardown_supported",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.gamersnexus.teardown",
-        "src.tomshardware.teardown"
+        "src.lanoc.review"
       ],
       "description": {
-        "en": "Samsung K4ZAF325BM-HC16 GDDR6 package, 16 Gbit (2 GB). Six packages are visible on the exact XC BLACK teardown sample. This model's package centre is estimated from teardown photography and is not a measured PCB coordinate; PCB revision / BoardView remains unconfirmed.",
-        "ru": "Микросхема Samsung K4ZAF325BM-HC16 GDDR6, 16 Гбит (2 ГБ). На образце точной XC BLACK в разборке видны шесть таких корпусов. Координата в этой 3D-модели оценена по фотографии и не является измерением PCB; ревизия платы / BoardView пока не подтверждена."
+        "en": "A GDDR6 memory-package position visible in exact-model XC BLACK teardown/review material. Its centre in the 3D scene is estimated from photography, not measured against a PCB drawing. The exact package manufacturer marking and part number for this 12G-P5-3655-KR sample have not been independently transcribed and verified.",
+        "ru": "Позиция корпуса памяти GDDR6, видимая в материалах разборки/обзора точной модели XC BLACK. Центр в 3D-сцене оценён по фотографии, а не измерен по чертежу PCB. Маркировка производителя и точный номер микросхемы на этом экземпляре 12G-P5-3655-KR пока не переписаны и не проверены независимо."
       }
     },
     {
@@ -2053,120 +2053,108 @@
       "id": "chip.memory.channel.01",
       "parent_id": "chip.memory.gddr6.bus",
       "name": {
-        "en": "GDDR6 package channel 01",
-        "ru": "Канал корпуса GDDR6 01"
+        "en": "GDDR6 interface presentation segment 01",
+        "ru": "Визуальный сегмент интерфейса GDDR6 01"
       },
       "category": "memory_interface",
-      "evidence_status": "manufacturer_data",
+      "evidence_status": "illustrative",
       "geometry_status": "logical_only",
       "source_ids": [
-        "src.evga.spec",
-        "src.samsung.gddr6.catalog",
-        "src.tomshardware.teardown"
+        "src.evga.spec"
       ],
       "description": {
-        "en": "Logical 32-bit aggregate interface mapped to one of the six visible GDDR6 packages. The mapping is an educational channel model derived from the 192-bit total bus and 32-bit package organization; it does not claim physical lane routing or die-partition placement.",
-        "ru": "Логический 32-битный агрегированный интерфейс, сопоставленный одной из шести видимых микросхем GDDR6. Это учебная модель канала, выведенная из общей 192-битной шины и 32-битной организации корпуса; физическая трассировка линий и размещение разделов на кристалле не утверждаются."
+        "en": "A logical presentation segment used only to divide the SKU's published 192-bit GDDR6 interface into six equal visual groups for navigation. This node is not a confirmed hardware memory channel, package-width assertion, controller partition, package-to-channel mapping or PCB net.",
+        "ru": "Логический сегмент представления, используемый только для разделения опубликованного 192-битного интерфейса GDDR6 на шесть равных визуальных групп для навигации. Этот узел не подтверждает физический канал памяти, ширину корпуса, раздел контроллера, соответствие микросхеме или сеть дорожек PCB."
       }
     },
     {
       "id": "chip.memory.channel.02",
       "parent_id": "chip.memory.gddr6.bus",
       "name": {
-        "en": "GDDR6 package channel 02",
-        "ru": "Канал корпуса GDDR6 02"
+        "en": "GDDR6 interface presentation segment 02",
+        "ru": "Визуальный сегмент интерфейса GDDR6 02"
       },
       "category": "memory_interface",
-      "evidence_status": "manufacturer_data",
+      "evidence_status": "illustrative",
       "geometry_status": "logical_only",
       "source_ids": [
-        "src.evga.spec",
-        "src.samsung.gddr6.catalog",
-        "src.tomshardware.teardown"
+        "src.evga.spec"
       ],
       "description": {
-        "en": "Logical 32-bit aggregate interface mapped to one of the six visible GDDR6 packages. The mapping is an educational channel model derived from the 192-bit total bus and 32-bit package organization; it does not claim physical lane routing or die-partition placement.",
-        "ru": "Логический 32-битный агрегированный интерфейс, сопоставленный одной из шести видимых микросхем GDDR6. Это учебная модель канала, выведенная из общей 192-битной шины и 32-битной организации корпуса; физическая трассировка линий и размещение разделов на кристалле не утверждаются."
+        "en": "A logical presentation segment used only to divide the SKU's published 192-bit GDDR6 interface into six equal visual groups for navigation. This node is not a confirmed hardware memory channel, package-width assertion, controller partition, package-to-channel mapping or PCB net.",
+        "ru": "Логический сегмент представления, используемый только для разделения опубликованного 192-битного интерфейса GDDR6 на шесть равных визуальных групп для навигации. Этот узел не подтверждает физический канал памяти, ширину корпуса, раздел контроллера, соответствие микросхеме или сеть дорожек PCB."
       }
     },
     {
       "id": "chip.memory.channel.03",
       "parent_id": "chip.memory.gddr6.bus",
       "name": {
-        "en": "GDDR6 package channel 03",
-        "ru": "Канал корпуса GDDR6 03"
+        "en": "GDDR6 interface presentation segment 03",
+        "ru": "Визуальный сегмент интерфейса GDDR6 03"
       },
       "category": "memory_interface",
-      "evidence_status": "manufacturer_data",
+      "evidence_status": "illustrative",
       "geometry_status": "logical_only",
       "source_ids": [
-        "src.evga.spec",
-        "src.samsung.gddr6.catalog",
-        "src.tomshardware.teardown"
+        "src.evga.spec"
       ],
       "description": {
-        "en": "Logical 32-bit aggregate interface mapped to one of the six visible GDDR6 packages. The mapping is an educational channel model derived from the 192-bit total bus and 32-bit package organization; it does not claim physical lane routing or die-partition placement.",
-        "ru": "Логический 32-битный агрегированный интерфейс, сопоставленный одной из шести видимых микросхем GDDR6. Это учебная модель канала, выведенная из общей 192-битной шины и 32-битной организации корпуса; физическая трассировка линий и размещение разделов на кристалле не утверждаются."
+        "en": "A logical presentation segment used only to divide the SKU's published 192-bit GDDR6 interface into six equal visual groups for navigation. This node is not a confirmed hardware memory channel, package-width assertion, controller partition, package-to-channel mapping or PCB net.",
+        "ru": "Логический сегмент представления, используемый только для разделения опубликованного 192-битного интерфейса GDDR6 на шесть равных визуальных групп для навигации. Этот узел не подтверждает физический канал памяти, ширину корпуса, раздел контроллера, соответствие микросхеме или сеть дорожек PCB."
       }
     },
     {
       "id": "chip.memory.channel.04",
       "parent_id": "chip.memory.gddr6.bus",
       "name": {
-        "en": "GDDR6 package channel 04",
-        "ru": "Канал корпуса GDDR6 04"
+        "en": "GDDR6 interface presentation segment 04",
+        "ru": "Визуальный сегмент интерфейса GDDR6 04"
       },
       "category": "memory_interface",
-      "evidence_status": "manufacturer_data",
+      "evidence_status": "illustrative",
       "geometry_status": "logical_only",
       "source_ids": [
-        "src.evga.spec",
-        "src.samsung.gddr6.catalog",
-        "src.tomshardware.teardown"
+        "src.evga.spec"
       ],
       "description": {
-        "en": "Logical 32-bit aggregate interface mapped to one of the six visible GDDR6 packages. The mapping is an educational channel model derived from the 192-bit total bus and 32-bit package organization; it does not claim physical lane routing or die-partition placement.",
-        "ru": "Логический 32-битный агрегированный интерфейс, сопоставленный одной из шести видимых микросхем GDDR6. Это учебная модель канала, выведенная из общей 192-битной шины и 32-битной организации корпуса; физическая трассировка линий и размещение разделов на кристалле не утверждаются."
+        "en": "A logical presentation segment used only to divide the SKU's published 192-bit GDDR6 interface into six equal visual groups for navigation. This node is not a confirmed hardware memory channel, package-width assertion, controller partition, package-to-channel mapping or PCB net.",
+        "ru": "Логический сегмент представления, используемый только для разделения опубликованного 192-битного интерфейса GDDR6 на шесть равных визуальных групп для навигации. Этот узел не подтверждает физический канал памяти, ширину корпуса, раздел контроллера, соответствие микросхеме или сеть дорожек PCB."
       }
     },
     {
       "id": "chip.memory.channel.05",
       "parent_id": "chip.memory.gddr6.bus",
       "name": {
-        "en": "GDDR6 package channel 05",
-        "ru": "Канал корпуса GDDR6 05"
+        "en": "GDDR6 interface presentation segment 05",
+        "ru": "Визуальный сегмент интерфейса GDDR6 05"
       },
       "category": "memory_interface",
-      "evidence_status": "manufacturer_data",
+      "evidence_status": "illustrative",
       "geometry_status": "logical_only",
       "source_ids": [
-        "src.evga.spec",
-        "src.samsung.gddr6.catalog",
-        "src.tomshardware.teardown"
+        "src.evga.spec"
       ],
       "description": {
-        "en": "Logical 32-bit aggregate interface mapped to one of the six visible GDDR6 packages. The mapping is an educational channel model derived from the 192-bit total bus and 32-bit package organization; it does not claim physical lane routing or die-partition placement.",
-        "ru": "Логический 32-битный агрегированный интерфейс, сопоставленный одной из шести видимых микросхем GDDR6. Это учебная модель канала, выведенная из общей 192-битной шины и 32-битной организации корпуса; физическая трассировка линий и размещение разделов на кристалле не утверждаются."
+        "en": "A logical presentation segment used only to divide the SKU's published 192-bit GDDR6 interface into six equal visual groups for navigation. This node is not a confirmed hardware memory channel, package-width assertion, controller partition, package-to-channel mapping or PCB net.",
+        "ru": "Логический сегмент представления, используемый только для разделения опубликованного 192-битного интерфейса GDDR6 на шесть равных визуальных групп для навигации. Этот узел не подтверждает физический канал памяти, ширину корпуса, раздел контроллера, соответствие микросхеме или сеть дорожек PCB."
       }
     },
     {
       "id": "chip.memory.channel.06",
       "parent_id": "chip.memory.gddr6.bus",
       "name": {
-        "en": "GDDR6 package channel 06",
-        "ru": "Канал корпуса GDDR6 06"
+        "en": "GDDR6 interface presentation segment 06",
+        "ru": "Визуальный сегмент интерфейса GDDR6 06"
       },
       "category": "memory_interface",
-      "evidence_status": "manufacturer_data",
+      "evidence_status": "illustrative",
       "geometry_status": "logical_only",
       "source_ids": [
-        "src.evga.spec",
-        "src.samsung.gddr6.catalog",
-        "src.tomshardware.teardown"
+        "src.evga.spec"
       ],
       "description": {
-        "en": "Logical 32-bit aggregate interface mapped to one of the six visible GDDR6 packages. The mapping is an educational channel model derived from the 192-bit total bus and 32-bit package organization; it does not claim physical lane routing or die-partition placement.",
-        "ru": "Логический 32-битный агрегированный интерфейс, сопоставленный одной из шести видимых микросхем GDDR6. Это учебная модель канала, выведенная из общей 192-битной шины и 32-битной организации корпуса; физическая трассировка линий и размещение разделов на кристалле не утверждаются."
+        "en": "A logical presentation segment used only to divide the SKU's published 192-bit GDDR6 interface into six equal visual groups for navigation. This node is not a confirmed hardware memory channel, package-width assertion, controller partition, package-to-channel mapping or PCB net.",
+        "ru": "Логический сегмент представления, используемый только для разделения опубликованного 192-битного интерфейса GDDR6 на шесть равных визуальных групп для навигации. Этот узел не подтверждает физический канал памяти, ширину корпуса, раздел контроллера, соответствие микросхеме или сеть дорожек PCB."
       }
     }
   ],
