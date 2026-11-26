@@ -297,114 +297,120 @@
       "id": "chip.memory.candidate.1",
       "parent_id": "assembly.pcb.electronics",
       "name": {
-        "en": "GDDR6 memory package position 1",
-        "ru": "Позиция микросхемы памяти GDDR6 1"
+        "en": "Samsung GDDR6 package 1 · K4ZAF325BM-HC16",
+        "ru": "Микросхема Samsung GDDR6 1 · K4ZAF325BM-HC16"
       },
       "category": "semiconductor",
       "evidence_status": "visible_exact_model",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
+        "src.tomshardware.teardown",
         "src.gamersnexus.teardown",
         "src.lanoc.review"
       ],
       "description": {
-        "en": "One of six GDDR6 package positions visible on the exact XC BLACK review/teardown sample. The 3D position is estimated from photographs, not measured from a BoardView or calibrated PCB drawing. The full manufacturer marking and exact part number on this 12G-P5-3655-KR sample have not been independently transcribed.",
-        "ru": "Одна из шести позиций корпусов GDDR6, видимых на образце точной XC BLACK в обзоре/разборке. Положение в 3D оценено по фотографиям, а не измерено по BoardView или калиброванному чертежу PCB. Полная маркировка производителя и точный номер микросхемы на этом экземпляре 12G-P5-3655-KR независимо не переписаны."
+        "en": "One of six exact-SKU-linked Samsung K4ZAF325BM-HC16 GDDR6 packages identified in Tom's Hardware's teardown sample. The same article's PCB identity photo reads P/N 12G-P5-3655-KR. Per-device density is 16Gbit; the 32-bit organization and 180-FBGA package details are transcribed from a secondary catalog. The displayed 3D centre is photo-estimated, not a measured BoardView coordinate; package-to-controller nets and channel routing remain unknown.",
+        "ru": "Одна из шести микросхем Samsung K4ZAF325BM-HC16 GDDR6, идентифицированных в разборке образца точного SKU. На фотографии PCB из той же статьи читается P/N 12G-P5-3655-KR. Плотность устройства — 16 Гбит; организация 32 бита и корпус 180 FBGA перенесены из вторичного каталога. Центр в 3D оценён по фотографиям, а не измерен по BoardView; соединения с контроллером и разводка каналов неизвестны."
       }
     },
     {
       "id": "chip.memory.candidate.2",
       "parent_id": "assembly.pcb.electronics",
       "name": {
-        "en": "GDDR6 memory package position 2",
-        "ru": "Позиция микросхемы памяти GDDR6 2"
+        "en": "Samsung GDDR6 package 2 · K4ZAF325BM-HC16",
+        "ru": "Микросхема Samsung GDDR6 2 · K4ZAF325BM-HC16"
       },
       "category": "semiconductor",
       "evidence_status": "visible_exact_model",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
+        "src.tomshardware.teardown",
         "src.gamersnexus.teardown",
         "src.lanoc.review"
       ],
       "description": {
-        "en": "One of six GDDR6 package positions visible on the exact XC BLACK review/teardown sample. The 3D position is estimated from photographs, not measured from a BoardView or calibrated PCB drawing. The full manufacturer marking and exact part number on this 12G-P5-3655-KR sample have not been independently transcribed.",
-        "ru": "Одна из шести позиций корпусов GDDR6, видимых на образце точной XC BLACK в обзоре/разборке. Положение в 3D оценено по фотографиям, а не измерено по BoardView или калиброванному чертежу PCB. Полная маркировка производителя и точный номер микросхемы на этом экземпляре 12G-P5-3655-KR независимо не переписаны."
+        "en": "One of six exact-SKU-linked Samsung K4ZAF325BM-HC16 GDDR6 packages identified in Tom's Hardware's teardown sample. The same article's PCB identity photo reads P/N 12G-P5-3655-KR. Per-device density is 16Gbit; the 32-bit organization and 180-FBGA package details are transcribed from a secondary catalog. The displayed 3D centre is photo-estimated, not a measured BoardView coordinate; package-to-controller nets and channel routing remain unknown.",
+        "ru": "Одна из шести микросхем Samsung K4ZAF325BM-HC16 GDDR6, идентифицированных в разборке образца точного SKU. На фотографии PCB из той же статьи читается P/N 12G-P5-3655-KR. Плотность устройства — 16 Гбит; организация 32 бита и корпус 180 FBGA перенесены из вторичного каталога. Центр в 3D оценён по фотографиям, а не измерен по BoardView; соединения с контроллером и разводка каналов неизвестны."
       }
     },
     {
       "id": "chip.memory.candidate.3",
       "parent_id": "assembly.pcb.electronics",
       "name": {
-        "en": "GDDR6 memory package position 3",
-        "ru": "Позиция микросхемы памяти GDDR6 3"
+        "en": "Samsung GDDR6 package 3 · K4ZAF325BM-HC16",
+        "ru": "Микросхема Samsung GDDR6 3 · K4ZAF325BM-HC16"
       },
       "category": "semiconductor",
       "evidence_status": "visible_exact_model",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
+        "src.tomshardware.teardown",
         "src.gamersnexus.teardown",
         "src.lanoc.review"
       ],
       "description": {
-        "en": "One of six GDDR6 package positions visible on the exact XC BLACK review/teardown sample. The 3D position is estimated from photographs, not measured from a BoardView or calibrated PCB drawing. The full manufacturer marking and exact part number on this 12G-P5-3655-KR sample have not been independently transcribed.",
-        "ru": "Одна из шести позиций корпусов GDDR6, видимых на образце точной XC BLACK в обзоре/разборке. Положение в 3D оценено по фотографиям, а не измерено по BoardView или калиброванному чертежу PCB. Полная маркировка производителя и точный номер микросхемы на этом экземпляре 12G-P5-3655-KR независимо не переписаны."
+        "en": "One of six exact-SKU-linked Samsung K4ZAF325BM-HC16 GDDR6 packages identified in Tom's Hardware's teardown sample. The same article's PCB identity photo reads P/N 12G-P5-3655-KR. Per-device density is 16Gbit; the 32-bit organization and 180-FBGA package details are transcribed from a secondary catalog. The displayed 3D centre is photo-estimated, not a measured BoardView coordinate; package-to-controller nets and channel routing remain unknown.",
+        "ru": "Одна из шести микросхем Samsung K4ZAF325BM-HC16 GDDR6, идентифицированных в разборке образца точного SKU. На фотографии PCB из той же статьи читается P/N 12G-P5-3655-KR. Плотность устройства — 16 Гбит; организация 32 бита и корпус 180 FBGA перенесены из вторичного каталога. Центр в 3D оценён по фотографиям, а не измерен по BoardView; соединения с контроллером и разводка каналов неизвестны."
       }
     },
     {
       "id": "chip.memory.candidate.4",
       "parent_id": "assembly.pcb.electronics",
       "name": {
-        "en": "GDDR6 memory package position 4",
-        "ru": "Позиция микросхемы памяти GDDR6 4"
+        "en": "Samsung GDDR6 package 4 · K4ZAF325BM-HC16",
+        "ru": "Микросхема Samsung GDDR6 4 · K4ZAF325BM-HC16"
       },
       "category": "semiconductor",
       "evidence_status": "visible_exact_model",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
+        "src.tomshardware.teardown",
         "src.gamersnexus.teardown",
         "src.lanoc.review"
       ],
       "description": {
-        "en": "One of six GDDR6 package positions visible on the exact XC BLACK review/teardown sample. The 3D position is estimated from photographs, not measured from a BoardView or calibrated PCB drawing. The full manufacturer marking and exact part number on this 12G-P5-3655-KR sample have not been independently transcribed.",
-        "ru": "Одна из шести позиций корпусов GDDR6, видимых на образце точной XC BLACK в обзоре/разборке. Положение в 3D оценено по фотографиям, а не измерено по BoardView или калиброванному чертежу PCB. Полная маркировка производителя и точный номер микросхемы на этом экземпляре 12G-P5-3655-KR независимо не переписаны."
+        "en": "One of six exact-SKU-linked Samsung K4ZAF325BM-HC16 GDDR6 packages identified in Tom's Hardware's teardown sample. The same article's PCB identity photo reads P/N 12G-P5-3655-KR. Per-device density is 16Gbit; the 32-bit organization and 180-FBGA package details are transcribed from a secondary catalog. The displayed 3D centre is photo-estimated, not a measured BoardView coordinate; package-to-controller nets and channel routing remain unknown.",
+        "ru": "Одна из шести микросхем Samsung K4ZAF325BM-HC16 GDDR6, идентифицированных в разборке образца точного SKU. На фотографии PCB из той же статьи читается P/N 12G-P5-3655-KR. Плотность устройства — 16 Гбит; организация 32 бита и корпус 180 FBGA перенесены из вторичного каталога. Центр в 3D оценён по фотографиям, а не измерен по BoardView; соединения с контроллером и разводка каналов неизвестны."
       }
     },
     {
       "id": "chip.memory.candidate.5",
       "parent_id": "assembly.pcb.electronics",
       "name": {
-        "en": "GDDR6 memory package position 5",
-        "ru": "Позиция микросхемы памяти GDDR6 5"
+        "en": "Samsung GDDR6 package 5 · K4ZAF325BM-HC16",
+        "ru": "Микросхема Samsung GDDR6 5 · K4ZAF325BM-HC16"
       },
       "category": "semiconductor",
       "evidence_status": "visible_exact_model",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
+        "src.tomshardware.teardown",
         "src.gamersnexus.teardown",
         "src.lanoc.review"
       ],
       "description": {
-        "en": "One of six GDDR6 package positions visible on the exact XC BLACK review/teardown sample. The 3D position is estimated from photographs, not measured from a BoardView or calibrated PCB drawing. The full manufacturer marking and exact part number on this 12G-P5-3655-KR sample have not been independently transcribed.",
-        "ru": "Одна из шести позиций корпусов GDDR6, видимых на образце точной XC BLACK в обзоре/разборке. Положение в 3D оценено по фотографиям, а не измерено по BoardView или калиброванному чертежу PCB. Полная маркировка производителя и точный номер микросхемы на этом экземпляре 12G-P5-3655-KR независимо не переписаны."
+        "en": "One of six exact-SKU-linked Samsung K4ZAF325BM-HC16 GDDR6 packages identified in Tom's Hardware's teardown sample. The same article's PCB identity photo reads P/N 12G-P5-3655-KR. Per-device density is 16Gbit; the 32-bit organization and 180-FBGA package details are transcribed from a secondary catalog. The displayed 3D centre is photo-estimated, not a measured BoardView coordinate; package-to-controller nets and channel routing remain unknown.",
+        "ru": "Одна из шести микросхем Samsung K4ZAF325BM-HC16 GDDR6, идентифицированных в разборке образца точного SKU. На фотографии PCB из той же статьи читается P/N 12G-P5-3655-KR. Плотность устройства — 16 Гбит; организация 32 бита и корпус 180 FBGA перенесены из вторичного каталога. Центр в 3D оценён по фотографиям, а не измерен по BoardView; соединения с контроллером и разводка каналов неизвестны."
       }
     },
     {
       "id": "chip.memory.candidate.6",
       "parent_id": "assembly.pcb.electronics",
       "name": {
-        "en": "GDDR6 memory package position 6",
-        "ru": "Позиция микросхемы памяти GDDR6 6"
+        "en": "Samsung GDDR6 package 6 · K4ZAF325BM-HC16",
+        "ru": "Микросхема Samsung GDDR6 6 · K4ZAF325BM-HC16"
       },
       "category": "semiconductor",
       "evidence_status": "visible_exact_model",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
+        "src.tomshardware.teardown",
         "src.gamersnexus.teardown",
         "src.lanoc.review"
       ],
       "description": {
-        "en": "One of six GDDR6 package positions visible on the exact XC BLACK review/teardown sample. The 3D position is estimated from photographs, not measured from a BoardView or calibrated PCB drawing. The full manufacturer marking and exact part number on this 12G-P5-3655-KR sample have not been independently transcribed.",
-        "ru": "Одна из шести позиций корпусов GDDR6, видимых на образце точной XC BLACK в обзоре/разборке. Положение в 3D оценено по фотографиям, а не измерено по BoardView или калиброванному чертежу PCB. Полная маркировка производителя и точный номер микросхемы на этом экземпляре 12G-P5-3655-KR независимо не переписаны."
+        "en": "One of six exact-SKU-linked Samsung K4ZAF325BM-HC16 GDDR6 packages identified in Tom's Hardware's teardown sample. The same article's PCB identity photo reads P/N 12G-P5-3655-KR. Per-device density is 16Gbit; the 32-bit organization and 180-FBGA package details are transcribed from a secondary catalog. The displayed 3D centre is photo-estimated, not a measured BoardView coordinate; package-to-controller nets and channel routing remain unknown.",
+        "ru": "Одна из шести микросхем Samsung K4ZAF325BM-HC16 GDDR6, идентифицированных в разборке образца точного SKU. На фотографии PCB из той же статьи читается P/N 12G-P5-3655-KR. Плотность устройства — 16 Гбит; организация 32 бита и корпус 180 FBGA перенесены из вторичного каталога. Центр в 3D оценён по фотографиям, а не измерен по BoardView; соединения с контроллером и разводка каналов неизвестны."
       }
     },
     {
@@ -545,8 +551,8 @@
         "src.tomshardware.teardown"
       ],
       "description": {
-        "en": "The exact XC BLACK review shows four heatsink mounting screws around the GPU. Four additional rear-edge placeholders are retained only as unverified candidates from a related EVGA RTX 3060 XC teardown; they are not asserted as installed screws on this SKU.",
-        "ru": "В обзоре точной XC BLACK показаны четыре винта крепления радиатора вокруг GPU. Ещё четыре макета крепежа у заднего края оставлены только как неподтверждённые кандидаты из разборки родственной EVGA RTX 3060 XC; их наличие на этом SKU не утверждается."
+        "en": "Eight cooler/shroud retention screws are reported for the exact 12G-P5-3655-KR sample: four around the GPU and four near the far end/rear area. The four GPU-area screw proxies have approximate photo-derived positions; the four rear-area screws are count-confirmed but remain logical-only because individual coordinates are not mapped.",
+        "ru": "Для точного образца 12G-P5-3655-KR указаны восемь винтов крепления кулера/кожуха: четыре вокруг GPU и четыре у дальнего/заднего края карты. Четыре макета винтов вокруг GPU имеют приблизительные положения по фотографиям; четыре задних винта подтверждены по количеству, но остаются логическими узлами, так как координаты каждого не восстановлены."
       }
     },
     {
@@ -625,72 +631,72 @@
       "id": "fastener.cooler.05",
       "parent_id": "assembly.fasteners",
       "name": {
-        "en": "Unverified rear retention screw candidate 1",
-        "ru": "Неподтверждённый кандидат заднего крепежа 1"
+        "en": "Rear-area cooler retention screw 1 · position unmapped",
+        "ru": "Задний винт крепления кулера 1 · положение не установлено"
       },
       "category": "fastener",
-      "evidence_status": "candidate_count_requires_exact_board_confirmation",
-      "geometry_status": "illustrative_proxy",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "logical_only",
       "source_ids": [
         "src.tomshardware.teardown"
       ],
       "description": {
-        "en": "Unverified rear-edge retention-screw candidate retained from a related EVGA RTX 3060 XC teardown. The article does not establish that this screw or its position belongs to the XC BLACK 12G-P5-3655-KR sample. It is not represented as an installed exact-SKU fastener.",
-        "ru": "Неподтверждённый кандидат винта крепления у заднего края, сохранённый по разборке родственной EVGA RTX 3060 XC. Статья не доказывает, что этот винт или его положение относятся к образцу XC BLACK 12G-P5-3655-KR. Он не представлен как установленный крепёж точного SKU."
+        "en": "One of the four additional rear-area cooler/shroud retention screws reported in the exact-SKU-linked Tom's Hardware teardown. The sample's PCB label identifies P/N 12G-P5-3655-KR. This node preserves the exact count, but its individual position, head profile, thread, length, spring and torque are not measured; no physical coordinate is invented.",
+        "ru": "Один из четырёх дополнительных винтов крепления кулера/кожуха в задней области, указанных в разборке, связанной с точным SKU. На наклейке образца указан P/N 12G-P5-3655-KR. Узел сохраняет подтверждённое количество, но индивидуальное положение, профиль головки, резьба, длина, пружина и момент затяжки не измерены; физическая координата не выдумывается."
       }
     },
     {
       "id": "fastener.cooler.06",
       "parent_id": "assembly.fasteners",
       "name": {
-        "en": "Unverified rear retention screw candidate 2",
-        "ru": "Неподтверждённый кандидат заднего крепежа 2"
+        "en": "Rear-area cooler retention screw 2 · position unmapped",
+        "ru": "Задний винт крепления кулера 2 · положение не установлено"
       },
       "category": "fastener",
-      "evidence_status": "candidate_count_requires_exact_board_confirmation",
-      "geometry_status": "illustrative_proxy",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "logical_only",
       "source_ids": [
         "src.tomshardware.teardown"
       ],
       "description": {
-        "en": "Unverified rear-edge retention-screw candidate retained from a related EVGA RTX 3060 XC teardown. The article does not establish that this screw or its position belongs to the XC BLACK 12G-P5-3655-KR sample. It is not represented as an installed exact-SKU fastener.",
-        "ru": "Неподтверждённый кандидат винта крепления у заднего края, сохранённый по разборке родственной EVGA RTX 3060 XC. Статья не доказывает, что этот винт или его положение относятся к образцу XC BLACK 12G-P5-3655-KR. Он не представлен как установленный крепёж точного SKU."
+        "en": "One of the four additional rear-area cooler/shroud retention screws reported in the exact-SKU-linked Tom's Hardware teardown. The sample's PCB label identifies P/N 12G-P5-3655-KR. This node preserves the exact count, but its individual position, head profile, thread, length, spring and torque are not measured; no physical coordinate is invented.",
+        "ru": "Один из четырёх дополнительных винтов крепления кулера/кожуха в задней области, указанных в разборке, связанной с точным SKU. На наклейке образца указан P/N 12G-P5-3655-KR. Узел сохраняет подтверждённое количество, но индивидуальное положение, профиль головки, резьба, длина, пружина и момент затяжки не измерены; физическая координата не выдумывается."
       }
     },
     {
       "id": "fastener.cooler.07",
       "parent_id": "assembly.fasteners",
       "name": {
-        "en": "Unverified rear retention screw candidate 3",
-        "ru": "Неподтверждённый кандидат заднего крепежа 3"
+        "en": "Rear-area cooler retention screw 3 · position unmapped",
+        "ru": "Задний винт крепления кулера 3 · положение не установлено"
       },
       "category": "fastener",
-      "evidence_status": "candidate_count_requires_exact_board_confirmation",
-      "geometry_status": "illustrative_proxy",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "logical_only",
       "source_ids": [
         "src.tomshardware.teardown"
       ],
       "description": {
-        "en": "Unverified rear-edge retention-screw candidate retained from a related EVGA RTX 3060 XC teardown. The article does not establish that this screw or its position belongs to the XC BLACK 12G-P5-3655-KR sample. It is not represented as an installed exact-SKU fastener.",
-        "ru": "Неподтверждённый кандидат винта крепления у заднего края, сохранённый по разборке родственной EVGA RTX 3060 XC. Статья не доказывает, что этот винт или его положение относятся к образцу XC BLACK 12G-P5-3655-KR. Он не представлен как установленный крепёж точного SKU."
+        "en": "One of the four additional rear-area cooler/shroud retention screws reported in the exact-SKU-linked Tom's Hardware teardown. The sample's PCB label identifies P/N 12G-P5-3655-KR. This node preserves the exact count, but its individual position, head profile, thread, length, spring and torque are not measured; no physical coordinate is invented.",
+        "ru": "Один из четырёх дополнительных винтов крепления кулера/кожуха в задней области, указанных в разборке, связанной с точным SKU. На наклейке образца указан P/N 12G-P5-3655-KR. Узел сохраняет подтверждённое количество, но индивидуальное положение, профиль головки, резьба, длина, пружина и момент затяжки не измерены; физическая координата не выдумывается."
       }
     },
     {
       "id": "fastener.cooler.08",
       "parent_id": "assembly.fasteners",
       "name": {
-        "en": "Unverified rear retention screw candidate 4",
-        "ru": "Неподтверждённый кандидат заднего крепежа 4"
+        "en": "Rear-area cooler retention screw 4 · position unmapped",
+        "ru": "Задний винт крепления кулера 4 · положение не установлено"
       },
       "category": "fastener",
-      "evidence_status": "candidate_count_requires_exact_board_confirmation",
-      "geometry_status": "illustrative_proxy",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "logical_only",
       "source_ids": [
         "src.tomshardware.teardown"
       ],
       "description": {
-        "en": "Unverified rear-edge retention-screw candidate retained from a related EVGA RTX 3060 XC teardown. The article does not establish that this screw or its position belongs to the XC BLACK 12G-P5-3655-KR sample. It is not represented as an installed exact-SKU fastener.",
-        "ru": "Неподтверждённый кандидат винта крепления у заднего края, сохранённый по разборке родственной EVGA RTX 3060 XC. Статья не доказывает, что этот винт или его положение относятся к образцу XC BLACK 12G-P5-3655-KR. Он не представлен как установленный крепёж точного SKU."
+        "en": "One of the four additional rear-area cooler/shroud retention screws reported in the exact-SKU-linked Tom's Hardware teardown. The sample's PCB label identifies P/N 12G-P5-3655-KR. This node preserves the exact count, but its individual position, head profile, thread, length, spring and torque are not measured; no physical coordinate is invented.",
+        "ru": "Один из четырёх дополнительных винтов крепления кулера/кожуха в задней области, указанных в разборке, связанной с точным SKU. На наклейке образца указан P/N 12G-P5-3655-KR. Узел сохраняет подтверждённое количество, но индивидуальное положение, профиль головки, резьба, длина, пружина и момент затяжки не измерены; физическая координата не выдумывается."
       }
     },
     {
