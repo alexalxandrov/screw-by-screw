@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
- * Turn Vite's production HTML entry into a self-contained root index.html.
- * The generated file is designed to be opened directly with file://.
+ * Preserve Vite's asset-based web build in dist/index.html and emit a
+ * self-contained root index.html for direct file:// use.
  */
 import { access, readFile, writeFile, unlink, rename } from "node:fs/promises";
 import { dirname, isAbsolute, relative, resolve, sep } from "node:path";
@@ -11,10 +11,8 @@ import { spawnSync } from "node:child_process";
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const distRoot = resolve(projectRoot, "dist");
 const templatePath = resolve(distRoot, "index.template.html");
-const htmlOutputPaths = [
-  resolve(projectRoot, "index.html"),
-  resolve(distRoot, "index.html")
-];
+const standaloneOutputPath = resolve(projectRoot, "index.html");
+const webOutputPath = resolve(distRoot, "index.html");
 
 async function exists(path) {
   try { await access(path); return true; } catch { return false; }
@@ -41,6 +39,29 @@ function escapeClosingTag(source, tagName) {
 }
 
 let html = await readFile(templatePath, "utf8");
+const webHtml = html;
+const inlineScriptPattern = /<script\b(?![^>]*\bsrc=)[^>]*>[\s\S]*?<\/script>/i;
+if (inlineScriptPattern.test(webHtml)) {
+  throw new Error("Web build contains an inline script and is not compatible with the documented strict CSP");
+}
+if (/<style\b/i.test(webHtml) || /\sstyle\s*=/i.test(webHtml)) {
+  throw new Error("Web build contains inline styles and is not compatible with the documented strict CSP");
+}
+const webScriptTags = [...webHtml.matchAll(/<script\b[^>]*\bsrc=(["'])([^"']+\.js(?:\?[^"']*)?)\1[^>]*>/gi)];
+const webStylesheetTags = [...webHtml.matchAll(/<link\b(?=[^>]*\brel=(["'])stylesheet\1)[^>]*>/gi)];
+if (webScriptTags.length < 1 || webStylesheetTags.length < 1) {
+  throw new Error("Vite web build must keep JavaScript and CSS as external assets");
+}
+for (const match of webScriptTags) await safeLocalPath(match[2], distRoot);
+for (const match of webStylesheetTags) {
+  const href = match[0].match(/\bhref=(["'])(.*?)\1/i)?.[2];
+  if (!href) throw new Error("Web stylesheet link has no href");
+  await safeLocalPath(href, distRoot);
+}
+const webTemporaryPath = webOutputPath + ".tmp";
+await writeFile(webTemporaryPath, webHtml, "utf8");
+await rename(webTemporaryPath, webOutputPath);
+
 let inlinedScripts = 0;
 const scriptTags = [...html.matchAll(/<script\b[^>]*\bsrc=(["'])([^"']+\.js(?:\?[^"']*)?)\1[^>]*>\s*<\/script>/gi)];
 for (const match of scriptTags) {
@@ -127,14 +148,17 @@ if (!html.includes('id="viewer-canvas"') || !html.includes('id="startup-fallback
 if (embeddedCatalogPackageCount > 0 && !html.includes("SBS_CATALOG_PACKAGE_DATA_URLS")) {
   throw new Error("Generated HTML did not embed staged catalogue packages");
 }
-for (const outputPath of htmlOutputPaths) {
-  const temporaryPath = outputPath + ".tmp";
-  await writeFile(temporaryPath, html, "utf8");
-  await rename(temporaryPath, outputPath);
-}
+const standaloneTemporaryPath = standaloneOutputPath + ".tmp";
+await writeFile(standaloneTemporaryPath, html, "utf8");
+await rename(standaloneTemporaryPath, standaloneOutputPath);
 
 console.log(JSON.stringify({
-  outputs: htmlOutputPaths.map((path) => relative(projectRoot, path)),
+  outputs: {
+    web: relative(projectRoot, webOutputPath),
+    standalone: relative(projectRoot, standaloneOutputPath)
+  },
+  webExternalScripts: webScriptTags.length,
+  webExternalStylesheets: webStylesheetTags.length,
   inlinedScripts,
   stylesheetsInlined: stylesheetTags.length,
   embeddedCatalogPackages: embeddedCatalogPackageCount,
