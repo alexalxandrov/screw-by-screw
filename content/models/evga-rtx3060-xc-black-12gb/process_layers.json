@@ -36,11 +36,17 @@
         "fan.2.hub",
         "fan.2.blade.1",
         "assembly.shroud",
-        "pcb.airflow.cutout"
+        "pcb.airflow.cutout",
+        "cooling.heatpipe.main.01",
+        "cooling.heatpipe.main.02",
+        "cooling.heatpipe.main.03",
+        "cooling.heatpipe.main.04",
+        "cooling.heatpipe.side.01",
+        "cooling.heatpipe.side.02"
       ],
       "description": {
-        "en": "A conceptual cooling path: heat leaves the GA106 package through the GPU contact interface, is transferred through candidate heatpipe routes into the fin stack, and is rejected to air by the two axial fans. Memory- and power-stage thermal-interface groups are shown separately because exact pad dimensions and coverage are unknown. The fan-opening and impeller diameters are approximate reviewer measurements; fan centres, blade profile/count, heatpipe routes, fin count and thermal resistance are not manufacturing measurements. Airflow particles show direction only, not CFD, temperature or heat-transfer simulation.",
-        "ru": "Условный путь охлаждения: тепло уходит от корпуса GA106 через контактный интерфейс GPU, передаётся по кандидатным трассам тепловых трубок к радиатору и отводится в воздух двумя осевыми вентиляторами. Группы термоинтерфейсов памяти и силовой части показаны отдельно, поскольку точные размеры и покрытие прокладок неизвестны. Диаметры отверстий вентиляторов и крыльчаток являются приблизительными измерениями из обзора; центры вентиляторов, профиль/количество лопастей, трассы трубок, число рёбер и тепловое сопротивление не являются производственными измерениями. Частицы потока показывают только направление, а не CFD, температуру или симуляцию теплообмена."
+        "en": "The exact 12G-P5-3655-KR XC BLACK review describes six heatpipes: four main central pipes contacting the GPU and two additional side pipes carrying heat toward the side of the heatsink. All six are now separately selectable. Their modelled centrelines, diameters, bends and flattening are illustrative, not calibrated CAD. Four copper terminal faces are also separately marked from the LanOC cooler-end photo; terminal-face count is not a substitute for the unique-pipe count. The contact plate, fin stack, two fans and thermal-interface groups are separate elements. Airflow markers show direction only and are not CFD or thermal simulation.",
+        "ru": "В обзоре точной XC BLACK 12G-P5-3655-KR описаны шесть тепловых трубок: четыре основные центральные, контактирующие с GPU, и две дополнительные боковые, переносящие тепло к краям радиатора. Все шесть теперь доступны для отдельного выбора. Их моделируемые осевые линии, диаметры, изгибы и сплющенные участки заданы условно и не являются калиброванной CAD-геометрией. Четыре медных торцевых окончания также отмечены отдельно по фотографии торца кулера LanOC; количество видимых окончаний не заменяет подсчёт отдельных трубок. Контактная пластина, радиатор, два вентилятора и группы термоинтерфейсов представлены отдельными элементами. Маркеры воздушного потока показывают только направление и не являются CFD или тепловой симуляцией."
       },
       "assumptions": [
         {
@@ -62,6 +68,10 @@
         {
           "en": "No thermal resistance, junction temperature, hotspot, fan curve, RPM or acoustic model is calculated.",
           "ru": "Не рассчитываются тепловое сопротивление, температура кристалла, hotspot, характеристика вентилятора, RPM или шумовая модель."
+        },
+        {
+          "en": "The exact-SKU review describes four central GPU-contact heatpipes and two side heatpipes. Their individual 3D routes and dimensions remain photo-estimated proxies.",
+          "ru": "Обзор точного SKU описывает четыре центральные тепловые трубки, контактирующие с GPU, и две боковые. Индивидуальные 3D-трассы и размеры остаются макетами, приблизительно восстановленными по фотографиям."
         }
       ],
       "source_ids": [
@@ -168,8 +178,8 @@
                 "ru": "2 · Перенос тепла"
               },
               "summary": {
-                "en": "The exact cooler-end photo shows four copper terminal faces; this is not a count of unique heatpipes",
-                "ru": "На точной фотографии торца кулера видны четыре медных окончания; это не подсчёт отдельных тепловых трубок"
+                "en": "Six heatpipes are described for this exact SKU: four main GPU-contact and two side routes; geometry remains proxy",
+                "ru": "Для точного SKU описаны шесть трубок: четыре основные с контактом GPU и две боковые; геометрия остаётся макетной"
               },
               "nodes": [
                 {
@@ -247,6 +257,72 @@
                   "metric": {
                     "en": "Visible in exact cooler-end photo",
                     "ru": "Видно на фотографии торца точного кулера"
+                  }
+                },
+                {
+                  "component_id": "cooling.heatpipe.main.01",
+                  "title": {
+                    "en": "Main GPU-contact heatpipe 1",
+                    "ru": "Основная тепловая трубка GPU 1"
+                  },
+                  "metric": {
+                    "en": "1 of 4 central GPU-contact pipes",
+                    "ru": "1 из 4 центральных трубок контакта с GPU"
+                  }
+                },
+                {
+                  "component_id": "cooling.heatpipe.main.02",
+                  "title": {
+                    "en": "Main GPU-contact heatpipe 2",
+                    "ru": "Основная тепловая трубка GPU 2"
+                  },
+                  "metric": {
+                    "en": "1 of 4 central GPU-contact pipes",
+                    "ru": "1 из 4 центральных трубок контакта с GPU"
+                  }
+                },
+                {
+                  "component_id": "cooling.heatpipe.main.03",
+                  "title": {
+                    "en": "Main GPU-contact heatpipe 3",
+                    "ru": "Основная тепловая трубка GPU 3"
+                  },
+                  "metric": {
+                    "en": "1 of 4 central GPU-contact pipes",
+                    "ru": "1 из 4 центральных трубок контакта с GPU"
+                  }
+                },
+                {
+                  "component_id": "cooling.heatpipe.main.04",
+                  "title": {
+                    "en": "Main GPU-contact heatpipe 4",
+                    "ru": "Основная тепловая трубка GPU 4"
+                  },
+                  "metric": {
+                    "en": "1 of 4 central GPU-contact pipes",
+                    "ru": "1 из 4 центральных трубок контакта с GPU"
+                  }
+                },
+                {
+                  "component_id": "cooling.heatpipe.side.01",
+                  "title": {
+                    "en": "Side heatpipe 1",
+                    "ru": "Боковая тепловая трубка 1"
+                  },
+                  "metric": {
+                    "en": "1 of 2 side heatpipes",
+                    "ru": "1 из 2 боковых трубок"
+                  }
+                },
+                {
+                  "component_id": "cooling.heatpipe.side.02",
+                  "title": {
+                    "en": "Side heatpipe 2",
+                    "ru": "Боковая тепловая трубка 2"
+                  },
+                  "metric": {
+                    "en": "1 of 2 side heatpipes",
+                    "ru": "1 из 2 боковых трубок"
                   }
                 }
               ]
