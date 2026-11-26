@@ -42,11 +42,13 @@
       "system_board_to_chassis": 9,
       "psu_to_chassis": 3,
       "other_optional_or_module_fasteners": 7,
-      "modeled_individual_instances": 20,
+      "modeled_individual_instances": 24,
       "source_ids": [
         "src.dell.5060.service"
       ],
-      "notes": "19 sums the table entries; optional module screws are not assumed. The model adds documented cooler-fan/captive hardware as separate schematic instances, not as part of the 19 table total."
+      "notes": "24 distinct mounting instances: 9 system-board screws, 3 PSU screws, 4 captive heatsink screws, 4 heatsink-fan screws and 4 system-fan rubber grommets. The 19-entry screw-table sum remains a separate manufacturer table total; optional/module screw counts are not assumed installed.",
+      "modeled_screw_instances": 20,
+      "modeled_rubber_grommets": 4
     },
     "platform": {
       "cpu_family": "8th-generation Intel Core / Coffee Lake family",
