@@ -24,3 +24,6 @@ The v0.6 browser interaction slice additionally tests the fan/PCB/I/O/power/top/
 
 
 The GA106 compute layer exports 14 numbered logical TPC nodes, 28 logical SM nodes (two per TPC), one PolyMorph Engine per TPC and 112 individually selectable processing-partition nodes (four per SM). All are EMPTY hierarchy nodes; the GA102 illustration from NVIDIA's GA10x whitepaper is not transplanted as a physical GA106 die floorplan.
+
+
+The PCB airflow cutout is a rounded-rectangle Boolean through-hole proxy (18 × 22 mm blockout). Its dimensions and centre are explicitly `illustrative`, not measured or taken from BoardView; the selection node exports the placeholder metadata and retains a stable component ID.
