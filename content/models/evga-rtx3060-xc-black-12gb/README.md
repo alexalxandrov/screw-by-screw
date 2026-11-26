@@ -72,9 +72,9 @@ The exact-SKU-linked Tom's Hardware teardown identifies six Samsung K4ZAF325BM-H
 The exact XC BLACK cooler-end photograph shows four copper terminal faces. They are now separately selectable in the viewer. The four-face count is distinct from the exact-SKU six-pipe count supported by The FPS Review (four central GPU-contact pipes plus two side pipes). Four visible terminal faces do not imply four unique pipes; route geometry remains illustrative.
 
 
-### Exact-SKU heatpipe count
+### Exact-SKU heatpipe route/run descriptions
 
-The FPS Review explicitly identifies its sample as 12G-P5-3655-KR and describes four central GPU-contact heatpipes plus two side heatpipes. All six are now separately selectable in the cooling hierarchy. The generated 3D paths remain illustrative, not dimensionally verified. Four visible copper terminal faces in the LanOC cooler-end image are recorded separately from the six unique heatpipes described by The FPS Review.
+The FPS Review explicitly identifies its sample as 12G-P5-3655-KR and describes four central GPU-contact runs plus two side runs. These six selectable route proxies do not establish six independent closed U-shaped tubes. PCWorld names the XC Black Gaming sample but describes four copper heatpipes; Gamers Nexus narrates two central tube paths through the GPU contact plate. These may reflect different counting conventions. The unique physical loop count remains unknown. Four visible copper terminal faces in the LanOC cooler-end image are recorded as a separate observation. OEM fan part identity remains unknown; aftermarket compatibility listings disagree on dimensions.
 
 
 ### Fan fastener evidence
