@@ -241,7 +241,7 @@ class ContentPackageTests(unittest.TestCase):
         self.assertIn("Components: 127", report)
         self.assertIn("Relationships: 122", report)
         self.assertIn("Animation clips: 2", report)
-        self.assertEqual(len(package["claims"]["claims"]), 50)
+        self.assertEqual(len(package["claims"]["claims"]), 51)
         self.assertEqual(len(package["process_layers"]["process_layers"]), 3)
         self.assertEqual(len(package["learning"]["questions"]), 8)
         clip = package["animations"]["clips"][0]
