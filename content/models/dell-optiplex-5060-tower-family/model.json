@@ -132,7 +132,7 @@
           "integrated_graphics": "UHD Graphics 630"
         }
       ],
-      "processor_notes": "These are manufacturer-listed supported options, not a fitted CPU. The separate service-manual processor table differs on some thermal-power values; confirm against an identified board/BIOS and exact order configuration before treating any option as installed."
+      "processor_notes": "Manufacturer-supported options only, not a fitted CPU. The service-manual processor table differs on some TDP values; verify the precise system-board revision and order configuration before treating any option as installed."
     },
     "memory": {
       "slot_count": 4,
@@ -210,8 +210,7 @@
       "rear_openings": 4,
       "source_ids": [
         "src.dell.5060.boardlayout",
-        "src.dell.5060.board_connectors",
-        "src.dell.5060.ports"
+        "src.dell.5060.board_connectors"
       ]
     },
     "power_supply": {
