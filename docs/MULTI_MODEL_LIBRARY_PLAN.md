@@ -10,7 +10,7 @@
 - Runtime startup now resolves the default entry from `content/catalog/models.json`. The RTX 3060 is still the default, but `src/main.js` and `src/data/model.js` no longer import its sidecar JSON as a special startup path.
 - Startup and later catalogue switching use the same `.sbsmodel` loader.
 - The OptiPlex v0.1 ZIP archive remains available at `public/models/dell_optiplex_5060_tower_v01.sbsmodel` for backward-compatibility testing; the current v0.2 `SBSMODEL-JSON` envelope is stored at `public/models/dell_optiplex_5060_tower_v02.sbsmodel`; editable source data lives in `content/models/dell-optiplex-5060-tower-family/`.
-- The OptiPlex v0.2 package has 115 semantic component nodes, 123 typed relationships, 58 box-proxy geometry nodes, 24 individual screw/grommet instances, 15 source records, 29 claims, six qualitative process layers, 12 documented partial service steps and nine learning questions. All 26 numbered motherboard callouts map to 29 component references.
+- The OptiPlex v0.2 package has 115 semantic component nodes, 123 typed relationships, 58 box-proxy geometry nodes, 24 individual screw/grommet instances, 18 source records, 30 claims, six qualitative process layers, 12 documented partial service steps and nine learning questions. All 26 numbered motherboard callouts map to 29 component references.
 - Its scene can be regenerated from per-component `visual_proxy` metadata by `tools/modeling/build_device_blockout.py`; a dedicated workflow rebuilds the scene and package and tests the production package loader with checksums.
 - The catalogue UI already supports category filters, text search, model identity, package version and geometry status.
 
