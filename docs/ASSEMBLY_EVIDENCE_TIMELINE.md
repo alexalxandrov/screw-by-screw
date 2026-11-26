@@ -9,7 +9,7 @@ The package distinguishes:
 
 ## Viewer behaviour
 
-When the top-level device is selected, the inspector displays the assembly evidence panel. If no steps are authored, it states that no verified sequence exists and may show source observations separately. Each timecoded YouTube observation can link to its source at the recorded timestamp.
+When the top-level device is selected, the inspector displays the assembly evidence panel, including package-authored procedure policy, branch groups and separately documented replacement fragments where present. If no steps are authored, it states that no verified sequence exists and may show source observations separately. Each timecoded YouTube observation can link to its source at the recorded timestamp.
 
 When a component is selected, only authored steps that target that component are shown. Target component buttons navigate to the corresponding 3D part. Steps are not animated as physical removal paths by this panel.
 
@@ -30,6 +30,16 @@ A step requires a unique ID, unique positive sequence integer, readable action/t
 
 Observation notes accept either a plain string or an RU/EN object. The viewer selects the current language and falls back to the available translation. Localization changes presentation only; source locators, timestamps and evidence meaning remain unchanged.
 
+
+## IBM Personal Computer 5150 (August 1981) — branching FRU graph
+
+The IBM 5150 package uses 14 granular actions arranged in seven display groups. This is a dependency graph, not a universal linear teardown. The common opening sequence isolates mains power and removes the cover; after that, PSU, speaker and system-board FRU removal are independent branches. P1/P2, optional diskette leads and the speaker connector are modeled as shared preparation actions when their relevant FRU branch requires them.
+
+The system-board branch records the IBM first-edition sequence: remove fitted adapters, disconnect P1/P2, disconnect fitted-drive leads if applicable, disconnect speaker connector P3, remove one board-retaining screw, slide the board about 1/2 inch away from the PSU until the standoffs clear their slots, then lift the board out. The branch does not require removing the PSU or removing the speaker assembly.
+
+The Viewer displays the bilingual branch-scope note, group headings, prerequisites, target-component links and source links. Four replacement fragments (cover, adapter, PSU, system board) are displayed separately as source-bounded fragments, not a full reverse procedure. The manual does not provide a separately headed speaker replacement sequence.
+
+Only IBM's explicit 1/2-inch slide distances are treated as manufacturer-stated motion. PSU lift/left offsets, speaker lift and board lift are educational approximations. See [IBM PC 5150 disassembly sequence](IBM_PC_5150_DISASSEMBLY_SEQUENCE.md).
 
 ## RTX 3060 XC BLACK pilot — current partial evidence
 
