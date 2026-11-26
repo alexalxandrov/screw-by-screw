@@ -483,11 +483,11 @@ function tag(object, id, evidence = "illustrative", geometry = "proxy") {
   return object;
 }
 
-function makeGroup(parent, id, name, position = [0, 0, 0]) {
+function makeGroup(parent, id, name, position = [0, 0, 0], evidence = "visible_exact_model", geometry = "assembly_node") {
   const group = new THREE.Group();
   group.name = name;
   group.position.set(...position);
-  tag(group, id, "visible_exact_model", "assembly_node");
+  tag(group, id, evidence, geometry);
   parent.add(group);
   return group;
 }
@@ -609,6 +609,22 @@ function createFallbackModel() {
   makeMesh(cooling, "cooling.gpu_contact", "Copper GPU contact proxy",
     new THREE.BoxGeometry(48, 3, 42), materials.copper, [97, -3, 57]);
 
+  // Match the selectable thermal-interface structure in the full Blender asset.
+  // Dimensions and placement below remain visual placeholders, not replacement-pad specs.
+  const thermalInterface = makeGroup(cooling, "cooling.thermal_interface", "Thermal interface group", [0, 0, 0], "teardown_supported", "illustrative_proxy");
+  makeMesh(thermalInterface, "cooling.thermal_paste.gpu", "GPU thermal compound proxy",
+    new THREE.BoxGeometry(19, 0.35, 19), materials.copper, [97, -5, 57]);
+  const memoryPads = makeGroup(thermalInterface, "cooling.thermal_pad.memory", "Memory thermal pads", [0, 0, 0], "teardown_supported", "illustrative_proxy");
+  for (let index = 0; index < 6; index += 1) {
+    const x = 50 + index * 16;
+    const padId = "cooling.thermal_pad.memory." + String(index + 1).padStart(2, "0");
+    makeMesh(memoryPads, padId, "Memory thermal pad proxy " + (index + 1),
+      new THREE.BoxGeometry(14, 0.65, 12), materials.metal, [x, -5.6, 57], "illustrative");
+  }
+  const vrmPads = makeGroup(thermalInterface, "cooling.thermal_pad.vrm", "Power-stage thermal pads", [0, 0, 0], "teardown_supported", "illustrative_proxy");
+  makeMesh(vrmPads, "cooling.thermal_pad.vrm.01", "VRM thermal pad strip proxy",
+    new THREE.BoxGeometry(34, 0.65, 18), materials.metal, [145, -5.6, 78], "illustrative");
+
   const heatpipes = makeGroup(cooling, "cooling.heatpipes", "Heatpipe group · illustrative");
   const pipeMaterial = new THREE.MeshStandardMaterial({ color: 0xb97845, metalness: 0.78, roughness: 0.32 });
   const pipeCurves = [
@@ -622,8 +638,27 @@ function createFallbackModel() {
     heatpipes.add(pipe);
   });
 
-  makeMesh(pcbAssembly, "chip.gpu.ga106", "GPU package proxy",
+  const gpuPackage = makeMesh(pcbAssembly, "chip.gpu.ga106", "GPU package proxy",
     new THREE.BoxGeometry(40, 5, 40), materials.chip, [97, 14, 57], "teardown_supported");
+  // Architecture entries are logical navigation nodes, not physical silicon floorplan geometry.
+  const gpuDie = makeGroup(gpuPackage, "chip.gpu.die", "GA106 die · logical proxy", [0, 0, 0], "manufacturer_data", "logical_only");
+  const smCluster = makeGroup(gpuDie, "chip.gpu.sm.cluster", "GA106 SM cluster · logical", [0, 0, 0], "manufacturer_data", "logical_only");
+  for (const [id, name] of [
+    ["chip.gpu.cuda_core.array", "CUDA core array · 3,584"],
+    ["chip.gpu.tensor_core.array", "Tensor Core array · 112"],
+    ["chip.gpu.rt_core.array", "RT Core array · 28"],
+    ["chip.gpu.tmu.array", "Texture unit array · 112"],
+    ["chip.gpu.rop.array", "ROP array · 48"]
+  ]) {
+    makeGroup(smCluster, id, name, [0, 0, 0], "manufacturer_data", "logical_only");
+  }
+
+  const memoryBus = makeGroup(pcbAssembly, "chip.memory.gddr6.bus", "GDDR6 interface · 192-bit logical", [0, 0, 0], "manufacturer_data", "logical_only");
+  for (let index = 0; index < 6; index += 1) {
+    const channelId = "chip.memory.channel." + String(index + 1).padStart(2, "0");
+    makeGroup(memoryBus, channelId, "GDDR6 interface presentation segment " + (index + 1),
+      [50 + index * 16, 14, 57], "illustrative", "logical_only");
+  }
 
   const powerStage = makeGroup(pcbAssembly, "assembly.power_stage", "Power conversion zone · proxy", [145, 13.5, 78]);
   const stageMaterial = new THREE.MeshStandardMaterial({ color: 0x555c64, metalness: 0.28, roughness: 0.5 });
