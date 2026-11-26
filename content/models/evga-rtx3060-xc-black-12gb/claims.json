@@ -613,7 +613,7 @@
       "predicate": "pcb_silkscreen_marking_candidate",
       "value": "EVGA232 REV 1.0",
       "unit": null,
-      "confidence_class": "illustrative",
+      "confidence_class": "candidate_reference_observation",
       "source_ids": [
         "src.techpowerup.pcb"
       ],
