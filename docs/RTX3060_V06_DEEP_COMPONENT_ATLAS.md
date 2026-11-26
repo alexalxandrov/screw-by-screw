@@ -41,7 +41,7 @@ Blender generation and GLB binding are exercised by the Blender blockout generat
 2. Obtain and legally validate a BoardView and schematic for that exact revision.
 3. Verify the full BOM, reference designators, VRM topology, MOSFETs, controller, shunts, passive values and connector pinouts.
 4. Replace proxy dimensions with calibrated measurement or licensed CAD for shroud, PCB, heatsink, heatpipes, fans, fasteners and all connectors.
-5. Review the complete exact-model teardown before authoring a complete service/removal sequence; the current two steps are explicitly partial observations only.
+5. Review the complete exact-model teardown before authoring a complete service/removal sequence; the current three steps are explicitly partial observations only.
 6. Add evidence-backed electrical and thermal diagrams; keep CFD, thermal FEA and SPICE as separate numerical projects.
 7. Obtain asset reuse rights, then perform visual acceptance on the generated blend, glb and sbsmodel.
 
@@ -57,14 +57,14 @@ The component atlas also adds separate, individually selectable photo-estimated 
 
 ## Fine-grained cooling decomposition
 
-The canonical package now exposes 127 semantic components and 122 typed relationships. This includes individually selectable fan frames, hubs and seven illustrative blade proxies per fan; 24 separate illustrative heatsink-fin proxies; six selectable heatpipe-route proxies grouped as four main GPU-contact pipes plus two side pipes; six memory-side thermal-pad proxies; and a VRM-side thermal-pad strip proxy.
+The canonical package now exposes **137 semantic components, 133 typed relationships, 64 claims and 12 registered sources**. This includes individually selectable fan frames, hubs and seven illustrative blade proxies per fan; 24 separate illustrative heatsink-fin proxies; six selectable heatpipe-route proxies grouped as four main GPU-contact pipes plus two side pipes; six memory-side thermal-pad proxies; and a VRM-side thermal-pad strip proxy.
 
 These are independently selectable teaching meshes, not a claim that the exact hardware has seven blades per fan or 24 fins. The count and shapes are explicitly identified as proxy geometry. Thermal-pad position proxies are aligned to the six identified GDDR6 package positions; pad thickness, material, hardness and service dimensions remain unverified. Heatpipe paths and cross-sections likewise remain illustrative.
 
 
 ## Source-backed partial teardown sequence
 
-The assembly evidence panel contains two partial observations grounded in exact-XC-BLACK sources: (1) the Tom's Hardware teardown reports eight cooler/shroud retention screws on the same review sample whose rear-PCB identity photograph reads P/N 12G-P5-3655-KR (four around GPU and four near the far end; only the four GPU-area centres are photo-positioned in 3D), and (2) disconnect both fan leads before separating the cooler, as shown in the exact-model Gamers Nexus teardown. The sequence remains `partial_observed_sequence` and `complete_sequence: false`. Four rear-area screw nodes preserve the verified count as `logical_only`; their individual coordinates are not invented. No driver size, torque, exact thread or reassembly procedure is inferred.
+The assembly evidence panel contains **three partial actions** grounded in exact-SKU-linked sources: (1) remove eight cooler/shroud retention screws reported by Tom's Hardware on the review sample whose rear-PCB identity photograph reads P/N 12G-P5-3655-KR (four around GPU and four near the far end; only the four GPU-area centres are photo-positioned in 3D); (2) disconnect both fan leads before separating the cooler, as shown in the exact-model Gamers Nexus teardown; and (3) remove three retaining screws from each independently replaceable fan, also shown in the Gamers Nexus teardown. The sequence remains `partial_observed_sequence` and `complete_sequence: false`. Four rear-area cooler screws and six fan screws preserve verified counts as `logical_only`; their individual coordinates are not invented. No driver size, torque, exact thread or reassembly procedure is inferred.
 
 
 ## Reversible exploded-assembly animation
@@ -85,7 +85,7 @@ The LanOC review explicitly identifies **four heatsink mounting screws around th
 
 Tom's Hardware's eight-screw description is tied to the exact retail SKU by the rear-PCB identity photograph on the same review page, which reads P/N 12G-P5-3655-KR. Four screws are located around the GPU and four near the far end. The first four have photo-estimated positions; four additional rear-area screw nodes are exact-SKU semantic entries with `geometry_status: logical_only` until individual centres can be calibrated.
 
-The disassembly panel now states the eight exact-SKU cooler/shroud retention screws (four around GPU and four near the far end), followed by the exact-model fan-lead disconnection step. The steps remain partial and are not a complete service manual.
+The disassembly panel now contains three exact-model partial actions: eight cooler/shroud retention screws (four around GPU and four near the far end), disconnecting both fan leads before cooler separation, and removing three retaining screws from each replaceable fan. Fan-screw positions are not mapped. The steps remain partial and are not a complete service manual.
 
 
 ## 14. GDDR6 package identity and mapping boundary
@@ -110,3 +110,10 @@ The exact XC BLACK cooler-end photograph in LanOC's review shows four separate c
 The FPS Review identifies its sample explicitly as EVGA GeForce RTX 3060 XC BLACK GAMING, part number `12G-P5-3655-KR`. Its cooler description states four main central heatpipes that contact the GPU, plus two additional side heatpipes that move heat toward the side of the heatsink. The model package now separates these into six selectable semantic route nodes grouped as four main and two side paths. Their 3D centrelines, tube diameters, bend radii and flattened sections are still illustrative photo-estimated geometry, not manufacturing CAD. The four terminal faces from the LanOC cooler-end photograph remain a separate visual observation and are not confused with the six-tube count.
 
 Source: https://www.thefpsreview.com/2021/03/03/evga-geforce-rtx-3060-xc-black-gaming-review/2/
+
+
+## 18. Fan-retention fasteners and three-step partial teardown
+
+The exact-model Gamers Nexus teardown shows each independently replaceable fan retained by three screws, for six fan-to-frame screws total. The package adds six separate semantic fastener nodes, all `geometry_status: logical_only`, because the individual screw centres, head profile, thread, length and torque are not measured. These six screws are distinct from the eight cooler/shroud retention screws.
+
+The assembly panel now records a third partial action after both fan leads are disconnected: remove three screws from each fan. This extends the evidence-backed observations but does not create a complete shroud-removal or reassembly procedure. The sequence remains `partial_observed_sequence` with `complete_sequence: false`.
