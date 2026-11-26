@@ -633,6 +633,150 @@
         "src.tomshardware.teardown"
       ],
       "notes": "Tom's Hardware's exact-SKU-linked teardown identifies four of the eight cooler/shroud screws as being near the far end/rear area of the card. Individual locations are not measured or mapped."
+    },
+    {
+      "id": "claim.cooling.thermal_pad.thickness.observation.primary",
+      "subject_id": "cooling.thermal_interface",
+      "predicate": "thermal_pad_thickness_observed",
+      "value": 2,
+      "unit": "mm",
+      "confidence_class": "measured",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "notes": "Gamers Nexus verbally measures one thermal-pad sample at about 2.0 mm in the exact-model teardown. The transcript does not unambiguously assign this sample to a specific package, VRM location or replacement-pad footprint. Do not use it as a complete replacement specification."
+    },
+    {
+      "id": "claim.cooling.thermal_pad.thickness.observation.secondary",
+      "subject_id": "cooling.thermal_interface",
+      "predicate": "thermal_pad_thickness_approximate_observation",
+      "value": 1.5,
+      "unit": "mm",
+      "confidence_class": "educational_approximation",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "notes": "Gamers Nexus estimates a second sample at approximately 1.5 mm and explicitly says it is harder to measure. Location, footprint, compression and material are not established."
+    },
+    {
+      "id": "claim.cooling.fan.mount_screws.per_fan",
+      "subject_id": "assembly.cooling",
+      "predicate": "fan_mounting_screw_count_per_fan",
+      "value": 3,
+      "unit": "screws",
+      "confidence_class": "independently_verified",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "notes": "Exact-model teardown states each independently replaceable fan is retained by three screws. Individual screw positions and specifications are not mapped."
+    },
+    {
+      "id": "claim.cooling.fan.mount_screws.total",
+      "subject_id": "assembly.cooling",
+      "predicate": "fan_mounting_screw_count_total",
+      "value": 6,
+      "unit": "screws",
+      "confidence_class": "calculated",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "notes": "Derived as two fans × three screws per fan. This is the fan-to-frame mounting hardware, distinct from the eight cooler/shroud retention screws."
+    },
+    {
+      "id": "claim.power.current_sense_shunt.count",
+      "subject_id": "power.shunt.cluster",
+      "predicate": "current_sense_shunt_count_observed",
+      "value": 2,
+      "unit": "shunts",
+      "confidence_class": "independently_verified",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "notes": "The teardown distinguishes one shunt for the auxiliary 8-pin input and another for PCIe-slot 12 V. This is not a VRM phase count."
+    },
+    {
+      "id": "claim.power.current_sense_shunt.8pin.resistance",
+      "subject_id": "power.shunt.8pin",
+      "predicate": "current_sense_resistance",
+      "value": 5,
+      "unit": "mΩ",
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "notes": "The presenter states 5 milliohms for the auxiliary input shunt. This value must not be copied to the separate PCIe-slot 12 V shunt; no reference designator or independent in-circuit measurement is supplied."
+    },
+    {
+      "id": "claim.power.input_fuse.count",
+      "subject_id": "power.fuse.input",
+      "predicate": "input_protection_fuse_count_observed",
+      "value": 1,
+      "unit": "fuse",
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "notes": "One fuse is pointed out in the exact-model teardown. Package marking, current rating, voltage rating and location are not established."
+    },
+    {
+      "id": "claim.gpu.die.marking",
+      "subject_id": "chip.gpu.ga106",
+      "predicate": "gpu_die_marking_read",
+      "value": "NVIDIA GA106-300-A1",
+      "unit": null,
+      "confidence_class": "independently_verified",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "notes": "The cleaned die marking is read in the exact-model teardown as NVIDIA GA106-300-A1. This is the package/die marking, not a full electrical revision or board ID."
+    },
+    {
+      "id": "claim.power.inductor.count.observed",
+      "subject_id": "assembly.power_stage",
+      "predicate": "inductor_packages_visible_in_teardown_near_tentative_memory_vrm_area",
+      "value": 2,
+      "unit": "inductors",
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "notes": "Two inductor packages are discussed in an area the presenter tentatively assumes may be memory VRM. The electrical function, phase assignment, values and reference designators are not confirmed."
+    },
+    {
+      "id": "claim.power.mosfet.copper_contact",
+      "subject_id": "power.switching_device.cluster",
+      "predicate": "direct_copper_plate_thermal_contact_observed",
+      "value": true,
+      "unit": null,
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "notes": "The teardown identifies a copper plate directly contacting a row of MOSFET packages. Plate dimensions and exact device coverage are not measured."
+    },
+    {
+      "id": "claim.cooling.heatpipe.nominal_diameter",
+      "subject_id": "cooling.heatpipes",
+      "predicate": "heatpipe_tube_diameter_approximate",
+      "value": 6,
+      "unit": "mm",
+      "confidence_class": "educational_approximation",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "notes": "The teardown presenter estimates the visible central heatpipe tubes at approximately 6 mm. No caliper measurement or complete tube-loop count is supplied."
+    },
+    {
+      "id": "claim.cooling.central_heatpipe_tubes.observed",
+      "subject_id": "cooling.heatpipes",
+      "predicate": "central_heatpipe_tubes_visible",
+      "value": 2,
+      "unit": "tubes",
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "notes": "The Gamers Nexus teardown narration identifies two central tubes passing through the GPU contact plate. The FPS Review separately describes four central GPU-contact heatpipe runs plus two side runs. Tube-loop count and visible run count are different counting conventions; preserve the source-specific observations and do not interpret them as a contradiction or merge them into one physical count without a drawing."
     }
   ]
 }
