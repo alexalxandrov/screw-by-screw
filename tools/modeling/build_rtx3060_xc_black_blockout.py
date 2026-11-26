@@ -805,16 +805,18 @@ def main():
             world_position, size, MAT["power_stage"], pcbcol, evidence=STATUS["illustrative"])
         set_parent_keep_world(block, power_stage_group)
 
-    # Six GDDR6 package positions are visible in exact XC BLACK material.
-    # Exact device markings are not confirmed; centres below are photo-estimated
-    # and no BoardView or metrology-grade coordinates are available.
+    # Exact-SKU-linked teardown identifies six Samsung K4ZAF325BM-HC16 packages.
+    # The same review's PCB identity photo reads P/N 12G-P5-3655-KR.
+    # Device rating is 16 Gbps/pin; 16 Gbit, 512M x 32 and 180-FBGA
+    # attributes are transcribed from a secondary catalog, not a primary datasheet.
+    # Centres below remain photo-estimated; no BoardView coordinates or net map exist.
     memory_centres = (
         (134.0, 78.0), (154.0, 58.0), (134.0, 40.0),
         (75.0, 25.0), (100.0, 22.0), (125.0, 25.0),
     )
     for i, (x, z) in enumerate(memory_centres, start=1):
         memory = cube(
-            f"GDDR6 memory package position {i}",
+            f"Samsung K4ZAF325BM-HC16 GDDR6 package {i}",
             f"chip.memory.candidate.{i}",
             (x, half_y - 4.0, z),
             (14.0, 4.0, 12.0),
@@ -1012,15 +1014,15 @@ def main():
     )
     set_parent_keep_world(vrm_pad, vrm_pad_group)
 
-    # Fasteners are individually selectable. Count/layout remain candidates,
-    # not an exact-SKU service specification or an authored removal sequence.
+    # The exact-SKU-linked Tom's Hardware teardown reports eight cooler/shroud
+    # retention screws: four around the GPU and four near the far/rear end.
+    # LanOC independently shows the four GPU-area subset; only those four positions
+    # are photo-estimated and rendered. The rear four are count-confirmed logical nodes.
     fasteners_group = make_assembly(
-        "Cooler fastener set | candidate", "assembly.fasteners",
+        "Cooler fastener set | 8 exact-SKU screws; rear positions unmapped", "assembly.fasteners",
         (CARD_LENGTH / 2, half_y + 0.5, CARD_HEIGHT / 2),
         ext, parent=card_root,
     )
-    # Four GPU-area mounting screws are photo-positioned from the exact XC BLACK review.
-    # The remaining related-XC fastener candidates stay as unmeshed logical markers.
     screw_positions = (
         (59.0, 27.0), (108.0, 27.0),
         (56.0, 62.0), (108.0, 62.0),
@@ -1043,14 +1045,14 @@ def main():
             MAT["connector"], screw_group, ext,
         )
 
-    for candidate_index in range(5, 9):
-        candidate_id = "fastener.cooler.{:02d}".format(candidate_index)
+    for rear_index in range(5, 9):
+        screw_id = "fastener.cooler.{:02d}".format(rear_index)
         make_assembly(
-            "Unverified rear retention candidate {:02d}".format(candidate_index - 4),
-            candidate_id,
+            "Rear-area cooler retention screw {:02d} | position unmapped".format(rear_index - 4),
+            screw_id,
             (0.0, half_y + 0.45, 0.0), ext, parent=fasteners_group,
-            evidence=STATUS["candidate_count_requires_exact_board_confirmation"],
-            geometry="illustrative_proxy",
+            evidence=STATUS["visible_exact_model"],
+            geometry="logical_only",
         )
 
     # PCIe edge contact field: representative segmented pads, not a pin-count drawing.
