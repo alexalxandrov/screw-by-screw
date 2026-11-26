@@ -9,9 +9,9 @@ Optional arguments after Blender's --:
   --no-glb
   --no-blend
 
-All geometry is proxy/blockout geometry. Manufacturer dimensions and reviewer
-fan diameters are provenance-labelled. Fan blade count/profile, fan positions,
-card thickness, shroud, PCB and component positions remain illustrative.
+All geometry is proxy/blockout geometry. Manufacturer dimensions, reviewer fan diameters and the photo-observed blade
+count are provenance-labelled. Blade profile, fan positions, card thickness,
+shroud, PCB and component positions remain illustrative.
 """
 from __future__ import annotations
 
@@ -38,7 +38,7 @@ FAN_IMPELLER_DIA = 85.0   # approximate reviewer measurement
 CARD_THICKNESS = 36.0
 FAN_CENTERS_X = (55.0, 146.0)
 FAN_CENTER_Z = 56.0
-FAN_BLADE_COUNT = 7       # illustrative; exact blade count not confirmed
+FAN_BLADE_COUNT = 8       # photo-observed in exact-SKU retail listing; detailed geometry remains proxy
 SHROUD_THICKNESS = 5.0
 PCB_THICKNESS = 1.6
 HEATSINK_THICKNESS = 13.0
@@ -91,8 +91,8 @@ manifest = {
         },
         "fan_blade_count": {
             "value": FAN_BLADE_COUNT,
-            "status": STATUS["illustrative"],
-            "note": "Visual proxy count; exact blade count not confirmed.",
+            "status": STATUS["visible_exact_model"],
+            "note": "Eight visible blade surfaces per fan are counted from two Newegg product photos whose listing identifies SKU 12G-P5-3655-KR. Blade pitch, camber, thickness, profile and depth remain unmeasured.",
         },
         "pcb_airflow_cutout_proxy": {
             "value": {"length": PCB_CUTOUT_PROXY_SIZE[0], "height": PCB_CUTOUT_PROXY_SIZE[1]},
@@ -103,7 +103,7 @@ manifest = {
     "objects": [],
     "warnings": [
         "This is a visual blockout, not dimensionally complete CAD.",
-        "Fan centres, blade count/profile, shroud outline, PCB outline, thickness and internal positions are illustrative.",
+        "Eight visible blade surfaces per fan are photo-observed in the exact-SKU retail listing; blade profile/pitch/camber/thickness, fan centres and all internal mechanical positions remain illustrative.",
         "The PCB airflow cutout is a rounded-rectangle through-hole proxy; its 18 x 22 mm blockout and centre are not measured and must not be treated as a PCB drawing.",
         "Fan ring diameters use approximate reviewer measurements as a visual guide, not a verified fan manufacturer drawing.",
         "Computed geometry bounds include protruding proxy components and must not be treated as the card's official thickness.",
