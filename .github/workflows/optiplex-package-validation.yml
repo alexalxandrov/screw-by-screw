@@ -16,6 +16,7 @@ on:
       - "tools/content/validate_glb_bindings.py"
       - "src/viewer/ModelPackageLoader.js"
       - "tests/optiplex-package.test.js"
+      - "tests/test_text_model_package.py"
       - "package.json"
       - "package-lock.json"
       - ".github/workflows/optiplex-package-validation.yml"
@@ -62,5 +63,7 @@ jobs:
             --compare-existing public/models/dell_optiplex_5060_tower_v02.sbsmodel
       - name: Verify committed package using the production loader
         run: node --test tests/optiplex-package.test.js tests/model-startup.test.js
+      - name: Test deterministic package builder
+        run: python -m unittest discover -s tests -p "test_text_model_package.py"
       - name: Run unit suite
         run: npm run test:unit
