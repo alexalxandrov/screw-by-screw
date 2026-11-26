@@ -23,6 +23,7 @@ test("catalogue lists multiple device classes and loads the OptiPlex package", a
   await expect(page.locator("#app-status")).toHaveText("Модель готова");
 
   await page.locator("#catalog-open").click();
+  await page.locator("#catalog-category").selectOption("all");
   await expect(page.locator('[data-model-id="gpu.evga.12g-p5-3655-kr"]')).toBeVisible();
   await expect(page.locator('[data-model-id="pc.dell.optiplex-5060-mt"]')).toHaveClass(/is-loaded/);
 });
