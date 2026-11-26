@@ -15,8 +15,12 @@
 - Do not mix in 64 KB–256 KB board data, the IBM 5160 PC/XT, aftermarket BIOS replacements, clone parts, or later PSU substitutions.
 - IBM Technical Reference Fig. 4 (printed p. 2-13) supports relative component zones only; do not infer exact PCB coordinates, connector footprints, slot pitch, or rotations from it.
 - FAU dimensions describe one museum specimen and are not an IBM-wide case specification or serial-matched launch measurement.
-- Do not infer physical chip count, copper routing, screws, sheet-metal dimensions, or torque from a logical diagram or museum photograph.
+- The IBM first-edition board removal procedure identifies one board-retaining screw and a sliding standoff/slot release, but it does not state the stand-off count or exact geometry.\n- A PCWorld sample reporting two board screws/four plastic standoffs is a separate, revision-unmatched observation and is not applied to the launch baseline.\n- Screw-head marks in the 3D scene are visual proxies; no drive standard, thread, length, size or torque is inferred.\n- Do not infer physical chip count, copper routing, screws, sheet-metal dimensions, or torque from a logical diagram or museum photograph.
 - The corporate-history launch configuration is a baseline template, not proof that every 1981 retail machine shipped with identical fitted options.
+
+## Out-of-package comparison (not used to set the launch baseline)
+
+[PCWorld — Inside the IBM PC 5150: The first-ever IBM PC](https://www.pcworld.com/article/416011/inside-the-ibm-pc-5150-the-first-ever-ibm-pc.html) reports two motherboard screws and four plastic standoffs on one used, revision-unmatched specimen. This is retained as a comparison note only; it is not a manufacturer source, is not part of the five-source content package, and is not applied to the August 1981 first-board geometry. The first-edition IBM procedure remains the authority for the selected one-screw removal sequence. See the [fastener evidence audit](../../../../../docs/IBM_PC_5150_FASTENER_EVIDENCE.md).
 
 ## Evidence classification
 
