@@ -1187,9 +1187,10 @@
       "confidence_class": "unknown",
       "source_ids": [
         "src.gpufanreplacement.catalog",
-        "src.gpuconnect.catalog"
+        "src.gpuconnect.catalog",
+        "src.ebay.aftermarket_fan.code_candidate"
       ],
-      "notes": "Unknown. Aftermarket compatibility listings name PLA09215S12H-family replacements, but do not show the original fan label or establish the OEM part fitted to this exact sample. Seller dimensions conflict (approximately 90 mm vs 87 mm, with 15/20 mm depth variants); voltage, current, connector and mounting measurements remain aftermarket catalogue claims only."
+      "notes": "Unknown. Aftermarket compatibility listings advertise PLA09215S12H-family replacements and another marketplace listing advertises PLD09220S12HH for a broad RTX 3060 / 3060 Ti XC BLACK family. These are conflicting seller-assigned replacement codes, not evidence of the OEM fan fitted to this exact sample; no original fan label has been inspected. Seller dimensions also conflict (approximately 90 mm vs 87 mm, with 15/20 mm depth variants). Voltage, current, connector and mounting measurements remain aftermarket catalogue claims only."
     },
     {
       "id": "claim.fan.blade_count.photo_observed",
