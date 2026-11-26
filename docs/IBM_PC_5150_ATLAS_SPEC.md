@@ -12,7 +12,7 @@ Add a second deeply navigable reference device to Screw by Screw: the original I
 - Draft package version: `0.1.0-draft`
 - Geometry state: `illustrative_proxy_not_cad`
 - 71 canonical components, 100 typed relationships, 21 source-linked claims
-- Five process layers, 12 bilingual learning questions, five partial FRU procedures, two explanatory animations
+- Five process layers, 12 bilingual learning questions, 14 granular disassembly actions in seven presentation groups, four partial replacement fragments and five explanatory animation clips
 - Each canonical component must resolve to one GLB anchor with `extras.sbs_component_id`; parent hierarchy must remain stable.
 
 ## Reference baseline
@@ -36,6 +36,6 @@ Represent the PSU as a sealed field-replaceable unit. Never model the hazardous 
 5. Verify model ID, 71 components, 100 relationships, and package integrity.
 6. Include both the GPU default package and IBM reference package in the standalone offline catalogue build.
 
-See [IBM PC 5150 fastener and board-mounting evidence audit](IBM_PC_5150_FASTENER_EVIDENCE.md) for the source-by-source screw and standoff matrix.\n\n## Explicit non-goals
+See [IBM PC 5150 fastener and board-mounting evidence audit](IBM_PC_5150_FASTENER_EVIDENCE.md) for the source-by-source screw and standoff matrix.\n\nThe IBM service manual also gives separate replacement fragments for the cover, option adapter, PSU and system board. The package stores those fragments separately and marks them as incomplete; it does not infer a full end-to-end rebuild or a speaker replacement procedure. The Viewer displays branch labels, prerequisite lists, a bilingual scope notice and source-bounded replacement fragments. See [IBM PC 5150 disassembly sequence](IBM_PC_5150_DISASSEMBLY_SEQUENCE.md).\n\n## Explicit non-goals
 
 No claim of exact physical restoration, no guessed screw specifications, no complete teardown ordering, no PSU repair instructions, and no redistribution of copyrighted manuals or photographs.
