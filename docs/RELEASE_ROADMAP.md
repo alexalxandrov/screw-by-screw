@@ -15,7 +15,7 @@ These are capability milestones, not promises that every feature will be physica
 
 ## Current RTX 3060 pilot data scope
 
-The current package contains **313 semantic components, 311 typed relationships, 110 atomic claims and 29 registered sources**, with three process layers, 12 bilingual learning questions and two package-authored animation clips. The component inventory includes logical-only GA106 architecture nodes and unmeasured visual proxies; its count is not a count of 313 physically reconstructed parts.
+The current package contains **313 semantic components, 311 typed relationships, 111 atomic claims and 29 registered sources**, with three process layers, 12 bilingual learning questions and two package-authored animation clips. The component inventory includes logical-only GA106 architecture nodes and unmeasured visual proxies; its count is not a count of 313 physically reconstructed parts.
 
 The pilot tracks five partial teardown observations, but no complete removal/reassembly sequence. The cooling model keeps six reviewer-described route/run proxies distinct from the unknown physical closed-loop count. The power model is qualitative and does not assert a verified exact-board VRM topology.
 
@@ -58,3 +58,6 @@ The generic runtime supports clip selection, play, pause, normalized seek, playb
 
 
 The PC Perspective review also reports a momentary frequency peak of **1905 MHz** during Metro Exodus at 2160/high. It is attached to the GPU as a measured review-sample observation, explicitly distinct from EVGA's published 1777 MHz boost clock; the article does not disclose the reviewed card's retail part number, so this is XC BLACK model evidence rather than an exact-P/N claim.
+
+
+The Gamers Nexus exact-model teardown also gives a rough verbal estimate of approximately **6 mm** for the two central heatpipe tube runs visible through the GPU contact plate. The package stores this as a teardown-supported estimate with a note that it is not calibrated and must not be applied to every route proxy.
