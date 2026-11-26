@@ -19,9 +19,9 @@ The manifest builder hashes every JSON content file. The validator checks SHA-25
 
 - Manufacturer specifications, reviewer observations, teardown evidence, illustrative geometry and unknowns remain separate evidence classes.
 - The 201.8 mm length is a nominal published value; it is not treated as the maximum outer-shroud extent.
-- Six GDDR6 package positions are visible on exact-model reference material. Their positions are photo-estimated; the exact package marking is still unknown. K4ZAF325BM-HC16 and its catalog attributes remain candidate details from a related XC teardown and a secondary catalog, not an exact-SKU BOM claim.
+- Six Samsung K4ZAF325BM-HC16 GDDR6 packages are identified in the Tom's Hardware teardown; the rear-PCB photo on the same review page reads P/N 12G-P5-3655-KR. Package centres remain photo-estimated. The 16-Gbit density, 512M × 32 organisation and 180-FBGA package type are secondary-catalog attributes, not primary Samsung datasheet values; they use the separate `secondary_catalog_data` evidence class.
 - The 24 heatsink fins in the current model are illustrative proxies, not a measured fin count.
-- The assembly panel contains two source-backed partial observations only: four GPU-area heatsink screws and disconnection of both fan leads before separating the cooler. This is not a complete service procedure; driver size, torque, thread details and reassembly order remain unverified.
+- The assembly panel contains two source-backed partial observations only: eight cooler/shroud retention screws (four around GPU and four near the far end; only the GPU-area four have photo-positioned proxies), then disconnection of both fan leads before separating the cooler. This is not a complete service procedure; driver size, torque, thread details, rear screw coordinates and reassembly order remain unverified.
 - No third-party images or video frames are redistributed in this package.
 
 
@@ -34,7 +34,7 @@ The content model exposes two illustrative rotor pivot components as children of
 
 The feat/rtx3060-deep-component-atlas branch expands the pilot beyond its original 24 semantic components. It adds selectable GPU-die, thermal-interface, candidate-fastener, PCIe-edge, fan-header, individual display-port, shunt-area, generic-passive and PCB-airflow-cutout entries with matching Blender scene nodes. Every new element carries English/Russian labels and an explicit evidence/geometry status.
 
-This is not yet a complete engineering reconstruction. Four GPU-area heatsink screws are photo-positioned from the exact XC BLACK review; four additional rear fastener nodes are uninstalled logical candidates from a related XC teardown and are not asserted as installed on this SKU. The candidate EVGA232 REV 1.0 board marking and PG190-A02 schematic lead do not establish the physical PCB identity. No pinout, VRM phase count, component values, fan RPM, screw torque or thermal-pad thickness is inferred.
+This is not yet a complete engineering reconstruction. Eight cooler/shroud retention screws are reported for the exact 12G-P5-3655-KR sample: four around GPU and four near the far end. Only four GPU-area centres are photo-positioned; four additional rear-area nodes are exact-SKU semantic items with `geometry_status: logical_only` until their individual coordinates can be calibrated. The candidate EVGA232 REV 1.0 board marking and PG190-A02 schematic lead do not establish the physical PCB identity. No pinout, VRM phase count, component values, fan RPM, screw torque or thermal-pad thickness is inferred.
 
 
 ### Fine-grained cooling decomposition
@@ -44,7 +44,7 @@ The development branch now expands the content graph to 127 semantic components 
 
 ### Partial teardown evidence
 
-The interactive assembly panel has two partial exact-model steps: four heatsink mounting screws around the GPU, followed by disconnection of both fan leads before separating the cooler/shroud. The eight-screw count from a related XC teardown is explicitly excluded from the exact-SKU procedure. The sequence is not a complete service guide; screw thread, driver/bit, torque, connector release geometry, thermal-pad specifications and reassembly order remain unverified.
+The interactive assembly panel has two partial exact-model steps: eight cooler/shroud retention screws (four around the GPU and four near the far end) according to the Tom's Hardware sample whose rear-PCB label identifies P/N 12G-P5-3655-KR, followed by disconnection of both fan leads before separating the cooler/shroud. The sequence is not a complete service guide; screw thread, driver/bit, torque, connector release geometry, thermal-pad specifications and reassembly order remain unverified.
 
 
 ### Reversible exploded assembly view
@@ -64,7 +64,7 @@ The exact 12G-P5-3655-KR XC BLACK review shows four heatsink mounting screws aro
 
 ### GDDR6 identity and bus mapping boundary
 
-The exact card has six visible GDDR6 package positions and a manufacturer-published 192-bit memory interface. The individual device markings and electrical mapping have not been confirmed from an exact-revision BoardView or schematic. The viewer separates the package positions from the logical interface presentation groups; no one-to-one channel mapping is claimed.
+The exact-SKU-linked Tom's Hardware teardown identifies six Samsung K4ZAF325BM-HC16 GDDR6 packages and states a 16-Gbps device rating. A secondary catalog supplies 16-Gbit density, 512M × 32 organisation and 180-FBGA package details. The EVGA-published 192-bit interface remains separate from the six logical presentation groups; no package-to-controller net or channel mapping is claimed.
 
 
 ### Four visible heatpipe terminal faces
