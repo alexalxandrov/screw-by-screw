@@ -2397,8 +2397,14 @@ function onCanvasClick(event) {
 }
 
 function bindUI() {
-  document.addEventListener("pointerdown", () => { state.userInteracted = true; }, { capture: true });
-  document.addEventListener("keydown", () => { state.userInteracted = true; }, { capture: true });
+  document.addEventListener("pointerdown", (event) => {
+    if (event.target instanceof Element && event.target.closest(".mobile-panel-switcher, #language-toggle")) return;
+    state.userInteracted = true;
+  }, { capture: true });
+  document.addEventListener("keydown", (event) => {
+    if (event.target instanceof Element && event.target.closest(".mobile-panel-switcher, #language-toggle")) return;
+    state.userInteracted = true;
+  }, { capture: true });
   document.querySelectorAll(".mobile-panel-button").forEach((button) => {
     button.addEventListener("click", () => setMobilePanel(button.dataset.mobilePanel));
   });
@@ -2532,15 +2538,26 @@ function bindUI() {
     }
   });
   document.querySelectorAll(".process-button").forEach((button) => {
-    button.addEventListener("click", () => setLayer(button.dataset.layer));
+    button.addEventListener("click", () => {
+      setLayer(button.dataset.layer);
+      if (button.dataset.layer !== "clear" && window.matchMedia("(max-width: 820px)").matches) {
+        setMobilePanel("details");
+      }
+    });
   });
   document.querySelectorAll(".view-tab").forEach((button) => {
     button.addEventListener("click", () => {
       document.querySelectorAll(".view-tab").forEach((tab) => tab.classList.toggle("active", tab === button));
       if (button.dataset.mode === "disassemble") { setLayer("clear"); setExplode(100); }
       if (button.dataset.mode === "explore") { setLayer("clear"); setExplode(0); }
-      if (button.dataset.mode === "understand") setLayer("cooling");
-      if (button.dataset.mode === "learn") showLearning();
+      if (button.dataset.mode === "understand") {
+        setLayer("cooling");
+        if (window.matchMedia("(max-width: 820px)").matches) setMobilePanel("details");
+      }
+      if (button.dataset.mode === "learn") {
+        showLearning();
+        if (window.matchMedia("(max-width: 820px)").matches) setMobilePanel("details");
+      }
       else if (state.learningMode) {
         state.learningMode = false;
         $("#learning-panel").hidden = true;
