@@ -422,8 +422,8 @@
         "src.gamersnexus.teardown"
       ],
       "description": {
-        "en": "A separate selectable group for the heatpipes visible in exact-model teardown references. The generated count, route and diameter are illustrative, not measured.",
-        "ru": "Отдельная группа тепловых трубок, видимых в разборках точной модели. Количество, трасса и диаметр в 3D-реконструкции условны и не измерены."
+        "en": "A selectable heatpipe assembly. The exact XC BLACK cooler photograph shows four copper terminal faces at the cooler end. This is a count of visible terminal faces only; the number of distinct U-shaped pipes, their internal route, diameter and flattened geometry remain unverified. The generated two-path representation is an illustrative routing proxy.",
+        "ru": "Выбираемая сборка тепловых трубок. На фотографии кулера точной XC BLACK видны четыре медных торцевых окончания. Это только количество видимых торцевых окончаний; число отдельных U-образных трубок, их внутренняя трасса, диаметр и сплющенная геометрия не подтверждены. Сгенерированное представление из двух трасс является условным макетом маршрута."
       }
     },
     {
@@ -2148,6 +2148,78 @@
       "description": {
         "en": "A logical presentation segment used only to divide the SKU's published 192-bit GDDR6 interface into six equal visual groups for navigation. This node is not a confirmed hardware memory channel, package-width assertion, controller partition, package-to-channel mapping or PCB net.",
         "ru": "Логический сегмент представления, используемый только для разделения опубликованного 192-битного интерфейса GDDR6 на шесть равных визуальных групп для навигации. Этот узел не подтверждает физический канал памяти, ширину корпуса, раздел контроллера, соответствие микросхеме или сеть дорожек PCB."
+      }
+    },
+    {
+      "id": "cooling.heatpipe.end.01",
+      "parent_id": "cooling.heatpipes",
+      "name": {
+        "en": "Visible copper heatpipe terminal 1",
+        "ru": "Видимое медное окончание тепловой трубки 1"
+      },
+      "category": "cooling",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "One of four copper heatpipe terminal faces visible at the cooler end in the exact EVGA RTX 3060 XC BLACK review photograph. The marker's 3D position and disc dimensions are approximate. A visible terminal face is not proof of the number of unique heatpipes or their internal route.",
+        "ru": "Одно из четырёх медных торцевых окончаний тепловых трубок, видимых на торце кулера на фотографии точной EVGA RTX 3060 XC BLACK. Положение маркера в 3D и размеры диска приблизительны. Видимое окончание не доказывает количество отдельных тепловых трубок или их внутреннюю трассу."
+      }
+    },
+    {
+      "id": "cooling.heatpipe.end.02",
+      "parent_id": "cooling.heatpipes",
+      "name": {
+        "en": "Visible copper heatpipe terminal 2",
+        "ru": "Видимое медное окончание тепловой трубки 2"
+      },
+      "category": "cooling",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "One of four copper heatpipe terminal faces visible at the cooler end in the exact EVGA RTX 3060 XC BLACK review photograph. The marker's 3D position and disc dimensions are approximate. A visible terminal face is not proof of the number of unique heatpipes or their internal route.",
+        "ru": "Одно из четырёх медных торцевых окончаний тепловых трубок, видимых на торце кулера на фотографии точной EVGA RTX 3060 XC BLACK. Положение маркера в 3D и размеры диска приблизительны. Видимое окончание не доказывает количество отдельных тепловых трубок или их внутреннюю трассу."
+      }
+    },
+    {
+      "id": "cooling.heatpipe.end.03",
+      "parent_id": "cooling.heatpipes",
+      "name": {
+        "en": "Visible copper heatpipe terminal 3",
+        "ru": "Видимое медное окончание тепловой трубки 3"
+      },
+      "category": "cooling",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "One of four copper heatpipe terminal faces visible at the cooler end in the exact EVGA RTX 3060 XC BLACK review photograph. The marker's 3D position and disc dimensions are approximate. A visible terminal face is not proof of the number of unique heatpipes or their internal route.",
+        "ru": "Одно из четырёх медных торцевых окончаний тепловых трубок, видимых на торце кулера на фотографии точной EVGA RTX 3060 XC BLACK. Положение маркера в 3D и размеры диска приблизительны. Видимое окончание не доказывает количество отдельных тепловых трубок или их внутреннюю трассу."
+      }
+    },
+    {
+      "id": "cooling.heatpipe.end.04",
+      "parent_id": "cooling.heatpipes",
+      "name": {
+        "en": "Visible copper heatpipe terminal 4",
+        "ru": "Видимое медное окончание тепловой трубки 4"
+      },
+      "category": "cooling",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.lanoc.review"
+      ],
+      "description": {
+        "en": "One of four copper heatpipe terminal faces visible at the cooler end in the exact EVGA RTX 3060 XC BLACK review photograph. The marker's 3D position and disc dimensions are approximate. A visible terminal face is not proof of the number of unique heatpipes or their internal route.",
+        "ru": "Одно из четырёх медных торцевых окончаний тепловых трубок, видимых на торце кулера на фотографии точной EVGA RTX 3060 XC BLACK. Положение маркера в 3D и размеры диска приблизительны. Видимое окончание не доказывает количество отдельных тепловых трубок или их внутреннюю трассу."
       }
     }
   ],
