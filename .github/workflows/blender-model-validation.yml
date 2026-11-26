@@ -102,7 +102,9 @@ jobs:
         run: |
           gzip -dk tools/modeling/build_ibm_pc_5150_blockout.py.gz
           gzip -dk tests/test_ibm_pc_5150_content.py.gz
-          gzip -dk content/models/ibm-pc-5150-1981/*.json.gz
+          for sidecar in model components relationships sources process_layers assembly_steps learning claims animations; do
+            gzip -dk "content/models/ibm-pc-5150-1981/${sidecar}.json.gz"
+          done
       - name: Generate IBM PC 5150 Blender scene and GLB
         run: |
           ./blender-4.3.2-linux-x64/blender --background --factory-startup --python-exit-code 1 --python tools/modeling/build_ibm_pc_5150_blockout.py
@@ -227,6 +229,7 @@ jobs:
           cp artifacts/ibm_pc_5150_1981.sbsmodel artifacts/ 2>/dev/null || true
           cp tools/modeling/build_ibm_pc_5150_blockout.py artifacts/ibm_pc_5150_blockout_source.py
           cp content/models/ibm-pc-5150-1981/components.json artifacts/ibm_pc_5150_components_source.json
+          cp tests/test_ibm_pc_5150_content.py artifacts/ibm_pc_5150_content_tests.py 2>/dev/null || true
       - uses: actions/upload-artifact@v4
         if: always()
         with:
