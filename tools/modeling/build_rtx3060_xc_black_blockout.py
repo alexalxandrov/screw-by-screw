@@ -952,7 +952,7 @@ def main():
             evidence=STATUS["manufacturer_data"], geometry="logical_only",
         )
 
-    # Memory subsystem and six logical package channels.
+    # Memory subsystem and six logical presentation segments; no package/channel map is asserted.
     memory_bus = make_assembly(
         "GDDR6 memory interface · 192-bit logical node",
         "chip.memory.gddr6.bus",
@@ -963,7 +963,7 @@ def main():
     for channel_index, (memory_x, memory_z) in enumerate(memory_centres, start=1):
         channel_id = "chip.memory.channel.{:02d}".format(channel_index)
         make_assembly(
-            "GDDR6 package channel {:02d} · 32-bit logical".format(channel_index),
+            "GDDR6 interface presentation segment {:02d} · logical only".format(channel_index),
             channel_id,
             (memory_x, half_y - PCB_THICKNESS / 2, memory_z),
             pcbcol, parent=memory_bus,
