@@ -1227,6 +1227,116 @@
         "src.dell.5060.storage"
       ],
       "notes": "SATA storage receives power from the PSU through the motherboard SATA power interface. The exact fitted harness route and drive population are unknown."
+    },
+    {
+      "id": "rel.contains.wireless_m2_module_optional",
+      "from": "motherboard.pcb",
+      "to": "wireless.m2_module.optional",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.board_connectors",
+        "src.dell.5060.storage"
+      ]
+    },
+    {
+      "id": "rel.contains.rear_video_typec_module_optional",
+      "from": "rear.io_region",
+      "to": "rear.video_typec_module.optional",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.screw_table",
+        "src.dell.5060.optional_video_module"
+      ]
+    },
+    {
+      "id": "rel.contains.wireless_antenna_internal_assembly",
+      "from": "chassis.frame",
+      "to": "wireless.antenna.internal.assembly",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.screw_table"
+      ]
+    },
+    {
+      "id": "rel.contains.wireless_antenna_internal_1_optional",
+      "from": "wireless.antenna.internal.assembly",
+      "to": "wireless.antenna.internal.1.optional",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.screw_table"
+      ]
+    },
+    {
+      "id": "rel.contains.wireless_antenna_internal_2_optional",
+      "from": "wireless.antenna.internal.assembly",
+      "to": "wireless.antenna.internal.2.optional",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.screw_table"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener_optional_sd_reader_01",
+      "from": "storage.sd_reader.optional",
+      "to": "fastener.optional.sd_reader.01",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.screw_table"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener_optional_wlan_01",
+      "from": "wireless.m2_module.optional",
+      "to": "fastener.optional.wlan.01",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.screw_table"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener_optional_m2ssd_01",
+      "from": "storage.m2.optional",
+      "to": "fastener.optional.m2ssd.01",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.screw_table"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener_optional_typec_01",
+      "from": "rear.video_typec_module.optional",
+      "to": "fastener.optional.typec.01",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.screw_table"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener_optional_typec_02",
+      "from": "rear.video_typec_module.optional",
+      "to": "fastener.optional.typec.02",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.screw_table"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener_optional_antenna_01",
+      "from": "wireless.antenna.internal.1.optional",
+      "to": "fastener.optional.antenna.01",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.screw_table"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener_optional_antenna_02",
+      "from": "wireless.antenna.internal.2.optional",
+      "to": "fastener.optional.antenna.02",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.5060.screw_table"
+      ]
     }
   ]
 }
