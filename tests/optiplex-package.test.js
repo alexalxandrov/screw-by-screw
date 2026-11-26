@@ -24,8 +24,8 @@ test("OptiPlex reference package passes the production package loader and checks
   assert.equal(loaded.data.model.specifications.physical.width_mm, 154);
   assert.equal(loaded.data.model.specifications.physical.depth_mm, 274);
   assert.equal(loaded.data.components.components.filter((component) => component.category === "fastener").length, 24);
-  assert.equal(loaded.data.sources.sources.length, 15);
-  assert.equal(loaded.data.claims.claims.length, 29);
+  assert.equal(loaded.data.sources.sources.length, 18);
+  assert.equal(loaded.data.claims.claims.length, 30);
   assert.equal(loaded.data.process_layers.process_layers.length, 6);
   assert.equal(loaded.data.assembly_steps.steps.length, 12);
   assert.equal(loaded.data.learning.questions.length, 9);
@@ -79,6 +79,19 @@ test("OptiPlex reference package passes the production package loader and checks
 
   assert.deepEqual(loaded.data.model.specifications.motherboard.callouts.find((entry) => entry.number === 24).component_ids, ["motherboard.m2.wlan"]);
   assert.deepEqual(loaded.data.model.specifications.motherboard.callouts.find((entry) => entry.number === 25).component_ids, ["motherboard.coin_cell"]);
+  const supportedCpus = loaded.data.model.specifications.platform.supported_processors;
+  const g5400 = supportedCpus.find((cpu) => cpu.model === "Pentium Gold G5400");
+  const g5500 = supportedCpus.find((cpu) => cpu.model === "Pentium Gold G5500");
+  assert.equal(g5400.intel_ark_tdp_w, 58);
+  assert.equal(g5400.dell_datasheet_power_rating_w, 65);
+  assert.equal(g5400.integrated_graphics, "UHD Graphics 610");
+  assert.equal(g5500.intel_ark_tdp_w, 54);
+  assert.equal(g5500.dell_datasheet_power_rating_w, 65);
+  assert.equal(g5500.integrated_graphics, "UHD Graphics 630");
+  assert.ok(sourceIds.has("src.dell.5060.spec_sheet"));
+  assert.ok(sourceIds.has("src.intel.g5400"));
+  assert.ok(sourceIds.has("src.intel.g5500"));
+  assert.equal(loaded.data.claims.claims.find((claim) => claim.id === "claim.cpu.power_rating_discrepancy").value["Pentium Gold G5500"].intel_ark_tdp_w, 54);
   assert.equal(loaded.data.animations.clips.length, 0);
 });
 
