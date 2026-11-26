@@ -1225,6 +1225,372 @@
           ]
         }
       }
+    },
+    {
+      "id": "process.gpu.graphics.paths",
+      "type": "graphics_pipeline",
+      "title": {
+        "en": "GA106 graphics workloads and display paths",
+        "ru": "Графические тракты GA106 и видеовыходы"
+      },
+      "mode": "logical_architecture",
+      "linked_component_ids": [
+        "pcb.connector.pcie",
+        "chip.gpu.ga106",
+        "chip.gpu.die",
+        "chip.gpu.polymorph.array",
+        "chip.gpu.sm.cluster",
+        "chip.gpu.tmu.array",
+        "chip.gpu.rt_core.array",
+        "chip.gpu.tensor_core.array",
+        "chip.gpu.rop.array",
+        "chip.memory.gddr6.bus",
+        "chip.memory.candidate.1",
+        "chip.memory.candidate.2",
+        "chip.memory.candidate.3",
+        "chip.memory.candidate.4",
+        "chip.memory.candidate.5",
+        "chip.memory.candidate.6",
+        "connector.displayport.1",
+        "connector.displayport.2",
+        "connector.displayport.3",
+        "connector.hdmi.1"
+      ],
+      "description": {
+        "en": "This conceptual map follows a teaching route from the host-facing PCIe connector through the GA106 device, its geometry/programmable resources and workload-dependent specialist units, to raster output, GDDR6 memory and external display connectors. It is not a fixed serial pipeline: real workloads branch, overlap and reuse resources according to the API, driver, shader program and render technique. The diagram does not represent the exact GA106 floorplan, GPC distribution, cache topology, instruction timing, memory-controller routing, display-engine internals or PCB nets.",
+        "ru": "Эта концептуальная карта показывает учебный маршрут от внешнего интерфейса PCIe через устройство GA106, его ресурсы геометрии/программируемых задач и специализированные блоки конкретных нагрузок к растровому выводу, памяти GDDR6 и внешним видеовыходам. Это не фиксированный последовательный конвейер: реальные нагрузки ветвятся, выполняются параллельно и повторно используют ресурсы в зависимости от API, драйвера, шейдерной программы и метода рендеринга. Схема не изображает точную топологию кристалла GA106, распределение GPC, структуру кэшей, тактирование инструкций, разводку контроллеров памяти, внутреннее устройство display engine или дорожки PCB."
+      },
+      "assumptions": [
+        {
+          "en": "Vertical group order is a teaching aid. It does not assert that every frame visits every block in this order or that the resources execute serially.",
+          "ru": "Вертикальный порядок групп нужен только для обучения. Он не означает, что каждый кадр проходит все блоки в этом порядке или что ресурсы работают строго последовательно."
+        },
+        {
+          "en": "The GA10x whitepaper is used for architecture-common SM/TPC resource descriptions. The GA102 physical block layout and GPC arrangement are not transferred to GA106.",
+          "ru": "Whitepaper GA10x используется для описания общих ресурсов SM/TPC. Физическая схема блоков и распределение GPC у GA102 не переносятся на GA106."
+        },
+        {
+          "en": "RT and Tensor Cores are specialized resources used by supported workloads; they are not mandatory stages in ordinary raster rendering.",
+          "ru": "RT- и Tensor Core — специализированные ресурсы для совместимых нагрузок; они не являются обязательными этапами обычного растрового рендеринга."
+        },
+        {
+          "en": "The six GDDR6 package nodes are sample-observed devices. Their individual channel assignments, traces and memory-controller topology remain unknown.",
+          "ru": "Шесть узлов корпусов GDDR6 соответствуют микросхемам, наблюдавшимся в образце. Их назначение по каналам, дорожки и топология контроллеров памяти неизвестны."
+        },
+        {
+          "en": "The three DisplayPort 1.4a and one HDMI 2.1 outputs are product-level specifications. Connector shell geometry and the display controller's internal design are not reconstructed.",
+          "ru": "Три выхода DisplayPort 1.4a и один HDMI 2.1 — спецификация продукта. Геометрия корпусов разъёмов и внутреннее устройство контроллера дисплея не восстановлены."
+        },
+        {
+          "en": "This is a logical architecture map, not a physical die floorplan, electrical schematic, PCB netlist, timing model, performance model or simulation.",
+          "ru": "Это логическая архитектурная карта, а не физическая топология кристалла, электрическая схема, список сетей PCB, модель тактирования/производительности или симуляция."
+        }
+      ],
+      "source_ids": [
+        "src.evga.spec",
+        "src.nvidia.rtx3060.architecture",
+        "src.tomshardware.rtx3060.specs",
+        "src.nvidia.ampere.whitepaper",
+        "src.neoseeker.review",
+        "src.tomshardware.teardown"
+      ],
+      "visualization": {
+        "kind": "selectable_workload_groups",
+        "not_a_simulation": true,
+        "diagram": {
+          "badge": {
+            "en": "CONCEPTUAL MAP · NOT A FIXED PIPELINE, FLOORPLAN OR BOARD ROUTING",
+            "ru": "КОНЦЕПТУАЛЬНАЯ КАРТА · НЕ ФИКСИРОВАННЫЙ КОНВЕЙЕР, ТОПОГРАФИЯ КРИСТАЛЛА ИЛИ РАЗВОДКА ПЛАТЫ"
+          },
+          "groups": [
+            {
+              "id": "host-and-device",
+              "title": {
+                "en": "1 · Host interface and GPU",
+                "ru": "1 · Интерфейс с хостом и GPU"
+              },
+              "summary": {
+                "en": "The PCIe edge connector is the physical host-facing endpoint; the GA106 package is the processing device. Driver queues and dispatch timing are not modelled.",
+                "ru": "Разъём PCIe — физический интерфейс со стороны хоста; корпус GA106 — вычислительное устройство. Очереди драйвера и расписание отправки задач не моделируются."
+              },
+              "nodes": [
+                {
+                  "component_id": "pcb.connector.pcie",
+                  "title": {
+                    "en": "PCI Express edge connector",
+                    "ru": "Разъём PCI Express"
+                  },
+                  "metric": {
+                    "en": "Physical host interface · connector proxy",
+                    "ru": "Физический интерфейс с хостом · макет разъёма"
+                  }
+                },
+                {
+                  "component_id": "chip.gpu.ga106",
+                  "title": {
+                    "en": "GA106 GPU package",
+                    "ru": "Корпус GPU GA106"
+                  },
+                  "metric": {
+                    "en": "GPU device context",
+                    "ru": "Контекст графического процессора"
+                  }
+                },
+                {
+                  "component_id": "chip.gpu.die",
+                  "title": {
+                    "en": "GA106 silicon die",
+                    "ru": "Кристалл GA106"
+                  },
+                  "metric": {
+                    "en": "28-SM RTX 3060 configuration · logical device model",
+                    "ru": "Конфигурация RTX 3060 с 28 SM · логическая модель устройства"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "geometry-and-programmable-work",
+              "title": {
+                "en": "2 · Geometry and programmable work",
+                "ru": "2 · Геометрия и программируемые задачи"
+              },
+              "summary": {
+                "en": "Geometry/primitive work and programmable shader or compute work are represented by logical resource groups, not physical die positions.",
+                "ru": "Работа с геометрией/примитивами и программируемые шейдерные или вычислительные задачи представлены логическими группами ресурсов, а не физическими координатами на кристалле."
+              },
+              "nodes": [
+                {
+                  "component_id": "chip.gpu.polymorph.array",
+                  "title": {
+                    "en": "PolyMorph Engine aggregate",
+                    "ru": "Агрегат PolyMorph Engine"
+                  },
+                  "metric": {
+                    "en": "14 logical instances · 2 SMs per GA10x TPC",
+                    "ru": "14 логических экземпляров · 2 SM на TPC GA10x"
+                  }
+                },
+                {
+                  "component_id": "chip.gpu.sm.cluster",
+                  "title": {
+                    "en": "Streaming multiprocessor cluster",
+                    "ru": "Кластер потоковых мультипроцессоров"
+                  },
+                  "metric": {
+                    "en": "28 SMs · RTX 3060 configuration",
+                    "ru": "28 SM · конфигурация RTX 3060"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "workload-dependent-units",
+              "title": {
+                "en": "3 · Workload-dependent specialized units",
+                "ru": "3 · Специализированные блоки в зависимости от нагрузки"
+              },
+              "summary": {
+                "en": "Texture sampling, ray-tracing acceleration and tensor operations are specialized resources. They are workload-dependent paths, not mandatory consecutive stages.",
+                "ru": "Текстурная выборка, аппаратное ускорение трассировки лучей и тензорные операции — специализированные ресурсы. Это пути для определённых нагрузок, а не обязательные последовательные этапы."
+              },
+              "nodes": [
+                {
+                  "component_id": "chip.gpu.tmu.array",
+                  "title": {
+                    "en": "Texture mapping units",
+                    "ru": "Текстурные блоки"
+                  },
+                  "metric": {
+                    "en": "112 TMUs · aggregate configuration",
+                    "ru": "112 TMU · суммарная конфигурация"
+                  }
+                },
+                {
+                  "component_id": "chip.gpu.rt_core.array",
+                  "title": {
+                    "en": "Second-generation RT Cores",
+                    "ru": "RT-ядра второго поколения"
+                  },
+                  "metric": {
+                    "en": "28 RT Cores · ray-tracing path",
+                    "ru": "28 RT-ядер · путь трассировки лучей"
+                  }
+                },
+                {
+                  "component_id": "chip.gpu.tensor_core.array",
+                  "title": {
+                    "en": "Third-generation Tensor Cores",
+                    "ru": "Тензорные ядра третьего поколения"
+                  },
+                  "metric": {
+                    "en": "112 Tensor Cores · tensor/AI workloads",
+                    "ru": "112 Tensor Core · тензорные/AI-нагрузки"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "raster-and-memory",
+              "title": {
+                "en": "4 · Raster output and frame-buffer memory",
+                "ru": "4 · Растровый вывод и видеопамять"
+              },
+              "summary": {
+                "en": "ROP resources handle raster-output operations; the 192-bit GDDR6 interface connects the GPU to six observed memory packages. Per-package channel or PCB-net mapping is not established.",
+                "ru": "Блоки ROP выполняют операции растрового вывода; 192-битный интерфейс GDDR6 связывает GPU с шестью наблюдавшимися микросхемами памяти. Соответствие отдельных корпусов каналам или дорожкам PCB не установлено."
+              },
+              "nodes": [
+                {
+                  "component_id": "chip.gpu.rop.array",
+                  "title": {
+                    "en": "Raster operations units",
+                    "ru": "Блоки растровых операций"
+                  },
+                  "metric": {
+                    "en": "48 ROPs · aggregate RTX 3060 configuration",
+                    "ru": "48 ROP · суммарная конфигурация RTX 3060"
+                  }
+                },
+                {
+                  "component_id": "chip.memory.gddr6.bus",
+                  "title": {
+                    "en": "GDDR6 memory interface",
+                    "ru": "Интерфейс памяти GDDR6"
+                  },
+                  "metric": {
+                    "en": "192-bit interface · manufacturer specification",
+                    "ru": "Интерфейс 192 бит · спецификация производителя"
+                  }
+                },
+                {
+                  "component_id": "chip.memory.candidate.1",
+                  "title": {
+                    "en": "Installed GDDR6 package 1",
+                    "ru": "Установленный корпус GDDR6 1"
+                  },
+                  "metric": {
+                    "en": "One of six packages observed in the exact-SKU-linked teardown sample",
+                    "ru": "Один из шести корпусов в образце разборки, связанном с точным SKU"
+                  }
+                },
+                {
+                  "component_id": "chip.memory.candidate.2",
+                  "title": {
+                    "en": "Installed GDDR6 package 2",
+                    "ru": "Установленный корпус GDDR6 2"
+                  },
+                  "metric": {
+                    "en": "One of six packages observed in the exact-SKU-linked teardown sample",
+                    "ru": "Один из шести корпусов в образце разборки, связанном с точным SKU"
+                  }
+                },
+                {
+                  "component_id": "chip.memory.candidate.3",
+                  "title": {
+                    "en": "Installed GDDR6 package 3",
+                    "ru": "Установленный корпус GDDR6 3"
+                  },
+                  "metric": {
+                    "en": "One of six packages observed in the exact-SKU-linked teardown sample",
+                    "ru": "Один из шести корпусов в образце разборки, связанном с точным SKU"
+                  }
+                },
+                {
+                  "component_id": "chip.memory.candidate.4",
+                  "title": {
+                    "en": "Installed GDDR6 package 4",
+                    "ru": "Установленный корпус GDDR6 4"
+                  },
+                  "metric": {
+                    "en": "One of six packages observed in the exact-SKU-linked teardown sample",
+                    "ru": "Один из шести корпусов в образце разборки, связанном с точным SKU"
+                  }
+                },
+                {
+                  "component_id": "chip.memory.candidate.5",
+                  "title": {
+                    "en": "Installed GDDR6 package 5",
+                    "ru": "Установленный корпус GDDR6 5"
+                  },
+                  "metric": {
+                    "en": "One of six packages observed in the exact-SKU-linked teardown sample",
+                    "ru": "Один из шести корпусов в образце разборки, связанном с точным SKU"
+                  }
+                },
+                {
+                  "component_id": "chip.memory.candidate.6",
+                  "title": {
+                    "en": "Installed GDDR6 package 6",
+                    "ru": "Установленный корпус GDDR6 6"
+                  },
+                  "metric": {
+                    "en": "One of six packages observed in the exact-SKU-linked teardown sample",
+                    "ru": "Один из шести корпусов в образце разборки, связанном с точным SKU"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "display-endpoints",
+              "title": {
+                "en": "5 · Display endpoints",
+                "ru": "5 · Видеовыходы"
+              },
+              "summary": {
+                "en": "The exact retail SKU is specified with three DisplayPort 1.4a outputs and one HDMI 2.1 output. Connector shells remain illustrative proxies.",
+                "ru": "Для точного розничного SKU указаны три выхода DisplayPort 1.4a и один HDMI 2.1. Корпуса разъёмов остаются условными макетами."
+              },
+              "nodes": [
+                {
+                  "component_id": "connector.displayport.1",
+                  "title": {
+                    "en": "DisplayPort receptacle 1",
+                    "ru": "Разъём DisplayPort 1"
+                  },
+                  "metric": {
+                    "en": "DisplayPort 1.4a · output 1",
+                    "ru": "DisplayPort 1.4a · выход 1"
+                  }
+                },
+                {
+                  "component_id": "connector.displayport.2",
+                  "title": {
+                    "en": "DisplayPort receptacle 2",
+                    "ru": "Разъём DisplayPort 2"
+                  },
+                  "metric": {
+                    "en": "DisplayPort 1.4a · output 2",
+                    "ru": "DisplayPort 1.4a · выход 2"
+                  }
+                },
+                {
+                  "component_id": "connector.displayport.3",
+                  "title": {
+                    "en": "DisplayPort receptacle 3",
+                    "ru": "Разъём DisplayPort 3"
+                  },
+                  "metric": {
+                    "en": "DisplayPort 1.4a · output 3",
+                    "ru": "DisplayPort 1.4a · выход 3"
+                  }
+                },
+                {
+                  "component_id": "connector.hdmi.1",
+                  "title": {
+                    "en": "HDMI receptacle",
+                    "ru": "Разъём HDMI"
+                  },
+                  "metric": {
+                    "en": "HDMI 2.1 · output 4",
+                    "ru": "HDMI 2.1 · выход 4"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
     }
   ]
 }

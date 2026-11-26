@@ -36,6 +36,22 @@ test("binds the power process layer from package relationships", async ({ page }
   await expect(page.locator("#process-components button")).toHaveCount(4);
 });
 
+test("renders conceptual GPU graphics paths and selects a linked architecture node", async ({ page }) => {
+  const pageErrors = [];
+  page.on("pageerror", (error) => pageErrors.push(error.message));
+  await page.goto("/");
+  await page.locator('.process-button[data-layer="graphics_pipeline"]').click();
+  await expect(page.locator("#process-details")).toBeVisible();
+  await expect(page.locator("#process-detail-title")).toHaveText("Графические тракты GA106 и видеовыходы");
+  await expect(page.locator("#process-diagram .architecture-diagram-group")).toHaveCount(5);
+  const rops = page.locator('#process-diagram .architecture-node[data-component-id="chip.gpu.rop.array"]');
+  await expect(rops).toBeVisible();
+  await rops.click();
+  await expect(page.locator("#component-details")).toBeVisible();
+  await expect(page.locator("#detail-id")).toHaveText("chip.gpu.rop.array");
+  expect(pageErrors).toEqual([]);
+});
+
 test("allows an animated explode sequence to be cancelled and reassembled", async ({ page }) => {
   await page.goto("/");
   const button = page.locator("#animate-button");

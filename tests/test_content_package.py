@@ -301,11 +301,28 @@ class ContentPackageTests(unittest.TestCase):
         self.assertIn("Relationships: 322", report)
         self.assertIn("Animation clips: 2", report)
         self.assertEqual(len(package["claims"]["claims"]), 111)
-        self.assertEqual(len(package["process_layers"]["process_layers"]), 3)
+        self.assertEqual(len(package["process_layers"]["process_layers"]), 4)
         power_layer = next(layer for layer in package["process_layers"]["process_layers"] if layer["id"] == "process.power.qualitative")
         self.assertEqual(len(power_layer["linked_component_ids"]), 12)
         self.assertIn("src.gamersnexus.teardown", power_layer["source_ids"])
         self.assertIn("5 mΩ current-sense shunt", power_layer["description"]["en"])
+        graphics_layer = next(layer for layer in package["process_layers"]["process_layers"] if layer["type"] == "graphics_pipeline")
+        self.assertEqual(graphics_layer["mode"], "logical_architecture")
+        self.assertEqual(len(graphics_layer["visualization"]["diagram"]["groups"]), 5)
+        graphics_node_ids = {
+            node["component_id"]
+            for group in graphics_layer["visualization"]["diagram"]["groups"]
+            for node in group["nodes"]
+        }
+        self.assertEqual(graphics_node_ids, set(graphics_layer["linked_component_ids"]))
+        self.assertTrue(graphics_node_ids <= set(components))
+        self.assertIn("chip.gpu.rop.array", graphics_node_ids)
+        self.assertIn("chip.memory.gddr6.bus", graphics_node_ids)
+        self.assertIn("connector.displayport.3", graphics_node_ids)
+        self.assertIn("connector.hdmi.1", graphics_node_ids)
+        self.assertIn("src.nvidia.ampere.whitepaper", graphics_layer["source_ids"])
+        self.assertIn("src.neoseeker.review", graphics_layer["source_ids"])
+        self.assertIn("not a fixed", graphics_layer["description"]["en"])
         self.assertEqual(len(package["learning"]["questions"]), 13)
         self.assertEqual(len(package["assembly_steps"]["steps"]), 5)
         self.assertEqual(claims["claim.cooler.fin_stack_base.screw_count"]["value"], 2)

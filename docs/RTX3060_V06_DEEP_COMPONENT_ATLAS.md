@@ -201,3 +201,14 @@ Seven additional fasteners are now separate selectable logical-only components b
 ## 32. Unpopulated memory locations
 
 The exact-SKU-linked Tom's Hardware teardown describes two unused memory locations on the PCB in addition to six installed Samsung K4ZAF325BM-HC16 packages. The canonical graph exposes one parent group and two individually selectable logical-only PCB position nodes. Their coordinates, pad geometry, electrical nets, compatibility and population potential are not established. The 192-bit bus and six installed devices remain separate evidence; no package-to-channel map is inferred.
+
+
+## 33. Conceptual graphics workload and display-path map
+
+The package adds a fourth selectable process layer, `graphics_pipeline`, with five bilingual groups: host interface and GPU; geometry/programming resources; workload-dependent TMU, RT and Tensor units; ROP output and GDDR6 memory; and the four display endpoints. It links existing stable IDs only and does not add fictional die blocks or claim PCB wiring.
+
+The map uses the exact-SKU display-output specification (three DisplayPort 1.4a and one HDMI 2.1), the published 192-bit memory interface, and the published RTX 3060 resource configuration. Six GDDR6 package nodes are included as separately observed devices; no individual package-to-channel assignment is asserted.
+
+The visual group order is instructional, not a fixed serial pipeline. Shaders, texture sampling, RT and Tensor operations, memory traffic and raster output may branch, overlap or be bypassed according to workload. The map does not reconstruct the GA106 physical floorplan/GPC layout, instruction timing, cache path, memory-controller topology, display-engine internals or PCB nets. RT/Tensor paths are workload-dependent, not mandatory stages.
+
+The generic renderer reuses the existing selectable process-diagram component; package tests verify all diagram IDs and five groups; the browser suite selects the ROP node through the new layer. Latest-head GitHub Actions still needs runner allocation before these tests can be certified remotely.
