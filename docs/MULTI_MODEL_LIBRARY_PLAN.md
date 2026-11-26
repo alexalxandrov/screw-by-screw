@@ -10,7 +10,7 @@
 - Runtime startup now resolves the default entry from `content/catalog/models.json`. The RTX 3060 is still the default, but `src/main.js` and `src/data/model.js` no longer import its sidecar JSON as a special startup path.
 - Startup and later catalogue switching use the same `.sbsmodel` loader.
 - The OptiPlex v0.1 archive remains available at `public/models/dell_optiplex_5060_tower_v01.sbsmodel`; the expanded v0.2 package is stored at `public/models/dell_optiplex_5060_tower_v02.sbsmodel`; editable source data lives in `content/models/dell-optiplex-5060-tower-family/`.
-- The OptiPlex package has 115 semantic component nodes, 123 typed relationships, 58 box-proxy geometry nodes, 24 individual screw/grommet instances, 15 source records, 31 claims, six qualitative process layers, 12 documented partial service steps and nine learning questions.
+- The OptiPlex v0.2 package has 115 semantic component nodes, 123 typed relationships, 58 box-proxy geometry nodes, 24 individual screw/grommet instances, 15 source records, 31 claims, six qualitative process layers, 12 documented partial service steps and nine learning questions. All 26 numbered motherboard callouts map to 29 component references.
 - Its scene can be regenerated from per-component `visual_proxy` metadata by `tools/modeling/build_device_blockout.py`; a dedicated workflow rebuilds the scene and package and tests the production package loader with checksums.
 - The catalogue UI already supports category filters, text search, model identity, package version and geometry status.
 
@@ -62,7 +62,7 @@ Do not use one package-wide accuracy label to imply every part has equal certain
 1. **Done:** add identity scope/model kind and a multi-category catalogue.
 2. **Done:** remove RTX-specific sidecar imports from viewer startup.
 3. **Done:** register a second system-level model and create its portable package.
-4. **Done:** add a reproducible GLB generator and dedicated package-validation workflow.
+4. **Done:** add a reproducible GLB generator and dedicated package-validation workflow. The text-envelope builder checks exact UTF-8 sidecars and SHA-256 values, parses both GLB scene graphs for semantic equality, and requires the GLB binary geometry chunk to match byte-for-byte. A fresh CI result for the latest v0.2 commits is still pending.
 5. **In progress:** finish the viewer browser suite and verify standalone offline opening of both model packages.
 6. Generalize the legacy RTX-specific Blender/build/validation pipeline.
 7. Add versioned cross-package component references.
