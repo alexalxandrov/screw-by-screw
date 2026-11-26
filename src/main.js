@@ -557,6 +557,12 @@ function createFan(parent, index, x) {
     tag(bladeMesh, `fan.${index}.blade.${blade + 1}`);
     rotor.add(bladeMesh);
   }
+  // Exact-model teardown: three screws per replaceable fan; individual positions unknown.
+  for (let screwIndex = 1; screwIndex <= 3; screwIndex += 1) {
+    const screwId = `fastener.fan.${index}.${String(screwIndex).padStart(2, "0")}`;
+    makeGroup(fan, screwId, `Fan ${index} mounting screw ${screwIndex} · location unmapped`,
+      [0, 0, 0], "visible_exact_model", "logical_only");
+  }
 }
 
 function createFallbackModel() {
@@ -652,8 +658,10 @@ function createFallbackModel() {
       new THREE.BoxGeometry(14, 0.65, 12), materials.metal, [x, -5.6, 57], "illustrative");
   }
   const vrmPads = makeGroup(thermalInterface, "cooling.thermal_pad.vrm", "Power-stage thermal pads", [0, 0, 0], "teardown_supported", "illustrative_proxy");
-  makeMesh(vrmPads, "cooling.thermal_pad.vrm.01", "VRM thermal pad strip proxy",
+  makeMesh(vrmPads, "cooling.thermal_pad.vrm.01", "Inductor-area thermal pad proxy · contact extent unmeasured",
     new THREE.BoxGeometry(34, 0.65, 18), materials.metal, [145, -5.6, 78], "illustrative");
+  makeMesh(thermalInterface, "cooling.vrm.copper_contact", "Copper plate contacting MOSFET row · proxy",
+    new THREE.BoxGeometry(38, 1, 17), materials.copper, [147, -4.8, 64], "teardown_supported");
 
   const heatpipes = makeGroup(cooling, "cooling.heatpipes", "Heatpipe group · illustrative");
   const pipeMaterial = new THREE.MeshStandardMaterial({ color: 0xb97845, metalness: 0.78, roughness: 0.32 });
@@ -702,6 +710,22 @@ function createFallbackModel() {
     part.name = "Unidentified power-stage proxy";
     powerStage.add(part);
   });
+  const shuntCluster = makeGroup(powerStage, "power.shunt.cluster", "Two current-sense shunts · proxy");
+  makeMesh(shuntCluster, "power.shunt.8pin", "Auxiliary 8-pin shunt · 5 mΩ stated",
+    new THREE.BoxGeometry(3, 1.2, 2), materials.metal, [-18, -2, -15], "teardown_supported");
+  makeGroup(shuntCluster, "power.shunt.pcie_slot", "PCIe-slot 12 V shunt · value unknown",
+    [-10, -2, -15], "teardown_supported", "logical_only");
+  makeGroup(powerStage, "power.fuse.input", "Input protection fuse · rating unknown",
+    [22, -2, 12], "teardown_supported", "logical_only");
+  const mosfetRow = makeGroup(powerStage, "power.switching_device.cluster", "MOSFET row · copper plate contact");
+  for (let index = 0; index < 6; index += 1) {
+    makeMesh(mosfetRow, `power.switching_device.proxy.${index + 1}`, `MOSFET visual proxy ${index + 1}`,
+      new THREE.BoxGeometry(3.5, 2, 4), materials.connector, [-9 + index * 5, -2, -13]);
+  }
+  makeGroup(powerStage, "power.inductor.candidate.1", "Inductor 1 · exact teardown observed",
+    [-4, -2, -5], "teardown_supported", "illustrative_proxy");
+  makeGroup(powerStage, "power.inductor.candidate.2", "Inductor 2 · exact teardown observed",
+    [12, -2, 8], "teardown_supported", "illustrative_proxy");
   for (let index = 0; index < 6; index += 1) {
     makeMesh(pcbAssembly, `chip.memory.candidate.${index + 1}`, `GDDR6 candidate ${index + 1}`,
       new THREE.BoxGeometry(14, 4, 12), materials.memory,
