@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { strToU8, zipSync } from "fflate";
 import { loadModelPackage, validateModelPackageData } from "../src/viewer/ModelPackageLoader.js";
+import { createModelDataAdapter } from "../src/data/model.js";
 
 const modelId = "test.device";
 
@@ -105,7 +106,7 @@ test("validates the committed RTX 3060 model package sidecars", () => {
   assert.equal(report.modelId, "gpu.evga.12g-p5-3655-kr");
   assert.equal(report.componentCount, 313);
   assert.equal(report.relationshipCount, 311);
-  assert.equal(report.sourceCount, 26);
+  assert.equal(report.sourceCount, 29);
 });
 
 test("loads a valid portable model package and validates all references", async () => {
@@ -289,4 +290,31 @@ test("allows an explicitly educational animation without a source but requires a
   assert.doesNotThrow(() => validateModelPackageData(testManifest(), data));
   delete data.animations.clips[0].evidence_status;
   assert.throws(() => validateModelPackageData(testManifest(), data), /evidence_status/);
+});
+
+
+test("preserves extended source metadata for linked claim references", () => {
+  const identityImage = "https://cdn.example.invalid/pcb-label.jpg";
+  const identityPage = "https://example.invalid/review";
+  const source = {
+    id: "src.identity",
+    title: "Exact retail SKU identity photograph",
+    url: "https://example.invalid/teardown",
+    applicability: "Exact retail sample P/N 12G-P5-3655-KR",
+    identity_reference_url: identityPage,
+    identity_reference_image_url: identityImage,
+    identity_locator: "Rear PCB product sticker"
+  };
+  const adapter = createModelDataAdapter({
+    model: { id: "test.device", manufacturer: "Test" },
+    sources: { sources: [source] },
+    components: { components: [{ id: "root", source_ids: ["src.identity"] }] }
+  });
+
+  assert.equal(adapter.model.sources.length, 1);
+  assert.equal(adapter.model.sources[0].label, source.title);
+  assert.equal(adapter.model.sources[0].identity_reference_url, identityPage);
+  assert.equal(adapter.model.sources[0].identity_reference_image_url, identityImage);
+  assert.equal(adapter.model.sources[0].identity_locator, "Rear PCB product sticker");
+  assert.equal(adapter.model.sources[0].applicability, source.applicability);
 });
