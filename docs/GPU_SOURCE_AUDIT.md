@@ -228,3 +228,12 @@ A second directory index labels a file `EVGA RTX 3060 12 GB BIOS (XC)` and a sep
 The Tom's Hardware review is no longer treated as a generic/related RTX 3060 XC variant source. The main review's rear-PCB label is legible as `P/N: 12G-P5-3655-KR`. The teardown discussion and images on page 2 belong to the same review sample. This is the provenance link used for the eight-screw cooler-retention count and Samsung K4ZAF325BM-HC16 package identity. It does not automatically establish the exact PCB revision, individual component coordinates or electrical nets.
 
 The source registry records the main-page identity photo URL and the direct image locator. The image itself is not copied or redistributed; the repository stores only attribution, source URL and the observed part-number text.
+
+
+### 12.2. Direct PDF text-layer audit: reference-board boundary
+
+The indexed PDF was opened directly and its text layer parsed. The internal title block identifies an NVIDIA drawing `600-1G190-BASE-A02`, `PCB REV PG190-A02`, `BOM REV A`, dated **12 June 2020**. It is a 50-page NVIDIA reference-design schematic. The file name supplied by the third-party directory includes "EVGA232 RTX 2070 RTX3060", but the document body/title block does **not** mention `EVGA232` or retail part number `12G-P5-3655-KR`.
+
+The page-2 text-layer block diagram names `NVVDD-PH1` through `NVVDD-PH8` and `FBVDDQ-PH1` / `FBVDDQ-PH2`. Those are phases in the PG190-A02 reference design, **not an established phase count for the EVGA XC BLACK card**. This distinction is particularly important because published reviews of different EVGA RTX 3060 XC variants describe differing PCB/cooler configurations. No exact-SKU VRM claim, net, component placement, controller, MOSFET identity, or BOM is derived from this file.
+
+The web PDF text extraction succeeded, but the screenshot endpoint returned a cache miss for the requested pages. Therefore no page artwork, exact component value, trace path, or symbol-to-footprint interpretation was extracted. No BoardView is listed in the independent catalogue entry, and no BoardView file was verified. The PDF is not redistributed from this repository.
