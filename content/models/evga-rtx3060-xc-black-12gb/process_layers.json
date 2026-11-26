@@ -20,6 +20,10 @@
         "cooling.heatpipes",
         "cooling.heatpipe.candidate.1",
         "cooling.heatpipe.candidate.2",
+        "cooling.heatpipe.end.01",
+        "cooling.heatpipe.end.02",
+        "cooling.heatpipe.end.03",
+        "cooling.heatpipe.end.04",
         "cooling.heatsink",
         "cooling.heatsink.fin.01",
         "assembly.cooling",
@@ -164,8 +168,8 @@
                 "ru": "2 · Перенос тепла"
               },
               "summary": {
-                "en": "Heatpipe presence is teardown-supported; two generated paths are illustrative candidates",
-                "ru": "Наличие тепловых трубок подтверждается разборкой; две построенные трассы — условные кандидаты"
+                "en": "The exact cooler-end photo shows four copper terminal faces; this is not a count of unique heatpipes",
+                "ru": "На точной фотографии торца кулера видны четыре медных окончания; это не подсчёт отдельных тепловых трубок"
               },
               "nodes": [
                 {
@@ -199,6 +203,50 @@
                   "metric": {
                     "en": "Illustrative 3D route",
                     "ru": "Условная 3D-трасса"
+                  }
+                },
+                {
+                  "component_id": "cooling.heatpipe.end.01",
+                  "title": {
+                    "en": "Copper terminal face 01",
+                    "ru": "Медное окончание 01"
+                  },
+                  "metric": {
+                    "en": "Visible in exact cooler-end photo",
+                    "ru": "Видно на фотографии торца точного кулера"
+                  }
+                },
+                {
+                  "component_id": "cooling.heatpipe.end.02",
+                  "title": {
+                    "en": "Copper terminal face 02",
+                    "ru": "Медное окончание 02"
+                  },
+                  "metric": {
+                    "en": "Visible in exact cooler-end photo",
+                    "ru": "Видно на фотографии торца точного кулера"
+                  }
+                },
+                {
+                  "component_id": "cooling.heatpipe.end.03",
+                  "title": {
+                    "en": "Copper terminal face 03",
+                    "ru": "Медное окончание 03"
+                  },
+                  "metric": {
+                    "en": "Visible in exact cooler-end photo",
+                    "ru": "Видно на фотографии торца точного кулера"
+                  }
+                },
+                {
+                  "component_id": "cooling.heatpipe.end.04",
+                  "title": {
+                    "en": "Copper terminal face 04",
+                    "ru": "Медное окончание 04"
+                  },
+                  "metric": {
+                    "en": "Visible in exact cooler-end photo",
+                    "ru": "Видно на фотографии торца точного кулера"
                   }
                 }
               ]
