@@ -1,0 +1,127 @@
+{
+  "schema_version": "0.1.0",
+  "device_model_id": "pc.dell.optiplex-5060-tower.family",
+  "claims": [
+    {
+      "id": "claim.chassis.height",
+      "subject_id": "pc.dell.optiplex-5060-tower.family",
+      "predicate": "chassis_height",
+      "value": 350,
+      "unit": "mm",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.5060.setup"
+      ]
+    },
+    {
+      "id": "claim.chassis.width",
+      "subject_id": "pc.dell.optiplex-5060-tower.family",
+      "predicate": "chassis_width",
+      "value": 154,
+      "unit": "mm",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.5060.setup"
+      ]
+    },
+    {
+      "id": "claim.chassis.depth",
+      "subject_id": "pc.dell.optiplex-5060-tower.family",
+      "predicate": "chassis_depth",
+      "value": 274,
+      "unit": "mm",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.5060.setup"
+      ]
+    },
+    {
+      "id": "claim.chassis.volume",
+      "subject_id": "pc.dell.optiplex-5060-tower.family",
+      "predicate": "chassis_volume",
+      "value": 14.77,
+      "unit": "L",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.5060.setup"
+      ]
+    },
+    {
+      "id": "claim.chassis.mass",
+      "subject_id": "pc.dell.optiplex-5060-tower.family",
+      "predicate": "chassis_mass",
+      "value": 7.93,
+      "unit": "kg",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.5060.setup"
+      ]
+    },
+    {
+      "id": "claim.board.callouts",
+      "subject_id": "motherboard.pcb",
+      "predicate": "numbered_motherboard_callouts",
+      "value": 26,
+      "unit": "callouts",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.5060.service"
+      ],
+      "notes": "Callout count, not component inventory."
+    },
+    {
+      "id": "claim.screws.board",
+      "subject_id": "motherboard.assembly",
+      "predicate": "listed_board_mounting_screws",
+      "value": 9,
+      "unit": "screws",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.5060.service"
+      ]
+    },
+    {
+      "id": "claim.screws.psu",
+      "subject_id": "power.psu",
+      "predicate": "listed_psu_mounting_screws",
+      "value": 3,
+      "unit": "screws",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.5060.service"
+      ]
+    },
+    {
+      "id": "claim.screws.table_total",
+      "subject_id": "pc.dell.optiplex-5060-tower.family",
+      "predicate": "screw_table_quantity_sum",
+      "value": 19,
+      "unit": "screws",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.5060.service"
+      ],
+      "notes": "Includes optional/module hardware; not the installed count for every configuration."
+    },
+    {
+      "id": "claim.cpu.exact_unknown",
+      "subject_id": "pc.dell.optiplex-5060-tower.family",
+      "predicate": "exact_fitted_cpu",
+      "value": null,
+      "unit": null,
+      "confidence_class": "unknown",
+      "source_ids": [],
+      "notes": "No exact processor selected."
+    },
+    {
+      "id": "claim.psu.exact_unknown",
+      "subject_id": "power.psu",
+      "predicate": "exact_psu_part_number",
+      "value": null,
+      "unit": null,
+      "confidence_class": "unknown",
+      "source_ids": [],
+      "notes": "Read PSU label from an identified physical unit."
+    }
+  ]
+}

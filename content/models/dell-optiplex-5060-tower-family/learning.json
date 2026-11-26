@@ -1,0 +1,60 @@
+{
+  "schema_version": "0.1.0",
+  "device_model_id": "pc.dell.optiplex-5060-tower.family",
+  "questions": [
+    {
+      "id": "learn.optiplex.dimensions",
+      "prompt": {
+        "en": "Which are the published Tower dimensions?",
+        "ru": "Какие размеры Tower опубликованы Dell?"
+      },
+      "choices": [
+        {
+          "id": "a",
+          "label": "350 × 154 × 274 mm"
+        },
+        {
+          "id": "b",
+          "label": "350 × 244 × 274 mm"
+        },
+        {
+          "id": "c",
+          "label": "154 × 154 × 274 mm"
+        }
+      ],
+      "correct_choice_id": "a",
+      "explanation": {
+        "en": "The family-level envelope is 350 mm high, 154 mm wide and 274 mm deep.",
+        "ru": "Габариты семейства: 350 мм высота, 154 мм ширина, 274 мм глубина."
+      },
+      "source_ids": [
+        "src.dell.5060.setup"
+      ]
+    },
+    {
+      "id": "learn.optiplex.fasteners",
+      "prompt": {
+        "en": "Does the screw-table sum of 19 prove that every retail configuration has exactly 19 screws installed?",
+        "ru": "Доказывает ли сумма 19 в таблице, что в каждой комплектации установлено ровно 19 винтов?"
+      },
+      "choices": [
+        {
+          "id": "a",
+          "label": "Yes / Да"
+        },
+        {
+          "id": "b",
+          "label": "No; optional modules and configuration matter / Нет; важны опции и комплектация"
+        }
+      ],
+      "correct_choice_id": "b",
+      "explanation": {
+        "en": "The total includes optional and module-specific fasteners; it is not a universal installed count.",
+        "ru": "Сумма включает крепёж опциональных модулей и не является универсальным количеством установленных винтов."
+      },
+      "source_ids": [
+        "src.dell.5060.service"
+      ]
+    }
+  ]
+}

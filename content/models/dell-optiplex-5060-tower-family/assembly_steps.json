@@ -1,0 +1,23 @@
+{
+  "schema_version": "0.1.0",
+  "device_model_id": "pc.dell.optiplex-5060-tower.family",
+  "steps": [],
+  "observations": [
+    {
+      "source_id": "src.dell.5060.service",
+      "locator": "Side-cover, PSU, system-board and cooling removal/installation sections",
+      "note": {
+        "en": "Dell publishes service procedures for these assemblies. The exact ordered disassembly sequence has not yet been authored into this family-level package.",
+        "ru": "Dell публикует процедуры обслуживания этих узлов. Полная последовательность разборки пока не перенесена в этот пакет семейства."
+      }
+    },
+    {
+      "source_id": "src.dell.5060.service",
+      "locator": "Tower screw-size table and heatsink-fan procedure",
+      "note": {
+        "en": "The table lists 9 board screws and 3 PSU screws; it separately documents four captive heatsink screws and four heatsink-fan screws. Optional-module entries are configuration-dependent.",
+        "ru": "В таблице указаны 9 винтов платы и 3 винта БП; отдельно описаны четыре невыпадающих винта радиатора и четыре винта вентилятора. Крепёж опциональных модулей зависит от конфигурации."
+      }
+    }
+  ]
+}

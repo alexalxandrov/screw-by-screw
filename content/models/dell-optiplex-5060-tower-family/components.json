@@ -1,0 +1,2139 @@
+{
+  "schema_version": "0.1.0",
+  "device_model_id": "pc.dell.optiplex-5060-tower.family",
+  "status": "family_level_research_blockout",
+  "components": [
+    {
+      "id": "pc.system.root",
+      "parent_id": null,
+      "name": {
+        "en": "Dell OptiPlex 5060 Tower · family reference",
+        "ru": "Dell OptiPlex 5060 Tower · эталон семейства"
+      },
+      "category": "system",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "assembly_node",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Family-level reference model only. No exact retail SKU, service tag or factory configuration has been selected.",
+        "ru": "Family-level reference model only. No exact retail SKU, service tag or factory configuration has been selected."
+      }
+    },
+    {
+      "id": "chassis.frame",
+      "parent_id": "pc.system.root",
+      "name": {
+        "en": "Chassis frame",
+        "ru": "Каркас корпуса"
+      },
+      "category": "mechanical_assembly",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "assembly_node",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Outer structure constrained by Dell's published envelope; internal folds and interfaces are schematic.",
+        "ru": "Outer structure constrained by Dell's published envelope; internal folds and interfaces are schematic."
+      }
+    },
+    {
+      "id": "chassis.base",
+      "parent_id": "chassis.frame",
+      "name": {
+        "en": "Bottom panel",
+        "ru": "Нижняя панель"
+      },
+      "category": "mechanical",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Family-level proxy component; exact part identity and placement require confirmation.",
+        "ru": "Макетный компонент уровня семейства; точную деталь и расположение требуется подтвердить."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          0,
+          1,
+          0
+        ],
+        "scale": [
+          154,
+          2,
+          274
+        ],
+        "material": 0
+      }
+    },
+    {
+      "id": "chassis.top",
+      "parent_id": "chassis.frame",
+      "name": {
+        "en": "Top panel",
+        "ru": "Верхняя панель"
+      },
+      "category": "mechanical",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Family-level proxy component; exact part identity and placement require confirmation.",
+        "ru": "Макетный компонент уровня семейства; точную деталь и расположение требуется подтвердить."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          0,
+          349,
+          0
+        ],
+        "scale": [
+          154,
+          2,
+          274
+        ],
+        "material": 0
+      }
+    },
+    {
+      "id": "chassis.side_panel",
+      "parent_id": "chassis.frame",
+      "name": {
+        "en": "Removable side cover",
+        "ru": "Съёмная боковая крышка"
+      },
+      "category": "mechanical",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Serviceable side cover; latch and captive-fastener geometry is not measured.",
+        "ru": "Serviceable side cover; latch and captive-fastener geometry is not measured."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          77,
+          175,
+          0
+        ],
+        "scale": [
+          1.5,
+          346,
+          270
+        ],
+        "material": 1
+      }
+    },
+    {
+      "id": "chassis.front_panel",
+      "parent_id": "chassis.frame",
+      "name": {
+        "en": "Front bezel and door",
+        "ru": "Передняя панель и дверца"
+      },
+      "category": "mechanical_io",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Family-level proxy component; exact part identity and placement require confirmation.",
+        "ru": "Макетный компонент уровня семейства; точную деталь и расположение требуется подтвердить."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          0,
+          175,
+          -137
+        ],
+        "scale": [
+          154,
+          342,
+          5
+        ],
+        "material": 1
+      }
+    },
+    {
+      "id": "chassis.rear_panel",
+      "parent_id": "chassis.frame",
+      "name": {
+        "en": "Rear chassis panel",
+        "ru": "Задняя панель корпуса"
+      },
+      "category": "mechanical",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Family-level proxy component; exact part identity and placement require confirmation.",
+        "ru": "Макетный компонент уровня семейства; точную деталь и расположение требуется подтвердить."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          0,
+          175,
+          137
+        ],
+        "scale": [
+          154,
+          342,
+          2
+        ],
+        "material": 0
+      }
+    },
+    {
+      "id": "chassis.board_tray",
+      "parent_id": "chassis.frame",
+      "name": {
+        "en": "Motherboard mounting tray",
+        "ru": "Поддон крепления системной платы"
+      },
+      "category": "mechanical",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Family-level proxy component; exact part identity and placement require confirmation.",
+        "ru": "Макетный компонент уровня семейства; точную деталь и расположение требуется подтвердить."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          -72,
+          165,
+          0
+        ],
+        "scale": [
+          3,
+          230,
+          230
+        ],
+        "material": 0
+      }
+    },
+    {
+      "id": "front.io_region",
+      "parent_id": "chassis.front_panel",
+      "name": {
+        "en": "Front I/O region",
+        "ru": "Зона передних разъёмов"
+      },
+      "category": "mechanical_io",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Family-level proxy component; exact part identity and placement require confirmation.",
+        "ru": "Макетный компонент уровня семейства; точную деталь и расположение требуется подтвердить."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          0,
+          260,
+          -141
+        ],
+        "scale": [
+          78,
+          22,
+          2
+        ],
+        "material": 1
+      }
+    },
+    {
+      "id": "front.power_button",
+      "parent_id": "front.io_region",
+      "name": {
+        "en": "Power button",
+        "ru": "Кнопка питания"
+      },
+      "category": "electromechanical",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Family-level proxy component; exact part identity and placement require confirmation.",
+        "ru": "Макетный компонент уровня семейства; точную деталь и расположение требуется подтвердить."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          23,
+          261,
+          -143
+        ],
+        "scale": [
+          11,
+          11,
+          2
+        ],
+        "material": 3
+      }
+    },
+    {
+      "id": "front.speaker",
+      "parent_id": "chassis.frame",
+      "name": {
+        "en": "Internal speaker",
+        "ru": "Внутренний динамик"
+      },
+      "category": "electroacoustic",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Family-level proxy component; exact part identity and placement require confirmation.",
+        "ru": "Макетный компонент уровня семейства; точную деталь и расположение требуется подтвердить."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          45,
+          65,
+          -110
+        ],
+        "scale": [
+          38,
+          14,
+          24
+        ],
+        "material": 1
+      }
+    },
+    {
+      "id": "motherboard.assembly",
+      "parent_id": "chassis.board_tray",
+      "name": {
+        "en": "System board assembly",
+        "ru": "Системная плата в сборе"
+      },
+      "category": "electrical_mechanical",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "assembly_node",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Dell documents the system board and its connector map; exact board assembly part number and PCB revision remain unknown.",
+        "ru": "Dell documents the system board and its connector map; exact board assembly part number and PCB revision remain unknown."
+      }
+    },
+    {
+      "id": "motherboard.pcb",
+      "parent_id": "motherboard.assembly",
+      "name": {
+        "en": "System board PCB",
+        "ru": "Печатная плата системной платы"
+      },
+      "category": "electrical_mechanical",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "PCB envelope is illustrative. Layer stack, exact outline, mounting holes and copper layout are not modeled.",
+        "ru": "PCB envelope is illustrative. Layer stack, exact outline, mounting holes and copper layout are not modeled."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          -55,
+          165,
+          0
+        ],
+        "scale": [
+          3,
+          220,
+          196
+        ],
+        "material": 2
+      }
+    },
+    {
+      "id": "motherboard.cpu_socket",
+      "parent_id": "motherboard.pcb",
+      "name": {
+        "en": "CPU socket region · LGA1151 platform",
+        "ru": "Зона CPU socket · платформа LGA1151"
+      },
+      "category": "compute_socket",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Socket region shown schematically for the Coffee Lake-era platform; no exact CPU is installed in this reference package.",
+        "ru": "Socket region shown schematically for the Coffee Lake-era platform; no exact CPU is installed in this reference package."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          -51,
+          224,
+          -32
+        ],
+        "scale": [
+          7,
+          48,
+          48
+        ],
+        "material": 3
+      }
+    },
+    {
+      "id": "motherboard.dimm.1",
+      "parent_id": "motherboard.pcb",
+      "name": {
+        "en": "DIMM slot 1",
+        "ru": "Слот DIMM 1"
+      },
+      "category": "memory_interface",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Slot position is schematic; connector geometry and exact board coordinates need an identified board revision.",
+        "ru": "Slot position is schematic; connector geometry and exact board coordinates need an identified board revision."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          -50,
+          220,
+          18
+        ],
+        "scale": [
+          5,
+          124,
+          7
+        ],
+        "material": 3
+      }
+    },
+    {
+      "id": "motherboard.dimm.2",
+      "parent_id": "motherboard.pcb",
+      "name": {
+        "en": "DIMM slot 2",
+        "ru": "Слот DIMM 2"
+      },
+      "category": "memory_interface",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Slot position is schematic; connector geometry and exact board coordinates need an identified board revision.",
+        "ru": "Slot position is schematic; connector geometry and exact board coordinates need an identified board revision."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          -50,
+          220,
+          31
+        ],
+        "scale": [
+          5,
+          124,
+          7
+        ],
+        "material": 3
+      }
+    },
+    {
+      "id": "motherboard.dimm.3",
+      "parent_id": "motherboard.pcb",
+      "name": {
+        "en": "DIMM slot 3",
+        "ru": "Слот DIMM 3"
+      },
+      "category": "memory_interface",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Slot position is schematic; connector geometry and exact board coordinates need an identified board revision.",
+        "ru": "Slot position is schematic; connector geometry and exact board coordinates need an identified board revision."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          -50,
+          220,
+          44
+        ],
+        "scale": [
+          5,
+          124,
+          7
+        ],
+        "material": 3
+      }
+    },
+    {
+      "id": "motherboard.dimm.4",
+      "parent_id": "motherboard.pcb",
+      "name": {
+        "en": "DIMM slot 4",
+        "ru": "Слот DIMM 4"
+      },
+      "category": "memory_interface",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Slot position is schematic; connector geometry and exact board coordinates need an identified board revision.",
+        "ru": "Slot position is schematic; connector geometry and exact board coordinates need an identified board revision."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          -50,
+          220,
+          57
+        ],
+        "scale": [
+          5,
+          124,
+          7
+        ],
+        "material": 3
+      }
+    },
+    {
+      "id": "motherboard.pcie.x16",
+      "parent_id": "motherboard.pcb",
+      "name": {
+        "en": "PCIe x16 slot",
+        "ru": "Слот PCIe x16"
+      },
+      "category": "expansion_interface",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Family-level proxy component; exact part identity and placement require confirmation.",
+        "ru": "Макетный компонент уровня семейства; точную деталь и расположение требуется подтвердить."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          -50,
+          115,
+          18
+        ],
+        "scale": [
+          5,
+          170,
+          7
+        ],
+        "material": 3
+      }
+    },
+    {
+      "id": "motherboard.pcie.x1.1",
+      "parent_id": "motherboard.pcb",
+      "name": {
+        "en": "PCIe x1 slot 1",
+        "ru": "Слот PCIe x1 №1"
+      },
+      "category": "expansion_interface",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Family-level proxy component; exact part identity and placement require confirmation.",
+        "ru": "Макетный компонент уровня семейства; точную деталь и расположение требуется подтвердить."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          -50,
+          90,
+          -57
+        ],
+        "scale": [
+          5,
+          86,
+          6
+        ],
+        "material": 3
+      }
+    },
+    {
+      "id": "motherboard.pcie.x1.2",
+      "parent_id": "motherboard.pcb",
+      "name": {
+        "en": "PCIe x1 slot 2",
+        "ru": "Слот PCIe x1 №2"
+      },
+      "category": "expansion_interface",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Family-level proxy component; exact part identity and placement require confirmation.",
+        "ru": "Макетный компонент уровня семейства; точную деталь и расположение требуется подтвердить."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          -50,
+          70,
+          -57
+        ],
+        "scale": [
+          5,
+          86,
+          6
+        ],
+        "material": 3
+      }
+    },
+    {
+      "id": "motherboard.m2",
+      "parent_id": "motherboard.pcb",
+      "name": {
+        "en": "M.2 PCIe SSD connector",
+        "ru": "Разъём M.2 PCIe SSD"
+      },
+      "category": "storage_interface",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Family-level proxy component; exact part identity and placement require confirmation.",
+        "ru": "Макетный компонент уровня семейства; точную деталь и расположение требуется подтвердить."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          -50,
+          235,
+          78
+        ],
+        "scale": [
+          5,
+          74,
+          7
+        ],
+        "material": 3
+      }
+    },
+    {
+      "id": "motherboard.sata.1",
+      "parent_id": "motherboard.pcb",
+      "name": {
+        "en": "SATA data header 1",
+        "ru": "Разъём SATA 1"
+      },
+      "category": "storage_interface",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Dell's Tower motherboard illustration identifies four SATA data headers; positions here are schematic.",
+        "ru": "Dell's Tower motherboard illustration identifies four SATA data headers; positions here are schematic."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          -50,
+          65,
+          -84
+        ],
+        "scale": [
+          7,
+          10,
+          12
+        ],
+        "material": 3
+      }
+    },
+    {
+      "id": "motherboard.sata.2",
+      "parent_id": "motherboard.pcb",
+      "name": {
+        "en": "SATA data header 2",
+        "ru": "Разъём SATA 2"
+      },
+      "category": "storage_interface",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Dell's Tower motherboard illustration identifies four SATA data headers; positions here are schematic.",
+        "ru": "Dell's Tower motherboard illustration identifies four SATA data headers; positions here are schematic."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          -50,
+          65,
+          -68
+        ],
+        "scale": [
+          7,
+          10,
+          12
+        ],
+        "material": 3
+      }
+    },
+    {
+      "id": "motherboard.sata.3",
+      "parent_id": "motherboard.pcb",
+      "name": {
+        "en": "SATA data header 3",
+        "ru": "Разъём SATA 3"
+      },
+      "category": "storage_interface",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Dell's Tower motherboard illustration identifies four SATA data headers; positions here are schematic.",
+        "ru": "Dell's Tower motherboard illustration identifies four SATA data headers; positions here are schematic."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          -50,
+          65,
+          -52
+        ],
+        "scale": [
+          7,
+          10,
+          12
+        ],
+        "material": 3
+      }
+    },
+    {
+      "id": "motherboard.sata.4",
+      "parent_id": "motherboard.pcb",
+      "name": {
+        "en": "SATA data header 4",
+        "ru": "Разъём SATA 4"
+      },
+      "category": "storage_interface",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Dell's Tower motherboard illustration identifies four SATA data headers; positions here are schematic.",
+        "ru": "Dell's Tower motherboard illustration identifies four SATA data headers; positions here are schematic."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          -50,
+          65,
+          -36
+        ],
+        "scale": [
+          7,
+          10,
+          12
+        ],
+        "material": 3
+      }
+    },
+    {
+      "id": "motherboard.system_power",
+      "parent_id": "motherboard.pcb",
+      "name": {
+        "en": "System power connector",
+        "ru": "Разъём основного питания"
+      },
+      "category": "power_interface",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Family-level proxy component; exact part identity and placement require confirmation.",
+        "ru": "Макетный компонент уровня семейства; точную деталь и расположение требуется подтвердить."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          -50,
+          170,
+          100
+        ],
+        "scale": [
+          8,
+          16,
+          24
+        ],
+        "material": 3
+      }
+    },
+    {
+      "id": "motherboard.cpu_power",
+      "parent_id": "motherboard.pcb",
+      "name": {
+        "en": "CPU power connector",
+        "ru": "Разъём питания CPU"
+      },
+      "category": "power_interface",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Family-level proxy component; exact part identity and placement require confirmation.",
+        "ru": "Макетный компонент уровня семейства; точную деталь и расположение требуется подтвердить."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          -50,
+          300,
+          100
+        ],
+        "scale": [
+          8,
+          14,
+          18
+        ],
+        "material": 3
+      }
+    },
+    {
+      "id": "motherboard.fan_header",
+      "parent_id": "motherboard.pcb",
+      "name": {
+        "en": "System fan header",
+        "ru": "Разъём системного вентилятора"
+      },
+      "category": "control_interface",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Family-level proxy component; exact part identity and placement require confirmation.",
+        "ru": "Макетный компонент уровня семейства; точную деталь и расположение требуется подтвердить."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          -50,
+          180,
+          115
+        ],
+        "scale": [
+          6,
+          5,
+          9
+        ],
+        "material": 3
+      }
+    },
+    {
+      "id": "motherboard.coin_cell",
+      "parent_id": "motherboard.pcb",
+      "name": {
+        "en": "RTC coin-cell battery",
+        "ru": "Батарейка RTC"
+      },
+      "category": "power_component",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Family-level proxy component; exact part identity and placement require confirmation.",
+        "ru": "Макетный компонент уровня семейства; точную деталь и расположение требуется подтвердить."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          -50,
+          145,
+          -78
+        ],
+        "scale": [
+          5,
+          20,
+          20
+        ],
+        "material": 4
+      }
+    },
+    {
+      "id": "cooling.assembly",
+      "parent_id": "motherboard.assembly",
+      "name": {
+        "en": "CPU cooling assembly",
+        "ru": "Система охлаждения CPU"
+      },
+      "category": "thermal_mechanical",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "assembly_node",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Family-level proxy component; exact part identity and placement require confirmation.",
+        "ru": "Макетный компонент уровня семейства; точную деталь и расположение требуется подтвердить."
+      }
+    },
+    {
+      "id": "cooling.cpu.heatsink",
+      "parent_id": "cooling.assembly",
+      "name": {
+        "en": "CPU heatsink",
+        "ru": "Радиатор CPU"
+      },
+      "category": "thermal_mechanical",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Family-level proxy component; exact part identity and placement require confirmation.",
+        "ru": "Макетный компонент уровня семейства; точную деталь и расположение требуется подтвердить."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          -27,
+          224,
+          -32
+        ],
+        "scale": [
+          40,
+          55,
+          64
+        ],
+        "material": 0
+      }
+    },
+    {
+      "id": "cooling.cpu.fan",
+      "parent_id": "cooling.assembly",
+      "name": {
+        "en": "CPU heatsink fan",
+        "ru": "Вентилятор радиатора CPU"
+      },
+      "category": "thermal_mechanical",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Fan envelope proxy only; OEM part number, blade profile and connector are unknown.",
+        "ru": "Fan envelope proxy only; OEM part number, blade profile and connector are unknown."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          1,
+          224,
+          -32
+        ],
+        "scale": [
+          16,
+          88,
+          88
+        ],
+        "material": 1
+      }
+    },
+    {
+      "id": "cooling.system_fan",
+      "parent_id": "chassis.frame",
+      "name": {
+        "en": "System fan",
+        "ru": "Системный вентилятор"
+      },
+      "category": "thermal_mechanical",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Dell documents the serviceable fan and rubber mounting grommets; exact size and part number are unknown.",
+        "ru": "Dell documents the serviceable fan and rubber mounting grommets; exact size and part number are unknown."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          0,
+          265,
+          112
+        ],
+        "scale": [
+          18,
+          90,
+          90
+        ],
+        "material": 1
+      }
+    },
+    {
+      "id": "power.assembly",
+      "parent_id": "chassis.frame",
+      "name": {
+        "en": "Power supply assembly",
+        "ru": "Блок питания в сборе"
+      },
+      "category": "power_electronics",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "assembly_node",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Family-level proxy component; exact part identity and placement require confirmation.",
+        "ru": "Макетный компонент уровня семейства; точную деталь и расположение требуется подтвердить."
+      }
+    },
+    {
+      "id": "power.psu",
+      "parent_id": "power.assembly",
+      "name": {
+        "en": "Power supply enclosure",
+        "ru": "Корпус блока питания"
+      },
+      "category": "power_electronics",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Enclosure-only proxy. Exact PSU manufacturer, part number, wattage, revision and internal topology remain unknown.",
+        "ru": "Enclosure-only proxy. Exact PSU manufacturer, part number, wattage, revision and internal topology remain unknown."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          0,
+          303,
+          65
+        ],
+        "scale": [
+          136,
+          78,
+          144
+        ],
+        "material": 0
+      }
+    },
+    {
+      "id": "power.psu.fan",
+      "parent_id": "power.psu",
+      "name": {
+        "en": "PSU fan region",
+        "ru": "Зона вентилятора БП"
+      },
+      "category": "thermal_mechanical",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Family-level proxy component; exact part identity and placement require confirmation.",
+        "ru": "Макетный компонент уровня семейства; точную деталь и расположение требуется подтвердить."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          0,
+          345,
+          65
+        ],
+        "scale": [
+          84,
+          3,
+          84
+        ],
+        "material": 1
+      }
+    },
+    {
+      "id": "power.psu.harness",
+      "parent_id": "power.assembly",
+      "name": {
+        "en": "Power cable harness",
+        "ru": "Жгут питания"
+      },
+      "category": "electrical_mechanical",
+      "evidence_status": "unknown",
+      "geometry_status": "unknown",
+      "source_ids": [],
+      "description": {
+        "en": "Wire routing, gauge, connector population and length are unknown until an exact PSU is identified.",
+        "ru": "Wire routing, gauge, connector population and length are unknown until an exact PSU is identified."
+      }
+    },
+    {
+      "id": "storage.assembly",
+      "parent_id": "chassis.frame",
+      "name": {
+        "en": "Storage and drive bay assembly",
+        "ru": "Узел накопителей и отсеков"
+      },
+      "category": "storage_mechanical",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "assembly_node",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Family-level proxy component; exact part identity and placement require confirmation.",
+        "ru": "Макетный компонент уровня семейства; точную деталь и расположение требуется подтвердить."
+      }
+    },
+    {
+      "id": "storage.drive_cage",
+      "parent_id": "storage.assembly",
+      "name": {
+        "en": "Drive cage proxy",
+        "ru": "Макет корзины накопителей"
+      },
+      "category": "storage_mechanical",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "The platform supports multiple storage arrangements; exact fitted cage revision and population are configuration-dependent.",
+        "ru": "The platform supports multiple storage arrangements; exact fitted cage revision and population are configuration-dependent."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          0,
+          112,
+          -80
+        ],
+        "scale": [
+          124,
+          80,
+          92
+        ],
+        "material": 0
+      }
+    },
+    {
+      "id": "storage.m2.optional",
+      "parent_id": "storage.assembly",
+      "name": {
+        "en": "Optional M.2 SSD · not populated",
+        "ru": "Опциональный SSD M.2 · не установлен"
+      },
+      "category": "storage_device",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "unknown",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "M.2 SSD is supported, but no exact SSD is selected or shown as installed.",
+        "ru": "M.2 SSD is supported, but no exact SSD is selected or shown as installed."
+      },
+      "configuration_status": "optional_not_populated"
+    },
+    {
+      "id": "storage.drive35.optional",
+      "parent_id": "storage.assembly",
+      "name": {
+        "en": "Optional 3.5-inch drive · not populated",
+        "ru": "Опциональный накопитель 3,5″ · не установлен"
+      },
+      "category": "storage_device",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "unknown",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "A 3.5-inch drive assembly is documented; its presence varies by factory configuration.",
+        "ru": "A 3.5-inch drive assembly is documented; its presence varies by factory configuration."
+      },
+      "configuration_status": "optional_not_populated"
+    },
+    {
+      "id": "controls.intrusion_switch",
+      "parent_id": "chassis.frame",
+      "name": {
+        "en": "Chassis intrusion switch",
+        "ru": "Датчик вскрытия корпуса"
+      },
+      "category": "control_electromechanical",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Family-level proxy component; exact part identity and placement require confirmation.",
+        "ru": "Макетный компонент уровня семейства; точную деталь и расположение требуется подтвердить."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          66,
+          310,
+          115
+        ],
+        "scale": [
+          10,
+          14,
+          14
+        ],
+        "material": 3
+      }
+    },
+    {
+      "id": "fastener.motherboard.01",
+      "parent_id": "motherboard.assembly",
+      "name": {
+        "en": "System-board screw 1",
+        "ru": "Винт системной платы 1"
+      },
+      "category": "fastener",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Individual instance from Dell's table of nine system-board-to-chassis screws; head shape and placement are schematic.",
+        "ru": "Individual instance from Dell's table of nine system-board-to-chassis screws; head shape and placement are schematic."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          -53,
+          70,
+          -82
+        ],
+        "scale": [
+          4,
+          4,
+          2
+        ],
+        "material": 4
+      },
+      "fastener_type": "#6.32x1.4",
+      "placement_status": "schematic_not_measured"
+    },
+    {
+      "id": "fastener.motherboard.02",
+      "parent_id": "motherboard.assembly",
+      "name": {
+        "en": "System-board screw 2",
+        "ru": "Винт системной платы 2"
+      },
+      "category": "fastener",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Individual instance from Dell's table of nine system-board-to-chassis screws; head shape and placement are schematic.",
+        "ru": "Individual instance from Dell's table of nine system-board-to-chassis screws; head shape and placement are schematic."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          -53,
+          145,
+          -82
+        ],
+        "scale": [
+          4,
+          4,
+          2
+        ],
+        "material": 4
+      },
+      "fastener_type": "#6.32x1.4",
+      "placement_status": "schematic_not_measured"
+    },
+    {
+      "id": "fastener.motherboard.03",
+      "parent_id": "motherboard.assembly",
+      "name": {
+        "en": "System-board screw 3",
+        "ru": "Винт системной платы 3"
+      },
+      "category": "fastener",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Individual instance from Dell's table of nine system-board-to-chassis screws; head shape and placement are schematic.",
+        "ru": "Individual instance from Dell's table of nine system-board-to-chassis screws; head shape and placement are schematic."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          -53,
+          220,
+          -82
+        ],
+        "scale": [
+          4,
+          4,
+          2
+        ],
+        "material": 4
+      },
+      "fastener_type": "#6.32x1.4",
+      "placement_status": "schematic_not_measured"
+    },
+    {
+      "id": "fastener.motherboard.04",
+      "parent_id": "motherboard.assembly",
+      "name": {
+        "en": "System-board screw 4",
+        "ru": "Винт системной платы 4"
+      },
+      "category": "fastener",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Individual instance from Dell's table of nine system-board-to-chassis screws; head shape and placement are schematic.",
+        "ru": "Individual instance from Dell's table of nine system-board-to-chassis screws; head shape and placement are schematic."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          -53,
+          70,
+          6
+        ],
+        "scale": [
+          4,
+          4,
+          2
+        ],
+        "material": 4
+      },
+      "fastener_type": "#6.32x1.4",
+      "placement_status": "schematic_not_measured"
+    },
+    {
+      "id": "fastener.motherboard.05",
+      "parent_id": "motherboard.assembly",
+      "name": {
+        "en": "System-board screw 5",
+        "ru": "Винт системной платы 5"
+      },
+      "category": "fastener",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Individual instance from Dell's table of nine system-board-to-chassis screws; head shape and placement are schematic.",
+        "ru": "Individual instance from Dell's table of nine system-board-to-chassis screws; head shape and placement are schematic."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          -53,
+          145,
+          6
+        ],
+        "scale": [
+          4,
+          4,
+          2
+        ],
+        "material": 4
+      },
+      "fastener_type": "#6.32x1.4",
+      "placement_status": "schematic_not_measured"
+    },
+    {
+      "id": "fastener.motherboard.06",
+      "parent_id": "motherboard.assembly",
+      "name": {
+        "en": "System-board screw 6",
+        "ru": "Винт системной платы 6"
+      },
+      "category": "fastener",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Individual instance from Dell's table of nine system-board-to-chassis screws; head shape and placement are schematic.",
+        "ru": "Individual instance from Dell's table of nine system-board-to-chassis screws; head shape and placement are schematic."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          -53,
+          220,
+          6
+        ],
+        "scale": [
+          4,
+          4,
+          2
+        ],
+        "material": 4
+      },
+      "fastener_type": "#6.32x1.4",
+      "placement_status": "schematic_not_measured"
+    },
+    {
+      "id": "fastener.motherboard.07",
+      "parent_id": "motherboard.assembly",
+      "name": {
+        "en": "System-board screw 7",
+        "ru": "Винт системной платы 7"
+      },
+      "category": "fastener",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Individual instance from Dell's table of nine system-board-to-chassis screws; head shape and placement are schematic.",
+        "ru": "Individual instance from Dell's table of nine system-board-to-chassis screws; head shape and placement are schematic."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          -53,
+          70,
+          94
+        ],
+        "scale": [
+          4,
+          4,
+          2
+        ],
+        "material": 4
+      },
+      "fastener_type": "#6.32x1.4",
+      "placement_status": "schematic_not_measured"
+    },
+    {
+      "id": "fastener.motherboard.08",
+      "parent_id": "motherboard.assembly",
+      "name": {
+        "en": "System-board screw 8",
+        "ru": "Винт системной платы 8"
+      },
+      "category": "fastener",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Individual instance from Dell's table of nine system-board-to-chassis screws; head shape and placement are schematic.",
+        "ru": "Individual instance from Dell's table of nine system-board-to-chassis screws; head shape and placement are schematic."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          -53,
+          145,
+          94
+        ],
+        "scale": [
+          4,
+          4,
+          2
+        ],
+        "material": 4
+      },
+      "fastener_type": "#6.32x1.4",
+      "placement_status": "schematic_not_measured"
+    },
+    {
+      "id": "fastener.motherboard.09",
+      "parent_id": "motherboard.assembly",
+      "name": {
+        "en": "System-board screw 9",
+        "ru": "Винт системной платы 9"
+      },
+      "category": "fastener",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Individual instance from Dell's table of nine system-board-to-chassis screws; head shape and placement are schematic.",
+        "ru": "Individual instance from Dell's table of nine system-board-to-chassis screws; head shape and placement are schematic."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          -53,
+          220,
+          94
+        ],
+        "scale": [
+          4,
+          4,
+          2
+        ],
+        "material": 4
+      },
+      "fastener_type": "#6.32x1.4",
+      "placement_status": "schematic_not_measured"
+    },
+    {
+      "id": "fastener.psu.01",
+      "parent_id": "power.psu",
+      "name": {
+        "en": "PSU mounting screw 1",
+        "ru": "Крепёжный винт БП 1"
+      },
+      "category": "fastener",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Individual instance from Dell's table of three PSU-to-chassis screws; placement is schematic.",
+        "ru": "Individual instance from Dell's table of three PSU-to-chassis screws; placement is schematic."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          67,
+          292,
+          2
+        ],
+        "scale": [
+          4,
+          4,
+          2
+        ],
+        "material": 4
+      },
+      "fastener_type": "#6.32x1.4",
+      "placement_status": "schematic_not_measured"
+    },
+    {
+      "id": "fastener.psu.02",
+      "parent_id": "power.psu",
+      "name": {
+        "en": "PSU mounting screw 2",
+        "ru": "Крепёжный винт БП 2"
+      },
+      "category": "fastener",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Individual instance from Dell's table of three PSU-to-chassis screws; placement is schematic.",
+        "ru": "Individual instance from Dell's table of three PSU-to-chassis screws; placement is schematic."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          67,
+          314,
+          2
+        ],
+        "scale": [
+          4,
+          4,
+          2
+        ],
+        "material": 4
+      },
+      "fastener_type": "#6.32x1.4",
+      "placement_status": "schematic_not_measured"
+    },
+    {
+      "id": "fastener.psu.03",
+      "parent_id": "power.psu",
+      "name": {
+        "en": "PSU mounting screw 3",
+        "ru": "Крепёжный винт БП 3"
+      },
+      "category": "fastener",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Individual instance from Dell's table of three PSU-to-chassis screws; placement is schematic.",
+        "ru": "Individual instance from Dell's table of three PSU-to-chassis screws; placement is schematic."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          67,
+          336,
+          2
+        ],
+        "scale": [
+          4,
+          4,
+          2
+        ],
+        "material": 4
+      },
+      "fastener_type": "#6.32x1.4",
+      "placement_status": "schematic_not_measured"
+    },
+    {
+      "id": "fastener.cooler.captive.01",
+      "parent_id": "cooling.cpu.heatsink",
+      "name": {
+        "en": "Captive heatsink screw 1",
+        "ru": "Невыпадающий винт радиатора 1"
+      },
+      "category": "fastener",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Dell documents four captive heatsink screws and a numbered loosening sequence; exact screw dimensions and coordinates are not published.",
+        "ru": "Dell documents four captive heatsink screws and a numbered loosening sequence; exact screw dimensions and coordinates are not published."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          -10,
+          249,
+          -50
+        ],
+        "scale": [
+          4,
+          4,
+          2
+        ],
+        "material": 4
+      },
+      "fastener_type": "captive screw · exact dimensions unknown",
+      "placement_status": "schematic_not_measured"
+    },
+    {
+      "id": "fastener.cooler.captive.02",
+      "parent_id": "cooling.cpu.heatsink",
+      "name": {
+        "en": "Captive heatsink screw 2",
+        "ru": "Невыпадающий винт радиатора 2"
+      },
+      "category": "fastener",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Dell documents four captive heatsink screws and a numbered loosening sequence; exact screw dimensions and coordinates are not published.",
+        "ru": "Dell documents four captive heatsink screws and a numbered loosening sequence; exact screw dimensions and coordinates are not published."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          -44,
+          249,
+          -50
+        ],
+        "scale": [
+          4,
+          4,
+          2
+        ],
+        "material": 4
+      },
+      "fastener_type": "captive screw · exact dimensions unknown",
+      "placement_status": "schematic_not_measured"
+    },
+    {
+      "id": "fastener.cooler.captive.03",
+      "parent_id": "cooling.cpu.heatsink",
+      "name": {
+        "en": "Captive heatsink screw 3",
+        "ru": "Невыпадающий винт радиатора 3"
+      },
+      "category": "fastener",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Dell documents four captive heatsink screws and a numbered loosening sequence; exact screw dimensions and coordinates are not published.",
+        "ru": "Dell documents four captive heatsink screws and a numbered loosening sequence; exact screw dimensions and coordinates are not published."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          -10,
+          249,
+          -14
+        ],
+        "scale": [
+          4,
+          4,
+          2
+        ],
+        "material": 4
+      },
+      "fastener_type": "captive screw · exact dimensions unknown",
+      "placement_status": "schematic_not_measured"
+    },
+    {
+      "id": "fastener.cooler.captive.04",
+      "parent_id": "cooling.cpu.heatsink",
+      "name": {
+        "en": "Captive heatsink screw 4",
+        "ru": "Невыпадающий винт радиатора 4"
+      },
+      "category": "fastener",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Dell documents four captive heatsink screws and a numbered loosening sequence; exact screw dimensions and coordinates are not published.",
+        "ru": "Dell documents four captive heatsink screws and a numbered loosening sequence; exact screw dimensions and coordinates are not published."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          -44,
+          249,
+          -14
+        ],
+        "scale": [
+          4,
+          4,
+          2
+        ],
+        "material": 4
+      },
+      "fastener_type": "captive screw · exact dimensions unknown",
+      "placement_status": "schematic_not_measured"
+    },
+    {
+      "id": "fastener.cooler.fan.01",
+      "parent_id": "cooling.cpu.fan",
+      "name": {
+        "en": "Heatsink-fan screw 1",
+        "ru": "Винт вентилятора радиатора 1"
+      },
+      "category": "fastener",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Dell documents four screws securing the heatsink fan to the heatsink and specifies Torx access through the top holes; geometry is proxy only.",
+        "ru": "Dell documents four screws securing the heatsink fan to the heatsink and specifies Torx access through the top holes; geometry is proxy only."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          36,
+          190,
+          -32
+        ],
+        "scale": [
+          3,
+          3,
+          2
+        ],
+        "material": 4
+      },
+      "fastener_type": "Torx-driven screw · exact specification unknown",
+      "placement_status": "schematic_not_measured"
+    },
+    {
+      "id": "fastener.cooler.fan.02",
+      "parent_id": "cooling.cpu.fan",
+      "name": {
+        "en": "Heatsink-fan screw 2",
+        "ru": "Винт вентилятора радиатора 2"
+      },
+      "category": "fastener",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Dell documents four screws securing the heatsink fan to the heatsink and specifies Torx access through the top holes; geometry is proxy only.",
+        "ru": "Dell documents four screws securing the heatsink fan to the heatsink and specifies Torx access through the top holes; geometry is proxy only."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          -34,
+          190,
+          -32
+        ],
+        "scale": [
+          3,
+          3,
+          2
+        ],
+        "material": 4
+      },
+      "fastener_type": "Torx-driven screw · exact specification unknown",
+      "placement_status": "schematic_not_measured"
+    },
+    {
+      "id": "fastener.cooler.fan.03",
+      "parent_id": "cooling.cpu.fan",
+      "name": {
+        "en": "Heatsink-fan screw 3",
+        "ru": "Винт вентилятора радиатора 3"
+      },
+      "category": "fastener",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Dell documents four screws securing the heatsink fan to the heatsink and specifies Torx access through the top holes; geometry is proxy only.",
+        "ru": "Dell documents four screws securing the heatsink fan to the heatsink and specifies Torx access through the top holes; geometry is proxy only."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          36,
+          258,
+          -32
+        ],
+        "scale": [
+          3,
+          3,
+          2
+        ],
+        "material": 4
+      },
+      "fastener_type": "Torx-driven screw · exact specification unknown",
+      "placement_status": "schematic_not_measured"
+    },
+    {
+      "id": "fastener.cooler.fan.04",
+      "parent_id": "cooling.cpu.fan",
+      "name": {
+        "en": "Heatsink-fan screw 4",
+        "ru": "Винт вентилятора радиатора 4"
+      },
+      "category": "fastener",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Dell documents four screws securing the heatsink fan to the heatsink and specifies Torx access through the top holes; geometry is proxy only.",
+        "ru": "Dell documents four screws securing the heatsink fan to the heatsink and specifies Torx access through the top holes; geometry is proxy only."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          -34,
+          258,
+          -32
+        ],
+        "scale": [
+          3,
+          3,
+          2
+        ],
+        "material": 4
+      },
+      "fastener_type": "Torx-driven screw · exact specification unknown",
+      "placement_status": "schematic_not_measured"
+    },
+    {
+      "id": "mount.system_fan.grommet.01",
+      "parent_id": "cooling.system_fan",
+      "name": {
+        "en": "System-fan rubber grommet 1",
+        "ru": "Резиновая втулка вентилятора 1"
+      },
+      "category": "fastener",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Dell documents rubber mounting grommets for the system fan; exact dimensions and coordinates are not measured.",
+        "ru": "Dell documents rubber mounting grommets for the system fan; exact dimensions and coordinates are not measured."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          38,
+          227,
+          112
+        ],
+        "scale": [
+          4,
+          4,
+          4
+        ],
+        "material": 1
+      },
+      "mount_type": "rubber_grommet",
+      "placement_status": "schematic_not_measured"
+    },
+    {
+      "id": "mount.system_fan.grommet.02",
+      "parent_id": "cooling.system_fan",
+      "name": {
+        "en": "System-fan rubber grommet 2",
+        "ru": "Резиновая втулка вентилятора 2"
+      },
+      "category": "fastener",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Dell documents rubber mounting grommets for the system fan; exact dimensions and coordinates are not measured.",
+        "ru": "Dell documents rubber mounting grommets for the system fan; exact dimensions and coordinates are not measured."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          -38,
+          227,
+          112
+        ],
+        "scale": [
+          4,
+          4,
+          4
+        ],
+        "material": 1
+      },
+      "mount_type": "rubber_grommet",
+      "placement_status": "schematic_not_measured"
+    },
+    {
+      "id": "mount.system_fan.grommet.03",
+      "parent_id": "cooling.system_fan",
+      "name": {
+        "en": "System-fan rubber grommet 3",
+        "ru": "Резиновая втулка вентилятора 3"
+      },
+      "category": "fastener",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Dell documents rubber mounting grommets for the system fan; exact dimensions and coordinates are not measured.",
+        "ru": "Dell documents rubber mounting grommets for the system fan; exact dimensions and coordinates are not measured."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          38,
+          303,
+          112
+        ],
+        "scale": [
+          4,
+          4,
+          4
+        ],
+        "material": 1
+      },
+      "mount_type": "rubber_grommet",
+      "placement_status": "schematic_not_measured"
+    },
+    {
+      "id": "mount.system_fan.grommet.04",
+      "parent_id": "cooling.system_fan",
+      "name": {
+        "en": "System-fan rubber grommet 4",
+        "ru": "Резиновая втулка вентилятора 4"
+      },
+      "category": "fastener",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "description": {
+        "en": "Dell documents rubber mounting grommets for the system fan; exact dimensions and coordinates are not measured.",
+        "ru": "Dell documents rubber mounting grommets for the system fan; exact dimensions and coordinates are not measured."
+      },
+      "visual_proxy": {
+        "kind": "box",
+        "translation": [
+          -38,
+          303,
+          112
+        ],
+        "scale": [
+          4,
+          4,
+          4
+        ],
+        "material": 1
+      },
+      "mount_type": "rubber_grommet",
+      "placement_status": "schematic_not_measured"
+    }
+  ]
+}

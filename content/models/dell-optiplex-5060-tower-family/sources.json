@@ -1,0 +1,26 @@
+{
+  "schema_version": "0.1.0",
+  "device_model_id": "pc.dell.optiplex-5060-tower.family",
+  "sources": [
+    {
+      "id": "src.dell.5060.service",
+      "title": "Dell OptiPlex 5060 Tower Service Manual",
+      "publisher": "Dell Technologies",
+      "source_type": "manufacturer_service_manual",
+      "url": "https://dl.dell.com/topicspdf/optiplex-5060-desktop_service-manual8_en-us.pdf",
+      "locator": "Tower motherboard map, fastener table, removal and installation procedures; printed pages 1 and 15–69",
+      "notes": "Primary source for serviceable assemblies and listed fastener types/counts. It does not identify one exact retail configuration or provide full CAD geometry.",
+      "access_date": "2026-11-26"
+    },
+    {
+      "id": "src.dell.5060.setup",
+      "title": "Dell OptiPlex 5060 Tower support · Manuals and specifications",
+      "publisher": "Dell Technologies",
+      "source_type": "manufacturer_setup_guide",
+      "url": "https://www.dell.com/support/product-details/en-us/product/optiplex-5060-desktop/resources/manuals",
+      "locator": "Tower physical characteristics",
+      "notes": "Family-level chassis dimensions and mass. These values constrain the outer envelope, not internal component coordinates.",
+      "access_date": "2026-11-26"
+    }
+  ]
+}

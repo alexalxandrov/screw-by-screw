@@ -1,0 +1,10 @@
+{
+  "schema_version": "0.1.0",
+  "model_id": "pc.dell.optiplex-5060-tower.family",
+  "part_number": null,
+  "package_version": "0.1.0",
+  "status": "research_blockout",
+  "geometry_status": "illustrative_proxy_not_cad",
+  "identity_scope": "platform_family",
+  "file_count": 10
+}

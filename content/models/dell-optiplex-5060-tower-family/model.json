@@ -1,0 +1,72 @@
+{
+  "schema_version": "0.1.0",
+  "id": "pc.dell.optiplex-5060-tower.family",
+  "manufacturer": "Dell",
+  "product_name": "OptiPlex 5060 Tower",
+  "part_number": null,
+  "identity_scope": "platform_family",
+  "model_kind": "system",
+  "variant_notes": "Family-level reference only. No service tag, exact retail configuration, motherboard assembly number, PCB revision or PSU part number is selected.",
+  "status": "research_blockout",
+  "geometry_status": "illustrative_proxy_not_cad",
+  "coordinate_system": {
+    "units": "mm",
+    "x": "case width",
+    "y": "case height",
+    "z": "case depth",
+    "origin": "schematic chassis base centre; positive Y upwards; front at negative Z"
+  },
+  "specifications": {
+    "physical": {
+      "height_mm": 350,
+      "width_mm": 154,
+      "depth_mm": 274,
+      "volume_l": 14.77,
+      "weight_kg": 7.93,
+      "evidence_status": "manufacturer_data",
+      "source_ids": [
+        "src.dell.5060.setup"
+      ],
+      "notes": "Published Tower family envelope and mass; internal dimensions remain unknown."
+    },
+    "motherboard": {
+      "numbered_callouts": 26,
+      "evidence_status": "manufacturer_data",
+      "source_ids": [
+        "src.dell.5060.service"
+      ],
+      "notes": "Callout count from Dell's motherboard illustration; not a component count."
+    },
+    "fasteners": {
+      "screw_table_quantity_total": 19,
+      "system_board_to_chassis": 9,
+      "psu_to_chassis": 3,
+      "other_optional_or_module_fasteners": 7,
+      "modeled_individual_instances": 20,
+      "source_ids": [
+        "src.dell.5060.service"
+      ],
+      "notes": "19 sums the table entries; optional module screws are not assumed. The model adds documented cooler-fan/captive hardware as separate schematic instances, not as part of the 19 table total."
+    },
+    "platform": {
+      "cpu_family": "8th-generation Intel Core / Coffee Lake family",
+      "socket_family": "LGA1151 platform",
+      "exact_cpu": null,
+      "exact_motherboard_part_number": null,
+      "motherboard_revision": null,
+      "exact_psu_part_number": null,
+      "source_ids": [
+        "src.dell.5060.service"
+      ]
+    }
+  },
+  "source_ids": [
+    "src.dell.5060.service",
+    "src.dell.5060.setup"
+  ],
+  "release": {
+    "version": "0.1.0",
+    "status": "research_blockout",
+    "geometry_fidelity": "illustrative_proxy_not_cad"
+  }
+}

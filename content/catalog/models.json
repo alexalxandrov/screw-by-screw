@@ -66,8 +66,8 @@
       "model_kind": "system",
       "category_id": "desktop_computers",
       "summary": {
-        "en": "Family-level desktop PC model with a source-linked assembly tree and individually addressable fastener proxies. Not an exact retail configuration or CAD.",
-        "ru": "Модель семейства настольного ПК с деревом сборки, источниками и отдельными макетами винтов. Не точная розничная комплектация и не CAD."
+        "en": "Source-linked system package with 20 individual fastener and grommet instances. Family-level illustrative geometry, not CAD or an exact retail configuration.",
+        "ru": "Пакет системной модели с источниками, 20 отдельными экземплярами крепежа и втулок. Условная геометрия семейства, не CAD и не точная розничная комплектация."
       },
       "tags": [
         "Dell",
@@ -75,7 +75,7 @@
         "desktop",
         "tower",
         "PC",
-        "computer system",
+        "system",
         "family reference"
       ],
       "status": "research_blockout",

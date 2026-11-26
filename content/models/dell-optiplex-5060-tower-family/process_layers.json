@@ -1,0 +1,52 @@
+{
+  "schema_version": "0.1.0",
+  "device_model_id": "pc.dell.optiplex-5060-tower.family",
+  "process_layers": [
+    {
+      "id": "process.cooling",
+      "type": "cooling",
+      "title": {
+        "en": "CPU and chassis cooling",
+        "ru": "Охлаждение CPU и корпуса"
+      },
+      "mode": "qualitative",
+      "linked_component_ids": [
+        "cooling.assembly",
+        "cooling.cpu.heatsink",
+        "cooling.cpu.fan",
+        "cooling.system_fan",
+        "motherboard.cpu_socket",
+        "chassis.frame"
+      ],
+      "source_ids": [
+        "src.dell.5060.service"
+      ],
+      "assumptions": [
+        "Positions and airflow are schematic. No CFD or measured temperature is represented."
+      ]
+    },
+    {
+      "id": "process.power",
+      "type": "power_delivery",
+      "title": {
+        "en": "Power supply and board power",
+        "ru": "Блок питания и питание платы"
+      },
+      "mode": "qualitative",
+      "linked_component_ids": [
+        "power.assembly",
+        "power.psu",
+        "power.psu.fan",
+        "power.psu.harness",
+        "motherboard.system_power",
+        "motherboard.cpu_power"
+      ],
+      "source_ids": [
+        "src.dell.5060.service"
+      ],
+      "assumptions": [
+        "No PSU internal topology, wattage, verified pinout or electrical simulation is claimed."
+      ]
+    }
+  ]
+}
