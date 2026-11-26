@@ -74,7 +74,7 @@ A second package-authored animation clip, `clip.exploded-cooler-overview`, now m
 
 ## GA106 compute and GDDR6 architecture tranche
 
-The semantic package now contains 121 components and 116 typed relationships. Thirteen logical-only nodes represent the 28-SM GA106 cluster, its CUDA/Tensor/RT/TMU/ROP aggregates, a 192-bit GDDR6 interface and six logical interface presentation groups. Six GDDR6 package positions are separately selectable from exact-XC-BLACK review/teardown material, but no one-to-one mapping between package positions and interface segments is asserted. The logical nodes carry `geometry_status: logical_only`: no physical die floorplan, shader wiring or PCB trace routing is drawn.
+The semantic package now contains 127 components and 122 typed relationships. Thirteen logical-only nodes represent the 28-SM GA106 cluster, its CUDA/Tensor/RT/TMU/ROP aggregates, a 192-bit GDDR6 interface and six logical interface presentation groups. Six GDDR6 package positions are separately selectable from exact-XC-BLACK review/teardown material, but no one-to-one mapping between package positions and interface segments is asserted. The logical nodes carry `geometry_status: logical_only`: no physical die floorplan, shader wiring or PCB trace routing is drawn.
 
 A third process layer, `gpu_compute`, exposes this architecture map in the viewer. Claims cover the published 28 SM / 112 Tensor / 28 RT / 112 TMU / 48 ROP configuration, 276 mm² and 12-billion-transistor GA106 die figures, Samsung 8N, and memory device attributes where available. The memory-package details are explicitly sourced to a secondary catalog entry rather than a primary Samsung datasheet. The viewer labels this as a logical map, not an architecture simulation.
 
@@ -103,3 +103,10 @@ The cooling process layer now exposes a four-stage clickable diagram: heat sourc
 ## 16. Four visible copper heatpipe terminal faces
 
 The exact XC BLACK cooler-end photograph in LanOC's review shows four separate copper terminal faces. Four individually selectable markers now exist under `cooling.heatpipes`. Their generated positions and disc dimensions are photo-estimated proxies. The claim deliberately counts **visible terminal faces**, not unique U-shaped heatpipes: two pipes can have four ends. The model's two illustrative route candidates remain unverified internal routing and are not promoted to an exact pipe-count or manufacturing specification.
+
+
+## 17. Six heatpipes confirmed for the exact retail SKU
+
+The FPS Review identifies its sample explicitly as EVGA GeForce RTX 3060 XC BLACK GAMING, part number `12G-P5-3655-KR`. Its cooler description states four main central heatpipes that contact the GPU, plus two additional side heatpipes that move heat toward the side of the heatsink. The model package now separates these into six selectable semantic route nodes grouped as four main and two side paths. Their 3D centrelines, tube diameters, bend radii and flattened sections are still illustrative photo-estimated geometry, not manufacturing CAD. The four terminal faces from the LanOC cooler-end photograph remain a separate visual observation and are not confused with the six-tube count.
+
+Source: https://www.thefpsreview.com/2021/03/03/evga-geforce-rtx-3060-xc-black-gaming-review/2/
