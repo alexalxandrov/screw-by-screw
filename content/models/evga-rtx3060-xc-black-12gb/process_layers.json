@@ -109,8 +109,8 @@
         "chip.memory.candidate.6"
       ],
       "description": {
-        "en": "An evidence-linked architectural map of the GA106 RTX 3060 configuration: 28 SMs, 3,584 CUDA cores, 112 third-generation Tensor Cores, 28 second-generation RT Cores, 112 TMUs, 48 ROPs and a 192-bit GDDR6 interface. Six 16Gbit Samsung packages on the reviewed XC BLACK sample are shown as logical channel links. Logical nodes are not a die floorplan, shader wiring, physical memory-controller placement or a cycle-accurate architecture simulation.",
-        "ru": "Архитектурная карта GA106 в конфигурации RTX 3060 с привязкой к источникам: 28 SM, 3 584 ядра CUDA, 112 тензорных ядер третьего поколения, 28 RT-ядер второго поколения, 112 TMU, 48 ROP и 192-битный интерфейс GDDR6. Шесть микросхем Samsung по 16 Гбит на рассмотренном образце XC BLACK представлены логическими связями каналов. Логические узлы не являются топологией кристалла, разводкой шейдеров, физическим размещением контроллера памяти или тактово-точной симуляцией архитектуры."
+        "en": "An evidence-linked architectural map of the GA106 RTX 3060 configuration: 28 SMs, 3,584 CUDA cores, 112 third-generation Tensor Cores, 28 second-generation RT Cores, 112 TMUs, 48 ROPs and the exact SKU's published 192-bit GDDR6 interface. Six GDDR6 package positions visible in XC BLACK material are available as separate layout nodes. Their exact device markings, bus partitioning and electrical mapping are not established. Logical nodes are not a die floorplan, shader wiring, physical memory-controller placement or a cycle-accurate architecture simulation.",
+        "ru": "Архитектурная карта GA106 в конфигурации RTX 3060 с привязкой к источникам: 28 SM, 3 584 ядра CUDA, 112 тензорных ядер третьего поколения, 28 RT-ядер второго поколения, 112 TMU, 48 ROP и опубликованный для точного SKU 192-битный интерфейс GDDR6. Шесть видимых в материалах XC BLACK позиций корпусов GDDR6 доступны как отдельные узлы компоновки. Точная маркировка устройств, разбиение шины и электрическое соответствие не установлены. Логические узлы не являются топологией кристалла, разводкой шейдеров, физическим размещением контроллера памяти или тактово-точной симуляцией архитектуры."
       },
       "assumptions": [
         {
@@ -132,14 +132,17 @@
         {
           "en": "No shader scheduler, cache hierarchy, clock-domain, performance, occupancy or instruction throughput simulation is implemented.",
           "ru": "Симуляция планировщика шейдеров, иерархии кэша, тактовых доменов, производительности, occupancy или пропускной способности инструкций не реализована."
+        },
+        {
+          "en": "The six GDDR6 package positions are not mapped one-to-one to the logical interface segments; no per-package channel width or board net has been established.",
+          "ru": "Шесть позиций корпусов GDDR6 не сопоставлены один-к-одному логическим сегментам интерфейса; ширина канала на корпус и сеть дорожек платы не установлены."
         }
       ],
       "source_ids": [
         "src.nvidia.rtx3060.architecture",
         "src.tomshardware.rtx3060.specs",
         "src.samsung.gddr6.catalog",
-        "src.evga.spec",
-        "src.tomshardware.teardown"
+        "src.evga.spec"
       ],
       "visualization": {
         "kind": "selectable_logical_nodes",
@@ -260,8 +263,8 @@
                 "ru": "Подсистема памяти GDDR6"
               },
               "summary": {
-                "en": "Six logical 32-bit package channels compose the published 192-bit bus",
-                "ru": "Шесть логических каналов по 32 бита образуют опубликованную 192-битную шину"
+                "en": "The 192-bit interface is confirmed; package positions are shown separately, with no assumed channel mapping",
+                "ru": "192-битный интерфейс подтверждён; позиции микросхем показаны отдельно, без предположения о соответствии каналам"
               },
               "nodes": [
                 {
@@ -271,74 +274,74 @@
                     "ru": "Интерфейс памяти"
                   },
                   "metric": {
-                    "en": "192-bit GDDR6",
-                    "ru": "192-битная GDDR6"
+                    "en": "192-bit GDDR6 · manufacturer specification",
+                    "ru": "192-битная GDDR6 · спецификация производителя"
                   }
                 },
                 {
                   "component_id": "chip.memory.channel.01",
                   "title": {
-                    "en": "Package channel 01",
-                    "ru": "Канал корпуса 01"
+                    "en": "Logical interface segment 01",
+                    "ru": "Логический сегмент интерфейса 01"
                   },
                   "metric": {
-                    "en": "32-bit · Samsung GDDR6 package 1",
-                    "ru": "32-бит · микросхема Samsung GDDR6 1"
+                    "en": "Presentation group · physical mapping unknown",
+                    "ru": "Группа представления · физическое соответствие неизвестно"
                   }
                 },
                 {
                   "component_id": "chip.memory.channel.02",
                   "title": {
-                    "en": "Package channel 02",
-                    "ru": "Канал корпуса 02"
+                    "en": "Logical interface segment 02",
+                    "ru": "Логический сегмент интерфейса 02"
                   },
                   "metric": {
-                    "en": "32-bit · Samsung GDDR6 package 2",
-                    "ru": "32-бит · микросхема Samsung GDDR6 2"
+                    "en": "Presentation group · physical mapping unknown",
+                    "ru": "Группа представления · физическое соответствие неизвестно"
                   }
                 },
                 {
                   "component_id": "chip.memory.channel.03",
                   "title": {
-                    "en": "Package channel 03",
-                    "ru": "Канал корпуса 03"
+                    "en": "Logical interface segment 03",
+                    "ru": "Логический сегмент интерфейса 03"
                   },
                   "metric": {
-                    "en": "32-bit · Samsung GDDR6 package 3",
-                    "ru": "32-бит · микросхема Samsung GDDR6 3"
+                    "en": "Presentation group · physical mapping unknown",
+                    "ru": "Группа представления · физическое соответствие неизвестно"
                   }
                 },
                 {
                   "component_id": "chip.memory.channel.04",
                   "title": {
-                    "en": "Package channel 04",
-                    "ru": "Канал корпуса 04"
+                    "en": "Logical interface segment 04",
+                    "ru": "Логический сегмент интерфейса 04"
                   },
                   "metric": {
-                    "en": "32-bit · Samsung GDDR6 package 4",
-                    "ru": "32-бит · микросхема Samsung GDDR6 4"
+                    "en": "Presentation group · physical mapping unknown",
+                    "ru": "Группа представления · физическое соответствие неизвестно"
                   }
                 },
                 {
                   "component_id": "chip.memory.channel.05",
                   "title": {
-                    "en": "Package channel 05",
-                    "ru": "Канал корпуса 05"
+                    "en": "Logical interface segment 05",
+                    "ru": "Логический сегмент интерфейса 05"
                   },
                   "metric": {
-                    "en": "32-bit · Samsung GDDR6 package 5",
-                    "ru": "32-бит · микросхема Samsung GDDR6 5"
+                    "en": "Presentation group · physical mapping unknown",
+                    "ru": "Группа представления · физическое соответствие неизвестно"
                   }
                 },
                 {
                   "component_id": "chip.memory.channel.06",
                   "title": {
-                    "en": "Package channel 06",
-                    "ru": "Канал корпуса 06"
+                    "en": "Logical interface segment 06",
+                    "ru": "Логический сегмент интерфейса 06"
                   },
                   "metric": {
-                    "en": "32-bit · Samsung GDDR6 package 6",
-                    "ru": "32-бит · микросхема Samsung GDDR6 6"
+                    "en": "Presentation group · physical mapping unknown",
+                    "ru": "Группа представления · физическое соответствие неизвестно"
                   }
                 }
               ]
