@@ -1288,7 +1288,8 @@ function renderDetails(id) {
 
   $("#empty-selection").hidden = true;
   $("#component-details").hidden = false;
-  $("#detail-index").textContent = String([...state.componentNodes.keys()].indexOf(id) + 1).padStart(2, "0");
+  const componentIndex = [...state.componentNodes.keys()].indexOf(id);
+  $("#detail-index").textContent = componentIndex < 0 ? "—" : String(componentIndex + 1).padStart(2, "0");
   $("#detail-category").textContent = (data.category ?? "component").replaceAll("_", " ").toUpperCase();
   $("#detail-name").textContent = label;
   $("#detail-description").textContent = description;
@@ -1603,7 +1604,11 @@ function clearHighlights() {
 
 function selectComponent(id) {
   const object = findNodeById(id);
-  if (!object) return;
+  // Some process diagrams expose manufacturer-documented logical components
+  // (for example NVENC/NVDEC) that intentionally have no physical placement
+  // or mesh in the current illustrative scene. They remain inspectable from
+  // their semantic package data without fabricating a 3D object.
+  if (!object && !state.catalog.has(id)) return;
   clearHighlights();
   state.activeLayer = null;
   buildProcessVisuals();
@@ -1612,8 +1617,10 @@ function selectComponent(id) {
   state.learningMode = false;
   state.selected = object;
   state.selectedId = id;
-  object.traverse((child) => { if (child.isMesh) applyHighlight(child); });
-  if (object.isMesh) applyHighlight(object);
+  if (object) {
+    object.traverse((child) => { if (child.isMesh) applyHighlight(child); });
+    if (object.isMesh) applyHighlight(object);
+  }
   renderDetails(id);
   renderTree();
   setStatus(id);
