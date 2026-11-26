@@ -152,3 +152,8 @@ Source: https://win-source.net/products/detail/evga/12g-p5-3655-kr.html
 The exact-XC-BLACK LanOC review describes a black plastic shroud with a lightly textured upper zone and dotted recess areas around the fans, no RGB lighting, an aluminium vertical-fin heatsink, and a copper contact plate broad enough to cover the GPU and memory. It also describes a large through-PCB cutout near the card end/left side that lets air from the front fan pass through the board area. The model now records these as source-backed claims and expands component descriptions; the mesh contours, wall thickness, fin pitch/count, plate outline and cutout dimensions remain proxy/unknown.
 
 Neoseeker identifies its review sample as `12G-P5-3655-KR` and documents three DisplayPort 1.4a outputs plus one HDMI 2.1 output. These connector versions and counts are added as explicit claims. LanOC also notes raised EVGA E-logo bumps on the fan blades with a golf-ball-like texture; these details are documented but not yet reconstructed in the proxy mesh.
+
+
+## 24. PCB through-airflow aperture proxy
+
+The Blender generator now subtracts a rounded-rectangle Boolean aperture from the PCB proxy, rather than placing a dark surface marker over a solid board. The placeholder is 18 × 22 mm and its visual centre is estimated from review imagery; neither value is a measurement or BoardView coordinate. The selection node `pcb.airflow.cutout` carries `geometry_status: illustrative_proxy` and explicitly records `sbs_proxy_aperture_dimensions_measured: false`. This makes the airflow feature visually legible without claiming exact PCB geometry.
