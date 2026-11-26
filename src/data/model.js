@@ -87,8 +87,9 @@ export function createModelDataAdapter(data) {
       status: modelPackage.geometry_status ?? "unknown",
       units: modelPackage.coordinate_system?.units ?? null,
       sources: sourcePackage.sources.map((source) => ({
+        ...source,
         id: source.id,
-        label: source.title ?? source.id,
+        label: source.title ?? source.label ?? source.id,
         url: source.url ?? ""
       }))
     },
