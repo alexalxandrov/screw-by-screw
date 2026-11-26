@@ -464,6 +464,44 @@
         "src.dell.5060.service"
       ],
       "notes": "Source values are intentionally kept side by side rather than collapsed. The Dell service manual's 35 W processor paragraph is inconsistent with its data sheet's standard non-T versus T-suffix distinction; do not infer an installed CPU or use these figures as a measured system thermal limit."
+    },
+    {
+      "id": "claim.fasteners.optional_mounting",
+      "subject_id": "pc.dell.optiplex-5060-tower.family",
+      "predicate": "optional_module_fastener_schedule",
+      "value": [
+        {
+          "assembly": "SD card reader",
+          "screw_type": "#6-32×3.6",
+          "quantity": 1
+        },
+        {
+          "assembly": "WLAN module",
+          "screw_type": "M2×3.5",
+          "quantity": 1
+        },
+        {
+          "assembly": "M.2 PCIe SSD",
+          "screw_type": "M2×3.5",
+          "quantity": 1
+        },
+        {
+          "assembly": "Type-C with DP/HDMI/VGA cable module",
+          "screw_type": "M3×3",
+          "quantity": 2
+        },
+        {
+          "assembly": "Internal antenna",
+          "screw_type": "M3×3",
+          "quantity": 2
+        }
+      ],
+      "unit": "fasteners",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.5060.screw_table"
+      ],
+      "notes": "Optional hardware schedule from Dell's Tower screw table. These are conditional fastener references, not evidence that all options are simultaneously installed. The seven references are excluded from the 24 illustrative service-relevant physical screw/grommet instances."
     }
   ]
 }
