@@ -2516,6 +2516,575 @@
         "en": "The exact-model teardown shows a copper plate making direct thermal contact with a row of MOSFET packages. This node represents the observed contact concept only; plate dimensions, thickness, finish, exact device coverage and PCB coordinates remain unmeasured.",
         "ru": "В разборке точной модели показана медная пластина, непосредственно контактирующая с рядом корпусов MOSFET. Узел отражает только наблюдаемую схему контакта; размеры, толщина, покрытие, точный охват компонентов и координаты на PCB не измерены."
       }
+    },
+    {
+      "id": "chip.gpu.tpc.cluster",
+      "parent_id": "chip.gpu.sm.cluster",
+      "name": {
+        "en": "Texture Processing Cluster aggregate (TPC) · logical",
+        "ru": "Логический агрегат кластеров текстурной обработки (TPC)"
+      },
+      "category": "semiconductor",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "description": {
+        "en": "The RTX 3060 configuration has 28 SMs. NVIDIA's GA10x architecture groups two SMs and one PolyMorph Engine in each TPC, so 14 TPCs are represented as a calculated logical aggregate (28 / 2). No TPC coordinates, GPC membership, physical grouping or GA106 die floorplan are asserted.",
+        "ru": "В конфигурации RTX 3060 — 28 SM. Архитектура GA10x от NVIDIA объединяет два SM и один PolyMorph Engine в TPC, поэтому 14 TPC представлены как вычисленный логический агрегат (28 / 2). Координаты TPC, принадлежность к GPC, физическая группировка и топология кристалла GA106 не утверждаются."
+      }
+    },
+    {
+      "id": "chip.gpu.sm.01",
+      "parent_id": "chip.gpu.tpc.cluster",
+      "name": {
+        "en": "GA106 SM 01 · logical instance",
+        "ru": "GA106 SM 01 · логический экземпляр"
+      },
+      "category": "semiconductor",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "description": {
+        "en": "One enumerated member of the 28-SM RTX 3060 configuration. The two-digit suffix is a navigation index only, not a silicon serial number, physical coordinate or floorplan location. GA10x architecture specifies 128 CUDA cores, four third-generation Tensor Cores, four texture units and one second-generation RT Core per SM, plus a 256 KB register file and 128 KB configurable L1/shared memory.",
+        "ru": "Один из 28 логически перечисленных SM конфигурации RTX 3060. Двузначный суффикс — только индекс навигации, а не серийный номер блока, физическая координата или позиция на кристалле. Архитектура GA10x предусматривает на SM 128 ядер CUDA, четыре Tensor Core третьего поколения, четыре текстурных блока и одно RT-ядро второго поколения, а также файл регистров 256 КБ и 128 КБ настраиваемой памяти L1/shared."
+      }
+    },
+    {
+      "id": "chip.gpu.sm.02",
+      "parent_id": "chip.gpu.tpc.cluster",
+      "name": {
+        "en": "GA106 SM 02 · logical instance",
+        "ru": "GA106 SM 02 · логический экземпляр"
+      },
+      "category": "semiconductor",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "description": {
+        "en": "One enumerated member of the 28-SM RTX 3060 configuration. The two-digit suffix is a navigation index only, not a silicon serial number, physical coordinate or floorplan location. GA10x architecture specifies 128 CUDA cores, four third-generation Tensor Cores, four texture units and one second-generation RT Core per SM, plus a 256 KB register file and 128 KB configurable L1/shared memory.",
+        "ru": "Один из 28 логически перечисленных SM конфигурации RTX 3060. Двузначный суффикс — только индекс навигации, а не серийный номер блока, физическая координата или позиция на кристалле. Архитектура GA10x предусматривает на SM 128 ядер CUDA, четыре Tensor Core третьего поколения, четыре текстурных блока и одно RT-ядро второго поколения, а также файл регистров 256 КБ и 128 КБ настраиваемой памяти L1/shared."
+      }
+    },
+    {
+      "id": "chip.gpu.sm.03",
+      "parent_id": "chip.gpu.tpc.cluster",
+      "name": {
+        "en": "GA106 SM 03 · logical instance",
+        "ru": "GA106 SM 03 · логический экземпляр"
+      },
+      "category": "semiconductor",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "description": {
+        "en": "One enumerated member of the 28-SM RTX 3060 configuration. The two-digit suffix is a navigation index only, not a silicon serial number, physical coordinate or floorplan location. GA10x architecture specifies 128 CUDA cores, four third-generation Tensor Cores, four texture units and one second-generation RT Core per SM, plus a 256 KB register file and 128 KB configurable L1/shared memory.",
+        "ru": "Один из 28 логически перечисленных SM конфигурации RTX 3060. Двузначный суффикс — только индекс навигации, а не серийный номер блока, физическая координата или позиция на кристалле. Архитектура GA10x предусматривает на SM 128 ядер CUDA, четыре Tensor Core третьего поколения, четыре текстурных блока и одно RT-ядро второго поколения, а также файл регистров 256 КБ и 128 КБ настраиваемой памяти L1/shared."
+      }
+    },
+    {
+      "id": "chip.gpu.sm.04",
+      "parent_id": "chip.gpu.tpc.cluster",
+      "name": {
+        "en": "GA106 SM 04 · logical instance",
+        "ru": "GA106 SM 04 · логический экземпляр"
+      },
+      "category": "semiconductor",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "description": {
+        "en": "One enumerated member of the 28-SM RTX 3060 configuration. The two-digit suffix is a navigation index only, not a silicon serial number, physical coordinate or floorplan location. GA10x architecture specifies 128 CUDA cores, four third-generation Tensor Cores, four texture units and one second-generation RT Core per SM, plus a 256 KB register file and 128 KB configurable L1/shared memory.",
+        "ru": "Один из 28 логически перечисленных SM конфигурации RTX 3060. Двузначный суффикс — только индекс навигации, а не серийный номер блока, физическая координата или позиция на кристалле. Архитектура GA10x предусматривает на SM 128 ядер CUDA, четыре Tensor Core третьего поколения, четыре текстурных блока и одно RT-ядро второго поколения, а также файл регистров 256 КБ и 128 КБ настраиваемой памяти L1/shared."
+      }
+    },
+    {
+      "id": "chip.gpu.sm.05",
+      "parent_id": "chip.gpu.tpc.cluster",
+      "name": {
+        "en": "GA106 SM 05 · logical instance",
+        "ru": "GA106 SM 05 · логический экземпляр"
+      },
+      "category": "semiconductor",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "description": {
+        "en": "One enumerated member of the 28-SM RTX 3060 configuration. The two-digit suffix is a navigation index only, not a silicon serial number, physical coordinate or floorplan location. GA10x architecture specifies 128 CUDA cores, four third-generation Tensor Cores, four texture units and one second-generation RT Core per SM, plus a 256 KB register file and 128 KB configurable L1/shared memory.",
+        "ru": "Один из 28 логически перечисленных SM конфигурации RTX 3060. Двузначный суффикс — только индекс навигации, а не серийный номер блока, физическая координата или позиция на кристалле. Архитектура GA10x предусматривает на SM 128 ядер CUDA, четыре Tensor Core третьего поколения, четыре текстурных блока и одно RT-ядро второго поколения, а также файл регистров 256 КБ и 128 КБ настраиваемой памяти L1/shared."
+      }
+    },
+    {
+      "id": "chip.gpu.sm.06",
+      "parent_id": "chip.gpu.tpc.cluster",
+      "name": {
+        "en": "GA106 SM 06 · logical instance",
+        "ru": "GA106 SM 06 · логический экземпляр"
+      },
+      "category": "semiconductor",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "description": {
+        "en": "One enumerated member of the 28-SM RTX 3060 configuration. The two-digit suffix is a navigation index only, not a silicon serial number, physical coordinate or floorplan location. GA10x architecture specifies 128 CUDA cores, four third-generation Tensor Cores, four texture units and one second-generation RT Core per SM, plus a 256 KB register file and 128 KB configurable L1/shared memory.",
+        "ru": "Один из 28 логически перечисленных SM конфигурации RTX 3060. Двузначный суффикс — только индекс навигации, а не серийный номер блока, физическая координата или позиция на кристалле. Архитектура GA10x предусматривает на SM 128 ядер CUDA, четыре Tensor Core третьего поколения, четыре текстурных блока и одно RT-ядро второго поколения, а также файл регистров 256 КБ и 128 КБ настраиваемой памяти L1/shared."
+      }
+    },
+    {
+      "id": "chip.gpu.sm.07",
+      "parent_id": "chip.gpu.tpc.cluster",
+      "name": {
+        "en": "GA106 SM 07 · logical instance",
+        "ru": "GA106 SM 07 · логический экземпляр"
+      },
+      "category": "semiconductor",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "description": {
+        "en": "One enumerated member of the 28-SM RTX 3060 configuration. The two-digit suffix is a navigation index only, not a silicon serial number, physical coordinate or floorplan location. GA10x architecture specifies 128 CUDA cores, four third-generation Tensor Cores, four texture units and one second-generation RT Core per SM, plus a 256 KB register file and 128 KB configurable L1/shared memory.",
+        "ru": "Один из 28 логически перечисленных SM конфигурации RTX 3060. Двузначный суффикс — только индекс навигации, а не серийный номер блока, физическая координата или позиция на кристалле. Архитектура GA10x предусматривает на SM 128 ядер CUDA, четыре Tensor Core третьего поколения, четыре текстурных блока и одно RT-ядро второго поколения, а также файл регистров 256 КБ и 128 КБ настраиваемой памяти L1/shared."
+      }
+    },
+    {
+      "id": "chip.gpu.sm.08",
+      "parent_id": "chip.gpu.tpc.cluster",
+      "name": {
+        "en": "GA106 SM 08 · logical instance",
+        "ru": "GA106 SM 08 · логический экземпляр"
+      },
+      "category": "semiconductor",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "description": {
+        "en": "One enumerated member of the 28-SM RTX 3060 configuration. The two-digit suffix is a navigation index only, not a silicon serial number, physical coordinate or floorplan location. GA10x architecture specifies 128 CUDA cores, four third-generation Tensor Cores, four texture units and one second-generation RT Core per SM, plus a 256 KB register file and 128 KB configurable L1/shared memory.",
+        "ru": "Один из 28 логически перечисленных SM конфигурации RTX 3060. Двузначный суффикс — только индекс навигации, а не серийный номер блока, физическая координата или позиция на кристалле. Архитектура GA10x предусматривает на SM 128 ядер CUDA, четыре Tensor Core третьего поколения, четыре текстурных блока и одно RT-ядро второго поколения, а также файл регистров 256 КБ и 128 КБ настраиваемой памяти L1/shared."
+      }
+    },
+    {
+      "id": "chip.gpu.sm.09",
+      "parent_id": "chip.gpu.tpc.cluster",
+      "name": {
+        "en": "GA106 SM 09 · logical instance",
+        "ru": "GA106 SM 09 · логический экземпляр"
+      },
+      "category": "semiconductor",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "description": {
+        "en": "One enumerated member of the 28-SM RTX 3060 configuration. The two-digit suffix is a navigation index only, not a silicon serial number, physical coordinate or floorplan location. GA10x architecture specifies 128 CUDA cores, four third-generation Tensor Cores, four texture units and one second-generation RT Core per SM, plus a 256 KB register file and 128 KB configurable L1/shared memory.",
+        "ru": "Один из 28 логически перечисленных SM конфигурации RTX 3060. Двузначный суффикс — только индекс навигации, а не серийный номер блока, физическая координата или позиция на кристалле. Архитектура GA10x предусматривает на SM 128 ядер CUDA, четыре Tensor Core третьего поколения, четыре текстурных блока и одно RT-ядро второго поколения, а также файл регистров 256 КБ и 128 КБ настраиваемой памяти L1/shared."
+      }
+    },
+    {
+      "id": "chip.gpu.sm.10",
+      "parent_id": "chip.gpu.tpc.cluster",
+      "name": {
+        "en": "GA106 SM 10 · logical instance",
+        "ru": "GA106 SM 10 · логический экземпляр"
+      },
+      "category": "semiconductor",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "description": {
+        "en": "One enumerated member of the 28-SM RTX 3060 configuration. The two-digit suffix is a navigation index only, not a silicon serial number, physical coordinate or floorplan location. GA10x architecture specifies 128 CUDA cores, four third-generation Tensor Cores, four texture units and one second-generation RT Core per SM, plus a 256 KB register file and 128 KB configurable L1/shared memory.",
+        "ru": "Один из 28 логически перечисленных SM конфигурации RTX 3060. Двузначный суффикс — только индекс навигации, а не серийный номер блока, физическая координата или позиция на кристалле. Архитектура GA10x предусматривает на SM 128 ядер CUDA, четыре Tensor Core третьего поколения, четыре текстурных блока и одно RT-ядро второго поколения, а также файл регистров 256 КБ и 128 КБ настраиваемой памяти L1/shared."
+      }
+    },
+    {
+      "id": "chip.gpu.sm.11",
+      "parent_id": "chip.gpu.tpc.cluster",
+      "name": {
+        "en": "GA106 SM 11 · logical instance",
+        "ru": "GA106 SM 11 · логический экземпляр"
+      },
+      "category": "semiconductor",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "description": {
+        "en": "One enumerated member of the 28-SM RTX 3060 configuration. The two-digit suffix is a navigation index only, not a silicon serial number, physical coordinate or floorplan location. GA10x architecture specifies 128 CUDA cores, four third-generation Tensor Cores, four texture units and one second-generation RT Core per SM, plus a 256 KB register file and 128 KB configurable L1/shared memory.",
+        "ru": "Один из 28 логически перечисленных SM конфигурации RTX 3060. Двузначный суффикс — только индекс навигации, а не серийный номер блока, физическая координата или позиция на кристалле. Архитектура GA10x предусматривает на SM 128 ядер CUDA, четыре Tensor Core третьего поколения, четыре текстурных блока и одно RT-ядро второго поколения, а также файл регистров 256 КБ и 128 КБ настраиваемой памяти L1/shared."
+      }
+    },
+    {
+      "id": "chip.gpu.sm.12",
+      "parent_id": "chip.gpu.tpc.cluster",
+      "name": {
+        "en": "GA106 SM 12 · logical instance",
+        "ru": "GA106 SM 12 · логический экземпляр"
+      },
+      "category": "semiconductor",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "description": {
+        "en": "One enumerated member of the 28-SM RTX 3060 configuration. The two-digit suffix is a navigation index only, not a silicon serial number, physical coordinate or floorplan location. GA10x architecture specifies 128 CUDA cores, four third-generation Tensor Cores, four texture units and one second-generation RT Core per SM, plus a 256 KB register file and 128 KB configurable L1/shared memory.",
+        "ru": "Один из 28 логически перечисленных SM конфигурации RTX 3060. Двузначный суффикс — только индекс навигации, а не серийный номер блока, физическая координата или позиция на кристалле. Архитектура GA10x предусматривает на SM 128 ядер CUDA, четыре Tensor Core третьего поколения, четыре текстурных блока и одно RT-ядро второго поколения, а также файл регистров 256 КБ и 128 КБ настраиваемой памяти L1/shared."
+      }
+    },
+    {
+      "id": "chip.gpu.sm.13",
+      "parent_id": "chip.gpu.tpc.cluster",
+      "name": {
+        "en": "GA106 SM 13 · logical instance",
+        "ru": "GA106 SM 13 · логический экземпляр"
+      },
+      "category": "semiconductor",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "description": {
+        "en": "One enumerated member of the 28-SM RTX 3060 configuration. The two-digit suffix is a navigation index only, not a silicon serial number, physical coordinate or floorplan location. GA10x architecture specifies 128 CUDA cores, four third-generation Tensor Cores, four texture units and one second-generation RT Core per SM, plus a 256 KB register file and 128 KB configurable L1/shared memory.",
+        "ru": "Один из 28 логически перечисленных SM конфигурации RTX 3060. Двузначный суффикс — только индекс навигации, а не серийный номер блока, физическая координата или позиция на кристалле. Архитектура GA10x предусматривает на SM 128 ядер CUDA, четыре Tensor Core третьего поколения, четыре текстурных блока и одно RT-ядро второго поколения, а также файл регистров 256 КБ и 128 КБ настраиваемой памяти L1/shared."
+      }
+    },
+    {
+      "id": "chip.gpu.sm.14",
+      "parent_id": "chip.gpu.tpc.cluster",
+      "name": {
+        "en": "GA106 SM 14 · logical instance",
+        "ru": "GA106 SM 14 · логический экземпляр"
+      },
+      "category": "semiconductor",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "description": {
+        "en": "One enumerated member of the 28-SM RTX 3060 configuration. The two-digit suffix is a navigation index only, not a silicon serial number, physical coordinate or floorplan location. GA10x architecture specifies 128 CUDA cores, four third-generation Tensor Cores, four texture units and one second-generation RT Core per SM, plus a 256 KB register file and 128 KB configurable L1/shared memory.",
+        "ru": "Один из 28 логически перечисленных SM конфигурации RTX 3060. Двузначный суффикс — только индекс навигации, а не серийный номер блока, физическая координата или позиция на кристалле. Архитектура GA10x предусматривает на SM 128 ядер CUDA, четыре Tensor Core третьего поколения, четыре текстурных блока и одно RT-ядро второго поколения, а также файл регистров 256 КБ и 128 КБ настраиваемой памяти L1/shared."
+      }
+    },
+    {
+      "id": "chip.gpu.sm.15",
+      "parent_id": "chip.gpu.tpc.cluster",
+      "name": {
+        "en": "GA106 SM 15 · logical instance",
+        "ru": "GA106 SM 15 · логический экземпляр"
+      },
+      "category": "semiconductor",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "description": {
+        "en": "One enumerated member of the 28-SM RTX 3060 configuration. The two-digit suffix is a navigation index only, not a silicon serial number, physical coordinate or floorplan location. GA10x architecture specifies 128 CUDA cores, four third-generation Tensor Cores, four texture units and one second-generation RT Core per SM, plus a 256 KB register file and 128 KB configurable L1/shared memory.",
+        "ru": "Один из 28 логически перечисленных SM конфигурации RTX 3060. Двузначный суффикс — только индекс навигации, а не серийный номер блока, физическая координата или позиция на кристалле. Архитектура GA10x предусматривает на SM 128 ядер CUDA, четыре Tensor Core третьего поколения, четыре текстурных блока и одно RT-ядро второго поколения, а также файл регистров 256 КБ и 128 КБ настраиваемой памяти L1/shared."
+      }
+    },
+    {
+      "id": "chip.gpu.sm.16",
+      "parent_id": "chip.gpu.tpc.cluster",
+      "name": {
+        "en": "GA106 SM 16 · logical instance",
+        "ru": "GA106 SM 16 · логический экземпляр"
+      },
+      "category": "semiconductor",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "description": {
+        "en": "One enumerated member of the 28-SM RTX 3060 configuration. The two-digit suffix is a navigation index only, not a silicon serial number, physical coordinate or floorplan location. GA10x architecture specifies 128 CUDA cores, four third-generation Tensor Cores, four texture units and one second-generation RT Core per SM, plus a 256 KB register file and 128 KB configurable L1/shared memory.",
+        "ru": "Один из 28 логически перечисленных SM конфигурации RTX 3060. Двузначный суффикс — только индекс навигации, а не серийный номер блока, физическая координата или позиция на кристалле. Архитектура GA10x предусматривает на SM 128 ядер CUDA, четыре Tensor Core третьего поколения, четыре текстурных блока и одно RT-ядро второго поколения, а также файл регистров 256 КБ и 128 КБ настраиваемой памяти L1/shared."
+      }
+    },
+    {
+      "id": "chip.gpu.sm.17",
+      "parent_id": "chip.gpu.tpc.cluster",
+      "name": {
+        "en": "GA106 SM 17 · logical instance",
+        "ru": "GA106 SM 17 · логический экземпляр"
+      },
+      "category": "semiconductor",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "description": {
+        "en": "One enumerated member of the 28-SM RTX 3060 configuration. The two-digit suffix is a navigation index only, not a silicon serial number, physical coordinate or floorplan location. GA10x architecture specifies 128 CUDA cores, four third-generation Tensor Cores, four texture units and one second-generation RT Core per SM, plus a 256 KB register file and 128 KB configurable L1/shared memory.",
+        "ru": "Один из 28 логически перечисленных SM конфигурации RTX 3060. Двузначный суффикс — только индекс навигации, а не серийный номер блока, физическая координата или позиция на кристалле. Архитектура GA10x предусматривает на SM 128 ядер CUDA, четыре Tensor Core третьего поколения, четыре текстурных блока и одно RT-ядро второго поколения, а также файл регистров 256 КБ и 128 КБ настраиваемой памяти L1/shared."
+      }
+    },
+    {
+      "id": "chip.gpu.sm.18",
+      "parent_id": "chip.gpu.tpc.cluster",
+      "name": {
+        "en": "GA106 SM 18 · logical instance",
+        "ru": "GA106 SM 18 · логический экземпляр"
+      },
+      "category": "semiconductor",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "description": {
+        "en": "One enumerated member of the 28-SM RTX 3060 configuration. The two-digit suffix is a navigation index only, not a silicon serial number, physical coordinate or floorplan location. GA10x architecture specifies 128 CUDA cores, four third-generation Tensor Cores, four texture units and one second-generation RT Core per SM, plus a 256 KB register file and 128 KB configurable L1/shared memory.",
+        "ru": "Один из 28 логически перечисленных SM конфигурации RTX 3060. Двузначный суффикс — только индекс навигации, а не серийный номер блока, физическая координата или позиция на кристалле. Архитектура GA10x предусматривает на SM 128 ядер CUDA, четыре Tensor Core третьего поколения, четыре текстурных блока и одно RT-ядро второго поколения, а также файл регистров 256 КБ и 128 КБ настраиваемой памяти L1/shared."
+      }
+    },
+    {
+      "id": "chip.gpu.sm.19",
+      "parent_id": "chip.gpu.tpc.cluster",
+      "name": {
+        "en": "GA106 SM 19 · logical instance",
+        "ru": "GA106 SM 19 · логический экземпляр"
+      },
+      "category": "semiconductor",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "description": {
+        "en": "One enumerated member of the 28-SM RTX 3060 configuration. The two-digit suffix is a navigation index only, not a silicon serial number, physical coordinate or floorplan location. GA10x architecture specifies 128 CUDA cores, four third-generation Tensor Cores, four texture units and one second-generation RT Core per SM, plus a 256 KB register file and 128 KB configurable L1/shared memory.",
+        "ru": "Один из 28 логически перечисленных SM конфигурации RTX 3060. Двузначный суффикс — только индекс навигации, а не серийный номер блока, физическая координата или позиция на кристалле. Архитектура GA10x предусматривает на SM 128 ядер CUDA, четыре Tensor Core третьего поколения, четыре текстурных блока и одно RT-ядро второго поколения, а также файл регистров 256 КБ и 128 КБ настраиваемой памяти L1/shared."
+      }
+    },
+    {
+      "id": "chip.gpu.sm.20",
+      "parent_id": "chip.gpu.tpc.cluster",
+      "name": {
+        "en": "GA106 SM 20 · logical instance",
+        "ru": "GA106 SM 20 · логический экземпляр"
+      },
+      "category": "semiconductor",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "description": {
+        "en": "One enumerated member of the 28-SM RTX 3060 configuration. The two-digit suffix is a navigation index only, not a silicon serial number, physical coordinate or floorplan location. GA10x architecture specifies 128 CUDA cores, four third-generation Tensor Cores, four texture units and one second-generation RT Core per SM, plus a 256 KB register file and 128 KB configurable L1/shared memory.",
+        "ru": "Один из 28 логически перечисленных SM конфигурации RTX 3060. Двузначный суффикс — только индекс навигации, а не серийный номер блока, физическая координата или позиция на кристалле. Архитектура GA10x предусматривает на SM 128 ядер CUDA, четыре Tensor Core третьего поколения, четыре текстурных блока и одно RT-ядро второго поколения, а также файл регистров 256 КБ и 128 КБ настраиваемой памяти L1/shared."
+      }
+    },
+    {
+      "id": "chip.gpu.sm.21",
+      "parent_id": "chip.gpu.tpc.cluster",
+      "name": {
+        "en": "GA106 SM 21 · logical instance",
+        "ru": "GA106 SM 21 · логический экземпляр"
+      },
+      "category": "semiconductor",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "description": {
+        "en": "One enumerated member of the 28-SM RTX 3060 configuration. The two-digit suffix is a navigation index only, not a silicon serial number, physical coordinate or floorplan location. GA10x architecture specifies 128 CUDA cores, four third-generation Tensor Cores, four texture units and one second-generation RT Core per SM, plus a 256 KB register file and 128 KB configurable L1/shared memory.",
+        "ru": "Один из 28 логически перечисленных SM конфигурации RTX 3060. Двузначный суффикс — только индекс навигации, а не серийный номер блока, физическая координата или позиция на кристалле. Архитектура GA10x предусматривает на SM 128 ядер CUDA, четыре Tensor Core третьего поколения, четыре текстурных блока и одно RT-ядро второго поколения, а также файл регистров 256 КБ и 128 КБ настраиваемой памяти L1/shared."
+      }
+    },
+    {
+      "id": "chip.gpu.sm.22",
+      "parent_id": "chip.gpu.tpc.cluster",
+      "name": {
+        "en": "GA106 SM 22 · logical instance",
+        "ru": "GA106 SM 22 · логический экземпляр"
+      },
+      "category": "semiconductor",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "description": {
+        "en": "One enumerated member of the 28-SM RTX 3060 configuration. The two-digit suffix is a navigation index only, not a silicon serial number, physical coordinate or floorplan location. GA10x architecture specifies 128 CUDA cores, four third-generation Tensor Cores, four texture units and one second-generation RT Core per SM, plus a 256 KB register file and 128 KB configurable L1/shared memory.",
+        "ru": "Один из 28 логически перечисленных SM конфигурации RTX 3060. Двузначный суффикс — только индекс навигации, а не серийный номер блока, физическая координата или позиция на кристалле. Архитектура GA10x предусматривает на SM 128 ядер CUDA, четыре Tensor Core третьего поколения, четыре текстурных блока и одно RT-ядро второго поколения, а также файл регистров 256 КБ и 128 КБ настраиваемой памяти L1/shared."
+      }
+    },
+    {
+      "id": "chip.gpu.sm.23",
+      "parent_id": "chip.gpu.tpc.cluster",
+      "name": {
+        "en": "GA106 SM 23 · logical instance",
+        "ru": "GA106 SM 23 · логический экземпляр"
+      },
+      "category": "semiconductor",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "description": {
+        "en": "One enumerated member of the 28-SM RTX 3060 configuration. The two-digit suffix is a navigation index only, not a silicon serial number, physical coordinate or floorplan location. GA10x architecture specifies 128 CUDA cores, four third-generation Tensor Cores, four texture units and one second-generation RT Core per SM, plus a 256 KB register file and 128 KB configurable L1/shared memory.",
+        "ru": "Один из 28 логически перечисленных SM конфигурации RTX 3060. Двузначный суффикс — только индекс навигации, а не серийный номер блока, физическая координата или позиция на кристалле. Архитектура GA10x предусматривает на SM 128 ядер CUDA, четыре Tensor Core третьего поколения, четыре текстурных блока и одно RT-ядро второго поколения, а также файл регистров 256 КБ и 128 КБ настраиваемой памяти L1/shared."
+      }
+    },
+    {
+      "id": "chip.gpu.sm.24",
+      "parent_id": "chip.gpu.tpc.cluster",
+      "name": {
+        "en": "GA106 SM 24 · logical instance",
+        "ru": "GA106 SM 24 · логический экземпляр"
+      },
+      "category": "semiconductor",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "description": {
+        "en": "One enumerated member of the 28-SM RTX 3060 configuration. The two-digit suffix is a navigation index only, not a silicon serial number, physical coordinate or floorplan location. GA10x architecture specifies 128 CUDA cores, four third-generation Tensor Cores, four texture units and one second-generation RT Core per SM, plus a 256 KB register file and 128 KB configurable L1/shared memory.",
+        "ru": "Один из 28 логически перечисленных SM конфигурации RTX 3060. Двузначный суффикс — только индекс навигации, а не серийный номер блока, физическая координата или позиция на кристалле. Архитектура GA10x предусматривает на SM 128 ядер CUDA, четыре Tensor Core третьего поколения, четыре текстурных блока и одно RT-ядро второго поколения, а также файл регистров 256 КБ и 128 КБ настраиваемой памяти L1/shared."
+      }
+    },
+    {
+      "id": "chip.gpu.sm.25",
+      "parent_id": "chip.gpu.tpc.cluster",
+      "name": {
+        "en": "GA106 SM 25 · logical instance",
+        "ru": "GA106 SM 25 · логический экземпляр"
+      },
+      "category": "semiconductor",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "description": {
+        "en": "One enumerated member of the 28-SM RTX 3060 configuration. The two-digit suffix is a navigation index only, not a silicon serial number, physical coordinate or floorplan location. GA10x architecture specifies 128 CUDA cores, four third-generation Tensor Cores, four texture units and one second-generation RT Core per SM, plus a 256 KB register file and 128 KB configurable L1/shared memory.",
+        "ru": "Один из 28 логически перечисленных SM конфигурации RTX 3060. Двузначный суффикс — только индекс навигации, а не серийный номер блока, физическая координата или позиция на кристалле. Архитектура GA10x предусматривает на SM 128 ядер CUDA, четыре Tensor Core третьего поколения, четыре текстурных блока и одно RT-ядро второго поколения, а также файл регистров 256 КБ и 128 КБ настраиваемой памяти L1/shared."
+      }
+    },
+    {
+      "id": "chip.gpu.sm.26",
+      "parent_id": "chip.gpu.tpc.cluster",
+      "name": {
+        "en": "GA106 SM 26 · logical instance",
+        "ru": "GA106 SM 26 · логический экземпляр"
+      },
+      "category": "semiconductor",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "description": {
+        "en": "One enumerated member of the 28-SM RTX 3060 configuration. The two-digit suffix is a navigation index only, not a silicon serial number, physical coordinate or floorplan location. GA10x architecture specifies 128 CUDA cores, four third-generation Tensor Cores, four texture units and one second-generation RT Core per SM, plus a 256 KB register file and 128 KB configurable L1/shared memory.",
+        "ru": "Один из 28 логически перечисленных SM конфигурации RTX 3060. Двузначный суффикс — только индекс навигации, а не серийный номер блока, физическая координата или позиция на кристалле. Архитектура GA10x предусматривает на SM 128 ядер CUDA, четыре Tensor Core третьего поколения, четыре текстурных блока и одно RT-ядро второго поколения, а также файл регистров 256 КБ и 128 КБ настраиваемой памяти L1/shared."
+      }
+    },
+    {
+      "id": "chip.gpu.sm.27",
+      "parent_id": "chip.gpu.tpc.cluster",
+      "name": {
+        "en": "GA106 SM 27 · logical instance",
+        "ru": "GA106 SM 27 · логический экземпляр"
+      },
+      "category": "semiconductor",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "description": {
+        "en": "One enumerated member of the 28-SM RTX 3060 configuration. The two-digit suffix is a navigation index only, not a silicon serial number, physical coordinate or floorplan location. GA10x architecture specifies 128 CUDA cores, four third-generation Tensor Cores, four texture units and one second-generation RT Core per SM, plus a 256 KB register file and 128 KB configurable L1/shared memory.",
+        "ru": "Один из 28 логически перечисленных SM конфигурации RTX 3060. Двузначный суффикс — только индекс навигации, а не серийный номер блока, физическая координата или позиция на кристалле. Архитектура GA10x предусматривает на SM 128 ядер CUDA, четыре Tensor Core третьего поколения, четыре текстурных блока и одно RT-ядро второго поколения, а также файл регистров 256 КБ и 128 КБ настраиваемой памяти L1/shared."
+      }
+    },
+    {
+      "id": "chip.gpu.sm.28",
+      "parent_id": "chip.gpu.tpc.cluster",
+      "name": {
+        "en": "GA106 SM 28 · logical instance",
+        "ru": "GA106 SM 28 · логический экземпляр"
+      },
+      "category": "semiconductor",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "description": {
+        "en": "One enumerated member of the 28-SM RTX 3060 configuration. The two-digit suffix is a navigation index only, not a silicon serial number, physical coordinate or floorplan location. GA10x architecture specifies 128 CUDA cores, four third-generation Tensor Cores, four texture units and one second-generation RT Core per SM, plus a 256 KB register file and 128 KB configurable L1/shared memory.",
+        "ru": "Один из 28 логически перечисленных SM конфигурации RTX 3060. Двузначный суффикс — только индекс навигации, а не серийный номер блока, физическая координата или позиция на кристалле. Архитектура GA10x предусматривает на SM 128 ядер CUDA, четыре Tensor Core третьего поколения, четыре текстурных блока и одно RT-ядро второго поколения, а также файл регистров 256 КБ и 128 КБ настраиваемой памяти L1/shared."
+      }
+    },
+    {
+      "id": "chip.gpu.polymorph.array",
+      "parent_id": "chip.gpu.tpc.cluster",
+      "name": {
+        "en": "PolyMorph Engine aggregate · 14 logical engines",
+        "ru": "Агрегат PolyMorph Engine · 14 логических блоков"
+      },
+      "category": "semiconductor",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ],
+      "description": {
+        "en": "GA10x architecture places one PolyMorph Engine in each TPC. The 14-engine aggregate is calculated from the 14 logical TPCs; no per-engine hardware coordinates, GPC distribution or geometry are claimed.",
+        "ru": "В архитектуре GA10x один PolyMorph Engine входит в каждый TPC. Агрегат из 14 блоков рассчитан по 14 логическим TPC; физические координаты отдельных блоков, распределение по GPC и геометрия не утверждаются."
+      }
     }
   ],
   "rules": [
