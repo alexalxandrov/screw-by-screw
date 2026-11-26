@@ -71,8 +71,8 @@
         "src.gamersnexus.teardown"
       ],
       "description": {
-        "en": "First axial fan. Its centre and blade profile are illustrative placeholders.",
-        "ru": "Первый осевой вентилятор. Центр и профиль лопастей заданы условно."
+        "en": "Axial fan visible in exact-model reviews. Its centre, blade profile and detailed frame are illustrative placeholders. The original OEM fan label/part number has not been verified; aftermarket listings are retained as fitment leads only and disagree on dimensions.",
+        "ru": "Осевой вентилятор, видимый в обзорах точной модели. Центр, профиль лопастей и конструкция рамки заданы условно. Маркировка/артикул исходного OEM-вентилятора не подтверждены; каталоги неоригинальных заменителей сохранены только как зацепки по совместимости и расходятся в размерах."
       }
     },
     {
@@ -106,8 +106,8 @@
         "src.gamersnexus.teardown"
       ],
       "description": {
-        "en": "Second axial fan. Its centre and blade profile are illustrative placeholders.",
-        "ru": "Второй осевой вентилятор. Центр и профиль лопастей заданы условно."
+        "en": "Axial fan visible in exact-model reviews. Its centre, blade profile and detailed frame are illustrative placeholders. The original OEM fan label/part number has not been verified; aftermarket listings are retained as fitment leads only and disagree on dimensions.",
+        "ru": "Осевой вентилятор, видимый в обзорах точной модели. Центр, профиль лопастей и конструкция рамки заданы условно. Маркировка/артикул исходного OEM-вентилятора не подтверждены; каталоги неоригинальных заменителей сохранены только как зацепки по совместимости и расходятся в размерах."
       }
     },
     {
@@ -137,11 +137,14 @@
       "evidence_status": "visible_exact_model",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
-        "src.lanoc.review"
+        "src.lanoc.review",
+        "src.thefpsreview.exact_sku",
+        "src.pcworld.xc_black",
+        "src.gamersnexus.teardown"
       ],
       "description": {
-        "en": "Exact-model review describes an aluminium heatsink with a vertical fin layout. Six heatpipes (four main GPU-contact plus two side) carry heat toward the stack. The 24 separately selectable fins are educational proxies only; actual fin count, pitch, thickness, louver geometry, alloy and brazed interfaces are not measured.",
-        "ru": "В обзоре точной модели описан алюминиевый радиатор с вертикальной ориентацией рёбер. Шесть тепловых трубок (четыре основные с контактом с GPU и две боковые) переносят тепло к радиаторному пакету. 24 отдельно выбираемых ребра — только учебные прокси; реальное число, шаг, толщина, жалюзийная геометрия, сплав и соединения пайкой не измерены."
+        "en": "Exact-model reviews describe an aluminium fin stack with vertical fins. The FPS Review describes four central GPU-contact plus two side heatpipe runs; PCWorld's overview says four copper heatpipes, while Gamers Nexus narrates two central tube paths through the contact plate. These are source-specific counting conventions and do not establish the number of unique closed U-shaped tube loops. Six selectable entries in this atlas are route/run proxies only; physical loop count and individual routing remain unresolved. The 24 separately selectable fins are educational proxies; actual fin count, pitch, thickness, louver geometry, alloy and brazed interfaces are not measured.",
+        "ru": "В обзорах точной модели описан алюминиевый радиатор с вертикальной ориентацией рёбер. The FPS Review описывает четыре центральные трассы с контактом с GPU и две боковые; PCWorld в общем описании указывает четыре медные тепловые трубки, а Gamers Nexus описывает два центральных трубчатых участка у контактной пластины. Это разные способы описания/подсчёта, по которым нельзя установить число отдельных замкнутых U-образных трубок. Шесть выбираемых элементов в атласе — только макеты трасс/участков; физическое число контуров и точная разводка не установлены. 24 отдельно выбираемых ребра — учебные прокси; реальное число, шаг, толщина, жалюзийная геометрия, сплав и соединения пайкой не измерены."
       }
     },
     {
@@ -425,11 +428,13 @@
       "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.lanoc.review",
-        "src.gamersnexus.teardown"
+        "src.gamersnexus.teardown",
+        "src.thefpsreview.exact_sku",
+        "src.pcworld.xc_black"
       ],
       "description": {
-        "en": "A selectable heatpipe assembly. The exact XC BLACK cooler photograph shows four copper terminal faces at the cooler end. This is a count of visible terminal faces only; the number of distinct U-shaped pipes, their internal route, diameter and flattened geometry remain unverified. The generated two-path representation is an illustrative routing proxy.",
-        "ru": "Выбираемая сборка тепловых трубок. На фотографии кулера точной XC BLACK видны четыре медных торцевых окончания. Это только количество видимых торцевых окончаний; число отдельных U-образных трубок, их внутренняя трасса, диаметр и сплющенная геометрия не подтверждены. Сгенерированное представление из двух трасс является условным макетом маршрута."
+        "en": "Selectable heatpipe assembly. The exact XC BLACK cooler-end photograph shows four copper terminal faces; this is a count of visible faces only. The FPS Review describes four central plus two side heatpipe runs, PCWorld describes four copper heatpipes, and Gamers Nexus narrates two central ~6 mm tube paths through the GPU contact plate. These source-specific observations are preserved separately because run, tube and closed-loop counts may differ. The six selectable route objects are educational proxies, not proof of six independent U-shaped pipes. Unique physical loop count, internal routing and flattened geometry remain unknown.",
+        "ru": "Выбираемая сборка тепловых трубок. На фотографии торца кулера точной XC BLACK видны четыре медных торцевых окончания; это только число видимых торцов. The FPS Review описывает четыре центральные и две боковые трассы, PCWorld указывает четыре медные тепловые трубки, а Gamers Nexus говорит о двух центральных трубчатых участках диаметром около 6 мм у контактной пластины GPU. Эти наблюдения сохранены отдельно: количество проходов/участков, трубок и замкнутых контуров может различаться. Шесть выбираемых объектов трасс — учебные прокси, а не доказательство существования шести отдельных U-образных трубок. Число физических контуров, внутренняя разводка и сплющенная геометрия неизвестны."
       }
     },
     {
@@ -2243,8 +2248,8 @@
         "src.thefpsreview.exact_sku"
       ],
       "description": {
-        "en": "One of four main heatpipes described on the exact XC BLACK 12G-P5-3655-KR review sample. The source says the central pipes make contact with the GPU. This route's 3D centreline, diameter, flattening, wick construction and exact bends are illustrative and not measured.",
-        "ru": "Одна из четырёх основных тепловых трубок, описанных в обзоре точного образца XC BLACK 12G-P5-3655-KR. Источник указывает, что центральные трубки контактируют с GPU. Пространственная осевая линия этой трассы, диаметр, сплющенные участки, конструкция фитиля и изгибы заданы условно и не измерены."
+        "en": "One of four central GPU-contact route/run proxies described by The FPS Review for the exact XC BLACK sample. This selectable line is not evidence of one independent closed U-shaped tube. Its centreline, diameter, flattening, wick construction and bends are illustrative and not measured.",
+        "ru": "Один из четырёх макетов центральных трасс/проходов с контактом с GPU, описанных The FPS Review для точного образца XC BLACK. Этот выбираемый элемент не доказывает существование отдельной замкнутой U-образной трубки. Осевая линия, диаметр, сплющенные участки, фитиль и изгибы заданы условно и не измерены."
       }
     },
     {
@@ -2261,8 +2266,8 @@
         "src.thefpsreview.exact_sku"
       ],
       "description": {
-        "en": "One of four main heatpipes described on the exact XC BLACK 12G-P5-3655-KR review sample. The source says the central pipes make contact with the GPU. This route's 3D centreline, diameter, flattening, wick construction and exact bends are illustrative and not measured.",
-        "ru": "Одна из четырёх основных тепловых трубок, описанных в обзоре точного образца XC BLACK 12G-P5-3655-KR. Источник указывает, что центральные трубки контактируют с GPU. Пространственная осевая линия этой трассы, диаметр, сплющенные участки, конструкция фитиля и изгибы заданы условно и не измерены."
+        "en": "One of four central GPU-contact route/run proxies described by The FPS Review for the exact XC BLACK sample. This selectable line is not evidence of one independent closed U-shaped tube. Its centreline, diameter, flattening, wick construction and bends are illustrative and not measured.",
+        "ru": "Один из четырёх макетов центральных трасс/проходов с контактом с GPU, описанных The FPS Review для точного образца XC BLACK. Этот выбираемый элемент не доказывает существование отдельной замкнутой U-образной трубки. Осевая линия, диаметр, сплющенные участки, фитиль и изгибы заданы условно и не измерены."
       }
     },
     {
@@ -2279,8 +2284,8 @@
         "src.thefpsreview.exact_sku"
       ],
       "description": {
-        "en": "One of four main heatpipes described on the exact XC BLACK 12G-P5-3655-KR review sample. The source says the central pipes make contact with the GPU. This route's 3D centreline, diameter, flattening, wick construction and exact bends are illustrative and not measured.",
-        "ru": "Одна из четырёх основных тепловых трубок, описанных в обзоре точного образца XC BLACK 12G-P5-3655-KR. Источник указывает, что центральные трубки контактируют с GPU. Пространственная осевая линия этой трассы, диаметр, сплющенные участки, конструкция фитиля и изгибы заданы условно и не измерены."
+        "en": "One of four central GPU-contact route/run proxies described by The FPS Review for the exact XC BLACK sample. This selectable line is not evidence of one independent closed U-shaped tube. Its centreline, diameter, flattening, wick construction and bends are illustrative and not measured.",
+        "ru": "Один из четырёх макетов центральных трасс/проходов с контактом с GPU, описанных The FPS Review для точного образца XC BLACK. Этот выбираемый элемент не доказывает существование отдельной замкнутой U-образной трубки. Осевая линия, диаметр, сплющенные участки, фитиль и изгибы заданы условно и не измерены."
       }
     },
     {
@@ -2297,8 +2302,8 @@
         "src.thefpsreview.exact_sku"
       ],
       "description": {
-        "en": "One of four main heatpipes described on the exact XC BLACK 12G-P5-3655-KR review sample. The source says the central pipes make contact with the GPU. This route's 3D centreline, diameter, flattening, wick construction and exact bends are illustrative and not measured.",
-        "ru": "Одна из четырёх основных тепловых трубок, описанных в обзоре точного образца XC BLACK 12G-P5-3655-KR. Источник указывает, что центральные трубки контактируют с GPU. Пространственная осевая линия этой трассы, диаметр, сплющенные участки, конструкция фитиля и изгибы заданы условно и не измерены."
+        "en": "One of four central GPU-contact route/run proxies described by The FPS Review for the exact XC BLACK sample. This selectable line is not evidence of one independent closed U-shaped tube. Its centreline, diameter, flattening, wick construction and bends are illustrative and not measured.",
+        "ru": "Один из четырёх макетов центральных трасс/проходов с контактом с GPU, описанных The FPS Review для точного образца XC BLACK. Этот выбираемый элемент не доказывает существование отдельной замкнутой U-образной трубки. Осевая линия, диаметр, сплющенные участки, фитиль и изгибы заданы условно и не измерены."
       }
     },
     {
@@ -2315,8 +2320,8 @@
         "src.thefpsreview.exact_sku"
       ],
       "description": {
-        "en": "One of two additional side heatpipes described on the exact XC BLACK 12G-P5-3655-KR review sample. The source says these move heat toward the side of the heatsink. This route's 3D centreline, diameter, flattening and bends remain illustrative.",
-        "ru": "Одна из двух дополнительных боковых тепловых трубок, описанных в обзоре точного образца XC BLACK 12G-P5-3655-KR. Источник указывает, что они переносят тепло к боковой части радиатора. Пространственная осевая линия, диаметр, сплющенные участки и изгибы остаются условными."
+        "en": "One of two side route/run proxies described by The FPS Review for the exact XC BLACK sample. This selectable line is not proof of one independent closed U-shaped tube. Its centreline, diameter, flattening and bends remain illustrative.",
+        "ru": "Один из двух макетов боковых трасс/проходов, описанных The FPS Review для точного образца XC BLACK. Этот выбираемый элемент не доказывает существование отдельной замкнутой U-образной трубки. Осевая линия, диаметр, сплющенные участки и изгибы остаются условными."
       }
     },
     {
@@ -2333,8 +2338,8 @@
         "src.thefpsreview.exact_sku"
       ],
       "description": {
-        "en": "One of two additional side heatpipes described on the exact XC BLACK 12G-P5-3655-KR review sample. The source says these move heat toward the side of the heatsink. This route's 3D centreline, diameter, flattening and bends remain illustrative.",
-        "ru": "Одна из двух дополнительных боковых тепловых трубок, описанных в обзоре точного образца XC BLACK 12G-P5-3655-KR. Источник указывает, что они переносят тепло к боковой части радиатора. Пространственная осевая линия, диаметр, сплющенные участки и изгибы остаются условными."
+        "en": "One of two side route/run proxies described by The FPS Review for the exact XC BLACK sample. This selectable line is not proof of one independent closed U-shaped tube. Its centreline, diameter, flattening and bends remain illustrative.",
+        "ru": "Один из двух макетов боковых трасс/проходов, описанных The FPS Review для точного образца XC BLACK. Этот выбираемый элемент не доказывает существование отдельной замкнутой U-образной трубки. Осевая линия, диаметр, сплющенные участки и изгибы остаются условными."
       }
     },
     {
