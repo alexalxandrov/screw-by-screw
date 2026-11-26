@@ -578,6 +578,36 @@ function createFallbackModel() {
   const cooling = makeGroup(root, "assembly.cooling", "Cooling assembly");
   const pcbAssembly = makeGroup(root, "assembly.pcb.electronics", "PCB and electronics assembly");
   const connectors = makeGroup(root, "assembly.connectors", "Connectors assembly");
+  const fasteners = makeGroup(root, "assembly.fasteners", "Eight cooler/shroud retention screws", [0, 0, 0], "visible_exact_model", "assembly_node");
+  // Only the four GPU-area screw centres are photo-estimated in the current scene.
+  // The four far/rear screws remain count-confirmed logical nodes without fake coordinates.
+  const gpuScrewPositions = [[72, 31], [122, 31], [72, 83], [122, 83]];
+  gpuScrewPositions.forEach(([x, z], index) => {
+    const id = "fastener.cooler." + String(index + 1).padStart(2, "0");
+    const head = new THREE.Mesh(
+      new THREE.CylinderGeometry(2.2, 2.2, 1.1, 24),
+      materials.metal
+    );
+    head.name = "GPU-area cooler screw " + (index + 1) + " · photo-position estimate";
+    head.position.set(x, 18.2, z);
+    tag(head, id, "visible_exact_model", "illustrative_proxy");
+    fasteners.add(head);
+    const crossA = new THREE.Mesh(new THREE.BoxGeometry(2.2, 0.25, 0.45), materials.shroud);
+    crossA.position.set(x, 18.82, z);
+    crossA.name = "Illustrative Phillips recess A";
+    tag(crossA, id, "illustrative", "illustrative_proxy");
+    fasteners.add(crossA);
+    const crossB = new THREE.Mesh(new THREE.BoxGeometry(0.45, 0.25, 2.2), materials.shroud);
+    crossB.position.set(x, 18.82, z);
+    crossB.name = "Illustrative Phillips recess B";
+    tag(crossB, id, "illustrative", "illustrative_proxy");
+    fasteners.add(crossB);
+  });
+  for (let index = 5; index <= 8; index += 1) {
+    const id = "fastener.cooler." + String(index).padStart(2, "0");
+    makeGroup(fasteners, id, "Rear-area cooler screw " + (index - 4) + " · position unmapped",
+      [0, 0, 0], "visible_exact_model", "logical_only");
+  }
 
   makeMesh(pcbAssembly, "assembly.pcb.board", "Exposed PCB proxy",
     new THREE.BoxGeometry(178, 1.6, 85), materials.pcb, [101, 16.5, 55], "visible_exact_model");
