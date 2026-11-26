@@ -83,7 +83,33 @@
       "heatpipe_count_source_ids": [
         "src.thefpsreview.exact_sku"
       ],
-      "heatpipe_geometry_status": "photo_estimated_proxy_not_measured"
+      "heatpipe_geometry_status": "photo_estimated_proxy_not_measured",
+      "thermal_pad_thickness_observations": [
+        {
+          "value_mm": 2,
+          "confidence": "measured_approximate",
+          "location_assignment": "unresolved",
+          "source_ids": [
+            "src.gamersnexus.teardown"
+          ],
+          "notes": "One pad sample verbally measured at about 2.0 mm; exact contact location not isolated in the transcript."
+        },
+        {
+          "value_mm": 1.5,
+          "confidence": "approximate_estimate",
+          "location_assignment": "unresolved",
+          "source_ids": [
+            "src.gamersnexus.teardown"
+          ],
+          "notes": "Second pad sample verbally estimated around 1.5 mm; presenter says measurement is harder."
+        }
+      ],
+      "heatpipe_diameter_mm_approximate": 6,
+      "heatpipe_diameter_source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "gn_central_heatpipe_tube_count": 2,
+      "heatpipe_count_interpretation": "TheFPS Review describes four central GPU-contact pipe runs plus two side runs (six runs); Gamers Nexus narrates two central ~6 mm tube/loop paths through the cold plate. These are retained as source-specific observations because a visual run count and distinct tube-loop count may differ."
     },
     "power_connector": "single 8-pin",
     "display_outputs": {
@@ -92,6 +118,20 @@
       "source_ids": [
         "src.evga.spec",
         "src.lanoc.review"
+      ]
+    },
+    "gpu_copper_contact_direct_to_die": true,
+    "gpu_die_marking": "NVIDIA GA106-300-A1",
+    "power_stage": {
+      "current_sense_shunt_count_observed": 2,
+      "auxiliary_8pin_shunt_resistance_milliohms": 5,
+      "pcie_slot_12v_shunt_resistance_milliohms": null,
+      "input_fuse_count_observed": 1,
+      "mosfet_row_copper_plate_contact": true,
+      "inductor_packages_visible_near_tentative_memory_vrm_area": 2,
+      "vrm_phase_topology": "unknown",
+      "source_ids": [
+        "src.gamersnexus.teardown"
       ]
     }
   },
