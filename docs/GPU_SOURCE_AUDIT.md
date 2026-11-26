@@ -17,6 +17,7 @@ A closely related EVGA RTX 3060 XC Gaming SKU 12G-P5-3657-KR also appears in sou
 | Source | Contribution | Applicability / limitation |
 |---|---|---|
 | [EVGA specification PDF](https://sg-repo-production-photos.s3.eu-central-1.amazonaws.com/aikido/cache/70b60b3a1a7bbeaced972a5b6905797f.pdf) | Product identity and published specifications for 12G-P5-3655-KR | Strong primary product source; verify original official hosting and redistribution rights |
+| [NVIDIA Ampere GA10x architecture whitepaper](https://www.nvidia.com/content/PDF/nvidia-ampere-ga-102-gpu-architecture-whitepaper-v2.pdf) | GA10x per-SM resources and TPC composition | Architecture-common data only; GA102 floorplan/GPC layout is not transferred |
 | [Gamers Nexus exact-model teardown](https://www.youtube.com/watch?v=hJFJ_clQT8U) | Explicit EVGA RTX 3060 XC Black disassembly; cooler, fans, PCB, thermal pads, shunt resistors and internal views | High-value visual evidence; video/images remain copyrighted unless permission/license permits reuse |
 | [Tom's Hardware RTX 3060 teardown](https://www.tomshardware.com/reviews/nvidia-geforce-rtx-3060-review/2) and [main review identity photo](https://www.tomshardware.com/reviews/nvidia-geforce-rtx-3060-review) | Eight cooler/shroud screws, two fan connections, six Samsung K4ZAF325BM-HC16 packages at 16 Gbps; the same review sample's rear-PCB sticker reads P/N 12G-P5-3655-KR | Exact-SKU-linked sample evidence; does not establish PCB revision, component coordinates or electrical nets |
 | [Hardwareluxx EVGA XC Gaming PCB/cooler review](https://www.hardwareluxx.ru/index.php/artikel/hardware/grafikkarten/51282-test-i-obzor-evga-geforce-rtx-3060-xc-gaming-kompaktnaya-i-bystraya-videokarta.html?start=2) | PCB/cooler analysis; reports five-phase power delivery for XC Gaming | XC Gaming, not confirmed exact XC BLACK; do not transfer board-specific claims without verification |
@@ -240,3 +241,12 @@ The indexed PDF was opened directly and its text layer parsed. The internal titl
 The page-2 text-layer block diagram names `NVVDD-PH1` through `NVVDD-PH8` and `FBVDDQ-PH1` / `FBVDDQ-PH2`. Those are phases in the PG190-A02 reference design, **not an established phase count for the EVGA XC BLACK card**. This distinction is particularly important because published reviews of different EVGA RTX 3060 XC variants describe differing PCB/cooler configurations. No exact-SKU VRM claim, net, component placement, controller, MOSFET identity, or BOM is derived from this file.
 
 The web PDF text extraction succeeded, but the screenshot endpoint returned a cache miss for the requested pages. Therefore no page artwork, exact component value, trace path, or symbol-to-footprint interpretation was extracted. No BoardView is listed in the independent catalogue entry, and no BoardView file was verified. The PDF is not redistributed from this repository.
+
+
+## 18. GA10x SM and TPC architecture evidence
+
+NVIDIA's official Ampere GA10x whitepaper states that each GA10x SM contains 128 CUDA cores, four third-generation Tensor Cores, four texture units, one second-generation RT Core, a 256 KB register file and 128 KB of configurable L1/shared memory. It also describes each TPC as containing two SMs and one PolyMorph Engine. Applied to the RTX 3060's published 28-SM configuration, the package calculates 14 logical TPCs and 14 PolyMorph Engines.
+
+The new 28 SM entries are individually selectable logical inventory nodes; their numeric suffixes are navigation indices only. No TPC/SM physical coordinates, GA106 GPC count or GPC distribution, disabled-block placement, or GA102 die layout is asserted. The diagram is an architecture map, not a silicon floorplan.
+
+Source: https://www.nvidia.com/content/PDF/nvidia-ampere-ga-102-gpu-architecture-whitepaper-v2.pdf (Figure 2 and printed page 10).
