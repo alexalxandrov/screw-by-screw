@@ -283,12 +283,19 @@ class ContentPackageTests(unittest.TestCase):
             self.assertEqual(edge["from"], fan_id)
             self.assertEqual(edge["to"], rotor_id)
 
-        self.assertIn("Components: 137", report)
-        self.assertIn("Relationships: 133", report)
+        self.assertIn("Components: 167", report)
+        self.assertIn("Relationships: 163", report)
         self.assertIn("Animation clips: 2", report)
-        self.assertEqual(len(package["claims"]["claims"]), 64)
+        self.assertEqual(len(package["claims"]["claims"]), 74)
         self.assertEqual(len(package["process_layers"]["process_layers"]), 3)
         self.assertEqual(len(package["learning"]["questions"]), 8)
+        sm_instances = [item for item in components.values() if item["id"].startswith("chip.gpu.sm.") and item["id"] != "chip.gpu.sm.cluster"]
+        self.assertEqual(len(sm_instances), 28)
+        self.assertTrue(all(item["parent_id"] == "chip.gpu.tpc.cluster" for item in sm_instances))
+        self.assertEqual(components["chip.gpu.tpc.cluster"]["geometry_status"], "logical_only")
+        self.assertEqual(components["chip.gpu.polymorph.array"]["geometry_status"], "logical_only")
+        self.assertEqual(claims["claim.gpu.tpc_count"]["value"], 14)
+        self.assertEqual(claims["claim.gpu.tpc_count"]["confidence_class"], "calculated")
         clip = package["animations"]["clips"][0]
         self.assertEqual(clip["evidence_status"], "educational_approximation")
         self.assertEqual(clip["source_ids"], [])
