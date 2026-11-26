@@ -3391,6 +3391,199 @@
         "thread": "M3",
         "length_mm": 3
       }
+    },
+    {
+      "id": "storage.drive35.carrier.optional",
+      "parent_id": "storage.assembly",
+      "name": {
+        "en": "Optional 3.5-inch HDD carrier assembly · not populated",
+        "ru": "Опциональная сборка-корзина HDD 3,5″ · не установлена"
+      },
+      "category": "storage_carrier",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "unknown",
+      "source_ids": [
+        "src.dell.5060.hdd35_assembly",
+        "src.dell.5060.service"
+      ],
+      "description": {
+        "en": "Dell documents a removable 3.5-inch HDD assembly with an HDD filler bracket and a blue release tab. Carrier revision, fitted drive and exact coordinates are unknown.",
+        "ru": "Dell документирует съёмную сборку HDD 3,5″ с заглушкой HDD и синей защёлкой. Ревизия корзины, установленный диск и точные координаты неизвестны."
+      },
+      "population": "optional_not_fitted"
+    },
+    {
+      "id": "storage.drive35.filler_bracket.optional",
+      "parent_id": "storage.drive35.carrier.optional",
+      "name": {
+        "en": "Optional 3.5-inch HDD filler bracket · not populated",
+        "ru": "Опциональная заглушка HDD 3,5″ · не установлена"
+      },
+      "category": "storage_bracket",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "unknown",
+      "source_ids": [
+        "src.dell.5060.hdd35_assembly"
+      ],
+      "description": {
+        "en": "Dell's 3.5-inch assembly removal procedure requires removing the HDD filler bracket before releasing the carrier. Shape and dimensions are not measured.",
+        "ru": "По процедуре Dell перед освобождением корзины 3,5″ требуется снять заглушку HDD. Форма и размеры не измерены."
+      },
+      "population": "optional_not_fitted"
+    },
+    {
+      "id": "storage.drive35.drive_bracket.optional",
+      "parent_id": "storage.drive35.carrier.optional",
+      "name": {
+        "en": "Optional 3.5-inch drive bracket · pin-retained",
+        "ru": "Опциональный кронштейн диска 3,5″ · фиксация штифтами"
+      },
+      "category": "storage_bracket",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "unknown",
+      "source_ids": [
+        "src.dell.5060.hdd35_bracket"
+      ],
+      "description": {
+        "en": "Dell documents flexible bracket pins that engage the drive slots; release one side of the bracket and lift the drive out. No fixed screw pattern is claimed.",
+        "ru": "Dell документирует гибкие штифты кронштейна, входящие в пазы диска; одну сторону кронштейна оттягивают и извлекают диск. Универсальная схема винтов не заявляется."
+      },
+      "population": "optional_not_fitted"
+    },
+    {
+      "id": "storage.drive35.release_tab.optional",
+      "parent_id": "storage.drive35.carrier.optional",
+      "name": {
+        "en": "3.5-inch HDD carrier blue release tab · optional",
+        "ru": "Синяя защёлка корзины HDD 3,5″ · опционально"
+      },
+      "category": "mechanical_latch",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "unknown",
+      "source_ids": [
+        "src.dell.5060.hdd35_assembly"
+      ],
+      "description": {
+        "en": "Dell identifies a blue tab that releases the 3.5-inch carrier from the chassis.",
+        "ru": "Dell обозначает синюю защёлку, освобождающую корзину 3,5″ из корпуса."
+      },
+      "population": "optional_not_fitted"
+    },
+    {
+      "id": "storage.drive25.carrier.optional",
+      "parent_id": "storage.assembly",
+      "name": {
+        "en": "Optional 2.5-inch HDD carrier assembly · not populated",
+        "ru": "Опциональная сборка-корзина HDD 2,5″ · не установлена"
+      },
+      "category": "storage_carrier",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "unknown",
+      "source_ids": [
+        "src.dell.5060.hdd25_assembly",
+        "src.dell.5060.service"
+      ],
+      "description": {
+        "en": "Dell documents a separate 2.5-inch hard-drive assembly released by blue tabs on both sides after disconnecting drive data and power. Exact carrier revision and position are unknown.",
+        "ru": "Dell документирует отдельную сборку HDD 2,5″, освобождаемую синими защёлками с обеих сторон после отключения питания и данных. Ревизия и положение корзины неизвестны."
+      },
+      "population": "optional_not_fitted"
+    },
+    {
+      "id": "storage.drive25.drive_bracket.optional",
+      "parent_id": "storage.drive25.carrier.optional",
+      "name": {
+        "en": "Optional 2.5-inch drive bracket · pin-retained",
+        "ru": "Опциональный кронштейн диска 2,5″ · фиксация штифтами"
+      },
+      "category": "storage_bracket",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "unknown",
+      "source_ids": [
+        "src.dell.5060.hdd25_bracket"
+      ],
+      "description": {
+        "en": "Dell documents pins on the sides of the flexible bracket engaging drive slots. Pull one side of the bracket outward, disengage the pins and lift the drive.",
+        "ru": "Dell документирует боковые штифты гибкого кронштейна, входящие в пазы диска. Одну сторону кронштейна оттягивают, освобождают штифты и поднимают диск."
+      },
+      "population": "optional_not_fitted"
+    },
+    {
+      "id": "storage.drive25.release_tab.left.optional",
+      "parent_id": "storage.drive25.carrier.optional",
+      "name": {
+        "en": "2.5-inch HDD carrier left blue release tab · optional",
+        "ru": "Левая синяя защёлка корзины HDD 2,5″ · опционально"
+      },
+      "category": "mechanical_latch",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "unknown",
+      "source_ids": [
+        "src.dell.5060.hdd25_assembly"
+      ],
+      "description": {
+        "en": "One of two blue side tabs that release the 2.5-inch carrier from the chassis.",
+        "ru": "Одна из двух синих боковых защёлок, освобождающих корзину 2,5″ из корпуса."
+      },
+      "population": "optional_not_fitted"
+    },
+    {
+      "id": "storage.drive25.release_tab.right.optional",
+      "parent_id": "storage.drive25.carrier.optional",
+      "name": {
+        "en": "2.5-inch HDD carrier right blue release tab · optional",
+        "ru": "Правая синяя защёлка корзины HDD 2,5″ · опционально"
+      },
+      "category": "mechanical_latch",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "unknown",
+      "source_ids": [
+        "src.dell.5060.hdd25_assembly"
+      ],
+      "description": {
+        "en": "One of two blue side tabs that release the 2.5-inch carrier from the chassis.",
+        "ru": "Одна из двух синих боковых защёлок, освобождающих корзину 2,5″ из корпуса."
+      },
+      "population": "optional_not_fitted"
+    },
+    {
+      "id": "storage.optical_drive.release_tab.optional",
+      "parent_id": "storage.optical_drive.optional",
+      "name": {
+        "en": "Slim optical-drive blue release tab · optional",
+        "ru": "Синяя защёлка тонкого оптического привода · опционально"
+      },
+      "category": "mechanical_latch",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "unknown",
+      "source_ids": [
+        "src.dell.5060.odd_removal"
+      ],
+      "description": {
+        "en": "Dell documents pressing a blue release tab and sliding the slim optical drive out of its bay after disconnecting and unrouting data/power leads.",
+        "ru": "Dell документирует нажатие синей защёлки и извлечение тонкого оптического привода после отсоединения и освобождения кабелей данных/питания."
+      },
+      "population": "optional_not_fitted"
+    },
+    {
+      "id": "storage.drive_cage.cable_retention_tabs",
+      "parent_id": "storage.drive_cage",
+      "name": {
+        "en": "Drive-cage cable-retention tabs",
+        "ru": "Фиксаторы кабелей под корзиной накопителей"
+      },
+      "category": "cable_management",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "unknown",
+      "source_ids": [
+        "src.dell.5060.odd_removal",
+        "src.dell.5060.optical_drive_install"
+      ],
+      "description": {
+        "en": "Dell notes that optical-drive data and power leads may need to be unrouted from tabs underneath the drive cage before disconnection.",
+        "ru": "Dell отмечает, что перед отключением кабели данных и питания оптического привода может потребоваться освободить из фиксаторов под корзиной накопителей."
+      },
+      "population": "optional_not_fitted"
     }
   ]
 }
