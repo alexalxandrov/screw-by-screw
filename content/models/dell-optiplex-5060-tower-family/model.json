@@ -255,32 +255,36 @@
           "cores": 2,
           "threads": 4,
           "base_ghz": 3.7,
-          "tdp_w": 65,
-          "integrated_graphics": "UHD Graphics 610"
+          "integrated_graphics": "UHD Graphics 610",
+          "dell_datasheet_power_rating_w": 65,
+          "intel_ark_tdp_w": 58,
+          "intel_thermal_solution_spec_w": 65
         },
         {
           "model": "Pentium Gold G5500",
           "cores": 2,
           "threads": 4,
           "base_ghz": 3.8,
-          "tdp_w": 65,
-          "integrated_graphics": "UHD Graphics 610"
+          "integrated_graphics": "UHD Graphics 630",
+          "dell_datasheet_power_rating_w": 65,
+          "intel_ark_tdp_w": 54,
+          "intel_thermal_solution_spec_w": 65
         },
         {
           "model": "Core i3-8100",
           "cores": 4,
           "threads": 4,
           "base_ghz": 3.6,
-          "tdp_w": 65,
-          "integrated_graphics": "UHD Graphics 630"
+          "integrated_graphics": "UHD Graphics 630",
+          "dell_datasheet_power_rating_w": 65
         },
         {
           "model": "Core i3-8300",
           "cores": 4,
           "threads": 4,
           "base_ghz": 3.7,
-          "tdp_w": 65,
-          "integrated_graphics": "UHD Graphics 630"
+          "integrated_graphics": "UHD Graphics 630",
+          "dell_datasheet_power_rating_w": 65
         },
         {
           "model": "Core i5-8400",
@@ -288,8 +292,8 @@
           "threads": 6,
           "base_ghz": 2.8,
           "max_turbo_ghz": 4,
-          "tdp_w": 65,
-          "integrated_graphics": "UHD Graphics 630"
+          "integrated_graphics": "UHD Graphics 630",
+          "dell_datasheet_power_rating_w": 65
         },
         {
           "model": "Core i5-8500",
@@ -297,8 +301,8 @@
           "threads": 6,
           "base_ghz": 3,
           "max_turbo_ghz": 4.1,
-          "tdp_w": 65,
-          "integrated_graphics": "UHD Graphics 630"
+          "integrated_graphics": "UHD Graphics 630",
+          "dell_datasheet_power_rating_w": 65
         },
         {
           "model": "Core i5-8600",
@@ -306,8 +310,8 @@
           "threads": 6,
           "base_ghz": 3.1,
           "max_turbo_ghz": 4.3,
-          "tdp_w": 65,
-          "integrated_graphics": "UHD Graphics 630"
+          "integrated_graphics": "UHD Graphics 630",
+          "dell_datasheet_power_rating_w": 65
         },
         {
           "model": "Core i7-8700",
@@ -315,11 +319,24 @@
           "threads": 12,
           "base_ghz": 3.2,
           "max_turbo_ghz": 4.6,
-          "tdp_w": 65,
-          "integrated_graphics": "UHD Graphics 630"
+          "integrated_graphics": "UHD Graphics 630",
+          "dell_datasheet_power_rating_w": 65
         }
       ],
-      "processor_notes": "Manufacturer-supported options only, not a fitted CPU. The service-manual processor table differs on some TDP values; verify the precise system-board revision and order configuration before treating any option as installed."
+      "processor_notes": "The listed CPU models are platform options, not a fitted CPU. Dell's OptiPlex 5060 data sheet lists 65 W for the standard non-T options. Intel ARK separately reports 58 W TDP for G5400 and 54 W for G5500, while both specify a PCG 2015C (65 W) thermal solution; TDP and thermal-solution class are distinct properties. The Dell service manual's processor paragraph contains 35 W entries with abbreviated model names; the data sheet separately identifies 35 W T-suffix CPUs, so that service-manual row is retained as a source discrepancy and not used to assert Tower CPU population.",
+      "processor_source_ids": [
+        "src.dell.5060.processors",
+        "src.dell.5060.spec_sheet",
+        "src.intel.g5400",
+        "src.intel.g5500",
+        "src.dell.5060.service"
+      ],
+      "processor_data_semantics": {
+        "dell_datasheet_power_rating_w": "Power rating as listed in Dell OptiPlex 5060 data sheet for standard non-T processor options; not asserted as measured CPU package power.",
+        "intel_ark_tdp_w": "Intel processor-level TDP; separately recorded where a primary Intel ARK record is linked.",
+        "intel_thermal_solution_spec_w": "Intel package thermal-solution class; do not conflate with processor TDP.",
+        "service_manual_note": "35 W entries in the service-manual processor paragraph are not reconciled to the data sheet's T-suffix options."
+      }
     },
     "memory": {
       "slot_count": 4,
@@ -471,7 +488,10 @@
     "src.dell.5060.heatsink",
     "src.dell.5060.cpu_removal",
     "src.dell.5060.system_fan",
-    "src.dell.5060.psu_removal"
+    "src.dell.5060.psu_removal",
+    "src.dell.5060.spec_sheet",
+    "src.intel.g5400",
+    "src.intel.g5500"
   ],
   "release": {
     "version": "0.2.0",
