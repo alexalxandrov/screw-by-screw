@@ -23,11 +23,24 @@
         "src.evga.spec"
       ],
       "evidence_status": "manufacturer_data",
-      "package_part_number": "Samsung K4ZAF325BM-HC16",
-      "package_capacity_gbit": 16,
-      "package_count": 6,
-      "package_count_evidence_status": "teardown_supported",
-      "package_position_status": "photo_estimated_not_measured"
+      "visible_package_positions": 6,
+      "visible_package_positions_evidence_status": "exact_model_visual_observation",
+      "package_position_status": "photo_estimated_not_measured",
+      "package_identity_candidate": {
+        "part_number": "Samsung K4ZAF325BM-HC16",
+        "capacity_gbit": 16,
+        "organization": "512M × 32",
+        "data_rate_gbps_per_pin": 16,
+        "package_type": "180 FBGA",
+        "interface_width_bits": 32,
+        "evidence_status": "related_variant_and_secondary_catalog_only",
+        "exact_sku_marking_verified": false,
+        "source_ids": [
+          "src.tomshardware.teardown",
+          "src.samsung.gddr6.catalog"
+        ],
+        "notes": "Candidate part identity and catalog attributes only. The exact 12G-P5-3655-KR XC BLACK sample marking has not been independently transcribed; do not treat these fields as an exact-SKU BOM."
+      }
     },
     "gpu": {
       "family": "GeForce RTX 3060",
@@ -60,7 +73,14 @@
       "diameter_evidence": "reviewer_measurement_approximate",
       "source_ids": [
         "src.lanoc.review"
-      ]
+      ],
+      "heatpipe_count": 6,
+      "main_gpu_contact_heatpipe_count": 4,
+      "side_heatpipe_count": 2,
+      "heatpipe_count_source_ids": [
+        "src.thefpsreview.exact_sku"
+      ],
+      "heatpipe_geometry_status": "photo_estimated_proxy_not_measured"
     },
     "power_connector": "single 8-pin",
     "display_outputs": {
@@ -77,7 +97,11 @@
     "src.lanoc.review",
     "src.gamersnexus.teardown",
     "src.neoseeker.review",
-    "src.tomshardware.teardown"
+    "src.tomshardware.teardown",
+    "src.thefpsreview.exact_sku",
+    "src.nvidia.rtx3060.architecture",
+    "src.tomshardware.rtx3060.specs",
+    "src.samsung.gddr6.catalog"
   ],
   "release": {
     "version": "0.1-draft",
