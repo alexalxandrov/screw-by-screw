@@ -466,6 +466,46 @@
         "en": "Remove the rear metal blanking bracket, insert the optional video module from inside, connect its system-board cable and secure it with two M3×3 screws. This is an option-specific procedure.",
         "ru": "Снять заднюю металлическую заглушку, вставить опциональный видеомодуль изнутри, подключить кабель к системной плате и закрепить двумя винтами M3×3. Процедура относится только к опциональной конфигурации."
       }
+    },
+    {
+      "source_id": "src.dell.5060.hdd35_assembly",
+      "locator": "Removing 3.5-inch hard-drive assembly",
+      "note": {
+        "en": "Disconnect SATA and power from the drive, remove the HDD filler bracket, press the blue tab and pull the carrier assembly out of the chassis.",
+        "ru": "Отключить SATA и питание от диска, снять заглушку HDD, нажать синюю защёлку и извлечь сборку-корзину из корпуса."
+      }
+    },
+    {
+      "source_id": "src.dell.5060.hdd35_bracket",
+      "locator": "Removing 3.5-inch HDD from the drive bracket",
+      "note": {
+        "en": "Release the HDD from its carrier by pulling one side of the flexible bracket to disengage its pins from the drive slots, then lift the drive out.",
+        "ru": "Освободить HDD из корзины: оттянуть одну сторону гибкого кронштейна, вывести штифты из пазов диска и поднять накопитель."
+      }
+    },
+    {
+      "source_id": "src.dell.5060.hdd25_assembly",
+      "locator": "Removing 2.5-inch hard-drive assembly",
+      "note": {
+        "en": "Disconnect data and power from the 2.5-inch drive, press blue tabs on both sides of the carrier and pull the assembly out of the chassis.",
+        "ru": "Отключить данные и питание от диска 2,5″, нажать синие защёлки с обеих сторон корзины и извлечь сборку из корпуса."
+      }
+    },
+    {
+      "source_id": "src.dell.5060.hdd25_bracket",
+      "locator": "Removing 2.5-inch drive from its bracket",
+      "note": {
+        "en": "Pull one side of the flexible bracket to disengage the retaining pins from the drive slots, then lift the drive out.",
+        "ru": "Оттянуть одну сторону гибкого кронштейна, вывести удерживающие штифты из пазов диска и поднять накопитель."
+      }
+    },
+    {
+      "source_id": "src.dell.5060.odd_removal",
+      "locator": "Removing optical drive",
+      "note": {
+        "en": "Disconnect data and power cables, freeing them from retention tabs beneath the drive cage if needed. Press the blue release tab and slide the slim optical drive out.",
+        "ru": "Отключить кабели данных и питания, при необходимости освободив их из фиксаторов под корзиной. Нажать синюю защёлку и выдвинуть тонкий оптический привод."
+      }
     }
   ],
   "status": "manufacturer_documented_partial_procedure",
