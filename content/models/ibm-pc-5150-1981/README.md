@@ -10,16 +10,16 @@ This is an educational reference package for the original IBM 5150 system unit, 
 
 - 71 semantic components with stable IDs and bilingual descriptions.
 - 100 typed component relationships.
-- 20 source-linked technical claims.
+- 21 source-linked technical claims.
 - 5 functional layers and 12 bilingual learning questions.
 - 5 documented FRU service operations, marked as partial rather than a complete teardown.
 - 2 educational animation clips; neither is a physical simulation.
-- 4 registered sources, led by the two August 1981 IBM manuals and IBM corporate history.
+- 5 registered sources, led by the two August 1981 IBM manuals and IBM corporate history, with one specimen-specific FAU museum record.
 
 ## Evidence boundaries
 
 The August 1981 technical reference is the authority for the initial board family, the 8-bit I/O channel, system timing, interfaces, and 63.5 W / 120 Vac power supply. Later 220/240 Vac variants are excluded. The launch baseline is documented as 16 KB RAM with no disk drive. The service manual documents individual FRU operations, but not one universal screw-by-screw sequence for every option configuration.
 
-The enclosure envelope, most component positions, sheet-metal folds, board-hole pattern, screw coordinates and fastener dimensions are visual proxies or unknown. The PSU is represented as a sealed FRU. Disconnect mains power before opening the system unit; do not open or probe the PSU.
+The case envelope follows one 1981 FAU museum specimen catalogued at 494 × 410 × 140 mm (L × W × H). That specimen has CGA and memory expansion; these dimensions are secondary specimen-specific evidence, not an IBM-wide specification or a serial-matched launch measurement. Relative board-component zones follow IBM Technical Reference Fig. 4 (printed p. 2-13), but the figure is not dimensioned. Exact component XY coordinates, sheet-metal folds, board-hole pattern, screw coordinates and fastener dimensions remain visual proxies or unknown. The PSU is represented as a sealed FRU. Disconnect mains power before opening the system unit; do not open or probe the PSU.
 
 See [model research and geometry notes](../../../MODELS/COMPUTERS/IBM/5150/README.md), [atlas implementation specification](../../../docs/IBM_PC_5150_ATLAS_SPEC.md), and the [source register](../../../MODELS/COMPUTERS/IBM/5150/00-SOURCES/REFERENCE_REGISTER.md).
