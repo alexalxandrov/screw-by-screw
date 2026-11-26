@@ -9,17 +9,19 @@
 - Identity scope and model kind are explicit; the OptiPlex is not assigned a fabricated part number.
 - Runtime startup now resolves the default entry from `content/catalog/models.json`. The RTX 3060 is still the default, but `src/main.js` and `src/data/model.js` no longer import its sidecar JSON as a special startup path.
 - Startup and later catalogue switching use the same `.sbsmodel` loader.
-- The OptiPlex package is stored at `public/models/dell_optiplex_5060_tower_v01.sbsmodel`; editable source data lives in `content/models/dell-optiplex-5060-tower-family/`.
-- The OptiPlex package has 67 stable component nodes, 68 typed relationships, 58 box-proxy geometry nodes and 24 individual screw/grommet instances.
+- The OptiPlex v0.1 archive remains available at `public/models/dell_optiplex_5060_tower_v01.sbsmodel`; the expanded v0.2 package is stored at `public/models/dell_optiplex_5060_tower_v02.sbsmodel`; editable source data lives in `content/models/dell-optiplex-5060-tower-family/`.
+- The OptiPlex package has 115 semantic component nodes, 123 typed relationships, 58 box-proxy geometry nodes, 24 individual screw/grommet instances, 15 source records, 31 claims, six qualitative process layers, 12 documented partial service steps and nine learning questions.
 - Its scene can be regenerated from per-component `visual_proxy` metadata by `tools/modeling/build_device_blockout.py`; a dedicated workflow rebuilds the scene and package and tests the production package loader with checksums.
 - The catalogue UI already supports category filters, text search, model identity, package version and geometry status.
 
 ## Current limitations and remaining engineering work
 
+The expanded v0.2 package maps all 26 numbered Dell Tower motherboard callouts to semantic component references, records separate SSD/WLAN M.2 sockets, SATA 0/1/2/3, memory capacity, PCIe lane-width distinctions, PSU variants and port inventory. A 12-step partial system-board removal sequence is source-backed. Read `OPTIPLEX_5060_RESEARCH.md` for the source matrix and scope notes.
+
 1. **Legacy RTX-specific tooling remains.** The RTX blockout generator and its CI workflow still use fixed model paths and RTX-specific assumptions. Reusable validators should become manifest-driven; the legacy RTX pipeline still has a known GLB binding discrepancy for some logical/abstract components.
 2. **The viewer's broader browser suite remains a gate.** Unit tests and the dedicated OptiPlex package workflow are separate from browser interaction tests. Catalogue switching, persistence and visual states must pass browser tests before a release.
 3. **Standalone distribution needs a final release check.** `npm run build` embeds all staged catalogue packages in root `index.html`. The standalone output should be inspected to confirm both entries can be opened without a server.
-4. **No cross-package component references yet.** The PC package can define a physical instance and eventually reference a GPU, RAM module, SSD or PSU package by stable versioned ID. The current v0.1 package keeps unknown/optional installed parts unpopulated rather than inventing their exact identity.
+4. **No cross-package component references yet.** The PC package can define a physical instance and eventually reference a GPU, RAM module, SSD or PSU package by stable versioned ID. The current v0.2 package keeps unknown/optional installed parts unpopulated rather than inventing their exact identity.
 5. **The OptiPlex is not a physical-sample reconstruction.** Exact system-board assembly number/revision, CPU, PSU, drive population, internal cable routing, board hole coordinates and detailed fastener positions remain unknown. Its GLB uses schematic box proxies, never CAD.
 
 ## Information architecture
