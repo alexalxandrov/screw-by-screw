@@ -386,7 +386,22 @@
       "source_ids": [
         "src.dell.5060.storage",
         "src.dell.5060.board_connectors"
-      ]
+      ],
+      "drive_retention": {
+        "3.5-inch": {
+          "carrier_release": "single blue tab",
+          "drive_to_bracket": "flexible bracket pins engage drive slots",
+          "filler_bracket": true
+        },
+        "2.5-inch": {
+          "carrier_release": "two blue side tabs",
+          "drive_to_bracket": "flexible bracket pins engage drive slots"
+        },
+        "slim_optical_drive": {
+          "carrier_release": "single blue tab",
+          "cable_routing": "route data and power leads through retention tabs beneath the drive cage"
+        }
+      }
     },
     "expansion": {
       "pcie_gen3": [
@@ -530,10 +545,15 @@
     "src.dell.5060.coin_cell_removal",
     "src.dell.5060.heatsink_fan_removal",
     "src.dell.5060.optical_drive_install",
-    "src.dell.5060.optional_video_module"
+    "src.dell.5060.optional_video_module",
+    "src.dell.5060.hdd35_assembly",
+    "src.dell.5060.hdd35_bracket",
+    "src.dell.5060.hdd25_assembly",
+    "src.dell.5060.hdd25_bracket",
+    "src.dell.5060.odd_removal"
   ],
   "release": {
-    "version": "0.2.0",
+    "version": "0.3.0",
     "status": "research_blockout",
     "geometry_fidelity": "illustrative_proxy_not_cad"
   }
