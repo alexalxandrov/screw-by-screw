@@ -46,12 +46,15 @@
     },
     {
       "id": "src.tomshardware.teardown",
-      "title": "EVGA GeForce RTX 3060 XC teardown — related variant reference",
+      "title": "EVGA GeForce RTX 3060 XC teardown with 12G-P5-3655-KR sample label",
       "publisher": "Tom's Hardware",
       "url": "https://www.tomshardware.com/reviews/nvidia-geforce-rtx-3060-review/2",
-      "type": "related_model_teardown_reference",
-      "applicability": "Tom's Hardware describes an EVGA GeForce RTX 3060 XC sample but does not identify it as XC BLACK / 12G-P5-3655-KR. Its eight-screw layout and far-edge screw positions are related-variant context only and must not be treated as an exact-SKU service specification.",
-      "license_status": "third_party_copyright_no_reuse_permission"
+      "type": "exact_sku_teardown_review",
+      "applicability": "The article body describes an EVGA RTX 3060 XC teardown. The rear-PCB identity photograph on the article's main page visibly reads P/N 12G-P5-3655-KR, the exact XC BLACK retail SKU. On the teardown page, Tom's Hardware reports eight cooler/shroud retention screws (four around the GPU and four near the far end), two fan connections, and six Samsung K4ZAF325BM-HC16 GDDR6 chips rated for 16Gbps. The photograph ties the teardown sample to the retail SKU; exact screw coordinates, package-to-net mapping and PCB revision remain unverified.",
+      "license_status": "third_party_copyright_no_reuse_permission",
+      "identity_reference_url": "https://www.tomshardware.com/reviews/nvidia-geforce-rtx-3060-review",
+      "identity_reference_image_url": "https://cdn.mos.cms.futurecdn.net/LYzTKyspS9Hont9woCwoo9-1200-80.jpg",
+      "identity_locator": "Main review's EVGA rear-PCB photo: label reads P/N 12G-P5-3655-KR."
     },
     {
       "id": "src.techpowerup.pcb",
