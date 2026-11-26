@@ -25,7 +25,7 @@ test("loads the generated Blender v0.5 SBS model package and resolves content-pa
   await expect(deviceRoot).toBeVisible();
   await deviceRoot.click();
   await expect(page.locator("#assembly-step-list .assembly-step-card")).toHaveCount(2);
-  await expect(page.locator("#assembly-step-list")).toContainText("Вывернуть четыре винта крепления радиатора вокруг GPU");
+  await expect(page.locator("#assembly-step-list")).toContainText("Вывернуть восемь винтов крепления кулера/кожуха");
   await expect(page.locator("#assembly-step-list")).toContainText("Отсоединить оба кабеля вентиляторов");
   await page.locator("#animation-clip-select").selectOption("clip.exploded-cooler-overview");
   await expect(page.locator("#animation-evidence-note")).toContainText("визуальное разнесение");
