@@ -331,9 +331,16 @@ export async function loadModelPackage(file) {
         !envelope.manifest || !envelope.files || typeof envelope.files !== "object" || Array.isArray(envelope.files)) {
       fail("unsupported JSON model package envelope");
     }
+    const fileEntries = Object.entries(envelope.files);
+    if (fileEntries.length < REQUIRED_FILE_KEYS.length || fileEntries.length > MAX_MODEL_PACKAGE_ENTRIES) {
+      fail("JSON package contains an invalid number of entries");
+    }
     archive = Object.create(null);
-    for (const [path, content] of Object.entries(envelope.files)) {
+    let totalUncompressedBytes = 0;
+    const encoder = new TextEncoder();
+    for (const [path, content] of fileEntries) {
       if (!isSafeArchivePath(path)) fail("unsafe package path: " + path);
+      let bytes;
       if (path === "scene.glb") {
         if (typeof content !== "string") fail("scene GLB must be a base64 string");
         if (content.length > Math.ceil(MAX_SCENE_GLB_BYTES / 3) * 4) fail("scene GLB exceeds the allowed size");
@@ -343,14 +350,16 @@ export async function loadModelPackage(file) {
         let decoded;
         try { decoded = globalThis.atob(content); }
         catch { fail("scene GLB base64 decoding failed"); }
-        const bytes = new Uint8Array(decoded.length);
+        bytes = new Uint8Array(decoded.length);
         for (let i = 0; i < decoded.length; i += 1) bytes[i] = decoded.charCodeAt(i);
         if (bytes.byteLength > MAX_SCENE_GLB_BYTES) fail("scene GLB exceeds the allowed size");
-        archive[path] = bytes;
       } else {
         if (typeof content !== "string") fail("JSON package entry must be UTF-8 text: " + path);
-        archive[path] = new TextEncoder().encode(content);
+        bytes = encoder.encode(content);
       }
+      totalUncompressedBytes += bytes.byteLength;
+      if (totalUncompressedBytes > MAX_MODEL_UNCOMPRESSED_BYTES) fail("package exceeds the expanded content size limit");
+      archive[path] = bytes;
     }
     manifest = envelope.manifest;
     integrityVerified = await verifyPackageChecksums(archive, manifest);
