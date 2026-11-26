@@ -777,6 +777,128 @@
         "src.gamersnexus.teardown"
       ],
       "notes": "The Gamers Nexus teardown narration identifies two central tubes passing through the GPU contact plate. The FPS Review separately describes four central GPU-contact heatpipe runs plus two side runs. Tube-loop count and visible run count are different counting conventions; preserve the source-specific observations and do not interpret them as a contradiction or merge them into one physical count without a drawing."
+    },
+    {
+      "id": "claim.gpu.cuda_cores_per_sm",
+      "subject_id": "chip.gpu.sm.cluster",
+      "predicate": "cuda_cores_per_sm",
+      "value": 128,
+      "unit": "cores/SM",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ],
+      "notes": "Each GA10x SM contains 128 CUDA cores."
+    },
+    {
+      "id": "claim.gpu.tensor_cores_per_sm",
+      "subject_id": "chip.gpu.sm.cluster",
+      "predicate": "tensor_cores_per_sm",
+      "value": 4,
+      "unit": "cores/SM",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ],
+      "notes": "Each GA10x SM contains four third-generation Tensor Cores."
+    },
+    {
+      "id": "claim.gpu.texture_units_per_sm",
+      "subject_id": "chip.gpu.sm.cluster",
+      "predicate": "texture_units_per_sm",
+      "value": 4,
+      "unit": "TMU/SM",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ],
+      "notes": "Each GA10x SM contains four texture units."
+    },
+    {
+      "id": "claim.gpu.rt_cores_per_sm",
+      "subject_id": "chip.gpu.sm.cluster",
+      "predicate": "rt_cores_per_sm",
+      "value": 1,
+      "unit": "cores/SM",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ],
+      "notes": "Each GA10x SM contains one second-generation RT Core."
+    },
+    {
+      "id": "claim.gpu.register_file_per_sm",
+      "subject_id": "chip.gpu.sm.cluster",
+      "predicate": "register_file_capacity_per_sm",
+      "value": 256,
+      "unit": "KB/SM",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ],
+      "notes": "NVIDIA GA10x whitepaper specifies a 256 KB register file per SM."
+    },
+    {
+      "id": "claim.gpu.l1_shared_memory_per_sm",
+      "subject_id": "chip.gpu.sm.cluster",
+      "predicate": "l1_shared_memory_capacity_per_sm",
+      "value": 128,
+      "unit": "KB/SM",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ],
+      "notes": "NVIDIA GA10x whitepaper specifies 128 KB of configurable L1/shared memory per SM."
+    },
+    {
+      "id": "claim.gpu.sms_per_tpc",
+      "subject_id": "chip.gpu.tpc.cluster",
+      "predicate": "streaming_multiprocessors_per_tpc",
+      "value": 2,
+      "unit": "SM/TPC",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ],
+      "notes": "Each GA10x TPC contains two SMs."
+    },
+    {
+      "id": "claim.gpu.tpc_count",
+      "subject_id": "chip.gpu.tpc.cluster",
+      "predicate": "texture_processing_cluster_count",
+      "value": 14,
+      "unit": "TPC",
+      "confidence_class": "calculated",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "notes": "28 configured RTX 3060 SMs divided by two SMs per GA10x TPC = 14 logical TPCs; no GPC distribution is inferred."
+    },
+    {
+      "id": "claim.gpu.polymorph_engine_per_tpc",
+      "subject_id": "chip.gpu.polymorph.array",
+      "predicate": "polymorph_engine_count_per_tpc",
+      "value": 1,
+      "unit": "engine/TPC",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ],
+      "notes": "Each GA10x TPC contains one PolyMorph Engine."
+    },
+    {
+      "id": "claim.gpu.polymorph_engine_count",
+      "subject_id": "chip.gpu.polymorph.array",
+      "predicate": "polymorph_engine_count",
+      "value": 14,
+      "unit": "engines",
+      "confidence_class": "calculated",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "notes": "One PolyMorph Engine per calculated logical TPC; 14 TPCs gives 14 engines."
     }
   ]
 }
