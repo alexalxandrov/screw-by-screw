@@ -1,4 +1,18 @@
 import { test, expect } from "@playwright/test";
+import { strFromU8, unzipSync } from "fflate";
+
+function parseGlbJson(bytes) {
+  if (!(bytes instanceof Uint8Array) || bytes.byteLength < 20) {
+    throw new Error("Generated GLB is missing or truncated");
+  }
+  const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+  if (view.getUint32(0, true) !== 0x46546c67) throw new Error("Invalid GLB magic");
+  if (view.getUint32(4, true) !== 2) throw new Error("Unsupported GLB version");
+  const jsonLength = view.getUint32(12, true);
+  if (view.getUint32(16, true) !== 0x4e4f534a) throw new Error("GLB JSON chunk is missing");
+  if (20 + jsonLength > bytes.byteLength) throw new Error("GLB JSON chunk exceeds archive bounds");
+  return JSON.parse(strFromU8(bytes.subarray(20, 20 + jsonLength)));
+}
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 
@@ -12,6 +26,32 @@ test("loads the generated Blender v0.5 SBS model package and resolves content-pa
   const modelBytes = await modelResponse.body();
   expect(modelBytes.byteLength).toBeGreaterThan(0);
   expect(modelBytes.byteLength).toBeLessThan(512 * 1024 * 1024);
+
+  // Confirm that the photo-informed relief details survive Blender -> GLB -> SBS package export.
+  const packageFiles = unzipSync(new Uint8Array(modelBytes));
+  expect(Object.keys(packageFiles)).toContain("scene.glb");
+  const glbDocument = parseGlbJson(packageFiles["scene.glb"]);
+  const stableNodes = new Map(
+    glbDocument.nodes
+      .filter((node) => typeof node.extras?.sbs_component_id === "string")
+      .map((node) => [node.extras.sbs_component_id, node])
+  );
+  for (const id of ["fan.1.blade.1", "fan.1.blade.8", "fan.2.blade.1", "fan.2.blade.8"]) {
+    const node = stableNodes.get(id);
+    expect(node, `missing GLB node ${id}`).toBeTruthy();
+    expect(node.mesh, `${id} must have exported mesh geometry`).toBeDefined();
+    expect(node.extras.sbs_surface_detail).toBe("stylized_raised_E_mark_proxy");
+  }
+  for (const id of ["fan.1.hub", "fan.2.hub"]) {
+    const node = stableNodes.get(id);
+    expect(node, `missing GLB node ${id}`).toBeTruthy();
+    expect(node.extras.sbs_surface_detail).toBe("raised_E_hub_badge_proxy");
+  }
+  for (const id of ["assembly.shroud.top", "assembly.shroud.bottom"]) {
+    const node = stableNodes.get(id);
+    expect(node, `missing GLB node ${id}`).toBeTruthy();
+    expect(node.extras.sbs_surface_detail).toBe("simplified_raised_wordmark_proxy");
+  }
   await expect(page.locator("#app-status")).toHaveText("Модель готова");
   const componentCount = Number(await page.locator("#component-count").textContent());
   expect(Number.isInteger(componentCount) && componentCount >= 85).toBeTruthy();
