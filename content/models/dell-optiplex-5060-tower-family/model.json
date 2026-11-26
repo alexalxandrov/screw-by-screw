@@ -33,9 +33,11 @@
       "numbered_callouts": 26,
       "evidence_status": "manufacturer_data",
       "source_ids": [
-        "src.dell.5060.service"
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.board_connectors"
       ],
-      "notes": "Callout count from Dell's motherboard illustration; not a component count."
+      "notes": "Callout count from Dell's motherboard illustration; not a component count.",
+      "callout_coverage": "semantic_reference_mapped"
     },
     "fasteners": {
       "screw_table_quantity_total": 19,
@@ -59,15 +61,234 @@
       "exact_psu_part_number": null,
       "source_ids": [
         "src.dell.5060.service"
+      ],
+      "supported_processors": [
+        {
+          "model": "Pentium Gold G5400",
+          "cores": 2,
+          "threads": 4,
+          "base_ghz": 3.7,
+          "tdp_w": 65,
+          "integrated_graphics": "UHD Graphics 610"
+        },
+        {
+          "model": "Pentium Gold G5500",
+          "cores": 2,
+          "threads": 4,
+          "base_ghz": 3.8,
+          "tdp_w": 65,
+          "integrated_graphics": "UHD Graphics 610"
+        },
+        {
+          "model": "Core i3-8100",
+          "cores": 4,
+          "threads": 4,
+          "base_ghz": 3.6,
+          "tdp_w": 65,
+          "integrated_graphics": "UHD Graphics 630"
+        },
+        {
+          "model": "Core i3-8300",
+          "cores": 4,
+          "threads": 4,
+          "base_ghz": 3.7,
+          "tdp_w": 65,
+          "integrated_graphics": "UHD Graphics 630"
+        },
+        {
+          "model": "Core i5-8400",
+          "cores": 6,
+          "threads": 6,
+          "base_ghz": 2.8,
+          "max_turbo_ghz": 4,
+          "tdp_w": 65,
+          "integrated_graphics": "UHD Graphics 630"
+        },
+        {
+          "model": "Core i5-8500",
+          "cores": 6,
+          "threads": 6,
+          "base_ghz": 3,
+          "max_turbo_ghz": 4.1,
+          "tdp_w": 65,
+          "integrated_graphics": "UHD Graphics 630"
+        },
+        {
+          "model": "Core i5-8600",
+          "cores": 6,
+          "threads": 6,
+          "base_ghz": 3.1,
+          "max_turbo_ghz": 4.3,
+          "tdp_w": 65,
+          "integrated_graphics": "UHD Graphics 630"
+        },
+        {
+          "model": "Core i7-8700",
+          "cores": 6,
+          "threads": 12,
+          "base_ghz": 3.2,
+          "max_turbo_ghz": 4.6,
+          "tdp_w": 65,
+          "integrated_graphics": "UHD Graphics 630"
+        }
+      ],
+      "processor_notes": "These are manufacturer-listed supported options, not a fitted CPU. The separate service-manual processor table differs on some thermal-power values; confirm against an identified board/BIOS and exact order configuration before treating any option as installed."
+    },
+    "memory": {
+      "slot_count": 4,
+      "slot_type": "UDIMM",
+      "technology": "DDR4",
+      "ecc": "non-ECC",
+      "max_capacity_gb": 64,
+      "max_per_slot_gb": 16,
+      "max_data_rate_mt_s": {
+        "Core i5/i7": 2666,
+        "Pentium/i3": 2400
+      },
+      "fitted_capacity_gb": null,
+      "fitted_module_count": null,
+      "source_ids": [
+        "src.dell.5060.memory",
+        "src.dell.5060.boardlayout"
+      ]
+    },
+    "storage": {
+      "m2_ssd_connectors": 1,
+      "m2_ssd_form_factors": [
+        "2230",
+        "2280"
+      ],
+      "m2_ssd_interfaces": [
+        "SATA",
+        "PCIe"
+      ],
+      "m2_wlan_connectors": 1,
+      "m2_wlan_form_factor": "2230",
+      "sata_data_headers": 4,
+      "sata_generation_counts": {
+        "Gen2": 1,
+        "Gen3": 3
+      },
+      "sata_gen2_role": "Optical drive",
+      "supported_drive_families": [
+        "2.5-inch SATA drive",
+        "3.5-inch SATA drive",
+        "M.2 SATA SSD",
+        "M.2 PCIe SSD",
+        "Slim optical drive",
+        "M.2 Optane combinations"
+      ],
+      "fitted_drives": null,
+      "source_ids": [
+        "src.dell.5060.storage",
+        "src.dell.5060.board_connectors"
+      ]
+    },
+    "expansion": {
+      "pcie_gen3": [
+        {
+          "slot": "Slot 2",
+          "mechanical": "x16",
+          "electrical": "x16"
+        },
+        {
+          "slot": "Slot 1",
+          "mechanical": "x1",
+          "electrical": "x1"
+        },
+        {
+          "slot": "Slot 3",
+          "mechanical": "x1",
+          "electrical": "x1"
+        },
+        {
+          "slot": "Slot 4",
+          "mechanical": "x16",
+          "electrical": "x4"
+        }
+      ],
+      "rear_openings": 4,
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.board_connectors",
+        "src.dell.5060.ports"
+      ]
+    },
+    "power_supply": {
+      "family_options": [
+        {
+          "wattage_w": 260,
+          "efficiency": "EPA Bronze"
+        },
+        {
+          "wattage_w": 260,
+          "efficiency": "EPA Platinum"
+        }
+      ],
+      "input_voltage_v": [
+        100,
+        240
+      ],
+      "input_current_a_max": 3.2,
+      "input_frequency_hz": [
+        50,
+        60
+      ],
+      "fitted_part_number": null,
+      "fitted_efficiency_option": null,
+      "source_ids": [
+        "src.dell.5060.power"
+      ]
+    },
+    "external_io": {
+      "front": {
+        "usb2": 2,
+        "usb2_powershare": 1,
+        "usb3_1_gen1": 1,
+        "usb3_1_gen2_type_c_powershare": 1,
+        "universal_audio_jack": 1,
+        "optional_sd_reader": true,
+        "optional_optical_drive": true
+      },
+      "rear": {
+        "usb2_smartpoweron": 2,
+        "usb3_1_gen1": 4,
+        "displayport_standard": 2,
+        "optional_video_module_alternatives": [
+          "HDMI 2.0b",
+          "DisplayPort",
+          "VGA",
+          "USB-C DisplayPort Alt Mode"
+        ],
+        "rj45_gigabit_ethernet": 1,
+        "line_out": 1,
+        "optional_serial": true,
+        "optional_external_antenna_connectors": 2
+      },
+      "source_ids": [
+        "src.dell.5060.ports"
       ]
     }
   },
   "source_ids": [
     "src.dell.5060.service",
-    "src.dell.5060.setup"
+    "src.dell.5060.setup",
+    "src.dell.5060.boardlayout",
+    "src.dell.5060.board_removal",
+    "src.dell.5060.processors",
+    "src.dell.5060.memory",
+    "src.dell.5060.storage",
+    "src.dell.5060.board_connectors",
+    "src.dell.5060.ports",
+    "src.dell.5060.power",
+    "src.dell.5060.screw_table",
+    "src.dell.5060.heatsink",
+    "src.dell.5060.cpu_removal",
+    "src.dell.5060.system_fan",
+    "src.dell.5060.psu_removal"
   ],
   "release": {
-    "version": "0.1.0",
+    "version": "0.2.0",
     "status": "research_blockout",
     "geometry_fidelity": "illustrative_proxy_not_cad"
   }
