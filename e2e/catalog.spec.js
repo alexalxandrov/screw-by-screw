@@ -37,3 +37,25 @@ test("catalog search is bilingual and retains the query when the UI language cha
   await expect(page.locator("#catalog-search")).toHaveValue("видеокарты");
   await expect(page.locator("#catalog-results .catalog-card")).toHaveCount(1);
 });
+
+test("catalogue lists IBM PC 5150 as a separate personal-computer reference", async ({ page }) => {
+  await page.goto("/");
+  await page.locator("#catalog-open").click();
+
+  const dialog = page.locator("#model-catalog-dialog");
+  await expect(dialog).toBeVisible();
+
+  const card = page.locator('[data-model-id="computer.ibm.5150.1981"]');
+  await expect(card).toBeVisible();
+  await expect(card).toContainText("Персональный компьютер IBM 5150 (1981)");
+  await expect(card).toContainText("5150");
+  await expect(card).toContainText("Условная геометрия · не CAD");
+
+  await page.locator("#catalog-search").fill("5150");
+  await page.locator("#catalog-category").selectOption("personal_computers");
+  await expect(page.locator("#catalog-results .catalog-card")).toHaveCount(1);
+
+  await page.locator("#catalog-search").fill("no-such-computer");
+  await expect(page.locator("#catalog-results .catalog-card")).toHaveCount(0);
+  await expect(page.locator("#catalog-results")).toContainText("Подходящих моделей не найдено");
+});
