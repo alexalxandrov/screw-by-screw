@@ -250,3 +250,10 @@ NVIDIA's official Ampere GA10x whitepaper states that each GA10x SM contains 128
 The new 28 SM entries are individually selectable logical inventory nodes; their numeric suffixes are navigation indices only. No TPC/SM physical coordinates, GA106 GPC count or GPC distribution, disabled-block placement, or GA102 die layout is asserted. The diagram is an architecture map, not a silicon floorplan.
 
 Source: https://www.nvidia.com/content/PDF/nvidia-ampere-ga-102-gpu-architecture-whitepaper-v2.pdf (Figure 2 and printed page 10).
+
+
+## 19. Partition-level GA10x architecture
+
+The official NVIDIA GA10x architecture whitepaper (Figure 3, printed page 10) specifies four processing partitions per SM. Each partition contains an L0 instruction cache, warp scheduler, dispatch unit, 16,384 × 32-bit register file, two FP32 datapaths, one third-generation Tensor Core, four LD/ST units and one SFU. The text explains that one datapath contains 16 FP32 CUDA cores and the other contains 16 FP32 CUDA cores plus 16 INT32 lanes that are selectable between FP32 and INT32 work.
+
+The model represents 112 partitions as four logical entries under each of 28 SMs. It separately models 14 TPC instances, each pairing two SMs and one PolyMorph Engine. All these nodes are `logical_only`; partition/TPC numbering is an inventory index, not physical layout. The paper's GA102 die diagram, GPC count and physical GPC assignment are not applied to GA106.
