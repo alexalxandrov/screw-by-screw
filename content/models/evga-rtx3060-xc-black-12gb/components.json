@@ -1749,38 +1749,36 @@
       "id": "cooling.heatpipe.candidate.1",
       "parent_id": "cooling.heatpipes",
       "name": {
-        "en": "Heatpipe route candidate 1",
-        "ru": "Кандидатная трасса тепловой трубки 1"
+        "en": "Central heatpipe route group",
+        "ru": "Группа центральных тепловых трубок"
       },
       "category": "cooling",
-      "evidence_status": "illustrative",
-      "geometry_status": "illustrative_proxy",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "assembly_node",
       "source_ids": [
-        "src.gamersnexus.teardown",
-        "src.lanoc.review"
+        "src.thefpsreview.exact_sku"
       ],
       "description": {
-        "en": "Selectable assembly grouping the corresponding short proxy segments. The exact card's pipe count, tube diameter, flattened sections, wick, working fluid and 3D route have not been verified.",
-        "ru": "Выбираемая сборка, объединяющая соответствующие короткие макетные сегменты. Количество трубок в точной карте, диаметр, сплющенные участки, фитиль, рабочая жидкость и пространственная трасса не подтверждены."
+        "en": "Grouping node for the four main heatpipes described by The FPS Review on the exact 12G-P5-3655-KR XC BLACK sample. Individual routes below are independent selectable educational proxies; their centreline coordinates, diameters and bend radii are not measured.",
+        "ru": "Группирующий узел для четырёх основных тепловых трубок, описанных The FPS Review на точном образце XC BLACK 12G-P5-3655-KR. Отдельные трассы ниже являются независимо выбираемыми учебными макетами; координаты осевых линий, диаметры и радиусы изгибов не измерены."
       }
     },
     {
       "id": "cooling.heatpipe.candidate.2",
       "parent_id": "cooling.heatpipes",
       "name": {
-        "en": "Heatpipe route candidate 2",
-        "ru": "Кандидатная трасса тепловой трубки 2"
+        "en": "Side heatpipe route group",
+        "ru": "Группа боковых тепловых трубок"
       },
       "category": "cooling",
-      "evidence_status": "illustrative",
-      "geometry_status": "illustrative_proxy",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "assembly_node",
       "source_ids": [
-        "src.gamersnexus.teardown",
-        "src.lanoc.review"
+        "src.thefpsreview.exact_sku"
       ],
       "description": {
-        "en": "Selectable assembly grouping the corresponding short proxy segments. The exact card's pipe count, tube diameter, flattened sections, wick, working fluid and 3D route have not been verified.",
-        "ru": "Выбираемая сборка, объединяющая соответствующие короткие макетные сегменты. Количество трубок в точной карте, диаметр, сплющенные участки, фитиль, рабочая жидкость и пространственная трасса не подтверждены."
+        "en": "Grouping node for the two additional side heatpipes described by The FPS Review on the exact 12G-P5-3655-KR XC BLACK sample. Individual routes below are independently selectable educational proxies, not a calibrated cooler drawing.",
+        "ru": "Группирующий узел для двух дополнительных боковых тепловых трубок, описанных The FPS Review на точном образце XC BLACK 12G-P5-3655-KR. Отдельные трассы ниже являются независимо выбираемыми учебными макетами, а не калиброванным чертежом кулера."
       }
     },
     {
@@ -2220,6 +2218,114 @@
       "description": {
         "en": "One of four copper heatpipe terminal faces visible at the cooler end in the exact EVGA RTX 3060 XC BLACK review photograph. The marker's 3D position and disc dimensions are approximate. A visible terminal face is not proof of the number of unique heatpipes or their internal route.",
         "ru": "Одно из четырёх медных торцевых окончаний тепловых трубок, видимых на торце кулера на фотографии точной EVGA RTX 3060 XC BLACK. Положение маркера в 3D и размеры диска приблизительны. Видимое окончание не доказывает количество отдельных тепловых трубок или их внутреннюю трассу."
+      }
+    },
+    {
+      "id": "cooling.heatpipe.main.01",
+      "parent_id": "cooling.heatpipe.candidate.1",
+      "name": {
+        "en": "Main GPU-contact heatpipe 1",
+        "ru": "Основная тепловая трубка GPU 1"
+      },
+      "category": "cooling",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.thefpsreview.exact_sku"
+      ],
+      "description": {
+        "en": "One of four main heatpipes described on the exact XC BLACK 12G-P5-3655-KR review sample. The source says the central pipes make contact with the GPU. This route's 3D centreline, diameter, flattening, wick construction and exact bends are illustrative and not measured.",
+        "ru": "Одна из четырёх основных тепловых трубок, описанных в обзоре точного образца XC BLACK 12G-P5-3655-KR. Источник указывает, что центральные трубки контактируют с GPU. Пространственная осевая линия этой трассы, диаметр, сплющенные участки, конструкция фитиля и изгибы заданы условно и не измерены."
+      }
+    },
+    {
+      "id": "cooling.heatpipe.main.02",
+      "parent_id": "cooling.heatpipe.candidate.1",
+      "name": {
+        "en": "Main GPU-contact heatpipe 2",
+        "ru": "Основная тепловая трубка GPU 2"
+      },
+      "category": "cooling",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.thefpsreview.exact_sku"
+      ],
+      "description": {
+        "en": "One of four main heatpipes described on the exact XC BLACK 12G-P5-3655-KR review sample. The source says the central pipes make contact with the GPU. This route's 3D centreline, diameter, flattening, wick construction and exact bends are illustrative and not measured.",
+        "ru": "Одна из четырёх основных тепловых трубок, описанных в обзоре точного образца XC BLACK 12G-P5-3655-KR. Источник указывает, что центральные трубки контактируют с GPU. Пространственная осевая линия этой трассы, диаметр, сплющенные участки, конструкция фитиля и изгибы заданы условно и не измерены."
+      }
+    },
+    {
+      "id": "cooling.heatpipe.main.03",
+      "parent_id": "cooling.heatpipe.candidate.1",
+      "name": {
+        "en": "Main GPU-contact heatpipe 3",
+        "ru": "Основная тепловая трубка GPU 3"
+      },
+      "category": "cooling",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.thefpsreview.exact_sku"
+      ],
+      "description": {
+        "en": "One of four main heatpipes described on the exact XC BLACK 12G-P5-3655-KR review sample. The source says the central pipes make contact with the GPU. This route's 3D centreline, diameter, flattening, wick construction and exact bends are illustrative and not measured.",
+        "ru": "Одна из четырёх основных тепловых трубок, описанных в обзоре точного образца XC BLACK 12G-P5-3655-KR. Источник указывает, что центральные трубки контактируют с GPU. Пространственная осевая линия этой трассы, диаметр, сплющенные участки, конструкция фитиля и изгибы заданы условно и не измерены."
+      }
+    },
+    {
+      "id": "cooling.heatpipe.main.04",
+      "parent_id": "cooling.heatpipe.candidate.1",
+      "name": {
+        "en": "Main GPU-contact heatpipe 4",
+        "ru": "Основная тепловая трубка GPU 4"
+      },
+      "category": "cooling",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.thefpsreview.exact_sku"
+      ],
+      "description": {
+        "en": "One of four main heatpipes described on the exact XC BLACK 12G-P5-3655-KR review sample. The source says the central pipes make contact with the GPU. This route's 3D centreline, diameter, flattening, wick construction and exact bends are illustrative and not measured.",
+        "ru": "Одна из четырёх основных тепловых трубок, описанных в обзоре точного образца XC BLACK 12G-P5-3655-KR. Источник указывает, что центральные трубки контактируют с GPU. Пространственная осевая линия этой трассы, диаметр, сплющенные участки, конструкция фитиля и изгибы заданы условно и не измерены."
+      }
+    },
+    {
+      "id": "cooling.heatpipe.side.01",
+      "parent_id": "cooling.heatpipe.candidate.2",
+      "name": {
+        "en": "Side heatpipe 1",
+        "ru": "Боковая тепловая трубка 1"
+      },
+      "category": "cooling",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.thefpsreview.exact_sku"
+      ],
+      "description": {
+        "en": "One of two additional side heatpipes described on the exact XC BLACK 12G-P5-3655-KR review sample. The source says these move heat toward the side of the heatsink. This route's 3D centreline, diameter, flattening and bends remain illustrative.",
+        "ru": "Одна из двух дополнительных боковых тепловых трубок, описанных в обзоре точного образца XC BLACK 12G-P5-3655-KR. Источник указывает, что они переносят тепло к боковой части радиатора. Пространственная осевая линия, диаметр, сплющенные участки и изгибы остаются условными."
+      }
+    },
+    {
+      "id": "cooling.heatpipe.side.02",
+      "parent_id": "cooling.heatpipe.candidate.2",
+      "name": {
+        "en": "Side heatpipe 2",
+        "ru": "Боковая тепловая трубка 2"
+      },
+      "category": "cooling",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.thefpsreview.exact_sku"
+      ],
+      "description": {
+        "en": "One of two additional side heatpipes described on the exact XC BLACK 12G-P5-3655-KR review sample. The source says these move heat toward the side of the heatsink. This route's 3D centreline, diameter, flattening and bends remain illustrative.",
+        "ru": "Одна из двух дополнительных боковых тепловых трубок, описанных в обзоре точного образца XC BLACK 12G-P5-3655-KR. Источник указывает, что они переносят тепло к боковой части радиатора. Пространственная осевая линия, диаметр, сплющенные участки и изгибы остаются условными."
       }
     }
   ],
