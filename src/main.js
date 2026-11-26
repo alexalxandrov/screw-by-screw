@@ -121,7 +121,7 @@ const UI = {
     measure: "Measure", clearMeasurement: "Clear", measureIdle: "Measurement off · model-space only", measurePrompt: "Click a visible surface to set point 1 of 2", measureFirstPoint: "Point 1 of 2 set · select the second point", measureDistance: "Distance", measureDisclaimer: "model-space only", measureNoHit: "Click a visible model surface", measureEnabled: "Measurement enabled", measureDisabled: "Measurement disabled", modelUnits: "model units", measureNote: "Not a verified physical dimension",
     clearLayer: "Clear layer", inspection: "INSPECTION", componentDetails: "Component details",
     selectComponent: "Select a component", selectHint: "Choose a part in the 3D view or assembly tree to inspect its role and evidence.",
-    identity: "IDENTITY", parent: "Parent", geometry: "Geometry", evidence: "EVIDENCE", technicalClaims: "TECHNICAL CLAIMS", claimUnknown: "Unknown", yes: "Yes", no: "No", claimSources: "Evidence sources", technicalRelationships: "TECHNICAL RELATIONSHIPS", qualitativeRelation: "Qualitative relationship", noRelationshipSource: "No source registered", exportData: "MODEL DATA", exportJson: "Export JSON", exportCsv: "CSV ZIP", exportComplete: "Export prepared · local only", exportFailed: "Export failed", assemblyEvidence: "DISASSEMBLY EVIDENCE", noVerifiedSequence: "No verified disassembly sequence has been authored for this model.", sourceObservations: "SOURCE OBSERVATIONS · NOT DISASSEMBLY STEPS", stepLabel: "Step", toolsLabel: "Tools", safetyLabel: "Safety", prerequisitesLabel: "Prerequisites", openAtSource: "Open source",
+    identity: "IDENTITY", parent: "Parent", geometry: "Geometry", evidence: "EVIDENCE", technicalClaims: "TECHNICAL CLAIMS", claimUnknown: "Unknown", yes: "Yes", no: "No", claimSources: "Evidence sources", technicalRelationships: "TECHNICAL RELATIONSHIPS", qualitativeRelation: "Qualitative relationship", noRelationshipSource: "No source registered", exportData: "MODEL DATA", exportJson: "Export JSON", exportCsv: "CSV ZIP", exportComplete: "Export prepared · local only", exportFailed: "Export failed", assemblyEvidence: "DISASSEMBLY EVIDENCE", noVerifiedSequence: "No verified disassembly sequence has been authored for this model.", sourceObservations: "SOURCE OBSERVATIONS · NOT DISASSEMBLY STEPS", stepLabel: "Step", toolsLabel: "Tools", safetyLabel: "Safety", prerequisitesLabel: "Prerequisites", openAtSource: "Open source", procedureGroup: "PROCEDURE BRANCH", commonEntryMode: "Common entry", conditionalBranchMode: "Conditional branch", sharedPreparationMode: "Shared preparation", independentFruBranchMode: "Independent FRU branch", replacementFragments: "DOCUMENTED REPLACEMENT FRAGMENTS · NOT A COMPLETE REASSEMBLY", sequenceDisplayOnly: "Display order only · follow the source-backed prerequisites and the selected FRU branch.",
     sources: "SOURCES", accuracyFooter: "Unknown values remain unknown. No inferred CAD accuracy.",
     ready: "READY", localFirst: "LOCAL-FIRST · NO ACCOUNT", openModel: "Open model",
     noSelection: "No component selected", componentsCount: "components",
@@ -146,7 +146,7 @@ const UI = {
     measure: "Измерить", clearMeasurement: "Сброс", measureIdle: "Измерение выключено · только пространство модели", measurePrompt: "Нажмите на видимую поверхность, чтобы задать точку 1 из 2", measureFirstPoint: "Точка 1 из 2 задана · выберите вторую", measureDistance: "Расстояние", measureDisclaimer: "ед. модели", measureNoHit: "Нажмите на видимую поверхность модели", measureEnabled: "Инструмент измерения включён", measureDisabled: "Инструмент измерения выключен", modelUnits: "единицы модели", measureNote: "Не подтверждённый физический размер",
     clearLayer: "Сбросить слой", inspection: "ИНСПЕКЦИЯ", componentDetails: "Карточка компонента",
     selectComponent: "Выберите компонент", selectHint: "Выберите деталь в 3D-окне или дереве сборки, чтобы изучить её назначение и источники.",
-    identity: "ИДЕНТИФИКАЦИЯ", parent: "Родитель", geometry: "Геометрия", evidence: "ДОКАЗАТЕЛЬНОСТЬ", technicalClaims: "ТЕХНИЧЕСКИЕ УТВЕРЖДЕНИЯ", claimUnknown: "Неизвестно", yes: "Да", no: "Нет", claimSources: "Источники утверждения", technicalRelationships: "ТЕХНИЧЕСКИЕ СВЯЗИ", qualitativeRelation: "Качественная связь", noRelationshipSource: "Источник не зарегистрирован", exportData: "ДАННЫЕ МОДЕЛИ", exportJson: "Экспорт JSON", exportCsv: "CSV ZIP", exportComplete: "Экспорт подготовлен · локально", exportFailed: "Ошибка экспорта", assemblyEvidence: "ДОКАЗАТЕЛЬСТВА РАЗБОРКИ", noVerifiedSequence: "Подтверждённая последовательность разборки для этой модели пока не составлена.", sourceObservations: "НАБЛЮДЕНИЯ В ИСТОЧНИКАХ · НЕ ШАГИ РАЗБОРКИ", stepLabel: "Шаг", toolsLabel: "Инструменты", safetyLabel: "Безопасность", prerequisitesLabel: "Предварительные шаги", openAtSource: "Открыть источник",
+    identity: "ИДЕНТИФИКАЦИЯ", parent: "Родитель", geometry: "Геометрия", evidence: "ДОКАЗАТЕЛЬНОСТЬ", technicalClaims: "ТЕХНИЧЕСКИЕ УТВЕРЖДЕНИЯ", claimUnknown: "Неизвестно", yes: "Да", no: "Нет", claimSources: "Источники утверждения", technicalRelationships: "ТЕХНИЧЕСКИЕ СВЯЗИ", qualitativeRelation: "Качественная связь", noRelationshipSource: "Источник не зарегистрирован", exportData: "ДАННЫЕ МОДЕЛИ", exportJson: "Экспорт JSON", exportCsv: "CSV ZIP", exportComplete: "Экспорт подготовлен · локально", exportFailed: "Ошибка экспорта", assemblyEvidence: "ДОКАЗАТЕЛЬСТВА РАЗБОРКИ", noVerifiedSequence: "Подтверждённая последовательность разборки для этой модели пока не составлена.", sourceObservations: "НАБЛЮДЕНИЯ В ИСТОЧНИКАХ · НЕ ШАГИ РАЗБОРКИ", stepLabel: "Шаг", toolsLabel: "Инструменты", safetyLabel: "Безопасность", prerequisitesLabel: "Предварительные шаги", openAtSource: "Открыть источник", procedureGroup: "ВЕТВЬ ПРОЦЕДУРЫ", commonEntryMode: "Общая начальная подготовка", conditionalBranchMode: "Условная ветвь", sharedPreparationMode: "Общая подготовка разъёмов", independentFruBranchMode: "Независимая ветвь FRU", replacementFragments: "ДОКУМЕНТИРОВАННЫЕ ФРАГМЕНТЫ УСТАНОВКИ · НЕ ПОЛНАЯ ОБРАТНАЯ СБОРКА", sequenceDisplayOnly: "Порядок отображения · следуйте подтверждённым зависимостям и выбранной ветви FRU.",
     sources: "ИСТОЧНИКИ", accuracyFooter: "Неизвестное остаётся неизвестным. Точность CAD не подразумевается.",
     ready: "ГОТОВО", localFirst: "ЛОКАЛЬНО · БЕЗ АККАУНТА", openModel: "Открыть модель",
     noSelection: "Компонент не выбран", componentsCount: "компонентов",
@@ -804,7 +804,7 @@ function renderTree() {
       parent = parent.parent;
     }
 
-    const isDeviceRoot = id === "assembly.card.root";
+    const isDeviceRoot = id === MODEL.id || id === "assembly.card.root";
     const claims = (CLAIM_PACKAGE.claims ?? []).filter((claim) =>
       claim.subject_id === id || (isDeviceRoot && claim.subject_id === MODEL.id)
     );
@@ -928,7 +928,7 @@ function renderClaims(componentId) {
   const host = $("#claim-list");
   if (!section || !host) return;
   host.replaceChildren();
-  const modelLevel = componentId === "assembly.card.root";
+  const modelLevel = componentId === MODEL.id || componentId === "assembly.card.root";
   const claims = (CLAIM_PACKAGE.claims ?? []).filter((claim) =>
     claim.subject_id === componentId || (modelLevel && claim.subject_id === MODEL.id)
   );
@@ -1137,30 +1137,83 @@ function renderAssemblyEvidence(componentId) {
   const section = $("#detail-assembly-section");
   const emptyNote = $("#assembly-empty-note");
   const stepHost = $("#assembly-step-list");
+  const policyNote = $("#assembly-policy-note");
   const observationHeading = $("#assembly-observation-heading");
   const observationHost = $("#assembly-observation-list");
+  const replacementHeading = $("#assembly-replacement-heading");
+  const replacementPolicy = $("#assembly-replacement-policy");
+  const replacementHost = $("#assembly-replacement-list");
   if (!section || !emptyNote || !stepHost || !observationHeading || !observationHost) return;
 
   stepHost.replaceChildren();
   observationHost.replaceChildren();
-  const isDeviceRoot = componentId === "assembly.card.root";
+  replacementHost?.replaceChildren();
+  const isDeviceRoot = componentId === MODEL.id || componentId === "assembly.card.root";
   const steps = (ASSEMBLY_PACKAGE.steps ?? []).filter((step) =>
     isDeviceRoot || (step.component_ids ?? []).includes(componentId)
   );
   const observations = isDeviceRoot ? (ASSEMBLY_PACKAGE.observations ?? []) : [];
-  section.hidden = steps.length === 0 && observations.length === 0 && !isDeviceRoot;
+  const replacementProcedures = isDeviceRoot
+    ? (ASSEMBLY_PACKAGE.replacement_procedures?.procedures ?? [])
+    : [];
+  section.hidden = steps.length === 0 && observations.length === 0 && replacementProcedures.length === 0 && !isDeviceRoot;
   if (section.hidden) return;
 
   emptyNote.hidden = !(isDeviceRoot && steps.length === 0);
   emptyNote.textContent = steps.length === 0 ? t("noVerifiedSequence") : "";
   stepHost.hidden = steps.length === 0;
+  if (policyNote) {
+    const policy = isDeviceRoot ? localizedPackageText(ASSEMBLY_PACKAGE.policy) : "";
+    policyNote.hidden = !policy;
+    policyNote.textContent = policy;
+  }
   observationHeading.hidden = observations.length === 0;
   observationHeading.textContent = t("sourceObservations");
   observationHost.hidden = observations.length === 0;
+  if (replacementHeading) {
+    replacementHeading.hidden = replacementProcedures.length === 0;
+    replacementHeading.textContent = t("replacementFragments");
+  }
+  if (replacementPolicy) {
+    const policy = isDeviceRoot
+      ? localizedPackageText(ASSEMBLY_PACKAGE.replacement_procedures?.policy)
+      : "";
+    replacementPolicy.hidden = !policy;
+    replacementPolicy.textContent = policy;
+  }
+  if (replacementHost) replacementHost.hidden = replacementProcedures.length === 0;
 
   const sourceMap = new Map(MODEL.sources.map((source) => [source.id, source]));
+  const groupMap = new Map((ASSEMBLY_PACKAGE.procedure_groups ?? []).map((group) => [group.id, group]));
+  const modeLabels = {
+    common_entry: "commonEntryMode",
+    conditional_branch: "conditionalBranchMode",
+    shared_preparation: "sharedPreparationMode",
+    independent_fru_branch: "independentFruBranchMode"
+  };
+  let previousGroupId = null;
 
   steps.forEach((step, index) => {
+    if (step.group_id && step.group_id !== previousGroupId) {
+      const group = groupMap.get(step.group_id);
+      const groupHeader = document.createElement("div");
+      groupHeader.className = "assembly-procedure-group";
+      groupHeader.dataset.groupId = step.group_id;
+      const groupTitle = document.createElement("strong");
+      groupTitle.className = "assembly-procedure-group-title";
+      groupTitle.textContent = group ? localizedPackageText(group.title) : step.group_id;
+      groupHeader.append(groupTitle);
+      const modeKey = modeLabels[group?.mode];
+      if (modeKey) {
+        const mode = document.createElement("span");
+        mode.className = "assembly-procedure-group-mode";
+        mode.textContent = t(modeKey);
+        groupHeader.append(mode);
+      }
+      if (isDeviceRoot) stepHost.append(groupHeader);
+      previousGroupId = step.group_id;
+    }
+
     const card = document.createElement("article");
     card.className = "assembly-step-card";
     card.dataset.stepId = step.id ?? `step-${index + 1}`;
@@ -1271,6 +1324,38 @@ function renderAssemblyEvidence(componentId) {
       card.append(missing);
     }
     observationHost.append(card);
+  });
+
+  replacementProcedures.forEach((procedure) => {
+    const card = document.createElement("article");
+    card.className = "assembly-replacement-card";
+    card.dataset.procedureId = procedure.id;
+    const title = document.createElement("strong");
+    title.className = "assembly-observation-locator";
+    title.textContent = localizedPackageText(procedure.title);
+    const locator = document.createElement("p");
+    locator.className = "assembly-step-meta";
+    locator.textContent = procedure.locator ?? "";
+    const list = document.createElement("ol");
+    list.className = "assembly-replacement-steps";
+    for (const item of procedure.steps ?? []) {
+      const li = document.createElement("li");
+      li.textContent = localizedPackageText(item);
+      list.append(li);
+    }
+    card.append(title, locator, list);
+    for (const sourceId of procedure.source_ids ?? []) {
+      const source = sourceMap.get(sourceId);
+      if (!source?.url) continue;
+      const link = document.createElement("a");
+      link.className = "assembly-source-link";
+      link.href = source.url;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.textContent = `↗ ${t("openAtSource")}: ${source.label}`;
+      card.append(link);
+    }
+    replacementHost?.append(card);
   });
 }
 
