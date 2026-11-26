@@ -169,6 +169,18 @@ test("shows model-level specifications when the top-level device is selected", a
 });
 
 
+test("shows exact-SKU cooler screw count and secondary-catalog memory attributes", async ({ page }) => {
+  await page.goto("/");
+  await page.locator('#component-tree button[data-id="assembly.fasteners"]').click();
+  await expect(page.locator('[data-claim-id="claim.cooler.fastener.count.total"]')).toContainText("8");
+  await expect(page.locator('[data-claim-id="claim.cooler.fastener.count.rear"]')).toContainText("4");
+  await expect(page.locator('[data-claim-id="claim.cooler.fastener.count.total"]')).toContainText("Независимо подтверждено");
+
+  await page.locator('#component-tree button[data-id="assembly.pcb.electronics"]').click();
+  await expect(page.locator('[data-claim-id="claim.memory.package_part_number"]')).toContainText("Samsung K4ZAF325BM-HC16");
+  await expect(page.locator('[data-claim-id="claim.memory.package_density"]')).toContainText("Данные вторичного каталога");
+});
+
 test("search finds components by package marking and source title", async ({ page }) => {
   await page.goto("/");
   const search = page.locator("#component-search");
