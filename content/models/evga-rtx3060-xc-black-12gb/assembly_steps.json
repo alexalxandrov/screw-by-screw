@@ -1,18 +1,18 @@
 {
   "schema_version": "0.1.0",
   "status": "partial_observed_sequence",
-  "policy": "Only actions directly supported by exact-XC-BLACK sources are included. The LanOC review identifies four heatsink mounting screws around the GPU. The exact-model Gamers Nexus teardown shows the fan removal/disconnection segment. Tom's Hardware's eight-screw description belongs to an EVGA RTX 3060 XC sample that is not identified as XC BLACK / 12G-P5-3655-KR; those four additional candidates are not used as a service step. No bit size, torque, screw map, hidden fasteners, thermal-pad replacement thickness or reassembly procedure is invented.",
+  "policy": "Only actions directly supported by exact-SKU-linked XC BLACK sources are included. The Tom's Hardware rear-PCB identity photo reads P/N 12G-P5-3655-KR; its teardown reports eight cooler/shroud retention screws (four around the GPU and four near the far end). LanOC independently shows the four GPU-area subset. The four rear screws have no calibrated individual location map. The exact-model Gamers Nexus teardown shows both fan leads being disconnected before cooler separation. No driver size, screw thread, spring specification, torque, pad thickness, full hidden-fastener map, or reassembly procedure is invented.",
   "steps": [
     {
       "id": "step.remove-gpu-heatsink-mounts",
       "sequence": 1,
       "title": {
-        "en": "Remove the four GPU-area heatsink mounting screws",
-        "ru": "Вывернуть четыре винта крепления радиатора вокруг GPU"
+        "en": "Remove the eight cooler/shroud retention screws",
+        "ru": "Вывернуть восемь винтов крепления кулера/кожуха"
       },
       "description": {
-        "en": "The exact XC BLACK review identifies four heatsink mounting screws in the centre around the GPU. This step refers only to those four visible GPU-area fasteners. The review does not provide a calibrated screw map, driver size, spring specification or torque value, and does not establish that these are the only fasteners retaining every part of the cooler/shroud assembly.",
-        "ru": "В обзоре точной XC BLACK указаны четыре винта крепления радиатора в центральной области вокруг GPU. Этот шаг относится только к этим четырём видимым креплениям вокруг GPU. В обзоре нет калиброванной карты винтов, размера биты, спецификации пружин или момента затяжки; также не утверждается, что это единственные крепления всех частей кулера и кожуха."
+        "en": "The exact-SKU-linked Tom's Hardware teardown reports eight screws retaining the cooler/shroud: four around the GPU and four near the far end of the card. The same article's rear-PCB identity photograph reads P/N 12G-P5-3655-KR. LanOC's exact XC BLACK review independently identifies the four GPU-area screws as a visible subset. This step therefore covers all eight reported retention screws, but only the four around the GPU have approximate photo-derived positions in the 3D model; the four rear-area screw coordinates are not mapped. No calibrated screw map, driver size, head/thread specification, spring data or torque value is available.",
+        "ru": "В разборке Tom's Hardware, связанной с точным SKU, указаны восемь винтов крепления кулера/кожуха: четыре вокруг GPU и четыре у дальнего края карты. На фотографии обратной стороны PCB из той же статьи читается P/N 12G-P5-3655-KR. В обзоре точной XC BLACK от LanOC независимо показаны четыре винта в зоне GPU как подмножество общего крепежа. Поэтому шаг охватывает все восемь указанных винтов, но только для четырёх вокруг GPU в 3D-модели восстановлены приблизительные положения по фото; координаты четырёх задних винтов не нанесены. Калиброванной карты крепежа, размера биты, спецификации головки/резьбы, параметров пружин и момента затяжки нет."
       },
       "component_ids": [
         "assembly.fasteners",
@@ -20,15 +20,20 @@
         "fastener.cooler.02",
         "fastener.cooler.03",
         "fastener.cooler.04",
+        "fastener.cooler.05",
+        "fastener.cooler.06",
+        "fastener.cooler.07",
+        "fastener.cooler.08",
         "assembly.cooling"
       ],
       "tool_requirements": [],
       "safety_notes": {
-        "en": "Disconnect the system from mains power and remove the card before handling it. Observe ESD precautions. Use the photo only to identify the four GPU-area fasteners; do not infer driver size or torque. Additional retention points may exist.",
-        "ru": "Отключите систему от электросети и извлеките видеокарту перед работой. Соблюдайте защиту от электростатического разряда. Используйте фотографию только для идентификации четырёх креплений вокруг GPU; не выводите из неё размер биты или момент затяжки. Могут существовать дополнительные точки крепления."
+        "en": "Disconnect the system from mains power and remove the card before handling it. Observe ESD precautions. Use the sources only to identify the eight reported fasteners; the four rear-area positions are not mapped. Do not infer bit size or torque. Support the cooler/shroud as its last retainers are removed.",
+        "ru": "Отключите систему от электросети и извлеките видеокарту перед работой. Соблюдайте защиту от электростатического разряда. Используйте источники только для идентификации восьми указанных креплений; положения четырёх задних винтов не нанесены. Не выводите размер биты или момент затяжки. Поддерживайте кулер/кожух при снятии последних креплений."
       },
       "prerequisite_step_ids": [],
       "source_ids": [
+        "src.tomshardware.teardown",
         "src.lanoc.review"
       ]
     },
@@ -108,10 +113,10 @@
     },
     {
       "source_id": "src.tomshardware.teardown",
-      "locator": "Related EVGA RTX 3060 XC PCB teardown photograph — not identified as XC BLACK",
+      "locator": "Exact-SKU-linked rear-PCB identity photo and cooler teardown",
       "note": {
-        "en": "A related EVGA GeForce RTX 3060 XC teardown image shows six Samsung K4ZAF325BM-HC16 GDDR6 packages around the GPU package. The article does not identify its sample as XC BLACK / 12G-P5-3655-KR. This is a candidate part-number lead only; package centres in the exact-SKU 3D model and electrical mapping are not measured from this photograph.",
-        "ru": "На фотографии разборки родственной EVGA GeForce RTX 3060 XC видны шесть микросхем Samsung K4ZAF325BM-HC16 вокруг GPU. В статье образец не идентифицирован как XC BLACK / 12G-P5-3655-KR. Это только кандидатный след для определения номера микросхемы; центры корпусов в 3D-модели точного SKU и электрическое соответствие не измерялись по этой фотографии."
+        "en": "The review's main-page rear-PCB photograph reads P/N 12G-P5-3655-KR. The corresponding teardown reports eight cooler/shroud retention screws (four around the GPU and four near the far end), two fan connections, and six Samsung K4ZAF325BM-HC16 GDDR6 packages rated at 16Gbps. Individual rear-screw coordinates and memory net routing are not provided.",
+        "ru": "На фотографии обратной стороны PCB на основной странице обзора читается P/N 12G-P5-3655-KR. Соответствующая разборка указывает восемь винтов крепления кулера/кожуха (четыре вокруг GPU и четыре у дальнего края), два подключения вентиляторов и шесть микросхем Samsung K4ZAF325BM-HC16 GDDR6 с рейтингом 16 Гбит/с. Координаты отдельных задних винтов и разводка линий памяти не приведены."
       }
     },
     {
