@@ -15,7 +15,7 @@ test("catalogue lists multiple device classes and loads the OptiPlex package", a
   await page.locator("#catalog-category").selectOption("desktop_computers");
   await expect(page.locator("#catalog-results .catalog-card")).toHaveCount(1);
 
-  await pc.click();
+  await pc.locator('[data-open-catalog-model="pc.dell.optiplex-5060-mt"]').click();
   await expect(dialog).toBeHidden();
   await expect(page.locator("#model-title")).toHaveText("OptiPlex 5060 Tower");
   await expect(page.locator("#model-sku")).toHaveText("D18M005");
