@@ -661,12 +661,13 @@
     },
     {
       "id": "rel.psu.powers.motherboard",
-      "from": "power.psu",
-      "to": "motherboard.system_power",
-      "type": "powers",
+      "from": "motherboard.assembly",
+      "to": "power.psu",
+      "type": "powered_by",
       "source_ids": [
         "src.dell.5060.service"
-      ]
+      ],
+      "notes": "The motherboard assembly receives power from the PSU; connector-level pin mapping and fitted harness geometry are not reconstructed."
     },
     {
       "id": "rel.cpu.cooling.contact",
@@ -1158,14 +1159,14 @@
     },
     {
       "id": "rel.psu.powers.cpu_header",
-      "from": "power.psu",
-      "to": "motherboard.cpu_power",
-      "type": "powers",
+      "from": "motherboard.cpu_power",
+      "to": "power.psu",
+      "type": "powered_by",
       "source_ids": [
         "src.dell.5060.boardlayout",
         "src.dell.5060.power"
       ],
-      "notes": "Power connector relationship only; no pin-level path or fitted harness is reconstructed."
+      "notes": "CPU power interface is supplied by the PSU; no pin-level path or fitted harness is reconstructed."
     },
     {
       "id": "rel.speaker.header.connected",
@@ -1218,14 +1219,14 @@
     },
     {
       "id": "rel.sata_power.header.powers.storage",
-      "from": "motherboard.sata_power_header",
-      "to": "storage.assembly",
-      "type": "powers",
+      "from": "storage.assembly",
+      "to": "motherboard.sata_power_header",
+      "type": "powered_by",
       "source_ids": [
         "src.dell.5060.boardlayout",
         "src.dell.5060.storage"
       ],
-      "notes": "Supported SATA power interface; fitted cable and drive population are unknown."
+      "notes": "SATA storage power is represented at the motherboard SATA power interface; the exact fitted harness route and drive population are unknown."
     }
   ]
 }
