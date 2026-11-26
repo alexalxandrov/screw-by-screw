@@ -318,9 +318,9 @@
       "id": "src.ebay.aftermarket_fan.code_candidate",
       "title": "eBay aftermarket fan listing with PLD09220S12HH compatibility claim",
       "publisher": "eBay marketplace seller listing",
-      "url": "https://www.ebay.com/itm/198666542691",
+      "url": "https://www.ebay.at/itm/227569888383",
       "type": "aftermarket_compatibility_listing",
-      "applicability": "Seller title claims a PLD09220S12HH replacement fan for EVGA RTX 3060 / 3060 Ti XC BLACK family cards. This is a marketplace seller's broad compatibility assertion; it does not identify the original fan fitted to retail SKU 12G-P5-3655-KR and does not show an original OEM label. Treat only as a conflicting aftermarket replacement-code lead; do not assign PLD09220S12HH to the target card's original fan.",
+      "applicability": "Seller title advertises a PLD09220S12HH replacement fan for EVGA RTX 3060 / 3060 Ti XC BLACK family cards. The listing identifies the brand as Unbranded and compatible brand generically as EVGA RTX3060 / 3060ti XC; this is a broad aftermarket compatibility assertion, not an OEM part label for retail SKU 12G-P5-3655-KR. Do not assign PLD09220S12HH to the target card's original fan.",
       "license_status": "metadata_reference_only_no_asset_reuse"
     }
   ]
