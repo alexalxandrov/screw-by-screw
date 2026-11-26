@@ -16,7 +16,7 @@
 
 ## Current limitations and remaining engineering work
 
-The expanded v0.2 package maps all 26 numbered Dell Tower motherboard callouts to semantic component references, records separate SSD/WLAN M.2 sockets, SATA 0/1/2/3, memory capacity, PCIe lane-width distinctions, PSU variants and port inventory. A 12-step partial system-board removal sequence is source-backed. Read `OPTIPLEX_5060_RESEARCH.md` for the source matrix and scope notes.
+The expanded v0.2 package maps all 26 numbered Dell Tower motherboard callouts to 29 semantic component references, records separate SSD/WLAN M.2 sockets, SATA 0/1/2/3, memory capacity, PCIe lane-width distinctions, PSU variants and port inventory. A 12-step partial system-board removal sequence is source-backed. Read `OPTIPLEX_5060_RESEARCH.md` for the source matrix and scope notes.
 
 1. **Legacy RTX-specific tooling remains.** The RTX blockout generator and its CI workflow still use fixed model paths and RTX-specific assumptions. Reusable validators should become manifest-driven; the legacy RTX pipeline still has a known GLB binding discrepancy for some logical/abstract components.
 2. **The viewer's broader browser suite remains a gate.** Unit tests and the dedicated OptiPlex package workflow are separate from browser interaction tests. Catalogue switching, persistence and visual states must pass browser tests before a release.
