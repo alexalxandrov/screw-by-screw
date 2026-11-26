@@ -17,7 +17,7 @@ test("catalogue lists multiple device classes and loads the OptiPlex package", a
 
   await pc.locator('[data-open-catalog-model="pc.dell.optiplex-5060-mt"]').click();
   await expect(dialog).toBeHidden();
-  await expect(page.locator("#model-title")).toHaveText("OptiPlex 5060 Tower");
+  await expect(page.locator("#model-title")).toHaveText("Dell OptiPlex 5060 Tower");
   await expect(page.locator("#model-sku")).toHaveText("D18M005");
   await expect(page.locator("#app-status")).toContainText("Package validated");
   await expect(page.locator("#component-count")).not.toHaveText("0");
