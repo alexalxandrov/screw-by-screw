@@ -1031,6 +1031,139 @@
         "src.nvidia.ampere.whitepaper"
       ],
       "notes": "Figure 3 depicts one L0 instruction cache per processing partition."
+    },
+    {
+      "id": "claim.cooling.heatsink.material",
+      "subject_id": "cooling.heatsink",
+      "predicate": "heatsink_material",
+      "value": "Aluminium",
+      "unit": null,
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.lanoc.review"
+      ],
+      "notes": "LanOC describes the exact XC BLACK cooler as an aluminium heatsink. This records material class, not alloy or temper."
+    },
+    {
+      "id": "claim.cooling.fin.orientation",
+      "subject_id": "cooling.heatsink",
+      "predicate": "heatsink_fin_orientation",
+      "value": "Vertical",
+      "unit": null,
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.lanoc.review"
+      ],
+      "notes": "LanOC describes the fin stack as vertically laid out/oriented. No fin pitch, count or exact fin geometry is asserted."
+    },
+    {
+      "id": "claim.cooling.contact_plate.coverage",
+      "subject_id": "cooling.heatsink",
+      "predicate": "copper_contact_plate_coverage",
+      "value": "GPU die area and memory",
+      "unit": null,
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.lanoc.review"
+      ],
+      "notes": "LanOC describes a copper heat plate over the GPU that is wide enough to cover the memory as well. Exact outline and contact footprint are not measured."
+    },
+    {
+      "id": "claim.pcb.airflow_cutout.present",
+      "subject_id": "assembly.pcb.board",
+      "predicate": "pcb_air_through_cutout_present",
+      "value": true,
+      "unit": null,
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.lanoc.review",
+        "src.neoseeker.review"
+      ],
+      "notes": "LanOC describes a large PCB cutout at the card end/left side that allows airflow from the front fan through the PCB. Exact aperture outline and dimensions remain unmeasured."
+    },
+    {
+      "id": "claim.shroud.material",
+      "subject_id": "assembly.shroud",
+      "predicate": "fan_shroud_material",
+      "value": "Black plastic",
+      "unit": null,
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.lanoc.review"
+      ],
+      "notes": "LanOC explicitly describes the exact XC BLACK shroud as black plastic with textured and dotted surface areas. Polymer type and wall thickness are unknown."
+    },
+    {
+      "id": "claim.shroud.rgb.present",
+      "subject_id": "assembly.shroud",
+      "predicate": "fan_shroud_rgb_lighting_present",
+      "value": false,
+      "unit": null,
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.lanoc.review"
+      ],
+      "notes": "LanOC describes this exact XC BLACK as an all-black shroud with no RGB lighting."
+    },
+    {
+      "id": "claim.fan.blade.surface_detail",
+      "subject_id": "assembly.fan.1",
+      "predicate": "fan_blade_visual_surface_detail",
+      "value": "Raised EVGA E-logo bumps; golf-ball-like surface texture",
+      "unit": null,
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.lanoc.review"
+      ],
+      "notes": "LanOC describes EVGA E-logo bumps on the fan blades, similar to golf-ball dimples. Exact bump dimensions and profile are not measured; this is not modelled as manufacturing geometry."
+    },
+    {
+      "id": "claim.displayport.count",
+      "subject_id": "connector.io.bracket",
+      "predicate": "displayport_output_count",
+      "value": 3,
+      "unit": "ports",
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.neoseeker.review"
+      ],
+      "notes": "Neoseeker's exact 12G-P5-3655-KR sample has three DisplayPort 1.4a outputs."
+    },
+    {
+      "id": "claim.displayport.version",
+      "subject_id": "connector.io.bracket",
+      "predicate": "displayport_output_version",
+      "value": "1.4a",
+      "unit": null,
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.neoseeker.review"
+      ],
+      "notes": "Neoseeker specifies DisplayPort 1.4a for the exact 12G-P5-3655-KR sample."
+    },
+    {
+      "id": "claim.hdmi.count",
+      "subject_id": "connector.io.bracket",
+      "predicate": "hdmi_output_count",
+      "value": 1,
+      "unit": "port",
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.neoseeker.review"
+      ],
+      "notes": "Neoseeker's exact 12G-P5-3655-KR sample has one HDMI 2.1 output."
+    },
+    {
+      "id": "claim.hdmi.version",
+      "subject_id": "connector.io.bracket",
+      "predicate": "hdmi_output_version",
+      "value": "2.1",
+      "unit": null,
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.neoseeker.review"
+      ],
+      "notes": "Neoseeker specifies HDMI 2.1 for the exact 12G-P5-3655-KR sample."
     }
   ]
 }
