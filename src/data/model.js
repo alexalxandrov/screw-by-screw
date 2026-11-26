@@ -1,6 +1,6 @@
-import MODEL_PACKAGE from "../../content/models/evga-rtx3060-xc-black-12gb/model.json";
-import SOURCE_PACKAGE from "../../content/models/evga-rtx3060-xc-black-12gb/sources.json";
-import COMPONENT_PACKAGE from "../../content/models/evga-rtx3060-xc-black-12gb/components.json";
+import MODEL_PACKAGE from "../../content/models/evga-rtx3060-xc-black-12gb/model.json" with { type: "json" };
+import SOURCE_PACKAGE from "../../content/models/evga-rtx3060-xc-black-12gb/sources.json" with { type: "json" };
+import COMPONENT_PACKAGE from "../../content/models/evga-rtx3060-xc-black-12gb/components.json" with { type: "json" };
 
 export const EVIDENCE = {
   manufacturer_data: {
