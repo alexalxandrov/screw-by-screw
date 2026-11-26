@@ -66,3 +66,8 @@ Before the full application: create a test scene with 10–20 independently sele
 ## Implemented static device catalogue
 
 The viewer includes a statically imported bilingual index at `content/catalog/models.json`. It records exact manufacturer part number, category, package version/path and geometry-evidence class. It does not need a catalogue API. Hosted builds resolve staged `.sbsmodel` archives by relative URL. The standalone HTML build embeds packages staged under `public/` as data URLs so the same catalogue works through `file://`. Every selection uses the standard package loader and package model-ID comparison.
+
+
+## Multi-model startup
+
+The default runtime model is resolved from `content/catalog/models.json`. The viewer does not import the EVGA RTX 3060 sidecar JSON as a special startup path: both initial boot and catalogue switching load a versioned `.sbsmodel` package through `ModelPackageLoader`. A small fallback scene remains available when no catalogue package can be fetched (for example, while opening a source checkout before packages have been staged).

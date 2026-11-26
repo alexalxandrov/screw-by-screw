@@ -1,7 +1,3 @@
-import MODEL_PACKAGE from "../../content/models/evga-rtx3060-xc-black-12gb/model.json" with { type: "json" };
-import SOURCE_PACKAGE from "../../content/models/evga-rtx3060-xc-black-12gb/sources.json" with { type: "json" };
-import COMPONENT_PACKAGE from "../../content/models/evga-rtx3060-xc-black-12gb/components.json" with { type: "json" };
-
 export const EVIDENCE = {
   manufacturer_data: {
     en: "Manufacturer specification",
@@ -121,10 +117,3 @@ export function createModelDataAdapter(data) {
   };
 }
 
-const DEFAULT_ADAPTER = createModelDataAdapter({
-  model: MODEL_PACKAGE,
-  sources: SOURCE_PACKAGE,
-  components: COMPONENT_PACKAGE
-});
-export const MODEL = DEFAULT_ADAPTER.model;
-export const COMPONENTS = DEFAULT_ADAPTER.components;

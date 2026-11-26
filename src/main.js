@@ -9,41 +9,30 @@ import { MeasurementController } from "./viewer/MeasurementController.js";
 import { AnimationPlayer } from "./viewer/AnimationPlayer.js";
 import { createCatalogAdapter } from "./data/catalog.js";
 import CATALOG_SOURCE from "../content/catalog/models.json";
-import { MODEL as DEFAULT_MODEL, COMPONENTS as DEFAULT_COMPONENTS, EVIDENCE, createModelDataAdapter } from "./data/model.js";
-import DEFAULT_LEARNING_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/learning.json";
-import DEFAULT_PROCESS_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/process_layers.json";
-import DEFAULT_CLAIM_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/claims.json";
-import DEFAULT_RELATIONSHIP_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/relationships.json";
-import DEFAULT_ASSEMBLY_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/assembly_steps.json";
-import DEFAULT_ANIMATION_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/animations.json";
-import DEFAULT_MODEL_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/model.json";
-import DEFAULT_COMPONENT_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/components.json";
-import DEFAULT_SOURCE_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/sources.json";
-import DEFAULT_RELEASE_PACKAGE from "../content/models/evga-rtx3060-xc-black-12gb/release.json";
+import { EVIDENCE, createModelDataAdapter } from "./data/model.js";
 import { loadModelPackage, validateSelfContainedGlb, MAX_MODEL_PACKAGE_BYTES, MAX_SCENE_GLB_BYTES } from "./viewer/ModelPackageLoader.js";
 
-let MODEL = DEFAULT_MODEL;
-let COMPONENTS = DEFAULT_COMPONENTS;
-let LEARNING_PACKAGE = DEFAULT_LEARNING_PACKAGE;
-let PROCESS_PACKAGE = DEFAULT_PROCESS_PACKAGE;
-let CLAIM_PACKAGE = DEFAULT_CLAIM_PACKAGE;
-let RELATIONSHIP_PACKAGE = DEFAULT_RELATIONSHIP_PACKAGE;
-let ASSEMBLY_PACKAGE = DEFAULT_ASSEMBLY_PACKAGE;
-let ANIMATION_PACKAGE = DEFAULT_ANIMATION_PACKAGE;
-const DEFAULT_PACKAGE_DATA = {
-  model: DEFAULT_MODEL_PACKAGE,
-  components: DEFAULT_COMPONENT_PACKAGE,
-  sources: DEFAULT_SOURCE_PACKAGE,
-  learning: DEFAULT_LEARNING_PACKAGE,
-  process_layers: DEFAULT_PROCESS_PACKAGE,
-  claims: DEFAULT_CLAIM_PACKAGE,
-  relationships: DEFAULT_RELATIONSHIP_PACKAGE,
-  assembly_steps: DEFAULT_ASSEMBLY_PACKAGE,
-  animations: DEFAULT_ANIMATION_PACKAGE,
-  release: DEFAULT_RELEASE_PACKAGE
+const DEFAULT_CATALOG_ENTRY = CATALOG_SOURCE.models.find((entry) => entry.default_package) ?? CATALOG_SOURCE.models[0];
+const DEFAULT_MODEL_ID = DEFAULT_CATALOG_ENTRY?.package_model_id || DEFAULT_CATALOG_ENTRY?.id || "catalog.unavailable";
+const DEFAULT_MODEL = {
+  id: DEFAULT_MODEL_ID,
+  name: DEFAULT_CATALOG_ENTRY?.name?.ru || DEFAULT_CATALOG_ENTRY?.name?.en || "Model catalogue",
+  partNumber: DEFAULT_CATALOG_ENTRY?.part_number || "",
+  manufacturer: DEFAULT_CATALOG_ENTRY?.manufacturer || "",
+  status: DEFAULT_CATALOG_ENTRY?.geometry_status || "unknown",
+  units: null,
+  sources: []
 };
+let MODEL = DEFAULT_MODEL;
+let COMPONENTS = [];
+let LEARNING_PACKAGE = { questions: [] };
+let PROCESS_PACKAGE = { process_layers: [] };
+let CLAIM_PACKAGE = { claims: [] };
+let RELATIONSHIP_PACKAGE = { relationships: [] };
+let ASSEMBLY_PACKAGE = { steps: [], observations: [] };
+let ANIMATION_PACKAGE = { clips: [] };
 const LEARNING_PROGRESS_STORE = createLearningProgressStore();
-const MODEL_CATALOG = createCatalogAdapter(CATALOG_SOURCE, { defaultPackageModelId: DEFAULT_MODEL.id });
+const MODEL_CATALOG = createCatalogAdapter(CATALOG_SOURCE, { defaultPackageModelId: DEFAULT_MODEL_ID });
 
 const $ = (selector) => document.querySelector(selector);
 const canvasHost = $("#viewer-canvas");
@@ -101,7 +90,7 @@ const state = {
   catalogCategory: "all",
   catalogLoadingId: null,
   catalogOpener: null,
-  packageData: DEFAULT_PACKAGE_DATA
+  packageData: null
 };
 
 const MAX_GLB_BYTES = MAX_SCENE_GLB_BYTES;
