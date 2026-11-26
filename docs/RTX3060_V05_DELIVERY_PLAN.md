@@ -1,5 +1,7 @@
 # EVGA RTX 3060 XC BLACK — v0.5 scope and acceptance
 
+> Historical v0.5 snapshot. The later v0.6/deep-atlas tranche supersedes early unknowns and component counts recorded here; see [the current deep component atlas](RTX3060_V06_DEEP_COMPONENT_ATLAS.md) and [source audit](GPU_SOURCE_AUDIT.md). This file preserves the v0.5 acceptance boundary and must not be read as the current package inventory.
+
 **Exact target:** EVGA GeForce RTX 3060 XC BLACK GAMING 12GB  
 **SKU:** `12G-P5-3655-KR`  
 **Geometry class:** `illustrative_proxy_not_cad` — unchanged.
