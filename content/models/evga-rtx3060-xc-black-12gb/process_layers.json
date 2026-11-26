@@ -566,11 +566,41 @@
         "chip.memory.candidate.3",
         "chip.memory.candidate.4",
         "chip.memory.candidate.5",
-        "chip.memory.candidate.6"
+        "chip.memory.candidate.6",
+        "chip.gpu.tpc.cluster",
+        "chip.gpu.polymorph.array",
+        "chip.gpu.sm.01",
+        "chip.gpu.sm.02",
+        "chip.gpu.sm.03",
+        "chip.gpu.sm.04",
+        "chip.gpu.sm.05",
+        "chip.gpu.sm.06",
+        "chip.gpu.sm.07",
+        "chip.gpu.sm.08",
+        "chip.gpu.sm.09",
+        "chip.gpu.sm.10",
+        "chip.gpu.sm.11",
+        "chip.gpu.sm.12",
+        "chip.gpu.sm.13",
+        "chip.gpu.sm.14",
+        "chip.gpu.sm.15",
+        "chip.gpu.sm.16",
+        "chip.gpu.sm.17",
+        "chip.gpu.sm.18",
+        "chip.gpu.sm.19",
+        "chip.gpu.sm.20",
+        "chip.gpu.sm.21",
+        "chip.gpu.sm.22",
+        "chip.gpu.sm.23",
+        "chip.gpu.sm.24",
+        "chip.gpu.sm.25",
+        "chip.gpu.sm.26",
+        "chip.gpu.sm.27",
+        "chip.gpu.sm.28"
       ],
       "description": {
-        "en": "An evidence-linked architectural map of the GA106 RTX 3060 configuration: 28 SMs, 3,584 CUDA cores, 112 third-generation Tensor Cores, 28 second-generation RT Cores, 112 TMUs, 48 ROPs and the exact SKU's published 192-bit GDDR6 interface. Six GDDR6 package positions visible in XC BLACK material are available as separate layout nodes. Their exact device markings, bus partitioning and electrical mapping are not established. Logical nodes are not a die floorplan, shader wiring, physical memory-controller placement or a cycle-accurate architecture simulation.",
-        "ru": "Архитектурная карта GA106 в конфигурации RTX 3060 с привязкой к источникам: 28 SM, 3 584 ядра CUDA, 112 тензорных ядер третьего поколения, 28 RT-ядер второго поколения, 112 TMU, 48 ROP и опубликованный для точного SKU 192-битный интерфейс GDDR6. Шесть видимых в материалах XC BLACK позиций корпусов GDDR6 доступны как отдельные узлы компоновки. Точная маркировка устройств, разбиение шины и электрическое соответствие не установлены. Логические узлы не являются топологией кристалла, разводкой шейдеров, физическим размещением контроллера памяти или тактово-точной симуляцией архитектуры."
+        "en": "An evidence-linked architectural map of the GA106 RTX 3060 configuration: 28 SMs, 14 calculated TPCs, 3,584 CUDA cores, 112 third-generation Tensor Cores, 28 second-generation RT Cores, 112 TMUs, 48 ROPs and the exact SKU's published 192-bit GDDR6 interface. The component tree exposes 28 individually selectable logical SM entries. GA10x per-SM resources are 128 CUDA, four Tensor Cores, four texture units, one RT Core, a 256 KB register file and 128 KB L1/shared memory. Each TPC contains two SMs and one PolyMorph Engine. Six GDDR6 package positions visible in XC BLACK material are separate layout nodes. No physical TPC/SM coordinates, GPC grouping, die floorplan, package-to-channel mapping or electrical net mapping are asserted.",
+        "ru": "Архитектурная карта конфигурации GA106 RTX 3060: 28 SM, 14 вычисленных TPC, 3 584 ядра CUDA, 112 тензорных ядер третьего поколения, 28 RT-ядер второго поколения, 112 TMU, 48 ROP и опубликованный для точного SKU 192-битный интерфейс GDDR6. Дерево компонентов содержит 28 отдельно выбираемых логических SM. Ресурсы каждого SM по архитектуре GA10x: 128 CUDA, четыре Tensor Core, четыре текстурных блока, одно RT-ядро, файл регистров 256 КБ и 128 КБ памяти L1/shared. Каждый TPC содержит два SM и один PolyMorph Engine. Шесть видимых позиций корпусов GDDR6 показаны отдельно. Физические координаты TPC/SM, группировка по GPC, топология кристалла, соответствие корпусов каналам и электрические сети не утверждаются."
       },
       "assumptions": [
         {
@@ -596,13 +626,26 @@
         {
           "en": "The six GDDR6 package positions are not mapped one-to-one to the logical interface segments; no per-package channel width or board net has been established.",
           "ru": "Шесть позиций корпусов GDDR6 не сопоставлены один-к-одному логическим сегментам интерфейса; ширина канала на корпус и сеть дорожек платы не установлены."
+        },
+        {
+          "en": "The GA10x architecture whitepaper specifies 128 CUDA cores, four third-generation Tensor Cores, four texture units, one second-generation RT Core, a 256 KB register file and 128 KB L1/shared memory per SM. These are logical architecture resources, not individual rendered blocks.",
+          "ru": "Архитектурный документ GA10x указывает на один SM: 128 ядер CUDA, четыре Tensor Core третьего поколения, четыре текстурных блока, одно RT-ядро второго поколения, файл регистров 256 КБ и 128 КБ памяти L1/shared. Это логические ресурсы, а не отдельные отрисованные физические блоки."
+        },
+        {
+          "en": "The TPC aggregate is calculated as 28 RTX 3060 SMs / two SMs per GA10x TPC = 14. The 28 numbered SM entries are navigation indices, not physical order or die coordinates.",
+          "ru": "Агрегат TPC рассчитан как 28 SM RTX 3060 / два SM на TPC GA10x = 14. Нумерация 28 SM — это индексы навигации, а не физический порядок или координаты на кристалле."
+        },
+        {
+          "en": "No GA106 GPC count, TPC-to-GPC distribution, disabled-block placement or physical die floorplan is inferred from the GA102 whitepaper diagram.",
+          "ru": "По схеме кристалла GA102 из whitepaper не выводятся число GPC у GA106, распределение TPC по GPC, расположение отключённых блоков или физическая топология кристалла."
         }
       ],
       "source_ids": [
         "src.nvidia.rtx3060.architecture",
         "src.tomshardware.rtx3060.specs",
         "src.samsung.gddr6.catalog",
-        "src.evga.spec"
+        "src.evga.spec",
+        "src.nvidia.ampere.whitepaper"
       ],
       "visualization": {
         "kind": "selectable_logical_nodes",
@@ -644,6 +687,17 @@
                   "metric": {
                     "en": "28 SMs",
                     "ru": "28 SM"
+                  }
+                },
+                {
+                  "component_id": "chip.gpu.tpc.cluster",
+                  "title": {
+                    "en": "Texture Processing Clusters",
+                    "ru": "Кластеры текстурной обработки"
+                  },
+                  "metric": {
+                    "en": "14 logical TPCs · derived from 28 SMs / 2",
+                    "ru": "14 логических TPC · расчёт 28 SM / 2"
                   }
                 }
               ]
