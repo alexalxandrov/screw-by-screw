@@ -284,19 +284,34 @@ class ContentPackageTests(unittest.TestCase):
             self.assertEqual(edge["from"], fan_id)
             self.assertEqual(edge["to"], rotor_id)
 
-        self.assertIn("Components: 167", report)
-        self.assertIn("Relationships: 163", report)
+        self.assertIn("Components: 307", report)
+        self.assertIn("Relationships: 303", report)
         self.assertIn("Animation clips: 2", report)
-        self.assertEqual(len(package["claims"]["claims"]), 74)
+        self.assertEqual(len(package["claims"]["claims"]), 85)
         self.assertEqual(len(package["process_layers"]["process_layers"]), 3)
         self.assertEqual(len(package["learning"]["questions"]), 8)
         sm_instances = [item for item in components.values() if item["id"].startswith("chip.gpu.sm.") and item["id"] != "chip.gpu.sm.cluster"]
         self.assertEqual(len(sm_instances), 28)
-        self.assertTrue(all(item["parent_id"] == "chip.gpu.tpc.cluster" for item in sm_instances))
         self.assertEqual(components["chip.gpu.tpc.cluster"]["geometry_status"], "logical_only")
         self.assertEqual(components["chip.gpu.polymorph.array"]["geometry_status"], "logical_only")
+        tpc_instances = [item for item in components.values() if item["id"].startswith("chip.gpu.tpc.") and item["id"] != "chip.gpu.tpc.cluster" and not item["id"].endswith(".polymorph")]
+        polymorph_instances = [item for item in components.values() if item["id"].startswith("chip.gpu.tpc.") and item["id"].endswith(".polymorph")]
+        partitions = [item for item in components.values() if ".partition." in item["id"]]
+        self.assertEqual(len(tpc_instances), 14)
+        self.assertEqual(len(polymorph_instances), 14)
+        self.assertEqual(len(partitions), 112)
+        self.assertTrue(all(item["parent_id"] == "chip.gpu.tpc.cluster" for item in tpc_instances))
+        for tpc_index, tpc in enumerate(sorted(tpc_instances, key=lambda item: item["id"]), start=1):
+            expected_sms = {f"chip.gpu.sm.{(tpc_index - 1) * 2 + slot:02d}" for slot in (1, 2)}
+            self.assertEqual({item["id"] for item in sm_instances if item["parent_id"] == tpc["id"]}, expected_sms)
+            self.assertEqual(len([item for item in partitions if item["parent_id"] in expected_sms]), 8)
+        for sm in sm_instances:
+            self.assertEqual(len([item for item in partitions if item["parent_id"] == sm["id"]]), 4)
         self.assertEqual(claims["claim.gpu.tpc_count"]["value"], 14)
         self.assertEqual(claims["claim.gpu.tpc_count"]["confidence_class"], "calculated")
+        self.assertEqual(claims["claim.gpu.sm_partition_count"]["value"], 112)
+        self.assertEqual(claims["claim.gpu.sm_partitions_per_sm"]["value"], 4)
+        self.assertEqual(claims["claim.gpu.register_file_per_partition"]["value"], 64)
         clip = package["animations"]["clips"][0]
         self.assertEqual(clip["evidence_status"], "educational_approximation")
         self.assertEqual(clip["source_ids"], [])
