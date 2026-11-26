@@ -19,7 +19,7 @@
       ],
       "description": {
         "en": "Family-level reference model only. No exact retail SKU, service tag or factory configuration has been selected.",
-        "ru": "Family-level reference model only. No exact retail SKU, service tag or factory configuration has been selected."
+        "ru": "Эталонная модель уровня семейства. Точный розничный SKU, Service Tag и заводская комплектация не выбраны."
       }
     },
     {
@@ -38,7 +38,7 @@
       ],
       "description": {
         "en": "Outer structure constrained by Dell's published envelope; internal folds and interfaces are schematic.",
-        "ru": "Outer structure constrained by Dell's published envelope; internal folds and interfaces are schematic."
+        "ru": "Внешняя конструкция ограничена опубликованными Dell габаритами; внутренние штамповки и интерфейсы показаны схематично."
       }
     },
     {
@@ -123,7 +123,7 @@
       ],
       "description": {
         "en": "Serviceable side cover; latch and captive-fastener geometry is not measured.",
-        "ru": "Serviceable side cover; latch and captive-fastener geometry is not measured."
+        "ru": "Съёмная боковая крышка; геометрия защёлки и невыпадающего крепежа не измерена."
       },
       "visual_proxy": {
         "kind": "box",
@@ -354,7 +354,7 @@
       ],
       "description": {
         "en": "Dell documents the system board and its connector map; exact board assembly part number and PCB revision remain unknown.",
-        "ru": "Dell documents the system board and its connector map; exact board assembly part number and PCB revision remain unknown."
+        "ru": "Dell документирует системную плату и карту её разъёмов; точный номер сборки платы и ревизия PCB неизвестны."
       }
     },
     {
@@ -373,7 +373,7 @@
       ],
       "description": {
         "en": "PCB envelope is illustrative. Layer stack, exact outline, mounting holes and copper layout are not modeled.",
-        "ru": "PCB envelope is illustrative. Layer stack, exact outline, mounting holes and copper layout are not modeled."
+        "ru": "Контур печатной платы показан условно. Слои, точный внешний контур, монтажные отверстия и медная разводка не моделируются."
       },
       "visual_proxy": {
         "kind": "box",
@@ -1225,7 +1225,7 @@
       "source_ids": [],
       "description": {
         "en": "Wire routing, gauge, connector population and length are unknown until an exact PSU is identified.",
-        "ru": "Wire routing, gauge, connector population and length are unknown until an exact PSU is identified."
+        "ru": "Трассировка проводов, сечение жил, состав разъёмов и длины кабелей неизвестны до идентификации точного блока питания."
       }
     },
     {
@@ -1263,7 +1263,7 @@
       ],
       "description": {
         "en": "The platform supports multiple storage arrangements; exact fitted cage revision and population are configuration-dependent.",
-        "ru": "The platform supports multiple storage arrangements; exact fitted cage revision and population are configuration-dependent."
+        "ru": "Платформа поддерживает несколько вариантов размещения накопителей; точная ревизия установленной корзины и её комплектация зависят от конфигурации."
       },
       "visual_proxy": {
         "kind": "box",
@@ -1368,7 +1368,7 @@
       ],
       "description": {
         "en": "Individual instance from Dell's table of nine system-board-to-chassis screws; head shape and placement are schematic.",
-        "ru": "Individual instance from Dell's table of nine system-board-to-chassis screws; head shape and placement are schematic."
+        "ru": "Отдельный экземпляр из указанной Dell группы девяти винтов крепления системной платы к корпусу; форма головки и положение показаны схематично."
       },
       "visual_proxy": {
         "kind": "box",
@@ -1403,7 +1403,7 @@
       ],
       "description": {
         "en": "Individual instance from Dell's table of nine system-board-to-chassis screws; head shape and placement are schematic.",
-        "ru": "Individual instance from Dell's table of nine system-board-to-chassis screws; head shape and placement are schematic."
+        "ru": "Отдельный экземпляр из указанной Dell группы девяти винтов крепления системной платы к корпусу; форма головки и положение показаны схематично."
       },
       "visual_proxy": {
         "kind": "box",
@@ -1438,7 +1438,7 @@
       ],
       "description": {
         "en": "Individual instance from Dell's table of nine system-board-to-chassis screws; head shape and placement are schematic.",
-        "ru": "Individual instance from Dell's table of nine system-board-to-chassis screws; head shape and placement are schematic."
+        "ru": "Отдельный экземпляр из указанной Dell группы девяти винтов крепления системной платы к корпусу; форма головки и положение показаны схематично."
       },
       "visual_proxy": {
         "kind": "box",
@@ -1473,7 +1473,7 @@
       ],
       "description": {
         "en": "Individual instance from Dell's table of nine system-board-to-chassis screws; head shape and placement are schematic.",
-        "ru": "Individual instance from Dell's table of nine system-board-to-chassis screws; head shape and placement are schematic."
+        "ru": "Отдельный экземпляр из указанной Dell группы девяти винтов крепления системной платы к корпусу; форма головки и положение показаны схематично."
       },
       "visual_proxy": {
         "kind": "box",
@@ -1508,7 +1508,7 @@
       ],
       "description": {
         "en": "Individual instance from Dell's table of nine system-board-to-chassis screws; head shape and placement are schematic.",
-        "ru": "Individual instance from Dell's table of nine system-board-to-chassis screws; head shape and placement are schematic."
+        "ru": "Отдельный экземпляр из указанной Dell группы девяти винтов крепления системной платы к корпусу; форма головки и положение показаны схематично."
       },
       "visual_proxy": {
         "kind": "box",
@@ -1543,7 +1543,7 @@
       ],
       "description": {
         "en": "Individual instance from Dell's table of nine system-board-to-chassis screws; head shape and placement are schematic.",
-        "ru": "Individual instance from Dell's table of nine system-board-to-chassis screws; head shape and placement are schematic."
+        "ru": "Отдельный экземпляр из указанной Dell группы девяти винтов крепления системной платы к корпусу; форма головки и положение показаны схематично."
       },
       "visual_proxy": {
         "kind": "box",
@@ -1578,7 +1578,7 @@
       ],
       "description": {
         "en": "Individual instance from Dell's table of nine system-board-to-chassis screws; head shape and placement are schematic.",
-        "ru": "Individual instance from Dell's table of nine system-board-to-chassis screws; head shape and placement are schematic."
+        "ru": "Отдельный экземпляр из указанной Dell группы девяти винтов крепления системной платы к корпусу; форма головки и положение показаны схематично."
       },
       "visual_proxy": {
         "kind": "box",
@@ -1613,7 +1613,7 @@
       ],
       "description": {
         "en": "Individual instance from Dell's table of nine system-board-to-chassis screws; head shape and placement are schematic.",
-        "ru": "Individual instance from Dell's table of nine system-board-to-chassis screws; head shape and placement are schematic."
+        "ru": "Отдельный экземпляр из указанной Dell группы девяти винтов крепления системной платы к корпусу; форма головки и положение показаны схематично."
       },
       "visual_proxy": {
         "kind": "box",
@@ -1648,7 +1648,7 @@
       ],
       "description": {
         "en": "Individual instance from Dell's table of nine system-board-to-chassis screws; head shape and placement are schematic.",
-        "ru": "Individual instance from Dell's table of nine system-board-to-chassis screws; head shape and placement are schematic."
+        "ru": "Отдельный экземпляр из указанной Dell группы девяти винтов крепления системной платы к корпусу; форма головки и положение показаны схематично."
       },
       "visual_proxy": {
         "kind": "box",
@@ -1683,7 +1683,7 @@
       ],
       "description": {
         "en": "Individual instance from Dell's table of three PSU-to-chassis screws; placement is schematic.",
-        "ru": "Individual instance from Dell's table of three PSU-to-chassis screws; placement is schematic."
+        "ru": "Отдельный экземпляр из указанной Dell группы трёх винтов крепления блока питания к корпусу; положение показано схематично."
       },
       "visual_proxy": {
         "kind": "box",
@@ -1718,7 +1718,7 @@
       ],
       "description": {
         "en": "Individual instance from Dell's table of three PSU-to-chassis screws; placement is schematic.",
-        "ru": "Individual instance from Dell's table of three PSU-to-chassis screws; placement is schematic."
+        "ru": "Отдельный экземпляр из указанной Dell группы трёх винтов крепления блока питания к корпусу; положение показано схематично."
       },
       "visual_proxy": {
         "kind": "box",
@@ -1753,7 +1753,7 @@
       ],
       "description": {
         "en": "Individual instance from Dell's table of three PSU-to-chassis screws; placement is schematic.",
-        "ru": "Individual instance from Dell's table of three PSU-to-chassis screws; placement is schematic."
+        "ru": "Отдельный экземпляр из указанной Dell группы трёх винтов крепления блока питания к корпусу; положение показано схематично."
       },
       "visual_proxy": {
         "kind": "box",
@@ -1788,7 +1788,7 @@
       ],
       "description": {
         "en": "Dell documents four captive heatsink screws and a numbered loosening sequence; exact screw dimensions and coordinates are not published.",
-        "ru": "Dell documents four captive heatsink screws and a numbered loosening sequence; exact screw dimensions and coordinates are not published."
+        "ru": "Dell документирует четыре невыпадающих винта радиатора и нумерованную последовательность их ослабления; точные размеры и координаты винтов не опубликованы."
       },
       "visual_proxy": {
         "kind": "box",
@@ -1823,7 +1823,7 @@
       ],
       "description": {
         "en": "Dell documents four captive heatsink screws and a numbered loosening sequence; exact screw dimensions and coordinates are not published.",
-        "ru": "Dell documents four captive heatsink screws and a numbered loosening sequence; exact screw dimensions and coordinates are not published."
+        "ru": "Dell документирует четыре невыпадающих винта радиатора и нумерованную последовательность их ослабления; точные размеры и координаты винтов не опубликованы."
       },
       "visual_proxy": {
         "kind": "box",
@@ -1858,7 +1858,7 @@
       ],
       "description": {
         "en": "Dell documents four captive heatsink screws and a numbered loosening sequence; exact screw dimensions and coordinates are not published.",
-        "ru": "Dell documents four captive heatsink screws and a numbered loosening sequence; exact screw dimensions and coordinates are not published."
+        "ru": "Dell документирует четыре невыпадающих винта радиатора и нумерованную последовательность их ослабления; точные размеры и координаты винтов не опубликованы."
       },
       "visual_proxy": {
         "kind": "box",
@@ -1893,7 +1893,7 @@
       ],
       "description": {
         "en": "Dell documents four captive heatsink screws and a numbered loosening sequence; exact screw dimensions and coordinates are not published.",
-        "ru": "Dell documents four captive heatsink screws and a numbered loosening sequence; exact screw dimensions and coordinates are not published."
+        "ru": "Dell документирует четыре невыпадающих винта радиатора и нумерованную последовательность их ослабления; точные размеры и координаты винтов не опубликованы."
       },
       "visual_proxy": {
         "kind": "box",
@@ -1928,7 +1928,7 @@
       ],
       "description": {
         "en": "Dell documents four screws securing the heatsink fan to the heatsink and specifies Torx access through the top holes; geometry is proxy only.",
-        "ru": "Dell documents four screws securing the heatsink fan to the heatsink and specifies Torx access through the top holes; geometry is proxy only."
+        "ru": "Dell документирует четыре винта крепления вентилятора к радиатору и доступ к ним через верхние отверстия под Torx; геометрия винта в модели условная."
       },
       "visual_proxy": {
         "kind": "box",
@@ -1963,7 +1963,7 @@
       ],
       "description": {
         "en": "Dell documents four screws securing the heatsink fan to the heatsink and specifies Torx access through the top holes; geometry is proxy only.",
-        "ru": "Dell documents four screws securing the heatsink fan to the heatsink and specifies Torx access through the top holes; geometry is proxy only."
+        "ru": "Dell документирует четыре винта крепления вентилятора к радиатору и доступ к ним через верхние отверстия под Torx; геометрия винта в модели условная."
       },
       "visual_proxy": {
         "kind": "box",
@@ -1998,7 +1998,7 @@
       ],
       "description": {
         "en": "Dell documents four screws securing the heatsink fan to the heatsink and specifies Torx access through the top holes; geometry is proxy only.",
-        "ru": "Dell documents four screws securing the heatsink fan to the heatsink and specifies Torx access through the top holes; geometry is proxy only."
+        "ru": "Dell документирует четыре винта крепления вентилятора к радиатору и доступ к ним через верхние отверстия под Torx; геометрия винта в модели условная."
       },
       "visual_proxy": {
         "kind": "box",
@@ -2033,7 +2033,7 @@
       ],
       "description": {
         "en": "Dell documents four screws securing the heatsink fan to the heatsink and specifies Torx access through the top holes; geometry is proxy only.",
-        "ru": "Dell documents four screws securing the heatsink fan to the heatsink and specifies Torx access through the top holes; geometry is proxy only."
+        "ru": "Dell документирует четыре винта крепления вентилятора к радиатору и доступ к ним через верхние отверстия под Torx; геометрия винта в модели условная."
       },
       "visual_proxy": {
         "kind": "box",
@@ -2068,7 +2068,7 @@
       ],
       "description": {
         "en": "Dell documents rubber mounting grommets for the system fan; exact dimensions and coordinates are not measured.",
-        "ru": "Dell documents rubber mounting grommets for the system fan; exact dimensions and coordinates are not measured."
+        "ru": "Dell документирует резиновые втулки крепления системного вентилятора; точные размеры и координаты не измерены."
       },
       "visual_proxy": {
         "kind": "box",
@@ -2103,7 +2103,7 @@
       ],
       "description": {
         "en": "Dell documents rubber mounting grommets for the system fan; exact dimensions and coordinates are not measured.",
-        "ru": "Dell documents rubber mounting grommets for the system fan; exact dimensions and coordinates are not measured."
+        "ru": "Dell документирует резиновые втулки крепления системного вентилятора; точные размеры и координаты не измерены."
       },
       "visual_proxy": {
         "kind": "box",
@@ -2138,7 +2138,7 @@
       ],
       "description": {
         "en": "Dell documents rubber mounting grommets for the system fan; exact dimensions and coordinates are not measured.",
-        "ru": "Dell documents rubber mounting grommets for the system fan; exact dimensions and coordinates are not measured."
+        "ru": "Dell документирует резиновые втулки крепления системного вентилятора; точные размеры и координаты не измерены."
       },
       "visual_proxy": {
         "kind": "box",
@@ -2173,7 +2173,7 @@
       ],
       "description": {
         "en": "Dell documents rubber mounting grommets for the system fan; exact dimensions and coordinates are not measured.",
-        "ru": "Dell documents rubber mounting grommets for the system fan; exact dimensions and coordinates are not measured."
+        "ru": "Dell документирует резиновые втулки крепления системного вентилятора; точные размеры и координаты не измерены."
       },
       "visual_proxy": {
         "kind": "box",
