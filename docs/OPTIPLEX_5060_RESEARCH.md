@@ -31,7 +31,37 @@ The 24 fastener instances remain an explicit set of modeled service-relevant ins
 
 ## Motherboard and expansion map
 
-The Dell Tower motherboard illustration has 26 numbered callouts. The package represents the labels as semantic references rather than claiming the board contains only 26 physical parts. Some callouts describe groups, such as the four DIMM slots.
+The Dell Tower motherboard illustration has 26 numbered callouts. The package represents the labels as semantic references rather than claiming the board contains only 26 physical parts. Some callouts describe groups, such as the four DIMM slots. The source map is stored in `model.specifications.motherboard.callouts`; it contains 26 labels that resolve to 29 component references because callout 13 expands to four individual DIMM sockets.
+
+| Dell callout | Label in the service manual | Semantic component ID(s) |
+|---:|---|---|
+| 1 | PCIe x16 connector wired x4 · Slot 4 | `motherboard.pcie.x16.wired_x4` |
+| 2 | PCIe x1 · Slot 3 | `motherboard.pcie.x1.2` |
+| 3 | PCIe x16 · Slot 2 | `motherboard.pcie.x16` |
+| 4 | PCIe x1 · Slot 1 | `motherboard.pcie.x1.1` |
+| 5 | Optional Type-C connector | `motherboard.typec_header.optional` |
+| 6 | Optional HDMI / DP / VGA connector | `motherboard.video_header.optional` |
+| 7 | Optional PS/2 / serial connector | `motherboard.ps2_serial_header.optional` |
+| 8 | System fan connector | `motherboard.fan_header` |
+| 9 | Intruder switch connector | `motherboard.intrusion_switch_header` |
+| 10 | CPU socket connector | `motherboard.cpu_socket` |
+| 11 | CPU power connector | `motherboard.cpu_power` |
+| 12 | CPU cooler fan connector | `motherboard.cpu_fan_header` |
+| 13 | Memory slots | `motherboard.dimm.1` … `motherboard.dimm.4` |
+| 14 | SD card reader connector | `motherboard.sd_reader_header` |
+| 15 | Power switch connector | `motherboard.power_switch_header` |
+| 16 | M.2 SSD connector | `motherboard.m2` |
+| 17 | SATA 0 · blue | `motherboard.sata.1` |
+| 18 | SATA 2 · white | `motherboard.sata.2` |
+| 19 | Internal speaker connector | `motherboard.speaker_header` |
+| 20 | SATA 3 · black | `motherboard.sata.3` |
+| 21 | SATA 1 · black | `motherboard.sata.4` |
+| 22 | System power · ATX | `motherboard.system_power` |
+| 23 | SATA power connector | `motherboard.sata_power_header` |
+| 24 | M.2 WLAN connector | `motherboard.m2.wlan` |
+| 25 | Coin-cell battery | `motherboard.coin_cell` |
+| 26 | Clear CMOS / Password / Service Mode jumper | `motherboard.clear_cmos_jumper` |
+
 
 The model distinguishes four PCIe positions:
 - Slot 2: PCIe 3.0 x16.
