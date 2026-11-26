@@ -241,7 +241,7 @@ class ContentPackageTests(unittest.TestCase):
         self.assertEqual(
             set(package["assembly_steps"]["steps"][0]["component_ids"]),
             {"assembly.fasteners", "assembly.cooling"}
-            | {f"fastener.cooler.{index:02d}" for index in range(1, 9)},
+            | {f"fastener.cooler.{index:02d}" for index in range(1, 5)},
         )
         for index in range(5, 9):
             rear = components[f"fastener.cooler.{index:02d}"]
@@ -292,12 +292,18 @@ class ContentPackageTests(unittest.TestCase):
             )
             self.assertIn("src.newegg.exact_sku.product_photo", components[blade_ids[-1]]["source_ids"])
 
-        self.assertIn("Components: 309", report)
-        self.assertIn("Relationships: 305", report)
+        self.assertIn("Components: 313", report)
+        self.assertIn("Relationships: 311", report)
         self.assertIn("Animation clips: 2", report)
-        self.assertEqual(len(package["claims"]["claims"]), 99)
+        self.assertEqual(len(package["claims"]["claims"]), 103)
         self.assertEqual(len(package["process_layers"]["process_layers"]), 3)
         self.assertEqual(len(package["learning"]["questions"]), 12)
+        self.assertEqual(len(package["assembly_steps"]["steps"]), 5)
+        self.assertEqual(claims["claim.cooler.fin_stack_base.screw_count"]["value"], 2)
+        self.assertEqual(claims["claim.io.bracket.mount_screw_count"]["value"], 2)
+        self.assertEqual(claims["claim.io.display_output.screw_count"]["value"], 3)
+        self.assertEqual(claims["claim.io.display_output.driver_size"]["value"], "Phillips #0")
+        self.assertEqual(components["fastener.shroud.candidate"]["geometry_status"], "logical_only")
         sm_instances = [item for item in components.values() if item["id"].startswith("chip.gpu.sm.") and item["id"] != "chip.gpu.sm.cluster" and item["id"].count(".") == 3]
         self.assertEqual(len(sm_instances), 28)
         self.assertEqual(components["chip.gpu.tpc.cluster"]["geometry_status"], "logical_only")

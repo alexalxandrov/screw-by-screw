@@ -335,7 +335,7 @@ test("partial teardown steps and source observations are both shown without conf
   await expect(section).toBeVisible();
   await expect(page.locator("#assembly-empty-note")).toBeHidden();
   const steps = page.locator("#assembly-step-list .assembly-step-card");
-  await expect(steps).toHaveCount(3);
+  await expect(steps).toHaveCount(5);
   await expect(steps.nth(0)).toContainText("Вывернуть восемь винтов крепления кулера/кожуха");
   await expect(steps.nth(1)).toContainText("Отсоединить оба кабеля вентиляторов");
   await expect(steps.nth(2)).toContainText("Вывернуть по три крепёжных винта каждого вентилятора");

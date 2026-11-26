@@ -315,3 +315,12 @@ Sources:
 - EVGA official 12G-P5-3655-KR specifications: https://www.evga.com/products/Specs/GPU.aspx?pn=fc6cb106-6765-4840-b472-9dba159cdc30
 
 EVGA's official page identifies 12G-P5-3655-KR and states **whole-card** dimensions of 201.8 × 110 mm and dual-slot width. Those values are not bare-PCB measurements, and they provide no component coordinate system or service drawing.
+
+
+## 26. Exact-model mechanical fastener groups — no false aggregate
+
+The full Gamers Nexus transcript distinguishes several mechanical groups that were previously too coarsely described: (1) four spring-loaded GPU cooler screws passing through the PCB around the die; (2) a separate pair of screws retaining the fin-stack base to the board; (3) two narrower I/O-plate screws with nuts on the reverse side; (4) three smaller display-output retaining screws, for which the presenter selects a Phillips #0 driver; and (5) three mounting screws per independently replaceable fan. The video also points out extra shroud screws but the presenter is uncertain whether there are four or six, so the shroud count remains a logical candidate without a numeric value.
+
+These observations must not be added into one grand screw count. Tom's Hardware separately reports eight cooler/shroud retention screws on the exact-SKU-linked sample (four around the GPU and four near the far end). The available material does not establish which of the fin-stack-base and I/O groups overlap with that aggregate. The model now separates the four GPU screws from the fin-stack-base pair, the I/O screw/nut pair and the three display-output screws. Only the four GPU screw positions have photo-positioned visual proxies; all other new groups are logical-only. The complete service sequence, all shroud screw positions, screw threads, lengths, head profiles and torque values remain unknown.
+
+Source: Gamers Nexus exact-model teardown, especially 01:30–05:33 and 09:00: https://www.youtube.com/watch?v=hJFJ_clQT8U
