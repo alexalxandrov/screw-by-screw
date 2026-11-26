@@ -31,6 +31,17 @@ test("OptiPlex reference package passes the production package loader and checks
   assert.equal(loaded.data.learning.questions.length, 9);
   assert.equal(loaded.data.model.specifications.motherboard.numbered_callouts, 26);
   assert.equal(loaded.data.model.specifications.motherboard.callouts.length, 26);
+  const callouts = loaded.data.model.specifications.motherboard.callouts;
+  const componentIds = new Set(loaded.data.components.components.map((component) => component.id));
+  assert.deepEqual(callouts.map((callout) => callout.number), Array.from({ length: 26 }, (_, index) => index + 1));
+  assert.ok(callouts.every((callout) => callout.component_ids.length > 0 &&
+    callout.component_ids.every((componentId) => componentIds.has(componentId))));
+  const supportedRelationshipTypes = new Set([
+    "contains", "mounted_in", "fastened_to", "connected_to", "powered_by",
+    "signals_to", "cooled_by", "transfers_heat_to", "airflow_over", "depends_on"
+  ]);
+  assert.ok(loaded.data.relationships.relationships.every((relationship) =>
+    supportedRelationshipTypes.has(relationship.type)));
   const componentIds = new Set(loaded.data.components.components.map((component) => component.id));
   const sourceIds = new Set(loaded.data.sources.sources.map((source) => source.id));
   const callouts = loaded.data.model.specifications.motherboard.callouts;
@@ -80,6 +91,6 @@ test("JSON model package rejects a tampered sidecar before loading", async () =>
       size: tamperedBytes.byteLength,
       arrayBuffer: async () => tamperedBuffer
     }),
-    /SHA-256 mismatch/
+    /SHA-256 mismatch|checksum/i
   );
 });
