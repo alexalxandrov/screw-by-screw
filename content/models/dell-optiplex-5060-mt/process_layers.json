@@ -1,0 +1,106 @@
+{
+  "schema_version": "0.1.0",
+  "device_model_id": "pc.dell.optiplex-5060-mt",
+  "process_layers": [
+    {
+      "id": "process.cpu-cooling.qualitative",
+      "type": "cooling",
+      "title": {
+        "en": "CPU cooling path",
+        "ru": "Контур охлаждения CPU"
+      },
+      "mode": "qualitative",
+      "linked_component_ids": [
+        "cpu.package",
+        "cpu.heatsink",
+        "cpu.heatsink-fan",
+        "assembly.system-fan"
+      ],
+      "description": {
+        "en": "A conceptual path from the processor through the heat sink and fan to chassis airflow. No thermal or fluid simulation is included.",
+        "ru": "Условный путь отвода тепла от процессора через радиатор и вентилятор к корпусному потоку воздуха. Тепловая и гидродинамическая симуляция не выполняется."
+      },
+      "assumptions": [
+        "Fan RPM, fan curve, heatsink fin pitch and thermal resistance are not established.",
+        "The fan and airflow visuals are explanatory only; no CFD or temperature field is calculated."
+      ],
+      "source_ids": [
+        "src.dell.heatsink",
+        "src.dell.heatsink-fan",
+        "src.dell.system-fan"
+      ],
+      "visualization": {
+        "kind": "qualitative_component_highlight",
+        "not_a_simulation": true
+      }
+    },
+    {
+      "id": "process.power.topology",
+      "type": "power_delivery",
+      "title": {
+        "en": "Power supply and board connections",
+        "ru": "Блок питания и соединения платы"
+      },
+      "mode": "qualitative",
+      "linked_component_ids": [
+        "assembly.psu",
+        "assembly.motherboard",
+        "board.conn.atx-power",
+        "board.conn.cpu-power",
+        "board.conn.sata-power"
+      ],
+      "description": {
+        "en": "Highlights PSU-to-board and drive-power connector groups. It does not represent pin assignments, wire gauge, current or electrical waveforms.",
+        "ru": "Подсвечивает группы соединений БП с платой и питанием накопителей. Не показывает распиновку, сечение проводов, ток или электрические осциллограммы."
+      },
+      "assumptions": [
+        "Exact harness routing and wire lengths are not reconstructed.",
+        "No voltage/current or safety-rated electrical simulation is present."
+      ],
+      "source_ids": [
+        "src.dell.psu",
+        "src.dell.board-layout"
+      ],
+      "visualization": {
+        "kind": "schematic_connection_highlight",
+        "not_a_simulation": true
+      }
+    },
+    {
+      "id": "process.storage-data",
+      "type": "data_path",
+      "title": {
+        "en": "Storage interfaces",
+        "ru": "Интерфейсы накопителей"
+      },
+      "mode": "qualitative",
+      "linked_component_ids": [
+        "storage.hdd35-assembly",
+        "storage.hdd25-assembly",
+        "storage.optical-drive",
+        "storage.m2-ssd",
+        "board.conn.sata0",
+        "board.conn.sata1",
+        "board.conn.sata2",
+        "board.conn.sata3",
+        "board.conn.m2-ssd"
+      ],
+      "description": {
+        "en": "Separates SATA and M.2 storage attachment points for learning. Drive SKU, cable route and installed drive population remain configuration-dependent.",
+        "ru": "Разделяет SATA- и M.2-точки подключения для обучения. Модель накопителя, трасса кабеля и количество установленных устройств зависят от конфигурации."
+      },
+      "assumptions": [
+        "The package does not claim a specific installed set of drives.",
+        "No data throughput or electrical link simulation is provided."
+      ],
+      "source_ids": [
+        "src.dell.board-layout",
+        "src.dell.service-manual"
+      ],
+      "visualization": {
+        "kind": "interface_group_highlight",
+        "not_a_simulation": true
+      }
+    }
+  ]
+}

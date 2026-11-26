@@ -1,0 +1,332 @@
+{
+  "schema_version": "0.1.0",
+  "status": "partial_service_manual_sequence",
+  "policy": "Only steps explicitly described in Dell's Tower service documentation are included. This is not a complete universal repair procedure; exact prerequisites can vary by installed options.",
+  "steps": [
+    {
+      "id": "step.remove-side-cover",
+      "sequence": 1,
+      "action": {
+        "en": "Release the side-cover latch, slide the cover rearward and lift it away.",
+        "ru": "Отпустить защёлку боковой крышки, сдвинуть её назад и снять."
+      },
+      "component_ids": [
+        "chassis.side-cover"
+      ],
+      "source_ids": [
+        "src.dell.cru-guide"
+      ],
+      "prerequisite_step_ids": [],
+      "tool_requirements": [],
+      "safety_notes": {
+        "en": "Shut down, disconnect mains power and attached cables, and follow Dell ESD precautions before opening the chassis.",
+        "ru": "Выключить компьютер, отсоединить сетевой кабель и внешние кабели; перед вскрытием соблюдать меры Dell по защите от статического электричества."
+      }
+    },
+    {
+      "id": "step.remove-front-bezel",
+      "sequence": 2,
+      "action": {
+        "en": "Release the front-bezel tabs and remove the bezel without forcing the clips.",
+        "ru": "Освободить фиксаторы передней панели и снять рамку, не прикладывая усилие к защёлкам."
+      },
+      "component_ids": [
+        "chassis.front-bezel"
+      ],
+      "source_ids": [
+        "src.dell.cru-guide"
+      ],
+      "prerequisite_step_ids": [
+        "step.remove-side-cover"
+      ],
+      "tool_requirements": [
+        "Plastic scribe if required by the illustrated procedure"
+      ],
+      "safety_notes": {
+        "en": "The exact clip sequence must be followed from the service-manual illustration.",
+        "ru": "Точную последовательность освобождения защёлок следует сверять с иллюстрацией сервисного мануала."
+      }
+    },
+    {
+      "id": "step.open-front-door",
+      "sequence": 3,
+      "action": {
+        "en": "Open the front panel door to gain access to serviceable assemblies.",
+        "ru": "Открыть переднюю дверцу для доступа к обслуживаемым узлам."
+      },
+      "component_ids": [
+        "chassis.front-door"
+      ],
+      "source_ids": [
+        "src.dell.service-manual"
+      ],
+      "prerequisite_step_ids": [
+        "step.remove-front-bezel"
+      ],
+      "tool_requirements": []
+    },
+    {
+      "id": "step.remove-expansion-card",
+      "sequence": 4,
+      "action": {
+        "en": "Release the chassis retention tab and expansion-card latch, then lift the card from its connector.",
+        "ru": "Освободить фиксатор корпуса и защёлку платы расширения, затем вынуть плату из разъёма."
+      },
+      "component_ids": [
+        "assembly.pcie"
+      ],
+      "source_ids": [
+        "src.dell.cru-guide"
+      ],
+      "prerequisite_step_ids": [
+        "step.remove-side-cover"
+      ],
+      "tool_requirements": []
+    },
+    {
+      "id": "step.remove-m2",
+      "sequence": 5,
+      "action": {
+        "en": "Remove the M.2 PCIe SSD after exposing its retaining M2 × 3.5 screw.",
+        "ru": "После доступа к креплению снять M.2 PCIe SSD, вывернув удерживающий винт M2 × 3,5."
+      },
+      "component_ids": [
+        "storage.m2-ssd",
+        "fastener.m2-ssd.01"
+      ],
+      "source_ids": [
+        "src.dell.screw-list",
+        "src.dell.service-manual"
+      ],
+      "prerequisite_step_ids": [
+        "step.remove-side-cover"
+      ],
+      "tool_requirements": [
+        "Phillips screwdriver; verify exact bit size against the manual"
+      ]
+    },
+    {
+      "id": "step.remove-memory",
+      "sequence": 6,
+      "action": {
+        "en": "Release the memory-module retention clips and lift the installed module(s) from the slots.",
+        "ru": "Освободить фиксаторы модулей памяти и извлечь установленные модули из слотов."
+      },
+      "component_ids": [
+        "assembly.memory",
+        "memory.slot-bank"
+      ],
+      "source_ids": [
+        "src.dell.service-manual"
+      ],
+      "prerequisite_step_ids": [
+        "step.remove-side-cover"
+      ],
+      "tool_requirements": []
+    },
+    {
+      "id": "step.remove-sd-reader",
+      "sequence": 7,
+      "action": {
+        "en": "Remove the optional SD card-reader module and its single #6-32 × 3.6 screw.",
+        "ru": "Снять опциональный считыватель SD-карт и его единственный винт #6-32 × 3,6."
+      },
+      "component_ids": [
+        "module.sd-reader",
+        "fastener.sd-reader.01"
+      ],
+      "source_ids": [
+        "src.dell.screw-list",
+        "src.dell.service-manual"
+      ],
+      "prerequisite_step_ids": [
+        "step.remove-side-cover"
+      ],
+      "tool_requirements": [
+        "Phillips screwdriver"
+      ]
+    },
+    {
+      "id": "step.remove-drive-assemblies",
+      "sequence": 8,
+      "action": {
+        "en": "Release and remove the 3.5-inch and 2.5-inch drive assemblies; remove the optical drive if installed.",
+        "ru": "Освободить и снять узлы накопителей 3,5 и 2,5 дюйма; при наличии снять оптический привод."
+      },
+      "component_ids": [
+        "storage.hdd35-assembly",
+        "storage.hdd25-assembly",
+        "storage.optical-drive"
+      ],
+      "source_ids": [
+        "src.dell.service-manual"
+      ],
+      "prerequisite_step_ids": [
+        "step.remove-side-cover"
+      ],
+      "tool_requirements": []
+    },
+    {
+      "id": "step.remove-cpu-fan",
+      "sequence": 9,
+      "action": {
+        "en": "Disconnect the CPU-cooling fan cable and remove the four Torx screws securing the fan to the heat sink.",
+        "ru": "Отсоединить кабель вентилятора охлаждения CPU и вывернуть четыре винта Torx, крепящие вентилятор к радиатору."
+      },
+      "component_ids": [
+        "cpu.heatsink-fan",
+        "fastener.cpu-fan.01",
+        "fastener.cpu-fan.02",
+        "fastener.cpu-fan.03",
+        "fastener.cpu-fan.04"
+      ],
+      "source_ids": [
+        "src.dell.heatsink-fan",
+        "src.dell.heatsink-fan-install"
+      ],
+      "prerequisite_step_ids": [
+        "step.remove-side-cover",
+        "step.remove-front-bezel"
+      ],
+      "tool_requirements": [
+        "Torx screwdriver; exact bit size not inferred"
+      ]
+    },
+    {
+      "id": "step.remove-heatsink",
+      "sequence": 10,
+      "action": {
+        "en": "Loosen the four captive heat-sink screws in the printed 1–4 order and lift the heat sink away.",
+        "ru": "Ослабить четыре невыпадающих винта радиатора в указанном на плате порядке 1–4 и снять радиатор."
+      },
+      "component_ids": [
+        "cpu.heatsink",
+        "fastener.heatsink.01",
+        "fastener.heatsink.02",
+        "fastener.heatsink.03",
+        "fastener.heatsink.04"
+      ],
+      "source_ids": [
+        "src.dell.heatsink"
+      ],
+      "prerequisite_step_ids": [
+        "step.remove-cpu-fan"
+      ],
+      "tool_requirements": [
+        "Screwdriver as specified in Dell service documentation"
+      ]
+    },
+    {
+      "id": "step.remove-processor",
+      "sequence": 11,
+      "action": {
+        "en": "Release the processor-socket lever, raise the processor shield and lift the CPU without touching socket contacts.",
+        "ru": "Освободить рычаг сокета, поднять рамку фиксатора и извлечь CPU, не касаясь контактов сокета."
+      },
+      "component_ids": [
+        "cpu.package",
+        "motherboard.cpu-socket"
+      ],
+      "source_ids": [
+        "src.dell.service-manual"
+      ],
+      "prerequisite_step_ids": [
+        "step.remove-heatsink"
+      ],
+      "tool_requirements": [],
+      "safety_notes": {
+        "en": "The socket contacts are fragile. Do not touch or bend them.",
+        "ru": "Контакты сокета хрупкие. Не касаться их и не допускать изгиба."
+      }
+    },
+    {
+      "id": "step.remove-system-fan",
+      "sequence": 12,
+      "action": {
+        "en": "Disconnect the chassis-fan cable, stretch the four rubber grommets and slide the fan away from the chassis.",
+        "ru": "Отсоединить кабель корпусного вентилятора, растянуть четыре резиновые втулки и снять вентилятор с корпуса."
+      },
+      "component_ids": [
+        "assembly.system-fan",
+        "grommet.system-fan.01",
+        "grommet.system-fan.02",
+        "grommet.system-fan.03",
+        "grommet.system-fan.04"
+      ],
+      "source_ids": [
+        "src.dell.system-fan"
+      ],
+      "prerequisite_step_ids": [
+        "step.remove-side-cover",
+        "step.remove-front-bezel"
+      ],
+      "tool_requirements": []
+    },
+    {
+      "id": "step.remove-psu",
+      "sequence": 13,
+      "action": {
+        "en": "Disconnect PSU power leads, release the PSU retention feature and remove its three chassis screws before lifting the unit out.",
+        "ru": "Отсоединить силовые кабели БП, освободить его фиксатор, вывернуть три винта крепления к корпусу и извлечь блок."
+      },
+      "component_ids": [
+        "assembly.psu",
+        "fastener.psu.01",
+        "fastener.psu.02",
+        "fastener.psu.03"
+      ],
+      "source_ids": [
+        "src.dell.psu",
+        "src.dell.screw-list"
+      ],
+      "prerequisite_step_ids": [
+        "step.remove-side-cover"
+      ],
+      "tool_requirements": [
+        "Phillips screwdriver"
+      ]
+    },
+    {
+      "id": "step.remove-system-board",
+      "sequence": 14,
+      "action": {
+        "en": "Disconnect CPU power, drive data, speaker, system power and SATA cables; remove the nine board screws, then slide and lift the system board out.",
+        "ru": "Отсоединить питание CPU, кабели данных накопителей, динамик, системное питание и SATA; вывернуть девять винтов платы, затем сдвинуть и поднять системную плату."
+      },
+      "component_ids": [
+        "assembly.motherboard",
+        "fastener.board.01",
+        "fastener.board.02",
+        "fastener.board.03",
+        "fastener.board.04",
+        "fastener.board.05",
+        "fastener.board.06",
+        "fastener.board.07",
+        "fastener.board.08",
+        "fastener.board.09"
+      ],
+      "source_ids": [
+        "src.dell.service-manual",
+        "src.dell.screw-list"
+      ],
+      "prerequisite_step_ids": [
+        "step.remove-expansion-card",
+        "step.remove-m2",
+        "step.remove-memory",
+        "step.remove-sd-reader",
+        "step.remove-drive-assemblies",
+        "step.remove-cpu-fan",
+        "step.remove-heatsink",
+        "step.remove-processor"
+      ],
+      "tool_requirements": [
+        "Phillips screwdriver"
+      ],
+      "safety_notes": {
+        "en": "The motherboard-removal procedure lists the required preceding component removals and cable disconnections; follow the complete service-manual page for any exact variant.",
+        "ru": "Процедура снятия системной платы перечисляет необходимые предварительные снятия узлов и отсоединения кабелей; для конкретной конфигурации следовать полной странице сервисного мануала."
+      }
+    }
+  ],
+  "observations": []
+}

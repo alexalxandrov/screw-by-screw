@@ -1,0 +1,204 @@
+{
+  "schema_version": "0.1.0",
+  "device_model_id": "pc.dell.optiplex-5060-mt",
+  "claims": [
+    {
+      "id": "claim.identity.regulatory-type",
+      "subject_id": "pc.dell.optiplex-5060-mt",
+      "predicate": "regulatory_type",
+      "value": "D18M005",
+      "unit": null,
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.service-manual"
+      ],
+      "notes": "Family identity marker from the Dell OptiPlex 5060 Tower documentation; not a unique customer order code."
+    },
+    {
+      "id": "claim.board.layout-callouts",
+      "subject_id": "motherboard.pcb",
+      "predicate": "numbered_layout_callouts",
+      "value": 26,
+      "unit": "callouts",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.board-layout"
+      ],
+      "notes": "The Dell Tower motherboard layout legend numbers 26 component/connector locations."
+    },
+    {
+      "id": "claim.pcie.slots",
+      "subject_id": "assembly.pcie",
+      "predicate": "documented_pcie_slot_positions",
+      "value": 4,
+      "unit": "slots",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.board-layout"
+      ]
+    },
+    {
+      "id": "claim.screws.system-board",
+      "subject_id": "assembly.motherboard",
+      "predicate": "mounting_screw_count",
+      "value": 9,
+      "unit": "screws",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.screw-list"
+      ],
+      "notes": "#6-32 × 1.4 screws; screw table applies to the Tower family."
+    },
+    {
+      "id": "claim.screws.psu",
+      "subject_id": "assembly.psu",
+      "predicate": "mounting_screw_count",
+      "value": 3,
+      "unit": "screws",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.screw-list"
+      ],
+      "notes": "#6-32 × 1.4 screws."
+    },
+    {
+      "id": "claim.screws.sd-reader",
+      "subject_id": "module.sd-reader",
+      "predicate": "mounting_screw_count",
+      "value": 1,
+      "unit": "screw",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.screw-list"
+      ],
+      "notes": "#6-32 × 3.6; module is optional."
+    },
+    {
+      "id": "claim.screws.wlan",
+      "subject_id": "module.wlan",
+      "predicate": "mounting_screw_count",
+      "value": 1,
+      "unit": "screw",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.screw-list"
+      ],
+      "notes": "M2 × 3.5; module is optional."
+    },
+    {
+      "id": "claim.screws.m2-ssd",
+      "subject_id": "storage.m2-ssd",
+      "predicate": "mounting_screw_count",
+      "value": 1,
+      "unit": "screw",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.screw-list"
+      ],
+      "notes": "M2 × 3.5; drive is optional."
+    },
+    {
+      "id": "claim.screws.typec",
+      "subject_id": "module.typec",
+      "predicate": "mounting_screw_count",
+      "value": 2,
+      "unit": "screws",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.screw-list"
+      ],
+      "notes": "M3 × 3; optional cable module variant."
+    },
+    {
+      "id": "claim.screws.antenna",
+      "subject_id": "module.internal-antenna",
+      "predicate": "mounting_screw_count",
+      "value": 2,
+      "unit": "screws",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.screw-list"
+      ],
+      "notes": "M3 × 3; optional internal antenna."
+    },
+    {
+      "id": "claim.screws.table-total",
+      "subject_id": "pc.dell.optiplex-5060-mt",
+      "predicate": "listed_fastener_quantity_in_service_manual_screw_table",
+      "value": 19,
+      "unit": "screws",
+      "confidence_class": "calculated",
+      "source_ids": [
+        "src.dell.screw-list"
+      ],
+      "notes": "Sum across listed Tower screw-table entries; includes optional modules and is not a universal count for every configuration."
+    },
+    {
+      "id": "claim.screws.heatsink-captive",
+      "subject_id": "cpu.heatsink",
+      "predicate": "captive_screw_count",
+      "value": 4,
+      "unit": "screws",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.heatsink"
+      ],
+      "notes": "Four captive screws, loosened in the printed 1–4 sequence. Thread and size are not stated in the cited instruction."
+    },
+    {
+      "id": "claim.screws.cpu-fan",
+      "subject_id": "cpu.heatsink-fan",
+      "predicate": "fan_to_heatsink_screw_count",
+      "value": 4,
+      "unit": "screws",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.heatsink-fan-install"
+      ],
+      "notes": "Four screws secure the heatsink fan; the cited procedure calls for Torx driver access but does not specify the screw thread/length."
+    },
+    {
+      "id": "claim.system-fan.grommets",
+      "subject_id": "assembly.system-fan",
+      "predicate": "mounting_grommet_count",
+      "value": 4,
+      "unit": "grommets",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.system-fan"
+      ],
+      "notes": "Four rubber grommets secure the chassis fan; they are not screws."
+    },
+    {
+      "id": "claim.system-fan.cable-route",
+      "subject_id": "assembly.system-fan",
+      "predicate": "intrusion_cable_routed_through_fan_grommet",
+      "value": true,
+      "unit": null,
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.system-fan"
+      ]
+    },
+    {
+      "id": "claim.motherboard.dimensions",
+      "subject_id": "motherboard.pcb",
+      "predicate": "pcb_outline_dimensions",
+      "value": null,
+      "unit": "mm",
+      "confidence_class": "unknown",
+      "source_ids": [],
+      "notes": "Exact PCB outline dimensions are not established from the current research sources."
+    },
+    {
+      "id": "claim.system.configuration",
+      "subject_id": "pc.dell.optiplex-5060-mt",
+      "predicate": "customer_bom",
+      "value": null,
+      "unit": null,
+      "confidence_class": "unknown",
+      "source_ids": [],
+      "notes": "No single customer-specific CPU, memory, storage, optical drive, WLAN or PSU configuration is selected in this family-level package."
+    }
+  ]
+}

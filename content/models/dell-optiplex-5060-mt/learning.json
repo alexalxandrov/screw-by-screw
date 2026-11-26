@@ -1,0 +1,122 @@
+{
+  "schema_version": "0.1.0",
+  "status": "draft",
+  "questions": [
+    {
+      "id": "quiz.optiplex.board-screws",
+      "prompt": {
+        "en": "How many screws secure the Tower system board according to Dell's screw table?",
+        "ru": "Сколько винтов крепит системную плату Tower по таблице Dell?"
+      },
+      "choices": [
+        {
+          "en": "3",
+          "ru": "3"
+        },
+        {
+          "en": "5",
+          "ru": "5"
+        },
+        {
+          "en": "9",
+          "ru": "9"
+        }
+      ],
+      "correct_index": 2,
+      "explanation": {
+        "en": "The Dell Tower screw table lists nine #6-32 × 1.4 system-board screws.",
+        "ru": "В таблице Dell для системной платы Tower указано девять винтов #6-32 × 1,4."
+      },
+      "source_ids": [
+        "src.dell.screw-list"
+      ]
+    },
+    {
+      "id": "quiz.optiplex.heatsink-fan-screws",
+      "prompt": {
+        "en": "How many screws secure the CPU heat-sink fan?",
+        "ru": "Сколько винтов крепит вентилятор радиатора CPU?"
+      },
+      "choices": [
+        {
+          "en": "2",
+          "ru": "2"
+        },
+        {
+          "en": "4",
+          "ru": "4"
+        },
+        {
+          "en": "6",
+          "ru": "6"
+        }
+      ],
+      "correct_index": 1,
+      "explanation": {
+        "en": "Dell's installation procedure specifies four screws.",
+        "ru": "В инструкции Dell по установке указаны четыре винта."
+      },
+      "source_ids": [
+        "src.dell.heatsink-fan-install"
+      ]
+    },
+    {
+      "id": "quiz.optiplex.system-fan-grommets",
+      "prompt": {
+        "en": "What secures the chassis system fan to the rear wall?",
+        "ru": "Что крепит корпусный вентилятор к задней стенке?"
+      },
+      "choices": [
+        {
+          "en": "Four rubber grommets",
+          "ru": "Четыре резиновые втулки"
+        },
+        {
+          "en": "Four M3 screws",
+          "ru": "Четыре винта M3"
+        },
+        {
+          "en": "Two spring clips",
+          "ru": "Две пружинные защёлки"
+        }
+      ],
+      "correct_index": 0,
+      "explanation": {
+        "en": "The service manual shows four grommets and a cable routed through one grommet.",
+        "ru": "Сервисный мануал показывает четыре втулки и прокладку кабеля через одну из них."
+      },
+      "source_ids": [
+        "src.dell.system-fan"
+      ]
+    },
+    {
+      "id": "quiz.optiplex.board-layout",
+      "prompt": {
+        "en": "How many numbered locations are listed in the Tower motherboard layout?",
+        "ru": "Сколько пронумерованных позиций указано на схеме системной платы Tower?"
+      },
+      "choices": [
+        {
+          "en": "16",
+          "ru": "16"
+        },
+        {
+          "en": "20",
+          "ru": "20"
+        },
+        {
+          "en": "26",
+          "ru": "26"
+        }
+      ],
+      "correct_index": 2,
+      "explanation": {
+        "en": "The layout legend enumerates 26 locations, including slots, headers and connectors.",
+        "ru": "В легенде схемы перечислены 26 позиций: слоты, колодки и разъёмы."
+      },
+      "source_ids": [
+        "src.dell.board-layout"
+      ]
+    }
+  ]
+}

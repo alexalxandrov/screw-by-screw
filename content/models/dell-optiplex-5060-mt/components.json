@@ -1,0 +1,3526 @@
+{
+  "schema_version": "0.1.0",
+  "device_model_id": "pc.dell.optiplex-5060-mt",
+  "status": "family_level_candidate_inventory",
+  "components": [
+    {
+      "id": "assembly.pc.root",
+      "parent_id": null,
+      "name": {
+        "en": "OptiPlex 5060 Tower — complete system",
+        "ru": "OptiPlex 5060 Tower — системный блок целиком"
+      },
+      "category": "assembly",
+      "evidence_status": "illustrative",
+      "geometry_status": "assembly_node",
+      "source_ids": [],
+      "description": {
+        "en": "Family-level reconstruction of the Dell OptiPlex 5060 Mini Tower (D18M / regulatory type D18M005). No single customer-specific BOM is claimed.",
+        "ru": "Семейная реконструкция Dell OptiPlex 5060 Mini Tower (D18M / регуляторный тип D18M005). Комплектация конкретного заказного экземпляра не утверждается."
+      },
+      "geometry_hint": {
+        "shape": "empty"
+      },
+      "configuration_status": "family_level_service_manual_model"
+    },
+    {
+      "id": "chassis.structure",
+      "parent_id": "assembly.pc.root",
+      "name": {
+        "en": "Steel chassis frame",
+        "ru": "Стальная рама корпуса"
+      },
+      "category": "mechanical",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.cru-guide"
+      ],
+      "description": {
+        "en": "Steel chassis frame. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Стальная рама корпуса. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "frame",
+        "position_mm": [
+          0,
+          0,
+          0
+        ],
+        "size_mm": [
+          190,
+          370,
+          360
+        ],
+        "color": [
+          0.48,
+          0.5,
+          0.52
+        ]
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "chassis.side-cover",
+      "parent_id": "chassis.structure",
+      "name": {
+        "en": "Left side cover",
+        "ru": "Левая боковая крышка"
+      },
+      "category": "mechanical",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.cru-guide"
+      ],
+      "description": {
+        "en": "Left side cover. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Левая боковая крышка. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          -101,
+          0,
+          0
+        ],
+        "size_mm": [
+          4,
+          365,
+          352
+        ],
+        "color": [
+          0.43,
+          0.45,
+          0.47
+        ]
+      },
+      "configuration_status": "required"
+    },
+    {
+      "id": "chassis.front-bezel",
+      "parent_id": "chassis.structure",
+      "name": {
+        "en": "Front bezel",
+        "ru": "Передняя рамка"
+      },
+      "category": "mechanical",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.cru-guide"
+      ],
+      "description": {
+        "en": "Front bezel. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Передняя рамка. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          0,
+          -189,
+          0
+        ],
+        "size_mm": [
+          185,
+          8,
+          350
+        ],
+        "color": [
+          0.16,
+          0.18,
+          0.2
+        ]
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "chassis.front-door",
+      "parent_id": "chassis.front-bezel",
+      "name": {
+        "en": "Front panel door",
+        "ru": "Передняя дверца панели"
+      },
+      "category": "mechanical",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.service-manual"
+      ],
+      "description": {
+        "en": "Front panel door. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Передняя дверца панели. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          0,
+          -195,
+          130
+        ],
+        "size_mm": [
+          164,
+          4,
+          82
+        ],
+        "color": [
+          0.24,
+          0.26,
+          0.28
+        ]
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "chassis.drive-cage",
+      "parent_id": "chassis.structure",
+      "name": {
+        "en": "Internal drive cage",
+        "ru": "Внутренняя корзина накопителей"
+      },
+      "category": "mechanical",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.service-manual"
+      ],
+      "description": {
+        "en": "Internal drive cage. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Внутренняя корзина накопителей. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          -28,
+          -105,
+          -112
+        ],
+        "size_mm": [
+          120,
+          95,
+          104
+        ],
+        "color": [
+          0.4,
+          0.42,
+          0.44
+        ]
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "chassis.optical-bay",
+      "parent_id": "chassis.structure",
+      "name": {
+        "en": "Optical-drive bay",
+        "ru": "Отсек оптического привода"
+      },
+      "category": "mechanical",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.service-manual"
+      ],
+      "description": {
+        "en": "Optical-drive bay. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Отсек оптического привода. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          -25,
+          -105,
+          126
+        ],
+        "size_mm": [
+          128,
+          132,
+          48
+        ],
+        "color": [
+          0.42,
+          0.44,
+          0.46
+        ]
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "chassis.front-io",
+      "parent_id": "chassis.front-bezel",
+      "name": {
+        "en": "Front I/O assembly",
+        "ru": "Передняя панель ввода-вывода"
+      },
+      "category": "io",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.service-manual"
+      ],
+      "description": {
+        "en": "Front I/O assembly. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Передняя панель ввода-вывода. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          0,
+          -194,
+          166
+        ],
+        "size_mm": [
+          118,
+          5,
+          30
+        ],
+        "color": [
+          0.12,
+          0.13,
+          0.14
+        ]
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "chassis.rear-io",
+      "parent_id": "chassis.structure",
+      "name": {
+        "en": "Rear I/O and expansion wall",
+        "ru": "Задняя панель разъёмов и слотов"
+      },
+      "category": "io",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.board-layout"
+      ],
+      "description": {
+        "en": "Rear I/O and expansion wall. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Задняя панель разъёмов и слотов. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          94,
+          145,
+          0
+        ],
+        "size_mm": [
+          7,
+          90,
+          280
+        ],
+        "color": [
+          0.34,
+          0.36,
+          0.38
+        ]
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "assembly.motherboard",
+      "parent_id": "chassis.structure",
+      "name": {
+        "en": "System board assembly",
+        "ru": "Системная плата в сборе"
+      },
+      "category": "assembly",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "assembly_node",
+      "source_ids": [
+        "src.dell.service-manual"
+      ],
+      "description": {
+        "en": "System board assembly. This node organizes the family-level service-manual inventory; it is not a verified bill-of-materials line.",
+        "ru": "Системная плата в сборе. Этот узел организует семейную структуру по сервисной документации; это не подтверждённая спецификация комплектации."
+      },
+      "geometry_hint": {
+        "shape": "empty"
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "motherboard.pcb",
+      "parent_id": "assembly.motherboard",
+      "name": {
+        "en": "System board PCB",
+        "ru": "Печатная плата системной платы"
+      },
+      "category": "electrical",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.board-layout"
+      ],
+      "description": {
+        "en": "System board PCB. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Печатная плата системной платы. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          83,
+          10,
+          13
+        ],
+        "size_mm": [
+          4,
+          250,
+          245
+        ],
+        "color": [
+          0.04,
+          0.22,
+          0.12
+        ]
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "motherboard.cpu-socket",
+      "parent_id": "motherboard.pcb",
+      "name": {
+        "en": "Processor socket",
+        "ru": "Процессорный разъём"
+      },
+      "category": "electrical",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.board-layout"
+      ],
+      "description": {
+        "en": "Processor socket. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Процессорный разъём. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          88,
+          12,
+          76
+        ],
+        "size_mm": [
+          5,
+          48,
+          48
+        ],
+        "color": [
+          0.7,
+          0.7,
+          0.66
+        ]
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "cpu.package",
+      "parent_id": "motherboard.cpu-socket",
+      "name": {
+        "en": "Processor package — exact SKU not fixed",
+        "ru": "Процессор — точная модель не зафиксирована"
+      },
+      "category": "semiconductor",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.service-manual"
+      ],
+      "description": {
+        "en": "The service manual documents processor removal, but this family-level package does not select one CPU SKU.",
+        "ru": "Сервисный мануал описывает снятие процессора, но в семейном пакете не выбран конкретный SKU CPU."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          94,
+          12,
+          76
+        ],
+        "size_mm": [
+          5,
+          38,
+          38
+        ],
+        "color": [
+          0.22,
+          0.23,
+          0.24
+        ]
+      },
+      "configuration_status": "replaceable_configuration_item"
+    },
+    {
+      "id": "assembly.cpu-cooling",
+      "parent_id": "motherboard.pcb",
+      "name": {
+        "en": "CPU cooling assembly",
+        "ru": "Охлаждение процессора в сборе"
+      },
+      "category": "thermal",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "assembly_node",
+      "source_ids": [
+        "src.dell.heatsink"
+      ],
+      "description": {
+        "en": "CPU cooling assembly. This node organizes the family-level service-manual inventory; it is not a verified bill-of-materials line.",
+        "ru": "Охлаждение процессора в сборе. Этот узел организует семейную структуру по сервисной документации; это не подтверждённая спецификация комплектации."
+      },
+      "geometry_hint": {
+        "shape": "empty"
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "cpu.heatsink",
+      "parent_id": "assembly.cpu-cooling",
+      "name": {
+        "en": "CPU heat sink",
+        "ru": "Радиатор процессора"
+      },
+      "category": "thermal_mechanical",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.heatsink"
+      ],
+      "description": {
+        "en": "CPU heat sink. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Радиатор процессора. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          103,
+          12,
+          76
+        ],
+        "size_mm": [
+          34,
+          72,
+          72
+        ],
+        "color": [
+          0.6,
+          0.62,
+          0.64
+        ]
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "cpu.heatsink-fan",
+      "parent_id": "assembly.cpu-cooling",
+      "name": {
+        "en": "Heat sink fan",
+        "ru": "Вентилятор радиатора процессора"
+      },
+      "category": "thermal_mechanical",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.heatsink-fan",
+        "src.dell.heatsink-fan-install"
+      ],
+      "description": {
+        "en": "Heat sink fan. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Вентилятор радиатора процессора. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          125,
+          12,
+          76
+        ],
+        "size_mm": [
+          20,
+          72,
+          72
+        ],
+        "color": [
+          0.1,
+          0.11,
+          0.12
+        ]
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "assembly.memory",
+      "parent_id": "motherboard.pcb",
+      "name": {
+        "en": "Memory subsystem",
+        "ru": "Подсистема памяти"
+      },
+      "category": "assembly",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "assembly_node",
+      "source_ids": [
+        "src.dell.board-layout"
+      ],
+      "description": {
+        "en": "Memory subsystem. This node organizes the family-level service-manual inventory; it is not a verified bill-of-materials line.",
+        "ru": "Подсистема памяти. Этот узел организует семейную структуру по сервисной документации; это не подтверждённая спецификация комплектации."
+      },
+      "geometry_hint": {
+        "shape": "empty"
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "memory.slot-bank",
+      "parent_id": "assembly.memory",
+      "name": {
+        "en": "Memory slots (count/configuration not fixed here)",
+        "ru": "Слоты памяти (количество и конфигурация здесь не зафиксированы)"
+      },
+      "category": "electrical",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.board-layout"
+      ],
+      "description": {
+        "en": "The motherboard layout identifies memory slots; an exact installed DIMM count is not established in this family-level model.",
+        "ru": "Схема платы обозначает слоты памяти; точное число установленных модулей DIMM для этой семейной модели не установлено."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          89,
+          -42,
+          40
+        ],
+        "size_mm": [
+          3,
+          9,
+          115
+        ],
+        "color": [
+          0.12,
+          0.12,
+          0.12
+        ]
+      },
+      "configuration_status": "layout_reference_only"
+    },
+    {
+      "id": "memory.dimm.reference",
+      "parent_id": "assembly.memory",
+      "name": {
+        "en": "Illustrative DDR4 DIMM placeholder",
+        "ru": "Условный макет модуля DDR4 DIMM"
+      },
+      "category": "memory",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [],
+      "description": {
+        "en": "A visual teaching placeholder only. Capacity, vendor, rank, module count and exact part number are intentionally unknown.",
+        "ru": "Только визуальная учебная заглушка. Объём, производитель, ранг, количество модулей и точный номер детали намеренно не указаны."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          96,
+          -42,
+          40
+        ],
+        "size_mm": [
+          5,
+          8,
+          125
+        ],
+        "color": [
+          0.07,
+          0.23,
+          0.12
+        ]
+      },
+      "configuration_status": "illustrative_not_an_asserted_installed_module"
+    },
+    {
+      "id": "assembly.pcie",
+      "parent_id": "motherboard.pcb",
+      "name": {
+        "en": "PCI Express expansion subsystem",
+        "ru": "Подсистема слотов PCI Express"
+      },
+      "category": "assembly",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "assembly_node",
+      "source_ids": [
+        "src.dell.board-layout"
+      ],
+      "description": {
+        "en": "PCI Express expansion subsystem. This node organizes the family-level service-manual inventory; it is not a verified bill-of-materials line.",
+        "ru": "Подсистема слотов PCI Express. Этот узел организует семейную структуру по сервисной документации; это не подтверждённая спецификация комплектации."
+      },
+      "geometry_hint": {
+        "shape": "empty"
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "slot.pcie.x16-wired-x4",
+      "parent_id": "assembly.pcie",
+      "name": {
+        "en": "PCIe x16 connector wired as x4 — Slot 4",
+        "ru": "Разъём PCIe x16 с разводкой x4 — слот 4"
+      },
+      "category": "electrical",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.board-layout"
+      ],
+      "description": {
+        "en": "PCIe x16 connector wired as x4 — Slot 4. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Разъём PCIe x16 с разводкой x4 — слот 4. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          90,
+          75,
+          -65
+        ],
+        "size_mm": [
+          4,
+          88,
+          8
+        ],
+        "color": [
+          0.12,
+          0.17,
+          0.23
+        ]
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "slot.pcie.x1-slot3",
+      "parent_id": "assembly.pcie",
+      "name": {
+        "en": "PCIe x1 connector — Slot 3",
+        "ru": "Разъём PCIe x1 — слот 3"
+      },
+      "category": "electrical",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.board-layout"
+      ],
+      "description": {
+        "en": "PCIe x1 connector — Slot 3. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Разъём PCIe x1 — слот 3. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          90,
+          55,
+          -88
+        ],
+        "size_mm": [
+          4,
+          38,
+          7
+        ],
+        "color": [
+          0.12,
+          0.17,
+          0.23
+        ]
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "slot.pcie.x16-slot2",
+      "parent_id": "assembly.pcie",
+      "name": {
+        "en": "PCIe x16 connector — Slot 2",
+        "ru": "Разъём PCIe x16 — слот 2"
+      },
+      "category": "electrical",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.board-layout"
+      ],
+      "description": {
+        "en": "PCIe x16 connector — Slot 2. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Разъём PCIe x16 — слот 2. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          90,
+          75,
+          -110
+        ],
+        "size_mm": [
+          4,
+          88,
+          8
+        ],
+        "color": [
+          0.12,
+          0.17,
+          0.23
+        ]
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "slot.pcie.x1-slot1",
+      "parent_id": "assembly.pcie",
+      "name": {
+        "en": "PCIe x1 connector — Slot 1",
+        "ru": "Разъём PCIe x1 — слот 1"
+      },
+      "category": "electrical",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.board-layout"
+      ],
+      "description": {
+        "en": "PCIe x1 connector — Slot 1. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Разъём PCIe x1 — слот 1. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          90,
+          55,
+          -132
+        ],
+        "size_mm": [
+          4,
+          38,
+          7
+        ],
+        "color": [
+          0.12,
+          0.17,
+          0.23
+        ]
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "assembly.storage",
+      "parent_id": "chassis.structure",
+      "name": {
+        "en": "Storage subsystem",
+        "ru": "Подсистема накопителей"
+      },
+      "category": "assembly",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "assembly_node",
+      "source_ids": [
+        "src.dell.service-manual"
+      ],
+      "description": {
+        "en": "Storage subsystem. This node organizes the family-level service-manual inventory; it is not a verified bill-of-materials line.",
+        "ru": "Подсистема накопителей. Этот узел организует семейную структуру по сервисной документации; это не подтверждённая спецификация комплектации."
+      },
+      "geometry_hint": {
+        "shape": "empty"
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "storage.hdd35-assembly",
+      "parent_id": "assembly.storage",
+      "name": {
+        "en": "3.5-inch drive assembly",
+        "ru": "Узел накопителя 3,5 дюйма"
+      },
+      "category": "mechanical",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.service-manual"
+      ],
+      "description": {
+        "en": "3.5-inch drive assembly. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Узел накопителя 3,5 дюйма. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          -29,
+          -122,
+          -106
+        ],
+        "size_mm": [
+          105,
+          92,
+          54
+        ],
+        "color": [
+          0.31,
+          0.33,
+          0.35
+        ]
+      },
+      "configuration_status": "optional_configuration_item"
+    },
+    {
+      "id": "storage.hdd35-drive",
+      "parent_id": "storage.hdd35-assembly",
+      "name": {
+        "en": "3.5-inch drive placeholder",
+        "ru": "Макет накопителя 3,5 дюйма"
+      },
+      "category": "storage",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [],
+      "description": {
+        "en": "The service manual defines a removable 3.5-inch assembly, but no exact HDD SKU is selected.",
+        "ru": "Сервисный мануал описывает съёмный узел 3,5 дюйма, однако точная модель HDD не выбрана."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          -29,
+          -122,
+          -106
+        ],
+        "size_mm": [
+          100,
+          145,
+          25
+        ],
+        "color": [
+          0.2,
+          0.22,
+          0.24
+        ]
+      },
+      "configuration_status": "illustrative_not_an_asserted_installed_drive"
+    },
+    {
+      "id": "storage.hdd25-assembly",
+      "parent_id": "assembly.storage",
+      "name": {
+        "en": "2.5-inch drive assembly",
+        "ru": "Узел накопителя 2,5 дюйма"
+      },
+      "category": "mechanical",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.service-manual"
+      ],
+      "description": {
+        "en": "2.5-inch drive assembly. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Узел накопителя 2,5 дюйма. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          -29,
+          -100,
+          -150
+        ],
+        "size_mm": [
+          104,
+          82,
+          25
+        ],
+        "color": [
+          0.34,
+          0.36,
+          0.38
+        ]
+      },
+      "configuration_status": "optional_configuration_item"
+    },
+    {
+      "id": "storage.hdd25-drive",
+      "parent_id": "storage.hdd25-assembly",
+      "name": {
+        "en": "2.5-inch drive placeholder",
+        "ru": "Макет накопителя 2,5 дюйма"
+      },
+      "category": "storage",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [],
+      "description": {
+        "en": "2.5-inch drive placeholder. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Макет накопителя 2,5 дюйма. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          -29,
+          -100,
+          -150
+        ],
+        "size_mm": [
+          100,
+          70,
+          10
+        ],
+        "color": [
+          0.22,
+          0.24,
+          0.26
+        ]
+      },
+      "configuration_status": "illustrative_not_an_asserted_installed_drive"
+    },
+    {
+      "id": "storage.optical-drive",
+      "parent_id": "chassis.optical-bay",
+      "name": {
+        "en": "Optical drive placeholder",
+        "ru": "Макет оптического привода"
+      },
+      "category": "storage",
+      "evidence_status": "illustrative",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [],
+      "description": {
+        "en": "The service manual documents an optical drive assembly; this placeholder does not claim a specific drive vendor or installed configuration.",
+        "ru": "Сервисный мануал описывает узел оптического привода; этот макет не утверждает производителя привода или его наличие в конкретной комплектации."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          -25,
+          -113,
+          126
+        ],
+        "size_mm": [
+          122,
+          135,
+          38
+        ],
+        "color": [
+          0.28,
+          0.3,
+          0.32
+        ]
+      },
+      "configuration_status": "optional_configuration_item"
+    },
+    {
+      "id": "storage.m2-ssd",
+      "parent_id": "motherboard.pcb",
+      "name": {
+        "en": "M.2 PCIe SSD module",
+        "ru": "Модуль M.2 PCIe SSD"
+      },
+      "category": "storage",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.screw-list"
+      ],
+      "description": {
+        "en": "M.2 PCIe SSD module. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Модуль M.2 PCIe SSD. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          91,
+          44,
+          18
+        ],
+        "size_mm": [
+          5,
+          76,
+          22
+        ],
+        "color": [
+          0.12,
+          0.13,
+          0.14
+        ]
+      },
+      "configuration_status": "optional_configuration_item"
+    },
+    {
+      "id": "module.wlan",
+      "parent_id": "motherboard.pcb",
+      "name": {
+        "en": "M.2 WLAN module",
+        "ru": "Модуль M.2 WLAN"
+      },
+      "category": "wireless",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.screw-list"
+      ],
+      "description": {
+        "en": "M.2 WLAN module. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Модуль M.2 WLAN. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          91,
+          72,
+          112
+        ],
+        "size_mm": [
+          4,
+          28,
+          20
+        ],
+        "color": [
+          0.12,
+          0.14,
+          0.16
+        ]
+      },
+      "configuration_status": "optional_configuration_item"
+    },
+    {
+      "id": "module.sd-reader",
+      "parent_id": "chassis.front-io",
+      "name": {
+        "en": "SD card reader module",
+        "ru": "Модуль считывателя SD-карт"
+      },
+      "category": "io",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.screw-list"
+      ],
+      "description": {
+        "en": "SD card reader module. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Модуль считывателя SD-карт. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          52,
+          -166,
+          150
+        ],
+        "size_mm": [
+          18,
+          35,
+          14
+        ],
+        "color": [
+          0.17,
+          0.18,
+          0.19
+        ]
+      },
+      "configuration_status": "optional_configuration_item"
+    },
+    {
+      "id": "module.typec",
+      "parent_id": "chassis.front-io",
+      "name": {
+        "en": "Optional Type-C cable module",
+        "ru": "Опциональный кабельный модуль Type-C"
+      },
+      "category": "io",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.screw-list"
+      ],
+      "description": {
+        "en": "Optional Type-C cable module. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Опциональный кабельный модуль Type-C. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          20,
+          -164,
+          165
+        ],
+        "size_mm": [
+          18,
+          25,
+          14
+        ],
+        "color": [
+          0.15,
+          0.16,
+          0.17
+        ]
+      },
+      "configuration_status": "optional_configuration_item"
+    },
+    {
+      "id": "module.internal-antenna",
+      "parent_id": "chassis.structure",
+      "name": {
+        "en": "Internal WLAN antenna pair",
+        "ru": "Пара внутренних WLAN-антенн"
+      },
+      "category": "wireless",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.screw-list"
+      ],
+      "description": {
+        "en": "Internal WLAN antenna pair. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Пара внутренних WLAN-антенн. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          82,
+          142,
+          120
+        ],
+        "size_mm": [
+          3,
+          42,
+          55
+        ],
+        "color": [
+          0.18,
+          0.19,
+          0.2
+        ]
+      },
+      "configuration_status": "optional_configuration_item"
+    },
+    {
+      "id": "assembly.psu",
+      "parent_id": "chassis.structure",
+      "name": {
+        "en": "Power supply unit (PSU)",
+        "ru": "Блок питания (PSU)"
+      },
+      "category": "power",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.psu",
+        "src.dell.screw-list"
+      ],
+      "description": {
+        "en": "Power supply unit (PSU). Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Блок питания (PSU). Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          -43,
+          94,
+          -118
+        ],
+        "size_mm": [
+          92,
+          142,
+          88
+        ],
+        "color": [
+          0.34,
+          0.36,
+          0.38
+        ]
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "assembly.system-fan",
+      "parent_id": "chassis.structure",
+      "name": {
+        "en": "Chassis system fan",
+        "ru": "Корпусный системный вентилятор"
+      },
+      "category": "thermal_mechanical",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.system-fan"
+      ],
+      "description": {
+        "en": "Chassis system fan. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Корпусный системный вентилятор. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          78,
+          155,
+          40
+        ],
+        "size_mm": [
+          22,
+          112,
+          112
+        ],
+        "color": [
+          0.11,
+          0.12,
+          0.13
+        ]
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "assembly.speaker",
+      "parent_id": "chassis.structure",
+      "name": {
+        "en": "Internal speaker",
+        "ru": "Внутренний динамик"
+      },
+      "category": "audio",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.service-manual"
+      ],
+      "description": {
+        "en": "Internal speaker. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Внутренний динамик. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          68,
+          -120,
+          -40
+        ],
+        "size_mm": [
+          16,
+          28,
+          22
+        ],
+        "color": [
+          0.08,
+          0.09,
+          0.1
+        ]
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "assembly.front-controls",
+      "parent_id": "chassis.front-bezel",
+      "name": {
+        "en": "Front controls and intrusion switch",
+        "ru": "Передние органы управления и датчик вскрытия"
+      },
+      "category": "io",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "assembly_node",
+      "source_ids": [
+        "src.dell.service-manual"
+      ],
+      "description": {
+        "en": "Front controls and intrusion switch. This node organizes the family-level service-manual inventory; it is not a verified bill-of-materials line.",
+        "ru": "Передние органы управления и датчик вскрытия. Этот узел организует семейную структуру по сервисной документации; это не подтверждённая спецификация комплектации."
+      },
+      "geometry_hint": {
+        "shape": "empty"
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "control.power-button",
+      "parent_id": "assembly.front-controls",
+      "name": {
+        "en": "Power button and indicator",
+        "ru": "Кнопка питания и индикатор"
+      },
+      "category": "io",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.board-layout"
+      ],
+      "description": {
+        "en": "Power button and indicator. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Кнопка питания и индикатор. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          8,
+          -199,
+          170
+        ],
+        "size_mm": [
+          13,
+          4,
+          13
+        ],
+        "color": [
+          0.08,
+          0.08,
+          0.08
+        ]
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "control.intrusion-switch",
+      "parent_id": "assembly.front-controls",
+      "name": {
+        "en": "Chassis intrusion switch",
+        "ru": "Датчик вскрытия корпуса"
+      },
+      "category": "electrical",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.system-fan"
+      ],
+      "description": {
+        "en": "Chassis intrusion switch. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Датчик вскрытия корпуса. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          86,
+          130,
+          145
+        ],
+        "size_mm": [
+          5,
+          14,
+          10
+        ],
+        "color": [
+          0.12,
+          0.12,
+          0.12
+        ]
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "rtc.coin-cell",
+      "parent_id": "motherboard.pcb",
+      "name": {
+        "en": "RTC coin-cell battery",
+        "ru": "Батарейка часов реального времени"
+      },
+      "category": "electrical",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.board-layout"
+      ],
+      "description": {
+        "en": "RTC coin-cell battery. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Батарейка часов реального времени. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "cylinder",
+        "position_mm": [
+          89,
+          -50,
+          -45
+        ],
+        "size_mm": [
+          3,
+          20,
+          20
+        ],
+        "color": [
+          0.68,
+          0.7,
+          0.72
+        ]
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "board.cmos-jumper",
+      "parent_id": "motherboard.pcb",
+      "name": {
+        "en": "Clear CMOS / Password / Service Mode jumper",
+        "ru": "Перемычка Clear CMOS / Password / Service Mode"
+      },
+      "category": "electrical",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.board-layout"
+      ],
+      "description": {
+        "en": "Clear CMOS / Password / Service Mode jumper. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Перемычка Clear CMOS / Password / Service Mode. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          90,
+          -65,
+          -58
+        ],
+        "size_mm": [
+          4,
+          7,
+          5
+        ],
+        "color": [
+          0.08,
+          0.08,
+          0.08
+        ]
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "board.connectors",
+      "parent_id": "motherboard.pcb",
+      "name": {
+        "en": "Motherboard connector and header bank",
+        "ru": "Банк разъёмов и колодок системной платы"
+      },
+      "category": "electrical",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "assembly_node",
+      "source_ids": [
+        "src.dell.board-layout"
+      ],
+      "description": {
+        "en": "Motherboard connector and header bank. This node organizes the family-level service-manual inventory; it is not a verified bill-of-materials line.",
+        "ru": "Банк разъёмов и колодок системной платы. Этот узел организует семейную структуру по сервисной документации; это не подтверждённая спецификация комплектации."
+      },
+      "geometry_hint": {
+        "shape": "empty"
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "board.conn.typec",
+      "parent_id": "board.connectors",
+      "name": {
+        "en": "Optional Type-C module connector",
+        "ru": "Разъём опционального модуля Type-C"
+      },
+      "category": "electrical",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.board-layout"
+      ],
+      "description": {
+        "en": "Optional Type-C module connector. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Разъём опционального модуля Type-C. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          90,
+          -112,
+          120
+        ],
+        "size_mm": [
+          4,
+          7,
+          6
+        ],
+        "color": [
+          0.14,
+          0.15,
+          0.16
+        ]
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "board.conn.video-module",
+      "parent_id": "board.connectors",
+      "name": {
+        "en": "Optional video module connector",
+        "ru": "Разъём опционального видеомодуля"
+      },
+      "category": "electrical",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.board-layout"
+      ],
+      "description": {
+        "en": "Optional video module connector. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Разъём опционального видеомодуля. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          90,
+          -96,
+          120
+        ],
+        "size_mm": [
+          4,
+          7,
+          6
+        ],
+        "color": [
+          0.14,
+          0.15,
+          0.16
+        ]
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "board.conn.ps2-serial",
+      "parent_id": "board.connectors",
+      "name": {
+        "en": "Optional PS/2 serial port connector",
+        "ru": "Разъём опционального порта PS/2/Serial"
+      },
+      "category": "electrical",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.board-layout"
+      ],
+      "description": {
+        "en": "Optional PS/2 serial port connector. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Разъём опционального порта PS/2/Serial. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          90,
+          -80,
+          120
+        ],
+        "size_mm": [
+          4,
+          7,
+          6
+        ],
+        "color": [
+          0.14,
+          0.15,
+          0.16
+        ]
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "board.conn.system-fan",
+      "parent_id": "board.connectors",
+      "name": {
+        "en": "System fan connector",
+        "ru": "Разъём системного вентилятора"
+      },
+      "category": "electrical",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.board-layout"
+      ],
+      "description": {
+        "en": "System fan connector. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Разъём системного вентилятора. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          90,
+          112,
+          82
+        ],
+        "size_mm": [
+          4,
+          7,
+          6
+        ],
+        "color": [
+          0.14,
+          0.15,
+          0.16
+        ]
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "board.conn.intrusion",
+      "parent_id": "board.connectors",
+      "name": {
+        "en": "Intrusion switch connector",
+        "ru": "Разъём датчика вскрытия"
+      },
+      "category": "electrical",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.board-layout"
+      ],
+      "description": {
+        "en": "Intrusion switch connector. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Разъём датчика вскрытия. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          90,
+          118,
+          100
+        ],
+        "size_mm": [
+          4,
+          7,
+          6
+        ],
+        "color": [
+          0.14,
+          0.15,
+          0.16
+        ]
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "board.conn.cpu-power",
+      "parent_id": "board.connectors",
+      "name": {
+        "en": "CPU power connector",
+        "ru": "Разъём питания процессора"
+      },
+      "category": "electrical",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.board-layout"
+      ],
+      "description": {
+        "en": "CPU power connector. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Разъём питания процессора. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          90,
+          38,
+          118
+        ],
+        "size_mm": [
+          4,
+          7,
+          6
+        ],
+        "color": [
+          0.14,
+          0.15,
+          0.16
+        ]
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "board.conn.cpu-fan",
+      "parent_id": "board.connectors",
+      "name": {
+        "en": "CPU cooler fan connector",
+        "ru": "Разъём вентилятора процессора"
+      },
+      "category": "electrical",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.board-layout"
+      ],
+      "description": {
+        "en": "CPU cooler fan connector. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Разъём вентилятора процессора. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          90,
+          34,
+          100
+        ],
+        "size_mm": [
+          4,
+          7,
+          6
+        ],
+        "color": [
+          0.14,
+          0.15,
+          0.16
+        ]
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "board.conn.sd-reader",
+      "parent_id": "board.connectors",
+      "name": {
+        "en": "SD card reader connector",
+        "ru": "Разъём считывателя SD-карт"
+      },
+      "category": "electrical",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.board-layout"
+      ],
+      "description": {
+        "en": "SD card reader connector. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Разъём считывателя SD-карт. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          90,
+          -130,
+          70
+        ],
+        "size_mm": [
+          4,
+          7,
+          6
+        ],
+        "color": [
+          0.14,
+          0.15,
+          0.16
+        ]
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "board.conn.power-switch",
+      "parent_id": "board.connectors",
+      "name": {
+        "en": "Power switch connector",
+        "ru": "Разъём кнопки питания"
+      },
+      "category": "electrical",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.board-layout"
+      ],
+      "description": {
+        "en": "Power switch connector. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Разъём кнопки питания. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          90,
+          -110,
+          60
+        ],
+        "size_mm": [
+          4,
+          7,
+          6
+        ],
+        "color": [
+          0.14,
+          0.15,
+          0.16
+        ]
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "board.conn.m2-ssd",
+      "parent_id": "board.connectors",
+      "name": {
+        "en": "M.2 SSD connector",
+        "ru": "Разъём M.2 SSD"
+      },
+      "category": "electrical",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.board-layout"
+      ],
+      "description": {
+        "en": "M.2 SSD connector. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Разъём M.2 SSD. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          90,
+          44,
+          28
+        ],
+        "size_mm": [
+          4,
+          7,
+          6
+        ],
+        "color": [
+          0.14,
+          0.15,
+          0.16
+        ]
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "board.conn.sata0",
+      "parent_id": "board.connectors",
+      "name": {
+        "en": "SATA 0 connector — blue",
+        "ru": "Разъём SATA 0 — синий"
+      },
+      "category": "electrical",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.board-layout"
+      ],
+      "description": {
+        "en": "SATA 0 connector — blue. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Разъём SATA 0 — синий. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          90,
+          90,
+          -36
+        ],
+        "size_mm": [
+          4,
+          7,
+          6
+        ],
+        "color": [
+          0.14,
+          0.15,
+          0.16
+        ]
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "board.conn.sata2",
+      "parent_id": "board.connectors",
+      "name": {
+        "en": "SATA 2 connector — white",
+        "ru": "Разъём SATA 2 — белый"
+      },
+      "category": "electrical",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.board-layout"
+      ],
+      "description": {
+        "en": "SATA 2 connector — white. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Разъём SATA 2 — белый. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          90,
+          90,
+          -52
+        ],
+        "size_mm": [
+          4,
+          7,
+          6
+        ],
+        "color": [
+          0.14,
+          0.15,
+          0.16
+        ]
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "board.conn.speaker",
+      "parent_id": "board.connectors",
+      "name": {
+        "en": "Internal speaker connector",
+        "ru": "Разъём внутреннего динамика"
+      },
+      "category": "electrical",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.board-layout"
+      ],
+      "description": {
+        "en": "Internal speaker connector. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Разъём внутреннего динамика. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          90,
+          100,
+          -68
+        ],
+        "size_mm": [
+          4,
+          7,
+          6
+        ],
+        "color": [
+          0.14,
+          0.15,
+          0.16
+        ]
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "board.conn.sata3",
+      "parent_id": "board.connectors",
+      "name": {
+        "en": "SATA 3 connector — black",
+        "ru": "Разъём SATA 3 — чёрный"
+      },
+      "category": "electrical",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.board-layout"
+      ],
+      "description": {
+        "en": "SATA 3 connector — black. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Разъём SATA 3 — чёрный. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          90,
+          90,
+          -84
+        ],
+        "size_mm": [
+          4,
+          7,
+          6
+        ],
+        "color": [
+          0.14,
+          0.15,
+          0.16
+        ]
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "board.conn.sata1",
+      "parent_id": "board.connectors",
+      "name": {
+        "en": "SATA 1 connector — black",
+        "ru": "Разъём SATA 1 — чёрный"
+      },
+      "category": "electrical",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.board-layout"
+      ],
+      "description": {
+        "en": "SATA 1 connector — black. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Разъём SATA 1 — чёрный. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          90,
+          90,
+          -100
+        ],
+        "size_mm": [
+          4,
+          7,
+          6
+        ],
+        "color": [
+          0.14,
+          0.15,
+          0.16
+        ]
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "board.conn.atx-power",
+      "parent_id": "board.connectors",
+      "name": {
+        "en": "System power (ATX) connector",
+        "ru": "Разъём системного питания ATX"
+      },
+      "category": "electrical",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.board-layout"
+      ],
+      "description": {
+        "en": "System power (ATX) connector. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Разъём системного питания ATX. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          90,
+          -8,
+          116
+        ],
+        "size_mm": [
+          4,
+          7,
+          6
+        ],
+        "color": [
+          0.14,
+          0.15,
+          0.16
+        ]
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "board.conn.sata-power",
+      "parent_id": "board.connectors",
+      "name": {
+        "en": "SATA power connector",
+        "ru": "Разъём питания SATA"
+      },
+      "category": "electrical",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.board-layout"
+      ],
+      "description": {
+        "en": "SATA power connector. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Разъём питания SATA. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          90,
+          18,
+          -110
+        ],
+        "size_mm": [
+          4,
+          7,
+          6
+        ],
+        "color": [
+          0.14,
+          0.15,
+          0.16
+        ]
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "board.conn.m2-wlan",
+      "parent_id": "board.connectors",
+      "name": {
+        "en": "M.2 WLAN connector",
+        "ru": "Разъём M.2 WLAN"
+      },
+      "category": "electrical",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.board-layout"
+      ],
+      "description": {
+        "en": "M.2 WLAN connector. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Разъём M.2 WLAN. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "box",
+        "position_mm": [
+          90,
+          72,
+          100
+        ],
+        "size_mm": [
+          4,
+          7,
+          6
+        ],
+        "color": [
+          0.14,
+          0.15,
+          0.16
+        ]
+      },
+      "configuration_status": "family_level_reference"
+    },
+    {
+      "id": "fastener.board.01",
+      "parent_id": "chassis.structure",
+      "name": {
+        "en": "System-board mounting screw 1",
+        "ru": "Винт крепления системной платы 1"
+      },
+      "category": "fastener",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.screw-list"
+      ],
+      "description": {
+        "en": "System-board mounting screw 1. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Винт крепления системной платы 1. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "cylinder",
+        "position_mm": [
+          77,
+          -85,
+          -92
+        ],
+        "size_mm": [
+          3.4,
+          5,
+          5
+        ],
+        "color": [
+          0.72,
+          0.73,
+          0.74
+        ],
+        "rotation_deg": [
+          0,
+          90,
+          0
+        ]
+      },
+      "configuration_status": "family_level_reference",
+      "fastener_spec": {
+        "designation": "#6-32 × 1.4",
+        "quantity": 1,
+        "scope": "one of nine system-board fasteners"
+      }
+    },
+    {
+      "id": "fastener.board.02",
+      "parent_id": "chassis.structure",
+      "name": {
+        "en": "System-board mounting screw 2",
+        "ru": "Винт крепления системной платы 2"
+      },
+      "category": "fastener",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.screw-list"
+      ],
+      "description": {
+        "en": "System-board mounting screw 2. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Винт крепления системной платы 2. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "cylinder",
+        "position_mm": [
+          77,
+          -42,
+          -92
+        ],
+        "size_mm": [
+          3.4,
+          5,
+          5
+        ],
+        "color": [
+          0.72,
+          0.73,
+          0.74
+        ],
+        "rotation_deg": [
+          0,
+          90,
+          0
+        ]
+      },
+      "configuration_status": "family_level_reference",
+      "fastener_spec": {
+        "designation": "#6-32 × 1.4",
+        "quantity": 1,
+        "scope": "one of nine system-board fasteners"
+      }
+    },
+    {
+      "id": "fastener.board.03",
+      "parent_id": "chassis.structure",
+      "name": {
+        "en": "System-board mounting screw 3",
+        "ru": "Винт крепления системной платы 3"
+      },
+      "category": "fastener",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.screw-list"
+      ],
+      "description": {
+        "en": "System-board mounting screw 3. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Винт крепления системной платы 3. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "cylinder",
+        "position_mm": [
+          77,
+          5,
+          -92
+        ],
+        "size_mm": [
+          3.4,
+          5,
+          5
+        ],
+        "color": [
+          0.72,
+          0.73,
+          0.74
+        ],
+        "rotation_deg": [
+          0,
+          90,
+          0
+        ]
+      },
+      "configuration_status": "family_level_reference",
+      "fastener_spec": {
+        "designation": "#6-32 × 1.4",
+        "quantity": 1,
+        "scope": "one of nine system-board fasteners"
+      }
+    },
+    {
+      "id": "fastener.board.04",
+      "parent_id": "chassis.structure",
+      "name": {
+        "en": "System-board mounting screw 4",
+        "ru": "Винт крепления системной платы 4"
+      },
+      "category": "fastener",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.screw-list"
+      ],
+      "description": {
+        "en": "System-board mounting screw 4. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Винт крепления системной платы 4. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "cylinder",
+        "position_mm": [
+          77,
+          52,
+          -92
+        ],
+        "size_mm": [
+          3.4,
+          5,
+          5
+        ],
+        "color": [
+          0.72,
+          0.73,
+          0.74
+        ],
+        "rotation_deg": [
+          0,
+          90,
+          0
+        ]
+      },
+      "configuration_status": "family_level_reference",
+      "fastener_spec": {
+        "designation": "#6-32 × 1.4",
+        "quantity": 1,
+        "scope": "one of nine system-board fasteners"
+      }
+    },
+    {
+      "id": "fastener.board.05",
+      "parent_id": "chassis.structure",
+      "name": {
+        "en": "System-board mounting screw 5",
+        "ru": "Винт крепления системной платы 5"
+      },
+      "category": "fastener",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.screw-list"
+      ],
+      "description": {
+        "en": "System-board mounting screw 5. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Винт крепления системной платы 5. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "cylinder",
+        "position_mm": [
+          77,
+          98,
+          -92
+        ],
+        "size_mm": [
+          3.4,
+          5,
+          5
+        ],
+        "color": [
+          0.72,
+          0.73,
+          0.74
+        ],
+        "rotation_deg": [
+          0,
+          90,
+          0
+        ]
+      },
+      "configuration_status": "family_level_reference",
+      "fastener_spec": {
+        "designation": "#6-32 × 1.4",
+        "quantity": 1,
+        "scope": "one of nine system-board fasteners"
+      }
+    },
+    {
+      "id": "fastener.board.06",
+      "parent_id": "chassis.structure",
+      "name": {
+        "en": "System-board mounting screw 6",
+        "ru": "Винт крепления системной платы 6"
+      },
+      "category": "fastener",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.screw-list"
+      ],
+      "description": {
+        "en": "System-board mounting screw 6. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Винт крепления системной платы 6. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "cylinder",
+        "position_mm": [
+          77,
+          -85,
+          108
+        ],
+        "size_mm": [
+          3.4,
+          5,
+          5
+        ],
+        "color": [
+          0.72,
+          0.73,
+          0.74
+        ],
+        "rotation_deg": [
+          0,
+          90,
+          0
+        ]
+      },
+      "configuration_status": "family_level_reference",
+      "fastener_spec": {
+        "designation": "#6-32 × 1.4",
+        "quantity": 1,
+        "scope": "one of nine system-board fasteners"
+      }
+    },
+    {
+      "id": "fastener.board.07",
+      "parent_id": "chassis.structure",
+      "name": {
+        "en": "System-board mounting screw 7",
+        "ru": "Винт крепления системной платы 7"
+      },
+      "category": "fastener",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.screw-list"
+      ],
+      "description": {
+        "en": "System-board mounting screw 7. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Винт крепления системной платы 7. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "cylinder",
+        "position_mm": [
+          77,
+          -42,
+          108
+        ],
+        "size_mm": [
+          3.4,
+          5,
+          5
+        ],
+        "color": [
+          0.72,
+          0.73,
+          0.74
+        ],
+        "rotation_deg": [
+          0,
+          90,
+          0
+        ]
+      },
+      "configuration_status": "family_level_reference",
+      "fastener_spec": {
+        "designation": "#6-32 × 1.4",
+        "quantity": 1,
+        "scope": "one of nine system-board fasteners"
+      }
+    },
+    {
+      "id": "fastener.board.08",
+      "parent_id": "chassis.structure",
+      "name": {
+        "en": "System-board mounting screw 8",
+        "ru": "Винт крепления системной платы 8"
+      },
+      "category": "fastener",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.screw-list"
+      ],
+      "description": {
+        "en": "System-board mounting screw 8. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Винт крепления системной платы 8. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "cylinder",
+        "position_mm": [
+          77,
+          52,
+          108
+        ],
+        "size_mm": [
+          3.4,
+          5,
+          5
+        ],
+        "color": [
+          0.72,
+          0.73,
+          0.74
+        ],
+        "rotation_deg": [
+          0,
+          90,
+          0
+        ]
+      },
+      "configuration_status": "family_level_reference",
+      "fastener_spec": {
+        "designation": "#6-32 × 1.4",
+        "quantity": 1,
+        "scope": "one of nine system-board fasteners"
+      }
+    },
+    {
+      "id": "fastener.board.09",
+      "parent_id": "chassis.structure",
+      "name": {
+        "en": "System-board mounting screw 9",
+        "ru": "Винт крепления системной платы 9"
+      },
+      "category": "fastener",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.screw-list"
+      ],
+      "description": {
+        "en": "System-board mounting screw 9. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Винт крепления системной платы 9. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "cylinder",
+        "position_mm": [
+          77,
+          98,
+          108
+        ],
+        "size_mm": [
+          3.4,
+          5,
+          5
+        ],
+        "color": [
+          0.72,
+          0.73,
+          0.74
+        ],
+        "rotation_deg": [
+          0,
+          90,
+          0
+        ]
+      },
+      "configuration_status": "family_level_reference",
+      "fastener_spec": {
+        "designation": "#6-32 × 1.4",
+        "quantity": 1,
+        "scope": "one of nine system-board fasteners"
+      }
+    },
+    {
+      "id": "fastener.psu.01",
+      "parent_id": "chassis.structure",
+      "name": {
+        "en": "PSU mounting screw 1",
+        "ru": "Винт крепления БП 1"
+      },
+      "category": "fastener",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.screw-list"
+      ],
+      "description": {
+        "en": "PSU mounting screw 1. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Винт крепления БП 1. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "cylinder",
+        "position_mm": [
+          -88,
+          142,
+          -158
+        ],
+        "size_mm": [
+          3.4,
+          5,
+          5
+        ],
+        "color": [
+          0.72,
+          0.73,
+          0.74
+        ],
+        "rotation_deg": [
+          0,
+          90,
+          0
+        ]
+      },
+      "configuration_status": "family_level_reference",
+      "fastener_spec": {
+        "designation": "#6-32 × 1.4",
+        "quantity": 1
+      }
+    },
+    {
+      "id": "fastener.psu.02",
+      "parent_id": "chassis.structure",
+      "name": {
+        "en": "PSU mounting screw 2",
+        "ru": "Винт крепления БП 2"
+      },
+      "category": "fastener",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.screw-list"
+      ],
+      "description": {
+        "en": "PSU mounting screw 2. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Винт крепления БП 2. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "cylinder",
+        "position_mm": [
+          -88,
+          60,
+          -158
+        ],
+        "size_mm": [
+          3.4,
+          5,
+          5
+        ],
+        "color": [
+          0.72,
+          0.73,
+          0.74
+        ],
+        "rotation_deg": [
+          0,
+          90,
+          0
+        ]
+      },
+      "configuration_status": "family_level_reference",
+      "fastener_spec": {
+        "designation": "#6-32 × 1.4",
+        "quantity": 1
+      }
+    },
+    {
+      "id": "fastener.psu.03",
+      "parent_id": "chassis.structure",
+      "name": {
+        "en": "PSU mounting screw 3",
+        "ru": "Винт крепления БП 3"
+      },
+      "category": "fastener",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.screw-list"
+      ],
+      "description": {
+        "en": "PSU mounting screw 3. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Винт крепления БП 3. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "cylinder",
+        "position_mm": [
+          -88,
+          142,
+          -82
+        ],
+        "size_mm": [
+          3.4,
+          5,
+          5
+        ],
+        "color": [
+          0.72,
+          0.73,
+          0.74
+        ],
+        "rotation_deg": [
+          0,
+          90,
+          0
+        ]
+      },
+      "configuration_status": "family_level_reference",
+      "fastener_spec": {
+        "designation": "#6-32 × 1.4",
+        "quantity": 1
+      }
+    },
+    {
+      "id": "fastener.sd-reader.01",
+      "parent_id": "chassis.structure",
+      "name": {
+        "en": "SD reader mounting screw",
+        "ru": "Винт крепления считывателя SD-карт"
+      },
+      "category": "fastener",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.screw-list"
+      ],
+      "description": {
+        "en": "SD reader mounting screw. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Винт крепления считывателя SD-карт. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "cylinder",
+        "position_mm": [
+          44,
+          -155,
+          143
+        ],
+        "size_mm": [
+          3.6,
+          5,
+          5
+        ],
+        "color": [
+          0.72,
+          0.73,
+          0.74
+        ],
+        "rotation_deg": [
+          0,
+          90,
+          0
+        ]
+      },
+      "configuration_status": "family_level_reference",
+      "fastener_spec": {
+        "designation": "#6-32 × 3.6",
+        "quantity": 1
+      }
+    },
+    {
+      "id": "fastener.wlan.01",
+      "parent_id": "motherboard.pcb",
+      "name": {
+        "en": "WLAN M.2 mounting screw",
+        "ru": "Винт крепления WLAN M.2"
+      },
+      "category": "fastener",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.screw-list"
+      ],
+      "description": {
+        "en": "WLAN M.2 mounting screw. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Винт крепления WLAN M.2. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "cylinder",
+        "position_mm": [
+          93,
+          82,
+          112
+        ],
+        "size_mm": [
+          3.5,
+          3,
+          3
+        ],
+        "color": [
+          0.72,
+          0.73,
+          0.74
+        ]
+      },
+      "configuration_status": "family_level_reference",
+      "fastener_spec": {
+        "designation": "M2 × 3.5",
+        "quantity": 1
+      }
+    },
+    {
+      "id": "fastener.m2-ssd.01",
+      "parent_id": "motherboard.pcb",
+      "name": {
+        "en": "M.2 SSD mounting screw",
+        "ru": "Винт крепления M.2 SSD"
+      },
+      "category": "fastener",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.screw-list"
+      ],
+      "description": {
+        "en": "M.2 SSD mounting screw. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Винт крепления M.2 SSD. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "cylinder",
+        "position_mm": [
+          93,
+          77,
+          18
+        ],
+        "size_mm": [
+          3.5,
+          3,
+          3
+        ],
+        "color": [
+          0.72,
+          0.73,
+          0.74
+        ]
+      },
+      "configuration_status": "family_level_reference",
+      "fastener_spec": {
+        "designation": "M2 × 3.5",
+        "quantity": 1
+      }
+    },
+    {
+      "id": "fastener.typec.01",
+      "parent_id": "chassis.structure",
+      "name": {
+        "en": "Optional Type-C module screw 1",
+        "ru": "Винт опционального модуля Type-C 1"
+      },
+      "category": "fastener",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.screw-list"
+      ],
+      "description": {
+        "en": "Optional Type-C module screw 1. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Винт опционального модуля Type-C 1. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "cylinder",
+        "position_mm": [
+          12,
+          -174,
+          166
+        ],
+        "size_mm": [
+          3,
+          4,
+          4
+        ],
+        "color": [
+          0.16,
+          0.16,
+          0.17
+        ]
+      },
+      "configuration_status": "optional_module_fastener",
+      "fastener_spec": {
+        "designation": "M3 × 3",
+        "quantity": 1
+      }
+    },
+    {
+      "id": "fastener.typec.02",
+      "parent_id": "chassis.structure",
+      "name": {
+        "en": "Optional Type-C module screw 2",
+        "ru": "Винт опционального модуля Type-C 2"
+      },
+      "category": "fastener",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.screw-list"
+      ],
+      "description": {
+        "en": "Optional Type-C module screw 2. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Винт опционального модуля Type-C 2. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "cylinder",
+        "position_mm": [
+          28,
+          -174,
+          166
+        ],
+        "size_mm": [
+          3,
+          4,
+          4
+        ],
+        "color": [
+          0.16,
+          0.16,
+          0.17
+        ]
+      },
+      "configuration_status": "optional_module_fastener",
+      "fastener_spec": {
+        "designation": "M3 × 3",
+        "quantity": 1
+      }
+    },
+    {
+      "id": "fastener.antenna.01",
+      "parent_id": "chassis.structure",
+      "name": {
+        "en": "Internal antenna screw 1",
+        "ru": "Винт внутренней антенны 1"
+      },
+      "category": "fastener",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.screw-list"
+      ],
+      "description": {
+        "en": "Internal antenna screw 1. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Винт внутренней антенны 1. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "cylinder",
+        "position_mm": [
+          82,
+          140,
+          95
+        ],
+        "size_mm": [
+          3,
+          4,
+          4
+        ],
+        "color": [
+          0.16,
+          0.16,
+          0.17
+        ]
+      },
+      "configuration_status": "optional_module_fastener",
+      "fastener_spec": {
+        "designation": "M3 × 3",
+        "quantity": 1
+      }
+    },
+    {
+      "id": "fastener.antenna.02",
+      "parent_id": "chassis.structure",
+      "name": {
+        "en": "Internal antenna screw 2",
+        "ru": "Винт внутренней антенны 2"
+      },
+      "category": "fastener",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.screw-list"
+      ],
+      "description": {
+        "en": "Internal antenna screw 2. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Винт внутренней антенны 2. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "cylinder",
+        "position_mm": [
+          82,
+          140,
+          150
+        ],
+        "size_mm": [
+          3,
+          4,
+          4
+        ],
+        "color": [
+          0.16,
+          0.16,
+          0.17
+        ]
+      },
+      "configuration_status": "optional_module_fastener",
+      "fastener_spec": {
+        "designation": "M3 × 3",
+        "quantity": 1
+      }
+    },
+    {
+      "id": "fastener.heatsink.01",
+      "parent_id": "assembly.cpu-cooling",
+      "name": {
+        "en": "CPU heat sink captive screw 1",
+        "ru": "Невыпадающий винт радиатора CPU 1"
+      },
+      "category": "fastener",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.heatsink"
+      ],
+      "description": {
+        "en": "CPU heat sink captive screw 1. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Невыпадающий винт радиатора CPU 1. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "cylinder",
+        "position_mm": [
+          91,
+          -26,
+          43
+        ],
+        "size_mm": [
+          8,
+          4,
+          4
+        ],
+        "color": [
+          0.68,
+          0.69,
+          0.7
+        ]
+      },
+      "configuration_status": "family_level_reference",
+      "fastener_spec": {
+        "designation": "Captive spring screw; thread/size not stated in screw table",
+        "quantity": 1
+      },
+      "removal_order": 1
+    },
+    {
+      "id": "fastener.heatsink.02",
+      "parent_id": "assembly.cpu-cooling",
+      "name": {
+        "en": "CPU heat sink captive screw 2",
+        "ru": "Невыпадающий винт радиатора CPU 2"
+      },
+      "category": "fastener",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.heatsink"
+      ],
+      "description": {
+        "en": "CPU heat sink captive screw 2. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Невыпадающий винт радиатора CPU 2. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "cylinder",
+        "position_mm": [
+          91,
+          50,
+          43
+        ],
+        "size_mm": [
+          8,
+          4,
+          4
+        ],
+        "color": [
+          0.68,
+          0.69,
+          0.7
+        ]
+      },
+      "configuration_status": "family_level_reference",
+      "fastener_spec": {
+        "designation": "Captive spring screw; thread/size not stated in screw table",
+        "quantity": 1
+      },
+      "removal_order": 2
+    },
+    {
+      "id": "fastener.heatsink.03",
+      "parent_id": "assembly.cpu-cooling",
+      "name": {
+        "en": "CPU heat sink captive screw 3",
+        "ru": "Невыпадающий винт радиатора CPU 3"
+      },
+      "category": "fastener",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.heatsink"
+      ],
+      "description": {
+        "en": "CPU heat sink captive screw 3. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Невыпадающий винт радиатора CPU 3. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "cylinder",
+        "position_mm": [
+          91,
+          -26,
+          109
+        ],
+        "size_mm": [
+          8,
+          4,
+          4
+        ],
+        "color": [
+          0.68,
+          0.69,
+          0.7
+        ]
+      },
+      "configuration_status": "family_level_reference",
+      "fastener_spec": {
+        "designation": "Captive spring screw; thread/size not stated in screw table",
+        "quantity": 1
+      },
+      "removal_order": 3
+    },
+    {
+      "id": "fastener.heatsink.04",
+      "parent_id": "assembly.cpu-cooling",
+      "name": {
+        "en": "CPU heat sink captive screw 4",
+        "ru": "Невыпадающий винт радиатора CPU 4"
+      },
+      "category": "fastener",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.heatsink"
+      ],
+      "description": {
+        "en": "CPU heat sink captive screw 4. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Невыпадающий винт радиатора CPU 4. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "cylinder",
+        "position_mm": [
+          91,
+          50,
+          109
+        ],
+        "size_mm": [
+          8,
+          4,
+          4
+        ],
+        "color": [
+          0.68,
+          0.69,
+          0.7
+        ]
+      },
+      "configuration_status": "family_level_reference",
+      "fastener_spec": {
+        "designation": "Captive spring screw; thread/size not stated in screw table",
+        "quantity": 1
+      },
+      "removal_order": 4
+    },
+    {
+      "id": "fastener.cpu-fan.01",
+      "parent_id": "assembly.cpu-cooling",
+      "name": {
+        "en": "CPU fan Torx screw 1",
+        "ru": "Винт Torx вентилятора CPU 1"
+      },
+      "category": "fastener",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.heatsink-fan",
+        "src.dell.heatsink-fan-install"
+      ],
+      "description": {
+        "en": "CPU fan Torx screw 1. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Винт Torx вентилятора CPU 1. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "cylinder",
+        "position_mm": [
+          127,
+          -20,
+          42
+        ],
+        "size_mm": [
+          4,
+          3,
+          3
+        ],
+        "color": [
+          0.15,
+          0.15,
+          0.16
+        ]
+      },
+      "configuration_status": "family_level_reference",
+      "fastener_spec": {
+        "designation": "Torx screw; thread/size not stated in cited procedure",
+        "quantity": 1
+      }
+    },
+    {
+      "id": "fastener.cpu-fan.02",
+      "parent_id": "assembly.cpu-cooling",
+      "name": {
+        "en": "CPU fan Torx screw 2",
+        "ru": "Винт Torx вентилятора CPU 2"
+      },
+      "category": "fastener",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.heatsink-fan",
+        "src.dell.heatsink-fan-install"
+      ],
+      "description": {
+        "en": "CPU fan Torx screw 2. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Винт Torx вентилятора CPU 2. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "cylinder",
+        "position_mm": [
+          127,
+          44,
+          42
+        ],
+        "size_mm": [
+          4,
+          3,
+          3
+        ],
+        "color": [
+          0.15,
+          0.15,
+          0.16
+        ]
+      },
+      "configuration_status": "family_level_reference",
+      "fastener_spec": {
+        "designation": "Torx screw; thread/size not stated in cited procedure",
+        "quantity": 1
+      }
+    },
+    {
+      "id": "fastener.cpu-fan.03",
+      "parent_id": "assembly.cpu-cooling",
+      "name": {
+        "en": "CPU fan Torx screw 3",
+        "ru": "Винт Torx вентилятора CPU 3"
+      },
+      "category": "fastener",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.heatsink-fan",
+        "src.dell.heatsink-fan-install"
+      ],
+      "description": {
+        "en": "CPU fan Torx screw 3. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Винт Torx вентилятора CPU 3. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "cylinder",
+        "position_mm": [
+          127,
+          -20,
+          110
+        ],
+        "size_mm": [
+          4,
+          3,
+          3
+        ],
+        "color": [
+          0.15,
+          0.15,
+          0.16
+        ]
+      },
+      "configuration_status": "family_level_reference",
+      "fastener_spec": {
+        "designation": "Torx screw; thread/size not stated in cited procedure",
+        "quantity": 1
+      }
+    },
+    {
+      "id": "fastener.cpu-fan.04",
+      "parent_id": "assembly.cpu-cooling",
+      "name": {
+        "en": "CPU fan Torx screw 4",
+        "ru": "Винт Torx вентилятора CPU 4"
+      },
+      "category": "fastener",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.heatsink-fan",
+        "src.dell.heatsink-fan-install"
+      ],
+      "description": {
+        "en": "CPU fan Torx screw 4. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Винт Torx вентилятора CPU 4. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "cylinder",
+        "position_mm": [
+          127,
+          44,
+          110
+        ],
+        "size_mm": [
+          4,
+          3,
+          3
+        ],
+        "color": [
+          0.15,
+          0.15,
+          0.16
+        ]
+      },
+      "configuration_status": "family_level_reference",
+      "fastener_spec": {
+        "designation": "Torx screw; thread/size not stated in cited procedure",
+        "quantity": 1
+      }
+    },
+    {
+      "id": "grommet.system-fan.01",
+      "parent_id": "assembly.system-fan",
+      "name": {
+        "en": "System fan rubber grommet 1",
+        "ru": "Резиновая втулка корпусного вентилятора 1"
+      },
+      "category": "fastener",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.system-fan"
+      ],
+      "description": {
+        "en": "System fan rubber grommet 1. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Резиновая втулка корпусного вентилятора 1. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "torus",
+        "position_mm": [
+          85,
+          148,
+          -15
+        ],
+        "size_mm": [
+          7,
+          7,
+          7
+        ],
+        "color": [
+          0.12,
+          0.12,
+          0.13
+        ]
+      },
+      "configuration_status": "family_level_reference",
+      "fastener_spec": {
+        "designation": "Rubber grommet; not a screw",
+        "quantity": 1
+      }
+    },
+    {
+      "id": "grommet.system-fan.02",
+      "parent_id": "assembly.system-fan",
+      "name": {
+        "en": "System fan rubber grommet 2",
+        "ru": "Резиновая втулка корпусного вентилятора 2"
+      },
+      "category": "fastener",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.system-fan"
+      ],
+      "description": {
+        "en": "System fan rubber grommet 2. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Резиновая втулка корпусного вентилятора 2. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "torus",
+        "position_mm": [
+          85,
+          148,
+          95
+        ],
+        "size_mm": [
+          7,
+          7,
+          7
+        ],
+        "color": [
+          0.12,
+          0.12,
+          0.13
+        ]
+      },
+      "configuration_status": "family_level_reference",
+      "fastener_spec": {
+        "designation": "Rubber grommet; not a screw",
+        "quantity": 1
+      }
+    },
+    {
+      "id": "grommet.system-fan.03",
+      "parent_id": "assembly.system-fan",
+      "name": {
+        "en": "System fan rubber grommet 3",
+        "ru": "Резиновая втулка корпусного вентилятора 3"
+      },
+      "category": "fastener",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.system-fan"
+      ],
+      "description": {
+        "en": "System fan rubber grommet 3. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Резиновая втулка корпусного вентилятора 3. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "torus",
+        "position_mm": [
+          85,
+          148,
+          -15
+        ],
+        "size_mm": [
+          7,
+          7,
+          7
+        ],
+        "color": [
+          0.12,
+          0.12,
+          0.13
+        ]
+      },
+      "configuration_status": "family_level_reference",
+      "fastener_spec": {
+        "designation": "Rubber grommet; not a screw",
+        "quantity": 1
+      }
+    },
+    {
+      "id": "grommet.system-fan.04",
+      "parent_id": "assembly.system-fan",
+      "name": {
+        "en": "System fan rubber grommet 4",
+        "ru": "Резиновая втулка корпусного вентилятора 4"
+      },
+      "category": "fastener",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "illustrative_proxy",
+      "source_ids": [
+        "src.dell.system-fan"
+      ],
+      "description": {
+        "en": "System fan rubber grommet 4. Geometry is an illustrative placement proxy, not measured CAD.",
+        "ru": "Резиновая втулка корпусного вентилятора 4. Геометрия является условным макетом расположения, а не измеренной CAD-моделью."
+      },
+      "geometry_hint": {
+        "shape": "torus",
+        "position_mm": [
+          85,
+          148,
+          95
+        ],
+        "size_mm": [
+          7,
+          7,
+          7
+        ],
+        "color": [
+          0.12,
+          0.12,
+          0.13
+        ]
+      },
+      "configuration_status": "family_level_reference",
+      "fastener_spec": {
+        "designation": "Rubber grommet; not a screw",
+        "quantity": 1
+      }
+    }
+  ]
+}

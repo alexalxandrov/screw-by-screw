@@ -6,6 +6,13 @@
   },
   "categories": [
     {
+      "id": "desktop_computers",
+      "label": {
+        "en": "Desktop computers",
+        "ru": "Настольные компьютеры"
+      }
+    },
+    {
       "id": "graphics_cards",
       "label": {
         "en": "Graphics cards",
@@ -42,6 +49,37 @@
       "geometry_status": "illustrative_proxy_not_cad",
       "package_version": "0.1.0",
       "package_path": "models/rtx3060_xc_black_v05.sbsmodel"
+    },
+    {
+      "id": "pc.dell.optiplex-5060-mt",
+      "package_model_id": "pc.dell.optiplex-5060-mt",
+      "manufacturer": "Dell",
+      "name": {
+        "en": "OptiPlex 5060 Tower",
+        "ru": "OptiPlex 5060 Tower"
+      },
+      "part_number": "D18M005",
+      "category_id": "desktop_computers",
+      "summary": {
+        "en": "Tower desktop family reconstruction based on Dell service documentation; component options and geometry confidence are explicitly labelled.",
+        "ru": "Реконструкция семейства настольных ПК Tower по сервисной документации Dell; опции компонентов и точность геометрии явно помечены."
+      },
+      "tags": [
+        "PC",
+        "Desktop",
+        "Tower",
+        "D18M",
+        "D18M005",
+        "Dell",
+        "System board",
+        "PSU",
+        "Screws",
+        "Service manual"
+      ],
+      "status": "research_blockout",
+      "geometry_status": "illustrative_proxy_not_cad",
+      "package_version": "0.1.0",
+      "package_path": "models/optiplex_5060_mt_v01.sbsmodel"
     }
   ]
 }

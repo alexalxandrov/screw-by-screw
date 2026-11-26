@@ -1,0 +1,936 @@
+{
+  "schema_version": "0.1.0",
+  "device_model_id": "pc.dell.optiplex-5060-mt",
+  "relationships": [
+    {
+      "id": "rel.contains.chassis-structure",
+      "from": "assembly.pc.root",
+      "to": "chassis.structure",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.cru-guide"
+      ]
+    },
+    {
+      "id": "rel.contains.chassis-side-cover",
+      "from": "chassis.structure",
+      "to": "chassis.side-cover",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.cru-guide"
+      ]
+    },
+    {
+      "id": "rel.contains.chassis-front-bezel",
+      "from": "chassis.structure",
+      "to": "chassis.front-bezel",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.cru-guide"
+      ]
+    },
+    {
+      "id": "rel.contains.chassis-front-door",
+      "from": "chassis.front-bezel",
+      "to": "chassis.front-door",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.service-manual"
+      ]
+    },
+    {
+      "id": "rel.contains.chassis-drive-cage",
+      "from": "chassis.structure",
+      "to": "chassis.drive-cage",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.service-manual"
+      ]
+    },
+    {
+      "id": "rel.contains.chassis-optical-bay",
+      "from": "chassis.structure",
+      "to": "chassis.optical-bay",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.service-manual"
+      ]
+    },
+    {
+      "id": "rel.contains.chassis-front-io",
+      "from": "chassis.front-bezel",
+      "to": "chassis.front-io",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.service-manual"
+      ]
+    },
+    {
+      "id": "rel.contains.chassis-rear-io",
+      "from": "chassis.structure",
+      "to": "chassis.rear-io",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.board-layout"
+      ]
+    },
+    {
+      "id": "rel.contains.assembly-motherboard",
+      "from": "chassis.structure",
+      "to": "assembly.motherboard",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.service-manual"
+      ]
+    },
+    {
+      "id": "rel.contains.motherboard-pcb",
+      "from": "assembly.motherboard",
+      "to": "motherboard.pcb",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.board-layout"
+      ]
+    },
+    {
+      "id": "rel.contains.motherboard-cpu-socket",
+      "from": "motherboard.pcb",
+      "to": "motherboard.cpu-socket",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.board-layout"
+      ]
+    },
+    {
+      "id": "rel.contains.cpu-package",
+      "from": "motherboard.cpu-socket",
+      "to": "cpu.package",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.service-manual"
+      ]
+    },
+    {
+      "id": "rel.contains.assembly-cpu-cooling",
+      "from": "motherboard.pcb",
+      "to": "assembly.cpu-cooling",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.heatsink"
+      ]
+    },
+    {
+      "id": "rel.contains.cpu-heatsink",
+      "from": "assembly.cpu-cooling",
+      "to": "cpu.heatsink",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.heatsink"
+      ]
+    },
+    {
+      "id": "rel.contains.cpu-heatsink-fan",
+      "from": "assembly.cpu-cooling",
+      "to": "cpu.heatsink-fan",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.heatsink-fan",
+        "src.dell.heatsink-fan-install"
+      ]
+    },
+    {
+      "id": "rel.contains.assembly-memory",
+      "from": "motherboard.pcb",
+      "to": "assembly.memory",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.board-layout"
+      ]
+    },
+    {
+      "id": "rel.contains.memory-slot-bank",
+      "from": "assembly.memory",
+      "to": "memory.slot-bank",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.board-layout"
+      ]
+    },
+    {
+      "id": "rel.contains.memory-dimm-reference",
+      "from": "assembly.memory",
+      "to": "memory.dimm.reference",
+      "type": "contains",
+      "source_ids": []
+    },
+    {
+      "id": "rel.contains.assembly-pcie",
+      "from": "motherboard.pcb",
+      "to": "assembly.pcie",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.board-layout"
+      ]
+    },
+    {
+      "id": "rel.contains.slot-pcie-x16-wired-x4",
+      "from": "assembly.pcie",
+      "to": "slot.pcie.x16-wired-x4",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.board-layout"
+      ]
+    },
+    {
+      "id": "rel.contains.slot-pcie-x1-slot3",
+      "from": "assembly.pcie",
+      "to": "slot.pcie.x1-slot3",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.board-layout"
+      ]
+    },
+    {
+      "id": "rel.contains.slot-pcie-x16-slot2",
+      "from": "assembly.pcie",
+      "to": "slot.pcie.x16-slot2",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.board-layout"
+      ]
+    },
+    {
+      "id": "rel.contains.slot-pcie-x1-slot1",
+      "from": "assembly.pcie",
+      "to": "slot.pcie.x1-slot1",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.board-layout"
+      ]
+    },
+    {
+      "id": "rel.contains.assembly-storage",
+      "from": "chassis.structure",
+      "to": "assembly.storage",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.service-manual"
+      ]
+    },
+    {
+      "id": "rel.contains.storage-hdd35-assembly",
+      "from": "assembly.storage",
+      "to": "storage.hdd35-assembly",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.service-manual"
+      ]
+    },
+    {
+      "id": "rel.contains.storage-hdd35-drive",
+      "from": "storage.hdd35-assembly",
+      "to": "storage.hdd35-drive",
+      "type": "contains",
+      "source_ids": []
+    },
+    {
+      "id": "rel.contains.storage-hdd25-assembly",
+      "from": "assembly.storage",
+      "to": "storage.hdd25-assembly",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.service-manual"
+      ]
+    },
+    {
+      "id": "rel.contains.storage-hdd25-drive",
+      "from": "storage.hdd25-assembly",
+      "to": "storage.hdd25-drive",
+      "type": "contains",
+      "source_ids": []
+    },
+    {
+      "id": "rel.contains.storage-optical-drive",
+      "from": "chassis.optical-bay",
+      "to": "storage.optical-drive",
+      "type": "contains",
+      "source_ids": []
+    },
+    {
+      "id": "rel.contains.storage-m2-ssd",
+      "from": "motherboard.pcb",
+      "to": "storage.m2-ssd",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.screw-list"
+      ]
+    },
+    {
+      "id": "rel.contains.module-wlan",
+      "from": "motherboard.pcb",
+      "to": "module.wlan",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.screw-list"
+      ]
+    },
+    {
+      "id": "rel.contains.module-sd-reader",
+      "from": "chassis.front-io",
+      "to": "module.sd-reader",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.screw-list"
+      ]
+    },
+    {
+      "id": "rel.contains.module-typec",
+      "from": "chassis.front-io",
+      "to": "module.typec",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.screw-list"
+      ]
+    },
+    {
+      "id": "rel.contains.module-internal-antenna",
+      "from": "chassis.structure",
+      "to": "module.internal-antenna",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.screw-list"
+      ]
+    },
+    {
+      "id": "rel.contains.assembly-psu",
+      "from": "chassis.structure",
+      "to": "assembly.psu",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.psu",
+        "src.dell.screw-list"
+      ]
+    },
+    {
+      "id": "rel.contains.assembly-system-fan",
+      "from": "chassis.structure",
+      "to": "assembly.system-fan",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.system-fan"
+      ]
+    },
+    {
+      "id": "rel.contains.assembly-speaker",
+      "from": "chassis.structure",
+      "to": "assembly.speaker",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.service-manual"
+      ]
+    },
+    {
+      "id": "rel.contains.assembly-front-controls",
+      "from": "chassis.front-bezel",
+      "to": "assembly.front-controls",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.service-manual"
+      ]
+    },
+    {
+      "id": "rel.contains.control-power-button",
+      "from": "assembly.front-controls",
+      "to": "control.power-button",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.board-layout"
+      ]
+    },
+    {
+      "id": "rel.contains.control-intrusion-switch",
+      "from": "assembly.front-controls",
+      "to": "control.intrusion-switch",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.system-fan"
+      ]
+    },
+    {
+      "id": "rel.contains.rtc-coin-cell",
+      "from": "motherboard.pcb",
+      "to": "rtc.coin-cell",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.board-layout"
+      ]
+    },
+    {
+      "id": "rel.contains.board-cmos-jumper",
+      "from": "motherboard.pcb",
+      "to": "board.cmos-jumper",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.board-layout"
+      ]
+    },
+    {
+      "id": "rel.contains.board-connectors",
+      "from": "motherboard.pcb",
+      "to": "board.connectors",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.board-layout"
+      ]
+    },
+    {
+      "id": "rel.contains.board-conn-typec",
+      "from": "board.connectors",
+      "to": "board.conn.typec",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.board-layout"
+      ]
+    },
+    {
+      "id": "rel.contains.board-conn-video-module",
+      "from": "board.connectors",
+      "to": "board.conn.video-module",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.board-layout"
+      ]
+    },
+    {
+      "id": "rel.contains.board-conn-ps2-serial",
+      "from": "board.connectors",
+      "to": "board.conn.ps2-serial",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.board-layout"
+      ]
+    },
+    {
+      "id": "rel.contains.board-conn-system-fan",
+      "from": "board.connectors",
+      "to": "board.conn.system-fan",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.board-layout"
+      ]
+    },
+    {
+      "id": "rel.contains.board-conn-intrusion",
+      "from": "board.connectors",
+      "to": "board.conn.intrusion",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.board-layout"
+      ]
+    },
+    {
+      "id": "rel.contains.board-conn-cpu-power",
+      "from": "board.connectors",
+      "to": "board.conn.cpu-power",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.board-layout"
+      ]
+    },
+    {
+      "id": "rel.contains.board-conn-cpu-fan",
+      "from": "board.connectors",
+      "to": "board.conn.cpu-fan",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.board-layout"
+      ]
+    },
+    {
+      "id": "rel.contains.board-conn-sd-reader",
+      "from": "board.connectors",
+      "to": "board.conn.sd-reader",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.board-layout"
+      ]
+    },
+    {
+      "id": "rel.contains.board-conn-power-switch",
+      "from": "board.connectors",
+      "to": "board.conn.power-switch",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.board-layout"
+      ]
+    },
+    {
+      "id": "rel.contains.board-conn-m2-ssd",
+      "from": "board.connectors",
+      "to": "board.conn.m2-ssd",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.board-layout"
+      ]
+    },
+    {
+      "id": "rel.contains.board-conn-sata0",
+      "from": "board.connectors",
+      "to": "board.conn.sata0",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.board-layout"
+      ]
+    },
+    {
+      "id": "rel.contains.board-conn-sata2",
+      "from": "board.connectors",
+      "to": "board.conn.sata2",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.board-layout"
+      ]
+    },
+    {
+      "id": "rel.contains.board-conn-speaker",
+      "from": "board.connectors",
+      "to": "board.conn.speaker",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.board-layout"
+      ]
+    },
+    {
+      "id": "rel.contains.board-conn-sata3",
+      "from": "board.connectors",
+      "to": "board.conn.sata3",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.board-layout"
+      ]
+    },
+    {
+      "id": "rel.contains.board-conn-sata1",
+      "from": "board.connectors",
+      "to": "board.conn.sata1",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.board-layout"
+      ]
+    },
+    {
+      "id": "rel.contains.board-conn-atx-power",
+      "from": "board.connectors",
+      "to": "board.conn.atx-power",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.board-layout"
+      ]
+    },
+    {
+      "id": "rel.contains.board-conn-sata-power",
+      "from": "board.connectors",
+      "to": "board.conn.sata-power",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.board-layout"
+      ]
+    },
+    {
+      "id": "rel.contains.board-conn-m2-wlan",
+      "from": "board.connectors",
+      "to": "board.conn.m2-wlan",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.board-layout"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener-board-01",
+      "from": "chassis.structure",
+      "to": "fastener.board.01",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.screw-list"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener-board-02",
+      "from": "chassis.structure",
+      "to": "fastener.board.02",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.screw-list"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener-board-03",
+      "from": "chassis.structure",
+      "to": "fastener.board.03",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.screw-list"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener-board-04",
+      "from": "chassis.structure",
+      "to": "fastener.board.04",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.screw-list"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener-board-05",
+      "from": "chassis.structure",
+      "to": "fastener.board.05",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.screw-list"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener-board-06",
+      "from": "chassis.structure",
+      "to": "fastener.board.06",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.screw-list"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener-board-07",
+      "from": "chassis.structure",
+      "to": "fastener.board.07",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.screw-list"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener-board-08",
+      "from": "chassis.structure",
+      "to": "fastener.board.08",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.screw-list"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener-board-09",
+      "from": "chassis.structure",
+      "to": "fastener.board.09",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.screw-list"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener-psu-01",
+      "from": "chassis.structure",
+      "to": "fastener.psu.01",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.screw-list"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener-psu-02",
+      "from": "chassis.structure",
+      "to": "fastener.psu.02",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.screw-list"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener-psu-03",
+      "from": "chassis.structure",
+      "to": "fastener.psu.03",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.screw-list"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener-sd-reader-01",
+      "from": "chassis.structure",
+      "to": "fastener.sd-reader.01",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.screw-list"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener-wlan-01",
+      "from": "motherboard.pcb",
+      "to": "fastener.wlan.01",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.screw-list"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener-m2-ssd-01",
+      "from": "motherboard.pcb",
+      "to": "fastener.m2-ssd.01",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.screw-list"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener-typec-01",
+      "from": "chassis.structure",
+      "to": "fastener.typec.01",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.screw-list"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener-typec-02",
+      "from": "chassis.structure",
+      "to": "fastener.typec.02",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.screw-list"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener-antenna-01",
+      "from": "chassis.structure",
+      "to": "fastener.antenna.01",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.screw-list"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener-antenna-02",
+      "from": "chassis.structure",
+      "to": "fastener.antenna.02",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.screw-list"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener-heatsink-01",
+      "from": "assembly.cpu-cooling",
+      "to": "fastener.heatsink.01",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.heatsink"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener-heatsink-02",
+      "from": "assembly.cpu-cooling",
+      "to": "fastener.heatsink.02",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.heatsink"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener-heatsink-03",
+      "from": "assembly.cpu-cooling",
+      "to": "fastener.heatsink.03",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.heatsink"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener-heatsink-04",
+      "from": "assembly.cpu-cooling",
+      "to": "fastener.heatsink.04",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.heatsink"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener-cpu-fan-01",
+      "from": "assembly.cpu-cooling",
+      "to": "fastener.cpu-fan.01",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.heatsink-fan",
+        "src.dell.heatsink-fan-install"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener-cpu-fan-02",
+      "from": "assembly.cpu-cooling",
+      "to": "fastener.cpu-fan.02",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.heatsink-fan",
+        "src.dell.heatsink-fan-install"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener-cpu-fan-03",
+      "from": "assembly.cpu-cooling",
+      "to": "fastener.cpu-fan.03",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.heatsink-fan",
+        "src.dell.heatsink-fan-install"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener-cpu-fan-04",
+      "from": "assembly.cpu-cooling",
+      "to": "fastener.cpu-fan.04",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.heatsink-fan",
+        "src.dell.heatsink-fan-install"
+      ]
+    },
+    {
+      "id": "rel.contains.grommet-system-fan-01",
+      "from": "assembly.system-fan",
+      "to": "grommet.system-fan.01",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.system-fan"
+      ]
+    },
+    {
+      "id": "rel.contains.grommet-system-fan-02",
+      "from": "assembly.system-fan",
+      "to": "grommet.system-fan.02",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.system-fan"
+      ]
+    },
+    {
+      "id": "rel.contains.grommet-system-fan-03",
+      "from": "assembly.system-fan",
+      "to": "grommet.system-fan.03",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.system-fan"
+      ]
+    },
+    {
+      "id": "rel.contains.grommet-system-fan-04",
+      "from": "assembly.system-fan",
+      "to": "grommet.system-fan.04",
+      "type": "contains",
+      "source_ids": [
+        "src.dell.system-fan"
+      ]
+    },
+    {
+      "id": "rel.board.fastened-to-chassis",
+      "from": "assembly.motherboard",
+      "to": "chassis.structure",
+      "type": "fastened_to",
+      "source_ids": [
+        "src.dell.screw-list",
+        "src.dell.service-manual"
+      ]
+    },
+    {
+      "id": "rel.psu.fastened-to-chassis",
+      "from": "assembly.psu",
+      "to": "chassis.structure",
+      "type": "fastened_to",
+      "source_ids": [
+        "src.dell.screw-list",
+        "src.dell.psu"
+      ]
+    },
+    {
+      "id": "rel.system-fan.grommet-mounted",
+      "from": "assembly.system-fan",
+      "to": "chassis.structure",
+      "type": "mounted_in",
+      "source_ids": [
+        "src.dell.system-fan"
+      ]
+    },
+    {
+      "id": "rel.cpu.cooled-by-heatsink",
+      "from": "cpu.package",
+      "to": "cpu.heatsink",
+      "type": "cooled_by",
+      "source_ids": [
+        "src.dell.heatsink"
+      ]
+    },
+    {
+      "id": "rel.cpu-fan.airflow-over-heatsink",
+      "from": "cpu.heatsink-fan",
+      "to": "cpu.heatsink",
+      "type": "airflow_over",
+      "source_ids": [
+        "src.dell.heatsink-fan"
+      ]
+    },
+    {
+      "id": "rel.motherboard.powered-by-psu",
+      "from": "assembly.motherboard",
+      "to": "assembly.psu",
+      "type": "powered_by",
+      "source_ids": [
+        "src.dell.psu"
+      ]
+    },
+    {
+      "id": "rel.psu.connected-system-power",
+      "from": "assembly.psu",
+      "to": "board.conn.atx-power",
+      "type": "connected_to",
+      "source_ids": [
+        "src.dell.board-layout",
+        "src.dell.service-manual"
+      ]
+    },
+    {
+      "id": "rel.ssd.connected-m2",
+      "from": "storage.m2-ssd",
+      "to": "board.conn.m2-ssd",
+      "type": "connected_to",
+      "source_ids": [
+        "src.dell.board-layout"
+      ]
+    },
+    {
+      "id": "rel.wlan.connected-m2",
+      "from": "module.wlan",
+      "to": "board.conn.m2-wlan",
+      "type": "connected_to",
+      "source_ids": [
+        "src.dell.board-layout"
+      ]
+    },
+    {
+      "id": "rel.system-fan.connected",
+      "from": "assembly.system-fan",
+      "to": "board.conn.system-fan",
+      "type": "connected_to",
+      "source_ids": [
+        "src.dell.system-fan",
+        "src.dell.board-layout"
+      ]
+    },
+    {
+      "id": "rel.intrusion.connected",
+      "from": "control.intrusion-switch",
+      "to": "board.conn.intrusion",
+      "type": "connected_to",
+      "source_ids": [
+        "src.dell.system-fan",
+        "src.dell.board-layout"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "schema_version": "0.1.0",
+  "id": "pc.dell.optiplex-5060-mt",
+  "manufacturer": "Dell",
+  "product_name": "OptiPlex 5060 Tower",
+  "part_number": "D18M005",
+  "variant_notes": "Regulatory type D18M005 / platform family D18M. This package is a family-level Tower service-manual reconstruction, not a unique customer order configuration. Do not merge Small Form Factor or Micro chassis geometry, parts or fastener counts.",
+  "status": "research_blockout",
+  "geometry_status": "illustrative_proxy_not_cad",
+  "coordinate_system": {
+    "units": "m",
+    "display_units": "mm",
+    "x": "left/right chassis width",
+    "y": "front/rear chassis depth; front is negative Y",
+    "z": "vertical height; up is positive Z",
+    "glb_export": "GLB transforms use metres; source geometry hints are entered in millimetres and scaled on export."
+  },
+  "specifications": {
+    "family": "OptiPlex 5060 Tower / Mini Tower",
+    "regulatory_model": "D18M",
+    "regulatory_type": "D18M005",
+    "motherboard_layout_callouts": 26,
+    "pcie_slots": [
+      {
+        "type": "PCIe x16 wired as x4",
+        "slot": 4
+      },
+      {
+        "type": "PCIe x1",
+        "slot": 3
+      },
+      {
+        "type": "PCIe x16",
+        "slot": 2
+      },
+      {
+        "type": "PCIe x1",
+        "slot": 1
+      }
+    ],
+    "screw_table": {
+      "listed_quantity": 19,
+      "scope": "Includes optional modules; not a universal per-unit installed screw count."
+    },
+    "documented_service_fasteners": {
+      "system_board": {
+        "designation": "#6-32 × 1.4",
+        "quantity": 9
+      },
+      "psu": {
+        "designation": "#6-32 × 1.4",
+        "quantity": 3
+      },
+      "sd_card_reader": {
+        "designation": "#6-32 × 3.6",
+        "quantity": 1
+      },
+      "wlan": {
+        "designation": "M2 × 3.5",
+        "quantity": 1,
+        "optional": true
+      },
+      "m2_pcie_ssd": {
+        "designation": "M2 × 3.5",
+        "quantity": 1,
+        "optional": true
+      },
+      "typec_cable_module": {
+        "designation": "M3 × 3",
+        "quantity": 2,
+        "optional": true
+      },
+      "internal_antenna": {
+        "designation": "M3 × 3",
+        "quantity": 2,
+        "optional": true
+      },
+      "cpu_heatsink": {
+        "designation": "Four captive screws; thread/size not stated",
+        "quantity": 4
+      },
+      "cpu_heatsink_fan": {
+        "designation": "Four Torx screws; thread/size not stated",
+        "quantity": 4
+      },
+      "system_fan_grommets": {
+        "designation": "Rubber grommet (not a screw)",
+        "quantity": 4
+      }
+    },
+    "configuration_status": "No fixed customer-specific CPU, DIMM population, storage SKU, optical-drive SKU, WLAN SKU or PSU wattage is asserted."
+  },
+  "source_ids": [
+    "src.dell.service-manual",
+    "src.dell.screw-list",
+    "src.dell.board-layout",
+    "src.dell.heatsink",
+    "src.dell.heatsink-fan",
+    "src.dell.heatsink-fan-install",
+    "src.dell.system-fan",
+    "src.dell.psu",
+    "src.dell.cru-guide",
+    "src.dell.support-library"
+  ],
+  "release": {
+    "version": "0.1.0-draft",
+    "status": "draft",
+    "geometry_fidelity": "illustrative_proxy_not_cad"
+  }
+}

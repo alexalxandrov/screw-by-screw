@@ -1,0 +1,131 @@
+{
+  "schema_version": "0.1.0",
+  "sources": [
+    {
+      "id": "src.dell.service-manual",
+      "title": "Dell OptiPlex 5060 Tower Service Manual — system board removal",
+      "publisher": "Dell Technologies",
+      "url": "https://www.dell.com/support/manuals/en-us/optiplex-5060-desktop/optiplex_5060_mt_service_manual/removing-system-board?guid=guid-4619c874-96c4-4bf3-9e6e-cdc300d69ca1&lang=en-us",
+      "type": "manufacturer_service_manual",
+      "applicability": "OptiPlex 5060 Tower / Mini Tower; D18M family; D18M005 regulatory type",
+      "license_status": "reference_only_no_document_or_image_redistribution",
+      "locators": [
+        "Removing system board",
+        "Removing and installing components"
+      ]
+    },
+    {
+      "id": "src.dell.screw-list",
+      "title": "Dell OptiPlex 5060 Tower Service Manual — screw size list",
+      "publisher": "Dell Technologies",
+      "url": "https://www.dell.com/support/manuals/en-sb/optiplex-5060-desktop/optiplex_5060_mt_service_manual/Screw-size-list?guid=guid-a77fcea9-e6c9-4fd8-bc2b-2bedbc1f0d71&lang=en-us",
+      "type": "manufacturer_fastener_table",
+      "applicability": "OptiPlex 5060 MT / Tower",
+      "license_status": "reference_only_no_document_or_image_redistribution",
+      "locators": [
+        "Screw size list — Table 1 / OptiPlex MT"
+      ]
+    },
+    {
+      "id": "src.dell.board-layout",
+      "title": "Dell OptiPlex 5060 Tower Service Manual — Tower motherboard layout",
+      "publisher": "Dell Technologies",
+      "url": "https://www.dell.com/support/manuals/en-pg/optiplex-5060-desktop/optiplex_5060_mt_service_manual/tower-motherboard-layout?guid=guid-fdd68959-9fc2-4808-921a-11d712a6b730&lang=en-us",
+      "type": "manufacturer_board_layout",
+      "applicability": "OptiPlex 5060 Tower system board layout",
+      "license_status": "reference_only_no_document_or_image_redistribution",
+      "locators": [
+        "Tower motherboard layout",
+        "Tower board components 1–26"
+      ]
+    },
+    {
+      "id": "src.dell.heatsink",
+      "title": "Dell OptiPlex 5060 Tower Service Manual — removing heat sink",
+      "publisher": "Dell Technologies",
+      "url": "https://www.dell.com/support/manuals/en-in/optiplex-5060-desktop/optiplex_5060_mt_service_manual/removing-heat-sink?guid=guid-5187dca8-063c-4317-a83f-faeefbc6c82d&lang=en-us",
+      "type": "manufacturer_service_procedure",
+      "applicability": "OptiPlex 5060 Tower",
+      "license_status": "reference_only_no_document_or_image_redistribution",
+      "locators": [
+        "Removing heat sink",
+        "Four captive screws; numbered sequence 1–4"
+      ]
+    },
+    {
+      "id": "src.dell.heatsink-fan",
+      "title": "Dell OptiPlex 5060 Tower Service Manual — removing heat sink fan",
+      "publisher": "Dell Technologies",
+      "url": "https://www.dell.com/support/manuals/en-in/optiplex-5060-desktop/optiplex_5060_mt_service_manual/removing-heat-sink-fan?guid=guid-e949c8bc-98ce-4dc8-adec-129c6ece95d7&lang=en-us",
+      "type": "manufacturer_service_procedure",
+      "applicability": "OptiPlex 5060 Tower",
+      "license_status": "reference_only_no_document_or_image_redistribution",
+      "locators": [
+        "Removing heat sink fan",
+        "Torx driver access from top screw hole"
+      ]
+    },
+    {
+      "id": "src.dell.heatsink-fan-install",
+      "title": "Dell OptiPlex 5060 Tower Service Manual — installing heat sink fan",
+      "publisher": "Dell Technologies",
+      "url": "https://www.dell.com/support/manuals/en-al/optiplex-5060-desktop/optiplex_5060_mt_service_manual/installing-heat-sink-fan?guid=guid-d9553e2f-74fd-4e07-b40b-7e19be4176b9&lang=en-us",
+      "type": "manufacturer_service_procedure",
+      "applicability": "OptiPlex 5060 Tower",
+      "license_status": "reference_only_no_document_or_image_redistribution",
+      "locators": [
+        "Installing heat sink fan",
+        "Four screws secure fan to heat sink"
+      ]
+    },
+    {
+      "id": "src.dell.system-fan",
+      "title": "Dell OptiPlex 5060 Tower Service Manual — system fan",
+      "publisher": "Dell Technologies",
+      "url": "https://www.dell.com/support/manuals/en-in/optiplex-5060-desktop/optiplex_5060_mt_service_manual/system-fan?guid=guid-aa96cbe8-23f6-4609-a71a-8ae963260813&lang=en-us",
+      "type": "manufacturer_service_procedure",
+      "applicability": "OptiPlex 5060 Tower",
+      "license_status": "reference_only_no_document_or_image_redistribution",
+      "locators": [
+        "Installing system fan",
+        "Four grommets; intrusion cable routing"
+      ]
+    },
+    {
+      "id": "src.dell.psu",
+      "title": "Dell OptiPlex 5060 Tower Service Manual — power supply unit",
+      "publisher": "Dell Technologies",
+      "url": "https://www.dell.com/support/manuals/en-lk/optiplex-5060-desktop/optiplex_5060_mt_service_manual/removing-power-supply-unit-or-psu?guid=guid-e09ec8ac-722e-477a-bcd8-a6fbc4b2f698&lang=en-us",
+      "type": "manufacturer_service_procedure",
+      "applicability": "OptiPlex 5060 Tower",
+      "license_status": "reference_only_no_document_or_image_redistribution",
+      "locators": [
+        "Removing and installing power supply unit or PSU"
+      ]
+    },
+    {
+      "id": "src.dell.cru-guide",
+      "title": "OptiPlex 5060 MT (Mini Tower) teardown/removal guide for customer replaceable units",
+      "publisher": "Dell Technologies",
+      "url": "https://www.dell.com/support/kbdoc/en-my/000132145/optiplex-5060-mt-mini-tower-teardown-removal-guide-for-customer-replaceable-units-crus",
+      "type": "manufacturer_teardown_guide",
+      "applicability": "OptiPlex 5060 MT / Mini Tower",
+      "license_status": "reference_only_no_document_or_image_redistribution",
+      "locators": [
+        "System cover and front bezel",
+        "Heat sink fan",
+        "System fan",
+        "Expansion card"
+      ]
+    },
+    {
+      "id": "src.dell.support-library",
+      "title": "Dell Support — OptiPlex 5060 Tower manuals and documents",
+      "publisher": "Dell Technologies",
+      "url": "https://www.dell.com/support/product-details/en-us/product/optiplex-5060-desktop/resources/manuals",
+      "type": "manufacturer_document_index",
+      "applicability": "OptiPlex 5060 Tower",
+      "license_status": "reference_only_no_document_or_image_redistribution"
+    }
+  ]
+}
