@@ -1100,7 +1100,7 @@
       "source_ids": [
         "src.lanoc.review"
       ],
-      "notes": "LanOC describes EVGA E-logo bumps on the fan blades, similar to golf-ball dimples. Exact bump dimensions and profile are not measured; this is not modelled as manufacturing geometry."
+      "notes": "LanOC describes raised EVGA E-logo bumps on the fan blades, similar to golf-ball dimples. The blockout now includes a simplified four-stroke E-like low-relief proxy on each blade; this is only a visual interpretation, not a calibrated reproduction. Exact logo vector, bump dimensions, spacing, depth and surface profile are not measured."
     },
     {
       "id": "claim.displayport.count",
