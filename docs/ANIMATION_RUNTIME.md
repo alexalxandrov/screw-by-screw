@@ -16,7 +16,7 @@ Documented motion requires registered source IDs. A clip with no source is allow
 
 The viewer provides clip selection, play, pause, normalized seek, playback speed, completion state and stop/reset. Speed follows the existing animation speed control. Stop and clip switching restore the captured values for every targeted property. Model replacement disposes the player and its pending animation frame.
 
-When no clips exist, the package animation panel is hidden. The viewer does not synthesize clips from viewer_effects; fan rotation, airflow particles, power pulses and exploded-view animations remain separate viewer-generated educational effects.
+When no clips exist, the package animation panel is hidden. The viewer does not synthesize clips from viewer_effects. Procedural fan rotation, airflow particles and power pulses remain separate viewer-generated educational effects; an explicitly authored exploded-cooler overview is a package clip and is not a service order.
 
 ## Interactions and conflict policy
 
@@ -31,6 +31,6 @@ The runtime does not infer fan RPM, physical mechanisms, removal order, airflow,
 
 ## RTX 3060 pilot demonstration
 
-The pilot includes one clip, clip.fan-impeller-visual-turn, targeting two dedicated component nodes: assembly.fan.1.rotor and assembly.fan.2.rotor. It rotates only the seven-blade proxy impeller groups around their local Y pivots; each static annular frame and hub remains outside those pivots.
+The pilot includes two clips. `clip.fan-impeller-visual-turn` targets the two dedicated rotor nodes `assembly.fan.1.rotor` and `assembly.fan.2.rotor`; it rotates only the proxy impellers around their local Y pivots while the frames and hubs remain static. It is explicitly `educational_approximation`, performs one visual turn in 3.2 seconds, and is not measured RPM or a manufacturer operating specification. Blade profile and blade count remain illustrative.
 
-The clip is explicitly labelled educational_approximation and has no source_ids. It performs one visual revolution in 3.2 seconds as a convenient playback demonstration. That duration is not measured RPM, duty cycle or a manufacturer operating specification. Blade profile and blade count remain illustrative. The clip does not document disassembly, repair or a verified mechanical service procedure.
+`clip.exploded-cooler-overview` moves the shroud, cooling, PCB/electronics and connector groups into a reversible separated presentation. It is also `educational_approximation`: its offsets are artistic layout values, not measured clearances, screw-by-screw order or a verified service procedure. Both clips are deterministic, seekable and resettable; neither is a physical simulation or repair instruction.
