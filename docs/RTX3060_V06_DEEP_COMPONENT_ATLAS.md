@@ -102,7 +102,7 @@ The cooling process layer now exposes a four-stage clickable diagram: heat sourc
 
 ## 16. Four visible copper heatpipe terminal faces
 
-The exact XC BLACK cooler-end photograph in LanOC's review shows four separate copper terminal faces. Four individually selectable markers now exist under `cooling.heatpipes`. Their generated positions and disc dimensions are photo-estimated proxies. The claim deliberately counts **visible terminal faces**, not unique U-shaped heatpipes: two pipes can have four ends. The exact-SKU six-pipe count is established separately by The FPS Review (four main plus two side); 3D route centrelines, bends and terminal-face-to-pipe mapping remain illustrative.
+The exact XC BLACK cooler-end photograph in LanOC's review shows four separate copper terminal faces. Four individually selectable markers now exist under `cooling.heatpipes`. Their generated positions and disc dimensions are photo-estimated proxies. The claim deliberately counts **visible terminal faces**, not unique U-shaped heatpipes: two pipes can have four ends. The exact-SKU The FPS Review description is recorded separately as four central plus two side route/runs; it is not treated as a verified count of unique closed U-shaped tubes. The physical loop count, 3D route centrelines, bends and terminal-face-to-loop mapping remain unresolved or illustrative.
 
 
 ## 17. Exact-SKU heatpipe route/run descriptions and unresolved physical loop count
