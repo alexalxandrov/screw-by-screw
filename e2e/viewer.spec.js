@@ -144,6 +144,11 @@ test("shows source-backed claims, evidence classes and explicit unknown values",
   await expect(revision).toContainText("Ревизия печатной платы");
   await expect(revision).toContainText("Неизвестно");
 
+  const markingCandidate = page.locator('[data-claim-id="claim.pcb.silkscreen_marking.candidate"]');
+  await expect(markingCandidate).toContainText("EVGA232 REV 1.0");
+  await expect(markingCandidate).toContainText("TechPowerUp");
+  await expect(revision).toContainText("Неизвестно");
+
   const backplate = page.locator('[data-claim-id="claim.card.backplate"]');
   await expect(backplate).toContainText("Наличие задней пластины");
   await expect(backplate).toContainText("Нет");
