@@ -243,10 +243,11 @@ test("cooling layer exposes an inspectable thermal path without claiming simulat
   const diagram = page.locator("#process-diagram");
   await expect(diagram).toBeVisible();
   await expect(diagram.locator(".architecture-diagram-group")).toHaveCount(4);
-  await expect(diagram.locator(".architecture-node")).toHaveCount(22);
+  await expect(diagram.locator(".architecture-node")).toHaveCount(26);
   await expect(diagram.locator(".architecture-diagram-badge")).toContainText("НЕ CFD / ТЕПЛОВАЯ СИМУЛЯЦИЯ");
   await expect(diagram.locator('.architecture-node[data-component-id="cooling.gpu_contact"]')).toContainText("Медная контактная пластина");
   await expect(diagram.locator('.architecture-node[data-component-id="cooling.heatpipe.candidate.1"]')).toContainText("Кандидатная трасса трубки 1");
+  await expect(diagram.locator('.architecture-node[data-component-id="cooling.heatpipe.end.04"]')).toContainText("Медное окончание 04");
   await expect(diagram.locator('.architecture-node[data-component-id="fan.2.blade.1"]')).toContainText("Макетная лопасть вентилятора 2");
   await expect(page.locator("#process-assumptions li")).toHaveCount(5);
   await expect(page.locator("#process-sources a")).toHaveCount(2);
