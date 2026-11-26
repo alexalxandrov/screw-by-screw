@@ -19,7 +19,7 @@ The catalogue contains two model classes:
 - **EVGA GeForce RTX 3060 XC BLACK GAMING 12GB**, exact SKU `12G-P5-3655-KR`, in `graphics_cards`. This remains the default package.
 - **Dell OptiPlex 5060 Tower**, `platform_family` system reference in `desktop_computers`. Its v0.1 ZIP archive is retained at `models/dell_optiplex_5060_tower_v01.sbsmodel`; the current v0.2 package is `models/dell_optiplex_5060_tower_v02.sbsmodel` and is explicitly labelled `illustrative_proxy_not_cad`.
 
-The OptiPlex v0.2 family package contains 115 semantic component nodes, 123 typed relationships, 58 box-proxy meshes, 24 modeled screw/grommet instances, 15 source records, 31 claims, six qualitative process layers, 12 partial service steps and nine learning questions. All 26 numbered motherboard callouts are explicitly mapped to stable semantic component IDs. Its outer dimensions are manufacturer-published; internal layout and fastener placement are schematic. The two entries use the same catalogue adapter and package loader.
+The OptiPlex v0.2 family package contains 115 semantic component nodes, 123 typed relationships, 58 box-proxy meshes, 24 modeled screw/grommet instances, 15 source records, 29 claims, six qualitative process layers, 12 partial service steps and nine learning questions. All 26 numbered motherboard callouts are explicitly mapped to stable semantic component IDs. Its outer dimensions are manufacturer-published; internal layout and fastener placement are schematic. The two entries use the same catalogue adapter and package loader.
 
 ## Adding another model
 
