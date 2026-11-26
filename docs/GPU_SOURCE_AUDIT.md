@@ -188,3 +188,10 @@ Tom's Hardware's teardown is a related EVGA RTX 3060 XC sample but does not iden
 Sources:
 - Exact card layout and photos: https://lanoc.org/review/video-cards/evga-rtx-3060-xc-black?showall=1
 - Related EVGA RTX 3060 XC teardown (not exact SKU): https://www.tomshardware.com/reviews/nvidia-geforce-rtx-3060-review/2
+
+
+## 14. GDDR6 package identity and bus mapping
+
+Six GDDR6 package positions are visible in exact XC BLACK review/teardown material. The exact part marking on the selected 12G-P5-3655-KR sample has not been independently transcribed. K4ZAF325BM-HC16 appears in a related EVGA RTX 3060 XC teardown that is not identified as XC BLACK; the density, organization, data rate and package details originate from a secondary catalog. These are candidate-part attributes only, not exact-SKU BOM facts.
+
+The EVGA-published 192-bit memory interface is retained as an exact-SKU fact. The six visual interface segments in the 3D viewer are now labelled as logical presentation groups. The unverified one-to-one segment-to-package relations were removed. No package channel width, chip-select mapping, memory-controller partition or PCB net is asserted without a matching BoardView/schematic.
