@@ -1190,6 +1190,18 @@
         "src.gpuconnect.catalog"
       ],
       "notes": "Unknown. Aftermarket compatibility listings name PLA09215S12H-family replacements, but do not show the original fan label or establish the OEM part fitted to this exact sample. Seller dimensions conflict (approximately 90 mm vs 87 mm, with 15/20 mm depth variants); voltage, current, connector and mounting measurements remain aftermarket catalogue claims only."
+    },
+    {
+      "id": "claim.fan.blade_count.photo_observed",
+      "subject_id": "assembly.cooling",
+      "predicate": "visible_impeller_blade_count_in_exact_sku_product_photo",
+      "value": 8,
+      "unit": "blades per fan",
+      "confidence_class": "candidate_reference_observation",
+      "source_ids": [
+        "src.newegg.exact_sku.product_photo"
+      ],
+      "notes": "Two front-view images in a Newegg listing whose title/model field identify exact SKU 12G-P5-3655-KR show eight visible impeller blade surfaces per fan. This is a photo count, not a manufacturer fan drawing, OEM datasheet or inspection of an installed sample. Blade camber, pitch, thickness, profile, depth and original fan part number remain unverified."
     }
   ]
 }
