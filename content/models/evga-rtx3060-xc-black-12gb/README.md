@@ -39,7 +39,7 @@ This is not yet a complete engineering reconstruction. Eight cooler/shroud reten
 
 ### Fine-grained cooling decomposition
 
-The development branch now expands the content graph to **313 semantic components, 311 typed relationships, 109 atomic claims and 29 sources**. Fan frames, hubs and eight photo-counted blade proxies per fan are separately selectable; the illustrative heatsink has 24 separately selectable fin proxies; six separate heatpipe route proxies record The FPS Review's four central plus two side runs; they do not establish six separate closed U-shaped tube loops; and six memory thermal-pad proxies plus one VRM pad strip have their own IDs. The eight-blade count is a retail-photo observation for this exact SKU, not a factory drawing; blade shape and all fin/thermal-pad dimensions remain proxies or unknown.
+The development branch now expands the content graph to **313 semantic components, 311 typed relationships, 110 atomic claims and 29 sources**. Fan frames, hubs and eight photo-counted blade proxies per fan are separately selectable; the illustrative heatsink has 24 separately selectable fin proxies; six separate heatpipe route proxies record The FPS Review's four central plus two side runs; they do not establish six separate closed U-shaped tube loops; and six memory thermal-pad proxies plus one VRM pad strip have their own IDs. The eight-blade count is a retail-photo observation for this exact SKU, not a factory drawing; blade shape and all fin/thermal-pad dimensions remain proxies or unknown.
 
 
 ### Partial teardown evidence
@@ -98,3 +98,6 @@ The exact-SKU review documents the black plastic no-RGB shroud, vertical alumini
 
 
 The PCB airflow cutout is now a Boolean through-hole proxy rather than an overlay marker. Its 18 × 22 mm rounded-rectangle dimensions and centre remain illustrative, not measured; they are not manufacturing or BoardView data.
+
+
+A separate source-backed claim records PC Perspective's 1905 MHz transient peak during Metro Exodus at 2160/high. The review identifies an EVGA RTX 3060 12GB XC BLACK sample but does not disclose its retail part number; the value is therefore a measured product-family sample observation, not a guaranteed frequency or a replacement for the 1777 MHz EVGA boost specification.
