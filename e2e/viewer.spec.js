@@ -273,7 +273,7 @@ test("GPU architecture layer exposes source-linked logical GA106 and GDDR6 nodes
   const linked = page.locator("#process-components .process-component-chip");
   await expect(linked).toHaveCount(21);
   await expect(page.locator('#process-components .process-component-chip[data-component-id="chip.gpu.sm.cluster"]')).toContainText("Кластер потоковых мультипроцессоров Ampere");
-  await expect(page.locator('#process-components .process-component-chip[data-component-id="chip.memory.channel.06"]')).toContainText("Логический сегмент интерфейса 06");
+  await expect(page.locator('#process-components .process-component-chip[data-component-id="chip.memory.channel.06"]')).toContainText("Визуальный сегмент интерфейса GDDR6 06");
   await expect(page.locator("#process-assumptions")).toContainText("не воспроизводят физическую топологию GA106");
   await expect(page.locator("#process-sources a")).toHaveCount(4);
   await diagram.locator('.architecture-node[data-component-id="chip.gpu.sm.cluster"]').click();
