@@ -40,7 +40,7 @@ test("OptiPlex reference package passes the production package loader and checks
   for (const component of loaded.data.components.components) {
     assert.ok(component.name?.ru, `missing Russian component name: ${component.id}`);
     assert.ok(component.description?.ru, `missing Russian component description: ${component.id}`);
-    assert.match(component.description.ru, /[\\u0400-\\u04FF]/, `component description is not localized in Russian: ${component.id}`);
+    assert.match(component.description.ru, /[\u0400-\u04FF]/, `component description is not localized in Russian: ${component.id}`);
   }
   const componentIds = new Set(loaded.data.components.components.map((component) => component.id));
   assert.deepEqual(callouts.map((callout) => callout.number), Array.from({ length: 26 }, (_, index) => index + 1));
