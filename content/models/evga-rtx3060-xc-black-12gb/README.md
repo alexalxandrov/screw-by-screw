@@ -21,7 +21,7 @@ The manifest builder hashes every JSON content file. The validator checks SHA-25
 - The 201.8 mm length is a nominal published value; it is not treated as the maximum outer-shroud extent.
 - Six Samsung K4ZAF325BM-HC16 GDDR6 packages are identified in the Tom's Hardware teardown; the rear-PCB photo on the same review page reads P/N 12G-P5-3655-KR. Package centres remain photo-estimated. The 16-Gbit density, 512M × 32 organisation and 180-FBGA package type are secondary-catalog attributes, not primary Samsung datasheet values; they use the separate `secondary_catalog_data` evidence class.
 - The 24 heatsink fins in the current model are illustrative proxies, not a measured fin count.
-- The assembly panel contains three source-backed partial actions: (1) eight cooler/shroud retention screws (four around GPU and four near the far end; only the GPU-area four have photo-positioned proxies); (2) disconnect both fan leads before separating the cooler; and (3) remove three retaining screws from each replaceable fan (six total, individual positions unmapped). This is not a complete service procedure; driver size, torque, thread details, rear screw coordinates and reassembly order remain unverified.
+- The assembly panel contains five partial exact-model teardown observations: (1) four spring-loaded GPU cooler screws; (2) a separate pair retaining the fin-stack base; (3) two narrow I/O-bracket screws with reverse-side nuts plus three display-output retaining screws (the teardown uses a Phillips #0 driver for the latter); (4) disconnect both fan leads before separating the cooler; and (5) remove three retaining screws from each replaceable fan. These observations are not a complete service procedure. Tom's Hardware separately reports an eight-screw cooler/shroud aggregate on a sample whose rear-PCB label reads P/N 12G-P5-3655-KR; its overlap with the Gamers Nexus groups is unresolved, so counts are not added together. Unmapped positions remain logical-only; driver size outside the documented display-output screws, torque, thread details, thermal-pad replacement dimensions and reassembly order remain unverified.
 - No third-party images or video frames are redistributed in this package.
 
 
@@ -39,7 +39,7 @@ This is not yet a complete engineering reconstruction. Eight cooler/shroud reten
 
 ### Fine-grained cooling decomposition
 
-The development branch now expands the content graph to **309 semantic components, 305 typed relationships, 99 claims and 18 sources**. Fan frames, hubs and eight photo-counted blade proxies per fan are separately selectable; the illustrative heatsink has 24 separately selectable fin proxies; six separate heatpipe route proxies record The FPS Review's four central plus two side runs; they do not establish six separate closed U-shaped tube loops; and six memory thermal-pad proxies plus one VRM pad strip have their own IDs. The eight-blade count is a retail-photo observation for this exact SKU, not a factory drawing; blade shape and all fin/thermal-pad dimensions remain proxies or unknown.
+The development branch now expands the content graph to **313 semantic components, 311 typed relationships, 109 atomic claims and 29 sources**. Fan frames, hubs and eight photo-counted blade proxies per fan are separately selectable; the illustrative heatsink has 24 separately selectable fin proxies; six separate heatpipe route proxies record The FPS Review's four central plus two side runs; they do not establish six separate closed U-shaped tube loops; and six memory thermal-pad proxies plus one VRM pad strip have their own IDs. The eight-blade count is a retail-photo observation for this exact SKU, not a factory drawing; blade shape and all fin/thermal-pad dimensions remain proxies or unknown.
 
 
 ### Partial teardown evidence
@@ -79,7 +79,7 @@ The FPS Review explicitly identifies its sample as 12G-P5-3655-KR and describes 
 
 ### Fan fastener evidence
 
-Gamers Nexus' exact-model teardown shows three retaining screws per independently replaceable fan. The model represents six fan-mount fasteners as separate semantic nodes with `geometry_status: logical_only`; their centres, thread, head, length and torque remain unknown. These are separate from the eight cooler/shroud retention screws. The new third assembly action records this limited observation without presenting a complete fan or cooler service procedure.
+Gamers Nexus' exact-model teardown shows three retaining screws per independently replaceable fan. The model represents six fan-mount fasteners as separate semantic nodes with `geometry_status: logical_only`; their centres, thread, head, length and torque remain unknown. These are separate from the eight cooler/shroud retention screws. The fifth partial assembly observation records this limited observation without presenting a complete fan or cooler service procedure.
 
 
 ### GA10x logical SM hierarchy

@@ -8,7 +8,7 @@
 - GPU: NVIDIA GeForce RTX 3060 (Ampere / GA106 family)
 - Memory: 12GB GDDR6
 - Content status: source-linked v0.6 deep-atlas development branch; canonical package is maintained at [`content/models/evga-rtx3060-xc-black-12gb`](../../../../content/models/evga-rtx3060-xc-black-12gb/)
-- Geometry status: Blender 4.3.2 v0.5 generator and GLB/SBS integration validated in CI; still illustrative proxy, not CAD
+- Geometry status: Blender 4.3.2 v0.5 generator and GLB/SBS integration validated in earlier CI runs; latest HEAD is waiting for GitHub-hosted runner assignment; still illustrative proxy, not CAD
 - Rights status: not cleared for third-party media/assets
 
 This package is specific to the XC BLACK SKU. Do not merge data from the distinct EVGA XC Gaming SKU (12G-P5-3657-KR) or other RTX 3060 boards without evidence of equivalence.
@@ -60,7 +60,7 @@ The current Blender generator writes versioned v0.5 artifacts:
 - `rtx3060_xc_black_blockout_v05.glb`
 - `rtx3060_xc_black_blockout_v05.manifest.json`
 
-Earlier v0.1/v0.2/v0.3 outputs are retained locally for comparison. v0.5 retains the fan-frame, hub and blade-pivot transform checks. The X-axis gate no longer incorrectly treats 201.8 mm as the maximum outer-shroud length; the vertical bounds remain a proxy sanity check. Current-head CI validates Blender generation, GLB and manifest integrity, portable SBS packaging, browser import and the viewer test suite. Visual fidelity still requires owner review against an exact physical sample or calibrated references. An independent standard-library validator is available at [validate_blockout_package.py](../../../../tools/modeling/validate_blockout_package.py); run it using the command in [BLOCKOUT_VALIDATION.md](02-CAD/BLOCKOUT_VALIDATION.md). Product geometry remains illustrative and has not passed the external-fidelity gate.
+Earlier v0.1/v0.2/v0.3 outputs are retained locally for comparison. v0.5 retains the fan-frame, hub and blade-pivot transform checks. The X-axis gate no longer incorrectly treats 201.8 mm as the maximum outer-shroud length; the vertical bounds remain a proxy sanity check. Earlier CI runs validated Blender generation, GLB and manifest integrity, portable SBS packaging, browser import and the viewer test suite. The latest HEAD's Actions jobs have not started because GitHub has not assigned a hosted runner (`runner_id: 0`, no steps/logs); do not interpret those attempts as passing current-head validation. Visual fidelity still requires review against an exact physical sample or calibrated references. An independent standard-library validator is available at [validate_blockout_package.py](../../../../tools/modeling/validate_blockout_package.py); run it using the command in [BLOCKOUT_VALIDATION.md](02-CAD/BLOCKOUT_VALIDATION.md). Product geometry remains illustrative and has not passed the external-fidelity gate.
 
 ## Text-first scene inspection
 
@@ -76,7 +76,7 @@ The report includes component IDs, parent IDs, world-space positions, dimensions
 
 ## Canonical package and remaining evidence gates
 
-The current canonical package is linked above and contains 309 semantic components, 305 typed relationships, 99 claims and 18 registered sources, plus three partial teardown actions and two educational clips. It remains a starter engineering atlas, not a complete BOM or complete service manual. Exact PCB revision, matching BoardView/schematic, component reference designators and calibrated mechanical dimensions remain unverified. Heatpipe sources use different counting conventions (six route/runs, four copper heatpipes, or two central tube paths); the unique physical closed-loop count is unresolved. Eight visible blade surfaces per fan are counted from two exact-SKU listing photographs; blade profile remains proxy geometry. Original OEM fan part number is unknown; aftermarket listings are compatibility leads only.
+The current canonical package is linked above and contains 313 semantic components, 311 typed relationships, 109 atomic claims and 29 registered sources, plus five partial teardown observations and two educational clips. It remains a starter engineering atlas, not a complete BOM or complete service manual. Exact PCB revision, matching BoardView/schematic, component reference designators and calibrated mechanical dimensions remain unverified. Heatpipe sources use different counting conventions (six route/runs, four copper heatpipes, or two central tube paths); the unique physical closed-loop count is unresolved. Eight visible blade surfaces per fan are counted from two exact-SKU listing photographs; blade profile remains proxy geometry. Original OEM fan part number is unknown; aftermarket listings are compatibility leads only.
 
 See [GPU source audit](../../../../docs/GPU_SOURCE_AUDIT.md) and [content pipeline](../../../../docs/CONTENT_PIPELINE.md).
 
