@@ -8,23 +8,23 @@
   "files": [
     {
       "path": "model.json",
-      "sha256": "942cf223ddeef939624302620f1ff86fa10bf4d73152e6d9e9995aa82cc0eff2"
+      "sha256": "1b2c121ec784004c13dec1cd8ce2229fa80a4a5196ad3161de414957c52ac1e2"
     },
     {
       "path": "sources.json",
-      "sha256": "127f381109f1df14699b0f1d2a8a1014939a2105dd1775fdd1ddeb666dd00427"
+      "sha256": "9fd92c546d5519dcdbe869ab905a6b9a5c53892acbcdd6b093e583343a4b222c"
     },
     {
       "path": "components.json",
-      "sha256": "a1b438b7317ee4b65716621efc66f1b2d40ba210efdce4b058111bf5264f40f6"
+      "sha256": "b41b8f698d18db6de072d9985bb09fa4ab0c650313355ee1382efefe4bcd114a"
     },
     {
       "path": "relationships.json",
-      "sha256": "d9dae17058e607884a2764f74470fcf01417667848463252c7f75522b582ae4b"
+      "sha256": "8a9df4f8303acd43821037bf71c1f8a25f733d3ce7ba035a52faadea6850aca3"
     },
     {
       "path": "process_layers.json",
-      "sha256": "60a11ea111c624363248a32bd62f9f4678f63510fa75610416964100be73b958"
+      "sha256": "b3e036de7e5c68cec55ea545fcc431ad9876fbbcc7a60d21ae7e4a287abc5460"
     },
     {
       "path": "assembly_steps.json",
@@ -36,7 +36,7 @@
     },
     {
       "path": "claims.json",
-      "sha256": "7cfe5f4a6085d857edd919d842b2d4d6b5d3fb018babdfd685a8db2a63c2d88b"
+      "sha256": "96c9e4ce4b03539f6912bdc5003f44ffe954fd70ce366fdd625591e19c43464e"
     },
     {
       "path": "animations.json",
