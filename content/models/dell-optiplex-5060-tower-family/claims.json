@@ -402,9 +402,12 @@
       "unit": "models",
       "confidence_class": "manufacturer_data",
       "source_ids": [
-        "src.dell.5060.processors"
+        "src.dell.5060.processors",
+        "src.dell.5060.spec_sheet",
+        "src.intel.g5400",
+        "src.intel.g5500"
       ],
-      "notes": "Supported orderable CPU family options only; this reference model does not select or install one. A separate service-manual table differs on some TDP values."
+      "notes": "Supported option list only, not a fitted CPU. Dell's data sheet lists 65 W for standard non-T options; Intel ARK reports different processor TDP values for G5400/G5500, with a separate 65 W thermal-solution specification. The service-manual 35 W row is not reconciled to T-suffix options."
     },
     {
       "id": "claim.fan.grommet_count",
@@ -429,6 +432,38 @@
         "src.dell.5060.heatsink"
       ],
       "notes": "Loosening order 1–4 is documented; installed screw coordinates and torque are not supplied."
+    },
+    {
+      "id": "claim.cpu.power_rating_discrepancy",
+      "subject_id": "motherboard.cpu_socket",
+      "predicate": "processor_power_values_by_source",
+      "value": {
+        "Pentium Gold G5400": {
+          "dell_datasheet_rating_w": 65,
+          "intel_ark_tdp_w": 58,
+          "intel_thermal_solution_spec_w": 65,
+          "integrated_graphics": "UHD Graphics 610"
+        },
+        "Pentium Gold G5500": {
+          "dell_datasheet_rating_w": 65,
+          "intel_ark_tdp_w": 54,
+          "intel_thermal_solution_spec_w": 65,
+          "integrated_graphics": "UHD Graphics 630"
+        },
+        "other_standard_non_T_options": {
+          "dell_datasheet_rating_w": 65
+        },
+        "service_manual_processor_list_value_w": 35
+      },
+      "unit": "W",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.5060.spec_sheet",
+        "src.intel.g5400",
+        "src.intel.g5500",
+        "src.dell.5060.service"
+      ],
+      "notes": "Source values are intentionally kept side by side rather than collapsed. The Dell service manual's 35 W processor paragraph is inconsistent with its data sheet's standard non-T versus T-suffix distinction; do not infer an installed CPU or use these figures as a measured system thermal limit."
     }
   ]
 }
