@@ -418,11 +418,59 @@
         "en": "Dell lists nine #6-32 × 1.4 mm system-board screws and three #6-32 × 1.4 mm PSU screws. Other entries are optional/module-specific, not a universal installed count.",
         "ru": "Dell указывает девять винтов #6-32 × 1,4 мм системной платы и три винта #6-32 × 1,4 мм БП. Остальные позиции относятся к опциям/модулям, а не к универсальному установленному количеству."
       }
+    },
+    {
+      "source_id": "src.dell.5060.m2_removal",
+      "locator": "Removing M.2 SSD",
+      "note": {
+        "en": "If an M.2 PCIe SSD is fitted: remove its single M2×3.5 retaining screw and slide the module out of the system-board connector. The option is not populated in the family reference.",
+        "ru": "Если M.2 PCIe SSD установлен: выкрутить единственный крепёжный винт M2×3,5 и выдвинуть модуль из разъёма системной платы. В эталоне семейства опция не установлена."
+      }
+    },
+    {
+      "source_id": "src.dell.5060.coin_cell_removal",
+      "locator": "Removing coin-cell battery",
+      "note": {
+        "en": "Press the coin-cell socket release latch until the battery pops out, then lift it from the holder. Dell notes that removing the coin cell may reset BIOS/settings.",
+        "ru": "Нажать фиксатор держателя батарейки, пока она не выйдет из гнезда, затем извлечь. Dell предупреждает, что снятие батарейки может сбросить BIOS/настройки."
+      }
+    },
+    {
+      "source_id": "src.dell.5060.heatsink_fan_removal",
+      "locator": "Removing heat sink fan",
+      "note": {
+        "en": "Disconnect the heatsink assembly cable, remove the fan screws through the top screw holes and lift the fan away. Exact fan SKU and screw coordinates are unknown.",
+        "ru": "Отключить кабель сборки радиатора, выкрутить винты вентилятора через верхние отверстия и снять вентилятор. Точный SKU вентилятора и координаты винтов неизвестны."
+      }
+    },
+    {
+      "source_id": "src.dell.5060.service",
+      "locator": "Removing 3.5-inch and 2.5-inch hard-drive assemblies, printed pp.22–27",
+      "note": {
+        "en": "The 3.5-inch assembly uses a removable HDD filler bracket and blue release tab; disconnect SATA data/power, press the tab and slide the assembly out. The 2.5-inch assembly is disconnected and released by blue tabs on both sides. Both drive brackets retain the drive with flexible pins rather than a universal fixed screw pattern.",
+        "ru": "Сборка 3,5″ использует съёмную заглушку/кронштейн HDD и синюю защёлку; после отключения SATA и питания нажать защёлку и выдвинуть сборку. Сборка 2,5″ отключается и освобождается синими фиксаторами по бокам. Оба кронштейна удерживают диск гибкими штифтами, а не универсальной схемой винтов."
+      }
+    },
+    {
+      "source_id": "src.dell.5060.optical_drive_install",
+      "locator": "Installing optical drive",
+      "note": {
+        "en": "The optional slim optical drive slides into its bay until it clicks. Route the data/power leads under the drive cage and connect them to the drive.",
+        "ru": "Опциональный тонкий оптический привод вставляется в отсек до щелчка. Кабели данных/питания провести под корзиной накопителей и подключить к приводу."
+      }
+    },
+    {
+      "source_id": "src.dell.5060.optional_video_module",
+      "locator": "Installing optional VGA module",
+      "note": {
+        "en": "Remove the rear metal blanking bracket, insert the optional video module from inside, connect its system-board cable and secure it with two M3×3 screws. This is an option-specific procedure.",
+        "ru": "Снять заднюю металлическую заглушку, вставить опциональный видеомодуль изнутри, подключить кабель к системной плате и закрепить двумя винтами M3×3. Процедура относится только к опциональной конфигурации."
+      }
     }
   ],
   "status": "manufacturer_documented_partial_procedure",
   "scope_note": {
-    "en": "Dell-documented system-board removal chain only. Not a complete teardown/reassembly guide and not evidence that optional devices are installed. PSU and system-fan removal are separate procedures.",
-    "ru": "Только последовательность снятия системной платы по руководству Dell. Не полная инструкция по разборке/сборке и не доказательство установки опциональных устройств. Для БП и корпусного вентилятора предусмотрены отдельные процедуры."
+    "en": "The 12-step chain below is only Dell's system-board removal prerequisite sequence. Separate service procedures for M.2 SSD, coin cell, heatsink fan, HDD/ODD and optional video modules are recorded as independent observations below. Optional-device presence remains conditional; this package is not a complete teardown/reassembly guide.",
+    "ru": "12 шагов ниже описывают только последовательность снятия системной платы по Dell. Отдельные процедуры M.2 SSD, батарейки RTC, вентилятора радиатора, HDD/ODD и опционального видеомодуля записаны ниже как самостоятельные наблюдения. Наличие опций условно; пакет не является полной инструкцией разборки/сборки."
   }
 }
