@@ -169,3 +169,8 @@ Hardware Asylum's EVGA RTX 3060 XC teardown and TechPowerUp's XC board analysis 
 ## 26. Separated mechanical fastener groups
 
 The exact-model Gamers Nexus teardown now has separate semantic groups for the four spring-loaded GPU cooler screws, the two screws securing the fin-stack base, two narrow I/O-plate screws with reverse-side nuts, three smaller display-output retaining screws (Phillips #0 is explicitly used here), and three screws per replaceable fan. Additional shroud screws are visible but the presenter is uncertain whether there are four or six, so they remain a logical candidate with no numeric count. These groups are **not added** to Tom's Hardware's separate eight-screw cooler/shroud aggregate because their overlap is not established. Only the four GPU screws have photo-positioned proxies; the other groups remain logical-only. The assembly panel now displays five partial observations, not a complete service procedure.
+
+
+## 27. Sample-specific cooling and board-power operating point
+
+PC Perspective reports a single EVGA GeForce RTX 3060 12GB XC BLACK test observation: Metro Exodus 2160/high, open case, approximately 24 °C ambient, 68.1 °C GPU, 80.5 °C hotspot, 73% fan duty and about 2030 RPM; observed board power peaked at 172.4 W. The review names the XC BLACK model but does not provide the 12G-P5-3655-KR retail part number, so the data is explicitly sample/workload evidence, not a board revision or universal operating specification. The official 170 W rating remains unchanged; a measured transient/test peak is not a replacement for that rating. The RPM point is not fan maximum speed, and one duty/RPM pair is insufficient to infer the factory fan curve.

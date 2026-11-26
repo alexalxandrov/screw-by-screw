@@ -324,3 +324,10 @@ The full Gamers Nexus transcript distinguishes several mechanical groups that we
 These observations must not be added into one grand screw count. Tom's Hardware separately reports eight cooler/shroud retention screws on the exact-SKU-linked sample (four around the GPU and four near the far end). The available material does not establish which of the fin-stack-base and I/O groups overlap with that aggregate. The model now separates the four GPU screws from the fin-stack-base pair, the I/O screw/nut pair and the three display-output screws. Only the four GPU screw positions have photo-positioned visual proxies; all other new groups are logical-only. The complete service sequence, all shroud screw positions, screw threads, lengths, head profiles and torque values remain unknown.
 
 Source: Gamers Nexus exact-model teardown, especially 01:30–05:33 and 09:00: https://www.youtube.com/watch?v=hJFJ_clQT8U
+
+
+## 27. Exact-product thermal/acoustic operating-point observation
+
+PC Perspective's review explicitly names the sample **EVGA GeForce RTX 3060 12GB XC BLACK** and reports a Metro Exodus 2160/high observation in an open case at approximately **24 °C ambient**: GPU temperature **68.1 °C**, hotspot **80.5 °C**, fans at **73% / approximately 2030 RPM**, and board power peaking at **172.4 W**. This source does not publish the retail part number, so these are tagged as exact-product-name review measurements rather than exact part-number identity evidence. They represent one workload/sample operating point; do not use 2030 RPM as fan maximum or OEM rating, infer a fan curve from one duty point, or replace EVGA's published 170 W product rating with the single observed 172.4 W reading. The model keeps these as separate atomic measurements and leaves ambient/test context in the claim provenance.
+
+Source: PC Perspective, 25 February 2021: https://pcper.com/2021/02/nvidia-geforce-rtx-3060-review-evga-xc-black-tested/
