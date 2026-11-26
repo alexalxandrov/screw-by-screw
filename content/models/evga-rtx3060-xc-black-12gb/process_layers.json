@@ -45,7 +45,19 @@
         "cooling.heatpipe.side.02",
         "connector.io.bracket",
         "fan.1.blade.8",
-        "fan.2.blade.8"
+        "fan.2.blade.8",
+        "fan.1.blade.2",
+        "fan.1.blade.3",
+        "fan.1.blade.4",
+        "fan.1.blade.5",
+        "fan.1.blade.6",
+        "fan.1.blade.7",
+        "fan.2.blade.2",
+        "fan.2.blade.3",
+        "fan.2.blade.4",
+        "fan.2.blade.5",
+        "fan.2.blade.6",
+        "fan.2.blade.7"
       ],
       "description": {
         "en": "The exact-SKU The FPS Review describes four central GPU-contact heatpipe runs plus two side runs; PCWorld's product-name review summarizes four copper heatpipes; Gamers Nexus narrates two central tube paths through the contact plate. These source-specific descriptions may count tube legs, full pipes or closed loops differently. Six selectable run proxies are shown for navigation only; the unique physical loop count remains unknown. Four copper terminal faces visible in LanOC's cooler-end photo are a separate observation. Heatpipe centrelines, diameters, bends and flattening remain illustrative, not calibrated CAD. The contact plate, fin stack, two fans and thermal-interface groups are separate elements. Airflow markers show direction only and are not CFD or thermal simulation. LanOC also describes the vertical aluminium fin stack, copper plate spanning GPU/memory, black plastic shroud without RGB, and PCB airflow cutout; mesh outlines remain proxies.",
