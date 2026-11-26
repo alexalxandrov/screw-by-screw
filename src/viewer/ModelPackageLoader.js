@@ -318,6 +318,7 @@ export async function loadModelPackage(file) {
   if (!file || typeof file.arrayBuffer !== "function") throw new TypeError("A local .sbsmodel file is required");
   if (file.size > MAX_MODEL_PACKAGE_BYTES) fail("archive exceeds the 512 MiB package limit");
   const buffer = await file.arrayBuffer();
+  if (!(buffer instanceof ArrayBuffer) || buffer.byteLength > MAX_MODEL_PACKAGE_BYTES) fail("package size is outside the allowed range");
   const prefix = "SBSMODEL-JSON\n";
   const header = new TextDecoder().decode(buffer.slice(0, prefix.length));
   let archive;
