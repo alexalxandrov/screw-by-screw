@@ -12,9 +12,14 @@ A double-click `file://` launch loads embedded packages without a server or netw
 
 Every archive still passes through `loadModelPackage`: ZIP structure, path traversal, entry-size limits, checksums, metadata references, animation tracks and GLB node bindings are checked. Catalogue strings are rendered as text nodes, not HTML.
 
-## Current entry
+## Current entries
 
-The index currently contains the exact EVGA GeForce RTX 3060 XC BLACK GAMING 12GB SKU `12G-P5-3655-KR`. Its status is a research blockout and its geometry is labelled `illustrative_proxy_not_cad`; the catalogue does not imply CAD accuracy.
+The catalogue contains two model classes:
+
+- **EVGA GeForce RTX 3060 XC BLACK GAMING 12GB**, exact SKU `12G-P5-3655-KR`, in `graphics_cards`. This remains the default package.
+- **Dell OptiPlex 5060 Tower**, `platform_family` system reference in `desktop_computers`. It is packaged as `models/dell_optiplex_5060_tower_v01.sbsmodel` and is explicitly labelled `illustrative_proxy_not_cad`.
+
+The OptiPlex family package contains 67 stable component nodes, 68 typed relationships, 58 box-proxy meshes and 24 separate screw/grommet instances. Its outer dimensions are manufacturer-published; internal layout and fastener placement are schematic. The two entries use the same catalogue adapter and package loader.
 
 ## Adding another model
 

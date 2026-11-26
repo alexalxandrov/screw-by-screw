@@ -1,129 +1,78 @@
-# Multi-model library — implementation plan
+# Multi-model library — implementation plan and status
 
-**Goal:** evolve Screw by Screw from a strong single-device pilot into a catalogue and viewer that can host many unrelated device models without adding model-specific branches to the application.
+**Goal:** evolve Screw by Screw from the RTX 3060 component pilot into a catalogue and viewer for unrelated devices, from individual components to complete systems.
 
-## Verified baseline
+## Implemented in this branch
 
-The following already exists:
+- The catalogue is bilingual and data-driven, with two categories: `graphics_cards` and `desktop_computers`.
+- It has two entries: EVGA GeForce RTX 3060 XC BLACK GAMING 12GB (exact SKU) and Dell OptiPlex 5060 Tower (platform-family system).
+- Identity scope and model kind are explicit; the OptiPlex is not assigned a fabricated part number.
+- Runtime startup now resolves the default entry from `content/catalog/models.json`. The RTX 3060 is still the default, but `src/main.js` and `src/data/model.js` no longer import its sidecar JSON as a special startup path.
+- Startup and later catalogue switching use the same `.sbsmodel` loader.
+- The OptiPlex package is stored at `public/models/dell_optiplex_5060_tower_v01.sbsmodel`; editable source data lives in `content/models/dell-optiplex-5060-tower-family/`.
+- The OptiPlex package has 67 stable component nodes, 68 typed relationships, 58 box-proxy geometry nodes and 24 individual screw/grommet instances.
+- Its scene can be regenerated from per-component `visual_proxy` metadata by `tools/modeling/build_device_blockout.py`; a dedicated workflow rebuilds the scene and package and tests the production package loader with checksums.
+- The catalogue UI already supports category filters, text search, model identity, package version and geometry status.
 
-- `content/catalog/models.json` is a data-driven bilingual catalogue with categories, model IDs, manufacturer/part-number identity, package version/path and geometry status.
-- This branch adds optional, validated `identity_scope` and `model_kind` fields to the catalogue adapter. `exact_sku` requires a real part number; platform-family records can leave `part_number` empty. Existing catalogue records remain backward-compatible.
-- `src/data/catalog.js` validates categories, unique catalogue IDs, duplicate manufacturer/part-number pairs, model package IDs and safe relative `.sbsmodel` paths.
-- `src/viewer/ModelPackageLoader.js` validates the portable model package and its cross-file references before loading.
-- This branch generalizes the content validator's package-level geometry fidelity field to include measured, CAD, teardown-supported, photo-estimated, mixed and unknown states; a model is no longer forced to claim illustrative proxy geometry.
-- `src/main.js` has `fetchCatalogPackage()`, `openCatalogEntry()` and `applyPackageData()`; selected catalogue packages can be loaded through the shared package loader.
-- The catalogue UI already has category filtering and text search.
+## Current limitations and remaining engineering work
 
-This is a useful starting point. The application is not yet fully model-agnostic at startup and in CI.
+1. **Legacy RTX-specific tooling remains.** The RTX blockout generator and its CI workflow still use fixed model paths and RTX-specific assumptions. Reusable validators should become manifest-driven; the legacy RTX pipeline still has a known GLB binding discrepancy for some logical/abstract components.
+2. **The viewer's broader browser suite remains a gate.** Unit tests and the dedicated OptiPlex package workflow are separate from browser interaction tests. Catalogue switching, persistence and visual states must pass browser tests before a release.
+3. **Standalone distribution needs a final release check.** `npm run build` embeds all staged catalogue packages in root `index.html`. The standalone output should be inspected to confirm both entries can be opened without a server.
+4. **No cross-package component references yet.** The PC package can define a physical instance and eventually reference a GPU, RAM module, SSD or PSU package by stable versioned ID. The current v0.1 package keeps unknown/optional installed parts unpopulated rather than inventing their exact identity.
+5. **The OptiPlex is not a physical-sample reconstruction.** Exact system-board assembly number/revision, CPU, PSU, drive population, internal cable routing, board hole coordinates and detailed fastener positions remain unknown. Its GLB uses schematic box proxies, never CAD.
 
-## Current blockers found in the repository
+## Information architecture
 
-1. **Single-model startup imports:** `src/main.js` imports the RTX 3060 package JSON as the default runtime data, and `src/data/model.js` statically imports that model's JSON files. The first model is therefore still a special path even though later catalogue selection is generic.
-2. **One category in production data:** `content/catalog/models.json` currently declares only `graphics_cards` and contains only the EVGA RTX 3060 entry.
-3. **RTX-specific modeling validator:** `tools/modeling/validate_blockout_package.py` contains fixed RTX 3060 model-ID and part-number constants.
-4. **RTX-specific Blender workflow:** `.github/workflows/blender-model-validation.yml` invokes the RTX 3060 generator and stages RTX 3060 artifacts by fixed filenames/paths.
-5. **No cross-package component references yet:** the package contract is self-contained. A PC package should be able to reference a separately versioned GPU/SSD/PSU package without copying its complete component graph or confusing a shared component definition with a physical instance.
-
-## Target information architecture
-
-The catalogue should support both whole systems and standalone devices. A practical first taxonomy:
-
-- **Computers:** desktop PCs, workstations, laptops and servers.
+- **Computer systems:** desktops, workstations, laptops and servers.
 - **Computer components:** GPUs, CPUs, motherboards, RAM, PSUs, coolers and storage.
-- **Networking:** routers, switches, access points and network adapters.
+- **Networking:** routers, switches, access points and adapters.
 - **Mobile and consumer electronics:** phones, tablets, cameras and audio equipment.
-- **Other devices:** added only when a real model justifies the category.
+- **Other devices:** added only when supported by an actual model.
 
-Each catalogue entry should carry:
-- a stable catalogue ID;
-- identity scope (exact retail SKU, platform family, physical sample or authored reference configuration);
+Each entry carries:
+- stable catalogue ID;
+- identity scope (`exact_sku`, `platform_family`, `physical_sample` or `reference_configuration`);
 - manufacturer and product/variant name;
-- part number only when it is a real manufacturer identifier;
-- category and model kind (system, assembly or component);
-- package version and safe package path;
-- package status and geometry/evidence status;
-- optional compatibility/related-model references.
+- manufacturer part number only when one is established;
+- category and model kind (`system`, `assembly`, `component` or `device`);
+- package version/path and model status;
+- geometry/evidence class and source-backed technical claims.
 
-Do not put a platform-family code into `part_number` and pretend it is a manufacturer SKU. The adapter on this branch represents family-level research entries honestly through `identity_scope`.
+## Package and instance architecture
 
-## Target package architecture
+A reusable component definition is not the same as a physical occurrence inside one PC. Repeated screws, DIMMs, fans and M.2 devices must have unique instance IDs and individual transforms. The current OptiPlex package demonstrates stable per-instance IDs for its repeated fasteners and grommets.
 
-### 1. Generic startup path
+Cross-package references should later let a PC instance point to a separately versioned GPU/SSD/PSU package. They must be optional and validated; an unavailable related package must not prevent the base PC model from opening.
 
-- Load the catalogue first.
-- Resolve the declared default model and its package by the same loader used for every other catalogue entry.
-- Keep a small, explicit fallback state only for offline/file-open failure; do not keep a parallel RTX-specific runtime data path.
-- Ensure model switching disposes scene, animation and selection state before the next package is applied.
-- Add tests for initial load, model switching, missing package, mismatched package ID, offline embedded packages and file:// fallback.
-
-### 2. Reusable physical components vs placed instances
-
-A reusable definition (for example, a 120 mm axial fan or M.2 SSD) is not the same as one physical occurrence in a particular PC.
-
-- `ComponentDefinition`: reusable type/specification.
-- `ComponentInstance`: one installed occurrence with its own parent, transform, reference designator, evidence and geometry node.
-- Repeated fans, DIMMs, screws and standoffs must have distinct instance IDs.
-- Geometry nodes bind to component instance IDs, not only to a generic part type.
-
-### 3. Cross-package references
-
-The PC package should own its system-level assembly and physical installed-instance IDs. Where a fitted part has its own detailed package, the PC component instance can point to a stable external package/model/release reference. Do not duplicate the GPU's component graph into the PC package.
-
-Define relationship types for system integration:
+Relationship vocabulary should cover:
 - mechanical: `mounted_in`, `fastened_to`, `supports`, `contains`;
 - electrical: `powered_by`, `connected_to`, `signals_to`;
 - thermal/airflow: `cooled_by`, `transfers_heat_to`, `airflow_over`;
 - data/storage: `data_connects_to`, `stores_data_for`.
 
-Cross-package references must be versioned, resolvable and validated. A broken or unavailable related package should not prevent the PC package itself from opening.
+## Evidence and geometry fidelity
 
-### 4. Evidence and geometry fidelity
-
-Do not use one global geometry status for every package. Geometry status belongs to the relevant asset, component or release and should distinguish at least:
-- manufacturer CAD;
-- measured reconstruction;
-- teardown-supported reconstruction;
-- calibrated photo estimate;
-- illustrative proxy;
-- unknown.
-
-A single model may contain a mixture of these. Claims must have per-claim provenance and applicability. Optional components and variant differences must be explicit rather than silently merged.
-
-### 5. Catalogue UI
-
-- Browse all models with search and category filters.
-- Distinguish full systems from components in cards and detail pages.
-- Show exact model identity and revision/configuration scope.
-- Show content status, geometry fidelity and evidence coverage.
-- Support related-model navigation and compatibility links.
-- Add compare views only when models share meaningful comparable properties.
-- Make the current model, category and selected component stable in URLs when practical.
-
-### 6. Multi-model CI and content pipeline
-
-- Split generic package validation from model-specific Blender generation.
-- Validate every package discovered from a manifest/catalogue entry.
-- Replace hard-coded RTX identifiers in reusable validators with CLI arguments or manifest-driven identity.
-- Use per-model build definitions or a controlled CI matrix.
-- Keep large binary packages as generated artifacts or in suitable asset storage; do not commit unlicensed source media or oversized working files.
-- Add contract tests that load at least two unrelated packages (GPU and desktop PC) through the same viewer runtime.
+Do not use one package-wide accuracy label to imply every part has equal certainty. Components and claims must retain their own provenance. Distinguish manufacturer CAD, measured reconstruction, teardown-supported reconstruction, photo estimate, illustrative proxy and unknown. Optional installed devices must be clearly marked as optional/unpopulated.
 
 ## Delivery sequence
 
-1. Stabilize current RTX 3060 work and resolve the existing PR/Actions approval state before stacking more release work.
-2. Extend and test the catalogue identity-scope and model-kind schema without registering an incomplete PC package. (Implemented in this branch.)
-3. Convert startup to use the same generic package-loading path as catalogue switching.
-4. Generalize validators and CI so the second device does not require RTX-specific code.
-5. Build the Dell OptiPlex 5060 Tower research package and staged geometry.
-6. Add the completed PC package to the catalogue; link any fitted component package by versioned reference.
-7. Prove model switching, offline launch, browser performance, accessibility and package integrity with both device classes.
+1. **Done:** add identity scope/model kind and a multi-category catalogue.
+2. **Done:** remove RTX-specific sidecar imports from viewer startup.
+3. **Done:** register a second system-level model and create its portable package.
+4. **Done:** add a reproducible GLB generator and dedicated package-validation workflow.
+5. **In progress:** finish the viewer browser suite and verify standalone offline opening of both model packages.
+6. Generalize the legacy RTX-specific Blender/build/validation pipeline.
+7. Add versioned cross-package component references.
+8. Replace schematic PC geometry with a calibrated reconstruction from an identified physical OptiPlex 5060 Tower configuration; record board and PSU revisions, dimensions, screw locations and fitted options.
 
-## Acceptance criteria for the multi-model milestone
+## Acceptance criteria
 
-- The RTX 3060 package remains loadable without a GPU-specific special case in the viewer runtime.
-- A PC package with a different component hierarchy loads through the same runtime.
-- The catalogue can represent multiple categories and identity scopes without fabricated manufacturer part numbers.
-- Generic validators accept valid packages with differing geometry-fidelity classes and reject invalid references/IDs.
-- Component instance IDs remain unique even when multiple instances share one component definition.
-- Related packages are navigable but not required for a base package to render.
-- No unknown geometry, screw count, electrical path or disassembly step is silently guessed.
+- Both catalogue entries validate and remain independently selectable.
+- The default RTX package opens through the same generic loader as the PC.
+- The PC package passes package loader, SHA-256, GLB node-ID and ancestry checks.
+- The catalogue supports multiple categories and identity scopes without fabricated manufacturer IDs.
+- Each repeated physical occurrence has a unique component-instance ID.
+- Missing/optional parts and unknown data remain explicit.
+- Standalone `file://` mode embeds the staged model packages and can open both models.
+- No unverified CAD accuracy, installed screw count, electrical path or teardown sequence is claimed.
