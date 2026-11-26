@@ -558,6 +558,18 @@
         "src.lanoc.review"
       ],
       "notes": "LanOC's explicit XC BLACK review identifies four heatsink mounting screws in the centre around the GPU in its 12G-P5-3655-KR sample. This is the visible GPU-area mounting set only, not a count of every screw retaining the shroud/cooler."
+    },
+    {
+      "id": "claim.cooling.heatpipe_terminal_count",
+      "subject_id": "cooling.heatpipes",
+      "predicate": "visible_copper_heatpipe_terminal_face_count",
+      "value": 4,
+      "unit": "visible terminal faces",
+      "confidence_class": "independently_verified",
+      "source_ids": [
+        "src.lanoc.review"
+      ],
+      "notes": "Four separate copper terminal faces are visible in the exact XC BLACK cooler end photograph (LanOC image 16). This does not establish four unique heatpipes; two U-shaped pipes may produce four ends. It is a visible-face count only."
     }
   ]
 }
