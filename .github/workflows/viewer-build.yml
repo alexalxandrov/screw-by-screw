@@ -54,5 +54,5 @@ jobs:
         run: npx playwright install --with-deps chromium firefox
       - name: Build production viewer
         run: npm run build
-      - name: Run browser interaction tests
-        run: npm run test:e2e
+      - name: Browser tests run with the generated default model
+        run: echo "The full Playwright suite runs in blender-model-validation.yml after the default GPU package is generated and staged."

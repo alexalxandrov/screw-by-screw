@@ -79,7 +79,7 @@
             <span data-i18n="assemblyTree">ASSEMBLY TREE</span>
             <button id="expand-tree" class="text-button" type="button" data-i18n="showAll">Show all</button>
           </div>
-          <nav id="component-tree" class="component-tree" aria-label="Component hierarchy"></nav>
+          <nav id="component-tree" class="component-tree" aria-label="Component hierarchy" tabindex="0"></nav>
           <div class="sidebar-note">
             <span class="status-dot"></span>
             <span data-i18n="proxyNote">Illustrative geometry · not CAD</span>
@@ -158,7 +158,7 @@
             </div>
           </div>
 
-          <div id="process-panel" class="process-panel">
+          <div id="process-panel" class="process-panel" tabindex="0">
             <div class="process-title"><span class="eyebrow" data-i18n="processLayers">PROCESS LAYERS</span><span data-i18n="qualitativeOnly">QUALITATIVE ONLY</span></div>
             <div class="process-buttons">
               <button class="process-button" data-layer="cooling" type="button"><span class="process-icon cooling-icon">≈</span><span data-i18n="cooling">Cooling</span></button>
@@ -212,7 +212,7 @@
             <strong data-i18n="selectComponent">Select a component</strong>
             <p data-i18n="selectHint">Choose a part in the 3D view or assembly tree to inspect its role and evidence.</p>
           </div>
-          <div id="learning-panel" hidden>
+          <div id="learning-panel" tabindex="0" hidden>
             <div class="quiz-meta"><span id="quiz-progress">01 / 08</span><span id="quiz-score">0 correct</span></div>
             <p id="learning-save-status" class="learning-save-status" role="status" aria-live="polite">Локальный прогресс</p>
             <h3 id="quiz-question" class="quiz-question">—</h3>
@@ -221,7 +221,7 @@
             <div id="quiz-sources" class="quiz-sources"></div>
             <button id="quiz-next" class="primary-button quiz-next" type="button" disabled>Check answer</button>
           </div>
-          <div id="process-details" class="process-details" hidden>
+          <div id="process-details" class="process-details" tabindex="0" hidden>
             <div class="process-detail-type" id="process-detail-type">COOLING</div>
             <h3 id="process-detail-title">—</h3>
             <p id="process-detail-description" class="detail-description">—</p>
@@ -239,7 +239,7 @@
               <div id="process-sources" class="source-links"></div>
             </div>
           </div>
-          <div id="component-details" hidden>
+          <div id="component-details" tabindex="0" hidden>
             <div class="detail-category" id="detail-category">COMPONENT</div>
             <h3 id="detail-name">—</h3>
             <p id="detail-description" class="detail-description">—</p>
