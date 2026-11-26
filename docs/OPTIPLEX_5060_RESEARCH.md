@@ -16,18 +16,20 @@ This is a Tower-family reference assembled from Dell's published service manual 
 
 | Layer | Current coverage |
 |---|---:|
-| Semantic component instances | 115 |
-| Typed relationships | 123 |
+| Semantic component instances | 127 |
+| Typed relationships | 135 |
 | GLB box-proxy nodes | 58 |
-| Individual screws / grommets | 24 |
+| Illustrative service-relevant screws / grommets | 24 |
+| Optional fastener references from Dell screw table | 7 |
 | Dell motherboard callouts | 26 mapped semantically |
-| Registered source records | 18 |
-| Technical claims | 30 |
+| Registered source records | 23 |
+| Technical claims | 31 |
 | Qualitative process layers | 6 |
 | Source-backed partial system-board steps | 12 |
+| Separate service procedure observations | 14 |
 | Bilingual learning questions | 9 |
 
-The 24 fastener instances remain an explicit set of modeled service-relevant instances (20 screws and four rubber grommets). They are not a claim that every retail configuration contains exactly 24 installed fasteners. Dell's screw table separately lists nine system-board screws and three PSU-to-chassis screws; other listed rows include option/module-specific fasteners.
+The 24 illustrative fastener instances remain an explicit service-relevant set (20 screws and four rubber grommets). They are not a claim that every retail configuration contains exactly 24 installed fasteners. Seven additional fastener reference nodes document conditional optional hardware: one SD-reader screw (#6-32×3.6), one WLAN screw (M2×3.5), one M.2 PCIe SSD screw (M2×3.5), two Type-C/DP/HDMI/VGA module screws (M3×3), and two internal-antenna screws (M3×3). These seven are marked `optional_reference_not_fitted` and are excluded from the 24 service-relevant physical instances. Dell's screw table separately lists nine system-board screws and three PSU-to-chassis screws; other listed rows include option/module-specific fasteners.
 
 ## Motherboard and expansion map
 
@@ -109,7 +111,7 @@ The 12-step sequence is a partial Dell-documented system-board removal procedure
 11. Disconnect the documented board-side power, storage, speaker and related cables.
 12. Remove the nine system-board screws and lift the board out.
 
-This is not a complete teardown or a reassembly guide. Dell's system-fan and PSU removal operations remain separate service procedures. Safety notes and prerequisites are retained on each step. The model does not invent screw coordinates, tightening torque, pinouts, a cable harness route or motherboard-hole geometry.
+The package also records 14 independent service observations for M.2 SSD removal, coin-cell battery removal, heatsink-fan removal, optical-drive insertion/cable routing, optional video-module installation, HDD/ODD drive-bracket actions, system-fan and PSU removal, and screw-table entries. These are source notes rather than a single linear procedure. This is not a complete teardown or a reassembly guide. Safety notes and prerequisites are retained on each step. The model does not invent screw coordinates, tightening torque, pinouts, a cable harness route or motherboard-hole geometry.
 
 ## Source register
 
