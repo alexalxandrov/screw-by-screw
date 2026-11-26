@@ -1,6 +1,6 @@
 # Offline model catalogue
 
-The catalogue is a statically imported JSON index at `content/catalog/models.json`. `src/data/catalog.js` validates the data before the UI uses it. Catalogue IDs and exact manufacturer/part-number pairs must be unique; every entry references a declared category and includes a package version, safe relative `.sbsmodel` path, research status and geometry-evidence class.
+The catalogue is a statically imported JSON index at `content/catalog/models.json`. `src/data/catalog.js` validates the data before the UI uses it. Catalogue IDs and supplied manufacturer/part-number pairs must be unique; every entry references a declared category and includes a package version, safe relative `.sbsmodel` path, research status and geometry-evidence class. Each entry also declares `identity_scope` (`exact_sku`, `platform_family`, `physical_sample` or `reference_configuration`) and `model_kind` (`system`, `assembly`, `component` or `device`). A real manufacturer part number is required for `exact_sku`; family-level entries may leave it null rather than inventing a SKU.
 
 Each entry has a catalogue ID and a separate `package_model_id` that must match the archive's internal `model_id`.
 
@@ -20,6 +20,6 @@ The index currently contains the exact EVGA GeForce RTX 3060 XC BLACK GAMING 12G
 
 1. Add and validate the package under `content/models/<model-id>/`.
 2. Stage its generated `.sbsmodel` under `public/models/` in the release workflow.
-3. Add its exact SKU, category, package version/path and geometry status to `content/catalog/models.json`.
+3. Add its identity scope, model kind, category, package version/path and geometry status to `content/catalog/models.json`. Use `exact_sku` only when the manufacturer part number is known.
 4. Set `package_model_id` to the archive's internal model ID.
 5. Run catalog unit tests, viewer browser tests, package validation and the standalone build.
