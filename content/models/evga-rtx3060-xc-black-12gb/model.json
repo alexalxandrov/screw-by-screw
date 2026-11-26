@@ -81,7 +81,9 @@
       "main_gpu_contact_heatpipe_count": 4,
       "side_heatpipe_count": 2,
       "heatpipe_count_source_ids": [
-        "src.thefpsreview.exact_sku"
+        "src.thefpsreview.exact_sku",
+        "src.pcworld.xc_black",
+        "src.gamersnexus.teardown"
       ],
       "heatpipe_geometry_status": "photo_estimated_proxy_not_measured",
       "thermal_pad_thickness_observations": [
@@ -109,7 +111,43 @@
         "src.gamersnexus.teardown"
       ],
       "gn_central_heatpipe_tube_count": 2,
-      "heatpipe_count_interpretation": "TheFPS Review describes four central GPU-contact pipe runs plus two side runs (six runs); Gamers Nexus narrates two central ~6 mm tube/loop paths through the cold plate. These are retained as source-specific observations because a visual run count and distinct tube-loop count may differ."
+      "heatpipe_count_interpretation": "The FPS Review describes four central GPU-contact runs plus two side runs; PCWorld's overview describes four copper heatpipes; Gamers Nexus narrates two central ~6 mm tube paths through the contact plate. These are source-specific descriptions that may count route legs, tubes or closed loops differently. Preserve them separately; six selectable entries are route/run proxies, not six proven independent closed tubes.",
+      "heatpipe_count_semantics": "Reported route/run categories in The FPS Review, not a verified count of independent closed U-shaped tube loops",
+      "unique_physical_heatpipe_loop_count": null,
+      "unique_physical_heatpipe_loop_count_status": "unknown_pending_calibrated_cooler_inspection",
+      "original_fan_part_number": null,
+      "original_fan_part_number_status": "unknown",
+      "original_fan_part_number_note": "Aftermarket sellers list PLA09215S12H-family compatible fans but do not establish the original OEM label or exact fitment. Seller dimensions conflict; do not use as replacement specifications without inspecting the card's fan label and measuring the sample.",
+      "aftermarket_fan_catalog_candidates": [
+        {
+          "source_id": "src.gpufanreplacement.catalog",
+          "seller_claims": {
+            "part_number": "PLA09215S12H",
+            "diameter_mm": 90,
+            "voltage_v": 12,
+            "current_a": 0.55,
+            "pins": 4,
+            "mount_spacing_mm": 42
+          },
+          "status": "aftermarket_catalog_claim_not_oem_verification"
+        },
+        {
+          "source_id": "src.gpuconnect.catalog",
+          "seller_claims": {
+            "part_number": "PLA09215S12H_family",
+            "diameter_mm": 87,
+            "depth_variants_mm": [
+              15,
+              20
+            ],
+            "voltage_v": 12,
+            "current_a": 0.55,
+            "pins": 4,
+            "mount_spacing_mm": 42
+          },
+          "status": "aftermarket_catalog_claim_not_oem_verification"
+        }
+      ]
     },
     "power_connector": "single 8-pin",
     "display_outputs": {
