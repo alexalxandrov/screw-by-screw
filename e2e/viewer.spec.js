@@ -178,6 +178,7 @@ test("shows exact-SKU cooler screw count and secondary-catalog memory attributes
 
   await page.locator('#component-tree button[data-id="assembly.pcb.electronics"]').click();
   await expect(page.locator('[data-claim-id="claim.memory.package_part_number"]')).toContainText("Samsung K4ZAF325BM-HC16");
+  await expect(page.locator('[data-claim-id="claim.memory.package_part_number"] a[href*="LYzTKyspS9Hont9woCwoo9"]')).toBeVisible();
 
   await page.locator('#component-tree button[data-id="chip.memory.gddr6.bus"]').click();
   await expect(page.locator('[data-claim-id="claim.memory.package_density"]')).toContainText("Данные вторичного каталога");
