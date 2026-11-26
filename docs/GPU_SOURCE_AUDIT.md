@@ -1,6 +1,6 @@
 # GPU Source Audit — EVGA RTX 3060 XC BLACK GAMING 12GB
 
-**Status:** initial source inventory; not complete asset/license clearance  
+**Status:** updated source audit; exact-SKU evidence improved, but not complete asset/license clearance  
 **Selected variant:** EVGA GeForce RTX 3060 XC BLACK GAMING 12GB  
 **Manufacturer part number:** 12G-P5-3655-KR  
 **GPU family:** NVIDIA GeForce RTX 3060 / Ampere  
@@ -18,9 +18,11 @@ A closely related EVGA RTX 3060 XC Gaming SKU 12G-P5-3657-KR also appears in sou
 |---|---|---|
 | [EVGA specification PDF](https://sg-repo-production-photos.s3.eu-central-1.amazonaws.com/aikido/cache/70b60b3a1a7bbeaced972a5b6905797f.pdf) | Product identity and published specifications for 12G-P5-3655-KR | Strong primary product source; verify original official hosting and redistribution rights |
 | [Gamers Nexus exact-model teardown](https://www.youtube.com/watch?v=hJFJ_clQT8U) | Explicit EVGA RTX 3060 XC Black disassembly; cooler, fans, PCB, thermal pads, shunt resistors and internal views | High-value visual evidence; video/images remain copyrighted unless permission/license permits reuse |
-| [Tom's Hardware RTX 3060 teardown](https://www.tomshardware.com/reviews/nvidia-geforce-rtx-3060-review/2) | EVGA RTX 3060 teardown details, screw layout, fan connectors, Samsung GDDR6 package marking | Exact board/SKU matching must be checked before treating as XC BLACK-specific |
+| [Tom's Hardware RTX 3060 teardown](https://www.tomshardware.com/reviews/nvidia-geforce-rtx-3060-review/2) and [main review identity photo](https://www.tomshardware.com/reviews/nvidia-geforce-rtx-3060-review) | Eight cooler/shroud screws, two fan connections, six Samsung K4ZAF325BM-HC16 packages at 16 Gbps; the same review sample's rear-PCB sticker reads P/N 12G-P5-3655-KR | Exact-SKU-linked sample evidence; does not establish PCB revision, component coordinates or electrical nets |
 | [Hardwareluxx EVGA XC Gaming PCB/cooler review](https://www.hardwareluxx.ru/index.php/artikel/hardware/grafikkarten/51282-test-i-obzor-evga-geforce-rtx-3060-xc-gaming-kompaktnaya-i-bystraya-videokarta.html?start=2) | PCB/cooler analysis; reports five-phase power delivery for XC Gaming | XC Gaming, not confirmed exact XC BLACK; do not transfer board-specific claims without verification |
 | [Hardware Asylum EVGA RTX 3060 teardown](https://www.hardwareasylum.com/reviews/video/evga_rtx3060/page3.aspx) | PCB and cooler removal observations; visible board population differences | Exact SKU/revision needs verification |
+| [The FPS Review — exact XC BLACK](https://www.thefpsreview.com/2021/03/03/evga-geforce-rtx-3060-xc-black-gaming-review/2/) | Explicit 12G-P5-3655-KR identity; four main GPU-contact heatpipes plus two side heatpipes | Exact-SKU cooler description; route geometry and bends are not measured |
+| [LanOC — exact XC BLACK](https://lanoc.org/review/video-cards/evga-rtx-3060-xc-black?showall=1) | Four GPU-area heatsink screws, no backplate, nominal size and approximate fan opening/impeller dimensions | Exact variant visual evidence; photos are not reusable without permission |
 | [Scan UK product listing](https://www.scan.co.uk/products/evga-nvidia-geforce-rtx-3060-12gb-xc-black-gaming-ampere-graphics-card-3584-core-1320mhz) | Manufacturer part number 12G-P5-3655-KR and marketed name | Secondary identity source |
 | [Micro Center refurbished listing](https://www.microcenter.com/product/678083/evga-nvidia-geforce-rtx-3060-xc-black-gaming-dual-fan-12gb-gddr6-pcie-40-graphics-card-%28refurbished%29) | Identifies XC Black and suffix variant 12G-P5-3655-KRR | Refurbished suffix; not exact selected retail part number |
 
@@ -30,7 +32,8 @@ A closely related EVGA RTX 3060 XC Gaming SKU 12G-P5-3657-KR also appears in sou
 - Product is an EVGA dual-fan RTX 3060 XC BLACK with 12GB GDDR6.
 - EVGA's specification lists 3,584 CUDA cores, 192-bit memory interface, 15,000 MHz effective memory clock, PCIe 4.0, and 1777 MHz boost clock for this SKU.
 - Gamers Nexus has a teardown explicitly titled for the EVGA RTX 3060 XC Black and documents internal cooler/PCB layout.
-- Tom's Hardware reports eight screws and identifies six Samsung GDDR6 packages (K4ZAF325BM-HC16) on an EVGA RTX 3060 XC teardown sample, but does not identify the XC BLACK 12G-P5-3655-KR. Treat screw layout and DRAM part number as related-variant context only.
+- Tom's Hardware's main review contains a rear-PCB identity photograph reading `P/N: 12G-P5-3655-KR`; the page-2 teardown is part of the same review sample. Its eight cooler/shroud screw count and six Samsung K4ZAF325BM-HC16 packages are therefore treated as exact-SKU-linked observations, but not as proof of PCB revision, coordinates or net mapping.
+- The FPS Review independently identifies the exact part number and describes six heatpipes: four main pipes contacting the GPU and two side pipes. The model records the count while keeping their route geometry illustrative.
 
 Store these as individual source-backed claims, not as unqualified global properties.
 
@@ -72,7 +75,7 @@ A publicly viewable teardown, review, product PDF, BoardView, or schematic is no
 | Exact marketed variant / part number | Identified |
 | Official specification source | Located; rights review pending |
 | Exact-model teardown | Located |
-| Independent teardown/review | Located; variant matching pending |
+| Independent teardown/review | Multiple exact-SKU reviews and sample-identity cross-checks located; PCB revision remains unverified |
 | Native CAD | Not located |
 | BoardView | Not verified |
 | Schematic | Not verified |
@@ -206,7 +209,7 @@ The EVGA-published **192-bit** memory interface remains the exact-SKU board clai
 
 ## 15. Cooler-end heatpipe terminal evidence
 
-LanOC's exact XC BLACK cooler-end photograph (image 16) shows four copper terminal faces. The model adds four separately selectable visual markers under the heatpipe assembly. Their locations are approximate photo-derived points. They are a terminal-face count, not a count of unique U-shaped tubes. The two heatpipe route assemblies remain illustrative and are not treated as a verified internal routing drawing.
+LanOC's exact XC BLACK cooler-end photograph (image 16) shows four copper terminal faces. The model adds four separately selectable visual markers under the heatpipe assembly. Their locations are approximate photo-derived points. They are a terminal-face count, not a count of unique U-shaped tubes. Six heatpipe route proxies are now separately selectable (four main plus two side) based on The FPS Review's exact-SKU description; their centrelines, bends and diameter remain illustrative rather than a verified internal routing drawing.
 
 
 ## 16. Exact-SKU heatpipe count and route grouping
