@@ -2808,6 +2808,24 @@
       "source_ids": [
         "src.nvidia.ampere.whitepaper"
       ]
+    },
+    {
+      "id": "rel.detail.contains.fan-1-blade-8",
+      "from": "assembly.fan.1.rotor",
+      "to": "fan.1.blade.8",
+      "type": "contains",
+      "source_ids": [
+        "src.newegg.exact_sku.product_photo"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.fan-2-blade-8",
+      "from": "assembly.fan.2.rotor",
+      "to": "fan.2.blade.8",
+      "type": "contains",
+      "source_ids": [
+        "src.newegg.exact_sku.product_photo"
+      ]
     }
   ]
 }
