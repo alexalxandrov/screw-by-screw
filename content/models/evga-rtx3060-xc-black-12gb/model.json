@@ -147,7 +147,13 @@
           },
           "status": "aftermarket_catalog_claim_not_oem_verification"
         }
-      ]
+      ],
+      "fan_blade_count_per_fan_photo_observed": 8,
+      "fan_blade_count_source_ids": [
+        "src.newegg.exact_sku.product_photo"
+      ],
+      "fan_blade_profile_status": "illustrative_proxy_not_measured",
+      "fan_blade_count_note": "Eight visible blade surfaces per fan are counted from two exact-SKU retail listing photos. This does not establish the original OEM fan part number or measured blade geometry."
     },
     "power_connector": "single 8-pin",
     "display_outputs": {
