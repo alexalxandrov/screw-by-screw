@@ -1,0 +1,103 @@
+name: OptiPlex 5060 MT model validation
+
+permissions:
+  contents: read
+
+concurrency:
+  group: optiplex-5060-model-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'content/catalog/models.json'
+      - 'content/models/dell-optiplex-5060-mt/**'
+      - 'tools/modeling/build_optiplex_5060_mt_blockout.py'
+      - 'tools/content/**'
+      - 'tools/modeling/package_model.py'
+      - 'tests/**'
+      - 'e2e/catalog-multi-model.spec.js'
+      - '.github/workflows/pc-model-validation.yml'
+  push:
+    paths:
+      - 'content/catalog/models.json'
+      - 'content/models/dell-optiplex-5060-mt/**'
+      - 'tools/modeling/build_optiplex_5060_mt_blockout.py'
+      - 'tools/content/**'
+      - 'tools/modeling/package_model.py'
+      - 'tests/**'
+      - 'e2e/catalog-multi-model.spec.js'
+      - '.github/workflows/pc-model-validation.yml'
+
+jobs:
+  build-and-validate:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Install Blender runtime libraries
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libxi6 libxrender1 libxfixes3 libxkbcommon0 libsm6 libice6 libgl1 libegl1 libx11-6 libxext6 libxrandr2 libxinerama1 libxcursor1 libxcomposite1 libxdamage1
+      - name: Download and verify Blender 4.3.2
+        run: |
+          set -euo pipefail
+          archive='blender-4.3.2-linux-x64.tar.xz'
+          base='https://download.blender.org/release/Blender4.3'
+          curl -fL "$base/$archive" -o "$archive"
+          curl -fL "$base/blender-4.3.2.sha256" -o blender-4.3.2.sha256
+          expected=$(grep -F "$archive" blender-4.3.2.sha256 | awk '{print $1}' | head -n 1)
+          test ${#expected} -eq 64
+          printf '%s  %s\n' "$expected" "$archive" | sha256sum --check -
+          tar -xf "$archive"
+      - name: Generate OptiPlex Tower blockout
+        run: |
+          ./blender-4.3.2-linux-x64/blender --background --factory-startup --python-exit-code 1 --python tools/modeling/build_optiplex_5060_mt_blockout.py
+      - name: Build and validate source-linked content package
+        run: |
+          python -m py_compile tools/modeling/build_optiplex_5060_mt_blockout.py
+          python tools/content/build_release_manifest.py content/models/dell-optiplex-5060-mt
+          python tools/content/validate_model_package.py content/models/dell-optiplex-5060-mt
+          python tools/content/validate_glb_bindings.py --components content/models/dell-optiplex-5060-mt/components.json --glb MODELS/PCS/DELL/OPTIPLEX-5060-MT/04-WORKING/generated/optiplex_5060_mt_blockout_v01.glb
+          python -m unittest discover -s tests -v
+      - name: Package model and stage it for the catalogue
+        run: |
+          mkdir -p public/models artifacts
+          python tools/modeling/package_model.py --model-dir content/models/dell-optiplex-5060-mt --scene MODELS/PCS/DELL/OPTIPLEX-5060-MT/04-WORKING/generated/optiplex_5060_mt_blockout_v01.glb --output public/models/optiplex_5060_mt_v01.sbsmodel
+          cp MODELS/PCS/DELL/OPTIPLEX-5060-MT/04-WORKING/generated/optiplex_5060_mt_blockout_v01.blend artifacts/
+          cp MODELS/PCS/DELL/OPTIPLEX-5060-MT/04-WORKING/generated/optiplex_5060_mt_blockout_v01.glb artifacts/
+          cp MODELS/PCS/DELL/OPTIPLEX-5060-MT/04-WORKING/generated/optiplex_5060_mt_blockout_v01.manifest.json artifacts/
+          cp public/models/optiplex_5060_mt_v01.sbsmodel artifacts/
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install locked viewer dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Validate archive with the browser package loader
+        run: |
+          node --input-type=module <<'NODE'
+          import { readFile } from 'node:fs/promises';
+          import { loadModelPackage } from './src/viewer/ModelPackageLoader.js';
+          const bytes = await readFile('public/models/optiplex_5060_mt_v01.sbsmodel');
+          const buffer = bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength);
+          const pkg = await loadModelPackage({ name: 'optiplex_5060_mt_v01.sbsmodel', size: bytes.byteLength, arrayBuffer: async () => buffer });
+          console.log(JSON.stringify({ modelId: pkg.report.modelId, components: pkg.report.componentCount, relationships: pkg.report.relationshipCount, integrityVerified: pkg.integrityVerified }, null, 2));
+          NODE
+      - name: Build viewer with both device classes
+        run: npm run build
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Test category filtering and GPU-to-PC model switching
+        run: npx playwright test e2e/catalog-multi-model.spec.js
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: optiplex-5060-mt-model-v01
+          path: |
+            artifacts/
+            public/models/optiplex_5060_mt_v01.sbsmodel
+          if-no-files-found: warn
+          retention-days: 14
