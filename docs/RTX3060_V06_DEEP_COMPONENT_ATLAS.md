@@ -57,7 +57,7 @@ The component atlas also adds separate, individually selectable photo-estimated 
 
 ## Fine-grained cooling decomposition
 
-The canonical package now exposes **307 semantic components, 303 typed relationships, 95 claims and 14 registered sources**. This includes individually selectable fan frames, hubs and seven illustrative blade proxies per fan; 24 separate illustrative heatsink-fin proxies; six selectable heatpipe-route proxies grouped as four main GPU-contact pipes plus two side pipes; six memory-side thermal-pad proxies; and a VRM-side thermal-pad strip proxy.
+The canonical package now exposes **307 semantic components, 303 typed relationships, 98 claims and 17 registered sources**. This includes individually selectable fan frames, hubs and seven illustrative blade proxies per fan; 24 separate illustrative heatsink-fin proxies; six selectable heatpipe route/run proxies reflecting the FPS Review's four central plus two side descriptions; the unique closed-loop count remains unknown; six memory-side thermal-pad proxies; and a VRM-side thermal-pad strip proxy.
 
 These are independently selectable teaching meshes, not a claim that the exact hardware has seven blades per fan or 24 fins. The count and shapes are explicitly identified as proxy geometry. Thermal-pad position proxies are aligned to the six identified GDDR6 package positions; pad thickness, material, hardness and service dimensions remain unverified. Heatpipe paths and cross-sections likewise remain illustrative.
 
@@ -74,7 +74,7 @@ A second package-authored animation clip, `clip.exploded-cooler-overview`, now m
 
 ## GA106 compute and GDDR6 architecture tranche
 
-The semantic package now contains **307 components, 303 typed relationships, 95 claims and 14 registered sources**. Thirteen logical-only nodes represent the 28-SM GA106 cluster, its CUDA/Tensor/RT/TMU/ROP aggregates, a 192-bit GDDR6 interface and six logical interface presentation groups. Six Samsung K4ZAF325BM-HC16 GDDR6 package positions are separately selectable from exact-SKU-linked teardown/review material; no one-to-one mapping between package positions and interface presentation segments is asserted. The logical nodes carry `geometry_status: logical_only`: no physical die floorplan, shader wiring or PCB trace routing is drawn.
+The semantic package now contains **307 components, 303 typed relationships, 98 claims and 17 registered sources**. Thirteen logical-only nodes represent the 28-SM GA106 cluster, its CUDA/Tensor/RT/TMU/ROP aggregates, a 192-bit GDDR6 interface and six logical interface presentation groups. Six Samsung K4ZAF325BM-HC16 GDDR6 package positions are separately selectable from exact-SKU-linked teardown/review material; no one-to-one mapping between package positions and interface presentation segments is asserted. The logical nodes carry `geometry_status: logical_only`: no physical die floorplan, shader wiring or PCB trace routing is drawn.
 
 A third process layer, `gpu_compute`, exposes this architecture map in the viewer. Claims cover the published 28 SM / 112 Tensor / 28 RT / 112 TMU / 48 ROP configuration, 276 mm² and 12-billion-transistor GA106 die figures, Samsung 8N, and exact-SKU-linked memory package identity. Tom's Hardware identifies six Samsung K4ZAF325BM-HC16 devices on the 12G-P5-3655-KR sample; 16-Gbit density, 512M × 32 organisation and 180-FBGA package type remain secondary-catalog device attributes, not primary Samsung-datasheet claims. The viewer labels this as a logical map, not an architecture simulation.
 
@@ -97,7 +97,7 @@ The EVGA 192-bit GDDR6 bus remains an exact-SKU manufacturer specification. Six 
 
 ## 15. Interactive thermal-path diagram
 
-The cooling process layer now exposes a four-stage clickable diagram: heat source/contact interfaces, heat transport, fin-stack rejection, and airflow/mechanical envelope. Its 32 nodes reuse the canonical component IDs and link directly to the component detail pane. The diagram records the approximate reviewer measurements for the fan opening and impeller but labels the 3D fan centres, blade meshes, six heatpipe route proxies grouped four main plus two side, fin count, pad dimensions and outer shroud contour as illustrative or unknown. It does not calculate CFD, junction temperature, thermal resistance, fan curves, RPM, acoustics or heat-transfer performance.
+The cooling process layer now exposes a four-stage clickable diagram: heat source/contact interfaces, heat transport, fin-stack rejection, and airflow/mechanical envelope. Its 32 nodes reuse the canonical component IDs and link directly to the component detail pane. The diagram records the approximate reviewer measurements for the fan opening and impeller but labels the 3D fan centres, blade meshes, six heatpipe route/run proxies grouped by the FPS Review's four central plus two side descriptions; the physical closed-loop count remains unknown, fin count, pad dimensions and outer shroud contour as illustrative or unknown. It does not calculate CFD, junction temperature, thermal resistance, fan curves, RPM, acoustics or heat-transfer performance.
 
 
 ## 16. Four visible copper heatpipe terminal faces
@@ -105,9 +105,9 @@ The cooling process layer now exposes a four-stage clickable diagram: heat sourc
 The exact XC BLACK cooler-end photograph in LanOC's review shows four separate copper terminal faces. Four individually selectable markers now exist under `cooling.heatpipes`. Their generated positions and disc dimensions are photo-estimated proxies. The claim deliberately counts **visible terminal faces**, not unique U-shaped heatpipes: two pipes can have four ends. The exact-SKU six-pipe count is established separately by The FPS Review (four main plus two side); 3D route centrelines, bends and terminal-face-to-pipe mapping remain illustrative.
 
 
-## 17. Six heatpipes confirmed for the exact retail SKU
+## 17. Exact-SKU heatpipe route/run descriptions and unresolved physical loop count
 
-The FPS Review identifies its sample explicitly as EVGA GeForce RTX 3060 XC BLACK GAMING, part number `12G-P5-3655-KR`. Its cooler description states four main central heatpipes that contact the GPU, plus two additional side heatpipes that move heat toward the side of the heatsink. The model package now separates these into six selectable semantic route nodes grouped as four main and two side paths. Their 3D centrelines, tube diameters, bend radii and flattened sections are still illustrative photo-estimated geometry, not manufacturing CAD. The four terminal faces from the LanOC cooler-end photograph remain a separate visual observation and are not confused with the six-tube count.
+The FPS Review identifies its sample explicitly as EVGA GeForce RTX 3060 XC BLACK GAMING, part number `12G-P5-3655-KR`, and describes four central GPU-contact runs plus two side runs. These are represented by six selectable route/run proxies, not as proof of six independent closed U-shaped tubes. PCWorld explicitly names the XC Black Gaming product but gives a four-copper-heatpipe overview; Gamers Nexus narrates two central tube paths through the contact plate. The publications may use different counting conventions (tube legs, full pipes or closed loops), so the unique physical loop count remains unknown. Their centreline, diameter, bends and flattened sections are illustrative, not manufacturing CAD. Four LanOC terminal faces remain a separate observation.
 
 Source: https://www.thefpsreview.com/2021/03/03/evga-geforce-rtx-3060-xc-black-gaming-review/2/
 
