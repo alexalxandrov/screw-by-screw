@@ -35,3 +35,24 @@ test("OptiPlex reference package passes the production package loader and checks
   assert.deepEqual(loaded.data.model.specifications.motherboard.callouts.find((entry) => entry.number === 25).component_ids, ["motherboard.coin_cell"]);
   assert.equal(loaded.data.animations.clips.length, 0);
 });
+
+
+test("JSON model package rejects a tampered sidecar before loading", async () => {
+  const prefix = "SBSMODEL-JSON\\n";
+  const envelope = JSON.parse(packageBytes.toString("utf8").slice(prefix.length));
+  envelope.files["model.json"] += " ";
+  const tamperedBytes = Buffer.from(prefix + JSON.stringify(envelope), "utf8");
+  const tamperedBuffer = tamperedBytes.buffer.slice(
+    tamperedBytes.byteOffset,
+    tamperedBytes.byteOffset + tamperedBytes.byteLength
+  );
+
+  await assert.rejects(
+    () => loadModelPackage({
+      name: "tampered.sbsmodel",
+      size: tamperedBytes.byteLength,
+      arrayBuffer: async () => tamperedBuffer
+    }),
+    /SHA-256 mismatch/
+  );
+});
