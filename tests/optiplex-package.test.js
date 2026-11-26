@@ -30,6 +30,8 @@ test("OptiPlex reference package passes the production package loader and checks
   assert.equal(loaded.data.assembly_steps.steps.length, 12);
   assert.equal(loaded.data.learning.questions.length, 9);
   assert.equal(loaded.data.model.specifications.motherboard.numbered_callouts, 26);
-  assert.equal(loaded.data.components.components.filter((component) => component.category === "fastener").length, 24);
+  assert.equal(loaded.data.model.specifications.motherboard.callouts.length, 26);
+  assert.deepEqual(loaded.data.model.specifications.motherboard.callouts.find((entry) => entry.number === 24).component_ids, ["motherboard.m2.wlan"]);
+  assert.deepEqual(loaded.data.model.specifications.motherboard.callouts.find((entry) => entry.number === 25).component_ids, ["motherboard.coin_cell"]);
   assert.equal(loaded.data.animations.clips.length, 0);
 });
