@@ -289,7 +289,7 @@ class ContentPackageTests(unittest.TestCase):
         self.assertIn("Animation clips: 2", report)
         self.assertEqual(len(package["claims"]["claims"]), 85)
         self.assertEqual(len(package["process_layers"]["process_layers"]), 3)
-        self.assertEqual(len(package["learning"]["questions"]), 8)
+        self.assertEqual(len(package["learning"]["questions"]), 12)
         sm_instances = [item for item in components.values() if item["id"].startswith("chip.gpu.sm.") and item["id"] != "chip.gpu.sm.cluster" and item["id"].count(".") == 3]
         self.assertEqual(len(sm_instances), 28)
         self.assertEqual(components["chip.gpu.tpc.cluster"]["geometry_status"], "logical_only")
