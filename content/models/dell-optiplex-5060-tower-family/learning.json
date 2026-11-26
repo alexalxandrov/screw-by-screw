@@ -55,6 +55,210 @@
       "source_ids": [
         "src.dell.5060.service"
       ]
+    },
+    {
+      "id": "learn.optiplex.memory.capacity",
+      "prompt": {
+        "en": "How many UDIMM sockets and what maximum memory capacity does Dell specify?",
+        "ru": "Сколько разъёмов UDIMM и какой максимальный объём памяти указывает Dell?"
+      },
+      "choices": [
+        {
+          "id": "a",
+          "label": "2 sockets / 32 GB"
+        },
+        {
+          "id": "b",
+          "label": "4 sockets / 64 GB"
+        },
+        {
+          "id": "c",
+          "label": "8 sockets / 128 GB"
+        }
+      ],
+      "correct_choice_id": "b",
+      "explanation": {
+        "en": "Dell specifies four UDIMM sockets and up to 64 GB total, with up to 16 GB per socket.",
+        "ru": "Dell указывает четыре разъёма UDIMM и до 64 ГБ суммарно, до 16 ГБ на разъём."
+      },
+      "source_ids": [
+        "src.dell.5060.memory"
+      ]
+    },
+    {
+      "id": "learn.optiplex.pcie.slots",
+      "prompt": {
+        "en": "Which PCIe slot has a mechanical x16 connector but is electrically wired for x4?",
+        "ru": "Какой слот PCIe имеет физический разъём x16, но электрически подключён как x4?"
+      },
+      "choices": [
+        {
+          "id": "a",
+          "label": "Slot 2"
+        },
+        {
+          "id": "b",
+          "label": "Slot 1"
+        },
+        {
+          "id": "c",
+          "label": "Slot 4"
+        }
+      ],
+      "correct_choice_id": "c",
+      "explanation": {
+        "en": "Dell identifies Slot 4 as PCIe x16 mechanical with x4 electrical wiring, Revision 3.0.",
+        "ru": "Dell обозначает Slot 4 как механический PCIe x16 с электрическим подключением x4, Revision 3.0."
+      },
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.board_connectors"
+      ]
+    },
+    {
+      "id": "learn.optiplex.sata.generations",
+      "prompt": {
+        "en": "How are the four SATA data headers divided by generation in Dell's connector specification?",
+        "ru": "Как по поколению распределены четыре SATA-разъёма в спецификации Dell?"
+      },
+      "choices": [
+        {
+          "id": "a",
+          "label": "Four Gen3"
+        },
+        {
+          "id": "b",
+          "label": "One Gen2 and three Gen3"
+        },
+        {
+          "id": "c",
+          "label": "Two Gen2 and two Gen3"
+        }
+      ],
+      "correct_choice_id": "b",
+      "explanation": {
+        "en": "One SATA Gen2 header is assigned to the optical-drive path; the other three are Gen3.",
+        "ru": "Один разъём SATA Gen2 назначен для оптического привода; остальные три относятся к Gen3."
+      },
+      "source_ids": [
+        "src.dell.5060.board_connectors"
+      ]
+    },
+    {
+      "id": "learn.optiplex.m2.sockets",
+      "prompt": {
+        "en": "Does the platform use the same M.2 connector for SSD and WLAN?",
+        "ru": "Использует ли платформа один и тот же M.2-разъём для SSD и WLAN?"
+      },
+      "choices": [
+        {
+          "id": "a",
+          "label": "Yes, one shared socket"
+        },
+        {
+          "id": "b",
+          "label": "No, separate SSD and WLAN sockets"
+        },
+        {
+          "id": "c",
+          "label": "No M.2 sockets are documented"
+        }
+      ],
+      "correct_choice_id": "b",
+      "explanation": {
+        "en": "Dell lists one M.2 SSD connector supporting 2230/2280 and a separate M.2 2230 WLAN connector.",
+        "ru": "Dell указывает один разъём M.2 SSD для 2230/2280 и отдельный разъём M.2 2230 для WLAN."
+      },
+      "source_ids": [
+        "src.dell.5060.board_connectors"
+      ]
+    },
+    {
+      "id": "learn.optiplex.psu.options",
+      "prompt": {
+        "en": "What power-supply options are listed for this Tower platform?",
+        "ru": "Какие варианты блока питания указаны для платформы Tower?"
+      },
+      "choices": [
+        {
+          "id": "a",
+          "label": "180 W Bronze only"
+        },
+        {
+          "id": "b",
+          "label": "260 W Bronze or 260 W Platinum"
+        },
+        {
+          "id": "c",
+          "label": "500 W Gold only"
+        }
+      ],
+      "correct_choice_id": "b",
+      "explanation": {
+        "en": "The setup specification lists alternative 260 W EPA Bronze and 260 W EPA Platinum PSU configurations; the fitted option is unknown.",
+        "ru": "В спецификации указаны альтернативные варианты БП 260 Вт EPA Bronze и 260 Вт EPA Platinum; установленный вариант неизвестен."
+      },
+      "source_ids": [
+        "src.dell.5060.power"
+      ]
+    },
+    {
+      "id": "learn.optiplex.callouts",
+      "prompt": {
+        "en": "Does the 26-number motherboard illustration mean the board contains exactly 26 components?",
+        "ru": "Означает ли схема платы с 26 номерами, что на плате ровно 26 компонентов?"
+      },
+      "choices": [
+        {
+          "id": "a",
+          "label": "Yes, each number is one discrete component"
+        },
+        {
+          "id": "b",
+          "label": "No, some numbers identify groups or connectors"
+        },
+        {
+          "id": "c",
+          "label": "It is the screw count"
+        }
+      ],
+      "correct_choice_id": "b",
+      "explanation": {
+        "en": "Callouts identify locations and functions; for example, one memory callout covers four physical DIMM sockets.",
+        "ru": "Номера обозначают позиции и функции; например, одна позиция памяти охватывает четыре физических слота DIMM."
+      },
+      "source_ids": [
+        "src.dell.5060.boardlayout"
+      ]
+    },
+    {
+      "id": "learn.optiplex.cpu.configuration",
+      "prompt": {
+        "en": "Does the family-level reference package identify the CPU fitted in an individual PC?",
+        "ru": "Определяет ли пакет семейства, какой процессор установлен в конкретном компьютере?"
+      },
+      "choices": [
+        {
+          "id": "a",
+          "label": "Yes, it is always an i7-8700"
+        },
+        {
+          "id": "b",
+          "label": "No, it records supported options, not the fitted CPU"
+        },
+        {
+          "id": "c",
+          "label": "Yes, it is always an i5-8400"
+        }
+      ],
+      "correct_choice_id": "b",
+      "explanation": {
+        "en": "The package lists manufacturer-supported processor options but does not choose a factory configuration or physical sample.",
+        "ru": "Пакет перечисляет поддерживаемые производителем варианты процессоров, но не выбирает заводскую конфигурацию или физический экземпляр."
+      },
+      "source_ids": [
+        "src.dell.5060.processors"
+      ]
     }
   ]
 }
