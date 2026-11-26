@@ -1,7 +1,359 @@
 {
   "schema_version": "0.1.0",
   "device_model_id": "pc.dell.optiplex-5060-tower.family",
-  "steps": [],
+  "steps": [
+    {
+      "id": "step.optiplex.remove-side-cover",
+      "sequence": 1,
+      "title": {
+        "en": "Remove the side cover",
+        "ru": "Снять боковую крышку"
+      },
+      "description": {
+        "en": "Remove the chassis side cover as a prerequisite for system-board service. Disconnect the computer from AC power and external peripherals before opening the chassis.",
+        "ru": "Снять боковую крышку корпуса как предварительное действие перед обслуживанием системной платы. Перед вскрытием отключить компьютер от сети и внешних устройств."
+      },
+      "component_ids": [
+        "chassis.side_panel"
+      ],
+      "tool_requirements": [],
+      "safety_notes": {
+        "en": "Disconnect mains power first. Use ESD precautions and keep screws organized.",
+        "ru": "Сначала отключить сетевое питание. Соблюдать защиту от ЭСР и хранить крепёж раздельно."
+      },
+      "prerequisite_step_ids": [],
+      "source_ids": [
+        "src.dell.5060.board_removal"
+      ]
+    },
+    {
+      "id": "step.optiplex.remove-front-bezel",
+      "sequence": 2,
+      "title": {
+        "en": "Remove the front bezel",
+        "ru": "Снять переднюю декоративную панель"
+      },
+      "description": {
+        "en": "Remove the front bezel when following Dell's system-board removal prerequisites. The exact bezel clips are not represented in the proxy geometry.",
+        "ru": "Снять переднюю декоративную панель в соответствии с перечнем подготовительных операций Dell для демонтажа системной платы. Точная геометрия защёлок в макете не представлена."
+      },
+      "component_ids": [
+        "chassis.front_panel",
+        "front.io_region"
+      ],
+      "tool_requirements": [],
+      "safety_notes": {
+        "en": "Release the bezel using the documented tabs; avoid levering against port openings.",
+        "ru": "Освобождать панель через предусмотренные фиксаторы; не использовать отверстия портов как точку рычага."
+      },
+      "prerequisite_step_ids": [
+        "step.optiplex.remove-side-cover"
+      ],
+      "source_ids": [
+        "src.dell.5060.board_removal"
+      ]
+    },
+    {
+      "id": "step.optiplex.open-front-door",
+      "sequence": 3,
+      "title": {
+        "en": "Open the front panel door",
+        "ru": "Открыть дверцу передней панели"
+      },
+      "description": {
+        "en": "Open the front panel door as required by the manufacturer's system-board service procedure.",
+        "ru": "Открыть дверцу передней панели, как требует сервисная процедура производителя для демонтажа системной платы."
+      },
+      "component_ids": [
+        "chassis.front_panel"
+      ],
+      "tool_requirements": [],
+      "safety_notes": {
+        "en": "Do not force the hinge or latch; the package does not model the exact hinge geometry.",
+        "ru": "Не прикладывать усилие к петле или защёлке; точная геометрия шарнира в пакете не смоделирована."
+      },
+      "prerequisite_step_ids": [
+        "step.optiplex.remove-front-bezel"
+      ],
+      "source_ids": [
+        "src.dell.5060.board_removal"
+      ]
+    },
+    {
+      "id": "step.optiplex.remove-cpu-fan",
+      "sequence": 4,
+      "title": {
+        "en": "Remove the CPU heatsink fan",
+        "ru": "Снять вентилятор радиатора CPU"
+      },
+      "description": {
+        "en": "Remove the heatsink fan before removing the heatsink. Dell lists fan removal among the prerequisites for system-board removal.",
+        "ru": "Перед снятием радиатора снять его вентилятор. Dell включает снятие вентилятора в перечень подготовительных действий для демонтажа системной платы."
+      },
+      "component_ids": [
+        "cooling.cpu.fan",
+        "cooling.assembly"
+      ],
+      "tool_requirements": [],
+      "safety_notes": {
+        "en": "Disconnect the fan lead by its connector, not by pulling the wire. Retain the four fan screws; exact OEM part and torque are unknown.",
+        "ru": "Отсоединять кабель за корпус разъёма, не тянуть за провод. Сохранить четыре винта вентилятора; точная OEM-деталь и момент затяжки неизвестны."
+      },
+      "prerequisite_step_ids": [
+        "step.optiplex.open-front-door"
+      ],
+      "source_ids": [
+        "src.dell.5060.board_removal",
+        "src.dell.5060.boardlayout"
+      ]
+    },
+    {
+      "id": "step.optiplex.remove-heatsink",
+      "sequence": 5,
+      "title": {
+        "en": "Loosen the four captive heatsink screws and lift the heatsink",
+        "ru": "Ослабить четыре невыпадающих винта и снять радиатор"
+      },
+      "description": {
+        "en": "Loosen the four captive screws in Dell's numbered 1–4 sequence, then lift the heatsink away. The package records the sequence but does not invent screw coordinates or torque.",
+        "ru": "Ослабить четыре невыпадающих винта в последовательности 1–4, указанной Dell, затем снять радиатор. Пакет фиксирует порядок, но не придумывает координаты винтов или момент затяжки."
+      },
+      "component_ids": [
+        "cooling.cpu.heatsink",
+        "fastener.cooler.captive.01",
+        "fastener.cooler.captive.02",
+        "fastener.cooler.captive.03",
+        "fastener.cooler.captive.04"
+      ],
+      "tool_requirements": [],
+      "safety_notes": {
+        "en": "Support the heatsink as the last fastener is released. Do not twist against the motherboard. Thermal-interface replacement details are outside the documented step.",
+        "ru": "Поддерживать радиатор при освобождении последнего винта. Не скручивать его относительно системной платы. Параметры замены термоинтерфейса в эту процедуру не включены."
+      },
+      "prerequisite_step_ids": [
+        "step.optiplex.remove-cpu-fan"
+      ],
+      "source_ids": [
+        "src.dell.5060.heatsink"
+      ]
+    },
+    {
+      "id": "step.optiplex.remove-processor",
+      "sequence": 6,
+      "title": {
+        "en": "Release and remove the processor",
+        "ru": "Освободить и извлечь процессор"
+      },
+      "description": {
+        "en": "After heatsink removal, release the socket lever and processor cover using Dell's documented latch movement, then lift the processor out. No particular CPU model is assigned to this family package.",
+        "ru": "После снятия радиатора освободить рычаг сокета и крышку процессора движением фиксатора, описанным Dell, затем извлечь процессор. Конкретная модель CPU в пакете семейства не назначена."
+      },
+      "component_ids": [
+        "motherboard.cpu_socket",
+        "motherboard.pcb"
+      ],
+      "tool_requirements": [],
+      "safety_notes": {
+        "en": "The LGA socket contacts are fragile. Hold the processor by its edges and never touch the contact field.",
+        "ru": "Контакты LGA-сокета хрупкие. Держать процессор за края и не касаться контактного поля."
+      },
+      "prerequisite_step_ids": [
+        "step.optiplex.remove-heatsink"
+      ],
+      "source_ids": [
+        "src.dell.5060.cpu_removal"
+      ]
+    },
+    {
+      "id": "step.optiplex.remove-expansion-card",
+      "sequence": 7,
+      "title": {
+        "en": "Remove installed expansion cards, if present",
+        "ru": "Снять установленные платы расширения, если они есть"
+      },
+      "description": {
+        "en": "Remove any fitted expansion card(s) listed among Dell's system-board removal prerequisites. Empty slots remain empty; this model does not imply a GPU or other card is installed.",
+        "ru": "Снять установленные платы расширения, если они присутствуют в перечне подготовительных действий Dell для демонтажа системной платы. Пустые слоты остаются пустыми; модель не утверждает наличие видеокарты или другой платы."
+      },
+      "component_ids": [
+        "motherboard.pcie.x16",
+        "motherboard.pcie.x1.1",
+        "motherboard.pcie.x1.2",
+        "motherboard.pcie.x16.wired_x4"
+      ],
+      "tool_requirements": [],
+      "safety_notes": {
+        "en": "Release the bracket retainer and card latch before lifting. Support the card and avoid touching contacts.",
+        "ru": "Перед извлечением освободить фиксатор планки и защёлку слота. Поддерживать плату и не касаться контактов."
+      },
+      "prerequisite_step_ids": [
+        "step.optiplex.remove-processor"
+      ],
+      "source_ids": [
+        "src.dell.5060.board_removal"
+      ]
+    },
+    {
+      "id": "step.optiplex.remove-pcie-ssd",
+      "sequence": 8,
+      "title": {
+        "en": "Remove an installed PCIe SSD, if present",
+        "ru": "Снять установленный PCIe SSD, если он есть"
+      },
+      "description": {
+        "en": "Remove the PCIe SSD only if fitted. Dell's system-board procedure lists PCIe SSD removal as a prerequisite; the family model does not claim an SSD is installed.",
+        "ru": "Снимать PCIe SSD только при его наличии. Процедура Dell перечисляет снятие PCIe SSD как подготовительный этап; модель семейства не утверждает, что SSD установлен."
+      },
+      "component_ids": [
+        "motherboard.m2",
+        "storage.m2.optional"
+      ],
+      "tool_requirements": [],
+      "safety_notes": {
+        "en": "Retain the SSD retaining screw and spacer if present. Exact SSD length and fitted module are unknown.",
+        "ru": "Сохранить винт и стойку крепления SSD, если они есть. Точная длина SSD и установленный модуль неизвестны."
+      },
+      "prerequisite_step_ids": [
+        "step.optiplex.remove-expansion-card"
+      ],
+      "source_ids": [
+        "src.dell.5060.board_removal",
+        "src.dell.5060.storage"
+      ]
+    },
+    {
+      "id": "step.optiplex.remove-sd-reader",
+      "sequence": 9,
+      "title": {
+        "en": "Remove the optional SD card reader, if fitted",
+        "ru": "Снять опциональный картридер SD, если он установлен"
+      },
+      "description": {
+        "en": "Remove the optional SD reader module only if present in the actual configuration. Dell shows a dedicated board connector and lists reader removal before board extraction.",
+        "ru": "Снимать опциональный модуль SD только при его наличии в реальной конфигурации. Dell показывает отдельный разъём платы и перечисляет снятие картридера до извлечения системной платы."
+      },
+      "component_ids": [
+        "storage.sd_reader.optional",
+        "motherboard.sd_reader_header"
+      ],
+      "tool_requirements": [],
+      "safety_notes": {
+        "en": "Disconnect the reader cable at its connector and retain the module screw. Do not infer presence from the board header alone.",
+        "ru": "Отсоединить кабель картридера за корпус разъёма и сохранить крепёжный винт. Наличие разъёма на плате само по себе не означает наличие модуля."
+      },
+      "prerequisite_step_ids": [
+        "step.optiplex.remove-pcie-ssd"
+      ],
+      "source_ids": [
+        "src.dell.5060.board_removal",
+        "src.dell.5060.boardlayout"
+      ]
+    },
+    {
+      "id": "step.optiplex.remove-memory",
+      "sequence": 10,
+      "title": {
+        "en": "Remove installed memory modules",
+        "ru": "Извлечь установленные модули памяти"
+      },
+      "description": {
+        "en": "Release the retaining clips and remove installed DIMMs. The four sockets in this reference indicate supported locations, not a known installed memory population.",
+        "ru": "Освободить фиксаторы и извлечь установленные модули DIMM. Четыре слота в эталонной модели показывают поддерживаемые позиции, но не известную установленную конфигурацию памяти."
+      },
+      "component_ids": [
+        "motherboard.dimm.1",
+        "motherboard.dimm.2",
+        "motherboard.dimm.3",
+        "motherboard.dimm.4"
+      ],
+      "tool_requirements": [],
+      "safety_notes": {
+        "en": "Handle modules by their edges and store them in ESD-safe packaging.",
+        "ru": "Брать модули за края и хранить в антистатической упаковке."
+      },
+      "prerequisite_step_ids": [
+        "step.optiplex.remove-sd-reader"
+      ],
+      "source_ids": [
+        "src.dell.5060.board_removal",
+        "src.dell.5060.memory"
+      ]
+    },
+    {
+      "id": "step.optiplex.disconnect-board-cables",
+      "sequence": 11,
+      "title": {
+        "en": "Disconnect the system-board cables",
+        "ru": "Отсоединить кабели системной платы"
+      },
+      "description": {
+        "en": "Dell lists CPU power, HDD/ODD data, internal speaker, system power and SATA cable connections among the disconnections required before board removal. Unroute retained cables only as specified by the manual.",
+        "ru": "Перед демонтажем платы Dell предписывает отключить питание CPU, линии данных HDD/ODD, внутренний динамик, основное питание системы и кабели SATA. Освобождать кабели из фиксаторов только в порядке, указанном руководством."
+      },
+      "component_ids": [
+        "motherboard.cpu_power",
+        "motherboard.system_power",
+        "motherboard.sata_power_header",
+        "motherboard.sata.1",
+        "motherboard.sata.2",
+        "motherboard.sata.3",
+        "motherboard.sata.4",
+        "motherboard.speaker_header",
+        "front.speaker",
+        "power.psu.harness",
+        "storage.assembly"
+      ],
+      "tool_requirements": [],
+      "safety_notes": {
+        "en": "Confirm AC power is disconnected. Depress connector latches and pull on connector bodies, not wires. Do not assume cable colors or pinouts.",
+        "ru": "Убедиться, что сетевое питание отключено. Нажимать фиксаторы разъёмов и тянуть за корпуса, а не провода. Не делать выводов о цветах кабелей или распиновке."
+      },
+      "prerequisite_step_ids": [
+        "step.optiplex.remove-memory"
+      ],
+      "source_ids": [
+        "src.dell.5060.board_removal",
+        "src.dell.5060.boardlayout"
+      ]
+    },
+    {
+      "id": "step.optiplex.remove-system-board",
+      "sequence": 12,
+      "title": {
+        "en": "Remove the nine system-board screws and lift the board out",
+        "ru": "Выкрутить девять винтов системной платы и извлечь её"
+      },
+      "description": {
+        "en": "Remove the nine board-to-chassis screws listed by Dell, slide the board as directed by the service manual to disengage its locating features, then lift it away. Screw coordinates and motherboard revision remain unknown.",
+        "ru": "Удалить девять винтов крепления платы к корпусу, сдвинуть плату по направлению, указанному в сервисном руководстве, чтобы освободить позиционирующие элементы, затем поднять её. Координаты винтов и ревизия платы неизвестны."
+      },
+      "component_ids": [
+        "motherboard.assembly",
+        "motherboard.pcb",
+        "fastener.motherboard.01",
+        "fastener.motherboard.02",
+        "fastener.motherboard.03",
+        "fastener.motherboard.04",
+        "fastener.motherboard.05",
+        "fastener.motherboard.06",
+        "fastener.motherboard.07",
+        "fastener.motherboard.08",
+        "fastener.motherboard.09"
+      ],
+      "tool_requirements": [],
+      "safety_notes": {
+        "en": "Support the board with both hands and do not bend it. Keep all standoffs and screws associated with their original locations; no torque or board-hole map is published in this package.",
+        "ru": "Поддерживать плату двумя руками и не сгибать её. Сохранить стойки и винты с привязкой к исходным местам; момент затяжки и карта отверстий в пакете не приведены."
+      },
+      "prerequisite_step_ids": [
+        "step.optiplex.disconnect-board-cables"
+      ],
+      "source_ids": [
+        "src.dell.5060.board_removal",
+        "src.dell.5060.screw_table"
+      ]
+    }
+  ],
   "observations": [
     {
       "source_id": "src.dell.5060.service",
@@ -18,6 +370,35 @@
         "en": "The table lists 9 board screws and 3 PSU screws; it separately documents four captive heatsink screws and four heatsink-fan screws. Optional-module entries are configuration-dependent.",
         "ru": "В таблице указаны 9 винтов платы и 3 винта БП; отдельно описаны четыре невыпадающих винта радиатора и четыре винта вентилятора. Крепёж опциональных модулей зависит от конфигурации."
       }
+    },
+    {
+      "source_id": "src.dell.5060.system_fan",
+      "locator": "Removing system fan",
+      "note": {
+        "en": "Dell instructs the technician to disconnect the intrusion-switch cable, unroute it from the grommet, disconnect the fan cable, stretch the rubber mounts and slide the fan out. The family package models four grommet instances but no exact fan coordinates.",
+        "ru": "Dell предписывает отключить кабель датчика вскрытия, освободить его из втулки, отключить кабель вентилятора, растянуть резиновые крепления и извлечь вентилятор. Пакет семейства содержит четыре экземпляра втулок, но не точные координаты вентилятора."
+      }
+    },
+    {
+      "source_id": "src.dell.5060.psu_removal",
+      "locator": "Removing PSU",
+      "note": {
+        "en": "Separate PSU procedure: disconnect and unroute cables from retention clips, remove three PSU-to-chassis screws, press the chassis release tab and slide/lift the PSU out. This sequence is not conflated with system-board removal.",
+        "ru": "Отдельная процедура снятия БП: отключить и освободить кабели из фиксаторов, удалить три винта крепления БП к корпусу, нажать фиксатор корпуса и сдвинуть/поднять БП. Эта последовательность не смешивается со снятием системной платы."
+      }
+    },
+    {
+      "source_id": "src.dell.5060.screw_table",
+      "locator": "Tower screw-size table",
+      "note": {
+        "en": "Dell lists nine #6-32 × 1.4 mm screws for the system board and three #6-32 × 1.4 mm screws for PSU-to-chassis mounting. Other listed quantities are optional/module-specific and must not be summed as a universal installed count.",
+        "ru": "Dell указывает девять винтов #6-32 × 1,4 мм для системной платы и три винта #6-32 × 1,4 мм для крепления БП к корпусу. Другие позиции таблицы относятся к опциям и модулям и не должны суммироваться как универсальное установленное количество."
+      }
     }
-  ]
+  ],
+  "status": "manufacturer_documented_partial_procedure",
+  "scope_note": {
+    "en": "This is the Dell-documented system-board removal prerequisite chain only. It is not a complete teardown, reassembly guide, or a claim that optional devices are installed. PSU and system-fan removal have separate procedures; they are not silently inserted into this sequence.",
+    "ru": "Это только цепочка подготовительных операций и снятия системной платы по руководству Dell. Это не полная разборка или инструкция по сборке и не утверждение, что опциональные устройства установлены. Для БП и корпусного вентилятора существуют отдельные процедуры; они не вставлены в эту последовательность без оснований."
+  }
 }
