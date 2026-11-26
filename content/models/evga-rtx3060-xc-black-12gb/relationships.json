@@ -1005,16 +1005,6 @@
       ]
     },
     {
-      "id": "rel.channel.01.connected.package",
-      "from": "chip.memory.channel.01",
-      "to": "chip.memory.candidate.1",
-      "type": "connected_to",
-      "source_ids": [
-        "src.samsung.gddr6.catalog",
-        "src.tomshardware.teardown"
-      ]
-    },
-    {
       "id": "rel.gddr6.bus.contains.channel.02",
       "from": "chip.memory.gddr6.bus",
       "to": "chip.memory.channel.02",
@@ -1022,16 +1012,6 @@
       "source_ids": [
         "src.evga.spec",
         "src.samsung.gddr6.catalog"
-      ]
-    },
-    {
-      "id": "rel.channel.02.connected.package",
-      "from": "chip.memory.channel.02",
-      "to": "chip.memory.candidate.2",
-      "type": "connected_to",
-      "source_ids": [
-        "src.samsung.gddr6.catalog",
-        "src.tomshardware.teardown"
       ]
     },
     {
@@ -1045,16 +1025,6 @@
       ]
     },
     {
-      "id": "rel.channel.03.connected.package",
-      "from": "chip.memory.channel.03",
-      "to": "chip.memory.candidate.3",
-      "type": "connected_to",
-      "source_ids": [
-        "src.samsung.gddr6.catalog",
-        "src.tomshardware.teardown"
-      ]
-    },
-    {
       "id": "rel.gddr6.bus.contains.channel.04",
       "from": "chip.memory.gddr6.bus",
       "to": "chip.memory.channel.04",
@@ -1062,16 +1032,6 @@
       "source_ids": [
         "src.evga.spec",
         "src.samsung.gddr6.catalog"
-      ]
-    },
-    {
-      "id": "rel.channel.04.connected.package",
-      "from": "chip.memory.channel.04",
-      "to": "chip.memory.candidate.4",
-      "type": "connected_to",
-      "source_ids": [
-        "src.samsung.gddr6.catalog",
-        "src.tomshardware.teardown"
       ]
     },
     {
@@ -1085,16 +1045,6 @@
       ]
     },
     {
-      "id": "rel.channel.05.connected.package",
-      "from": "chip.memory.channel.05",
-      "to": "chip.memory.candidate.5",
-      "type": "connected_to",
-      "source_ids": [
-        "src.samsung.gddr6.catalog",
-        "src.tomshardware.teardown"
-      ]
-    },
-    {
       "id": "rel.gddr6.bus.contains.channel.06",
       "from": "chip.memory.gddr6.bus",
       "to": "chip.memory.channel.06",
@@ -1102,16 +1052,6 @@
       "source_ids": [
         "src.evga.spec",
         "src.samsung.gddr6.catalog"
-      ]
-    },
-    {
-      "id": "rel.channel.06.connected.package",
-      "from": "chip.memory.channel.06",
-      "to": "chip.memory.candidate.6",
-      "type": "connected_to",
-      "source_ids": [
-        "src.samsung.gddr6.catalog",
-        "src.tomshardware.teardown"
       ]
     }
   ]
