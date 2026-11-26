@@ -717,24 +717,56 @@ def main():
     )
     set_parent_keep_world(contact, cooling_group)
 
-    # Teardown-supported heat pipes are present, but their exact count, routing,
-    # diameter and contact geometry are unknown. Two visual paths are proxies only.
-    heatpipes_group = make_assembly("Heatpipe group | reconstructed routes", "cooling.heatpipes",
-        (CARD_LENGTH / 2, 0, CARD_HEIGHT / 2), cool, parent=cooling_group)
-    heatpipe_paths = (
-        ((76, -4.4, 57), (67, -3.6, 59), (57, -2.1, 62), (47, -0.8, 65), (39, 0.0, 66)),
-        ((118, -4.4, 57), (128, -3.6, 59), (139, -2.1, 62), (150, -0.8, 65), (160, 0.0, 66)),
+    # Exact-SKU review states four central GPU-contact heatpipes plus two side heatpipes.
+    # Route geometry below is independently selectable but remains a photo-estimated proxy.
+    heatpipes_group = make_assembly(
+        "Heatpipe assembly | six reviewed pipes",
+        "cooling.heatpipes",
+        (CARD_LENGTH / 2, 0, CARD_HEIGHT / 2),
+        cool, parent=cooling_group,
+        evidence=STATUS["teardown_supported"], geometry="assembly_node",
     )
-    for pipe_index, path in enumerate(heatpipe_paths, start=1):
+    main_pipe_group = make_assembly(
+        "Four central GPU-contact heatpipes",
+        "cooling.heatpipe.candidate.1",
+        (CARD_LENGTH * 0.48, -2.0, CARD_HEIGHT * 0.55),
+        cool, parent=heatpipes_group,
+        evidence=STATUS["teardown_supported"], geometry="assembly_node",
+    )
+    side_pipe_group = make_assembly(
+        "Two side heatpipes",
+        "cooling.heatpipe.candidate.2",
+        (CARD_LENGTH * 0.5, -2.0, CARD_HEIGHT * 0.42),
+        cool, parent=heatpipes_group,
+        evidence=STATUS["teardown_supported"], geometry="assembly_node",
+    )
+    heatpipe_routes = (
+        ("cooling.heatpipe.main.01", "Main GPU-contact heatpipe 01", main_pipe_group,
+         ((82, -4.4, 50), (75, -3.2, 54), (66, -1.8, 58), (55, -0.7, 63), (45, 0.0, 66))),
+        ("cooling.heatpipe.main.02", "Main GPU-contact heatpipe 02", main_pipe_group,
+         ((88, -4.4, 56), (82, -3.2, 60), (74, -1.8, 64), (64, -0.7, 68), (53, 0.0, 70))),
+        ("cooling.heatpipe.main.03", "Main GPU-contact heatpipe 03", main_pipe_group,
+         ((106, -4.4, 50), (113, -3.2, 54), (122, -1.8, 58), (133, -0.7, 63), (145, 0.0, 66))),
+        ("cooling.heatpipe.main.04", "Main GPU-contact heatpipe 04", main_pipe_group,
+         ((112, -4.4, 56), (119, -3.2, 60), (127, -1.8, 64), (138, -0.7, 68), (150, 0.0, 70))),
+        ("cooling.heatpipe.side.01", "Side heatpipe 01", side_pipe_group,
+         ((76, -4.2, 44), (65, -3.3, 42), (50, -1.9, 41), (32, -0.7, 43), (18, 0.0, 45))),
+        ("cooling.heatpipe.side.02", "Side heatpipe 02", side_pipe_group,
+         ((124, -4.2, 44), (137, -3.3, 42), (153, -1.9, 41), (171, -0.7, 43), (186, 0.0, 45))),
+    )
+    heatpipe_paths = tuple(route[3] for route in heatpipe_routes)
+    for route_id, route_name, route_parent, route_points in heatpipe_routes:
         pipe_group = make_assembly(
-            "Heatpipe route candidate {}".format(pipe_index),
-            "cooling.heatpipe.candidate.{}".format(pipe_index),
-            path[0], cool, parent=heatpipes_group,
+            route_name, route_id, route_points[0], cool, parent=route_parent,
+            evidence=STATUS["teardown_supported"], geometry="illustrative_proxy",
         )
-        for segment_index, (start, end) in enumerate(zip(path, path[1:]), start=1):
-            cylinder_between(f"Heatpipe proxy {pipe_index} segment {segment_index}",
-                f"cooling.heatpipes.proxy.{pipe_index}.{segment_index}",
-                start, end, 1.6, MAT["heatpipe"], cool, pipe_group)
+        route_slug = route_id.replace("cooling.heatpipe.", "")
+        for segment_index, (start, end) in enumerate(zip(route_points, route_points[1:]), start=1):
+            cylinder_between(
+                "{} segment {}".format(route_name, segment_index),
+                "visual.detail.heatpipe.{}.segment.{:02d}".format(route_slug, segment_index),
+                start, end, 1.35, MAT["heatpipe"], cool, pipe_group,
+            )
 
     # Rear-side exposed PCB proxy: exact outline and position remain unknown.
     pcb = cube(
