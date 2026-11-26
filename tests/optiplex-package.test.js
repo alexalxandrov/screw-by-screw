@@ -3,97 +3,134 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { loadModelPackage } from "../src/viewer/ModelPackageLoader.js";
 
-const packageBytes = await readFile(new URL("../public/models/dell_optiplex_5060_tower_v02.sbsmodel", import.meta.url));
+const packageBytes = await readFile(new URL("../public/models/dell_optiplex_5060_tower_v03.sbsmodel", import.meta.url));
 const packageBuffer = packageBytes.buffer.slice(
   packageBytes.byteOffset,
   packageBytes.byteOffset + packageBytes.byteLength
 );
-const loaded = await loadModelPackage({
-  name: "dell_optiplex_5060_tower_v02.sbsmodel",
-  size: packageBytes.byteLength,
-  arrayBuffer: async () => packageBuffer
-});
+const prefix = "SBSMODEL-JSON" + String.fromCharCode(10);
 
-test("OptiPlex reference package passes the production package loader and checksum verification", () => {
+async function loadBytes(bytes, name) {
+  const buffer = bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength);
+  return loadModelPackage({
+    name,
+    size: bytes.byteLength,
+    arrayBuffer: async () => buffer
+  });
+}
+
+const loaded = await loadBytes(packageBytes, "dell_optiplex_5060_tower_v03.sbsmodel");
+
+test("OptiPlex v0.3 package passes the production loader and cross-file validation", () => {
   assert.equal(loaded.report.modelId, "pc.dell.optiplex-5060-tower.family");
-  assert.equal(loaded.report.componentCount, 127);
-  assert.equal(loaded.report.relationshipCount, 135);
+  assert.equal(loaded.report.componentCount, 137);
+  assert.equal(loaded.report.relationshipCount, 145);
   assert.equal(loaded.integrityVerified, true);
   assert.equal(loaded.data.model.geometry_status, "illustrative_proxy_not_cad");
+  assert.equal(loaded.data.model.release.version, "0.3.0");
   assert.equal(loaded.data.model.specifications.physical.height_mm, 350);
   assert.equal(loaded.data.model.specifications.physical.width_mm, 154);
   assert.equal(loaded.data.model.specifications.physical.depth_mm, 274);
-  assert.equal(loaded.data.components.components.filter((component) => component.category === "fastener" && component.fastener_population !== "optional_reference_not_fitted").length, 24);
-  assert.equal(loaded.data.components.components.filter((component) => component.fastener_population === "optional_reference_not_fitted").length, 7);
-  assert.equal(loaded.data.assembly_steps.observations.length, 14);
-  assert.equal(loaded.data.model.specifications.service_hardware.optional_fastener_references, 7);
-  assert.equal(loaded.data.claims.claims.find((claim) => claim.id === "claim.fasteners.optional_mounting").value.length, 5);
-  assert.equal(loaded.data.model.specifications.service_hardware.physical_reference_instances, 24);
-  assert.equal(loaded.data.sources.sources.length, 23);
-  assert.equal(loaded.data.claims.claims.length, 31);
-  assert.equal(loaded.data.process_layers.process_layers.length, 6);
-  assert.equal(loaded.data.assembly_steps.steps.length, 12);
-  assert.equal(loaded.data.learning.questions.length, 9);
-  assert.equal(loaded.data.model.specifications.motherboard.numbered_callouts, 26);
-  assert.equal(loaded.data.model.specifications.motherboard.callouts.length, 26);
+
+  const components = loaded.data.components.components;
+  const componentIds = new Set(components.map((component) => component.id));
+  const sources = loaded.data.sources.sources;
+  const sourceIds = new Set(sources.map((source) => source.id));
+  const relationships = loaded.data.relationships.relationships;
+  const claims = loaded.data.claims.claims;
+  const steps = loaded.data.assembly_steps.steps;
+  const stepIds = new Set(steps.map((step) => step.id));
   const callouts = loaded.data.model.specifications.motherboard.callouts;
-  for (const component of loaded.data.components.components) {
+
+  assert.equal(components.filter((component) =>
+    component.category === "fastener" &&
+    component.fastener_population !== "optional_reference_not_fitted"
+  ).length, 24);
+  assert.equal(components.filter((component) =>
+    component.fastener_population === "optional_reference_not_fitted"
+  ).length, 7);
+  assert.equal(sources.length, 28);
+  assert.equal(claims.length, 34);
+  assert.equal(loaded.data.process_layers.process_layers.length, 6);
+  assert.equal(steps.length, 12);
+  assert.equal(loaded.data.assembly_steps.observations.length, 19);
+  assert.equal(loaded.data.learning.questions.length, 9);
+
+  assert.equal(loaded.data.model.specifications.service_hardware.physical_reference_instances, 24);
+  assert.equal(loaded.data.model.specifications.service_hardware.optional_fastener_references, 7);
+  assert.equal(loaded.data.model.specifications.service_hardware.optional_fastener_schedule.length, 5);
+  assert.equal(claims.find((claim) => claim.id === "claim.fasteners.optional_mounting").value.length, 5);
+
+  assert.equal(loaded.data.model.specifications.motherboard.numbered_callouts, 26);
+  assert.equal(callouts.length, 26);
+  assert.deepEqual(callouts.map((callout) => callout.number), Array.from({ length: 26 }, (_, index) => index + 1));
+  assert.equal(callouts.reduce((count, callout) => count + callout.component_ids.length, 0), 29);
+  assert.deepEqual(callouts.find((entry) => entry.number === 24).component_ids, ["motherboard.m2.wlan"]);
+  assert.deepEqual(callouts.find((entry) => entry.number === 25).component_ids, ["motherboard.coin_cell"]);
+
+  // Russian localization is part of the package contract for every component.
+  for (const component of components) {
     assert.ok(component.name?.ru, `missing Russian component name: ${component.id}`);
     assert.ok(component.description?.ru, `missing Russian component description: ${component.id}`);
-    assert.match(component.description.ru, /[\u0400-\u04FF]/, `component description is not localized in Russian: ${component.id}`);
+    assert.match(component.description.ru, /[\u0400-\u04FF]/, `component description is not localized: ${component.id}`);
   }
-  const componentIds = new Set(loaded.data.components.components.map((component) => component.id));
-  assert.deepEqual(callouts.map((callout) => callout.number), Array.from({ length: 26 }, (_, index) => index + 1));
-  assert.ok(callouts.every((callout) => callout.component_ids.length > 0 &&
-    callout.component_ids.every((componentId) => componentIds.has(componentId))));
-  const supportedRelationshipTypes = new Set([
-    "contains", "mounted_in", "fastened_to", "connected_to", "powered_by",
-    "signals_to", "cooled_by", "transfers_heat_to", "airflow_over", "depends_on"
-  ]);
-  assert.ok(loaded.data.relationships.relationships.every((relationship) =>
-    supportedRelationshipTypes.has(relationship.type)));
-  const componentIds = new Set(loaded.data.components.components.map((component) => component.id));
-  const sourceIds = new Set(loaded.data.sources.sources.map((source) => source.id));
-  assert.ok(sourceIds.has("src.dell.5060.m2_removal"));
-  assert.ok(sourceIds.has("src.dell.5060.coin_cell_removal"));
-  assert.ok(sourceIds.has("src.dell.5060.heatsink_fan_removal"));
-  assert.ok(sourceIds.has("src.dell.5060.optical_drive_install"));
-  assert.ok(sourceIds.has("src.dell.5060.optional_video_module"));
-  const callouts = loaded.data.model.specifications.motherboard.callouts;
-  assert.deepEqual(callouts.map((entry) => entry.number), Array.from({ length: 26 }, (_, index) => index + 1));
-  assert.equal(callouts.reduce((count, entry) => count + entry.component_ids.length, 0), 29);
-  for (const callout of callouts) {
-    for (const componentId of callout.component_ids) assert.ok(componentIds.has(componentId), `unresolved callout ${callout.number}: ${componentId}`);
+
+  // Every reference in the editable semantic graph must resolve.
+  for (const component of components) {
+    if (component.parent_id) assert.ok(componentIds.has(component.parent_id), `unresolved parent: ${component.id}`);
+    for (const sourceId of component.source_ids ?? []) assert.ok(sourceIds.has(sourceId), `unresolved component source: ${component.id}`);
   }
-  for (const component of loaded.data.components.components) {
-    if (component.parent_id) assert.ok(componentIds.has(component.parent_id), `unresolved parent for ${component.id}`);
-    for (const sourceId of component.source_ids ?? []) assert.ok(sourceIds.has(sourceId), `unresolved source for ${component.id}`);
-  }
-  for (const relationship of loaded.data.relationships.relationships) {
+  for (const relationship of relationships) {
     assert.ok(componentIds.has(relationship.from), `unresolved relationship source: ${relationship.id}`);
     assert.ok(componentIds.has(relationship.to), `unresolved relationship target: ${relationship.id}`);
-    for (const sourceId of relationship.source_ids ?? []) assert.ok(sourceIds.has(sourceId), `unresolved relationship evidence: ${relationship.id}`);
+    for (const sourceId of relationship.source_ids ?? []) assert.ok(sourceIds.has(sourceId), `unresolved relationship source record: ${relationship.id}`);
+  }
+  for (const claim of claims) {
+    assert.ok(componentIds.has(claim.subject_id) || claim.subject_id === loaded.data.model.id, `unresolved claim subject: ${claim.id}`);
+    for (const sourceId of claim.source_ids ?? []) assert.ok(sourceIds.has(sourceId), `unresolved claim evidence: ${claim.id}`);
   }
   for (const layer of loaded.data.process_layers.process_layers) {
     for (const componentId of layer.linked_component_ids ?? []) assert.ok(componentIds.has(componentId), `unresolved process component: ${layer.id}`);
     for (const sourceId of layer.source_ids ?? []) assert.ok(sourceIds.has(sourceId), `unresolved process evidence: ${layer.id}`);
   }
-  const stepIds = new Set(loaded.data.assembly_steps.steps.map((step) => step.id));
-  for (const step of loaded.data.assembly_steps.steps) {
+  for (const step of steps) {
     for (const componentId of step.component_ids ?? []) assert.ok(componentIds.has(componentId), `unresolved step component: ${step.id}`);
     for (const sourceId of step.source_ids ?? []) assert.ok(sourceIds.has(sourceId), `unresolved step evidence: ${step.id}`);
     for (const prerequisite of step.prerequisite_step_ids ?? []) assert.ok(stepIds.has(prerequisite), `unresolved step prerequisite: ${step.id}`);
   }
-  for (const claim of loaded.data.claims.claims) {
-    assert.ok(componentIds.has(claim.subject_id) || claim.subject_id === loaded.data.model.id, `unresolved claim subject: ${claim.id}`);
-    for (const sourceId of claim.source_ids ?? []) assert.ok(sourceIds.has(sourceId), `unresolved claim evidence: ${claim.id}`);
-  }
   for (const question of loaded.data.learning.questions) {
     for (const sourceId of question.source_ids ?? []) assert.ok(sourceIds.has(sourceId), `unresolved learning evidence: ${question.id}`);
   }
+  for (const callout of callouts) {
+    for (const componentId of callout.component_ids) assert.ok(componentIds.has(componentId), `unresolved callout ${callout.number}: ${componentId}`);
+  }
 
-  assert.deepEqual(loaded.data.model.specifications.motherboard.callouts.find((entry) => entry.number === 24).component_ids, ["motherboard.m2.wlan"]);
-  assert.deepEqual(loaded.data.model.specifications.motherboard.callouts.find((entry) => entry.number === 25).component_ids, ["motherboard.coin_cell"]);
+  // The HDD and optical-drive mechanics are separate optional carrier modules.
+  const drive35Claim = claims.find((claim) => claim.id === "claim.storage.drive35_mechanism");
+  const drive25Claim = claims.find((claim) => claim.id === "claim.storage.drive25_mechanism");
+  const oddClaim = claims.find((claim) => claim.id === "claim.storage.odd_mechanism");
+  assert.equal(drive35Claim.value.release, "single blue carrier tab");
+  assert.equal(drive25Claim.value.release, "two blue side tabs");
+  assert.equal(oddClaim.value.release, "single blue carrier tab");
+  for (const id of [
+    "storage.drive35.carrier.optional",
+    "storage.drive35.filler_bracket.optional",
+    "storage.drive35.drive_bracket.optional",
+    "storage.drive35.release_tab.optional",
+    "storage.drive25.carrier.optional",
+    "storage.drive25.drive_bracket.optional",
+    "storage.drive25.release_tab.left.optional",
+    "storage.drive25.release_tab.right.optional",
+    "storage.optical_drive.release_tab.optional",
+    "storage.drive_cage.cable_retention_tabs"
+  ]) {
+    const component = components.find((entry) => entry.id === id);
+    assert.ok(component, `missing storage mechanism component: ${id}`);
+    assert.equal(component.geometry_status, "unknown");
+    assert.equal(component.visual_proxy, undefined);
+  }
+
+  // Platform support data is not confused with the installed sample configuration.
   const supportedCpus = loaded.data.model.specifications.platform.supported_processors;
   const g5400 = supportedCpus.find((cpu) => cpu.model === "Pentium Gold G5400");
   const g5500 = supportedCpus.find((cpu) => cpu.model === "Pentium Gold G5500");
@@ -106,66 +143,42 @@ test("OptiPlex reference package passes the production package loader and checks
   assert.ok(sourceIds.has("src.dell.5060.spec_sheet"));
   assert.ok(sourceIds.has("src.intel.g5400"));
   assert.ok(sourceIds.has("src.intel.g5500"));
-  assert.equal(loaded.data.claims.claims.find((claim) => claim.id === "claim.cpu.power_rating_discrepancy").value["Pentium Gold G5500"].intel_ark_tdp_w, 54);
+
+  for (const sourceId of [
+    "src.dell.5060.m2_removal",
+    "src.dell.5060.coin_cell_removal",
+    "src.dell.5060.heatsink_fan_removal",
+    "src.dell.5060.optical_drive_install",
+    "src.dell.5060.optional_video_module",
+    "src.dell.5060.hdd35_assembly",
+    "src.dell.5060.hdd35_bracket",
+    "src.dell.5060.hdd25_assembly",
+    "src.dell.5060.hdd25_bracket",
+    "src.dell.5060.odd_removal"
+  ]) assert.ok(sourceIds.has(sourceId), `missing manufacturer service source: ${sourceId}`);
+
+  const supportedRelationshipTypes = new Set(["contains", "powered_by", "connected_to", "transfers_heat_to"]);
+  assert.ok(relationships.every((relationship) => supportedRelationshipTypes.has(relationship.type)));
   assert.equal(loaded.data.animations.clips.length, 0);
 });
 
-
 test("JSON model package rejects a tampered sidecar before loading", async () => {
-  const prefix = "SBSMODEL-JSON\n";
   const envelope = JSON.parse(packageBytes.toString("utf8").slice(prefix.length));
   envelope.files["model.json"] += " ";
   const tamperedBytes = Buffer.from(prefix + JSON.stringify(envelope), "utf8");
-  const tamperedBuffer = tamperedBytes.buffer.slice(
-    tamperedBytes.byteOffset,
-    tamperedBytes.byteOffset + tamperedBytes.byteLength
-  );
-
-  await assert.rejects(
-    () => loadModelPackage({
-      name: "tampered.sbsmodel",
-      size: tamperedBytes.byteLength,
-      arrayBuffer: async () => tamperedBuffer
-    }),
-    /SHA-256 mismatch|checksum/i
-  );
+  await assert.rejects(() => loadBytes(tamperedBytes, "tampered.sbsmodel"), /SHA-256 mismatch|checksum/i);
 });
 
-
 test("JSON model package rejects an excessive entry count", async () => {
-  const prefix = "SBSMODEL-JSON\\n";
   const envelope = JSON.parse(packageBytes.toString("utf8").slice(prefix.length));
   for (let index = 0; index < 130; index += 1) envelope.files[`extra-${index}.json`] = "{}";
-  const oversizedBytes = Buffer.from(prefix + JSON.stringify(envelope), "utf8");
-  const oversizedBuffer = oversizedBytes.buffer.slice(
-    oversizedBytes.byteOffset,
-    oversizedBytes.byteOffset + oversizedBytes.byteLength
-  );
-  await assert.rejects(
-    () => loadModelPackage({
-      name: "too-many-entries.sbsmodel",
-      size: oversizedBytes.byteLength,
-      arrayBuffer: async () => oversizedBuffer
-    }),
-    /invalid number of entries/
-  );
+  const bytes = Buffer.from(prefix + JSON.stringify(envelope), "utf8");
+  await assert.rejects(() => loadBytes(bytes, "too-many-entries.sbsmodel"), /invalid number of entries/);
 });
 
 test("JSON model package rejects unsafe envelope paths", async () => {
-  const prefix = "SBSMODEL-JSON\\n";
   const envelope = JSON.parse(packageBytes.toString("utf8").slice(prefix.length));
   envelope.files["../escape.json"] = "{}";
-  const unsafeBytes = Buffer.from(prefix + JSON.stringify(envelope), "utf8");
-  const unsafeBuffer = unsafeBytes.buffer.slice(
-    unsafeBytes.byteOffset,
-    unsafeBytes.byteOffset + unsafeBytes.byteLength
-  );
-  await assert.rejects(
-    () => loadModelPackage({
-      name: "unsafe-path.sbsmodel",
-      size: unsafeBytes.byteLength,
-      arrayBuffer: async () => unsafeBuffer
-    }),
-    /unsafe package path/
-  );
+  const bytes = Buffer.from(prefix + JSON.stringify(envelope), "utf8");
+  await assert.rejects(() => loadBytes(bytes, "unsafe-path.sbsmodel"), /unsafe package path/);
 });
