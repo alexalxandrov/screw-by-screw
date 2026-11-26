@@ -162,7 +162,22 @@ export function validateModelPackageData(manifest, data) {
   const components = data.components.components;
   if (!Array.isArray(sources) || !Array.isArray(components)) fail("sources or components collection is missing");
   const sourceIds = new Set();
-  for (const source of sources) { assertString(source.id, "source id"); if (sourceIds.has(source.id)) fail("duplicate source ID: " + source.id); sourceIds.add(source.id); }
+  for (const source of sources) {
+    assertString(source.id, "source id");
+    if (sourceIds.has(source.id)) fail("duplicate source ID: " + source.id);
+    sourceIds.add(source.id);
+    for (const field of ["url", "identity_reference_url", "identity_reference_image_url"]) {
+      const value = source[field];
+      if (value === undefined || value === null || value === "") continue;
+      assertString(value, "source." + field);
+      let parsed;
+      try { parsed = new URL(value); }
+      catch { fail("source." + field + " must be an absolute HTTP(S) URL"); }
+      if (parsed.protocol !== "http:" && parsed.protocol !== "https:") {
+        fail("source." + field + " must use HTTP or HTTPS");
+      }
+    }
+  }
   const componentIds = new Set();
   for (const component of components) { assertString(component.id, "component id"); if (componentIds.has(component.id)) fail("duplicate component ID: " + component.id); componentIds.add(component.id); }
   for (const component of components) {
