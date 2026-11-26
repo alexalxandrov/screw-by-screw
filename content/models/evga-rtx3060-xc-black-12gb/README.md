@@ -39,7 +39,7 @@ This is not yet a complete engineering reconstruction. Eight cooler/shroud reten
 
 ### Fine-grained cooling decomposition
 
-The development branch now expands the content graph to **307 semantic components, 303 typed relationships, 85 claims and 13 sources**. Fan frames, hubs and each blade proxy are separately selectable; the illustrative heatsink has 24 separately selectable fin proxies; six separate heatpipe route proxies are grouped as four main GPU-contact pipes plus two side pipes; and six memory thermal-pad proxies plus one VRM pad strip have their own IDs. No proxy blade/fin count or thermal-pad dimensions are presented as a factory specification.
+The development branch now expands the content graph to **307 semantic components, 303 typed relationships, 96 claims and 13 sources**. Fan frames, hubs and each blade proxy are separately selectable; the illustrative heatsink has 24 separately selectable fin proxies; six separate heatpipe route proxies are grouped as four main GPU-contact pipes plus two side pipes; and six memory thermal-pad proxies plus one VRM pad strip have their own IDs. No proxy blade/fin count or thermal-pad dimensions are presented as a factory specification.
 
 
 ### Partial teardown evidence
@@ -90,3 +90,8 @@ The architecture tree now exposes 14 logical TPC instances, each with two SMs an
 ### Learning module
 
 The bilingual learning quiz contains 12 source-linked questions, including the new TPC and per-SM processing-partition structure, datapath resources and register-file organization documented by NVIDIA's GA10x architecture whitepaper.
+
+
+### Exterior and airflow observations
+
+The exact-SKU review documents the black plastic no-RGB shroud, vertical aluminium fin stack, copper plate broad enough to cover GPU and memory, and large through-PCB airflow cutout. Neoseeker's exact sample identifies three DisplayPort 1.4a ports and one HDMI 2.1 port. These are source-backed descriptions only; model contours and dimensions are not a manufacturing CAD reconstruction.
