@@ -502,6 +502,67 @@
         "src.dell.5060.screw_table"
       ],
       "notes": "Optional hardware schedule from Dell's Tower screw table. These are conditional fastener references, not evidence that all options are simultaneously installed. The seven references are excluded from the 24 illustrative service-relevant physical screw/grommet instances."
+    },
+    {
+      "id": "claim.storage.drive35_mechanism",
+      "subject_id": "storage.drive35.carrier.optional",
+      "predicate": "drive_carrier_retention",
+      "value": {
+        "release": "single blue carrier tab",
+        "bracket": "removable HDD filler bracket",
+        "drive_retention": "flexible bracket pins engage drive slots",
+        "cable_disconnect": [
+          "SATA data",
+          "power"
+        ]
+      },
+      "unit": "service_configuration",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.5060.hdd35_assembly",
+        "src.dell.5060.hdd35_bracket"
+      ],
+      "notes": "Optional 3.5-inch assembly; no fitted HDD or carrier variant is asserted."
+    },
+    {
+      "id": "claim.storage.drive25_mechanism",
+      "subject_id": "storage.drive25.carrier.optional",
+      "predicate": "drive_carrier_retention",
+      "value": {
+        "release": "two blue side tabs",
+        "bracket": "flexible bracket pins engage drive slots",
+        "drive_retention": "pin-retained, not a universal screw pattern",
+        "cable_disconnect": [
+          "data",
+          "power"
+        ]
+      },
+      "unit": "service_configuration",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.5060.hdd25_assembly",
+        "src.dell.5060.hdd25_bracket"
+      ],
+      "notes": "Optional 2.5-inch assembly; no fitted HDD or carrier variant is asserted."
+    },
+    {
+      "id": "claim.storage.odd_mechanism",
+      "subject_id": "storage.optical_drive.optional",
+      "predicate": "optical_drive_release_and_cable_path",
+      "value": {
+        "release": "single blue carrier tab",
+        "cable_disconnect": [
+          "data",
+          "power"
+        ],
+        "cable_management": "unroute leads from tabs below the drive cage before disconnecting"
+      },
+      "unit": "service_configuration",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.5060.odd_removal"
+      ],
+      "notes": "Optional slim optical drive; its installed presence is unknown."
     }
   ]
 }
