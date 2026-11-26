@@ -10,16 +10,16 @@ Hosted/Vite mode resolves a package through its relative path under the static p
 
 A double-click `file://` launch loads embedded packages without a server or network. If a package is not embedded, selecting it opens the file picker and verifies the selected archive's internal model ID before loading.
 
-Every archive still passes through `loadModelPackage`: ZIP structure, path traversal, entry-size limits, checksums, metadata references, animation tracks and GLB node bindings are checked. Catalogue strings are rendered as text nodes, not HTML.
+Every package still passes through `loadModelPackage`: ZIP structure or the `SBSMODEL-JSON` envelope, path traversal, entry-size limits, SHA-256 checksums, metadata references, animation tracks and GLB node bindings are checked. Catalogue strings are rendered as text nodes, not HTML.
 
 ## Current entries
 
 The catalogue contains two model classes:
 
 - **EVGA GeForce RTX 3060 XC BLACK GAMING 12GB**, exact SKU `12G-P5-3655-KR`, in `graphics_cards`. This remains the default package.
-- **Dell OptiPlex 5060 Tower**, `platform_family` system reference in `desktop_computers`. It is packaged as `models/dell_optiplex_5060_tower_v01.sbsmodel` and is explicitly labelled `illustrative_proxy_not_cad`.
+- **Dell OptiPlex 5060 Tower**, `platform_family` system reference in `desktop_computers`. Its v0.1 ZIP archive is retained at `models/dell_optiplex_5060_tower_v01.sbsmodel`; the current v0.2 package is `models/dell_optiplex_5060_tower_v02.sbsmodel` and is explicitly labelled `illustrative_proxy_not_cad`.
 
-The OptiPlex family package contains 67 stable component nodes, 68 typed relationships, 58 box-proxy meshes and 24 separate screw/grommet instances. Its outer dimensions are manufacturer-published; internal layout and fastener placement are schematic. The two entries use the same catalogue adapter and package loader.
+The OptiPlex v0.2 family package contains 115 semantic component nodes, 123 typed relationships, 58 box-proxy meshes, 24 modeled screw/grommet instances, 15 source records, 31 claims, six qualitative process layers, 12 partial service steps and nine learning questions. All 26 numbered motherboard callouts are explicitly mapped to stable semantic component IDs. Its outer dimensions are manufacturer-published; internal layout and fastener placement are schematic. The two entries use the same catalogue adapter and package loader.
 
 ## Adding another model
 
