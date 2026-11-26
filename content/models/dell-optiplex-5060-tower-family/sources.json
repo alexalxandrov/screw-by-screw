@@ -151,6 +151,36 @@
       "locator": "Disconnect and unroute cables, release three PSU mounting screws and chassis tab",
       "notes": "Manufacturer PSU removal procedure; model-specific cable routing and PSU part number are not captured by the family proxy.",
       "access_date": "2026-11-26"
+    },
+    {
+      "id": "src.dell.5060.spec_sheet",
+      "title": "Dell OptiPlex 5060 technical specifications data sheet",
+      "publisher": "Dell Technologies",
+      "source_type": "manufacturer_technical_datasheet",
+      "url": "https://i.dell.com/sites/csdocuments/shared-content_data-sheets_documents/en/optiplex_5060_spec_sheet.pdf",
+      "locator": "Processor options; Tower I/O, storage, dimensions, weight, expansion slots and PSU rows",
+      "notes": "Combined Tower/SFF/Micro data sheet. Tower-specific chassis/ports/storage/PSU/slots use the Tower column; processor table includes standard and T-suffix options across form factors and must not be read as proof that every CPU fits every form factor.",
+      "access_date": "2026-11-27"
+    },
+    {
+      "id": "src.intel.g5400",
+      "title": "Intel Pentium Gold G5400 Processor Specifications",
+      "publisher": "Intel",
+      "source_type": "processor_manufacturer_product_specification",
+      "url": "https://www.intel.com/content/www/us/en/products/sku/129951/intel-pentium-gold-g5400-processor-4m-cache-3-70-ghz/specifications.html",
+      "locator": "CPU Specifications: 58 W TDP; GPU Specifications: UHD Graphics 610; Package Specifications: PCG 2015C (65 W)",
+      "notes": "Intel processor-level TDP and graphics identity. Thermal solution specification is a separate property and must not be conflated with TDP.",
+      "access_date": "2026-11-27"
+    },
+    {
+      "id": "src.intel.g5500",
+      "title": "Intel Pentium Gold G5500 Processor Specifications",
+      "publisher": "Intel",
+      "source_type": "processor_manufacturer_product_specification",
+      "url": "https://www.intel.com/content/www/us/en/products/sku/129946/intel-pentium-gold-g5500-processor-4m-cache-3-80-ghz/specifications.html",
+      "locator": "CPU Specifications: 54 W TDP; GPU Specifications: UHD Graphics 630; Package Specifications: PCG 2015C (65 W)",
+      "notes": "Intel processor-level TDP and graphics identity. Thermal solution specification is a separate property and must not be conflated with TDP.",
+      "access_date": "2026-11-27"
     }
   ]
 }
