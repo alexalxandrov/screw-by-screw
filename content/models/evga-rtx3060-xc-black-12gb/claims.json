@@ -300,21 +300,6 @@
       "notes": "Manufacturer system requirement; this is not the board's own power draw."
     },
     {
-      "id": "claim.display.interface_versions",
-      "subject_id": "connector.io.bracket",
-      "predicate": "display_interface_versions",
-      "value": {
-        "DisplayPort": "1.4a × 3",
-        "HDMI": "2.1 × 1"
-      },
-      "unit": null,
-      "confidence_class": "manufacturer_data",
-      "source_ids": [
-        "src.evga.spec"
-      ],
-      "notes": "Output protocol versions and counts are from the exact part-number datasheet."
-    },
-    {
       "id": "claim.card.slot_width",
       "subject_id": "gpu.evga.12g-p5-3655-kr",
       "predicate": "slot_width",
