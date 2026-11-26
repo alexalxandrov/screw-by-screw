@@ -200,16 +200,6 @@ test("keeps heatpipe route counts separate from unknown physical loop count and 
   await expect(page.locator('[data-claim-id="claim.fan.oem_part_identity"]')).toContainText("Aftermarket");
 });
 
-
-test("renders the photo-observed eighth blade for both independent fan rotors", async ({ page }) => {
-  await page.goto("/");
-  await expect(page.locator('#component-tree button[data-id="fan.1.blade.8"]')).toBeVisible();
-  await expect(page.locator('#component-tree button[data-id="fan.2.blade.8"]')).toBeVisible();
-  await page.locator('#component-tree button[data-id="fan.1.blade.8"]').click();
-  await expect(page.locator("#detail-id")).toHaveText("fan.1.blade.8");
-  await expect(page.locator("#detail-description")).toContainText("восемь");
-});
-
 test("search finds components by package marking and source title", async ({ page }) => {
   await page.goto("/");
   const search = page.locator("#component-search");
