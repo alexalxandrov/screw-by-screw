@@ -26,6 +26,20 @@ test("mobile workspace switches panels instead of stacking the whole application
   await expect(page.getByRole("button", { name: "Structure" })).toBeVisible();
 });
 
+test("mobile understand and learn modes reveal their detail content", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/");
+  await page.locator('.view-tab[data-mode="understand"]').click();
+  await expect(page.locator("#app")).toHaveAttribute("data-mobile-panel", "details");
+  await expect(page.locator("#process-details")).toBeVisible();
+  await expect(page.locator(".details-panel")).toBeVisible();
+
+  await page.locator('.mobile-panel-button[data-mobile-panel="viewer"]').click();
+  await page.locator('.view-tab[data-mode="learn"]').click();
+  await expect(page.locator("#app")).toHaveAttribute("data-mobile-panel", "details");
+  await expect(page.locator("#learning-panel")).toBeVisible();
+});
+
 test("mobile workspace navigation remains hidden on desktop", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto("/");
