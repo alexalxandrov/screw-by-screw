@@ -18,7 +18,7 @@ The package adds source-backed relations and claims where evidence exists, and k
 |---|---|---|
 | GPU die | visual proxy | exact die outline, dimensions, substrate stack |
 | Thermal compound/pads | teardown-supported presence | brand, thickness, hardness, precise coverage |
-| Eight cooler screws | candidate count from a related EVGA XC teardown | exact-SKU count, locations, thread, torque, order |
+| Cooler fasteners | four GPU-area screws visible on exact XC BLACK; four additional uninstalled logical candidates from a related XC teardown | exact thread, driver, spring, torque, complete count, reassembly order |
 | PCIe edge | manufacturer interface claim / visual proxy | measured pin field, signal map, lane routing |
 | Fan headers | two teardown-visible connections | pinout, voltage, PWM/tach mapping |
 | Display ports | three DP + one HDMI from SKU specification | manufacturing shell geometry |
@@ -41,7 +41,7 @@ Blender generation and GLB binding are exercised by the Blender blockout generat
 2. Obtain and legally validate a BoardView and schematic for that exact revision.
 3. Verify the full BOM, reference designators, VRM topology, MOSFETs, controller, shunts, passive values and connector pinouts.
 4. Replace proxy dimensions with calibrated measurement or licensed CAD for shroud, PCB, heatsink, heatpipes, fans, fasteners and all connectors.
-5. Review the complete exact-model teardown before authoring any service/removal sequence.
+5. Review the complete exact-model teardown before authoring a complete service/removal sequence; the current two steps are explicitly partial observations only.
 6. Add evidence-backed electrical and thermal diagrams; keep CFD, thermal FEA and SPICE as separate numerical projects.
 7. Obtain asset reuse rights, then perform visual acceptance on the generated blend, glb and sbsmodel.
 
@@ -57,7 +57,7 @@ The component atlas also adds separate, individually selectable photo-estimated 
 
 ## Fine-grained cooling decomposition
 
-The canonical package now exposes 104 semantic components and 99 typed relationships. This includes individually selectable fan frames, hubs and seven blade proxies per fan; 24 separate heatsink-fin proxies; two selectable heatpipe-route assemblies; six memory-side thermal-pad proxies; and a VRM-side thermal-pad strip proxy.
+The canonical package now exposes 127 semantic components and 122 typed relationships. This includes individually selectable fan frames, hubs and seven illustrative blade proxies per fan; 24 separate illustrative heatsink-fin proxies; six selectable heatpipe-route proxies grouped as four main GPU-contact pipes plus two side pipes; six memory-side thermal-pad proxies; and a VRM-side thermal-pad strip proxy.
 
 These are independently selectable teaching meshes, not a claim that the exact hardware has seven blades per fan or 24 fins. The count and shapes are explicitly identified as proxy geometry. Thermal-pad positions are aligned to the six memory-package candidates only; pad thickness, material, hardness and service dimensions remain unverified. Heatpipe paths and cross-sections likewise remain illustrative.
 
@@ -76,7 +76,7 @@ A second package-authored animation clip, `clip.exploded-cooler-overview`, now m
 
 The semantic package now contains 127 components and 122 typed relationships. Thirteen logical-only nodes represent the 28-SM GA106 cluster, its CUDA/Tensor/RT/TMU/ROP aggregates, a 192-bit GDDR6 interface and six logical interface presentation groups. Six GDDR6 package positions are separately selectable from exact-XC-BLACK review/teardown material, but no one-to-one mapping between package positions and interface segments is asserted. The logical nodes carry `geometry_status: logical_only`: no physical die floorplan, shader wiring or PCB trace routing is drawn.
 
-A third process layer, `gpu_compute`, exposes this architecture map in the viewer. Claims cover the published 28 SM / 112 Tensor / 28 RT / 112 TMU / 48 ROP configuration, 276 mm² and 12-billion-transistor GA106 die figures, Samsung 8N, and memory device attributes where available. The memory-package details are explicitly sourced to a secondary catalog entry rather than a primary Samsung datasheet. The viewer labels this as a logical map, not an architecture simulation.
+A third process layer, `gpu_compute`, exposes this architecture map in the viewer. Claims cover the published 28 SM / 112 Tensor / 28 RT / 112 TMU / 48 ROP configuration, 276 mm² and 12-billion-transistor GA106 die figures, Samsung 8N, and candidate memory-device attributes where available. K4ZAF325BM-HC16 and its package attributes are explicitly unverified on the exact XC BLACK sample and sourced from a related-variant teardown plus a secondary catalog, not a primary exact-SKU BOM. The viewer labels this as a logical map, not an architecture simulation.
 
 
 ## 13. Exact-SKU fastener evidence reconciliation
@@ -97,12 +97,12 @@ The EVGA 192-bit GDDR6 bus remains an exact-SKU manufacturer specification. Six 
 
 ## 15. Interactive thermal-path diagram
 
-The cooling process layer now exposes a four-stage clickable diagram: heat source/contact interfaces, heat transport, fin-stack rejection, and airflow/mechanical envelope. Its 22 nodes reuse the canonical component IDs and link directly to the component detail pane. The diagram records the approximate reviewer measurements for the fan opening and impeller but labels the 3D fan centres, blade meshes, two heatpipe paths, fin count, pad dimensions and outer shroud contour as illustrative or unknown. It does not calculate CFD, junction temperature, thermal resistance, fan curves, RPM, acoustics or heat-transfer performance.
+The cooling process layer now exposes a four-stage clickable diagram: heat source/contact interfaces, heat transport, fin-stack rejection, and airflow/mechanical envelope. Its 32 nodes reuse the canonical component IDs and link directly to the component detail pane. The diagram records the approximate reviewer measurements for the fan opening and impeller but labels the 3D fan centres, blade meshes, six heatpipe route proxies grouped four main plus two side, fin count, pad dimensions and outer shroud contour as illustrative or unknown. It does not calculate CFD, junction temperature, thermal resistance, fan curves, RPM, acoustics or heat-transfer performance.
 
 
 ## 16. Four visible copper heatpipe terminal faces
 
-The exact XC BLACK cooler-end photograph in LanOC's review shows four separate copper terminal faces. Four individually selectable markers now exist under `cooling.heatpipes`. Their generated positions and disc dimensions are photo-estimated proxies. The claim deliberately counts **visible terminal faces**, not unique U-shaped heatpipes: two pipes can have four ends. The model's two illustrative route candidates remain unverified internal routing and are not promoted to an exact pipe-count or manufacturing specification.
+The exact XC BLACK cooler-end photograph in LanOC's review shows four separate copper terminal faces. Four individually selectable markers now exist under `cooling.heatpipes`. Their generated positions and disc dimensions are photo-estimated proxies. The claim deliberately counts **visible terminal faces**, not unique U-shaped heatpipes: two pipes can have four ends. The exact-SKU six-pipe count is established separately by The FPS Review (four main plus two side); 3D route centrelines, bends and terminal-face-to-pipe mapping remain illustrative.
 
 
 ## 17. Six heatpipes confirmed for the exact retail SKU
