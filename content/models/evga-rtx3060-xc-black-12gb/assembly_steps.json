@@ -1,7 +1,7 @@
 {
   "schema_version": "0.1.0",
   "status": "partial_observed_sequence",
-  "policy": "Only actions directly supported by exact-SKU-linked XC BLACK sources are included. The Tom's Hardware rear-PCB identity photo reads P/N 12G-P5-3655-KR; its teardown reports eight cooler/shroud retention screws (four around the GPU and four near the far end). LanOC independently shows the four GPU-area subset. The four rear screws have no calibrated individual location map. The exact-model Gamers Nexus teardown shows both fan leads being disconnected before cooler separation. No driver size, screw thread, spring specification, torque, pad thickness, full hidden-fastener map, or reassembly procedure is invented.",
+  "policy": "Only actions directly supported by exact-SKU-linked XC BLACK sources are included. The Tom's Hardware rear-PCB identity photo reads P/N 12G-P5-3655-KR; its teardown reports eight cooler/shroud retention screws (four around the GPU and four near the far end). LanOC independently shows the four GPU-area subset. The four rear screws have no calibrated individual location map. The exact-model Gamers Nexus teardown shows both fan leads being disconnected before cooler separation. No driver size, screw thread, spring specification, torque, pad thickness, full hidden-fastener map, or reassembly procedure is invented. The Gamers Nexus exact-model teardown additionally describes three screws per independently replaceable fan, two generic thermal-pad thickness observations (about 2.0 mm and a less certain ~1.5 mm, neither assigned to a specific contact zone), one 5 mΩ shunt on the auxiliary 8-pin path, a separate PCIe-slot 12 V shunt with unknown value, one visible fuse, direct copper-plate contact to a row of MOSFETs and a die marking of GA106-300-A1. These are source observations, not a substitute for a BoardView or full electrical schematic.",
   "steps": [
     {
       "id": "step.remove-gpu-heatsink-mounts",
@@ -68,6 +68,39 @@
       "source_ids": [
         "src.gamersnexus.teardown"
       ]
+    },
+    {
+      "id": "step.remove-fan-mounts",
+      "sequence": 3,
+      "title": {
+        "en": "Remove three retaining screws from each fan",
+        "ru": "Вывернуть по три крепёжных винта каждого вентилятора"
+      },
+      "description": {
+        "en": "After the fan leads are disconnected and the fan/shroud assembly is safely supported/separated, the exact-model teardown shows three screws retaining each independently replaceable fan. The six fastener nodes in this model preserve the count only; individual positions, head profile, thread, length and torque are not measured. The complete shroud-removal sequence and all intermediate fasteners remain outside this partial observation.",
+        "ru": "После отключения кабелей и безопасного отделения/поддержки узла вентилятора с кожухом разборка точной модели показывает по три винта крепления каждого отдельно заменяемого вентилятора. Шесть узлов крепежа в модели сохраняют только количество; индивидуальные положения, профиль головки, резьба, длина и момент затяжки не измерены. Полная последовательность снятия кожуха и все промежуточные крепления в это частичное наблюдение не входят."
+      },
+      "component_ids": [
+        "assembly.fan.1",
+        "assembly.fan.2",
+        "fastener.fan.1.01",
+        "fastener.fan.1.02",
+        "fastener.fan.1.03",
+        "fastener.fan.2.01",
+        "fastener.fan.2.02",
+        "fastener.fan.2.03"
+      ],
+      "tool_requirements": [],
+      "safety_notes": {
+        "en": "Work only with the card removed from the system and disconnected from all power. Support the fan frame. Do not pull on the wires or use this partial observation as a complete shroud disassembly procedure. Exact screw torque and reassembly order are unknown.",
+        "ru": "Работайте только с видеокартой, извлечённой из системы и отключённой от питания. Поддерживайте рамку вентилятора. Не тяните за провода и не используйте это частичное наблюдение как полную процедуру разборки кожуха. Момент затяжки и порядок обратной сборки неизвестны."
+      },
+      "prerequisite_step_ids": [
+        "step.disconnect-fan-leads"
+      ],
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
     }
   ],
   "observations": [
@@ -125,6 +158,14 @@
       "note": {
         "en": "The exact 12G-P5-3655-KR XC BLACK sample has no backplate and shows four heatsink mounting screws around the GPU; a large PCB airflow cutout is visible toward the left end. This is a visual observation, not a complete fastener map or service sequence.",
         "ru": "На точном образце XC BLACK 12G-P5-3655-KR отсутствует backplate; вокруг GPU видны четыре винта крепления радиатора, а у левого края заметен крупный вырез PCB для воздушного потока. Это визуальное наблюдение, а не полная карта крепежа или инструкция по разборке."
+      }
+    },
+    {
+      "source_id": "src.gamersnexus.teardown",
+      "locator": "05:33–13:25",
+      "note": {
+        "en": "The teardown provides two pad-thickness observations (~2.0 mm and a less certain ~1.5 mm) without unambiguous contact-location assignment; counts three screws per replaceable fan; shows a copper plate contacting a MOSFET row, two shunts (8-pin path: 5 mΩ; PCIe-slot 12 V value unknown), one fuse, two inductors in a tentatively identified memory-VRM area, and reads the GPU die marking GA106-300-A1. It does not provide electrical net mapping, part designators or calibrated component coordinates.",
+        "ru": "Разборка даёт два наблюдения толщины термопрокладок (~2,0 мм и менее уверенно ~1,5 мм) без однозначной привязки к конкретной контактной зоне; указывает три винта на каждый заменяемый вентилятор; показывает медную пластину на ряду MOSFET, два шунта (линия 8-pin: 5 мОм; значение шунта PCIe-слота неизвестно), один предохранитель, два дросселя в предположительно определённой зоне VRM памяти и маркировку GPU GA106-300-A1. Электрическая карта цепей, позиционные обозначения и калиброванные координаты компонентов отсутствуют."
       }
     }
   ],
