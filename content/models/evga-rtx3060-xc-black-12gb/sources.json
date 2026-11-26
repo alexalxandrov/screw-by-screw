@@ -230,6 +230,15 @@
       "type": "aftermarket_compatibility_listing",
       "applicability": "Aftermarket replacement listing advertises broad compatibility across multiple EVGA XC Gaming Black variants and lists PLA09215S12H-family fans. The catalog material gives an approximately 87 mm size and 15 mm / 20 mm depth variants, plus seller-claimed 12 V, 0.55 A, 4-pin and 42 mm mounting spacing. These are catalogue claims, not an OEM label or confirmed fitment for 12G-P5-3655-KR; its dimensions also differ from another seller's 90 mm claim.",
       "license_status": "metadata_reference_only_no_asset_reuse"
+    },
+    {
+      "id": "src.newegg.exact_sku.product_photo",
+      "title": "EVGA GeForce RTX 3060 XC BLACK GAMING 12G-P5-3655-KR — product photo gallery",
+      "publisher": "Newegg",
+      "url": "https://www.newegg.com/evga-xc-12g-p5-3655-kr-geforce-rtx-3060-12gb-graphics-card-double-fans/p/N82E16814487538",
+      "type": "exact_sku_retail_listing_photographic_reference",
+      "applicability": "The listing title and model field identify exact part number 12G-P5-3655-KR. Two front product photographs show eight visible impeller blade surfaces on each fan. Retained for visible blade count only; these images are not an OEM mechanical drawing or inspection of an installed sample. Blade pitch, camber, exact profile, thickness, depth and fan OEM identity remain unverified.",
+      "license_status": "third_party_copyright_no_reuse_permission"
     }
   ]
 }
