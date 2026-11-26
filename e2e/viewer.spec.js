@@ -299,7 +299,7 @@ test("cooling layer exposes an inspectable thermal path without claiming simulat
   await expect(diagram.locator('.architecture-node[data-component-id="cooling.heatpipe.side.02"]')).toContainText("Боковая тепловая трубка 2");
   await expect(diagram.locator('.architecture-node[data-component-id="fan.2.blade.1"]')).toContainText("Макетная лопасть вентилятора 2");
   await expect(page.locator("#process-assumptions li")).toHaveCount(6);
-  await expect(page.locator("#process-sources a")).toHaveCount(4);
+  await expect(page.locator("#process-sources a")).toHaveCount(5);
   await diagram.locator('.architecture-node[data-component-id="cooling.thermal_pad.memory"]').click();
   await expect(page.locator("#detail-id")).toHaveText("cooling.thermal_pad.memory");
   await expect(page.locator("#detail-description")).toContainText("толщина");
