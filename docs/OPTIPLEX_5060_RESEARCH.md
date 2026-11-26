@@ -22,7 +22,7 @@ This is a Tower-family reference assembled from Dell's published service manual 
 | Individual screws / grommets | 24 |
 | Dell motherboard callouts | 26 mapped semantically |
 | Registered source records | 15 |
-| Technical claims | 31 |
+| Technical claims | 29 |
 | Qualitative process layers | 6 |
 | Source-backed partial system-board steps | 12 |
 | Bilingual learning questions | 9 |
