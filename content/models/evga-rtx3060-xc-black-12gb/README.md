@@ -19,9 +19,9 @@ The manifest builder hashes every JSON content file. The validator checks SHA-25
 
 - Manufacturer specifications, reviewer observations, teardown evidence, illustrative geometry and unknowns remain separate evidence classes.
 - The 201.8 mm length is a nominal published value; it is not treated as the maximum outer-shroud extent.
-- Six memory package candidates are not a confirmed exact-board population.
+- Six GDDR6 package positions are visible on exact-model reference material. Their positions are photo-estimated; the exact package marking is still unknown. K4ZAF325BM-HC16 and its catalog attributes remain candidate details from a related XC teardown and a secondary catalog, not an exact-SKU BOM claim.
 - The 24 heatsink fins in the current model are illustrative proxies, not a measured fin count.
-- Assembly steps remain intentionally empty until the teardown is reviewed in sufficient detail to support an actual sequence.
+- The assembly panel contains two source-backed partial observations only: four GPU-area heatsink screws and disconnection of both fan leads before separating the cooler. This is not a complete service procedure; driver size, torque, thread details and reassembly order remain unverified.
 - No third-party images or video frames are redistributed in this package.
 
 
@@ -39,7 +39,7 @@ This is not yet a complete engineering reconstruction. Four GPU-area heatsink sc
 
 ### Fine-grained cooling decomposition
 
-The development branch now expands the content graph to 127 semantic components and 122 typed relationships. Fan frames, hubs and each blade proxy are separately selectable; the illustrative heatsink has 24 separately selectable fin proxies; the two reconstructed heatpipe routes are separate assembly nodes; and six memory thermal-pad proxies plus one VRM pad strip have their own IDs. No proxy blade/fin count or thermal-pad dimensions are presented as a factory specification.
+The development branch now expands the content graph to 127 semantic components and 122 typed relationships. Fan frames, hubs and each blade proxy are separately selectable; the illustrative heatsink has 24 separately selectable fin proxies; six separate heatpipe route proxies are grouped as four main GPU-contact pipes plus two side pipes; and six memory thermal-pad proxies plus one VRM pad strip have their own IDs. No proxy blade/fin count or thermal-pad dimensions are presented as a factory specification.
 
 
 ### Partial teardown evidence
@@ -69,7 +69,7 @@ The exact card has six visible GDDR6 package positions and a manufacturer-publis
 
 ### Four visible heatpipe terminal faces
 
-The exact XC BLACK cooler-end photograph shows four copper terminal faces. They are now separately selectable in the viewer. The four-face count must not be confused with four unique heatpipes: internal pipe paths and the number of distinct U-shaped tubes are still unverified.
+The exact XC BLACK cooler-end photograph shows four copper terminal faces. They are now separately selectable in the viewer. The four-face count is distinct from the exact-SKU six-pipe count supported by The FPS Review (four central GPU-contact pipes plus two side pipes). Four visible terminal faces do not imply four unique pipes; route geometry remains illustrative.
 
 
 ### Exact-SKU heatpipe count
