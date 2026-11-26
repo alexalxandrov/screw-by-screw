@@ -122,6 +122,325 @@
       "confidence_class": "unknown",
       "source_ids": [],
       "notes": "Read PSU label from an identified physical unit."
+    },
+    {
+      "id": "claim.board.pcie_layout",
+      "subject_id": "motherboard.pcb",
+      "predicate": "pcie_slot_configuration",
+      "value": [
+        {
+          "slot": "Slot 2",
+          "mechanical": "x16",
+          "electrical": "x16",
+          "generation": "PCIe 3.0"
+        },
+        {
+          "slot": "Slot 1",
+          "mechanical": "x1",
+          "electrical": "x1",
+          "generation": "PCIe 3.0"
+        },
+        {
+          "slot": "Slot 3",
+          "mechanical": "x1",
+          "electrical": "x1",
+          "generation": "PCIe 3.0"
+        },
+        {
+          "slot": "Slot 4",
+          "mechanical": "x16",
+          "electrical": "x4",
+          "generation": "PCIe 3.0"
+        }
+      ],
+      "unit": "slots",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.board_connectors"
+      ],
+      "notes": "Board capability, not installed expansion cards. Physical slot numbering and function follow Dell's Tower motherboard map."
+    },
+    {
+      "id": "claim.memory.slot_count",
+      "subject_id": "motherboard.pcb",
+      "predicate": "udimm_slot_count",
+      "value": 4,
+      "unit": "slots",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.5060.memory",
+        "src.dell.5060.boardlayout"
+      ]
+    },
+    {
+      "id": "claim.memory.max_capacity",
+      "subject_id": "motherboard.pcb",
+      "predicate": "maximum_memory_capacity",
+      "value": 64,
+      "unit": "GB",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.5060.memory"
+      ]
+    },
+    {
+      "id": "claim.memory.max_per_slot",
+      "subject_id": "motherboard.pcb",
+      "predicate": "maximum_capacity_per_udimm_slot",
+      "value": 16,
+      "unit": "GB",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.5060.memory"
+      ]
+    },
+    {
+      "id": "claim.memory.type",
+      "subject_id": "motherboard.pcb",
+      "predicate": "memory_type",
+      "value": "DDR4 non-ECC UDIMM",
+      "unit": null,
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.5060.memory"
+      ]
+    },
+    {
+      "id": "claim.memory.speeds",
+      "subject_id": "motherboard.pcb",
+      "predicate": "supported_memory_data_rates",
+      "value": {
+        "Core i5/i7": 2666,
+        "Pentium/i3": 2400
+      },
+      "unit": "MT/s",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.5060.memory"
+      ],
+      "notes": "Maximum supported data rate varies with the selected processor."
+    },
+    {
+      "id": "claim.storage.m2_ssd",
+      "subject_id": "motherboard.m2",
+      "predicate": "m2_ssd_connector",
+      "value": {
+        "count": 1,
+        "form_factors": [
+          "2230",
+          "2280"
+        ],
+        "interfaces": [
+          "SATA",
+          "PCIe"
+        ]
+      },
+      "unit": "connector",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.5060.board_connectors",
+        "src.dell.5060.storage"
+      ],
+      "notes": "Supported interface and form factors only; no installed SSD is known."
+    },
+    {
+      "id": "claim.storage.m2_wlan",
+      "subject_id": "motherboard.m2.wlan",
+      "predicate": "m2_wlan_connector",
+      "value": {
+        "count": 1,
+        "form_factor": "2230",
+        "interfaces": [
+          "CNVi",
+          "USB 2.0 / PCIe"
+        ]
+      },
+      "unit": "connector",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.5060.board_connectors"
+      ]
+    },
+    {
+      "id": "claim.storage.sata_ports",
+      "subject_id": "motherboard.pcb",
+      "predicate": "sata_data_headers",
+      "value": {
+        "total": 4,
+        "SATA_Gen2": 1,
+        "SATA_Gen3": 3,
+        "Gen2_role": "optical drive"
+      },
+      "unit": "headers",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.5060.board_connectors",
+        "src.dell.5060.boardlayout"
+      ]
+    },
+    {
+      "id": "claim.power.psu_variants",
+      "subject_id": "power.psu",
+      "predicate": "supported_psu_options",
+      "value": [
+        {
+          "wattage_w": 260,
+          "efficiency": "EPA Bronze"
+        },
+        {
+          "wattage_w": 260,
+          "efficiency": "EPA Platinum"
+        }
+      ],
+      "unit": "options",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.5060.power"
+      ],
+      "notes": "Alternative platform configurations, not two simultaneous power supplies and not the fitted PSU identity."
+    },
+    {
+      "id": "claim.power.input",
+      "subject_id": "power.psu",
+      "predicate": "ac_input_specification",
+      "value": {
+        "voltage_v": [
+          100,
+          240
+        ],
+        "current_a_max": 3.2,
+        "frequency_hz": [
+          50,
+          60
+        ]
+      },
+      "unit": "AC input",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.5060.power"
+      ]
+    },
+    {
+      "id": "claim.io.front_usb",
+      "subject_id": "front.io_region",
+      "predicate": "front_usb_port_count",
+      "value": {
+        "USB_2_0": 2,
+        "USB_3_1_Gen1": 1,
+        "USB_3_1_Gen2_TypeC": 1
+      },
+      "unit": "ports",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.5060.ports"
+      ]
+    },
+    {
+      "id": "claim.io.rear_usb",
+      "subject_id": "rear.io_region",
+      "predicate": "rear_usb_port_count",
+      "value": {
+        "USB_2_0_SmartPowerOn": 2,
+        "USB_3_1_Gen1": 4
+      },
+      "unit": "ports",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.5060.ports"
+      ]
+    },
+    {
+      "id": "claim.io.rear_video",
+      "subject_id": "rear.io_region",
+      "predicate": "standard_and_optional_video_outputs",
+      "value": {
+        "standard_DisplayPort": 2,
+        "optional_module": [
+          "HDMI 2.0b",
+          "DisplayPort",
+          "VGA",
+          "USB-C DisplayPort Alt Mode"
+        ]
+      },
+      "unit": "outputs",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.5060.ports"
+      ],
+      "notes": "Optional module entries are alternatives, not a guaranteed simultaneous port population."
+    },
+    {
+      "id": "claim.io.ethernet",
+      "subject_id": "rear.rj45",
+      "predicate": "ethernet_port",
+      "value": {
+        "count": 1,
+        "connector": "RJ-45",
+        "class": "Gigabit Ethernet"
+      },
+      "unit": "port",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.5060.ports"
+      ]
+    },
+    {
+      "id": "claim.cpu.supported_options",
+      "subject_id": "motherboard.cpu_socket",
+      "predicate": "supported_processor_options",
+      "value": [
+        "Intel Pentium Gold G5400",
+        "Intel Pentium Gold G5500",
+        "Intel Core i3-8100",
+        "Intel Core i3-8300",
+        "Intel Core i5-8400",
+        "Intel Core i5-8500",
+        "Intel Core i5-8600",
+        "Intel Core i7-8700"
+      ],
+      "unit": "models",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.5060.processors"
+      ],
+      "notes": "Supported orderable CPU family options only; this reference model does not select or install one. A separate service-manual table differs on some TDP values."
+    },
+    {
+      "id": "claim.board.callouts.covered",
+      "subject_id": "motherboard.pcb",
+      "predicate": "numbered_callout_coverage",
+      "value": 26,
+      "unit": "callouts",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.5060.boardlayout"
+      ],
+      "notes": "The package models the 26 labeled callouts as semantic references. Some callouts represent groups (for example, four DIMM sockets), not 26 individual parts."
+    },
+    {
+      "id": "claim.fan.grommet_count",
+      "subject_id": "cooling.system_fan",
+      "predicate": "documented_mounting_grommets",
+      "value": 4,
+      "unit": "grommets",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.5060.system_fan"
+      ],
+      "notes": "Dell documents rubber grommet retention; the four-instance count follows the mounting arrangement in the service procedure, not measured dimensions."
+    },
+    {
+      "id": "claim.cpu.heatsink_fasteners",
+      "subject_id": "cooling.cpu.heatsink",
+      "predicate": "captive_heatsink_screws",
+      "value": 4,
+      "unit": "screws",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.5060.heatsink"
+      ],
+      "notes": "Loosening order 1–4 is documented; installed screw coordinates and torque are not supplied."
     }
   ]
 }
