@@ -284,10 +284,18 @@ class ContentPackageTests(unittest.TestCase):
             self.assertEqual(edge["from"], fan_id)
             self.assertEqual(edge["to"], rotor_id)
 
-        self.assertIn("Components: 307", report)
-        self.assertIn("Relationships: 303", report)
+            blade_ids = [f"fan.{fan_index}.blade.{index}" for index in range(1, 9)]
+            self.assertTrue(all(blade_id in components for blade_id in blade_ids))
+            self.assertEqual(
+                relationships[f"rel.detail.contains.fan-{fan_index}-blade-8"]["to"],
+                f"fan.{fan_index}.blade.8",
+            )
+            self.assertIn("src.newegg.exact_sku.product_photo", components[blade_ids[-1]]["source_ids"])
+
+        self.assertIn("Components: 309", report)
+        self.assertIn("Relationships: 305", report)
         self.assertIn("Animation clips: 2", report)
-        self.assertEqual(len(package["claims"]["claims"]), 98)
+        self.assertEqual(len(package["claims"]["claims"]), 99)
         self.assertEqual(len(package["process_layers"]["process_layers"]), 3)
         self.assertEqual(len(package["learning"]["questions"]), 12)
         sm_instances = [item for item in components.values() if item["id"].startswith("chip.gpu.sm.") and item["id"] != "chip.gpu.sm.cluster" and item["id"].count(".") == 3]
