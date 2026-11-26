@@ -32,7 +32,7 @@ test("binds the power process layer from package relationships", async ({ page }
   await page.goto("/");
   await page.locator('.process-button[data-layer="power_delivery"]').click();
   await expect(page.locator("#process-details")).toBeVisible();
-  await expect(page.locator("#process-detail-title")).toHaveText("Ввод питания");
+  await expect(page.locator("#process-detail-title")).toHaveText("Ввод питания, измерение тока и защита");
   await expect(page.locator("#process-components button")).toHaveCount(17);
   await expect(page.locator("#process-diagram .architecture-diagram-group")).toHaveCount(4);
   const shunt = page.locator('#process-diagram .architecture-node[data-component-id="power.shunt.8pin"]');
@@ -331,7 +331,7 @@ test("cooling layer exposes an inspectable thermal path without claiming simulat
   await expect(diagram.locator('.architecture-node[data-component-id="cooling.heatpipe.side.02"]')).toContainText("Боковая тепловая трубка 2");
   await expect(diagram.locator('.architecture-node[data-component-id="fan.2.blade.1"]')).toContainText("Макетная лопасть вентилятора 2");
   await expect(page.locator("#process-assumptions li")).toHaveCount(6);
-  await expect(page.locator("#process-sources a")).toHaveCount(6);
+  await expect(page.locator("#process-sources a")).toHaveCount(5);
   await diagram.locator('.architecture-node[data-component-id="cooling.thermal_pad.memory"]').click();
   await expect(page.locator("#detail-id")).toHaveText("cooling.thermal_pad.memory");
   await expect(page.locator("#detail-description")).toContainText("толщина");
@@ -365,7 +365,7 @@ test("GPU architecture layer exposes source-linked logical GA106 and GDDR6 nodes
   await expect(page.locator("#process-assumptions")).toContainText("две незанятые позиции памяти");
 
   await expect(page.locator("#process-assumptions")).toContainText("не воспроизводят физическую топологию GA106");
-  await expect(page.locator("#process-sources a")).toHaveCount(5);
+  await expect(page.locator("#process-sources a")).toHaveCount(6);
   await diagram.locator('.architecture-node[data-component-id="chip.gpu.sm.cluster"]').click();
   await expect(page.locator("#component-details")).toBeVisible();
   await expect(page.locator("#detail-name")).toContainText("Кластер потоковых мультипроцессоров Ampere");
@@ -469,7 +469,7 @@ test("shows a workload-specific cooling and board-power operating point with sou
   const pipeDiameter = page.locator('[data-claim-id="claim.cooling.heatpipe.diameter.observed_estimate"]');
   await expect(pipeDiameter.locator(".claim-value")).toContainText("6 mm");
   await expect(pipeDiameter).toContainText("rough teardown estimate");
-  await expect(pipeDiameter.locator(".claim-sources a")).toHaveAttribute(
+  await expect(pipeDiameter.locator(".claim-sources a").first()).toHaveAttribute(
     "href",
     "https://www.youtube.com/watch?v=hJFJ_clQT8U"
   );
