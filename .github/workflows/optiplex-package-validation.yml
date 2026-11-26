@@ -53,7 +53,7 @@ jobs:
             --model-dir content/models/dell-optiplex-5060-tower-family \
             --scene /tmp/optiplex-5060-family.glb \
             --output /tmp/optiplex-5060-family.sbsmodel
-      - name: Rebuild the committed v0.2 JSON package and verify byte-for-byte reproducibility
+      - name: Rebuild v0.2 and verify source, scene graph and binary geometry equivalence
         run: |
           python tools/modeling/build_text_model_package.py \
             --model-dir content/models/dell-optiplex-5060-tower-family \
