@@ -9,15 +9,17 @@
   "file_count": 10,
   "content_coverage": {
     "motherboard_callouts": 26,
-    "semantic_components": 115,
-    "relationship_count": 123,
+    "semantic_components": 127,
+    "relationship_count": 135,
     "process_layers": 6,
     "assembly_steps": 12,
     "learning_questions": 9,
-    "documented_source_records": 18,
+    "documented_source_records": 23,
     "geometry_nodes": 58,
     "optional_population_unknown": true,
     "motherboard_callout_mappings": 26,
-    "technical_claims": 30
+    "technical_claims": 31,
+    "optional_fastener_references": 7,
+    "physical_fastener_instances": 24
   }
 }
