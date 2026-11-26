@@ -24,7 +24,7 @@ Evolve the current viewer from a model inspector into a small engineering worksp
 
 ## Remaining v0.6 priorities
 
-1. **Exploded timeline:** authored, reversible steps with target component IDs, camera focus and explanatory text. No repair/disassembly step until the full exact-model teardown sequence is reviewed.
+1. **Complete teardown evidence:** extend the three existing partial source-backed actions only after reviewing the complete exact-model teardown and mapping each additional fastener, connector, prerequisite and safety constraint. Current evidence is not a complete removal or reassembly procedure.
 2. **Measurement calibration:** calibrated photo references, registered reference planes, uncertainty bounds, and an evidence class for every derived measurement. The current ruler reports model-space distances only.
 3. **Component and source search:** search by name, stable ID, package marking, claim, source and reference designator when verified.
 4. **Revision comparison:** compare exact SKUs and PCB revisions without merging geometry or claims between them.
@@ -63,12 +63,12 @@ No feature is marked complete only because its control appears. Each new interac
 
 ## Assembly evidence and step authoring
 
-The viewer has a model-package-driven disassembly evidence panel. It displays authored, source-backed assembly steps separately from source observations. The RTX 3060 pilot deliberately keeps the sequence empty; its current teardown timecodes are presented as localized source observations, not a verified removal order. The loader enforces unique step IDs and sequence numbers, valid component/source references, resolvable prerequisites and explicit source provenance.
+The viewer has a model-package-driven disassembly evidence panel. It displays authored, source-backed assembly steps separately from source observations. The RTX 3060 pilot now contains three source-backed partial actions: remove eight cooler/shroud retention screws (four GPU-area and four far-end, with only the first four photo-positioned); disconnect both fan leads before separating the cooler; and remove three screws from each replaceable fan. Six fan screws and four far-end cooler screws remain logical-only because individual coordinates are unmapped. This is not a complete service order or reassembly guide. The loader enforces unique step IDs and sequence numbers, valid component/source references, resolvable prerequisites and explicit source provenance.
 
 
 ## Package-authored animation playback
 
-The generic runtime now reads validated clips from animations.json and provides clip selection, play/pause, normalized seek, speed control, completion and deterministic stop/reset. The runtime is independent of GPU-specific content. The pilot package intentionally keeps clips empty until an exact-model motion sequence has an evidence basis; existing fan/airflow/power visuals are viewer-generated educational effects.
+The generic runtime now reads validated clips from animations.json and provides clip selection, play/pause, normalized seek, speed control, completion and deterministic stop/reset. The runtime is independent of GPU-specific content. The pilot package now contains two authored clips: an educational one-turn rotor motion and a reversible exploded-cooler overview. The first does not represent measured RPM; the second is presentation spacing, not a service order or measured physical clearance. Existing airflow/power effects remain separate viewer-generated educational overlays.
 
 
 - **Stable impeller subassemblies:** both Blender and fallback scenes expose a separate child component ID for each rotor. Only the impeller group rotates; the static frame and hub remain outside the pivot.
@@ -83,4 +83,4 @@ The apparent EVGA232 REV 1.0 silkscreen and community-indexed PG190-A02 schemati
 
 ### Detailed cooling graph (in progress)
 
-The pilot content graph has reached 104 components / 99 relationships, including fan-frame/hub/blade nodes, individual proxy fins, heatpipe route assemblies, per-memory thermal-pad proxies, and a VRM pad strip. Counts and geometry remain illustrative where no exact fan drawing, fin metrology, thermal-pad service specification or matching board revision has been sourced.
+The current RTX 3060 XC BLACK package contains **137 semantic components, 133 typed relationships, 64 atomic claims and 12 registered sources**. It includes fan-frame/hub/blade nodes, 24 individually selectable illustrative fin proxies, six heatpipe-route proxies (four main GPU-contact plus two side), six memory-pad proxies, a VRM pad strip and separately selectable fastener nodes. These mesh dimensions, positions and counts remain proxies where no exact drawing or metrology exists; all service-critical unknowns remain explicit.
