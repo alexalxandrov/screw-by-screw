@@ -1250,6 +1250,78 @@
         "src.gamersnexus.teardown"
       ],
       "notes": "The presenter explicitly selects a Phillips #0 driver immediately before removing the three smaller display-output retaining screws. This driver note is not transferred to unrelated fastener groups."
+    },
+    {
+      "id": "claim.power.current_sense_shunt.pcie_slot.resistance",
+      "subject_id": "power.shunt.pcie_slot",
+      "predicate": "current_sense_resistance",
+      "value": null,
+      "unit": "mΩ",
+      "confidence_class": "unknown",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "notes": "The exact-model teardown distinguishes a separate PCIe-slot 12 V current-sense shunt but does not state its resistance. This value must remain unknown; the 5 mΩ value belongs only to the separate auxiliary 8-pin input shunt."
+    },
+    {
+      "id": "claim.cooling.fan.rpm.sample_operating_point",
+      "subject_id": "assembly.cooling",
+      "predicate": "fan_speed_observed_operating_point",
+      "value": 2030,
+      "unit": "RPM",
+      "confidence_class": "measured",
+      "source_ids": [
+        "src.pcper.xc_black.operating_point"
+      ],
+      "notes": "PC Perspective reports fans spinning at approximately 2030 RPM and 73% during Metro Exodus at 2160/high, in an open case at about 24 °C ambient. The review names the sample EVGA RTX 3060 12GB XC BLACK but does not show its retail part number. This is one workload operating point, not the fan's maximum/nominal RPM or a factory fan curve."
+    },
+    {
+      "id": "claim.cooling.fan.pwm.sample_operating_point",
+      "subject_id": "assembly.cooling",
+      "predicate": "fan_duty_observed_operating_point",
+      "value": 73,
+      "unit": "%",
+      "confidence_class": "measured",
+      "source_ids": [
+        "src.pcper.xc_black.operating_point"
+      ],
+      "notes": "One PC Perspective Metro Exodus 2160/high test observation: fan duty 73%, approximately 2030 RPM, open case, ambient about 24 °C. It is not a specification of the card's automatic fan curve."
+    },
+    {
+      "id": "claim.gpu.temperature.edge.sample_operating_point",
+      "subject_id": "chip.gpu.ga106",
+      "predicate": "gpu_temperature_observed_operating_point",
+      "value": 68.1,
+      "unit": "°C",
+      "confidence_class": "measured",
+      "source_ids": [
+        "src.pcper.xc_black.operating_point"
+      ],
+      "notes": "PC Perspective reports 68.1 °C GPU temperature during Metro Exodus at 2160/high in an open case at about 24 °C ambient. A single review sample/workload measurement; not a guaranteed thermal result."
+    },
+    {
+      "id": "claim.gpu.temperature.hotspot.sample_operating_point",
+      "subject_id": "chip.gpu.ga106",
+      "predicate": "gpu_hotspot_temperature_observed_operating_point",
+      "value": 80.5,
+      "unit": "°C",
+      "confidence_class": "measured",
+      "source_ids": [
+        "src.pcper.xc_black.operating_point"
+      ],
+      "notes": "PC Perspective reports 80.5 °C GPU hotspot during the same Metro Exodus 2160/high operating observation; the open case ambient was about 24 °C. Sample/workload-specific, not a design target."
+    },
+    {
+      "id": "claim.power.board_power.sample_operating_point",
+      "subject_id": "gpu.evga.12g-p5-3655-kr",
+      "predicate": "board_power_observed_operating_point",
+      "value": 172.4,
+      "unit": "W",
+      "confidence_class": "measured",
+      "source_ids": [
+        "src.pcper.xc_black.operating_point"
+      ],
+      "notes": "PC Perspective reports board power topping out at 172.4 W during its Metro Exodus 2160/high test of the EVGA XC BLACK sample. This is an observed workload peak, not a revised TGP/TDP specification; EVGA's published specification remains 170 W."
     }
   ]
 }

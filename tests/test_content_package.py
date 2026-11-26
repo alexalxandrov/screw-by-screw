@@ -295,7 +295,7 @@ class ContentPackageTests(unittest.TestCase):
         self.assertIn("Components: 313", report)
         self.assertIn("Relationships: 311", report)
         self.assertIn("Animation clips: 2", report)
-        self.assertEqual(len(package["claims"]["claims"]), 103)
+        self.assertEqual(len(package["claims"]["claims"]), 109)
         self.assertEqual(len(package["process_layers"]["process_layers"]), 3)
         self.assertEqual(len(package["learning"]["questions"]), 12)
         self.assertEqual(len(package["assembly_steps"]["steps"]), 5)
@@ -304,6 +304,13 @@ class ContentPackageTests(unittest.TestCase):
         self.assertEqual(claims["claim.io.display_output.screw_count"]["value"], 3)
         self.assertEqual(claims["claim.io.display_output.driver_size"]["value"], "Phillips #0")
         self.assertEqual(components["fastener.shroud.candidate"]["geometry_status"], "logical_only")
+        self.assertEqual(claims["claim.power.current_sense_shunt.pcie_slot.resistance"]["value"], None)
+        self.assertEqual(claims["claim.cooling.fan.rpm.sample_operating_point"]["value"], 2030)
+        self.assertEqual(claims["claim.cooling.fan.pwm.sample_operating_point"]["value"], 73)
+        self.assertEqual(claims["claim.gpu.temperature.edge.sample_operating_point"]["value"], 68.1)
+        self.assertEqual(claims["claim.gpu.temperature.hotspot.sample_operating_point"]["value"], 80.5)
+        self.assertEqual(claims["claim.power.board_power.sample_operating_point"]["value"], 172.4)
+
         sm_instances = [item for item in components.values() if item["id"].startswith("chip.gpu.sm.") and item["id"] != "chip.gpu.sm.cluster" and item["id"].count(".") == 3]
         self.assertEqual(len(sm_instances), 28)
         self.assertEqual(components["chip.gpu.tpc.cluster"]["geometry_status"], "logical_only")

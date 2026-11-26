@@ -304,6 +304,15 @@
       "type": "generic_rtx3060_service_file_discussion",
       "applicability": "The forum entry concerns generic RTX 3060 schematic/BoardView files and does not establish EVGA 12G-P5-3655-KR or XC BLACK PCB revision applicability. Treat any referenced board files as unrelated candidates until their silkscreen and revision are correlated to a physical target sample.",
       "license_status": "community_reference_no_redistribution"
+    },
+    {
+      "id": "src.pcper.xc_black.operating_point",
+      "title": "NVIDIA GeForce RTX 3060 Review: EVGA XC BLACK Tested",
+      "publisher": "PC Perspective",
+      "url": "https://pcper.com/2021/02/nvidia-geforce-rtx-3060-review-evga-xc-black-tested/",
+      "type": "exact_product_model_thermal_performance_review",
+      "applicability": "Explicitly identifies the reviewed product as EVGA GeForce RTX 3060 12GB XC BLACK. Reports a single Metro Exodus 2160/high operating observation in an open case: approximately 24 °C ambient, 68.1 °C GPU temperature (80.5 °C hotspot), fans at 73% / ~2030 RPM, and peak observed board power 172.4 W. The page does not publish retail part number 12G-P5-3655-KR; these are sample/workload measurements, not fan maximum RPM, factory fan curve, nominal board limit or universally repeatable operating values.",
+      "license_status": "third_party_copyright_no_reuse_permission"
     }
   ]
 }
