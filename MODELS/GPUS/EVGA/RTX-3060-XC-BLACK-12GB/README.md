@@ -76,6 +76,11 @@ The report includes component IDs, parent IDs, world-space positions, dimensions
 
 ## Canonical package and remaining evidence gates
 
-The current canonical package is linked above and contains 137 semantic components, 133 typed relationships, 64 claims and 12 registered sources, plus three partial teardown actions and two educational clips. It remains a starter engineering atlas, not a complete BOM or complete service manual. Exact PCB revision, matching BoardView/schematic, component reference designators and calibrated mechanical dimensions remain unverified.
+The current canonical package is linked above and contains 167 semantic components, 163 typed relationships, 74 claims and 13 registered sources, plus three partial teardown actions and two educational clips. It remains a starter engineering atlas, not a complete BOM or complete service manual. Exact PCB revision, matching BoardView/schematic, component reference designators and calibrated mechanical dimensions remain unverified.
 
 See [GPU source audit](../../../../docs/GPU_SOURCE_AUDIT.md) and [content pipeline](../../../../docs/CONTENT_PIPELINE.md).
+
+
+### GA106 compute architecture extension
+
+The canonical content package has 28 logical SM nodes and a calculated 14-TPC aggregate. Each SM's GA10x logical resource description is evidence-backed by NVIDIA's Ampere whitepaper; the instance numbers are navigation labels only and are not physical die coordinates. No GA106 GPC layout is inferred.
