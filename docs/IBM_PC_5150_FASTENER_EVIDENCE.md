@@ -44,6 +44,6 @@ The Blender blockout now:
 
 Museum reference: [FAU Informatics Collection — IBM PC specimen, 1981](https://www.iser.fau.de/2025/04/25/neuzugang-ibm-pc-mit-monitor/).
 
-## Service and safety boundary
+See the [IBM PC 5150 disassembly sequence](IBM_PC_5150_DISASSEMBLY_SEQUENCE.md) for the complete action graph, prerequisites and the four separately documented replacement fragments.\n\n## Service and safety boundary
 
-The five included service operations are partial, source-bounded FRU operations. They are not a universal screw-by-screw teardown order for every option configuration. Disconnect the system unit from mains before opening it. Do not open or probe the PSU; no PSU internal repair steps are included.
+The 14 granular actions are partial, source-bounded FRU operations arranged as seven groups and a dependency graph. They are not a universal screw-by-screw teardown order for every option configuration. The Viewer keeps the PSU, speaker and system-board FRU branches independent after the common cover-opening sequence. Disconnect the system unit from mains before opening it. Do not open or probe the PSU; no PSU internal repair steps are included.
