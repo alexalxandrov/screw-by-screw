@@ -43,7 +43,9 @@
         "cooling.heatpipe.main.04",
         "cooling.heatpipe.side.01",
         "cooling.heatpipe.side.02",
-        "connector.io.bracket"
+        "connector.io.bracket",
+        "fan.1.blade.8",
+        "fan.2.blade.8"
       ],
       "description": {
         "en": "The exact-SKU The FPS Review describes four central GPU-contact heatpipe runs plus two side runs; PCWorld's product-name review summarizes four copper heatpipes; Gamers Nexus narrates two central tube paths through the contact plate. These source-specific descriptions may count tube legs, full pipes or closed loops differently. Six selectable run proxies are shown for navigation only; the unique physical loop count remains unknown. Four copper terminal faces visible in LanOC's cooler-end photo are a separate observation. Heatpipe centrelines, diameters, bends and flattening remain illustrative, not calibrated CAD. The contact plate, fin stack, two fans and thermal-interface groups are separate elements. Airflow markers show direction only and are not CFD or thermal simulation. LanOC also describes the vertical aluminium fin stack, copper plate spanning GPU/memory, black plastic shroud without RGB, and PCB airflow cutout; mesh outlines remain proxies.",
@@ -55,8 +57,8 @@
           "ru": "Диаметр отверстия 90 мм и приблизительно 85 мм для крыльчатки — измерения из обзора, а не чертёж производителя вентилятора."
         },
         {
-          "en": "Fan centres, blade count/profile, hub internals, exact heatpipe loop count and routing, fin pitch/count, thermal-pad dimensions and thermal resistance remain unverified.",
-          "ru": "Центры вентиляторов, число/профиль лопастей, устройство ступицы, точное число контуров и трассы трубок, шаг/число рёбер, размеры термопрокладок и тепловое сопротивление не подтверждены."
+          "en": "Fan centres, blade camber/pitch/profile, hub internals, exact heatpipe loop count and routing, fin pitch/count, thermal-pad dimensions and thermal resistance remain unverified. Eight visible blade surfaces per fan are photo-counted from the exact-SKU retail listing; detailed fan geometry remains proxy.",
+          "ru": "Центры вентиляторов, кривизна/шаг/профиль лопастей, внутреннее устройство ступицы, точное число контуров и трассы трубок, шаг/число рёбер, размеры термопрокладок и тепловое сопротивление не подтверждены. В карточке товара с точным SKU визуально насчитывается восемь лопастей на вентилятор; детальная геометрия остаётся макетной."
         },
         {
           "en": "The two heatpipe routes and 24 fin meshes are illustrative proxies. Their count and geometry are not service or manufacturing specifications.",
@@ -79,7 +81,8 @@
         "src.lanoc.review",
         "src.gamersnexus.teardown",
         "src.thefpsreview.exact_sku",
-        "src.pcworld.xc_black"
+        "src.pcworld.xc_black",
+        "src.newegg.exact_sku.product_photo"
       ],
       "visualization": {
         "kind": "directional_particle_path",
@@ -427,8 +430,8 @@
                     "ru": "Макетная лопасть вентилятора 1"
                   },
                   "metric": {
-                    "en": "7 mesh blades · count unverified",
-                    "ru": "7 сеточных лопастей · количество не подтверждено"
+                    "en": "8 visible blade surfaces photo-counted · profile remains proxy",
+                    "ru": "8 видимых лопастей по фото · профиль остаётся макетным"
                   }
                 },
                 {
@@ -471,8 +474,8 @@
                     "ru": "Макетная лопасть вентилятора 2"
                   },
                   "metric": {
-                    "en": "7 mesh blades · count unverified",
-                    "ru": "7 сеточных лопастей · количество не подтверждено"
+                    "en": "8 visible blade surfaces photo-counted · profile remains proxy",
+                    "ru": "8 видимых лопастей по фото · профиль остаётся макетным"
                   }
                 },
                 {
