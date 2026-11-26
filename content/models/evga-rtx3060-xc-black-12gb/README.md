@@ -44,7 +44,7 @@ The development branch now expands the content graph to **313 semantic component
 
 ### Partial teardown evidence
 
-The interactive assembly panel has three partial exact-model actions: eight cooler/shroud retention screws (four around the GPU and four near the far end) according to the Tom's Hardware sample whose rear-PCB label identifies P/N 12G-P5-3655-KR; disconnection of both fan leads before separating the cooler/shroud; and removal of three retaining screws from each replaceable fan. The six fan screws remain logical-only because individual positions are not mapped. The sequence is not a complete service guide; screw thread, driver/bit, torque, connector release geometry, thermal-pad specifications and reassembly order remain unverified.
+The interactive assembly panel contains five partial exact-model teardown observations: (1) four spring-loaded GPU cooler screws; (2) a separate pair retaining the fin-stack base; (3) two narrow I/O-bracket screws with reverse-side nuts plus three display-output retaining screws (the teardown uses a Phillips #0 driver for the latter); (4) disconnect both fan leads before separating the cooler; and (5) remove three retaining screws from each replaceable fan. These observations are not a complete service procedure. Tom's Hardware separately reports an eight-screw cooler/shroud aggregate on a sample whose rear-PCB label reads P/N 12G-P5-3655-KR; its overlap with the Gamers Nexus groups is unresolved, so counts are not added together. Unmapped screw positions remain logical-only; driver size outside the documented display-output screws, torque, thread details, thermal-pad replacement dimensions and reassembly order remain unverified.
 
 
 ### Reversible exploded assembly view
