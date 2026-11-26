@@ -93,7 +93,17 @@
         "storage.drive25.optional",
         "storage.drive35.optional",
         "storage.m2.optional",
-        "storage.optical_drive.optional"
+        "storage.optical_drive.optional",
+        "storage.drive35.carrier.optional",
+        "storage.drive35.filler_bracket.optional",
+        "storage.drive35.drive_bracket.optional",
+        "storage.drive35.release_tab.optional",
+        "storage.drive25.carrier.optional",
+        "storage.drive25.drive_bracket.optional",
+        "storage.drive25.release_tab.left.optional",
+        "storage.drive25.release_tab.right.optional",
+        "storage.optical_drive.release_tab.optional",
+        "storage.drive_cage.cable_retention_tabs"
       ],
       "source_ids": [
         "src.dell.5060.storage",
