@@ -16,16 +16,26 @@ const loaded = await loadModelPackage({
 
 test("OptiPlex reference package passes the production package loader and checksum verification", () => {
   assert.equal(loaded.report.modelId, "pc.dell.optiplex-5060-tower.family");
-  assert.equal(loaded.report.componentCount, 115);
-  assert.equal(loaded.report.relationshipCount, 123);
+  assert.equal(loaded.report.componentCount, 127);
+  assert.equal(loaded.report.relationshipCount, 135);
   assert.equal(loaded.integrityVerified, true);
   assert.equal(loaded.data.model.geometry_status, "illustrative_proxy_not_cad");
   assert.equal(loaded.data.model.specifications.physical.height_mm, 350);
   assert.equal(loaded.data.model.specifications.physical.width_mm, 154);
   assert.equal(loaded.data.model.specifications.physical.depth_mm, 274);
-  assert.equal(loaded.data.components.components.filter((component) => component.category === "fastener").length, 24);
-  assert.equal(loaded.data.sources.sources.length, 18);
-  assert.equal(loaded.data.claims.claims.length, 30);
+  assert.equal(loaded.data.components.components.filter((component) => component.category === "fastener" && component.fastener_population !== "optional_reference_not_fitted").length, 24);
+  assert.equal(loaded.data.components.components.filter((component) => component.fastener_population === "optional_reference_not_fitted").length, 7);
+  assert.equal(loaded.data.assembly_steps.observations.length, 14);
+  assert.equal(loaded.data.model.specifications.service_hardware.optional_fastener_references, 7);
+  assert.equal(loaded.data.claims.claims.find((claim) => claim.id === "claim.fasteners.optional_mounting").value.length, 5);
+  assert.equal(loaded.data.model.specifications.service_hardware.physical_reference_instances, 24);
+  assert.ok(sourceIds.has("src.dell.5060.m2_removal"));
+  assert.ok(sourceIds.has("src.dell.5060.coin_cell_removal"));
+  assert.ok(sourceIds.has("src.dell.5060.heatsink_fan_removal"));
+  assert.ok(sourceIds.has("src.dell.5060.optical_drive_install"));
+  assert.ok(sourceIds.has("src.dell.5060.optional_video_module"));
+  assert.equal(loaded.data.sources.sources.length, 23);
+  assert.equal(loaded.data.claims.claims.length, 31);
   assert.equal(loaded.data.process_layers.process_layers.length, 6);
   assert.equal(loaded.data.assembly_steps.steps.length, 12);
   assert.equal(loaded.data.learning.questions.length, 9);
