@@ -183,8 +183,8 @@ def validate_package(package: dict, package_dir: Path | None = None) -> list[str
     release_doc = package["release"]
     if not isinstance(model, dict) or not isinstance(model.get("id"), str):
         raise PackageError("model.json must define a model id")
-    if model.get("geometry_status") != "illustrative_proxy_not_cad":
-        raise PackageError("Pilot geometry must remain explicitly labelled illustrative_proxy_not_cad")
+    if model.get("geometry_status") not in GEOMETRY_STATUSES:
+        raise PackageError(f"model.geometry_status must be one of: {sorted(GEOMETRY_STATUSES)}")
 
     sources = sources_doc.get("sources") if isinstance(sources_doc, dict) else None
     components = components_doc.get("components") if isinstance(components_doc, dict) else None
@@ -408,7 +408,7 @@ def validate_package(package: dict, package_dir: Path | None = None) -> list[str
         f"Animation clips: {len(animation_ids)}",
         "Bilingual labels and semantic references: PASS",
         "Release manifest and SHA-256 integrity: PASS" if package_dir is not None else "Release manifest structure: PASS",
-        "Accuracy status: illustrative proxy, not CAD",
+        f"Geometry fidelity: {model['geometry_status']}",
     ]
 
 
