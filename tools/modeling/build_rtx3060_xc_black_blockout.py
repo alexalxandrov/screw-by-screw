@@ -106,6 +106,7 @@ manifest = {
         "Eight visible blade surfaces per fan are photo-observed in the exact-SKU retail listing; blade profile/pitch/camber/thickness, fan centres and all internal mechanical positions remain illustrative.",
         "The PCB airflow cutout is a rounded-rectangle through-hole proxy; its 18 x 22 mm blockout and centre are not measured and must not be treated as a PCB drawing.",
         "Fan ring diameters use approximate reviewer measurements as a visual guide, not a verified fan manufacturer drawing.",
+        "Raised E-like fan-blade embossments and simplified EVGA / GEFORCE RTX wordmarks are photo-informed visual interpretations; logo vectors, relief height, font, and manufacturing geometry are not measured.",
         "Computed geometry bounds include protruding proxy components and must not be treated as the card's official thickness.",
         "No PCB revision, BoardView, schematic or exact mechanical CAD has been confirmed.",
         "Heatpipe routing and power-stage locations are reconstruction placeholders; do not use them as service or electrical instructions.",
@@ -222,6 +223,113 @@ def cube(name, component_id, location, dimensions, mat, collection,
     obj.data.materials.append(mat)
     move_to_collection(obj, collection)
     return tag(obj, component_id, evidence, export_role=export_role)
+
+
+def _append_prism(verts, faces, center_x, center_z, axis_x, axis_z,
+                  length, thickness, y_front, y_back):
+    """Append one closed rectangular stroke in the XZ plane."""
+    axis_len = math.hypot(axis_x, axis_z)
+    if axis_len < 1e-8:
+        raise ValueError("Prism axis must be non-zero")
+    ux, uz = axis_x / axis_len, axis_z / axis_len
+    px, pz = -uz, ux
+    half_l, half_t = length / 2, thickness / 2
+    outline = (
+        (center_x - ux * half_l - px * half_t, center_z - uz * half_l - pz * half_t),
+        (center_x + ux * half_l - px * half_t, center_z + uz * half_l - pz * half_t),
+        (center_x + ux * half_l + px * half_t, center_z + uz * half_l + pz * half_t),
+        (center_x - ux * half_l + px * half_t, center_z - uz * half_l + pz * half_t),
+    )
+    base = len(verts)
+    verts.extend((x, y_front, z) for x, z in outline)
+    verts.extend((x, y_back, z) for x, z in outline)
+    faces.extend((
+        (base, base + 1, base + 2, base + 3),
+        (base + 7, base + 6, base + 5, base + 4),
+        (base, base + 4, base + 5, base + 1),
+        (base + 1, base + 5, base + 6, base + 2),
+        (base + 2, base + 6, base + 7, base + 3),
+        (base + 3, base + 7, base + 4, base),
+    ))
+
+
+def _append_mesh_detail(obj, detail_verts, detail_faces):
+    """Merge local-space relief geometry into an existing tagged mesh."""
+    if not detail_verts or not detail_faces:
+        return obj
+    old_mesh = obj.data
+    old_verts = [tuple(vertex.co) for vertex in old_mesh.vertices]
+    old_faces = [tuple(poly.vertices) for poly in old_mesh.polygons]
+    offset = len(old_verts)
+    faces = old_faces + [
+        tuple(offset + index for index in face) for face in detail_faces
+    ]
+    mesh = bpy.data.meshes.new(obj.name + " | detailed mesh")
+    mesh.from_pydata(old_verts + detail_verts, [], faces)
+    for existing_material in old_mesh.materials:
+        mesh.materials.append(existing_material)
+    mesh.validate()
+    mesh.update()
+    obj.data = mesh
+    if old_mesh.users == 0:
+        bpy.data.meshes.remove(old_mesh)
+    bpy.context.view_layer.update()
+    component_id = obj.get("sbs_component_id")
+    for record in manifest["objects"]:
+        if record["component_id"] == component_id:
+            record["dimensions_mm"] = [round(float(v), 3) for v in obj.dimensions]
+            record["location_mm"] = [round(float(v), 3) for v in obj.location]
+            break
+    return obj
+
+
+FONT_STROKES = {
+    "A": (((0, 0), (0, 5)), ((0, 5), (2.5, 6)), ((2.5, 6), (5, 5)),
+          ((5, 5), (5, 0)), ((0, 3), (5, 3))),
+    "C": (((5, 6), (0, 6)), ((0, 6), (0, 0)), ((0, 0), (5, 0))),
+    "E": (((0, 0), (0, 6)), ((0, 6), (5, 6)), ((0, 3), (4, 3)),
+          ((0, 0), (5, 0))),
+    "F": (((0, 0), (0, 6)), ((0, 6), (5, 6)), ((0, 3), (4, 3))),
+    "G": (((5, 5), (5, 6)), ((5, 6), (0, 6)), ((0, 6), (0, 0)),
+          ((0, 0), (5, 0)), ((5, 0), (5, 3)), ((5, 3), (2.5, 3))),
+    "O": (((0, 0), (0, 6)), ((0, 6), (5, 6)), ((5, 6), (5, 0)),
+          ((5, 0), (0, 0))),
+    "R": (((0, 0), (0, 6)), ((0, 6), (5, 6)), ((5, 6), (5, 3)),
+          ((5, 3), (0, 3)), ((2.5, 3), (5, 0))),
+    "T": (((0, 6), (5, 6)), ((2.5, 6), (2.5, 0))),
+    "V": (((0, 6), (2.5, 0)), ((2.5, 0), (5, 6))),
+    "X": (((0, 6), (5, 0)), ((0, 0), (5, 6))),
+}
+
+
+def add_stroke_wordmark(obj, text, height, stroke_width=0.22):
+    """Add simplified raised lettering to the front of a shroud rail."""
+    scale = height / 6.0
+    gap_units = 1.1
+    widths = [2.5 if char == " " else 5.0 for char in text]
+    total_units = sum(widths) + gap_units * max(0, len(text) - 1)
+    cursor = -total_units * scale / 2
+    y_front = -SHROUD_THICKNESS / 2 - 0.30
+    y_back = -SHROUD_THICKNESS / 2 + 0.05
+    detail_verts, detail_faces = [], []
+
+    for char, glyph_width in zip(text, widths):
+        for start, end in FONT_STROKES.get(char, ()):
+            x1 = cursor + start[0] * scale
+            z1 = (start[1] - 3.0) * scale
+            x2 = cursor + end[0] * scale
+            z2 = (end[1] - 3.0) * scale
+            dx, dz = x2 - x1, z2 - z1
+            _append_prism(
+                detail_verts, detail_faces,
+                (x1 + x2) / 2, (z1 + z2) / 2,
+                dx, dz, math.hypot(dx, dz), stroke_width,
+                y_front, y_back,
+            )
+        cursor += (glyph_width + gap_units) * scale
+
+    obj["sbs_surface_detail"] = "simplified_raised_wordmark_proxy"
+    return _append_mesh_detail(obj, detail_verts, detail_faces)
 
 
 def cylinder(name, component_id, location, radius, depth, mat, collection,
@@ -357,6 +465,29 @@ def curved_fan_blade(index, blade_index, count, center, base_y, collection):
         j = (i + 1) % n
         faces.append((i, j, n + j, n + i))
 
+    # LanOC describes raised EVGA E-logo bumps on the blade surfaces, like
+    # golf-ball dimples. Model a restrained four-stroke E relief on each
+    # blade: its size/shape is a visual interpretation, not measured CAD.
+    mark_angle = base_angle + math.radians(6.0)
+    radial = (math.cos(mark_angle), math.sin(mark_angle))
+    tangent = (-radial[1], radial[0])
+    mark_radius = 27.0
+    mark_center = (mark_radius * radial[0], mark_radius * radial[1])
+    emboss_front = -FAN_BLADE_DEPTH / 2 - 0.18
+    emboss_back = -FAN_BLADE_DEPTH / 2 + 0.05
+    _append_prism(
+        verts, faces, mark_center[0], mark_center[1],
+        radial[0], radial[1], 4.2, 0.42, emboss_front, emboss_back,
+    )
+    for radial_offset, bar_length in ((1.45, 3.35), (0.0, 2.85), (-1.45, 3.35)):
+        _append_prism(
+            verts, faces,
+            mark_center[0] + radial[0] * radial_offset,
+            mark_center[1] + radial[1] * radial_offset,
+            tangent[0], tangent[1], bar_length, 0.42,
+            emboss_front, emboss_back,
+        )
+
     name = f"Fan {index} | blade {blade_index + 1}"
     mesh = bpy.data.meshes.new(name + " mesh")
     mesh.from_pydata(verts, [], faces)
@@ -367,11 +498,13 @@ def curved_fan_blade(index, blade_index, count, center, base_y, collection):
     obj.location = (center[0], base_y, center[2])
     collection.objects.link(obj)
     obj.data.materials.append(MAT["fan"])
-    return tag(
+    tagged = tag(
         obj,
         f"fan.{index}.blade.{blade_index + 1}",
         STATUS["illustrative"],
     )
+    tagged["sbs_surface_detail"] = "stylized_raised_E_mark_proxy"
+    return tagged
 
 
 def make_fan(index, x, z, y, collection, cooling_parent):
@@ -695,6 +828,11 @@ def main():
             MAT["shroud"], ext,
         ),
     ]
+    # Exact-model photos show EVGA branding at the top centre and
+    # GEFORCE RTX lettering along the lower edge. These raised stroke-font
+    # marks are readability proxies, not exact vector logos or dimensions.
+    add_stroke_wordmark(shroud_parts[0], "EVGA", height=3.0, stroke_width=0.24)
+    add_stroke_wordmark(shroud_parts[1], "GEFORCE RTX", height=2.45, stroke_width=0.20)
     for part in shroud_parts:
         set_parent_keep_world(part, shroud_group)
 
