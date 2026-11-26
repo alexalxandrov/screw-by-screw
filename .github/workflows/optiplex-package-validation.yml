@@ -55,9 +55,9 @@ jobs:
             --output /tmp/optiplex-5060-family.sbsmodel
       - name: Rebuild the committed v0.2 JSON package and verify byte-for-byte reproducibility
         run: |
-          python tools/modeling/build_text_model_package.py \\
-            --model-dir content/models/dell-optiplex-5060-tower-family \\
-            --scene /tmp/optiplex-5060-family.glb \\
+          python tools/modeling/build_text_model_package.py \
+            --model-dir content/models/dell-optiplex-5060-tower-family \
+            --scene /tmp/optiplex-5060-family.glb \
             --output /tmp/dell_optiplex_5060_tower_v02.sbsmodel
           cmp /tmp/dell_optiplex_5060_tower_v02.sbsmodel public/models/dell_optiplex_5060_tower_v02.sbsmodel
       - name: Verify committed package using the production loader
