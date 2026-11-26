@@ -8,11 +8,11 @@
   "files": [
     {
       "path": "model.json",
-      "sha256": "18acb7c59d3f8a82f9e9e25fffd6eebe61bbb3a67bd709bc0e40ba9a37ca0f4b"
+      "sha256": "b9d26ea7fa18df075e64c788b66a21197cbb9afd1c67fc331e7e2060d3621e39"
     },
     {
       "path": "sources.json",
-      "sha256": "884a9e8ba5315729c25d29026b897beb32d5fd467d94047e799a4d6643e2bff2"
+      "sha256": "0a440cc4d8d540a3d5df2c798b06185b31e0f23b9a4d280251dbf76d571d12df"
     },
     {
       "path": "components.json",
@@ -36,7 +36,7 @@
     },
     {
       "path": "claims.json",
-      "sha256": "f12e396cb8c9439ec4866de2d8e09720a5e7c7eb03dc8bb63cd8d13b1a25a568"
+      "sha256": "391b34bbd697c43232ed3047528524876eb0508d336afeae86cb4a1d23a48150"
     },
     {
       "path": "animations.json",
