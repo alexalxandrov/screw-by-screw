@@ -773,21 +773,21 @@ def main():
             world_position, size, MAT["power_stage"], pcbcol, evidence=STATUS["illustrative"])
         set_parent_keep_world(block, power_stage_group)
 
-    # Six Samsung 16-Gbit packages are confirmed in the exact-model teardown.
-    # Their centres below are image-estimated; the board revision / BoardView
-    # and metrology-grade coordinates have not been obtained.
+    # Six GDDR6 package positions are visible in exact XC BLACK material.
+    # Exact device markings are not confirmed; centres below are photo-estimated
+    # and no BoardView or metrology-grade coordinates are available.
     memory_centres = (
         (134.0, 78.0), (154.0, 58.0), (134.0, 40.0),
         (75.0, 25.0), (100.0, 22.0), (125.0, 25.0),
     )
     for i, (x, z) in enumerate(memory_centres, start=1):
         memory = cube(
-            f"Samsung GDDR6 K4ZAF325BM-HC16 package {i}",
+            f"GDDR6 memory package position {i}",
             f"chip.memory.candidate.{i}",
             (x, half_y - 4.0, z),
             (14.0, 4.0, 12.0),
             MAT["memory"], pcbcol,
-            evidence=STATUS["teardown_supported"],
+            evidence=STATUS["visible_exact_model"],
         )
         memory["sbs_position_status"] = "image_estimated_not_measured"
         set_parent_keep_world(memory, pcb_group)
