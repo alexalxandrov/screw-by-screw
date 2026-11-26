@@ -219,6 +219,7 @@ class ContentPackageTests(unittest.TestCase):
 
     def test_candidate_pcb_marking_does_not_confirm_revision(self):
         package_dir = ROOT / "content" / "models" / "evga-rtx3060-xc-black-12gb"
+        manifest_builder.build_manifest(package_dir)
         package = validator.load_package(package_dir)
         validator.validate_package(package, package_dir)
         claims = {item["id"]: item for item in package["claims"]["claims"]}
