@@ -115,3 +115,42 @@ test("JSON model package rejects a tampered sidecar before loading", async () =>
     /SHA-256 mismatch|checksum/i
   );
 });
+
+
+test("JSON model package rejects an excessive entry count", async () => {
+  const prefix = "SBSMODEL-JSON\\n";
+  const envelope = JSON.parse(packageBytes.toString("utf8").slice(prefix.length));
+  for (let index = 0; index < 130; index += 1) envelope.files[`extra-${index}.json`] = "{}";
+  const oversizedBytes = Buffer.from(prefix + JSON.stringify(envelope), "utf8");
+  const oversizedBuffer = oversizedBytes.buffer.slice(
+    oversizedBytes.byteOffset,
+    oversizedBytes.byteOffset + oversizedBytes.byteLength
+  );
+  await assert.rejects(
+    () => loadModelPackage({
+      name: "too-many-entries.sbsmodel",
+      size: oversizedBytes.byteLength,
+      arrayBuffer: async () => oversizedBuffer
+    }),
+    /invalid number of entries/
+  );
+});
+
+test("JSON model package rejects unsafe envelope paths", async () => {
+  const prefix = "SBSMODEL-JSON\\n";
+  const envelope = JSON.parse(packageBytes.toString("utf8").slice(prefix.length));
+  envelope.files["../escape.json"] = "{}";
+  const unsafeBytes = Buffer.from(prefix + JSON.stringify(envelope), "utf8");
+  const unsafeBuffer = unsafeBytes.buffer.slice(
+    unsafeBytes.byteOffset,
+    unsafeBytes.byteOffset + unsafeBytes.byteLength
+  );
+  await assert.rejects(
+    () => loadModelPackage({
+      name: "unsafe-path.sbsmodel",
+      size: unsafeBytes.byteLength,
+      arrayBuffer: async () => unsafeBuffer
+    }),
+    /unsafe package path/
+  );
+});
