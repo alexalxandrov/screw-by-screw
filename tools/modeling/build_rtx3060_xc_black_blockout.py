@@ -419,6 +419,16 @@ def make_fan(index, x, z, y, collection, cooling_parent):
         )
         set_parent_keep_world(obj, rotor)
 
+    # The exact teardown counts three mounting screws on each independently
+    # replaceable fan. Individual screw centres are not mapped, so keep nodes logical-only.
+    for screw_index in range(1, 4):
+        make_assembly(
+            f"Fan {index} mounting screw {screw_index} | location unmapped",
+            f"fastener.fan.{index}.{screw_index:02d}",
+            (x, y, z), collection, parent=assembly,
+            evidence=STATUS["visible_exact_model"], geometry="logical_only",
+        )
+
 
 def validate_scene_transform_integrity():
     """Fail generation if parent assignment moves geometry away from its centres."""
@@ -1014,6 +1024,19 @@ def main():
     )
     set_parent_keep_world(vrm_pad, vrm_pad_group)
 
+    vrm_copper_contact = make_assembly(
+        "Copper plate contacting MOSFET row | proxy",
+        "cooling.vrm.copper_contact",
+        (stage_origin[0] + 2.0, -4.6, stage_origin[2] - 13.0),
+        cool, parent=thermal_group,
+        evidence=STATUS["teardown_supported"], geometry="illustrative_proxy",
+    )
+    make_detail_box(
+        "VRM copper contact plate proxy",
+        (stage_origin[0] + 2.0, -4.6, stage_origin[2] - 13.0),
+        (38.0, 1.0, 17.0), MAT["copper"], vrm_copper_contact, cool,
+    )
+
     # The exact-SKU-linked Tom's Hardware teardown reports eight cooler/shroud
     # retention screws: four around the GPU and four near the far/rear end.
     # LanOC independently shows the four GPU-area subset; only those four positions
@@ -1122,12 +1145,33 @@ def main():
         (stage_origin[0] - 16.0, half_y - 2.0, stage_origin[2] - 15.0),
         pcbcol, parent=power_stage_group,
     )
-    for shunt_index in range(3):
-        make_detail_box(
-            "Shunt resistor candidate {}".format(shunt_index + 1),
-            (stage_origin[0] - 18.0 + shunt_index * 5.0, half_y - 2.0, stage_origin[2] - 15.0),
-            (3.0, 1.2, 2.0), MAT["power_stage"], shunt_group, pcbcol,
-        )
+    shunt_8pin = make_assembly(
+        "Auxiliary 8-pin input shunt | 5 milliohms stated in teardown",
+        "power.shunt.8pin",
+        (stage_origin[0] - 18.0, half_y - 2.0, stage_origin[2] - 15.0),
+        pcbcol, parent=shunt_group,
+        evidence=STATUS["teardown_supported"], geometry="illustrative_proxy",
+    )
+    make_detail_box(
+        "Auxiliary 8-pin shunt body proxy",
+        (stage_origin[0] - 18.0, half_y - 2.0, stage_origin[2] - 15.0),
+        (3.0, 1.2, 2.0), MAT["power_stage"], shunt_8pin, pcbcol,
+    )
+    shunt_pcie = make_assembly(
+        "PCIe-slot 12V shunt | resistance unknown",
+        "power.shunt.pcie_slot",
+        (stage_origin[0] - 10.0, half_y - 2.0, stage_origin[2] - 15.0),
+        pcbcol, parent=shunt_group,
+        evidence=STATUS["teardown_supported"], geometry="logical_only",
+    )
+
+    fuse_group = make_assembly(
+        "Input protection fuse | rating unknown",
+        "power.fuse.input",
+        (stage_origin[0] + 22.0, half_y - 2.0, stage_origin[2] + 12.0),
+        pcbcol, parent=power_stage_group,
+        evidence=STATUS["teardown_supported"], geometry="logical_only",
+    )
 
     passives_group = make_assembly(
         "Unidentified power passives | visual proxy", "power.passives.cluster",
@@ -1195,7 +1239,7 @@ def main():
         )
 
     switching_group = make_assembly(
-        "Power switching-device cluster | photo-estimated",
+        "MOSFET row | copper plate contact observed",
         "power.switching_device.cluster",
         (stage_origin[0] + 2.0, half_y - 2.4, stage_origin[2] - 13.0),
         pcbcol, parent=power_stage_group,
