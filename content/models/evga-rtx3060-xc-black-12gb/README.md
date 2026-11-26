@@ -85,3 +85,8 @@ Gamers Nexus' exact-model teardown shows three retaining screws per independentl
 ### GA10x logical SM hierarchy
 
 The architecture tree now exposes 14 logical TPC instances, each with two SMs and one PolyMorph Engine; all 28 SMs expand into four processing partitions each, for 112 individually selectable partition nodes. NVIDIA's GA10x whitepaper supplies per-SM counts and TPC composition: 128 CUDA, four Tensor, four texture, one RT, 256 KB register file and 128 KB L1/shared memory per SM; two SMs and one PolyMorph Engine per TPC. Fourteen TPCs is calculated from 28 configured SMs. None of these nodes has a physical die position or implies a recovered GA106 floorplan/GPC arrangement.
+
+
+### Learning module
+
+The bilingual learning quiz contains 12 source-linked questions, including the new TPC and per-SM processing-partition structure, datapath resources and register-file organization documented by NVIDIA's GA10x architecture whitepaper.
