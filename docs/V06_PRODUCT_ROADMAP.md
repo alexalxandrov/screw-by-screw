@@ -27,7 +27,7 @@ The pilot is an evidence-linked educational model. Its component inventory delib
 
 The canonical package currently contains **313 semantic components, 311 typed relationships, 109 atomic claims and 27 registered sources**. It has three process layers, 12 bilingual learning questions and two authored animation clips.
 
-The cooling inventory includes two fans, eight photo-counted visible blade-surface proxies per fan, 24 illustrative fin proxies, six selectable heatpipe run proxies and separate thermal-interface markers. Fan profile, centres, fin count/pitch, pad footprint and thickness, heatpipe loop count and routing remain unverified.
+The cooling inventory includes two fans, eight photo-counted visible blade-surface proxies per fan with low-relief E-like markers, raised hub badge proxies, simplified EVGA / GEFORCE RTX shroud wordmarks, 24 illustrative fin proxies, six selectable heatpipe run proxies and separate thermal-interface markers. Fan profile, centres, exact logo vectors, OEM fan identity, fin count/pitch, pad footprint and thickness, heatpipe loop count and routing remain unverified.
 
 The power layer exposes an auxiliary-input current-sense shunt observed at 5 mΩ, a separate PCIe-slot shunt with unknown resistance, one teardown-observed fuse with unknown rating, a MOSFET/copper-contact region and two inductor packages discussed in a tentatively identified memory-VRM area. It does not infer controller identity, phase count, net routing or component values.
 
