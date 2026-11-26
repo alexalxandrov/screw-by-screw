@@ -1,10 +1,15 @@
 name: Model package validation
+permissions:
+  contents: read
 concurrency:
   group: model-package-validation-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 on:
+  workflow_dispatch:
   push:
+    branches:
+      - main
     paths:
       - "tools/modeling/**"
       - "tools/content/**"

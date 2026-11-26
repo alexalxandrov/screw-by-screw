@@ -27,6 +27,8 @@ on:
       - "e2e/**"
       - ".github/workflows/blender-model-validation.yml"
   push:
+    branches:
+      - main
     paths:
       - "tools/modeling/build_rtx3060_xc_black_blockout.py"
       - "tools/modeling/inspect_blend_scene.py"
