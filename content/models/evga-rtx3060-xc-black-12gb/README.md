@@ -39,7 +39,7 @@ This is not yet a complete engineering reconstruction. Four GPU-area heatsink sc
 
 ### Fine-grained cooling decomposition
 
-The development branch now expands the content graph to 117 semantic components and 112 typed relationships. Fan frames, hubs and each blade proxy are separately selectable; the illustrative heatsink has 24 separately selectable fin proxies; the two reconstructed heatpipe routes are separate assembly nodes; and six memory thermal-pad proxies plus one VRM pad strip have their own IDs. No proxy blade/fin count or thermal-pad dimensions are presented as a factory specification.
+The development branch now expands the content graph to 121 semantic components and 116 typed relationships. Fan frames, hubs and each blade proxy are separately selectable; the illustrative heatsink has 24 separately selectable fin proxies; the two reconstructed heatpipe routes are separate assembly nodes; and six memory thermal-pad proxies plus one VRM pad strip have their own IDs. No proxy blade/fin count or thermal-pad dimensions are presented as a factory specification.
 
 
 ### Partial teardown evidence
@@ -65,3 +65,8 @@ The exact 12G-P5-3655-KR XC BLACK review shows four heatsink mounting screws aro
 ### GDDR6 identity and bus mapping boundary
 
 The exact card has six visible GDDR6 package positions and a manufacturer-published 192-bit memory interface. The individual device markings and electrical mapping have not been confirmed from an exact-revision BoardView or schematic. The viewer separates the package positions from the logical interface presentation groups; no one-to-one channel mapping is claimed.
+
+
+### Four visible heatpipe terminal faces
+
+The exact XC BLACK cooler-end photograph shows four copper terminal faces. They are now separately selectable in the viewer. The four-face count must not be confused with four unique heatpipes: internal pipe paths and the number of distinct U-shaped tubes are still unverified.
