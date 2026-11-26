@@ -71,6 +71,16 @@ export const EVIDENCE = {
   }
 };
 
+function safeExternalHttpUrl(value) {
+  if (typeof value !== "string" || !value.trim()) return "";
+  try {
+    const url = new URL(value);
+    return url.protocol === "http:" || url.protocol === "https:" ? url.href : "";
+  } catch {
+    return "";
+  }
+}
+
 export function createModelDataAdapter(data) {
   const modelPackage = data?.model;
   const sourcePackage = data?.sources;
@@ -90,7 +100,9 @@ export function createModelDataAdapter(data) {
         ...source,
         id: source.id,
         label: source.title ?? source.label ?? source.id,
-        url: source.url ?? ""
+        url: safeExternalHttpUrl(source.url),
+        identity_reference_url: safeExternalHttpUrl(source.identity_reference_url),
+        identity_reference_image_url: safeExternalHttpUrl(source.identity_reference_image_url)
       }))
     },
     components: componentPackage.components.map((component) => ({
