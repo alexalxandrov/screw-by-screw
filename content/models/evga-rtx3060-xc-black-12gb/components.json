@@ -417,6 +417,60 @@
       }
     },
     {
+      "id": "pcb.memory.unpopulated.locations",
+      "parent_id": "assembly.pcb.electronics",
+      "name": {
+        "en": "Two unused memory positions · unpopulated PCB locations",
+        "ru": "Две незанятые позиции памяти · пустые места на PCB"
+      },
+      "category": "pcb_feature",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ],
+      "description": {
+        "en": "Tom's Hardware reports two memory locations on the exact-SKU-linked PCB sample that are unused. This group separates those unpopulated locations from the six installed Samsung GDDR6 packages. It does not establish electrical routing, pad design, compatibility, or whether either location can be populated. Individual coordinates are not mapped.",
+        "ru": "Tom's Hardware сообщает о двух незанятых позициях памяти на образце PCB, связанном с точным SKU. Эта группа отделяет пустые позиции от шести установленных микросхем Samsung GDDR6. Это не подтверждает электрическую разводку, конструкцию площадок, совместимость или возможность установки микросхем в эти места. Индивидуальные координаты не нанесены."
+      }
+    },
+    {
+      "id": "pcb.memory.unpopulated.01",
+      "parent_id": "pcb.memory.unpopulated.locations",
+      "name": {
+        "en": "Unpopulated memory position 01 · no package fitted",
+        "ru": "Незаполненная позиция памяти 01 · корпус не установлен"
+      },
+      "category": "pcb_feature",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ],
+      "description": {
+        "en": "One of two visibly unused memory locations reported in the exact-SKU-linked Tom's Hardware teardown sample. No package is fitted in this location in the reviewed sample. Its PCB coordinates, pad geometry, electrical connections and population compatibility remain unknown.",
+        "ru": "Одна из двух визуально незанятых позиций памяти, отмеченных в разборке Tom's Hardware на образце, связанном с точным SKU. В рассмотренном образце микросхема в этой позиции не установлена. Координаты PCB, геометрия площадок, электрические соединения и возможность установки корпуса неизвестны."
+      }
+    },
+    {
+      "id": "pcb.memory.unpopulated.02",
+      "parent_id": "pcb.memory.unpopulated.locations",
+      "name": {
+        "en": "Unpopulated memory position 02 · no package fitted",
+        "ru": "Незаполненная позиция памяти 02 · корпус не установлен"
+      },
+      "category": "pcb_feature",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ],
+      "description": {
+        "en": "One of two visibly unused memory locations reported in the exact-SKU-linked Tom's Hardware teardown sample. No package is fitted in this location in the reviewed sample. Its PCB coordinates, pad geometry, electrical connections and population compatibility remain unknown.",
+        "ru": "Одна из двух визуально незанятых позиций памяти, отмеченных в разборке Tom's Hardware на образце, связанном с точным SKU. В рассмотренном образце микросхема в этой позиции не установлена. Координаты PCB, геометрия площадок, электрические соединения и возможность установки корпуса неизвестны."
+      }
+    },
+    {
       "id": "cooling.heatpipes",
       "parent_id": "assembly.cooling",
       "name": {

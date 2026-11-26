@@ -390,3 +390,10 @@ The same review's specification page lists an 1882 MHz boost clock and a configu
 This article is retained as a **related EVGA RTX 3060 XC variant reference only**. The five-phase count, backplate, two-heatpipe description, 1882 MHz boost and 190 W upper power-limit figure must not be copied into the 12G-P5-3655-KR package or Blender reconstruction. The exact retail P/N and PCB revision of the Hardwareluxx sample are not established by its article text; do not guess that it is a particular suffix based only on appearance or clock values.
 
 This cross-check reinforces the project's strict SKU boundary: family resemblance does not establish shared PCB population, cooler assembly, service parts or electrical topology.
+
+
+## 26. Two unused memory locations on the exact-SKU-linked PCB sample
+
+Tom's Hardware states that the reviewed EVGA RTX 3060 XC PCB has two memory locations that go unused, then identifies six installed Samsung K4ZAF325BM-HC16 GDDR6 devices. The rear-PCB identity photograph in the same review reads P/N 12G-P5-3655-KR, linking the sample to the selected XC BLACK retail SKU. The project records the two unused locations separately from the six populated memory packages. Their exact PCB coordinates, pad geometry, electrical routing, intended compatibility and ability to accept additional devices remain unknown. The observation must not be represented as an 8-device memory bus, a 16GB upgrade path or an electrically complete footprint map.
+
+Source: Tom's Hardware, [EVGA GeForce RTX 3060 XC teardown](https://www.tomshardware.com/reviews/nvidia-geforce-rtx-3060-review/2), teardown paragraph following the eight-screw/fan-connector description; the main review's rear-PCB image provides the retail P/N identity reference.

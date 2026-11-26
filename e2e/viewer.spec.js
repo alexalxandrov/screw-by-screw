@@ -294,7 +294,7 @@ test("cooling layer exposes an inspectable thermal path without claiming simulat
   await expect(diagram.locator('.architecture-node[data-component-id="cooling.heatpipe.side.02"]')).toContainText("Боковая тепловая трубка 2");
   await expect(diagram.locator('.architecture-node[data-component-id="fan.2.blade.1"]')).toContainText("Макетная лопасть вентилятора 2");
   await expect(page.locator("#process-assumptions li")).toHaveCount(6);
-  await expect(page.locator("#process-sources a")).toHaveCount(5);
+  await expect(page.locator("#process-sources a")).toHaveCount(6);
   await diagram.locator('.architecture-node[data-component-id="cooling.thermal_pad.memory"]').click();
   await expect(page.locator("#detail-id")).toHaveText("cooling.thermal_pad.memory");
   await expect(page.locator("#detail-description")).toContainText("толщина");
@@ -308,12 +308,15 @@ test("GPU architecture layer exposes source-linked logical GA106 and GDDR6 nodes
   await expect(diagram).toBeVisible();
   await expect(diagram.locator(".architecture-diagram-group")).toHaveCount(3);
   const diagramNodes = diagram.locator(".architecture-node");
-  await expect(diagramNodes).toHaveCount(29);
+  await expect(diagramNodes).toHaveCount(31);
   await expect(diagram.locator('.architecture-node[data-component-id="chip.gpu.die"]')).toContainText("Кристалл GA106");
   await expect(diagram.locator('.architecture-node[data-component-id="chip.gpu.cuda_core.array"]')).toContainText("3 584");
   await expect(diagram.locator('.architecture-node[data-component-id="chip.memory.gddr6.bus"]')).toContainText("192-битная GDDR6");
+  await expect(diagram.locator('.architecture-node[data-component-id="pcb.memory.unpopulated.01"]')).toContainText("Незанятая позиция памяти 01");
+  await expect(diagram.locator('.architecture-node[data-component-id="pcb.memory.unpopulated.02"]')).toContainText("Незанятая позиция памяти 02");
+
   const linked = page.locator("#process-components .process-component-chip");
-  await expect(linked).toHaveCount(191);
+  await expect(linked).toHaveCount(194);
   await expect(page.locator('#process-components .process-component-chip[data-component-id="chip.gpu.sm.cluster"]')).toContainText("Кластер потоковых мультипроцессоров Ampere");
   await expect(diagram.locator('.architecture-node[data-component-id="chip.gpu.tpc.cluster"]')).toContainText("14 логических TPC");
   await expect(diagram.locator('.architecture-node[data-component-id="chip.gpu.tpc.14"]')).toContainText("2 SM");
@@ -321,6 +324,9 @@ test("GPU architecture layer exposes source-linked logical GA106 and GDDR6 nodes
   await expect(page.locator('#process-components .process-component-chip[data-component-id="chip.gpu.sm.28.partition.04"]')).toContainText("вычислительная секция 4");
   await expect(page.locator('#process-components .process-component-chip[data-component-id="chip.gpu.tpc.14"]')).toContainText("TPC 14");
   await expect(page.locator('#process-components .process-component-chip[data-component-id="chip.memory.channel.06"]')).toContainText("Визуальный сегмент интерфейса GDDR6 06");
+  await expect(page.locator('#process-components .process-component-chip[data-component-id="pcb.memory.unpopulated.locations"]')).toContainText("Две незанятые позиции памяти");
+  await expect(page.locator("#process-assumptions")).toContainText("две незанятые позиции памяти");
+
   await expect(page.locator("#process-assumptions")).toContainText("не воспроизводят физическую топологию GA106");
   await expect(page.locator("#process-sources a")).toHaveCount(5);
   await diagram.locator('.architecture-node[data-component-id="chip.gpu.sm.cluster"]').click();

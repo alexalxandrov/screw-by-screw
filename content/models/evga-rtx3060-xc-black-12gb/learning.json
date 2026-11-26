@@ -352,6 +352,35 @@
       "source_ids": [
         "src.nvidia.ampere.whitepaper"
       ]
+    },
+    {
+      "id": "quiz.memory.unpopulated.locations",
+      "prompt": {
+        "en": "How many unused memory locations does Tom's Hardware report on the reviewed PCB?",
+        "ru": "Сколько незанятых позиций памяти Tom's Hardware отмечает на рассмотренной плате?"
+      },
+      "choices": [
+        {
+          "en": "None; all memory locations are populated",
+          "ru": "Ни одной; все позиции памяти заняты"
+        },
+        {
+          "en": "Two unused locations",
+          "ru": "Две незанятые позиции"
+        },
+        {
+          "en": "Six unused locations",
+          "ru": "Шесть незанятых позиций"
+        }
+      ],
+      "correct_index": 1,
+      "explanation": {
+        "en": "The teardown describes two unused memory locations on the PCB. This observation does not prove that they are electrically routed or can be populated on this card.",
+        "ru": "В разборке описаны две незанятые позиции памяти на PCB. Это наблюдение не доказывает, что к ним подведены электрические цепи или что в них можно установить микросхемы на этой карте."
+      },
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ]
     }
   ]
 }

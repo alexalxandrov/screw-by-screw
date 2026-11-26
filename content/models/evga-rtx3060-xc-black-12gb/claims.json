@@ -1332,6 +1332,18 @@
         "src.gamersnexus.teardown"
       ],
       "notes": "Gamers Nexus verbally estimates approximately 6 mm for the two central tube runs visible through the GPU contact plate. This is a rough teardown estimate, not a calibrated measurement. Do not apply it automatically to every route proxy or use it to infer the number of unique closed-loop pipes."
+    },
+    {
+      "id": "claim.memory.unpopulated_location_count",
+      "subject_id": "assembly.pcb.electronics",
+      "predicate": "unpopulated_memory_position_count",
+      "value": 2,
+      "unit": "positions",
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ],
+      "notes": "Tom's Hardware explicitly describes two unused memory locations on the teardown PCB. The reviewed sample is linked to retail P/N 12G-P5-3655-KR by the rear-PCB identity photograph in the same review. This count records visibly unpopulated positions only; it does not establish electrical routing, footprint compatibility, or a valid memory upgrade path."
     }
   ]
 }

@@ -2953,6 +2953,33 @@
       "source_ids": [
         "src.gamersnexus.teardown"
       ]
+    },
+    {
+      "id": "rel.pcb.contains.unpopulated_memory_locations",
+      "from": "assembly.pcb.electronics",
+      "to": "pcb.memory.unpopulated.locations",
+      "type": "contains",
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ]
+    },
+    {
+      "id": "rel.unpopulated_memory.locations.contains.01",
+      "from": "pcb.memory.unpopulated.locations",
+      "to": "pcb.memory.unpopulated.01",
+      "type": "contains",
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ]
+    },
+    {
+      "id": "rel.unpopulated_memory.locations.contains.02",
+      "from": "pcb.memory.unpopulated.locations",
+      "to": "pcb.memory.unpopulated.02",
+      "type": "contains",
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ]
     }
   ]
 }

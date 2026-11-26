@@ -766,11 +766,14 @@
         "chip.gpu.sm.28.partition.01",
         "chip.gpu.sm.28.partition.02",
         "chip.gpu.sm.28.partition.03",
-        "chip.gpu.sm.28.partition.04"
+        "chip.gpu.sm.28.partition.04",
+        "pcb.memory.unpopulated.locations",
+        "pcb.memory.unpopulated.01",
+        "pcb.memory.unpopulated.02"
       ],
       "description": {
-        "en": "An evidence-linked architecture map of the GA106 RTX 3060 configuration: 28 SMs, 14 logical TPCs, 112 logical SM processing partitions, 3,584 CUDA cores, 112 third-generation Tensor Cores, 28 second-generation RT Cores, 112 TMUs, 48 ROPs and the exact SKU's published 192-bit GDDR6 interface. Each logical TPC groups two SM entries and one PolyMorph Engine; each SM expands into four processing-partition entries. NVIDIA's GA10x whitepaper details each partition's scheduler/dispatch, register file, FP32/INT32 datapaths, Tensor Core, load/store units and SFU. These IDs describe architecture hierarchy only. No physical GPC count, die coordinates, silicon floorplan, package-to-channel mapping or electrical net mapping is asserted.",
-        "ru": "Архитектурная карта GA106 в конфигурации RTX 3060: 28 SM, 14 логических TPC, 112 логических вычислительных секций SM, 3 584 ядра CUDA, 112 тензорных ядер третьего поколения, 28 RT-ядер второго поколения, 112 TMU, 48 ROP и опубликованный для точного SKU 192-битный интерфейс GDDR6. Каждый логический TPC объединяет два узла SM и один PolyMorph Engine; каждый SM раскрывается в четыре узла вычислительных секций. В whitepaper NVIDIA GA10x описаны scheduler/dispatch, файл регистров, тракты FP32/INT32, Tensor Core, блоки load/store и SFU каждой секции. Эти идентификаторы описывают только архитектурную иерархию. Физическое число GPC, координаты на кристалле, топология кремния, соответствие корпусов памяти каналам и электрические сети не утверждаются."
+        "en": "An evidence-linked architecture map of the GA106 RTX 3060 configuration: 28 SMs, 14 logical TPCs, 112 logical SM processing partitions, 3,584 CUDA cores, 112 third-generation Tensor Cores, 28 second-generation RT Cores, 112 TMUs, 48 ROPs and the exact SKU's published 192-bit GDDR6 interface. Each logical TPC groups two SM entries and one PolyMorph Engine; each SM expands into four processing-partition entries. NVIDIA's GA10x whitepaper details each partition's scheduler/dispatch, register file, FP32/INT32 datapaths, Tensor Core, load/store units and SFU. These IDs describe architecture hierarchy only. No physical GPC count, die coordinates, silicon floorplan, package-to-channel mapping or electrical net mapping is asserted. The exact-SKU-linked teardown sample also shows two unused PCB memory locations alongside the six installed GDDR6 packages; their electrical routing and population compatibility are not established.",
+        "ru": "Архитектурная карта GA106 в конфигурации RTX 3060: 28 SM, 14 логических TPC, 112 логических вычислительных секций SM, 3 584 ядра CUDA, 112 тензорных ядер третьего поколения, 28 RT-ядер второго поколения, 112 TMU, 48 ROP и опубликованный для точного SKU 192-битный интерфейс GDDR6. Каждый логический TPC объединяет два узла SM и один PolyMorph Engine; каждый SM раскрывается в четыре узла вычислительных секций. В whitepaper NVIDIA GA10x описаны scheduler/dispatch, файл регистров, тракты FP32/INT32, Tensor Core, блоки load/store и SFU каждой секции. Эти идентификаторы описывают только архитектурную иерархию. Физическое число GPC, координаты на кристалле, топология кремния, соответствие корпусов памяти каналам и электрические сети не утверждаются. В образце разборки, связанном с точным SKU, также видны две незанятые позиции памяти на PCB рядом с шестью установленными микросхемами GDDR6; их электрическая разводка и возможность установки корпусов не установлены."
       },
       "assumptions": [
         {
@@ -816,6 +819,10 @@
         {
           "en": "Each partition describes logical functional resources only: scheduler/dispatch, register file, FP32 and FP32/INT32 datapaths, Tensor Core, LD/ST units and SFU. No circuit layout, transistor-level design or physical placement is reconstructed.",
           "ru": "Каждая секция описывает только логические функциональные ресурсы: scheduler/dispatch, файл регистров, тракты FP32 и FP32/INT32, Tensor Core, блоки LD/ST и SFU. Топология цепей, транзисторная схема или физическое размещение не восстанавливаются."
+        },
+        {
+          "en": "Tom's Hardware identifies two unused memory locations on the teardown PCB. They are recorded separately from the six populated GDDR6 packages; no electrical connection, pad geometry, compatibility or upgrade capability is inferred.",
+          "ru": "Tom's Hardware отмечает на плате из разборки две незанятые позиции памяти. Они учитываются отдельно от шести установленных микросхем GDDR6; электрическое соединение, геометрия площадок, совместимость или возможность расширения памяти не выводятся."
         }
       ],
       "source_ids": [
@@ -823,7 +830,8 @@
         "src.tomshardware.rtx3060.specs",
         "src.samsung.gddr6.catalog",
         "src.evga.spec",
-        "src.nvidia.ampere.whitepaper"
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.teardown"
       ],
       "visualization": {
         "kind": "selectable_logical_nodes",
@@ -1109,8 +1117,8 @@
                 "ru": "Подсистема памяти GDDR6"
               },
               "summary": {
-                "en": "The 192-bit interface is confirmed; package positions are shown separately, with no assumed channel mapping",
-                "ru": "192-битный интерфейс подтверждён; позиции микросхем показаны отдельно, без предположения о соответствии каналам"
+                "en": "Six populated GDDR6 packages and two unused PCB memory locations are recorded separately; interface/package mapping remains unknown",
+                "ru": "Шесть установленных корпусов GDDR6 и две незанятые позиции PCB учитываются отдельно; соответствие интерфейса и корпусов неизвестно"
               },
               "nodes": [
                 {
@@ -1188,6 +1196,28 @@
                   "metric": {
                     "en": "Presentation group · physical mapping unknown",
                     "ru": "Группа представления · физическое соответствие неизвестно"
+                  }
+                },
+                {
+                  "component_id": "pcb.memory.unpopulated.01",
+                  "title": {
+                    "en": "Unused memory location 01",
+                    "ru": "Незанятая позиция памяти 01"
+                  },
+                  "metric": {
+                    "en": "No device fitted · electrical routing unknown",
+                    "ru": "Корпус не установлен · электрическая разводка неизвестна"
+                  }
+                },
+                {
+                  "component_id": "pcb.memory.unpopulated.02",
+                  "title": {
+                    "en": "Unused memory location 02",
+                    "ru": "Незанятая позиция памяти 02"
+                  },
+                  "metric": {
+                    "en": "No device fitted · electrical routing unknown",
+                    "ru": "Корпус не установлен · электрическая разводка неизвестна"
                   }
                 }
               ]

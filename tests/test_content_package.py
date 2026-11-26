@@ -227,6 +227,11 @@ class ContentPackageTests(unittest.TestCase):
         self.assertEqual(claims["claim.cooler.fastener.count.total"]["value"], 8)
         self.assertEqual(claims["claim.cooler.fastener.count.rear"]["value"], 4)
         self.assertEqual(claims["claim.memory.package_part_number"]["value"], "Samsung K4ZAF325BM-HC16")
+        self.assertEqual(claims["claim.memory.unpopulated_location_count"]["value"], 2)
+        self.assertEqual(components["pcb.memory.unpopulated.01"]["geometry_status"], "logical_only")
+        self.assertEqual(components["pcb.memory.unpopulated.02"]["geometry_status"], "logical_only")
+        self.assertEqual(components["pcb.memory.unpopulated.01"]["parent_id"], "pcb.memory.unpopulated.locations")
+        self.assertIn("src.tomshardware.teardown", claims["claim.memory.unpopulated_location_count"]["source_ids"])
         for claim_id in (
             "claim.memory.package_density",
             "claim.memory.package_organization",
@@ -292,16 +297,16 @@ class ContentPackageTests(unittest.TestCase):
             )
             self.assertIn("src.newegg.exact_sku.product_photo", components[blade_ids[-1]]["source_ids"])
 
-        self.assertIn("Components: 320", report)
-        self.assertIn("Relationships: 319", report)
+        self.assertIn("Components: 323", report)
+        self.assertIn("Relationships: 322", report)
         self.assertIn("Animation clips: 2", report)
-        self.assertEqual(len(package["claims"]["claims"]), 110)
+        self.assertEqual(len(package["claims"]["claims"]), 111)
         self.assertEqual(len(package["process_layers"]["process_layers"]), 3)
         power_layer = next(layer for layer in package["process_layers"]["process_layers"] if layer["id"] == "process.power.qualitative")
         self.assertEqual(len(power_layer["linked_component_ids"]), 12)
         self.assertIn("src.gamersnexus.teardown", power_layer["source_ids"])
         self.assertIn("5 mΩ current-sense shunt", power_layer["description"]["en"])
-        self.assertEqual(len(package["learning"]["questions"]), 12)
+        self.assertEqual(len(package["learning"]["questions"]), 13)
         self.assertEqual(len(package["assembly_steps"]["steps"]), 5)
         self.assertEqual(claims["claim.cooler.fin_stack_base.screw_count"]["value"], 2)
         self.assertEqual(claims["claim.io.bracket.mount_screw_count"]["value"], 2)

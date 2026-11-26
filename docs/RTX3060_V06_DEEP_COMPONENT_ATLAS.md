@@ -196,3 +196,8 @@ The Gamers Nexus teardown verbally estimates approximately **6 mm** for the two 
 ## Individual screw inventory expansion
 
 Seven additional fasteners are now separate selectable logical-only components beneath three observed groups: two fin-stack base screws, two I/O-bracket screw-and-nut fasteners, and three display-output retaining screws. The corresponding partial teardown observations link to each individual stable ID. Their centres, head geometries, thread sizes, lengths and torque remain undocumented; no physical meshes or coordinates are invented. The display-output group retains the Gamers Nexus Phillips #0 driver observation, without assigning one screw to each port.
+
+
+## 32. Unpopulated memory locations
+
+The exact-SKU-linked Tom's Hardware teardown describes two unused memory locations on the PCB in addition to six installed Samsung K4ZAF325BM-HC16 packages. The canonical graph exposes one parent group and two individually selectable logical-only PCB position nodes. Their coordinates, pad geometry, electrical nets, compatibility and population potential are not established. The 192-bit bus and six installed devices remain separate evidence; no package-to-channel map is inferred.

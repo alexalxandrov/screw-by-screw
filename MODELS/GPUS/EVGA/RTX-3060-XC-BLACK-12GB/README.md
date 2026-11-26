@@ -76,7 +76,7 @@ The report includes component IDs, parent IDs, world-space positions, dimensions
 
 ## Canonical package and remaining evidence gates
 
-The current canonical package is linked above and contains 320 semantic components, 319 typed relationships, 110 atomic claims and 29 registered sources, plus five partial teardown observations and two educational clips. It remains a starter engineering atlas, not a complete BOM or complete service manual. Exact PCB revision, matching BoardView/schematic, component reference designators and calibrated mechanical dimensions remain unverified. Heatpipe sources use different counting conventions (six route/runs, four copper heatpipes, or two central tube paths); the unique physical closed-loop count is unresolved. Eight visible blade surfaces per fan are counted from two exact-SKU listing photographs; blade profile remains proxy geometry. Original OEM fan part number is unknown; aftermarket listings are compatibility leads only.
+The current canonical package is linked above and contains 323 semantic components, 322 typed relationships, 111 atomic claims and 29 registered sources, plus five partial teardown observations and two educational clips. It remains a starter engineering atlas, not a complete BOM or complete service manual. Exact PCB revision, matching BoardView/schematic, component reference designators and calibrated mechanical dimensions remain unverified. Heatpipe sources use different counting conventions (six route/runs, four copper heatpipes, or two central tube paths); the unique physical closed-loop count is unresolved. Eight visible blade surfaces per fan are counted from two exact-SKU listing photographs; blade profile remains proxy geometry. Original OEM fan part number is unknown; aftermarket listings are compatibility leads only.
 
 See [GPU source audit](../../../../docs/GPU_SOURCE_AUDIT.md) and [content pipeline](../../../../docs/CONTENT_PIPELINE.md).
 
@@ -84,3 +84,8 @@ See [GPU source audit](../../../../docs/GPU_SOURCE_AUDIT.md) and [content pipeli
 ### GA106 compute architecture extension
 
 The canonical content package has 28 logical SM nodes and a calculated 14-TPC aggregate. Each SM's GA10x logical resource description is evidence-backed by NVIDIA's Ampere whitepaper; the instance numbers are navigation labels only and are not physical die coordinates. No GA106 GPC layout is inferred.
+
+
+### Unpopulated memory locations
+
+The exact-SKU-linked Tom's Hardware teardown also notes two unused memory positions on the PCB alongside six installed Samsung GDDR6 devices. They are separate logical-only nodes in the package; no footprint geometry, net routing or upgrade path is inferred.
