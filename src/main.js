@@ -888,6 +888,7 @@ function claimPredicateLabel(predicate) {
     cuda_core_count: ["Количество CUDA-ядер", "CUDA core count"],
     boost_clock: ["Boost-частота", "Boost clock"],
     observed_peak_frequency: ["Наблюдаемая пиковая частота", "Observed peak frequency"],
+    observed_heatpipe_tube_diameter_estimate: ["Оценочный диаметр трубки теплотрубки", "Estimated heatpipe tube diameter"],
     memory_bandwidth: ["Пропускная способность памяти", "Memory bandwidth"],
     nominal_length: ["Номинальная длина", "Nominal length"],
     overall_outer_length: ["Полная длина кожуха", "Overall outer length"],
