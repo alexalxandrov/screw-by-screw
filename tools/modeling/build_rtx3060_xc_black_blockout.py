@@ -253,21 +253,62 @@ def _append_prism(verts, faces, center_x, center_z, axis_x, axis_z,
     ))
 
 
-def _append_mesh_detail(obj, detail_verts, detail_faces):
+def _append_prism_xy(verts, faces, center_x, center_y, axis_x, axis_y,
+                     length, thickness, z_front, z_back):
+    """Append one closed rectangular stroke in the local XY plane."""
+    axis_len = math.hypot(axis_x, axis_y)
+    if axis_len < 1e-8:
+        raise ValueError("Prism axis must be non-zero")
+    ux, uy = axis_x / axis_len, axis_y / axis_len
+    px, py = -uy, ux
+    half_l, half_t = length / 2, thickness / 2
+    outline = (
+        (center_x - ux * half_l - px * half_t, center_y - uy * half_l - py * half_t),
+        (center_x + ux * half_l - px * half_t, center_y + uy * half_l - py * half_t),
+        (center_x + ux * half_l + px * half_t, center_y + uy * half_l + py * half_t),
+        (center_x - ux * half_l + px * half_t, center_y - uy * half_l + py * half_t),
+    )
+    base = len(verts)
+    verts.extend((x, y, z_front) for x, y in outline)
+    verts.extend((x, y, z_back) for x, y in outline)
+    faces.extend((
+        (base, base + 1, base + 2, base + 3),
+        (base + 7, base + 6, base + 5, base + 4),
+        (base, base + 4, base + 5, base + 1),
+        (base + 1, base + 5, base + 6, base + 2),
+        (base + 2, base + 6, base + 7, base + 3),
+        (base + 3, base + 7, base + 4, base),
+    ))
+
+
+def _append_mesh_detail(obj, detail_verts, detail_faces, detail_material=None):
     """Merge local-space relief geometry into an existing tagged mesh."""
     if not detail_verts or not detail_faces:
         return obj
     old_mesh = obj.data
     old_verts = [tuple(vertex.co) for vertex in old_mesh.vertices]
     old_faces = [tuple(poly.vertices) for poly in old_mesh.polygons]
+    old_materials = list(old_mesh.materials)
+    detail_material_index = 0
+    if detail_material is not None:
+        detail_material_index = next(
+            (index for index, material in enumerate(old_materials)
+             if material.name == detail_material.name),
+            -1,
+        )
+        if detail_material_index < 0:
+            old_materials.append(detail_material)
+            detail_material_index = len(old_materials) - 1
     offset = len(old_verts)
     faces = old_faces + [
         tuple(offset + index for index in face) for face in detail_faces
     ]
     mesh = bpy.data.meshes.new(obj.name + " | detailed mesh")
     mesh.from_pydata(old_verts + detail_verts, [], faces)
-    for existing_material in old_mesh.materials:
+    for existing_material in old_materials:
         mesh.materials.append(existing_material)
+    for polygon in list(mesh.polygons)[len(old_faces):]:
+        polygon.material_index = detail_material_index
     mesh.validate()
     mesh.update()
     obj.data = mesh
@@ -281,6 +322,20 @@ def _append_mesh_detail(obj, detail_verts, detail_faces):
             record["location_mm"] = [round(float(v), 3) for v in obj.location]
             break
     return obj
+
+
+def add_hub_emblem(hub):
+    """Add a small raised E-like badge mark to the front of the hub proxy."""
+    verts, faces = [], []
+    z_front, z_back = 2.16, 1.94
+    _append_prism_xy(verts, faces, 0.0, 0.0, 0.0, 1.0, 4.2, 0.48, z_front, z_back)
+    for y_offset, bar_length in ((1.45, 3.35), (0.0, 2.85), (-1.45, 3.35)):
+        _append_prism_xy(
+            verts, faces, 0.0, y_offset, 1.0, 0.0,
+            bar_length, 0.42, z_front, z_back,
+        )
+    hub["sbs_surface_detail"] = "raised_E_hub_badge_proxy"
+    return _append_mesh_detail(hub, verts, faces, detail_material=MAT["metal"])
 
 
 FONT_STROKES = {
@@ -539,6 +594,7 @@ def make_fan(index, x, z, y, collection, cooling_parent):
         collection,
         vertices=64,
     )
+    add_hub_emblem(hub)
     set_parent_keep_world(hub, assembly)
 
     # A dedicated stable pivot lets the viewer animate only the impeller.
