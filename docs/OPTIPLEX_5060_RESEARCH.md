@@ -29,7 +29,17 @@ This is a Tower-family reference assembled from Dell's published service manual 
 | Separate service procedure observations | 14 |
 | Bilingual learning questions | 9 |
 
-The 24 illustrative fastener instances remain an explicit service-relevant set (20 screws and four rubber grommets). They are not a claim that every retail configuration contains exactly 24 installed fasteners. Seven additional fastener reference nodes document conditional optional hardware: one SD-reader screw (#6-32×3.6), one WLAN screw (M2×3.5), one M.2 PCIe SSD screw (M2×3.5), two Type-C/DP/HDMI/VGA module screws (M3×3), and two internal-antenna screws (M3×3). These seven are marked `optional_reference_not_fitted` and are excluded from the 24 service-relevant physical instances. Dell's screw table separately lists nine system-board screws and three PSU-to-chassis screws; other listed rows include option/module-specific fasteners.
+The 24 illustrative fastener instances remain an explicit service-relevant set (20 screws and four rubber grommets). They are not a claim that every retail configuration contains exactly 24 installed fasteners. Seven additional fastener reference nodes document conditional optional hardware: one SD-reader screw (#6-32×3.6), one WLAN screw (M2×3.5), one M.2 PCIe SSD screw (M2×3.5), two Type-C/DP/HDMI/VGA module screws (M3×3), and two internal-antenna screws (M3×3). These seven are marked `optional_reference_not_fitted` and are excluded from the 24 service-relevant physical instances.
+
+| Optional assembly | Dell screw specification | Quantity | Component reference |
+|---|---|---:|---|
+| SD card reader | `#6-32×3.6` | 1 | `fastener.optional.sd_reader.01` |
+| WLAN module | `M2×3.5` | 1 | `fastener.optional.wlan.01` |
+| M.2 PCIe SSD | `M2×3.5` | 1 | `fastener.optional.m2ssd.01` |
+| Type-C with DP/HDMI/VGA cable module | `M3×3` | 2 | `fastener.optional.typec.01` / `.02` |
+| Internal antenna | `M3×3` | 2 | `fastener.optional.antenna.01` / `.02` |
+
+The seven references are logical/conditional nodes with unknown fitted population and no guessed spatial coordinates. They are not included in the 24 illustrative physical-instance count. Dell's screw table separately lists nine system-board screws and three PSU-to-chassis screws; other listed rows include option/module-specific fasteners.
 
 ## Motherboard and expansion map
 
@@ -137,6 +147,11 @@ All sources below are Dell Technologies' manufacturer service-manual or setup/sp
 | `src.dell.5060.cpu_removal` | CPU socket release / removal procedure |
 | `src.dell.5060.system_fan` | Fan cable, intrusion-switch cable and rubber grommet removal |
 | `src.dell.5060.psu_removal` | Separate PSU removal procedure |
+| `src.dell.5060.m2_removal` | M.2 PCIe SSD: one retaining screw and slide-out connector removal |
+| `src.dell.5060.coin_cell_removal` | RTC coin-cell release latch and BIOS/settings reset warning |
+| `src.dell.5060.heatsink_fan_removal` | Heatsink-fan cable, screw access and fan removal |
+| `src.dell.5060.optical_drive_install` | Optional slim ODD insertion and cable routing under the drive cage |
+| `src.dell.5060.optional_video_module` | Optional VGA/video-module blanking bracket, cable and two M3×3 screws |
 
 Canonical URLs are retained in `sources.json` and included in the package's provenance records.
 
