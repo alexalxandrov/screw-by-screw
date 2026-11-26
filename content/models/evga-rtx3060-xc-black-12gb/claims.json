@@ -606,6 +606,18 @@
         "src.thefpsreview.exact_sku"
       ],
       "notes": "The exact-SKU review describes two additional side heatpipes which move heat toward the side of the heatsink. Individual geometry and coordinates remain illustrative."
+    },
+    {
+      "id": "claim.pcb.silkscreen_marking.candidate",
+      "subject_id": "assembly.pcb.board",
+      "predicate": "pcb_silkscreen_marking_candidate",
+      "value": "EVGA232 REV 1.0",
+      "unit": null,
+      "confidence_class": "illustrative",
+      "source_ids": [
+        "src.techpowerup.pcb"
+      ],
+      "notes": "The PCB photograph on the TechPowerUp EVGA RTX 3060 XC BLACK product page appears to show this silkscreen marking. The photographed sample has not been independently tied to the selected 12G-P5-3655-KR unit or to a specific production batch. Keep the actual PCB revision unknown; do not use this candidate alone to select a BoardView or schematic."
     }
   ]
 }
