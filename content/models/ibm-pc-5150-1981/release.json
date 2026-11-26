@@ -1,0 +1,46 @@
+{
+  "schema_version": "0.1.0",
+  "model_id": "computer.ibm.5150.1981",
+  "part_number": "5150",
+  "package_version": "0.1.0-draft",
+  "status": "draft",
+  "geometry_status": "illustrative_proxy_not_cad",
+  "files": [
+    {
+      "path": "model.json",
+      "sha256": "18acb7c59d3f8a82f9e9e25fffd6eebe61bbb3a67bd709bc0e40ba9a37ca0f4b"
+    },
+    {
+      "path": "sources.json",
+      "sha256": "884a9e8ba5315729c25d29026b897beb32d5fd467d94047e799a4d6643e2bff2"
+    },
+    {
+      "path": "components.json",
+      "sha256": "a05c9fad7d98eec98a3b8cc6c5803d847ebb36ca1f6687a31c894623079c45a7"
+    },
+    {
+      "path": "relationships.json",
+      "sha256": "ceaf37df5eb7d5923ffa97cbd400db2b41b175c2d9dda68af56fd906a03c89a7"
+    },
+    {
+      "path": "process_layers.json",
+      "sha256": "c411f2da59594d14270c9806f6eda0c9f5147835e4f28878eb2e4cc351995880"
+    },
+    {
+      "path": "assembly_steps.json",
+      "sha256": "febcf8a7947dbef9d4778ef5776a651c81d054471110bc1921d095ff19d7c3bb"
+    },
+    {
+      "path": "learning.json",
+      "sha256": "1696d3c28862c7b349cd6a4b316f3d7139e99915149932c4d12a3c24f26c28e5"
+    },
+    {
+      "path": "claims.json",
+      "sha256": "f12e396cb8c9439ec4866de2d8e09720a5e7c7eb03dc8bb63cd8d13b1a25a568"
+    },
+    {
+      "path": "animations.json",
+      "sha256": "455009d0dabd15a3d47dab066221e6423221ac751b3595cfac87a388fd30ee1d"
+    }
+  ]
+}
