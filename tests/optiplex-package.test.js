@@ -69,6 +69,14 @@ test("OptiPlex reference package passes the production package loader and checks
     for (const sourceId of step.source_ids ?? []) assert.ok(sourceIds.has(sourceId), `unresolved step evidence: ${step.id}`);
     for (const prerequisite of step.prerequisite_step_ids ?? []) assert.ok(stepIds.has(prerequisite), `unresolved step prerequisite: ${step.id}`);
   }
+  for (const claim of loaded.data.claims.claims) {
+    assert.ok(componentIds.has(claim.subject_id) || claim.subject_id === loaded.data.model.id, `unresolved claim subject: ${claim.id}`);
+    for (const sourceId of claim.source_ids ?? []) assert.ok(sourceIds.has(sourceId), `unresolved claim evidence: ${claim.id}`);
+  }
+  for (const question of loaded.data.learning.questions) {
+    for (const sourceId of question.source_ids ?? []) assert.ok(sourceIds.has(sourceId), `unresolved learning evidence: ${question.id}`);
+  }
+
   assert.deepEqual(loaded.data.model.specifications.motherboard.callouts.find((entry) => entry.number === 24).component_ids, ["motherboard.m2.wlan"]);
   assert.deepEqual(loaded.data.model.specifications.motherboard.callouts.find((entry) => entry.number === 25).component_ids, ["motherboard.coin_cell"]);
   assert.equal(loaded.data.animations.clips.length, 0);
