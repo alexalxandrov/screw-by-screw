@@ -51,6 +51,12 @@ export const EVIDENCE = {
     copyEn: "The marking is visible on a public product-page photograph, but the photographed board has not been independently tied to this exact retail sample or production batch.",
     copyRu: "Маркировка читается на фотографии из публичной карточки продукта, но показанная плата не сопоставлена независимо с этим точным розничным экземпляром или производственной партией."
   },
+  secondary_catalog_data: {
+    en: "Secondary catalog data",
+    ru: "Данные вторичного каталога",
+    copyEn: "A device attribute is transcribed from a secondary catalog, not a primary manufacturer datasheet. Confirm it against an authoritative datasheet before using it for repair or design.",
+    copyRu: "Параметр микросхемы перенесён из вторичного каталога, а не первичного паспорта производителя. Перед ремонтом или проектированием сверяйте его с официальным даташитом."
+  },
   illustrative: {
     en: "Illustrative proxy",
     ru: "Условная геометрия",
