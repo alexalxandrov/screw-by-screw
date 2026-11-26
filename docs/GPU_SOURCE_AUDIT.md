@@ -216,7 +216,7 @@ LanOC's exact XC BLACK cooler-end photograph (image 16) shows four copper termin
 
 ## 16. Exact-SKU heatpipe count and route grouping
 
-The FPS Review article identifies the tested card as EVGA GeForce RTX 3060 XC BLACK GAMING, part number 12G-P5-3655-KR. Its page 2 cooler description specifies four main heatpipes in the centre contacting the GPU and two additional heatpipes at the side moving heat toward the edge of the heatsink. The repository now records six unique heatpipes as four main plus two side. This exact-SKU source supersedes the earlier cautious statement that the unique pipe count was unknown.
+The FPS Review article identifies the tested card as EVGA GeForce RTX 3060 XC BLACK GAMING, part number 12G-P5-3655-KR. Its page 2 cooler description specifies four main central GPU-contact heatpipe runs and two additional side runs (six described runs). This is now recorded as the FPS Review's route/run description, not as a verified count of six independent closed U-shaped tubes. PCWorld's review explicitly names the tested product XC Black Gaming but gives a four-copper-heatpipe overview; Gamers Nexus narrates two central tube paths through the GPU contact plate. These statements are retained as source-specific observations because publications may be counting tube legs, pipes or closed loops differently. The unique physical loop count remains unknown until a calibrated cooler drawing or direct sample inspection reconciles the geometry.
 
 The four copper circular terminal faces in LanOC image 16 remain a distinct visual-face count; they are not used as the unique pipe count. Six 3D paths have been created as selectable educational proxies, but their individual coordinates, diameter, flattened areas and bends are not measured.
 
@@ -265,3 +265,21 @@ The model represents 112 partitions as four logical entries under each of 28 SMs
 LanOC describes the exact XC BLACK as having a black plastic shroud without RGB, a vertically oriented aluminium fin stack, a copper heat plate over the GPU wide enough to cover memory, a large PCB airflow cutout, and visible EVGA E-logo bumps on the fan blades. The listed observations are now represented as claims and component descriptions, not as calibrated physical geometry.
 
 Neoseeker explicitly identifies its sample as `12G-P5-3655-KR` and specifies three DisplayPort 1.4a outputs plus one HDMI 2.1 output. It also documents the exposed PCB rear and a ventilation cutout. Neither source establishes component values, exact PCB revision or electrical nets.
+
+
+## 22. Heatpipe counting convention and aftermarket fan catalog leads
+
+The exact-model cooler sources do not currently support a single unambiguous count of unique closed heatpipe loops:
+
+- The FPS Review identifies the exact retail SKU `12G-P5-3655-KR` and describes four central GPU-contact heatpipe runs plus two side runs. This is retained as **six described route/run positions**, not six independently verified U-shaped tube loops.
+- PCWorld explicitly names the tested model as EVGA GeForce RTX 3060 XC Black Gaming but its overview describes four copper heatpipes. The accessible text does not provide the retail part number, so it is useful as an exact-product-name summary, not as an exact-PCB or calibrated cooler drawing.
+- Gamers Nexus' exact-model teardown narration identifies two central tube paths passing through the GPU contact plate and estimates their diameter at approximately 6 mm. This is a separate observation and is not mechanically identical to a full loop count.
+- LanOC's exact XC BLACK cooler-end image shows four copper terminal faces. Four visible faces do not independently establish the number of full tubes or loops.
+
+The data model therefore preserves the FPS Review's 4 + 2 route/run description, the PCWorld four-heatpipe overview, the Gamers Nexus two central paths and LanOC's four visible terminal faces as separate claims. The six route meshes are selectable educational proxies only. The unique physical closed-loop count and exact routing remain unknown. Do not use the six proxies as a service, fitment, thermal or manufacturing specification.
+
+### Aftermarket fan listings — leads, not OEM identification
+
+Two aftermarket sellers advertise replacement fans for broad EVGA RTX 3050/3060/3060 Ti XC families and include XC BLACK in compatibility text. One listing associates PLA09215S12H with approximately 90 mm, 12 V, 0.55 A, 4-pin and 42 mm mounting-spacing claims. Another gives approximately 87 mm and 15 mm / 20 mm depth variants with similar electrical and mounting claims. These catalogue values are inconsistent on basic dimensions and are not an original fan label, manufacturer datasheet or exact-sample measurement.
+
+The repository registers both as aftermarket compatibility leads only. The original fan manufacturer part number, exact frame diameter/depth, pinout, current, speed and replacement fitment remain **unknown** until the installed fan label and a physical sample are inspected. No seller product image or asset is redistributed.
