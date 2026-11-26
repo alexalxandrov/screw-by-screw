@@ -39,7 +39,7 @@ This is not yet a complete engineering reconstruction. Eight cooler/shroud reten
 
 ### Fine-grained cooling decomposition
 
-The development branch now expands the content graph to **307 semantic components, 303 typed relationships, 96 claims and 13 sources**. Fan frames, hubs and each blade proxy are separately selectable; the illustrative heatsink has 24 separately selectable fin proxies; six separate heatpipe route proxies are grouped as four main GPU-contact pipes plus two side pipes; and six memory thermal-pad proxies plus one VRM pad strip have their own IDs. No proxy blade/fin count or thermal-pad dimensions are presented as a factory specification.
+The development branch now expands the content graph to **307 semantic components, 303 typed relationships, 95 claims and 13 sources**. Fan frames, hubs and each blade proxy are separately selectable; the illustrative heatsink has 24 separately selectable fin proxies; six separate heatpipe route proxies are grouped as four main GPU-contact pipes plus two side pipes; and six memory thermal-pad proxies plus one VRM pad strip have their own IDs. No proxy blade/fin count or thermal-pad dimensions are presented as a factory specification.
 
 
 ### Partial teardown evidence
