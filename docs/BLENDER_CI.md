@@ -6,7 +6,7 @@ The repository includes a reproducible headless generation workflow for the v0.5
 - Verifies the archive against Blender's published SHA-256 checksum.
 - Runs the generator and text/JSON scene inspector.
 - Validates the GLB 2.0 package and its manifest.
-- Checks canonical component identity and parent ancestry against the current 137-component semantic package, including logical-only assembly nodes.
+- Checks canonical component identity and parent ancestry against the current 167-component semantic package, including logical-only assembly nodes.
 - Copies the generated GLB into the viewer's public model path, builds the production frontend and runs Playwright against the actual Blender output.
 - Enforces a 1 MiB GLB asset-size budget.
 - Uploads the .blend, .glb, manifest and inspection reports as a seven-day workflow artifact.
@@ -21,3 +21,6 @@ This proves reproducible generation, structural integrity and browser integratio
 
 
 The v0.6 browser interaction slice additionally tests the fan/PCB/I/O/power/top/isometric camera presets, adjustable X/Y/Z clipping plane, powered fan rotation and reduced-motion behaviour. The section is an uncapped visual clipping operation; it does not invent section caps or imply CAD topology.
+
+
+The GA106 compute layer also exports 28 individually selectable logical SM nodes, a calculated 14-TPC aggregate and a 14-engine PolyMorph aggregate. All are EMPTY hierarchy nodes; the GA102 illustration from NVIDIA's GA10x whitepaper is not transplanted as a physical GA106 die floorplan.
