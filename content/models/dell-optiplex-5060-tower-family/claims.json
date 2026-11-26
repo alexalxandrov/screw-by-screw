@@ -65,9 +65,9 @@
       "unit": "callouts",
       "confidence_class": "manufacturer_data",
       "source_ids": [
-        "src.dell.5060.service"
+        "src.dell.5060.boardlayout"
       ],
-      "notes": "Callout count, not component inventory."
+      "notes": "All 26 numbered labels from Dell's Tower motherboard layout are mapped in model.specifications.motherboard.callouts to 29 component references. Callout 13 maps to four individual DIMM sockets; callouts can identify connectors or groups, not only one component."
     },
     {
       "id": "claim.screws.board",
@@ -407,18 +407,6 @@
       "notes": "Supported orderable CPU family options only; this reference model does not select or install one. A separate service-manual table differs on some TDP values."
     },
     {
-      "id": "claim.board.callouts.covered",
-      "subject_id": "motherboard.pcb",
-      "predicate": "numbered_callout_coverage",
-      "value": 26,
-      "unit": "callouts",
-      "confidence_class": "manufacturer_data",
-      "source_ids": [
-        "src.dell.5060.boardlayout"
-      ],
-      "notes": "All 26 numbered labels from Dell's Tower motherboard layout are mapped in model.specifications.motherboard.callouts. Callout 13 maps to four distinct DIMM sockets; each callout may describe a connector or group, not necessarily a single physical component."
-    },
-    {
       "id": "claim.fan.grommet_count",
       "subject_id": "cooling.system_fan",
       "predicate": "documented_mounting_grommets",
@@ -441,26 +429,6 @@
         "src.dell.5060.heatsink"
       ],
       "notes": "Loosening order 1–4 is documented; installed screw coordinates and torque are not supplied."
-    },
-    {
-      "id": "claim.io.video",
-      "subject_id": "rear.io_region",
-      "predicate": "standard_and_optional_video_outputs",
-      "value": {
-        "standard_DisplayPort": 2,
-        "optional_module": [
-          "HDMI 2.0b",
-          "DisplayPort",
-          "VGA",
-          "USB-C DisplayPort Alt Mode"
-        ]
-      },
-      "unit": "outputs",
-      "confidence_class": "manufacturer_data",
-      "source_ids": [
-        "src.dell.5060.ports"
-      ],
-      "notes": "Optional modules are alternatives, not four guaranteed simultaneous ports."
     }
   ]
 }
