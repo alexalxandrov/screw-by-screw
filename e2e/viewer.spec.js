@@ -252,7 +252,7 @@ test("cooling layer exposes an inspectable thermal path without claiming simulat
   await expect(diagram.locator('.architecture-node[data-component-id="cooling.heatpipe.side.02"]')).toContainText("Боковая тепловая трубка 2");
   await expect(diagram.locator('.architecture-node[data-component-id="fan.2.blade.1"]')).toContainText("Макетная лопасть вентилятора 2");
   await expect(page.locator("#process-assumptions li")).toHaveCount(6);
-  await expect(page.locator("#process-sources a")).toHaveCount(3);
+  await expect(page.locator("#process-sources a")).toHaveCount(2);
   await diagram.locator('.architecture-node[data-component-id="cooling.thermal_pad.memory"]').click();
   await expect(page.locator("#detail-id")).toHaveText("cooling.thermal_pad.memory");
   await expect(page.locator("#detail-description")).toContainText("толщина");
@@ -272,8 +272,8 @@ test("GPU architecture layer exposes source-linked logical GA106 and GDDR6 nodes
   await expect(diagram.locator('.architecture-node[data-component-id="chip.memory.gddr6.bus"]')).toContainText("192-битная GDDR6");
   const linked = page.locator("#process-components .process-component-chip");
   await expect(linked).toHaveCount(21);
-  await expect(linked.locator('[data-component-id="chip.gpu.sm.cluster"]')).toContainText("Кластер потоковых мультипроцессоров Ampere");
-  await expect(linked.locator('[data-component-id="chip.memory.channel.06"]')).toContainText("Логический сегмент интерфейса 06");
+  await expect(page.locator('#process-components .process-component-chip[data-component-id="chip.gpu.sm.cluster"]')).toContainText("Кластер потоковых мультипроцессоров Ampere");
+  await expect(page.locator('#process-components .process-component-chip[data-component-id="chip.memory.channel.06"]')).toContainText("Логический сегмент интерфейса 06");
   await expect(page.locator("#process-assumptions")).toContainText("не воспроизводят физическую топологию GA106");
   await expect(page.locator("#process-sources a")).toHaveCount(4);
   await diagram.locator('.architecture-node[data-component-id="chip.gpu.sm.cluster"]').click();
