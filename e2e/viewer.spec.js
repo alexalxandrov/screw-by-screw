@@ -236,6 +236,25 @@ test("a missing optional bundled model does not reset active user interaction", 
 });
 
 
+test("cooling layer exposes an inspectable thermal path without claiming simulation", async ({ page }) => {
+  await page.goto("/");
+  await page.locator('.process-button[data-layer="cooling"]').click();
+  await expect(page.locator("#process-detail-title")).toContainText("Охлаждение и воздушный поток");
+  const diagram = page.locator("#process-diagram");
+  await expect(diagram).toBeVisible();
+  await expect(diagram.locator(".architecture-diagram-group")).toHaveCount(4);
+  await expect(diagram.locator(".architecture-node")).toHaveCount(22);
+  await expect(diagram.locator(".architecture-diagram-badge")).toContainText("НЕ CFD / ТЕПЛОВАЯ СИМУЛЯЦИЯ");
+  await expect(diagram.locator('.architecture-node[data-component-id="cooling.gpu_contact"]')).toContainText("Медная контактная пластина");
+  await expect(diagram.locator('.architecture-node[data-component-id="cooling.heatpipe.candidate.1"]')).toContainText("Кандидатная трасса трубки 1");
+  await expect(diagram.locator('.architecture-node[data-component-id="fan.2.blade.1"]')).toContainText("Макетная лопасть вентилятора 2");
+  await expect(page.locator("#process-assumptions li")).toHaveCount(5);
+  await expect(page.locator("#process-sources a")).toHaveCount(2);
+  await diagram.locator('.architecture-node[data-component-id="cooling.thermal_pad.memory"]').click();
+  await expect(page.locator("#detail-id")).toHaveText("cooling.thermal_pad.memory");
+  await expect(page.locator("#detail-description")).toContainText("толщина");
+});
+
 test("GPU architecture layer exposes source-linked logical GA106 and GDDR6 nodes", async ({ page }) => {
   await page.goto("/");
   await page.locator('.process-button[data-layer="gpu_compute"]').click();

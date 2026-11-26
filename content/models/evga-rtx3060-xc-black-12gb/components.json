@@ -505,8 +505,7 @@
       "evidence_status": "teardown_supported",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
-        "src.gamersnexus.teardown",
-        "src.tomshardware.teardown"
+        "src.gamersnexus.teardown"
       ],
       "description": {
         "en": "Memory-side thermal pad group shown in teardown material. Exact thickness, hardness, material and per-package footprint are not established.",
@@ -1795,8 +1794,7 @@
       "evidence_status": "illustrative",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
-        "src.gamersnexus.teardown",
-        "src.tomshardware.teardown"
+        "src.gamersnexus.teardown"
       ],
       "description": {
         "en": "One proxy contact patch aligned to a memory-package candidate. Thickness, hardness, material, exact footprint and compression are not measured and must not be used as a replacement-pad specification.",
@@ -1814,8 +1812,7 @@
       "evidence_status": "illustrative",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
-        "src.gamersnexus.teardown",
-        "src.tomshardware.teardown"
+        "src.gamersnexus.teardown"
       ],
       "description": {
         "en": "One proxy contact patch aligned to a memory-package candidate. Thickness, hardness, material, exact footprint and compression are not measured and must not be used as a replacement-pad specification.",
@@ -1833,8 +1830,7 @@
       "evidence_status": "illustrative",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
-        "src.gamersnexus.teardown",
-        "src.tomshardware.teardown"
+        "src.gamersnexus.teardown"
       ],
       "description": {
         "en": "One proxy contact patch aligned to a memory-package candidate. Thickness, hardness, material, exact footprint and compression are not measured and must not be used as a replacement-pad specification.",
@@ -1852,8 +1848,7 @@
       "evidence_status": "illustrative",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
-        "src.gamersnexus.teardown",
-        "src.tomshardware.teardown"
+        "src.gamersnexus.teardown"
       ],
       "description": {
         "en": "One proxy contact patch aligned to a memory-package candidate. Thickness, hardness, material, exact footprint and compression are not measured and must not be used as a replacement-pad specification.",
@@ -1871,8 +1866,7 @@
       "evidence_status": "illustrative",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
-        "src.gamersnexus.teardown",
-        "src.tomshardware.teardown"
+        "src.gamersnexus.teardown"
       ],
       "description": {
         "en": "One proxy contact patch aligned to a memory-package candidate. Thickness, hardness, material, exact footprint and compression are not measured and must not be used as a replacement-pad specification.",
@@ -1890,8 +1884,7 @@
       "evidence_status": "illustrative",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
-        "src.gamersnexus.teardown",
-        "src.tomshardware.teardown"
+        "src.gamersnexus.teardown"
       ],
       "description": {
         "en": "One proxy contact patch aligned to a memory-package candidate. Thickness, hardness, material, exact footprint and compression are not measured and must not be used as a replacement-pad specification.",

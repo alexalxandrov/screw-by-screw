@@ -11,20 +11,54 @@
       },
       "mode": "qualitative",
       "linked_component_ids": [
-        "assembly.fan.1",
-        "assembly.fan.2",
-        "cooling.heatsink",
+        "chip.gpu.ga106",
         "cooling.gpu_contact",
-        "cooling.heatpipes"
+        "cooling.thermal_interface",
+        "cooling.thermal_paste.gpu",
+        "cooling.thermal_pad.memory",
+        "cooling.thermal_pad.vrm",
+        "cooling.heatpipes",
+        "cooling.heatpipe.candidate.1",
+        "cooling.heatpipe.candidate.2",
+        "cooling.heatsink",
+        "cooling.heatsink.fin.01",
+        "assembly.cooling",
+        "assembly.fan.1",
+        "fan.1.frame",
+        "fan.1.hub",
+        "fan.1.blade.1",
+        "assembly.fan.2",
+        "fan.2.frame",
+        "fan.2.hub",
+        "fan.2.blade.1",
+        "assembly.shroud",
+        "pcb.airflow.cutout"
       ],
       "description": {
-        "en": "Fans drive a conceptual airflow path across the cooler. Heat conducts from the GPU contact into the cooler and is rejected through the fin stack; heatpipes are shown as a selectable group. Animated particles illustrate direction only and are not CFD or measured airflow.",
-        "ru": "Вентиляторы создают условный поток через кулер. Тепло от контактной площадки GPU передаётся системе охлаждения и отводится через радиатор; тепловые трубки вынесены в отдельную группу. Движущиеся частицы показывают только направление и не являются CFD или измерением потока."
+        "en": "A conceptual cooling path: heat leaves the GA106 package through the GPU contact interface, is transferred through candidate heatpipe routes into the fin stack, and is rejected to air by the two axial fans. Memory- and power-stage thermal-interface groups are shown separately because exact pad dimensions and coverage are unknown. The fan-opening and impeller diameters are approximate reviewer measurements; fan centres, blade profile/count, heatpipe routes, fin count and thermal resistance are not manufacturing measurements. Airflow particles show direction only, not CFD, temperature or heat-transfer simulation.",
+        "ru": "Условный путь охлаждения: тепло уходит от корпуса GA106 через контактный интерфейс GPU, передаётся по кандидатным трассам тепловых трубок к радиатору и отводится в воздух двумя осевыми вентиляторами. Группы термоинтерфейсов памяти и силовой части показаны отдельно, поскольку точные размеры и покрытие прокладок неизвестны. Диаметры отверстий вентиляторов и крыльчаток являются приблизительными измерениями из обзора; центры вентиляторов, профиль/количество лопастей, трассы трубок, число рёбер и тепловое сопротивление не являются производственными измерениями. Частицы потока показывают только направление, а не CFD, температуру или симуляцию теплообмена."
       },
       "assumptions": [
-        "No CFD, pressure field or thermal model is present.",
-        "Fan curves, measured rpm, fan centres, fin pitch, heatpipe count/routing and thermal resistance are not established.",
-        "Airflow particles are directional educational markers, not fluid parcels or velocity vectors."
+        {
+          "en": "The 90 mm opening and approximately 85 mm impeller diameters are reviewer measurements, not a manufacturer fan drawing.",
+          "ru": "Диаметр отверстия 90 мм и приблизительно 85 мм для крыльчатки — измерения из обзора, а не чертёж производителя вентилятора."
+        },
+        {
+          "en": "Fan centres, blade count/profile, hub internals, heatpipe count and route, fin pitch/count, thermal-pad dimensions and thermal resistance remain unverified.",
+          "ru": "Центры вентиляторов, количество/профиль лопастей, внутреннее устройство ступицы, количество и трассы тепловых трубок, шаг/число рёбер, размеры термопрокладок и тепловое сопротивление не подтверждены."
+        },
+        {
+          "en": "The two heatpipe routes and 24 fin meshes are illustrative proxies. Their count and geometry are not service or manufacturing specifications.",
+          "ru": "Две трассы тепловых трубок и 24 сеточных ребра радиатора — условные макеты. Их количество и геометрия не являются сервисной или производственной спецификацией."
+        },
+        {
+          "en": "Airflow particles are directional educational markers, not CFD fluid parcels, velocity vectors or temperature measurements.",
+          "ru": "Частицы воздушного потока — учебные маркеры направления, а не частицы CFD, векторы скорости или измерения температуры."
+        },
+        {
+          "en": "No thermal resistance, junction temperature, hotspot, fan curve, RPM or acoustic model is calculated.",
+          "ru": "Не рассчитываются тепловое сопротивление, температура кристалла, hotspot, характеристика вентилятора, RPM или шумовая модель."
+        }
       ],
       "source_ids": [
         "src.lanoc.review",
@@ -37,7 +71,309 @@
           "powered"
         ],
         "motion": "qualitative",
-        "not_a_simulation": true
+        "not_a_simulation": true,
+        "diagram": {
+          "badge": {
+            "en": "CONCEPTUAL THERMAL PATH · NOT CFD / THERMAL SIMULATION",
+            "ru": "КОНЦЕПТУАЛЬНЫЙ ТЕПЛОВОЙ ПУТЬ · НЕ CFD / ТЕПЛОВАЯ СИМУЛЯЦИЯ"
+          },
+          "groups": [
+            {
+              "id": "heat-source",
+              "title": {
+                "en": "1 · Heat source and contact interfaces",
+                "ru": "1 · Источник тепла и контактные интерфейсы"
+              },
+              "summary": {
+                "en": "GPU contact is reviewed; pad geometry and coverage remain proxy data",
+                "ru": "Контактная пластина описана в обзоре; геометрия и покрытие прокладок остаются макетными"
+              },
+              "nodes": [
+                {
+                  "component_id": "chip.gpu.ga106",
+                  "title": {
+                    "en": "GA106 GPU package",
+                    "ru": "Корпус GPU GA106"
+                  },
+                  "metric": {
+                    "en": "40 mm proxy package · dimensions not measured",
+                    "ru": "Корпус-макет 40 мм · размеры не измерены"
+                  }
+                },
+                {
+                  "component_id": "cooling.gpu_contact",
+                  "title": {
+                    "en": "Copper contact plate",
+                    "ru": "Медная контактная пластина"
+                  },
+                  "metric": {
+                    "en": "Visible in exact-model review · proxy dimensions",
+                    "ru": "Видна в обзоре точной модели · размеры макетные"
+                  }
+                },
+                {
+                  "component_id": "cooling.thermal_interface",
+                  "title": {
+                    "en": "Thermal interface group",
+                    "ru": "Группа термоинтерфейсов"
+                  },
+                  "metric": {
+                    "en": "Teardown-supported presence",
+                    "ru": "Наличие подтверждается разборкой"
+                  }
+                },
+                {
+                  "component_id": "cooling.thermal_paste.gpu",
+                  "title": {
+                    "en": "GPU thermal compound",
+                    "ru": "Термопаста GPU"
+                  },
+                  "metric": {
+                    "en": "Brand and thickness unknown",
+                    "ru": "Марка и толщина неизвестны"
+                  }
+                },
+                {
+                  "component_id": "cooling.thermal_pad.memory",
+                  "title": {
+                    "en": "Memory thermal pads",
+                    "ru": "Термопрокладки памяти"
+                  },
+                  "metric": {
+                    "en": "Coverage and thickness unknown",
+                    "ru": "Покрытие и толщина неизвестны"
+                  }
+                },
+                {
+                  "component_id": "cooling.thermal_pad.vrm",
+                  "title": {
+                    "en": "Power-stage thermal pads",
+                    "ru": "Термопрокладки силовой части"
+                  },
+                  "metric": {
+                    "en": "Exact device coverage unknown",
+                    "ru": "Точное покрытие элементов неизвестно"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "heat-transport",
+              "title": {
+                "en": "2 · Heat transport",
+                "ru": "2 · Перенос тепла"
+              },
+              "summary": {
+                "en": "Heatpipe presence is teardown-supported; two generated paths are illustrative candidates",
+                "ru": "Наличие тепловых трубок подтверждается разборкой; две построенные трассы — условные кандидаты"
+              },
+              "nodes": [
+                {
+                  "component_id": "cooling.heatpipes",
+                  "title": {
+                    "en": "Heatpipe assembly",
+                    "ru": "Сборка тепловых трубок"
+                  },
+                  "metric": {
+                    "en": "Count and geometry not verified",
+                    "ru": "Количество и геометрия не подтверждены"
+                  }
+                },
+                {
+                  "component_id": "cooling.heatpipe.candidate.1",
+                  "title": {
+                    "en": "Heatpipe route candidate 1",
+                    "ru": "Кандидатная трасса трубки 1"
+                  },
+                  "metric": {
+                    "en": "Illustrative 3D route",
+                    "ru": "Условная 3D-трасса"
+                  }
+                },
+                {
+                  "component_id": "cooling.heatpipe.candidate.2",
+                  "title": {
+                    "en": "Heatpipe route candidate 2",
+                    "ru": "Кандидатная трасса трубки 2"
+                  },
+                  "metric": {
+                    "en": "Illustrative 3D route",
+                    "ru": "Условная 3D-трасса"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "heat-rejection",
+              "title": {
+                "en": "3 · Fin-stack heat rejection",
+                "ru": "3 · Отвод тепла через радиатор"
+              },
+              "summary": {
+                "en": "The fin stack is visible; individual fin geometry and count are placeholders",
+                "ru": "Радиатор виден; геометрия и количество отдельных рёбер условные"
+              },
+              "nodes": [
+                {
+                  "component_id": "cooling.heatsink",
+                  "title": {
+                    "en": "Heatsink fin stack",
+                    "ru": "Радиатор с рёбрами"
+                  },
+                  "metric": {
+                    "en": "Fin count and pitch unknown",
+                    "ru": "Количество и шаг рёбер неизвестны"
+                  }
+                },
+                {
+                  "component_id": "cooling.heatsink.fin.01",
+                  "title": {
+                    "en": "Fin proxy 01",
+                    "ru": "Макетное ребро 01"
+                  },
+                  "metric": {
+                    "en": "1 of 24 illustrative meshes",
+                    "ru": "1 из 24 условных элементов"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "airflow",
+              "title": {
+                "en": "4 · Airflow and mechanical envelope",
+                "ru": "4 · Воздушный поток и механический контур"
+              },
+              "summary": {
+                "en": "Two fans are confirmed; the detailed rotating geometry is still proxy",
+                "ru": "Наличие двух вентиляторов подтверждено; детальная геометрия вращения остаётся макетной"
+              },
+              "nodes": [
+                {
+                  "component_id": "assembly.cooling",
+                  "title": {
+                    "en": "Cooling assembly",
+                    "ru": "Система охлаждения"
+                  },
+                  "metric": {
+                    "en": "Dual-fan cooler",
+                    "ru": "Двухвентиляторный кулер"
+                  }
+                },
+                {
+                  "component_id": "assembly.fan.1",
+                  "title": {
+                    "en": "Axial fan 1",
+                    "ru": "Осевой вентилятор 1"
+                  },
+                  "metric": {
+                    "en": "Opening ~90 mm · impeller ~85 mm",
+                    "ru": "Отверстие ~90 мм · крыльчатка ~85 мм"
+                  }
+                },
+                {
+                  "component_id": "fan.1.frame",
+                  "title": {
+                    "en": "Fan 1 frame",
+                    "ru": "Рамка вентилятора 1"
+                  },
+                  "metric": {
+                    "en": "Opening diameter is approximate",
+                    "ru": "Диаметр отверстия приблизительный"
+                  }
+                },
+                {
+                  "component_id": "fan.1.hub",
+                  "title": {
+                    "en": "Fan 1 hub",
+                    "ru": "Ступица вентилятора 1"
+                  },
+                  "metric": {
+                    "en": "Motor and bearing details unknown",
+                    "ru": "Данные о двигателе и подшипнике неизвестны"
+                  }
+                },
+                {
+                  "component_id": "fan.1.blade.1",
+                  "title": {
+                    "en": "Fan 1 blade proxy",
+                    "ru": "Макетная лопасть вентилятора 1"
+                  },
+                  "metric": {
+                    "en": "7 mesh blades · count unverified",
+                    "ru": "7 сеточных лопастей · количество не подтверждено"
+                  }
+                },
+                {
+                  "component_id": "assembly.fan.2",
+                  "title": {
+                    "en": "Axial fan 2",
+                    "ru": "Осевой вентилятор 2"
+                  },
+                  "metric": {
+                    "en": "Opening ~90 mm · impeller ~85 mm",
+                    "ru": "Отверстие ~90 мм · крыльчатка ~85 мм"
+                  }
+                },
+                {
+                  "component_id": "fan.2.frame",
+                  "title": {
+                    "en": "Fan 2 frame",
+                    "ru": "Рамка вентилятора 2"
+                  },
+                  "metric": {
+                    "en": "Opening diameter is approximate",
+                    "ru": "Диаметр отверстия приблизительный"
+                  }
+                },
+                {
+                  "component_id": "fan.2.hub",
+                  "title": {
+                    "en": "Fan 2 hub",
+                    "ru": "Ступица вентилятора 2"
+                  },
+                  "metric": {
+                    "en": "Motor and bearing details unknown",
+                    "ru": "Данные о двигателе и подшипнике неизвестны"
+                  }
+                },
+                {
+                  "component_id": "fan.2.blade.1",
+                  "title": {
+                    "en": "Fan 2 blade proxy",
+                    "ru": "Макетная лопасть вентилятора 2"
+                  },
+                  "metric": {
+                    "en": "7 mesh blades · count unverified",
+                    "ru": "7 сеточных лопастей · количество не подтверждено"
+                  }
+                },
+                {
+                  "component_id": "assembly.shroud",
+                  "title": {
+                    "en": "Fan shroud",
+                    "ru": "Кожух вентиляторов"
+                  },
+                  "metric": {
+                    "en": "Exact outer contour not measured",
+                    "ru": "Точный внешний контур не измерен"
+                  }
+                },
+                {
+                  "component_id": "pcb.airflow.cutout",
+                  "title": {
+                    "en": "PCB airflow cutout",
+                    "ru": "Вырез PCB для воздушного потока"
+                  },
+                  "metric": {
+                    "en": "Visible area · boundary is proxy",
+                    "ru": "Область видна · граница макетная"
+                  }
+                }
+              ]
+            }
+          ]
+        }
       }
     },
     {

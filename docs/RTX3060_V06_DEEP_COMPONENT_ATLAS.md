@@ -93,3 +93,8 @@ The disassembly panel now states only the four GPU-area screws and the exact-mod
 The exact XC BLACK teardown/review material supports six visible GDDR6 package positions. The available exact-SKU material does not yet establish each package's full marking. K4ZAF325BM-HC16 appears in a related EVGA RTX 3060 XC teardown and a secondary catalog, so its 16-Gbit density, 512M × 32 organization, 16-Gbps data rate and 180-FBGA package are recorded only as candidate-part attributes.
 
 The EVGA 192-bit GDDR6 bus remains an exact-SKU manufacturer specification. Six interface presentation groups remain in the architecture tree, but they are not confirmed hardware channels and are no longer connected to the six package nodes. The exact electrical partition and BoardView mapping remain unknown.
+
+
+## 15. Interactive thermal-path diagram
+
+The cooling process layer now exposes a four-stage clickable diagram: heat source/contact interfaces, heat transport, fin-stack rejection, and airflow/mechanical envelope. Its 22 nodes reuse the canonical component IDs and link directly to the component detail pane. The diagram records the approximate reviewer measurements for the fan opening and impeller but labels the 3D fan centres, blade meshes, two heatpipe paths, fin count, pad dimensions and outer shroud contour as illustrative or unknown. It does not calculate CFD, junction temperature, thermal resistance, fan curves, RPM, acoustics or heat-transfer performance.
