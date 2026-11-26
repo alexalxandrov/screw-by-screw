@@ -24,9 +24,10 @@ test("loads the generated Blender v0.5 SBS model package and resolves content-pa
   const deviceRoot = page.getByRole("button", { name: /Видеокарта в сборе/ });
   await expect(deviceRoot).toBeVisible();
   await deviceRoot.click();
-  await expect(page.locator("#assembly-step-list .assembly-step-card")).toHaveCount(2);
+  await expect(page.locator("#assembly-step-list .assembly-step-card")).toHaveCount(3);
   await expect(page.locator("#assembly-step-list")).toContainText("Вывернуть восемь винтов крепления кулера/кожуха");
   await expect(page.locator("#assembly-step-list")).toContainText("Отсоединить оба кабеля вентиляторов");
+  await expect(page.locator("#assembly-step-list")).toContainText("Вывернуть по три крепёжных винта каждого вентилятора");
   await page.locator("#animation-clip-select").selectOption("clip.exploded-cooler-overview");
   await expect(page.locator("#animation-evidence-note")).toContainText("визуальное разнесение");
   await page.locator("#animation-seek").evaluate((element) => {
