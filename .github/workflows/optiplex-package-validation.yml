@@ -9,7 +9,7 @@ on:
       - "content/models/dell-optiplex-5060-tower-family/**"
       - "content/catalog/models.json"
       - "public/models/dell_optiplex_5060_tower_v01.sbsmodel"
-      - "public/models/dell_optiplex_5060_tower_v02.sbsmodel"
+      - "public/models/dell_optiplex_5060_tower_v03.sbsmodel"
       - "tools/modeling/build_device_blockout.py"
       - "tools/modeling/package_model.py"
       - "tools/modeling/build_text_model_package.py"
@@ -54,13 +54,13 @@ jobs:
             --model-dir content/models/dell-optiplex-5060-tower-family \
             --scene /tmp/optiplex-5060-family.glb \
             --output /tmp/optiplex-5060-family.sbsmodel
-      - name: Rebuild v0.2 and verify source, scene graph and binary geometry equivalence
+      - name: Rebuild v0.3 and verify source, scene graph and binary geometry equivalence
         run: |
           python tools/modeling/build_text_model_package.py \
             --model-dir content/models/dell-optiplex-5060-tower-family \
             --scene /tmp/optiplex-5060-family.glb \
-            --output /tmp/dell_optiplex_5060_tower_v02.sbsmodel \
-            --compare-existing public/models/dell_optiplex_5060_tower_v02.sbsmodel
+            --output /tmp/dell_optiplex_5060_tower_v03.sbsmodel \
+            --compare-existing public/models/dell_optiplex_5060_tower_v03.sbsmodel
       - name: Verify committed package using the production loader
         run: node --test tests/optiplex-package.test.js tests/model-startup.test.js
       - name: Test deterministic package builder
