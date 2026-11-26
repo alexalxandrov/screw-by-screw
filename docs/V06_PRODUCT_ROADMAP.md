@@ -25,7 +25,7 @@ The pilot is an evidence-linked educational model. Its component inventory delib
 
 ## Current RTX 3060 pilot inventory
 
-The canonical package currently contains **313 semantic components, 311 typed relationships, 110 atomic claims and 29 registered sources**. It has three process layers, 12 bilingual learning questions and two authored animation clips.
+The canonical package currently contains **313 semantic components, 311 typed relationships, 111 atomic claims and 29 registered sources**. It has three process layers, 12 bilingual learning questions and two authored animation clips.
 
 The cooling inventory includes two fans, eight photo-counted visible blade-surface proxies per fan with low-relief E-like markers, raised hub badge proxies, simplified EVGA / GEFORCE RTX shroud wordmarks, 24 illustrative fin proxies, six selectable heatpipe run proxies and separate thermal-interface markers. Fan profile, centres, exact logo vectors, OEM fan identity, fin count/pitch, pad footprint and thickness, heatpipe loop count and routing remain unverified.
 
@@ -85,3 +85,6 @@ The generic runtime validates clips from `animations.json` and supports clip sel
 
 
 The PC Perspective review additionally reports an observed peak of **1905 MHz** in Metro Exodus at 2160/high. This is a measured XC BLACK review-sample value, not the EVGA 1777 MHz stock boost specification; the review does not state the retail `12G-P5-3655-KR` part number. The claim is deliberately marked as sample evidence, not an exact-SKU guarantee.
+
+
+A Gamers Nexus verbal estimate of approximately 6 mm applies only to the two central visible heatpipe tube runs and is retained as an uncalibrated teardown observation, not a universal tube dimension.
