@@ -416,7 +416,7 @@
       "source_ids": [
         "src.dell.5060.boardlayout"
       ],
-      "notes": "The package models the 26 labeled callouts as semantic references. Some callouts represent groups (for example, four DIMM sockets), not 26 individual parts."
+      "notes": "All 26 numbered labels from Dell's Tower motherboard layout are mapped in model.specifications.motherboard.callouts. Callout 13 maps to four distinct DIMM sockets; each callout may describe a connector or group, not necessarily a single physical component."
     },
     {
       "id": "claim.fan.grommet_count",
