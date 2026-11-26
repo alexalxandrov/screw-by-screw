@@ -178,7 +178,7 @@ test("shows exact-SKU cooler screw count and secondary-catalog memory attributes
 
   await page.locator('#component-tree .tree-item[data-id="assembly.pcb.electronics"]').click();
   await expect(page.locator('[data-claim-id="claim.memory.package_part_number"]')).toContainText("Samsung K4ZAF325BM-HC16");
-  await expect(page.locator('[data-claim-id="claim.memory.package_part_number"] a[href*="LYzTKyspS9Hont9woCwoo9"]')).toBeVisible();
+  await expect(page.locator('[data-claim-id="claim.memory.package_part_number"] a[href="https://www.tomshardware.com/reviews/nvidia-geforce-rtx-3060-review/2"]')).toBeVisible();
 
   await page.locator('#component-tree .tree-item[data-id="chip.memory.gddr6.bus"]').click();
   await expect(page.locator('[data-claim-id="claim.memory.package_density"]')).toContainText("Данные вторичного каталога");
@@ -314,9 +314,10 @@ test("partial teardown steps and source observations are both shown without conf
   await expect(section).toBeVisible();
   await expect(page.locator("#assembly-empty-note")).toBeHidden();
   const steps = page.locator("#assembly-step-list .assembly-step-card");
-  await expect(steps).toHaveCount(2);
+  await expect(steps).toHaveCount(3);
   await expect(steps.nth(0)).toContainText("Вывернуть восемь винтов крепления кулера/кожуха");
   await expect(steps.nth(1)).toContainText("Отсоединить оба кабеля вентиляторов");
+  await expect(steps.nth(2)).toContainText("Вывернуть по три крепёжных винта каждого вентилятора");
   const exactFastenerObservation = page.locator('[data-observation-source-id="src.lanoc.review"]').first();
   await expect(exactFastenerObservation).toContainText("вокруг GPU видны четыре винта крепления радиатора");
   await expect(page.locator("#assembly-observation-heading")).toContainText("НАБЛЮДЕНИЯ В ИСТОЧНИКАХ");
