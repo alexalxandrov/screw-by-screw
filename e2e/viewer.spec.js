@@ -419,6 +419,15 @@ test("shows a workload-specific cooling and board-power operating point with sou
   await page.locator('#component-tree button[data-id="assembly.cooling"]').click();
   const fanRpm = page.locator('[data-claim-id="claim.cooling.fan.rpm.sample_operating_point"]');
   const fanDuty = page.locator('[data-claim-id="claim.cooling.fan.pwm.sample_operating_point"]');
+  await page.locator('#component-tree button[data-id="cooling.heatpipes"]').click();
+  const pipeDiameter = page.locator('[data-claim-id="claim.cooling.heatpipe.diameter.observed_estimate"]');
+  await expect(pipeDiameter.locator(".claim-value")).toContainText("6 mm");
+  await expect(pipeDiameter).toContainText("rough teardown estimate");
+  await expect(pipeDiameter.locator(".claim-sources a")).toHaveAttribute(
+    "href",
+    "https://www.youtube.com/watch?v=hJFJ_clQT8U"
+  );
+  await page.locator('#component-tree button[data-id="assembly.cooling"]').click();
   await expect(fanRpm.locator(".claim-value")).toContainText("2030 RPM");
   await expect(fanRpm).toContainText("not the fan's maximum/nominal RPM or a factory fan curve");
   await expect(fanDuty.locator(".claim-value")).toContainText("73 %");
