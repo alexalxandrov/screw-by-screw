@@ -3138,6 +3138,259 @@
         "en": "Service Tag location on the chassis. No real service-tag value is stored in this family package.",
         "ru": "Место размещения Service Tag на корпусе. Реальное значение сервисного тега в пакете семейства не хранится."
       }
+    },
+    {
+      "id": "wireless.m2_module.optional",
+      "parent_id": "motherboard.pcb",
+      "name": {
+        "en": "Optional M.2 2230 WLAN module · not populated",
+        "ru": "Опциональный модуль M.2 2230 WLAN · не установлен"
+      },
+      "category": "wireless_device",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "unknown",
+      "source_ids": [
+        "src.dell.5060.board_connectors",
+        "src.dell.5060.storage"
+      ],
+      "description": {
+        "en": "Platform-supported WLAN module option in a separate M.2 2230 socket. No WLAN card, manufacturer, chipset or fitted antenna system is selected for this family reference.",
+        "ru": "Поддерживаемый платформой модуль WLAN в отдельном разъёме M.2 2230. Карта WLAN, производитель, чипсет и установленная антенная система не определены."
+      }
+    },
+    {
+      "id": "rear.video_typec_module.optional",
+      "parent_id": "rear.io_region",
+      "name": {
+        "en": "Optional Type-C with DP/HDMI/VGA cable module · not populated",
+        "ru": "Опциональный кабельный модуль Type-C с DP/HDMI/VGA · не установлен"
+      },
+      "category": "external_io_module",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "unknown",
+      "source_ids": [
+        "src.dell.5060.screw_table",
+        "src.dell.5060.optional_video_module"
+      ],
+      "description": {
+        "en": "Dell's screw table lists a Type-C with DP/HDMI/VGA cable module secured by two M3×3 screws. Presence and exact port option remain unknown.",
+        "ru": "В таблице винтов Dell указан кабельный модуль Type-C с DP/HDMI/VGA, закрепляемый двумя винтами M3×3. Наличие и конкретный вариант неизвестны."
+      }
+    },
+    {
+      "id": "wireless.antenna.internal.assembly",
+      "parent_id": "chassis.frame",
+      "name": {
+        "en": "Optional internal antenna assembly · not populated",
+        "ru": "Опциональная внутренняя антенная сборка · не установлена"
+      },
+      "category": "wireless_assembly",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "unknown",
+      "source_ids": [
+        "src.dell.5060.screw_table"
+      ],
+      "description": {
+        "en": "Dell lists two M3×3 screws for the internal antenna option. Antenna type, exact placement and fitted wireless module are unknown.",
+        "ru": "Dell указывает два винта M3×3 для опции внутренних антенн. Тип антенн, положение и установленный WLAN-модуль неизвестны."
+      }
+    },
+    {
+      "id": "wireless.antenna.internal.1.optional",
+      "parent_id": "wireless.antenna.internal.assembly",
+      "name": {
+        "en": "Optional internal antenna 1 · not populated",
+        "ru": "Опциональная внутренняя антенна 1 · не установлена"
+      },
+      "category": "wireless_device",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "unknown",
+      "source_ids": [
+        "src.dell.5060.screw_table"
+      ],
+      "description": {
+        "en": "One internal antenna position represented by Dell's service hardware table; no antenna type or coordinate is assigned.",
+        "ru": "Одна из позиций внутренней антенны по сервисной таблице Dell; тип и координата не назначены."
+      }
+    },
+    {
+      "id": "wireless.antenna.internal.2.optional",
+      "parent_id": "wireless.antenna.internal.assembly",
+      "name": {
+        "en": "Optional internal antenna 2 · not populated",
+        "ru": "Опциональная внутренняя антенна 2 · не установлена"
+      },
+      "category": "wireless_device",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "unknown",
+      "source_ids": [
+        "src.dell.5060.screw_table"
+      ],
+      "description": {
+        "en": "One internal antenna position represented by Dell's service hardware table; no antenna type or coordinate is assigned.",
+        "ru": "Одна из позиций внутренней антенны по сервисной таблице Dell; тип и координата не назначены."
+      }
+    },
+    {
+      "id": "fastener.optional.sd_reader.01",
+      "parent_id": "storage.sd_reader.optional",
+      "name": {
+        "en": "SD-reader retaining screw · #6-32×3.6",
+        "ru": "Винт крепления картридера SD · #6-32×3,6"
+      },
+      "category": "fastener",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "unknown",
+      "source_ids": [
+        "src.dell.5060.screw_table"
+      ],
+      "description": {
+        "en": "One screw for the optional SD-card-reader module, per Dell's Tower screw-size table. This is a conditional reference, not a fitted instance.",
+        "ru": "Один винт опционального картридера SD по таблице крепежа Tower Dell. Это условная справочная позиция, не установленный экземпляр."
+      },
+      "fastener_population": "optional_reference_not_fitted",
+      "hardware_specification": {
+        "thread": "#6-32",
+        "length_mm": 3.6
+      }
+    },
+    {
+      "id": "fastener.optional.wlan.01",
+      "parent_id": "wireless.m2_module.optional",
+      "name": {
+        "en": "WLAN retaining screw · M2×3.5",
+        "ru": "Винт крепления WLAN · M2×3,5"
+      },
+      "category": "fastener",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "unknown",
+      "source_ids": [
+        "src.dell.5060.screw_table"
+      ],
+      "description": {
+        "en": "One M2×3.5 screw for the optional WLAN module on the system board, per Dell's Tower screw-size table.",
+        "ru": "Один винт M2×3,5 для опционального модуля WLAN на системной плате по таблице крепежа Dell."
+      },
+      "fastener_population": "optional_reference_not_fitted",
+      "hardware_specification": {
+        "thread": "M2",
+        "length_mm": 3.5
+      }
+    },
+    {
+      "id": "fastener.optional.m2ssd.01",
+      "parent_id": "storage.m2.optional",
+      "name": {
+        "en": "M.2 PCIe SSD retaining screw · M2×3.5",
+        "ru": "Винт крепления M.2 PCIe SSD · M2×3,5"
+      },
+      "category": "fastener",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "unknown",
+      "source_ids": [
+        "src.dell.5060.screw_table"
+      ],
+      "description": {
+        "en": "One M2×3.5 screw secures an optional M.2 PCIe SSD to the system board. Dell's removal procedure shows one screw and a slide-out action.",
+        "ru": "Один винт M2×3,5 крепит опциональный M.2 PCIe SSD к системной плате. Процедура Dell показывает один винт и извлечение сдвигом."
+      },
+      "fastener_population": "optional_reference_not_fitted",
+      "hardware_specification": {
+        "thread": "M2",
+        "length_mm": 3.5
+      }
+    },
+    {
+      "id": "fastener.optional.typec.01",
+      "parent_id": "rear.video_typec_module.optional",
+      "name": {
+        "en": "Optional I/O module screw 1 · M3×3",
+        "ru": "Винт опционального I/O-модуля 1 · M3×3"
+      },
+      "category": "fastener",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "unknown",
+      "source_ids": [
+        "src.dell.5060.screw_table"
+      ],
+      "description": {
+        "en": "One of two M3×3 screws for the optional Type-C with DP/HDMI/VGA cable module.",
+        "ru": "Один из двух винтов M3×3 опционального кабельного модуля Type-C с DP/HDMI/VGA."
+      },
+      "fastener_population": "optional_reference_not_fitted",
+      "hardware_specification": {
+        "thread": "M3",
+        "length_mm": 3
+      }
+    },
+    {
+      "id": "fastener.optional.typec.02",
+      "parent_id": "rear.video_typec_module.optional",
+      "name": {
+        "en": "Optional I/O module screw 2 · M3×3",
+        "ru": "Винт опционального I/O-модуля 2 · M3×3"
+      },
+      "category": "fastener",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "unknown",
+      "source_ids": [
+        "src.dell.5060.screw_table"
+      ],
+      "description": {
+        "en": "One of two M3×3 screws for the optional Type-C with DP/HDMI/VGA cable module.",
+        "ru": "Один из двух винтов M3×3 опционального кабельного модуля Type-C с DP/HDMI/VGA."
+      },
+      "fastener_population": "optional_reference_not_fitted",
+      "hardware_specification": {
+        "thread": "M3",
+        "length_mm": 3
+      }
+    },
+    {
+      "id": "fastener.optional.antenna.01",
+      "parent_id": "wireless.antenna.internal.1.optional",
+      "name": {
+        "en": "Internal antenna retaining screw 1 · M3×3",
+        "ru": "Винт крепления внутренней антенны 1 · M3×3"
+      },
+      "category": "fastener",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "unknown",
+      "source_ids": [
+        "src.dell.5060.screw_table"
+      ],
+      "description": {
+        "en": "One of two M3×3 screws listed for the internal antenna option; bracket coordinates are unknown.",
+        "ru": "Один из двух винтов M3×3, указанных для опции внутренних антенн; координаты кронштейна неизвестны."
+      },
+      "fastener_population": "optional_reference_not_fitted",
+      "hardware_specification": {
+        "thread": "M3",
+        "length_mm": 3
+      }
+    },
+    {
+      "id": "fastener.optional.antenna.02",
+      "parent_id": "wireless.antenna.internal.2.optional",
+      "name": {
+        "en": "Internal antenna retaining screw 2 · M3×3",
+        "ru": "Винт крепления внутренней антенны 2 · M3×3"
+      },
+      "category": "fastener",
+      "evidence_status": "manufacturer_data",
+      "geometry_status": "unknown",
+      "source_ids": [
+        "src.dell.5060.screw_table"
+      ],
+      "description": {
+        "en": "One of two M3×3 screws listed for the internal antenna option; bracket coordinates are unknown.",
+        "ru": "Один из двух винтов M3×3, указанных для опции внутренних антенн; координаты кронштейна неизвестны."
+      },
+      "fastener_population": "optional_reference_not_fitted",
+      "hardware_specification": {
+        "thread": "M3",
+        "length_mm": 3
+      }
     }
   ]
 }
