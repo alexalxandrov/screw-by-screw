@@ -19,8 +19,8 @@ test("catalogue lists multiple device classes and loads the OptiPlex package", a
   await expect(dialog).toBeHidden();
   await expect(page.locator("#model-title")).toHaveText("Dell OptiPlex 5060 Tower");
   await expect(page.locator("#model-sku")).toHaveText("D18M005");
-  await expect(page.locator("#app-status")).toContainText("Package validated");
   await expect(page.locator("#component-count")).not.toHaveText("0");
+  await expect(page.locator("#app-status")).toHaveText("Модель готова");
 
   await page.locator("#catalog-open").click();
   await expect(page.locator('[data-model-id="gpu.evga.12g-p5-3655-kr"]')).toBeVisible();
