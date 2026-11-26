@@ -171,16 +171,16 @@ test("shows model-level specifications when the top-level device is selected", a
 
 test("shows exact-SKU cooler screw count and secondary-catalog memory attributes", async ({ page }) => {
   await page.goto("/");
-  await page.locator('#component-tree button[data-id="assembly.fasteners"]').click();
+  await page.locator('#component-tree .tree-item[data-id="assembly.fasteners"]').click();
   await expect(page.locator('[data-claim-id="claim.cooler.fastener.count.total"]')).toContainText("8");
   await expect(page.locator('[data-claim-id="claim.cooler.fastener.count.rear"]')).toContainText("4");
   await expect(page.locator('[data-claim-id="claim.cooler.fastener.count.total"]')).toContainText("Независимо подтверждено");
 
-  await page.locator('#component-tree button[data-id="assembly.pcb.electronics"]').click();
+  await page.locator('#component-tree .tree-item[data-id="assembly.pcb.electronics"]').click();
   await expect(page.locator('[data-claim-id="claim.memory.package_part_number"]')).toContainText("Samsung K4ZAF325BM-HC16");
   await expect(page.locator('[data-claim-id="claim.memory.package_part_number"] a[href*="LYzTKyspS9Hont9woCwoo9"]')).toBeVisible();
 
-  await page.locator('#component-tree button[data-id="chip.memory.gddr6.bus"]').click();
+  await page.locator('#component-tree .tree-item[data-id="chip.memory.gddr6.bus"]').click();
   await expect(page.locator('[data-claim-id="claim.memory.package_density"]')).toContainText("Данные вторичного каталога");
 });
 
@@ -189,7 +189,7 @@ test("search finds components by package marking and source title", async ({ pag
   const search = page.locator("#component-search");
 
   await search.fill("K4ZAF325BM-HC16");
-  const electronics = page.locator('#component-tree button[data-id="assembly.pcb.electronics"]');
+  const electronics = page.locator('#component-tree .tree-item[data-id="assembly.pcb.electronics"]');
   await expect(electronics).toBeVisible();
   await expect(electronics).toHaveClass(/search-match/);
   await expect(page.locator('#component-tree button[data-id="assembly.card.root"]')).toBeVisible();
