@@ -12,11 +12,11 @@
     },
     {
       "path": "sources.json",
-      "sha256": "2bee78bfdf947047f5baf66ee585d6bc4acfbb38419731af369d8e4859eef242"
+      "sha256": "76762f2d38e5a2d3d101c591353b54efc4e766133009baef64212168f8a95649"
     },
     {
       "path": "components.json",
-      "sha256": "9be0630f3c6f2bb18cbd0a73199e5ffea83c2a1869cfe20659e0adbaf32afdcd"
+      "sha256": "509717ddad30c69283fc45d30a9a5dbe4d812756a4fe1dff1f1e701eeb1289c2"
     },
     {
       "path": "relationships.json",
@@ -36,7 +36,7 @@
     },
     {
       "path": "claims.json",
-      "sha256": "ead9140749bc916e19afc3041a0fa7899783e8b71b30d1bd04b3da845b2c8108"
+      "sha256": "d936dcd185dc37730a87ec2d77b28f8b5431ce14b15a23ad81887b2151e51fec"
     },
     {
       "path": "animations.json",
