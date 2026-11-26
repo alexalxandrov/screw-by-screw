@@ -39,7 +39,7 @@ This is not yet a complete engineering reconstruction. Four GPU-area heatsink sc
 
 ### Fine-grained cooling decomposition
 
-The development branch now expands the content graph to 121 semantic components and 116 typed relationships. Fan frames, hubs and each blade proxy are separately selectable; the illustrative heatsink has 24 separately selectable fin proxies; the two reconstructed heatpipe routes are separate assembly nodes; and six memory thermal-pad proxies plus one VRM pad strip have their own IDs. No proxy blade/fin count or thermal-pad dimensions are presented as a factory specification.
+The development branch now expands the content graph to 127 semantic components and 122 typed relationships. Fan frames, hubs and each blade proxy are separately selectable; the illustrative heatsink has 24 separately selectable fin proxies; the two reconstructed heatpipe routes are separate assembly nodes; and six memory thermal-pad proxies plus one VRM pad strip have their own IDs. No proxy blade/fin count or thermal-pad dimensions are presented as a factory specification.
 
 
 ### Partial teardown evidence
@@ -70,3 +70,8 @@ The exact card has six visible GDDR6 package positions and a manufacturer-publis
 ### Four visible heatpipe terminal faces
 
 The exact XC BLACK cooler-end photograph shows four copper terminal faces. They are now separately selectable in the viewer. The four-face count must not be confused with four unique heatpipes: internal pipe paths and the number of distinct U-shaped tubes are still unverified.
+
+
+### Exact-SKU heatpipe count
+
+The FPS Review explicitly identifies its sample as 12G-P5-3655-KR and describes four central GPU-contact heatpipes plus two side heatpipes. All six are now separately selectable in the cooling hierarchy. The generated 3D paths remain illustrative, not dimensionally verified. Four visible copper terminal faces in the LanOC cooler-end image are recorded separately from the six unique heatpipes described by The FPS Review.
