@@ -17,7 +17,7 @@
 |---|---|---|
 | Web client | Vanilla JavaScript + Vite (current); React + TypeScript optional later | Application shell and navigation |
 | 3D runtime | Three.js 0.187.0 (current) | GLB rendering, picking, transforms, layers and animation |
-| Content package | GLB + JSON | Geometry and device-specific data |
+| Content package | GLB + JSON sidecars inside a versioned `.sbsmodel` container (ZIP or `SBSMODEL-JSON` envelope) | Geometry, device metadata, provenance and checksums |
 | Content tools | Python + Blender Python + FreeCAD | Import, cleanup, metadata, export, validation |
 | API | FastAPI, optional for static MVP | Model catalogue and content delivery |
 | Metadata store | SQLite initially; PostgreSQL only when justified | Device/source metadata and future authoring |
@@ -65,7 +65,7 @@ Before the full application: create a test scene with 10–20 independently sele
 
 ## Implemented static device catalogue
 
-The viewer includes a statically imported bilingual index at `content/catalog/models.json`. It records exact manufacturer part number, category, package version/path and geometry-evidence class. It does not need a catalogue API. Hosted builds resolve staged `.sbsmodel` archives by relative URL. The standalone HTML build embeds packages staged under `public/` as data URLs so the same catalogue works through `file://`. Every selection uses the standard package loader and package model-ID comparison.
+The viewer includes a statically imported bilingual index at `content/catalog/models.json`. It records exact manufacturer part number, category, package version/path and geometry-evidence class. It does not need a catalogue API. Hosted builds resolve staged `.sbsmodel` archives by relative URL. The standalone HTML build embeds packages staged under `public/` as data URLs so the same catalogue works through `file://`. Every selection uses the standard package loader and package model-ID comparison. The loader accepts both the legacy ZIP archive and the checksummed UTF-8 `SBSMODEL-JSON` envelope; both resolve to the same manifest, sidecar and self-contained GLB contract.
 
 
 ## Multi-model startup
