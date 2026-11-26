@@ -54,12 +54,12 @@ A second animation separates the fan shroud, cooler, PCB/electronics and connect
 
 ### GA106 and GDDR6 architecture
 
-The model package adds a separately selectable logical architecture tree: 28 SMs, aggregate CUDA/Tensor/RT/TMU/ROP units, and the published 192-bit memory interface. Six GDDR6 package positions are visible on the exact XC BLACK card, but the exact package marking is not verified. The K4ZAF325BM-HC16 identity and its catalog attributes come from a related XC teardown and a secondary catalog, so they remain candidate details rather than exact-SKU BOM facts. Six interface presentation segments are logical navigation groups only; they are not mapped to physical packages or PCB nets.
+The model package adds a separately selectable logical architecture tree: 28 SMs, aggregate CUDA/Tensor/RT/TMU/ROP units, and the published 192-bit memory interface. The exact-SKU-linked Tom's Hardware teardown identifies six Samsung K4ZAF325BM-HC16 GDDR6 packages. The 16-Gbit density, 512M × 32 organisation and 180-FBGA package attributes come from a secondary catalog and use `secondary_catalog_data`, not manufacturer-data confidence. Six interface presentation segments are logical navigation groups only; they are not mapped to physical packages or PCB nets.
 
 
 ### Fastener evidence correction
 
-The exact 12G-P5-3655-KR XC BLACK review shows four heatsink mounting screws around the GPU. Those four screw meshes are photo-positioned proxies. Four additional nodes remain only as uninstalled logical candidates from a related EVGA RTX 3060 XC teardown whose retail SKU is not established. The viewer does not present eight screws as an exact-XC-BLACK service instruction.
+The exact-SKU-linked Tom's Hardware teardown reports eight cooler/shroud retention screws on the sample whose rear-PCB label reads P/N 12G-P5-3655-KR: four around the GPU and four near the far end. The LanOC exact-XC-BLACK review shows the central four-screw subset. Those four meshes are photo-positioned proxies; four additional rear-area nodes preserve the exact-SKU count as `logical_only` entries because their individual coordinates are not mapped.
 
 
 ### GDDR6 identity and bus mapping boundary
