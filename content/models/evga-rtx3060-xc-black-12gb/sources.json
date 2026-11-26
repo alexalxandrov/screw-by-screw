@@ -106,6 +106,15 @@
       "type": "exact_model_review",
       "applicability": "Review sample explicitly identified as EVGA GeForce RTX 3060 XC BLACK GAMING, part number 12G-P5-3655-KR; describes four main heatpipes contacting the GPU and two additional side heatpipes",
       "license_status": "third_party_copyright_no_reuse_permission"
+    },
+    {
+      "id": "src.reniemarquet.evga232",
+      "title": "EVGA232 RTX 2070 / RTX3060 PG190-A02 GA104-GA106 schematic catalogue entry",
+      "publisher": "RM Schematics (catalogue/index)",
+      "url": "https://reniemarquet.com/files/evga232-rtx-2070-rtx3060-pg190-a02-ga104-ga106-sh191528/",
+      "type": "community_schematic_catalogue_candidate",
+      "applicability": "Catalogue lists one 12.2 MB schematic for EVGA232 / RTX 2070 / RTX3060 / PG190-A02 / GA104-GA106. It does not identify the EVGA XC BLACK retail SKU 12G-P5-3655-KR or a specific retail PCB revision. Listing states the file is delivered through a Telegram post; no boardview is listed on this entry.",
+      "license_status": "third_party_service_document_no_redistribution_permission"
     }
   ]
 }
