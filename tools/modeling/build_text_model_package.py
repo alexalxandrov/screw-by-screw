@@ -35,10 +35,15 @@ FILE_ORDER = (
 def safe_package_path(value: str) -> Path:
     if not isinstance(value, str) or not value:
         raise ValueError("package file path must be a non-empty string")
-    pure = PurePosixPath(value)
-    if pure.is_absolute() or ".." in pure.parts or "\\" in value:
+    if (
+        value.startswith("/")
+        or "\\" in value
+        or "\\0" in value
+        or (len(value) >= 2 and value[0].isalpha() and value[1] == ":")
+        or any(part in {"", ".", ".."} for part in value.split("/"))
+    ):
         raise ValueError(f"unsafe package path: {value!r}")
-    return Path(*pure.parts)
+    return Path(*PurePosixPath(value).parts)
 
 
 def build_envelope(model_dir: Path, scene_path: Path) -> str:
@@ -48,6 +53,7 @@ def build_envelope(model_dir: Path, scene_path: Path) -> str:
     if not isinstance(files_map, dict):
         raise ValueError("model-package.json must contain a files object")
 
+    model_root = model_dir.resolve()
     file_payloads: dict[str, bytes] = {}
     file_text: dict[str, str] = {}
     for key, relative_path in files_map.items():
@@ -61,14 +67,17 @@ def build_envelope(model_dir: Path, scene_path: Path) -> str:
             file_payloads[relative_path] = payload
             file_text[relative_path] = base64.b64encode(payload).decode("ascii")
         else:
-            payload = (model_dir / safe_path).read_bytes()
+            source_path = (model_dir / safe_path).resolve()
+            if not source_path.is_relative_to(model_root):
+                raise ValueError(f"package sidecar resolves outside model directory: {relative_path!r}")
+            payload = source_path.read_bytes()
             # Decode strictly so the envelope cannot silently carry invalid UTF-8.
             text = payload.decode("utf-8", errors="strict")
             file_payloads[relative_path] = payload
             file_text[relative_path] = text
 
     expected_names = {files_map[key] for key in files_map}
-    if set(file_text) != expected_names:
+    if len(file_text) != len(files_map) or set(file_text) != expected_names:
         raise ValueError("manifest paths are not unique")
     required_names = set(FILE_ORDER)
     if expected_names != required_names:
