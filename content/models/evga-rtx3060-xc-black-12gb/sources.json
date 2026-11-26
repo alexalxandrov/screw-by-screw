@@ -185,6 +185,15 @@
       "type": "community_schematic_catalogue_candidate",
       "applicability": "Catalogue lists one 12.2 MB schematic for EVGA232 / RTX 2070 / RTX3060 / PG190-A02 / GA104-GA106. It does not identify the EVGA XC BLACK retail SKU 12G-P5-3655-KR or a specific retail PCB revision. Listing states the file is delivered through a Telegram post; no boardview is listed on this entry.",
       "license_status": "third_party_service_document_no_redistribution_permission"
+    },
+    {
+      "id": "src.nvidia.ampere.whitepaper",
+      "title": "NVIDIA Ampere GA10x GPU architecture whitepaper",
+      "publisher": "NVIDIA",
+      "url": "https://www.nvidia.com/content/PDF/nvidia-ampere-ga-102-gpu-architecture-whitepaper-v2.pdf",
+      "type": "manufacturer_architecture_whitepaper",
+      "applicability": "GA10x architecture-common SM and TPC organization: 128 CUDA cores, four third-generation Tensor Cores, four texture units, one second-generation RT Core, 256 KB register file, 128 KB L1/shared memory per SM; two SMs and one PolyMorph Engine per TPC. Applied only as logical architecture to GA106 RTX 3060. The GA102 physical floorplan and GPC layout are not transferred.",
+      "license_status": "redistribution_not_cleared"
     }
   ]
 }
