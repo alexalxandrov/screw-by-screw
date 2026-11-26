@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import struct
 import sys
@@ -35,7 +36,7 @@ def minimal_glb(number_value: int | float = 1, binary_byte: int = 0) -> bytes:
     )
 
 
-def make_source_tree(root: Path, scene: bytes) -> Path:
+def make_source_tree(root: Path, scene: bytes) -> tuple[Path, Path]:
     model_dir = root / "model"
     model_dir.mkdir()
     file_map = {
@@ -94,7 +95,7 @@ class TextModelPackageBuilderTests(unittest.TestCase):
             committed = root / "committed.sbsmodel"
             envelope = json.loads(built.read_text(encoding="utf-8")[len(builder.PREFIX):])
             envelope["files"]["scene.glb"] = builder.base64.b64encode(minimal_glb(number_value=1.0)).decode("ascii")
-            envelope["manifest"]["sha256"]["scene.glb"] = __import__("hashlib").sha256(
+            envelope["manifest"]["sha256"]["scene.glb"] = hashlib.sha256(
                 minimal_glb(number_value=1.0)
             ).hexdigest()
             committed.write_text(builder.PREFIX + json.dumps(envelope, separators=(",", ":")), encoding="utf-8")
