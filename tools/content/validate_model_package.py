@@ -17,7 +17,7 @@ EVIDENCE = {"manufacturer_data", "reviewer_measurement", "visible_exact_model",
             "teardown_supported", "illustrative",
             "candidate_count_requires_exact_board_confirmation", "unknown"}
 CLAIM_CLASSES = {"manufacturer_data", "measured", "independently_verified",
-                 "calculated", "educational_approximation", "illustrative", "unknown"}
+                 "calculated", "educational_approximation", "illustrative", "candidate_reference_observation", "unknown"}
 RELATIONSHIP_TYPES = {"contains", "mounted_in", "fastened_to", "connected_to",
                       "powered_by", "signals_to", "cooled_by", "transfers_heat_to",
                       "airflow_over", "depends_on"}
