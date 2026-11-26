@@ -184,6 +184,22 @@ test("shows exact-SKU cooler screw count and secondary-catalog memory attributes
   await expect(page.locator('[data-claim-id="claim.memory.package_density"]')).toContainText("Данные вторичного каталога");
 });
 
+
+
+test("keeps heatpipe route counts separate from unknown physical loop count and OEM fan identity", async ({ page }) => {
+  await page.goto("/");
+  await page.locator('#component-tree button[data-id="cooling.heatpipes"]').click();
+  await expect(page.locator('[data-claim-id="claim.cooling.heatpipe_count"]')).toContainText("6");
+  await expect(page.locator('[data-claim-id="claim.cooling.heatpipe_count"]')).toContainText("reported heatpipe runs");
+  await expect(page.locator('[data-claim-id="claim.cooling.heatpipe.physical_loop_count"]')).toContainText("Неизвестно");
+  await expect(page.locator('[data-claim-id="claim.cooling.heatpipe.counting_convention"]')).toContainText("six reported runs");
+  await expect(page.locator('[data-claim-id="claim.cooling.heatpipe.counting_convention"]')).toContainText("four copper heatpipes");
+
+  await page.locator('#component-tree button[data-id="assembly.cooling"]').click();
+  await expect(page.locator('[data-claim-id="claim.fan.oem_part_identity"]')).toContainText("Неизвестно");
+  await expect(page.locator('[data-claim-id="claim.fan.oem_part_identity"]')).toContainText("Aftermarket");
+});
+
 test("search finds components by package marking and source title", async ({ page }) => {
   await page.goto("/");
   const search = page.locator("#component-search");
