@@ -974,14 +974,41 @@ def main():
         pcbcol, parent=sm_cluster,
         evidence=STATUS["manufacturer_data"], geometry="logical_only",
     )
-    for sm_index in range(1, 29):
-        make_assembly(
-            "GA106 SM {:02d} | logical instance".format(sm_index),
-            "chip.gpu.sm.{:02d}".format(sm_index),
+    for tpc_index in range(1, 15):
+        tpc_number = "{:02d}".format(tpc_index)
+        tpc_node = make_assembly(
+            "GA10x TPC {} | logical instance".format(tpc_number),
+            "chip.gpu.tpc." + tpc_number,
             (CARD_LENGTH * 0.48, half_y - 7.0, CARD_HEIGHT * 0.52),
             pcbcol, parent=tpc_cluster,
             evidence=STATUS["manufacturer_data"], geometry="logical_only",
         )
+        make_assembly(
+            "PolyMorph Engine | TPC {}".format(tpc_number),
+            "chip.gpu.tpc." + tpc_number + ".polymorph",
+            (CARD_LENGTH * 0.48, half_y - 7.0, CARD_HEIGHT * 0.52),
+            pcbcol, parent=tpc_node,
+            evidence=STATUS["manufacturer_data"], geometry="logical_only",
+        )
+        for sm_slot in range(1, 3):
+            sm_index = (tpc_index - 1) * 2 + sm_slot
+            sm_number = "{:02d}".format(sm_index)
+            sm_node = make_assembly(
+                "GA106 SM {} | logical instance".format(sm_number),
+                "chip.gpu.sm." + sm_number,
+                (CARD_LENGTH * 0.48, half_y - 7.0, CARD_HEIGHT * 0.52),
+                pcbcol, parent=tpc_node,
+                evidence=STATUS["manufacturer_data"], geometry="logical_only",
+            )
+            for partition_index in range(1, 5):
+                partition_number = "{:02d}".format(partition_index)
+                make_assembly(
+                    "GA10x SM {} processing partition {}".format(sm_number, partition_number),
+                    "chip.gpu.sm." + sm_number + ".partition." + partition_number,
+                    (CARD_LENGTH * 0.48, half_y - 7.0, CARD_HEIGHT * 0.52),
+                    pcbcol, parent=sm_node,
+                    evidence=STATUS["manufacturer_data"], geometry="logical_only",
+                )
     make_assembly(
         "GA10x PolyMorph Engine array | 14 logical engines",
         "chip.gpu.polymorph.array",
