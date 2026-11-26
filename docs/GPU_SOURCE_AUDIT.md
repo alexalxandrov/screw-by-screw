@@ -214,7 +214,7 @@ The EVGA-published **192-bit** memory interface remains the exact-SKU board clai
 LanOC's exact XC BLACK cooler-end photograph (image 16) shows four copper terminal faces. The model adds four separately selectable visual markers under the heatpipe assembly. Their locations are approximate photo-derived points. They are a terminal-face count, not a count of unique U-shaped tubes. Six heatpipe route proxies are now separately selectable (four main plus two side) based on The FPS Review's exact-SKU description; their centrelines, bends and diameter remain illustrative rather than a verified internal routing drawing.
 
 
-## 16. Exact-SKU heatpipe count and route grouping
+## 16. Exact-SKU heatpipe route/run description and counting boundary
 
 The FPS Review article identifies the tested card as EVGA GeForce RTX 3060 XC BLACK GAMING, part number 12G-P5-3655-KR. Its page 2 cooler description specifies four main central GPU-contact route/runs and two additional side runs (six described runs). This is now recorded as the FPS Review's route/run description, not as a verified count of six independent closed U-shaped tubes. PCWorld's review explicitly names the tested product XC Black Gaming but gives a four-copper-heatpipe overview; Gamers Nexus narrates two central tube paths through the GPU contact plate. These statements are retained as source-specific observations because publications may be counting tube legs, pipes or closed loops differently. The unique physical loop count remains unknown until a calibrated cooler drawing or direct sample inspection reconciles the geometry.
 
