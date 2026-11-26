@@ -16,11 +16,11 @@
     },
     {
       "path": "components.json",
-      "sha256": "509717ddad30c69283fc45d30a9a5dbe4d812756a4fe1dff1f1e701eeb1289c2"
+      "sha256": "61adc7faa59efda68b417e3e0c1aabfe3e00393b20aba7275528f502fb27b457"
     },
     {
       "path": "relationships.json",
-      "sha256": "f88b4e93daefe36c97f685aa728b44920bdecdd3d0f081f93db544fad55229d5"
+      "sha256": "6ba786cc9ff9c1daef021927f1b06749d3623e0cc9ad2d0c62970a90bb05ccf5"
     },
     {
       "path": "process_layers.json",
@@ -28,7 +28,7 @@
     },
     {
       "path": "assembly_steps.json",
-      "sha256": "a867e156d11b98aeef736033eeb1ed91221a14696b94d78e1633316f486716d3"
+      "sha256": "2a87aa189f3edb12d7913950970512a09d089205e35aa6b2393513fd4b32f29f"
     },
     {
       "path": "learning.json",

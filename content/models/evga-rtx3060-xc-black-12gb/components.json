@@ -5700,6 +5700,42 @@
       }
     },
     {
+      "id": "fastener.cooler.fin_stack_base.01",
+      "parent_id": "fastener.cooler.fin_stack_base",
+      "name": {
+        "en": "Fin-stack base retaining screw 1 · position unmapped",
+        "ru": "Винт крепления основания радиатора 1 · положение не нанесено"
+      },
+      "category": "fastener",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "description": {
+        "en": "One of the two separate screws described by Gamers Nexus as securing the fin-stack base. This is a logical inventory member of that observed pair; its individual centre, head profile, thread, length and torque are not mapped. No physical coordinates are invented.",
+        "ru": "Один из двух отдельных винтов, которыми, согласно Gamers Nexus, крепится основание пакета рёбер. Это логический элемент наблюдаемой пары; его индивидуальная координата, профиль головки, резьба, длина и момент затяжки не установлены. Физические координаты не выдумываются."
+      }
+    },
+    {
+      "id": "fastener.cooler.fin_stack_base.02",
+      "parent_id": "fastener.cooler.fin_stack_base",
+      "name": {
+        "en": "Fin-stack base retaining screw 2 · position unmapped",
+        "ru": "Винт крепления основания радиатора 2 · положение не нанесено"
+      },
+      "category": "fastener",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "description": {
+        "en": "One of the two separate screws described by Gamers Nexus as securing the fin-stack base. This is a logical inventory member of that observed pair; its individual centre, head profile, thread, length and torque are not mapped. No physical coordinates are invented.",
+        "ru": "Один из двух отдельных винтов, которыми, согласно Gamers Nexus, крепится основание пакета рёбер. Это логический элемент наблюдаемой пары; его индивидуальная координата, профиль головки, резьба, длина и момент затяжки не установлены. Физические координаты не выдумываются."
+      }
+    },
+    {
       "id": "fastener.io.bracket.mount",
       "parent_id": "assembly.fasteners",
       "name": {
@@ -5718,6 +5754,42 @@
       }
     },
     {
+      "id": "fastener.io.bracket.mount.01",
+      "parent_id": "fastener.io.bracket.mount",
+      "name": {
+        "en": "I/O bracket screw-and-nut 1 · position unmapped",
+        "ru": "Винт с гайкой крепления I/O-планки 1 · положение не нанесено"
+      },
+      "category": "fastener",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "description": {
+        "en": "One of the two narrower I/O-bracket screws shown in the exact-model teardown, each with a nut on the reverse side. Individual position and hardware dimensions are not mapped. No physical coordinates are invented.",
+        "ru": "Один из двух более узких винтов I/O-планки, показанных в разборке точной модели; у каждого есть гайка с обратной стороны. Индивидуальное положение и размеры крепежа не нанесены. Физические координаты не выдумываются."
+      }
+    },
+    {
+      "id": "fastener.io.bracket.mount.02",
+      "parent_id": "fastener.io.bracket.mount",
+      "name": {
+        "en": "I/O bracket screw-and-nut 2 · position unmapped",
+        "ru": "Винт с гайкой крепления I/O-планки 2 · положение не нанесено"
+      },
+      "category": "fastener",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "description": {
+        "en": "One of the two narrower I/O-bracket screws shown in the exact-model teardown, each with a nut on the reverse side. Individual position and hardware dimensions are not mapped. No physical coordinates are invented.",
+        "ru": "Один из двух более узких винтов I/O-планки, показанных в разборке точной модели; у каждого есть гайка с обратной стороны. Индивидуальное положение и размеры крепежа не нанесены. Физические координаты не выдумываются."
+      }
+    },
+    {
       "id": "fastener.io.display.output",
       "parent_id": "assembly.fasteners",
       "name": {
@@ -5733,6 +5805,60 @@
       "description": {
         "en": "Three smaller screws are shown retaining the display-output section during I/O bracket removal. The presenter selects a Phillips #0 driver for these screws. The group is not mapped one-to-one to the four connector receptacles; individual centres, thread, length and torque are unknown.",
         "ru": "При снятии I/O-планки показаны три меньших винта крепления секции видеовыходов. Для них автор выбирает отвёртку Phillips #0. Группа не сопоставляется один-к-одному с четырьмя разъёмами; индивидуальные координаты, резьба, длина и момент затяжки неизвестны."
+      }
+    },
+    {
+      "id": "fastener.io.display.output.01",
+      "parent_id": "fastener.io.display.output",
+      "name": {
+        "en": "Display-output retention screw 1 · position unmapped",
+        "ru": "Винт крепления выходной панели 1 · положение не нанесено"
+      },
+      "category": "fastener",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "description": {
+        "en": "One of three smaller screws shown retaining the display-output section. Gamers Nexus selects a Phillips #0 driver for this group. It is not assigned to an individual port; position, thread, length and torque remain unknown. No physical coordinates are invented.",
+        "ru": "Один из трёх меньших винтов крепления секции видеовыходов. Для этой группы Gamers Nexus выбирает отвёртку Phillips #0. Винт не сопоставлен отдельному порту; положение, резьба, длина и момент затяжки неизвестны. Физические координаты не выдумываются."
+      }
+    },
+    {
+      "id": "fastener.io.display.output.02",
+      "parent_id": "fastener.io.display.output",
+      "name": {
+        "en": "Display-output retention screw 2 · position unmapped",
+        "ru": "Винт крепления выходной панели 2 · положение не нанесено"
+      },
+      "category": "fastener",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "description": {
+        "en": "One of three smaller screws shown retaining the display-output section. Gamers Nexus selects a Phillips #0 driver for this group. It is not assigned to an individual port; position, thread, length and torque remain unknown. No physical coordinates are invented.",
+        "ru": "Один из трёх меньших винтов крепления секции видеовыходов. Для этой группы Gamers Nexus выбирает отвёртку Phillips #0. Винт не сопоставлен отдельному порту; положение, резьба, длина и момент затяжки неизвестны. Физические координаты не выдумываются."
+      }
+    },
+    {
+      "id": "fastener.io.display.output.03",
+      "parent_id": "fastener.io.display.output",
+      "name": {
+        "en": "Display-output retention screw 3 · position unmapped",
+        "ru": "Винт крепления выходной панели 3 · положение не нанесено"
+      },
+      "category": "fastener",
+      "evidence_status": "teardown_supported",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "description": {
+        "en": "One of three smaller screws shown retaining the display-output section. Gamers Nexus selects a Phillips #0 driver for this group. It is not assigned to an individual port; position, thread, length and torque remain unknown. No physical coordinates are invented.",
+        "ru": "Один из трёх меньших винтов крепления секции видеовыходов. Для этой группы Gamers Nexus выбирает отвёртку Phillips #0. Винт не сопоставлен отдельному порту; положение, резьба, длина и момент затяжки неизвестны. Физические координаты не выдумываются."
       }
     },
     {

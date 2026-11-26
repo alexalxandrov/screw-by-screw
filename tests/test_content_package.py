@@ -292,8 +292,8 @@ class ContentPackageTests(unittest.TestCase):
             )
             self.assertIn("src.newegg.exact_sku.product_photo", components[blade_ids[-1]]["source_ids"])
 
-        self.assertIn("Components: 313", report)
-        self.assertIn("Relationships: 312", report)
+        self.assertIn("Components: 320", report)
+        self.assertIn("Relationships: 319", report)
         self.assertIn("Animation clips: 2", report)
         self.assertEqual(len(package["claims"]["claims"]), 110)
         self.assertEqual(len(package["process_layers"]["process_layers"]), 3)
@@ -307,6 +307,20 @@ class ContentPackageTests(unittest.TestCase):
         self.assertEqual(claims["claim.io.bracket.mount_screw_count"]["value"], 2)
         self.assertEqual(claims["claim.io.display_output.screw_count"]["value"], 3)
         self.assertEqual(claims["claim.io.display_output.driver_size"]["value"], "Phillips #0")
+        individual_fastener_groups = {
+            "fastener.cooler.fin_stack_base": 2,
+            "fastener.io.bracket.mount": 2,
+            "fastener.io.display.output": 3,
+        }
+        for group_id, count in individual_fastener_groups.items():
+            for index in range(1, count + 1):
+                child_id = f"{group_id}.{index:02d}"
+                self.assertEqual(components[child_id]["parent_id"], group_id)
+                self.assertEqual(components[child_id]["geometry_status"], "logical_only")
+                relation = relationships[f"rel.contains.{child_id}"]
+                self.assertEqual(relation["from"], group_id)
+                self.assertEqual(relation["to"], child_id)
+                self.assertIn("src.gamersnexus.teardown", relation["source_ids"])
         self.assertEqual(components["fastener.shroud.candidate"]["geometry_status"], "logical_only")
         self.assertEqual(claims["claim.power.current_sense_shunt.pcie_slot.resistance"]["value"], None)
         self.assertEqual(claims["claim.cooling.fan.rpm.sample_operating_point"]["value"], 2030)

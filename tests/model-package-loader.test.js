@@ -104,8 +104,8 @@ test("validates the committed RTX 3060 model package sidecars", () => {
   };
   const report = validateModelPackageData(manifest, data);
   assert.equal(report.modelId, "gpu.evga.12g-p5-3655-kr");
-  assert.equal(report.componentCount, 313);
-  assert.equal(report.relationshipCount, 312);
+  assert.equal(report.componentCount, 320);
+  assert.equal(report.relationshipCount, 319);
   assert.equal(report.sourceCount, 29);
 });
 

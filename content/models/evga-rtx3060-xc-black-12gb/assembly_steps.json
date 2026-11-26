@@ -47,7 +47,9 @@
       "component_ids": [
         "assembly.fasteners",
         "assembly.cooling",
-        "fastener.cooler.fin_stack_base"
+        "fastener.cooler.fin_stack_base",
+        "fastener.cooler.fin_stack_base.01",
+        "fastener.cooler.fin_stack_base.02"
       ],
       "tool_requirements": [],
       "safety_notes": {
@@ -76,7 +78,12 @@
         "assembly.fasteners",
         "connector.io.bracket",
         "fastener.io.bracket.mount",
-        "fastener.io.display.output"
+        "fastener.io.display.output",
+        "fastener.io.bracket.mount.01",
+        "fastener.io.bracket.mount.02",
+        "fastener.io.display.output.01",
+        "fastener.io.display.output.02",
+        "fastener.io.display.output.03"
       ],
       "tool_requirements": [
         "Phillips #0 screwdriver for the three display-output retaining screws; driver for the two narrow bracket screws is not specified."

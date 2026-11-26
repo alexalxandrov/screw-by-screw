@@ -57,7 +57,7 @@ The component atlas also adds separate, individually selectable photo-estimated 
 
 ## Fine-grained cooling decomposition
 
-The current canonical package exposes **313 semantic components, 312 typed relationships, 110 atomic claims and 29 registered sources**. This includes individually selectable fan frames, hubs and eight photo-counted blade-surface proxies per fan (profile still illustrative); 24 separate illustrative heatsink-fin proxies; six selectable heatpipe route/run proxies reflecting the FPS Review's four central plus two side descriptions; the unique closed-loop count remains unknown; six memory-side thermal-pad proxies; and a VRM-side thermal-pad strip proxy.
+The current canonical package exposes **320 semantic components, 319 typed relationships, 110 atomic claims and 29 registered sources**. This includes individually selectable fan frames, hubs and eight photo-counted blade-surface proxies per fan (profile still illustrative); 24 separate illustrative heatsink-fin proxies; six selectable heatpipe route/run proxies reflecting the FPS Review's four central plus two side descriptions; the unique closed-loop count remains unknown; six memory-side thermal-pad proxies; and a VRM-side thermal-pad strip proxy.
 
 Eight visible blade surfaces per fan are counted from exact-SKU retail photographs. Each blade mesh now carries a small four-stroke E-like raised relief, and each hub has a raised badge mark; both are photo-informed visual interpretations, not measured logo vectors or OEM relief geometry. The shroud rails also carry simplified EVGA / GEFORCE RTX stroke-wordmark proxies. Blade profile, camber, pitch, thickness, hub sticker construction and shroud text outlines remain unmeasured. Twenty-four fin meshes are layout proxies and do not assert the hardware's actual fin count or pitch. All mesh geometry remains illustrative. Thermal-pad position proxies are aligned to the six identified GDDR6 package positions; pad thickness, material, hardness and service dimensions remain unverified. Heatpipe paths and cross-sections likewise remain illustrative.
 
@@ -191,3 +191,8 @@ Source: PC Perspective, *NVIDIA GeForce RTX 3060 Review: EVGA XC BLACK Tested*, 
 ## 30. Central heatpipe diameter estimate
 
 The Gamers Nexus teardown verbally estimates approximately **6 mm** for the two central tube runs visible through the GPU contact plate. This observation is exposed as a teardown-supported estimate, not a caliper measurement. The transcript does not establish that all six route proxies share this diameter, and the model does not convert the estimate into six identical measured pipe dimensions or use it to infer closed-loop count.
+
+
+## Individual screw inventory expansion
+
+Seven additional fasteners are now separate selectable logical-only components beneath three observed groups: two fin-stack base screws, two I/O-bracket screw-and-nut fasteners, and three display-output retaining screws. The corresponding partial teardown observations link to each individual stable ID. Their centres, head geometries, thread sizes, lengths and torque remain undocumented; no physical meshes or coordinates are invented. The display-output group retains the Gamers Nexus Phillips #0 driver observation, without assigning one screw to each port.

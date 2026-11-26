@@ -2890,6 +2890,69 @@
         "src.lanoc.review"
       ],
       "certainty": "qualitative"
+    },
+    {
+      "id": "rel.contains.fastener.cooler.fin_stack_base.01",
+      "from": "fastener.cooler.fin_stack_base",
+      "to": "fastener.cooler.fin_stack_base.01",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener.cooler.fin_stack_base.02",
+      "from": "fastener.cooler.fin_stack_base",
+      "to": "fastener.cooler.fin_stack_base.02",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener.io.bracket.mount.01",
+      "from": "fastener.io.bracket.mount",
+      "to": "fastener.io.bracket.mount.01",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener.io.bracket.mount.02",
+      "from": "fastener.io.bracket.mount",
+      "to": "fastener.io.bracket.mount.02",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener.io.display.output.01",
+      "from": "fastener.io.display.output",
+      "to": "fastener.io.display.output.01",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener.io.display.output.02",
+      "from": "fastener.io.display.output",
+      "to": "fastener.io.display.output.02",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener.io.display.output.03",
+      "from": "fastener.io.display.output",
+      "to": "fastener.io.display.output.03",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
     }
   ]
 }

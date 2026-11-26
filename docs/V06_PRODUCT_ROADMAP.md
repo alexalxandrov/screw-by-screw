@@ -44,6 +44,10 @@ Five observations from the exact-model Gamers Nexus teardown are separately repr
 
 These observations are not a complete removal or reassembly procedure. Tom's Hardware separately reports an eight-screw cooler/shroud aggregate on a review sample whose rear-PCB identity photograph reads P/N `12G-P5-3655-KR`. Its overlap with the Gamers Nexus fastener groups is not established, so the counts must not be added together. Four GPU-area screw centres have photo-positioned proxies; unmapped fasteners remain logical-only. Additional shroud screws remain an uncertain 4-or-6 candidate.
 
+## Individual screw-level inventory
+
+The latest package turns the two fin-stack base screws, two I/O-bracket screw-and-nut fasteners, and three display-output retaining screws into seven separate stable component IDs. All seven remain logical-only because their individual positions and dimensions are not mapped. This keeps the viewer granular without inventing a physical screw map.
+
 ## Remaining v0.6 / v0.7 engineering priorities
 
 1. **Complete teardown evidence review:** inspect all available exact-model teardown segments and link each observation to its component, source locator, uncertainty and prerequisites. Do not turn sparse observations into an invented service sequence.
