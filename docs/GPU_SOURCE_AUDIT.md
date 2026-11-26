@@ -283,3 +283,8 @@ The data model therefore preserves the FPS Review's 4 + 2 route/run description,
 Two aftermarket sellers advertise replacement fans for broad EVGA RTX 3050/3060/3060 Ti XC families and include XC BLACK in compatibility text. One listing associates PLA09215S12H with approximately 90 mm, 12 V, 0.55 A, 4-pin and 42 mm mounting-spacing claims. Another gives approximately 87 mm and 15 mm / 20 mm depth variants with similar electrical and mounting claims. These catalogue values are inconsistent on basic dimensions and are not an original fan label, manufacturer datasheet or exact-sample measurement.
 
 The repository registers both as aftermarket compatibility leads only. The original fan manufacturer part number, exact frame diameter/depth, pinout, current, speed and replacement fitment remain **unknown** until the installed fan label and a physical sample are inspected. No seller product image or asset is redistributed.
+
+
+## 23. Exact-SKU fan blade visual count
+
+Newegg's retail gallery title and model field identify `12G-P5-3655-KR`. Two front-view product images show eight visible blade surfaces on each fan. The package records this as a **photo-observed visible count**, not as a manufacturer mechanical specification or examination of the installed sample. The Blender proxy and component graph now contain eight individually selectable blade meshes under each independent rotor. Blade camber, pitch, cross-section, thickness, depth, exact contour, embossed-E dimensions, RPM and OEM fan manufacturer/part number remain unverified. The retailer photographs are linked for attribution only and are not copied into the repository.
