@@ -217,6 +217,19 @@ class ContentPackageTests(unittest.TestCase):
 
 
 
+    def test_candidate_pcb_marking_does_not_confirm_revision(self):
+        package_dir = ROOT / "content" / "models" / "evga-rtx3060-xc-black-12gb"
+        package = validator.load_package(package_dir)
+        validator.validate_package(package, package_dir)
+        claims = {item["id"]: item for item in package["claims"]["claims"]}
+        self.assertEqual(
+            claims["claim.pcb.silkscreen_marking.candidate"]["confidence_class"],
+            "candidate_reference_observation",
+        )
+        self.assertEqual(claims["claim.pcb.silkscreen_marking.candidate"]["value"], "EVGA232 REV 1.0")
+        self.assertIsNone(claims["claim.pcb.revision"]["value"])
+        self.assertEqual(claims["claim.pcb.revision"]["confidence_class"], "unknown")
+
     def test_pilot_rotors_are_separate_proxy_components_and_animation_targets(self):
         package_dir = ROOT / "content" / "models" / "evga-rtx3060-xc-black-12gb"
         manifest = manifest_builder.build_manifest(package_dir)
