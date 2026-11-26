@@ -1332,6 +1332,18 @@
         "src.pcper.xc_black.operating_point"
       ],
       "notes": "PC Perspective reports frequency spikes as high as 1905 MHz during Metro Exodus at 2160/high on its EVGA GeForce RTX 3060 12GB XC BLACK sample. The review does not publish retail part number 12G-P5-3655-KR. This is an observed peak on that review sample, not EVGA's published 1777 MHz boost clock, a guaranteed frequency, or a universal operating value."
+    },
+    {
+      "id": "claim.cooling.heatpipe.diameter.observed_estimate",
+      "subject_id": "cooling.heatpipes",
+      "predicate": "observed_heatpipe_tube_diameter_estimate",
+      "value": 6,
+      "unit": "mm",
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "notes": "Gamers Nexus verbally estimates approximately 6 mm for the two central tube runs visible through the GPU contact plate. This is a rough teardown estimate, not a calibrated measurement. Do not apply it automatically to every route proxy or use it to infer the number of unique closed-loop pipes."
     }
   ]
 }
