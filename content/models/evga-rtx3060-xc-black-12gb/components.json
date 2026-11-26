@@ -556,8 +556,8 @@
         "src.tomshardware.teardown"
       ],
       "description": {
-        "en": "Eight cooler/shroud retention screws are reported for the exact 12G-P5-3655-KR sample: four around the GPU and four near the far end/rear area. The four GPU-area screw proxies have approximate photo-derived positions; the four rear-area screws are count-confirmed but remain logical-only because individual coordinates are not mapped.",
-        "ru": "Для точного образца 12G-P5-3655-KR указаны восемь винтов крепления кулера/кожуха: четыре вокруг GPU и четыре у дальнего/заднего края карты. Четыре макета винтов вокруг GPU имеют приблизительные положения по фотографиям; четыре задних винта подтверждены по количеству, но остаются логическими узлами, так как координаты каждого не восстановлены."
+        "en": "Eight cooler/shroud retention screws are reported for the exact 12G-P5-3655-KR sample: four around the GPU and four near the far end/rear area. The four GPU-area screw proxies have approximate photo-derived positions; the four rear-area screws are count-confirmed but remain logical-only because individual coordinates are not mapped. Separate teardown observations also identify a pair of fin-stack base screws, two narrow I/O-bracket screw/nut fasteners and three display-output retaining screws. These are distinct source-described groups whose correspondence to the eight-screw Tom's Hardware aggregate is not established; do not add the counts together.",
+        "ru": "Для точного образца 12G-P5-3655-KR указаны восемь винтов крепления кулера/кожуха: четыре вокруг GPU и четыре у дальнего/заднего края карты. Четыре макета винтов вокруг GPU имеют приблизительные положения по фотографиям; четыре задних винта подтверждены по количеству, но остаются логическими узлами, так как координаты каждого не восстановлены. В отдельной разборке также описаны пара винтов основания пакета рёбер, два узких винта с гайками крепления I/O-планки и три винта выходной панели. Это отдельные группы из наблюдения источника; их соответствие агрегату из восьми винтов Tom's Hardware не установлено — количества нельзя складывать."
       }
     },
     {
@@ -571,11 +571,12 @@
       "evidence_status": "visible_exact_model",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
-        "src.lanoc.review"
+        "src.lanoc.review",
+        "src.gamersnexus.teardown"
       ],
       "description": {
-        "en": "One of the four heatsink mounting screws explicitly visible around the GPU in the exact EVGA RTX 3060 XC BLACK review sample. Approximate photo-derived position only; head profile, thread, length, spring specification and torque are not measured.",
-        "ru": "Один из четырёх винтов крепления радиатора, явно показанных вокруг GPU на образце точной EVGA RTX 3060 XC BLACK. Положение приблизительно восстановлено по фотографии; профиль головки, резьба, длина, параметры пружины и момент затяжки не измерены."
+        "en": "One of the four spring-loaded heatsink mounting screws explicitly visible around the GPU in the exact EVGA RTX 3060 XC BLACK review sample. Approximate photo-derived position only; head profile, thread, length, spring specification and torque are not measured. The exact-model Gamers Nexus teardown confirms these are spring-loaded mounts passing through the PCB.",
+        "ru": "Один из четырёх подпружиненных винтов крепления радиатора, явно показанных вокруг GPU на образце точной EVGA RTX 3060 XC BLACK. Положение приблизительно восстановлено по фотографии; профиль головки, резьба, длина, параметры пружины и момент затяжки не измерены. Разборка точной модели Gamers Nexus подтверждает, что это подпружиненные крепления, проходящие через PCB."
       }
     },
     {
@@ -589,11 +590,12 @@
       "evidence_status": "visible_exact_model",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
-        "src.lanoc.review"
+        "src.lanoc.review",
+        "src.gamersnexus.teardown"
       ],
       "description": {
-        "en": "One of the four heatsink mounting screws explicitly visible around the GPU in the exact EVGA RTX 3060 XC BLACK review sample. Approximate photo-derived position only; head profile, thread, length, spring specification and torque are not measured.",
-        "ru": "Один из четырёх винтов крепления радиатора, явно показанных вокруг GPU на образце точной EVGA RTX 3060 XC BLACK. Положение приблизительно восстановлено по фотографии; профиль головки, резьба, длина, параметры пружины и момент затяжки не измерены."
+        "en": "One of the four spring-loaded heatsink mounting screws explicitly visible around the GPU in the exact EVGA RTX 3060 XC BLACK review sample. Approximate photo-derived position only; head profile, thread, length, spring specification and torque are not measured. The exact-model Gamers Nexus teardown confirms these are spring-loaded mounts passing through the PCB.",
+        "ru": "Один из четырёх подпружиненных винтов крепления радиатора, явно показанных вокруг GPU на образце точной EVGA RTX 3060 XC BLACK. Положение приблизительно восстановлено по фотографии; профиль головки, резьба, длина, параметры пружины и момент затяжки не измерены. Разборка точной модели Gamers Nexus подтверждает, что это подпружиненные крепления, проходящие через PCB."
       }
     },
     {
@@ -607,11 +609,12 @@
       "evidence_status": "visible_exact_model",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
-        "src.lanoc.review"
+        "src.lanoc.review",
+        "src.gamersnexus.teardown"
       ],
       "description": {
-        "en": "One of the four heatsink mounting screws explicitly visible around the GPU in the exact EVGA RTX 3060 XC BLACK review sample. Approximate photo-derived position only; head profile, thread, length, spring specification and torque are not measured.",
-        "ru": "Один из четырёх винтов крепления радиатора, явно показанных вокруг GPU на образце точной EVGA RTX 3060 XC BLACK. Положение приблизительно восстановлено по фотографии; профиль головки, резьба, длина, параметры пружины и момент затяжки не измерены."
+        "en": "One of the four spring-loaded heatsink mounting screws explicitly visible around the GPU in the exact EVGA RTX 3060 XC BLACK review sample. Approximate photo-derived position only; head profile, thread, length, spring specification and torque are not measured. The exact-model Gamers Nexus teardown confirms these are spring-loaded mounts passing through the PCB.",
+        "ru": "Один из четырёх подпружиненных винтов крепления радиатора, явно показанных вокруг GPU на образце точной EVGA RTX 3060 XC BLACK. Положение приблизительно восстановлено по фотографии; профиль головки, резьба, длина, параметры пружины и момент затяжки не измерены. Разборка точной модели Gamers Nexus подтверждает, что это подпружиненные крепления, проходящие через PCB."
       }
     },
     {
@@ -625,11 +628,12 @@
       "evidence_status": "visible_exact_model",
       "geometry_status": "illustrative_proxy",
       "source_ids": [
-        "src.lanoc.review"
+        "src.lanoc.review",
+        "src.gamersnexus.teardown"
       ],
       "description": {
-        "en": "One of the four heatsink mounting screws explicitly visible around the GPU in the exact EVGA RTX 3060 XC BLACK review sample. Approximate photo-derived position only; head profile, thread, length, spring specification and torque are not measured.",
-        "ru": "Один из четырёх винтов крепления радиатора, явно показанных вокруг GPU на образце точной EVGA RTX 3060 XC BLACK. Положение приблизительно восстановлено по фотографии; профиль головки, резьба, длина, параметры пружины и момент затяжки не измерены."
+        "en": "One of the four spring-loaded heatsink mounting screws explicitly visible around the GPU in the exact EVGA RTX 3060 XC BLACK review sample. Approximate photo-derived position only; head profile, thread, length, spring specification and torque are not measured. The exact-model Gamers Nexus teardown confirms these are spring-loaded mounts passing through the PCB.",
+        "ru": "Один из четырёх подпружиненных винтов крепления радиатора, явно показанных вокруг GPU на образце точной EVGA RTX 3060 XC BLACK. Положение приблизительно восстановлено по фотографии; профиль головки, резьба, длина, параметры пружины и момент затяжки не измерены. Разборка точной модели Gamers Nexus подтверждает, что это подпружиненные крепления, проходящие через PCB."
       }
     },
     {
@@ -5675,6 +5679,78 @@
       "description": {
         "en": "Individually selectable swept-blade proxy. Two front-view photographs in an exact-SKU retail listing show eight visible blade surfaces per fan. The mesh does not reproduce calibrated blade geometry or LanOC's observed raised EVGA E-logo / golf-ball-like surface details; camber, pitch, thickness and embossing dimensions remain unmeasured.",
         "ru": "Отдельно выбираемый макет изогнутой лопасти. На двух фронтальных фотографиях карточки товара с точным SKU видны восемь лопастных поверхностей на вентилятор. Сетка не воспроизводит калиброванную геометрию или отмеченный LanOC рельеф EVGA E, похожий на ямочки мяча для гольфа; кривизна, шаг, толщина и размеры рельефа не измерены."
+      }
+    },
+    {
+      "id": "fastener.cooler.fin_stack_base",
+      "parent_id": "assembly.fasteners",
+      "name": {
+        "en": "Fin-stack base retaining screws · count described as two",
+        "ru": "Винты крепления основания пакета рёбер · по описанию два"
+      },
+      "category": "fastener",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "description": {
+        "en": "A separate pair of screws is described as securing the fin-stack base to the PCB. The presenter calls them 'a couple'; individual centres, head profile, thread, length and torque are not mapped. Do not merge this group with the four spring-loaded GPU mounting screws or assume it maps one-to-one to Tom's Hardware's eight-screw aggregate.",
+        "ru": "Отдельно описана пара винтов, крепящих основание пакета рёбер к PCB. Автор называет их «a couple»; индивидуальные координаты, профиль головки, резьба, длина и момент затяжки не нанесены. Не объединять эту группу с четырьмя подпружиненными винтами крепления GPU и не считать её однозначно соответствующей агрегату из восьми винтов Tom's Hardware."
+      }
+    },
+    {
+      "id": "fastener.io.bracket.mount",
+      "parent_id": "assembly.fasteners",
+      "name": {
+        "en": "I/O bracket mounting screw-and-nut pair",
+        "ru": "Пара винтов и гаек крепления I/O-планки"
+      },
+      "category": "fastener",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "description": {
+        "en": "The exact-model teardown shows two narrower screws associated with removing the I/O plate, with a nut on the opposite side of each. The pair is preserved as a logical fastener group; individual coordinates, thread, length, head profile and torque are unknown.",
+        "ru": "В разборке точной модели показаны два более узких винта при снятии I/O-планки, с гайкой на обратной стороне каждого. Пара сохранена как логическая группа крепежа; индивидуальные координаты, резьба, длина, профиль головки и момент затяжки неизвестны."
+      }
+    },
+    {
+      "id": "fastener.io.display.output",
+      "parent_id": "assembly.fasteners",
+      "name": {
+        "en": "Display-output retention screws · three",
+        "ru": "Винты крепления выходной панели · три"
+      },
+      "category": "fastener",
+      "evidence_status": "visible_exact_model",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "description": {
+        "en": "Three smaller screws are shown retaining the display-output section during I/O bracket removal. The presenter selects a Phillips #0 driver for these screws. The group is not mapped one-to-one to the four connector receptacles; individual centres, thread, length and torque are unknown.",
+        "ru": "При снятии I/O-планки показаны три меньших винта крепления секции видеовыходов. Для них автор выбирает отвёртку Phillips #0. Группа не сопоставляется один-к-одному с четырьмя разъёмами; индивидуальные координаты, резьба, длина и момент затяжки неизвестны."
+      }
+    },
+    {
+      "id": "fastener.shroud.candidate",
+      "parent_id": "assembly.shroud",
+      "name": {
+        "en": "Additional shroud fasteners · count uncertain",
+        "ru": "Дополнительный крепёж кожуха · количество не установлено"
+      },
+      "category": "fastener",
+      "evidence_status": "candidate_count_requires_exact_board_confirmation",
+      "geometry_status": "logical_only",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "description": {
+        "en": "During the fan-removal discussion, the presenter points out additional shroud screws but is uncertain whether the set totals four or six. Candidate group only: no numeric count, individual positions, fastener type or removal sequence is asserted.",
+        "ru": "При обсуждении снятия вентиляторов автор указывает на дополнительные винты кожуха, но не уверен, состоит ли группа из четырёх или шести креплений. Только кандидатная группа: точное количество, индивидуальные положения, тип крепежа и последовательность снятия не утверждаются."
       }
     }
   ],

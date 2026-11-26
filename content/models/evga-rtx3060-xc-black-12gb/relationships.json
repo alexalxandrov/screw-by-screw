@@ -2826,6 +2826,60 @@
       "source_ids": [
         "src.newegg.exact_sku.product_photo"
       ]
+    },
+    {
+      "id": "rel.fasteners.contains.fin_stack_base",
+      "from": "assembly.fasteners",
+      "to": "fastener.cooler.fin_stack_base",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.fasteners.contains.io_bracket_mount",
+      "from": "assembly.fasteners",
+      "to": "fastener.io.bracket.mount",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.fasteners.contains.io_display_output",
+      "from": "assembly.fasteners",
+      "to": "fastener.io.display.output",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.shroud.contains.candidate_fasteners",
+      "from": "assembly.shroud",
+      "to": "fastener.shroud.candidate",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.fastener.io_bracket_mount.fastens.bracket",
+      "from": "fastener.io.bracket.mount",
+      "to": "connector.io.bracket",
+      "type": "fastened_to",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.fastener.io_display_output.fastens.bracket",
+      "from": "fastener.io.display.output",
+      "to": "connector.io.bracket",
+      "type": "fastened_to",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
     }
   ]
 }

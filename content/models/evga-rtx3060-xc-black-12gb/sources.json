@@ -39,12 +39,13 @@
           "locator": "01:30–05:33",
           "topic": "cooler_fasteners_and_fan_connectors",
           "findings": [
-            "Four spring-loaded cooler mounting screws pass through the PCB around the GPU; the presenter uses a Phillips #0 driver.",
-            "Additional screws secure the fin-stack base and I/O/display bracket. These are distinct from the four GPU mounting screws; the video does not provide a fully calibrated board-wide screw map.",
-            "Both fan leads are separate connectors with release clips; disconnect before lifting the cooler."
+            "Four spring-loaded cooler mounting screws pass through the PCB around the GPU. This is a distinct four-screw GPU mount group.",
+            "A separate pair of screws secures the fin-stack base to the board; the presenter describes them as 'a couple'. Their exact positions are not mapped.",
+            "I/O-plate removal exposes two narrower screws with a nut on the opposite side of each, followed by three smaller display-output retaining screws. The presenter selects a Phillips #0 driver for the three display-output screws.",
+            "Both fan leads are separate connectors with release clips; disconnect them before lifting/separating the cooler."
           ],
           "confidence": "exact_model_teardown_observation",
-          "limitations": "The video does not enumerate every screw in the same grouping as Tom's Hardware's eight rear fasteners. Preserve the four GPU-area screws as a known subset; do not infer that every fan/shroud/port fastener is part of the eight."
+          "limitations": "The teardown exposes several distinct hardware groups but does not provide a calibrated screw map or a one-to-one mapping to Tom's Hardware's eight-screw cooler/shroud aggregate. Do not sum the four GPU mounts, fin-stack base pair, I/O screw/nut pair, display-output screws and Tom's Hardware count as one total. No thread, length, torque or complete removal order is supplied."
         },
         {
           "locator": "05:33–06:45",
@@ -64,11 +65,12 @@
           "findings": [
             "The presenter identifies a row of MOSFETs contacted by a copper plate.",
             "Two inductors are discussed on the opposite-side power area; the presenter tentatively calls that area the memory VRM, so that functional assignment remains tentative.",
-            "The presenter notes a thermal-pad impression on the two-inductor area but says the pad contact is incomplete for the rest of the nearby inductors.",
-            "Each fan is retained by three screws and has its own independently replaceable lead."
+            "The presenter notes a thermal-pad impression on the two-inductor area but says pad contact is incomplete for the rest of the nearby inductors.",
+            "Each fan is retained by three screws and has its own independently replaceable lead.",
+            "Additional shroud screws are pointed out during fan removal, but the presenter is unsure whether the group contains four or six; no exact shroud fastener count is accepted."
           ],
           "confidence": "exact_model_teardown_observation",
-          "limitations": "No MOSFET part number, inductor designation, inductance, VRM phase topology, controller identity, pad footprint or screw coordinates are provided."
+          "limitations": "No MOSFET part number, inductor designation, inductance, VRM phase topology, controller identity, pad footprint or screw coordinates are provided. The shroud fastener count is explicitly uncertain and must remain a candidate, not a numeric claim."
         },
         {
           "locator": "11:00–13:25",

@@ -1202,6 +1202,54 @@
         "src.newegg.exact_sku.product_photo"
       ],
       "notes": "Two front-view images in a Newegg listing whose title/model field identify exact SKU 12G-P5-3655-KR show eight visible impeller blade surfaces per fan. This is a photo count, not a manufacturer fan drawing, OEM datasheet or inspection of an installed sample. Blade camber, pitch, thickness, profile, depth and original fan part number remain unverified."
+    },
+    {
+      "id": "claim.cooler.fin_stack_base.screw_count",
+      "subject_id": "fastener.cooler.fin_stack_base",
+      "predicate": "fin_stack_base_to_pcb_screw_count",
+      "value": 2,
+      "unit": "screws",
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "notes": "The presenter describes 'a couple' of additional screws securing the fin-stack base to the PCB. Count is preserved as two from the spoken description; exact coordinates and screw specifications are not available."
+    },
+    {
+      "id": "claim.io.bracket.mount_screw_count",
+      "subject_id": "fastener.io.bracket.mount",
+      "predicate": "io_bracket_narrow_screw_count",
+      "value": 2,
+      "unit": "screws",
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "notes": "The teardown shows two narrow I/O-plate screws with nuts on the opposite side. Individual positions and specifications are not measured."
+    },
+    {
+      "id": "claim.io.display_output.screw_count",
+      "subject_id": "fastener.io.display.output",
+      "predicate": "display_output_retaining_screw_count",
+      "value": 3,
+      "unit": "screws",
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "notes": "Three smaller screws are shown securing the display-output section. They are not assigned one per connector."
+    },
+    {
+      "id": "claim.io.display_output.driver_size",
+      "subject_id": "fastener.io.display.output",
+      "predicate": "display_output_retaining_screw_driver",
+      "value": "Phillips #0",
+      "unit": "driver",
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "notes": "The presenter explicitly selects a Phillips #0 driver immediately before removing the three smaller display-output retaining screws. This driver note is not transferred to unrelated fastener groups."
     }
   ]
 }
