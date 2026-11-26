@@ -103,12 +103,12 @@ jobs:
           gzip -dk tools/modeling/build_ibm_pc_5150_blockout.py.gz
           gzip -dk tests/test_ibm_pc_5150_content.py.gz
           gzip -dk e2e/catalog.spec.js.gz
+          gzip -dk content/models/ibm-pc-5150-1981/*.json.gz
       - name: Generate IBM PC 5150 Blender scene and GLB
         run: |
           ./blender-4.3.2-linux-x64/blender --background --factory-startup --python-exit-code 1 --python tools/modeling/build_ibm_pc_5150_blockout.py
       - name: Validate IBM PC 5150 content and scene bindings
         run: |
-          gzip -dk content/models/ibm-pc-5150-1981/*.json.gz
           python tools/content/build_release_manifest.py content/models/ibm-pc-5150-1981
           python tools/content/validate_model_package.py content/models/ibm-pc-5150-1981
           python tools/content/validate_glb_bindings.py \
