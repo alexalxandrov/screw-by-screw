@@ -7,6 +7,7 @@
 The following already exists:
 
 - `content/catalog/models.json` is a data-driven bilingual catalogue with categories, model IDs, manufacturer/part-number identity, package version/path and geometry status.
+- This branch adds optional, validated `identity_scope` and `model_kind` fields to the catalogue adapter. `exact_sku` requires a real part number; platform-family records can leave `part_number` empty. Existing catalogue records remain backward-compatible.
 - `src/data/catalog.js` validates categories, unique catalogue IDs, duplicate manufacturer/part-number pairs, model package IDs and safe relative `.sbsmodel` paths.
 - `src/viewer/ModelPackageLoader.js` validates the portable model package and its cross-file references before loading.
 - `src/main.js` has `fetchCatalogPackage()`, `openCatalogEntry()` and `applyPackageData()`; selected catalogue packages can be loaded through the shared package loader.
@@ -43,7 +44,7 @@ Each catalogue entry should carry:
 - package status and geometry/evidence status;
 - optional compatibility/related-model references.
 
-Do not put a platform-family code into `part_number` and pretend it is a manufacturer SKU. Extend the catalogue schema to represent family-level research entries honestly.
+Do not put a platform-family code into `part_number` and pretend it is a manufacturer SKU. The adapter on this branch represents family-level research entries honestly through `identity_scope`.
 
 ## Target package architecture
 
@@ -110,7 +111,7 @@ A single model may contain a mixture of these. Claims must have per-claim proven
 ## Delivery sequence
 
 1. Stabilize current RTX 3060 work and resolve the existing PR/Actions approval state before stacking more release work.
-2. Add the catalogue identity-scope and model-kind schema without registering an incomplete PC package.
+2. Extend and test the catalogue identity-scope and model-kind schema without registering an incomplete PC package. (Implemented in this branch.)
 3. Convert startup to use the same generic package-loading path as catalogue switching.
 4. Generalize validators and CI so the second device does not require RTX-specific code.
 5. Build the Dell OptiPlex 5060 Tower research package and staged geometry.
