@@ -57,3 +57,13 @@ Do not delete old branch refs until:
 4. The obsolete comparison PR #36 is closed as superseded by the consolidated implementation.
 
 No branch refs are deleted by this change.
+
+## Final state — merged and cleanup-ready
+
+- Consolidation PR [#39](https://github.com/alexalxandrov/screw-by-screw/pull/39) was merged with a regular merge commit, not squash or rebase.
+- Final merge commit on `main`: `3f97a936555dff88517f8b0e3f7e31b81e952e5d`.
+- Superseded comparison PR [#36](https://github.com/alexalxandrov/screw-by-screw/pull/36) was closed.
+- All 22 divergent branch tips listed above were re-compared against the merged `main`; each returned `ahead_by = 0` and `total_commits = 0`. Every unique branch tip is now an ancestor of `main`.
+- The remaining old refs were already ancestors of the pre-consolidation `main`. The temporary safety branch `backup/main-before-consolidation-2026-11-27` points to the old main commit, and `maintenance/consolidate-branches-2026-11-27` points to the merged PR head; both are ancestors of the new `main`.
+
+**Cleanup status:** 42 branches were present after the merge, including `main`. All 41 non-`main` refs are safe to delete from a history-preservation standpoint. No branch refs have been deleted in this operation. Once the refs are deleted, keep `main` as the only branch; tags and the commit graph remain separate from branch refs.
