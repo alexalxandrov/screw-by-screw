@@ -116,6 +116,8 @@ if (await exists(catalogManifestPath)) {
         !packagePath.endsWith(".sbsmodel")) {
       throw new Error("Unsafe catalogue package path for model " + String(model.id));
     }
+    // Unpublished research archives must never be bundled into the public offline launcher.
+    if (model.published === false) continue;
     const assetPath = resolve(publicRoot, ...packagePath.split("/"));
     const publicRelative = relative(publicRoot, assetPath);
     if (!publicRelative || publicRelative === ".." || publicRelative.startsWith(".." + sep) || isAbsolute(publicRelative)) {

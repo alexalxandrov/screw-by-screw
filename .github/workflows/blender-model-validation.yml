@@ -133,7 +133,11 @@ jobs:
           const rawMap = html.slice(jsonStart, jsonEnd).trim().replace(/;$/, "");
           const packages = JSON.parse(rawMap);
           const defaults = catalog.models.filter((model) => model.default_package);
+          const archived = catalog.models.filter((model) => model.published === false);
           if (defaults.length === 0) throw new Error("Catalogue has no default model package");
+          for (const model of archived) {
+            if (packages[model.id]) throw new Error("Standalone launcher must not embed unpublished research archive: " + model.id);
+          }
           for (const model of defaults) {
             const dataUrl = packages[model.id];
             if (typeof dataUrl !== "string" || !dataUrl.startsWith("data:application/octet-stream;base64,")) {
