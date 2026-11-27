@@ -67,7 +67,7 @@ jobs:
           for item in missing:
               print(f"::notice::{item}")
           PY
-          if grep -q '^ready=false    steps:
+    steps:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
