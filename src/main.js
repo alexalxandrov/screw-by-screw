@@ -557,6 +557,7 @@ function applyLanguage() {
   document.querySelectorAll("[data-i18n-placeholder]").forEach((node) => {
     node.placeholder = t(node.dataset.i18nPlaceholder);
   });
+  renderModelSwitcher();
   renderTree();
   if ($("#model-catalog-dialog")?.open) renderCatalog();
   if (state.compareMode) renderComparison();
