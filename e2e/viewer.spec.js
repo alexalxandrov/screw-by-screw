@@ -51,7 +51,7 @@ test("mobile workspace navigation remains hidden on desktop", async ({ page }) =
   await expect(page.locator(".details-panel")).toBeVisible();
 });
 
-import { test, expect } from "@playwright/test";
+
 
 test("renders the fallback GPU scene and selects a component", async ({ page }) => {
   const pageErrors = [];
