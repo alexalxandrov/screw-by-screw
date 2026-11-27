@@ -1,0 +1,27 @@
+{
+  "schema_version": "0.1.0",
+  "model_id": "pc.dell.optiplex-5060-tower.family",
+  "part_number": null,
+  "package_version": "0.3.0",
+  "status": "research_blockout",
+  "geometry_status": "illustrative_proxy_not_cad",
+  "identity_scope": "platform_family",
+  "file_count": 10,
+  "content_coverage": {
+    "motherboard_callouts": 26,
+    "semantic_components": 137,
+    "relationship_count": 145,
+    "process_layers": 6,
+    "assembly_steps": 12,
+    "learning_questions": 9,
+    "documented_source_records": 28,
+    "geometry_nodes": 58,
+    "optional_population_unknown": true,
+    "motherboard_callout_mappings": 26,
+    "technical_claims": 34,
+    "optional_fastener_references": 7,
+    "physical_fastener_instances": 24,
+    "service_observations": 19,
+    "storage_mechanism_nodes": 10
+  }
+}
