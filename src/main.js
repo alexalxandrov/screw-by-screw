@@ -114,7 +114,7 @@ const UI = {
     understand: "Understand", animate: "Animate", assembledState: "ASSEMBLED STATE", demoScene: "DEMO SCENE · LOCAL",
     assemblyState: "ASSEMBLY STATE", assemble: "Assemble", explode: "Explode",
     assembled: "ASSEMBLED", exploded: "EXPLODED", processLayers: "PROCESS LAYERS",
-    qualitativeOnly: "SCHEMATIC · NOT CFD / SPICE", cooling: "Airflow", powerDelivery: "Power path",
+    qualitativeOnly: "SCHEMATIC · NOT CFD / SPICE", cooling: "Airflow", powerDelivery: "Power path", gpuCompute: "GPU architecture", graphicsPipeline: "GPU data paths", videoCodec: "Video engines",
     powerOn: "Run animation", powerOff: "Stop animation", operatingState: "OPERATING VISUALIZATION", simulationSpeed: "Animation speed",
     cameraPreset: "VIEW", viewIso: "Isometric", viewFan: "Fan side", viewPcb: "PCB side", viewIo: "I/O bracket", viewPower: "Power connector", viewTop: "Top",
     sliceToggle: "Section cut", sliceAxis: "Axis", sliceNote: "Visual cut · uncapped · not CAD",
@@ -128,7 +128,7 @@ const UI = {
     loadError: "Could not load this GLB file.", loadedGlb: "GLB LOADED · LOCAL FILE", loadedPackage: "SBS MODEL PACKAGE · LOCAL", loadedBundled: "BUNDLED MODEL · LOCAL",
     demoLoaded: "DEMO SCENE · LOCAL", loading: "LOADING MODEL…", isolate: "Isolated",
     allVisible: "All components visible", layerCooling: "Cooling layer · qualitative",
-    layerPower: "Power path · qualitative", noWebgl: "WebGL is unavailable in this browser.",
+    layerPower: "Power path · qualitative", layerCompute: "GPU architecture · logical map", layerGraphicsPipeline: "Graphics paths · conceptual map", layerVideoCodec: "Video codec engines · logical map", noWebgl: "WebGL is unavailable in this browser.",
     source: "Source", noSources: "No direct source linked to this component.",
     modelLoaded: "Model ready", glbPicker: "Choose a .glb file", learn: "Learn", learning: "LEARNING", authoredAnimations: "PACKAGE ANIMATIONS", clipSelect: "Select clip", clipTimeline: "Animation timeline", clipPlay: "Play", clipPause: "Pause", clipStop: "Stop / reset", clipReady: "Ready", clipPlaying: "Playing", clipPaused: "Paused", clipCompleted: "Completed", clipTime: "TIME", clipEvidenceNote: "Authored model motion · not a physics simulation", clipEducationalApproximation: "Educational approximation · duration is not measured RPM", clipIllustrative: "Illustrative motion · not a measured mechanism", clipDocumentedMotion: "Documented motion · source-linked", clipMeasuredMotion: "Measured motion · source and method recorded", linkedComponents: "LINKED COMPONENTS", assumptions: "ASSUMPTIONS & LIMITS", processLayer: "PROCESS LAYER", fileTooLarge: "GLB exceeds the 256 MB limit.", packageTooLarge: "SBS model package exceeds the 512 MB limit.", externalResources: "This GLB references external files. Only self-contained GLB files are allowed.", question: "QUESTION", checkAnswer: "Check answer", nextQuestion: "Next question", finishQuiz: "Finish", restartQuiz: "Try again", correctAnswer: "Correct", wrongAnswer: "Not quite", quizComplete: "Quiz complete", yourScore: "Your score", chooseAnswer: "Choose an answer first", learningProgressSaved: "Progress saved in this browser", learningProgressLocal: "Local progress · this browser", learningProgressSession: "Local storage unavailable · session only"
   },
@@ -139,7 +139,7 @@ const UI = {
     understand: "Принцип работы", animate: "Анимировать", assembledState: "СОБРАННОЕ СОСТОЯНИЕ", demoScene: "ДЕМО-СЦЕНА · ЛОКАЛЬНО",
     assemblyState: "СОСТОЯНИЕ СБОРКИ", assemble: "Собрать", explode: "Разобрать",
     assembled: "СОБРАНО", exploded: "РАЗОБРАНО", processLayers: "СЛОИ ПРОЦЕССОВ",
-    qualitativeOnly: "СХЕМА · НЕ CFD / SPICE", cooling: "Воздушный поток", powerDelivery: "Путь питания",
+    qualitativeOnly: "СХЕМА · НЕ CFD / SPICE", cooling: "Воздушный поток", powerDelivery: "Путь питания", gpuCompute: "Архитектура GPU", graphicsPipeline: "Тракты GPU", videoCodec: "Медиаблоки видео",
     powerOn: "Включить анимацию", powerOff: "Остановить анимацию", operatingState: "ВИЗУАЛИЗАЦИЯ РАБОТЫ", simulationSpeed: "Скорость анимации",
     cameraPreset: "РАКУРС", viewIso: "Изометрия", viewFan: "Сторона вентиляторов", viewPcb: "Сторона PCB", viewIo: "Планка I/O", viewPower: "Разъём питания", viewTop: "Сверху",
     sliceToggle: "Сечение", sliceAxis: "Ось", sliceNote: "Визуальный срез · без крышек · не CAD",
@@ -153,7 +153,7 @@ const UI = {
     loadError: "Не удалось загрузить этот GLB-файл.", loadedGlb: "GLB ЗАГРУЖЕН · ЛОКАЛЬНЫЙ ФАЙЛ", loadedPackage: "ПАКЕТ SBS MODEL · ЛОКАЛЬНО", loadedBundled: "ВСТРОЕННАЯ МОДЕЛЬ · ЛОКАЛЬНО",
     demoLoaded: "ДЕМО-СЦЕНА · ЛОКАЛЬНО", loading: "ЗАГРУЗКА МОДЕЛИ…", isolate: "Изолировано",
     allVisible: "Все компоненты видимы", layerCooling: "Слой охлаждения · качественно",
-    layerPower: "Путь питания · качественно", noWebgl: "В этом браузере недоступен WebGL.",
+    layerPower: "Путь питания · качественно", layerCompute: "Архитектура GPU · логическая карта", layerGraphicsPipeline: "Тракты GPU · концептуальная схема", layerVideoCodec: "NVENC / NVDEC · логическая карта", noWebgl: "В этом браузере недоступен WebGL.",
     source: "Источник", noSources: "Для этого компонента нет прямой ссылки на источник.",
     modelLoaded: "Модель готова", glbPicker: "Выберите файл .glb", learn: "Обучение", learning: "ОБУЧЕНИЕ", authoredAnimations: "АНИМАЦИИ ПАКЕТА", clipSelect: "Выберите клип", clipTimeline: "Шкала анимации", clipPlay: "Пуск", clipPause: "Пауза", clipStop: "Стоп / сброс", clipReady: "Готово", clipPlaying: "Воспроизведение", clipPaused: "Пауза", clipCompleted: "Завершено", clipTime: "ВРЕМЯ", clipEvidenceNote: "Анимация из пакета · не физическая симуляция", clipEducationalApproximation: "Учебное приближение · длительность не является измеренным RPM", clipIllustrative: "Условное движение · не измеренный механизм", clipDocumentedMotion: "Движение подтверждено источником", clipMeasuredMotion: "Измеренное движение · источник и метод указаны", linkedComponents: "СВЯЗАННЫЕ КОМПОНЕНТЫ", assumptions: "ДОПУЩЕНИЯ И ОГРАНИЧЕНИЯ", processLayer: "СЛОЙ ПРОЦЕССА", fileTooLarge: "GLB превышает лимит 256 МБ.", packageTooLarge: "Пакет SBS model превышает лимит 512 МБ.", externalResources: "Этот GLB ссылается на внешние файлы. Разрешены только самодостаточные GLB.", question: "ВОПРОС", checkAnswer: "Проверить ответ", nextQuestion: "Следующий вопрос", finishQuiz: "Завершить", restartQuiz: "Повторить", correctAnswer: "Верно", wrongAnswer: "Не совсем", quizComplete: "Тест завершён", yourScore: "Ваш результат", chooseAnswer: "Сначала выберите ответ", learningProgressSaved: "Прогресс сохранён в этом браузере", learningProgressLocal: "ПРОГРЕСС · ЭТОТ БРАУЗЕР", learningProgressSession: "Локальное хранилище недоступно · только эта сессия"
   }
@@ -232,7 +232,8 @@ function updateAnimationPlayerUI(snapshot = state.animationPlayer?.getSnapshot()
       documented_motion: "clipDocumentedMotion",
       measured_motion: "clipMeasuredMotion"
     }[state.animationPlayer.clip?.evidence_status] ?? "clipEvidenceNote";
-    evidenceNote.textContent = t(evidenceLabel);
+    const description = localizedPackageText(state.animationPlayer.clip?.description);
+    evidenceNote.textContent = description ? `${t(evidenceLabel)} · ${description}` : t(evidenceLabel);
   }
   if (status) {
     status.textContent = animationStatusLabel(snapshot.status);
@@ -482,11 +483,11 @@ function tag(object, id, evidence = "illustrative", geometry = "proxy") {
   return object;
 }
 
-function makeGroup(parent, id, name, position = [0, 0, 0]) {
+function makeGroup(parent, id, name, position = [0, 0, 0], evidence = "visible_exact_model", geometry = "assembly_node") {
   const group = new THREE.Group();
   group.name = name;
   group.position.set(...position);
-  tag(group, id, "visible_exact_model", "assembly_node");
+  tag(group, id, evidence, geometry);
   parent.add(group);
   return group;
 }
@@ -556,6 +557,12 @@ function createFan(parent, index, x) {
     tag(bladeMesh, `fan.${index}.blade.${blade + 1}`);
     rotor.add(bladeMesh);
   }
+  // Exact-model teardown: three screws per replaceable fan; individual positions unknown.
+  for (let screwIndex = 1; screwIndex <= 3; screwIndex += 1) {
+    const screwId = `fastener.fan.${index}.${String(screwIndex).padStart(2, "0")}`;
+    makeGroup(fan, screwId, `Fan ${index} mounting screw ${screwIndex} · location unmapped`,
+      [0, 0, 0], "visible_exact_model", "logical_only");
+  }
 }
 
 function createFallbackModel() {
@@ -577,6 +584,36 @@ function createFallbackModel() {
   const cooling = makeGroup(root, "assembly.cooling", "Cooling assembly");
   const pcbAssembly = makeGroup(root, "assembly.pcb.electronics", "PCB and electronics assembly");
   const connectors = makeGroup(root, "assembly.connectors", "Connectors assembly");
+  const fasteners = makeGroup(root, "assembly.fasteners", "Eight cooler/shroud retention screws", [0, 0, 0], "visible_exact_model", "assembly_node");
+  // Only the four GPU-area screw centres are photo-estimated in the current scene.
+  // The four far/rear screws remain count-confirmed logical nodes without fake coordinates.
+  const gpuScrewPositions = [[72, 31], [122, 31], [72, 83], [122, 83]];
+  gpuScrewPositions.forEach(([x, z], index) => {
+    const id = "fastener.cooler." + String(index + 1).padStart(2, "0");
+    const head = new THREE.Mesh(
+      new THREE.CylinderGeometry(2.2, 2.2, 1.1, 24),
+      materials.metal
+    );
+    head.name = "GPU-area cooler screw " + (index + 1) + " · photo-position estimate";
+    head.position.set(x, 18.2, z);
+    tag(head, id, "visible_exact_model", "illustrative_proxy");
+    fasteners.add(head);
+    const crossA = new THREE.Mesh(new THREE.BoxGeometry(2.2, 0.25, 0.45), materials.shroud);
+    crossA.position.set(x, 18.82, z);
+    crossA.name = "Illustrative Phillips recess A";
+    tag(crossA, id, "illustrative", "illustrative_proxy");
+    fasteners.add(crossA);
+    const crossB = new THREE.Mesh(new THREE.BoxGeometry(0.45, 0.25, 2.2), materials.shroud);
+    crossB.position.set(x, 18.82, z);
+    crossB.name = "Illustrative Phillips recess B";
+    tag(crossB, id, "illustrative", "illustrative_proxy");
+    fasteners.add(crossB);
+  });
+  for (let index = 5; index <= 8; index += 1) {
+    const id = "fastener.cooler." + String(index).padStart(2, "0");
+    makeGroup(fasteners, id, "Rear-area cooler screw " + (index - 4) + " · position unmapped",
+      [0, 0, 0], "visible_exact_model", "logical_only");
+  }
 
   makeMesh(pcbAssembly, "assembly.pcb.board", "Exposed PCB proxy",
     new THREE.BoxGeometry(178, 1.6, 85), materials.pcb, [101, 16.5, 55], "visible_exact_model");
@@ -608,6 +645,24 @@ function createFallbackModel() {
   makeMesh(cooling, "cooling.gpu_contact", "Copper GPU contact proxy",
     new THREE.BoxGeometry(48, 3, 42), materials.copper, [97, -3, 57]);
 
+  // Match the selectable thermal-interface structure in the full Blender asset.
+  // Dimensions and placement below remain visual placeholders, not replacement-pad specs.
+  const thermalInterface = makeGroup(cooling, "cooling.thermal_interface", "Thermal interface group", [0, 0, 0], "teardown_supported", "illustrative_proxy");
+  makeMesh(thermalInterface, "cooling.thermal_paste.gpu", "GPU thermal compound proxy",
+    new THREE.BoxGeometry(19, 0.35, 19), materials.copper, [97, -5, 57]);
+  const memoryPads = makeGroup(thermalInterface, "cooling.thermal_pad.memory", "Memory thermal pads", [0, 0, 0], "teardown_supported", "illustrative_proxy");
+  for (let index = 0; index < 6; index += 1) {
+    const x = 50 + index * 16;
+    const padId = "cooling.thermal_pad.memory." + String(index + 1).padStart(2, "0");
+    makeMesh(memoryPads, padId, "Memory thermal pad proxy " + (index + 1),
+      new THREE.BoxGeometry(14, 0.65, 12), materials.metal, [x, -5.6, 57], "illustrative");
+  }
+  const vrmPads = makeGroup(thermalInterface, "cooling.thermal_pad.vrm", "Power-stage thermal pads", [0, 0, 0], "teardown_supported", "illustrative_proxy");
+  makeMesh(vrmPads, "cooling.thermal_pad.vrm.01", "Inductor-area thermal pad proxy · contact extent unmeasured",
+    new THREE.BoxGeometry(34, 0.65, 18), materials.metal, [145, -5.6, 78], "illustrative");
+  makeMesh(thermalInterface, "cooling.vrm.copper_contact", "Copper plate contacting MOSFET row · proxy",
+    new THREE.BoxGeometry(38, 1, 17), materials.copper, [147, -4.8, 64], "teardown_supported");
+
   const heatpipes = makeGroup(cooling, "cooling.heatpipes", "Heatpipe group · illustrative");
   const pipeMaterial = new THREE.MeshStandardMaterial({ color: 0xb97845, metalness: 0.78, roughness: 0.32 });
   const pipeCurves = [
@@ -621,8 +676,27 @@ function createFallbackModel() {
     heatpipes.add(pipe);
   });
 
-  makeMesh(pcbAssembly, "chip.gpu.ga106", "GPU package proxy",
+  const gpuPackage = makeMesh(pcbAssembly, "chip.gpu.ga106", "GPU package proxy",
     new THREE.BoxGeometry(40, 5, 40), materials.chip, [97, 14, 57], "teardown_supported");
+  // Architecture entries are logical navigation nodes, not physical silicon floorplan geometry.
+  const gpuDie = makeGroup(gpuPackage, "chip.gpu.die", "GA106 die · logical proxy", [0, 0, 0], "manufacturer_data", "logical_only");
+  const smCluster = makeGroup(gpuDie, "chip.gpu.sm.cluster", "GA106 SM cluster · logical", [0, 0, 0], "manufacturer_data", "logical_only");
+  for (const [id, name] of [
+    ["chip.gpu.cuda_core.array", "CUDA core array · 3,584"],
+    ["chip.gpu.tensor_core.array", "Tensor Core array · 112"],
+    ["chip.gpu.rt_core.array", "RT Core array · 28"],
+    ["chip.gpu.tmu.array", "Texture unit array · 112"],
+    ["chip.gpu.rop.array", "ROP array · 48"]
+  ]) {
+    makeGroup(smCluster, id, name, [0, 0, 0], "manufacturer_data", "logical_only");
+  }
+
+  const memoryBus = makeGroup(pcbAssembly, "chip.memory.gddr6.bus", "GDDR6 interface · 192-bit logical", [0, 0, 0], "manufacturer_data", "logical_only");
+  for (let index = 0; index < 6; index += 1) {
+    const channelId = "chip.memory.channel." + String(index + 1).padStart(2, "0");
+    makeGroup(memoryBus, channelId, "GDDR6 interface presentation segment " + (index + 1),
+      [50 + index * 16, 14, 57], "illustrative", "logical_only");
+  }
 
   const powerStage = makeGroup(pcbAssembly, "assembly.power_stage", "Power conversion zone · proxy", [145, 13.5, 78]);
   const stageMaterial = new THREE.MeshStandardMaterial({ color: 0x555c64, metalness: 0.28, roughness: 0.5 });
@@ -636,6 +710,22 @@ function createFallbackModel() {
     part.name = "Unidentified power-stage proxy";
     powerStage.add(part);
   });
+  const shuntCluster = makeGroup(powerStage, "power.shunt.cluster", "Two current-sense shunts · proxy");
+  makeMesh(shuntCluster, "power.shunt.8pin", "Auxiliary 8-pin shunt · 5 mΩ stated",
+    new THREE.BoxGeometry(3, 1.2, 2), materials.metal, [-18, -2, -15], "teardown_supported");
+  makeGroup(shuntCluster, "power.shunt.pcie_slot", "PCIe-slot 12 V shunt · value unknown",
+    [-10, -2, -15], "teardown_supported", "logical_only");
+  makeGroup(powerStage, "power.fuse.input", "Input protection fuse · rating unknown",
+    [22, -2, 12], "teardown_supported", "logical_only");
+  const mosfetRow = makeGroup(powerStage, "power.switching_device.cluster", "MOSFET row · copper plate contact");
+  for (let index = 0; index < 6; index += 1) {
+    makeMesh(mosfetRow, `power.switching_device.proxy.${index + 1}`, `MOSFET visual proxy ${index + 1}`,
+      new THREE.BoxGeometry(3.5, 2, 4), materials.connector, [-9 + index * 5, -2, -13]);
+  }
+  makeGroup(powerStage, "power.inductor.candidate.1", "Inductor 1 · exact teardown observed",
+    [-4, -2, -5], "teardown_supported", "illustrative_proxy");
+  makeGroup(powerStage, "power.inductor.candidate.2", "Inductor 2 · exact teardown observed",
+    [12, -2, 8], "teardown_supported", "illustrative_proxy");
   for (let index = 0; index < 6; index += 1) {
     makeMesh(pcbAssembly, `chip.memory.candidate.${index + 1}`, `GDDR6 candidate ${index + 1}`,
       new THREE.BoxGeometry(14, 4, 12), materials.memory,
@@ -797,6 +887,8 @@ function claimPredicateLabel(predicate) {
     memory_bus_width: ["Ширина шины памяти", "Memory bus width"],
     cuda_core_count: ["Количество CUDA-ядер", "CUDA core count"],
     boost_clock: ["Boost-частота", "Boost clock"],
+    observed_peak_frequency: ["Наблюдаемая пиковая частота", "Observed peak frequency"],
+    observed_heatpipe_tube_diameter_estimate: ["Оценочный диаметр трубки теплотрубки", "Estimated heatpipe tube diameter"],
     memory_bandwidth: ["Пропускная способность памяти", "Memory bandwidth"],
     nominal_length: ["Номинальная длина", "Nominal length"],
     overall_outer_length: ["Полная длина кожуха", "Overall outer length"],
@@ -810,7 +902,13 @@ function claimPredicateLabel(predicate) {
     pcb_revision: ["Ревизия печатной платы", "PCB revision"],
     gddr6_package_population: ["Количество микросхем GDDR6", "GDDR6 package population"],
     heatsink_fin_count: ["Количество рёбер радиатора", "Heatsink fin count"],
-    gddr6_package_part_number: ["Маркировка микросхем памяти", "GDDR6 package part number"]
+    gddr6_package_part_number: ["Маркировка микросхем памяти", "GDDR6 package part number"],
+    effective_memory_clock: ["Эффективная частота памяти", "Effective memory clock"],
+    total_graphics_power: ["Полная мощность видеокарты", "Total graphics power"],
+    recommended_power_supply: ["Рекомендуемая мощность БП", "Recommended power supply"],
+    display_interface_versions: ["Версии видеовыходов", "Display interface versions"],
+    slot_width: ["Ширина по слотам", "Slot width"],
+    max_digital_resolution: ["Максимальное цифровое разрешение", "Maximum digital resolution"]
   };
   const label = labels[predicate];
   return label ? label[state.language === "ru" ? 0 : 1] : String(predicate ?? "").replaceAll("_", " ");
@@ -876,6 +974,23 @@ function renderClaims(componentId) {
         link.rel = "noopener noreferrer";
         link.textContent = `↗ ${source.label}`;
         sourceList.append(link);
+
+        if (source.identity_reference_url) {
+          const identityPage = document.createElement("a");
+          identityPage.href = source.identity_reference_url;
+          identityPage.target = "_blank";
+          identityPage.rel = "noopener noreferrer";
+          identityPage.textContent = state.language === "ru" ? "↗ Страница с фото наклейки SKU" : "↗ SKU identity photo page";
+          sourceList.append(identityPage);
+        }
+        if (source.identity_reference_image_url) {
+          const identityImage = document.createElement("a");
+          identityImage.href = source.identity_reference_image_url;
+          identityImage.target = "_blank";
+          identityImage.rel = "noopener noreferrer";
+          identityImage.textContent = state.language === "ru" ? "↗ Открыть фото маркировки PCB" : "↗ Open PCB label photo";
+          sourceList.append(identityImage);
+        }
       });
       card.append(sourceList);
     }
@@ -1173,7 +1288,8 @@ function renderDetails(id) {
 
   $("#empty-selection").hidden = true;
   $("#component-details").hidden = false;
-  $("#detail-index").textContent = String([...state.componentNodes.keys()].indexOf(id) + 1).padStart(2, "0");
+  const componentIndex = [...state.componentNodes.keys()].indexOf(id);
+  $("#detail-index").textContent = componentIndex < 0 ? "—" : String(componentIndex + 1).padStart(2, "0");
   $("#detail-category").textContent = (data.category ?? "component").replaceAll("_", " ").toUpperCase();
   $("#detail-name").textContent = label;
   $("#detail-description").textContent = description;
@@ -1366,6 +1482,60 @@ function renderProcessLayer() {
   $("#process-detail-type").textContent = layer.type.replaceAll("_", " ").toUpperCase();
   $("#process-detail-title").textContent = state.language === "ru" ? layer.title.ru : layer.title.en;
   $("#process-detail-description").textContent = state.language === "ru" ? layer.description.ru : layer.description.en;
+  const diagramHost = $("#process-diagram");
+  diagramHost.replaceChildren();
+  const diagram = layer.visualization?.diagram;
+  diagramHost.hidden = !diagram;
+  if (diagram) {
+    const badge = document.createElement("div");
+    badge.className = "architecture-diagram-badge";
+    badge.textContent = localizedPackageText(diagram.badge);
+    diagramHost.append(badge);
+
+    const grid = document.createElement("div");
+    grid.className = "architecture-diagram-grid";
+    (diagram.groups ?? []).forEach((group, groupIndex) => {
+      const section = document.createElement("section");
+      section.className = "architecture-diagram-group";
+      section.dataset.groupId = group.id ?? String(groupIndex);
+      const heading = document.createElement("h4");
+      heading.textContent = localizedPackageText(group.title);
+      const summary = document.createElement("p");
+      summary.className = "architecture-diagram-summary";
+      summary.textContent = localizedPackageText(group.summary);
+      const nodes = document.createElement("div");
+      nodes.className = "architecture-node-grid";
+      (group.nodes ?? []).forEach((node) => {
+        const componentId = node.component_id;
+        if (!componentId) return;
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "architecture-node";
+        button.dataset.componentId = componentId;
+        button.setAttribute("aria-label", localizedPackageText(node.title));
+        const title = document.createElement("span");
+        title.className = "architecture-node-title";
+        title.textContent = localizedPackageText(node.title);
+        const metric = document.createElement("span");
+        metric.className = "architecture-node-metric";
+        metric.textContent = localizedPackageText(node.metric);
+        button.append(title, metric);
+        button.addEventListener("click", () => selectComponent(componentId));
+        nodes.append(button);
+      });
+      section.append(heading, summary, nodes);
+      grid.append(section);
+      if (groupIndex < (diagram.groups?.length ?? 0) - 1) {
+        const connector = document.createElement("div");
+        connector.className = "architecture-diagram-connector";
+        connector.setAttribute("aria-hidden", "true");
+        connector.textContent = "↓";
+        grid.append(connector);
+      }
+    });
+    diagramHost.append(grid);
+  }
+
 
   const componentHost = $("#process-components");
   componentHost.replaceChildren();
@@ -1375,6 +1545,7 @@ function renderProcessLayer() {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "process-component-chip";
+    button.dataset.componentId = id;
     button.textContent = state.language === "ru" ? data.ru : data.en;
     button.addEventListener("click", () => selectComponent(id));
     componentHost.append(button);
@@ -1384,7 +1555,7 @@ function renderProcessLayer() {
   assumptions.replaceChildren();
   (layer.assumptions ?? []).forEach((item) => {
     const li = document.createElement("li");
-    li.textContent = item;
+    li.textContent = localizedPackageText(item);
     assumptions.append(li);
   });
 
@@ -1433,7 +1604,11 @@ function clearHighlights() {
 
 function selectComponent(id) {
   const object = findNodeById(id);
-  if (!object) return;
+  // Some process diagrams expose manufacturer-documented logical components
+  // (for example NVENC/NVDEC) that intentionally have no physical placement
+  // or mesh in the current illustrative scene. They remain inspectable from
+  // their semantic package data without fabricating a 3D object.
+  if (!object && !state.catalog.has(id)) return;
   clearHighlights();
   state.activeLayer = null;
   buildProcessVisuals();
@@ -1442,8 +1617,10 @@ function selectComponent(id) {
   state.learningMode = false;
   state.selected = object;
   state.selectedId = id;
-  object.traverse((child) => { if (child.isMesh) applyHighlight(child); });
-  if (object.isMesh) applyHighlight(object);
+  if (object) {
+    object.traverse((child) => { if (child.isMesh) applyHighlight(child); });
+    if (object.isMesh) applyHighlight(object);
+  }
   renderDetails(id);
   renderTree();
   setStatus(id);
@@ -1761,13 +1938,15 @@ function setLayer(layer) {
     if (id && linkedIds.has(id)) matches.push(object);
   });
   matches.forEach((object) => {
-    const color = state.activeLayer === "cooling" ? 0x6bc8e8 : 0xe8b75e;
+    const layerColors = { cooling: 0x6bc8e8, power_delivery: 0xe8b75e, gpu_compute: 0xb18be6 };
+    const color = layerColors[state.activeLayer] ?? 0xc3e86d;
     if (object.isMesh) applyHighlight(object, color);
     else object.traverse((child) => { if (child.isMesh) applyHighlight(child, color); });
   });
   buildProcessVisuals();
   renderProcessLayer();
-  setStatus(t(state.activeLayer === "cooling" ? "layerCooling" : "layerPower"));
+  const layerStatus = { cooling: "layerCooling", power_delivery: "layerPower", gpu_compute: "layerCompute", graphics_pipeline: "layerGraphicsPipeline", video_codec: "layerVideoCodec" };
+  setStatus(t(layerStatus[state.activeLayer] ?? "ready"));
 }
 
 function fitModel(root) {

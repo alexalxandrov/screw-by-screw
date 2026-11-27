@@ -1,6 +1,6 @@
-import MODEL_PACKAGE from "../../content/models/evga-rtx3060-xc-black-12gb/model.json";
-import SOURCE_PACKAGE from "../../content/models/evga-rtx3060-xc-black-12gb/sources.json";
-import COMPONENT_PACKAGE from "../../content/models/evga-rtx3060-xc-black-12gb/components.json";
+import MODEL_PACKAGE from "../../content/models/evga-rtx3060-xc-black-12gb/model.json" with { type: "json" };
+import SOURCE_PACKAGE from "../../content/models/evga-rtx3060-xc-black-12gb/sources.json" with { type: "json" };
+import COMPONENT_PACKAGE from "../../content/models/evga-rtx3060-xc-black-12gb/components.json" with { type: "json" };
 
 export const EVIDENCE = {
   manufacturer_data: {
@@ -45,6 +45,18 @@ export const EVIDENCE = {
     copyEn: "This is a candidate placement only. Exact PCB revision and component population must be confirmed.",
     copyRu: "Это только кандидат размещения. Необходимо подтвердить ревизию PCB и состав компонентов."
   },
+  candidate_reference_observation: {
+    en: "Candidate reference observation",
+    ru: "Кандидатное наблюдение по справочному изображению",
+    copyEn: "The marking is visible on a public product-page photograph, but the photographed board has not been independently tied to this exact retail sample or production batch.",
+    copyRu: "Маркировка читается на фотографии из публичной карточки продукта, но показанная плата не сопоставлена независимо с этим точным розничным экземпляром или производственной партией."
+  },
+  secondary_catalog_data: {
+    en: "Secondary catalog data",
+    ru: "Данные вторичного каталога",
+    copyEn: "A device attribute is transcribed from a secondary catalog, not a primary manufacturer datasheet. Confirm it against an authoritative datasheet before using it for repair or design.",
+    copyRu: "Параметр микросхемы перенесён из вторичного каталога, а не первичного паспорта производителя. Перед ремонтом или проектированием сверяйте его с официальным даташитом."
+  },
   illustrative: {
     en: "Illustrative proxy",
     ru: "Условная геометрия",
@@ -58,6 +70,16 @@ export const EVIDENCE = {
     copyRu: "Надёжное значение отсутствует. Поле намеренно оставлено неизвестным."
   }
 };
+
+function safeExternalHttpUrl(value) {
+  if (typeof value !== "string" || !value.trim()) return "";
+  try {
+    const url = new URL(value);
+    return url.protocol === "http:" || url.protocol === "https:" ? url.href : "";
+  } catch {
+    return "";
+  }
+}
 
 export function createModelDataAdapter(data) {
   const modelPackage = data?.model;
@@ -75,9 +97,12 @@ export function createModelDataAdapter(data) {
       status: modelPackage.geometry_status ?? "unknown",
       units: modelPackage.coordinate_system?.units ?? null,
       sources: sourcePackage.sources.map((source) => ({
+        ...source,
         id: source.id,
-        label: source.title ?? source.id,
-        url: source.url ?? ""
+        label: source.title ?? source.label ?? source.id,
+        url: safeExternalHttpUrl(source.url),
+        identity_reference_url: safeExternalHttpUrl(source.identity_reference_url),
+        identity_reference_image_url: safeExternalHttpUrl(source.identity_reference_image_url)
       }))
     },
     components: componentPackage.components.map((component) => ({

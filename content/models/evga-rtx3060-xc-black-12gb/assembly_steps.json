@@ -1,8 +1,172 @@
 {
   "schema_version": "0.1.0",
-  "status": "not_authored",
-  "policy": "Do not infer a complete removal sequence from sparse video timecodes. Author steps only after reviewing the full teardown or a service procedure.",
-  "steps": [],
+  "status": "partial_observed_sequence",
+  "policy": "Only actions directly supported by exact-SKU-linked XC BLACK sources are included. The four spring-loaded GPU mounting screws, separate fin-stack base pair, narrow I/O-bracket screw/nut pair, three display-output screws and fan-retaining screws are distinct source-described groups. Tom's Hardware separately reports eight cooler/shroud retention screws (four around the GPU and four near the far end), but the sources do not map every screw one-to-one across these categories. Do not sum these source group counts. Additional shroud fasteners mentioned by Gamers Nexus have an uncertain count (four or six) and remain a logical candidate only. This is a partial observation sequence, not a complete service/reassembly procedure. No exact torque, thread, screw length, complete map, PCB revision, BoardView, pad replacement specification or electrical procedure is inferred.",
+  "steps": [
+    {
+      "id": "step.remove-gpu-heatsink-mounts",
+      "sequence": 1,
+      "title": {
+        "en": "Remove the four spring-loaded GPU cooler mounting screws",
+        "ru": "Вывернуть четыре подпружиненных винта крепления кулера вокруг GPU"
+      },
+      "description": {
+        "en": "The exact-model Gamers Nexus teardown shows four spring-loaded cooler mounting screws passing through the PCB around the GPU. LanOC's exact XC BLACK sample independently shows the same four GPU-area mounting positions, which are the only fasteners in this group represented with approximate photo-positioned proxies. This is the GPU mount subset only; it is not the full cooler/shroud fastener count. Tom's Hardware separately reports eight cooler/shroud retention screws, but the other source-described fastener groups are not mapped one-to-one to that aggregate.",
+        "ru": "В разборке точной модели Gamers Nexus показаны четыре подпружиненных винта крепления кулера, проходящие через PCB вокруг GPU. В точном образце XC BLACK из обзора LanOC независимо видны те же четыре положения крепежа в зоне GPU; только эти винты представлены макетами с приблизительными координатами по фото. Это только группа крепления GPU, а не полный подсчёт винтов кулера/кожуха. Tom's Hardware отдельно указывает восемь винтов крепления кулера/кожуха, но другие группы из видеоряда не сопоставлены с этим агрегатом один-к-одному."
+      },
+      "component_ids": [
+        "assembly.fasteners",
+        "assembly.cooling",
+        "fastener.cooler.01",
+        "fastener.cooler.02",
+        "fastener.cooler.03",
+        "fastener.cooler.04"
+      ],
+      "tool_requirements": [],
+      "safety_notes": {
+        "en": "Disconnect mains power and remove the graphics card before handling. Observe ESD precautions and support the cooler as fasteners are released. No torque or reinstallation value is documented.",
+        "ru": "Отключите питание от сети и извлеките видеокарту перед работой. Соблюдайте защиту от ЭСР и поддерживайте кулер при освобождении крепежа. Момент затяжки и параметры обратной установки не документированы."
+      },
+      "prerequisite_step_ids": [],
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "step.remove-fin-stack-base-retainers",
+      "sequence": 2,
+      "title": {
+        "en": "Release the separate fin-stack base retainers",
+        "ru": "Освободить отдельный крепёж основания пакета рёбер"
+      },
+      "description": {
+        "en": "Gamers Nexus describes a separate pair of screws securing the cooler fin-stack base to the board. The presenter calls them 'a couple'; this is kept as a two-screw logical group, with no invented screw centres or hardware specification. Do not conflate these with the four spring-loaded GPU mounts or add them to Tom's Hardware's eight-screw aggregate.",
+        "ru": "Gamers Nexus описывает отдельную пару винтов, крепящих основание пакета рёбер кулера к плате. Автор называет их «a couple»; группа сохранена как два логических винта без выдуманных координат и спецификации. Не смешивайте их с четырьмя подпружиненными винтами GPU и не прибавляйте автоматически к агрегату из восьми винтов Tom's Hardware."
+      },
+      "component_ids": [
+        "assembly.fasteners",
+        "assembly.cooling",
+        "fastener.cooler.fin_stack_base",
+        "fastener.cooler.fin_stack_base.01",
+        "fastener.cooler.fin_stack_base.02"
+      ],
+      "tool_requirements": [],
+      "safety_notes": {
+        "en": "Keep the cooler supported. Exact locations, fastener type, torque and whether any fastener is shared with another retainer are not established.",
+        "ru": "Поддерживайте кулер. Точные положения, тип крепежа, момент затяжки и возможное совмещение с другими фиксаторами не установлены."
+      },
+      "prerequisite_step_ids": [
+        "step.remove-gpu-heatsink-mounts"
+      ],
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "step.release-io-bracket-fasteners",
+      "sequence": 3,
+      "title": {
+        "en": "Release the I/O bracket and display-output retainers",
+        "ru": "Освободить крепёж I/O-планки и выходной панели"
+      },
+      "description": {
+        "en": "The teardown shows two narrower I/O-plate screws with nuts on the opposite side of the bracket, followed by three smaller screws retaining the display-output section. The presenter selects a Phillips #0 driver for the three display-output screws. These are separate groups; the three screws are not assigned one per port. Exact centres, threads, lengths and torque are not documented.",
+        "ru": "В разборке показаны два более узких винта I/O-планки с гайками на обратной стороне кронштейна, затем три меньших винта крепления секции видеовыходов. Для трёх винтов выходной панели автор выбирает отвёртку Phillips #0. Это отдельные группы; три винта не сопоставляются по одному каждому порту. Точные координаты, резьба, длина и момент затяжки не документированы."
+      },
+      "component_ids": [
+        "assembly.fasteners",
+        "connector.io.bracket",
+        "fastener.io.bracket.mount",
+        "fastener.io.display.output",
+        "fastener.io.bracket.mount.01",
+        "fastener.io.bracket.mount.02",
+        "fastener.io.display.output.01",
+        "fastener.io.display.output.02",
+        "fastener.io.display.output.03"
+      ],
+      "tool_requirements": [
+        "Phillips #0 screwdriver for the three display-output retaining screws; driver for the two narrow bracket screws is not specified."
+      ],
+      "safety_notes": {
+        "en": "Support the I/O bracket and retain the two nuts; the source does not document their dimensions or torque. Do not lever against connector shells.",
+        "ru": "Поддерживайте I/O-планку и удерживайте две гайки; источник не документирует их размеры и момент затяжки. Не используйте корпуса разъёмов как рычаг."
+      },
+      "prerequisite_step_ids": [
+        "step.remove-gpu-heatsink-mounts"
+      ],
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "step.disconnect-fan-leads",
+      "sequence": 4,
+      "title": {
+        "en": "Disconnect both fan leads before separating the cooler",
+        "ru": "Отсоединить оба кабеля вентиляторов перед снятием кулера"
+      },
+      "description": {
+        "en": "The exact-model Gamers Nexus teardown has a dedicated fan-removal segment. Disconnect both fan leads before lifting/separating the cooler/shroud assembly. The connectors have release clips; the exact release direction and required force are not specified.",
+        "ru": "В разборке точной модели Gamers Nexus есть отдельный фрагмент снятия вентиляторов. Перед подъёмом/отделением кулера с кожухом отсоедините оба кабеля вентиляторов. У разъёмов есть фиксаторы; точное направление разблокировки и необходимое усилие не указаны."
+      },
+      "component_ids": [
+        "connector.fan.header.1",
+        "connector.fan.header.2",
+        "assembly.fan.1",
+        "assembly.fan.2",
+        "assembly.cooling",
+        "assembly.shroud",
+        "assembly.pcb.electronics"
+      ],
+      "tool_requirements": [],
+      "safety_notes": {
+        "en": "Support the cooler so its weight does not load the fan wires. Do not pull on the wires. Stop if a connector does not release with gentle, controlled handling.",
+        "ru": "Поддерживайте кулер, чтобы его вес не нагружал провода вентиляторов. Не тяните за сами провода. Остановитесь, если разъём не освобождается при аккуратном контролируемом воздействии."
+      },
+      "prerequisite_step_ids": [
+        "step.remove-gpu-heatsink-mounts",
+        "step.remove-fin-stack-base-retainers",
+        "step.release-io-bracket-fasteners"
+      ],
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "step.remove-fan-mounts",
+      "sequence": 5,
+      "title": {
+        "en": "Remove three retaining screws from each fan",
+        "ru": "Вывернуть по три крепёжных винта каждого вентилятора"
+      },
+      "description": {
+        "en": "After the fan leads are disconnected and the fan/shroud assembly is safely supported/separated, the exact-model teardown shows three screws retaining each independently replaceable fan. Six logical fastener nodes preserve this count only; individual positions, head profile, thread, length and torque are not measured. The teardown also points out extra shroud fasteners but is uncertain whether there are four or six, so their count remains an unresolved candidate.",
+        "ru": "После отключения кабелей и безопасного отделения/поддержки узла вентилятора с кожухом разборка точной модели показывает по три винта крепления каждого отдельно заменяемого вентилятора. Шесть логических узлов сохраняют только это количество; индивидуальные положения, профиль головки, резьба, длина и момент затяжки не измерены. В разборке также показаны дополнительные винты кожуха, но автор не уверен, четыре их или шесть, поэтому их количество остаётся неустановленным."
+      },
+      "component_ids": [
+        "assembly.fan.1",
+        "assembly.fan.2",
+        "fastener.fan.1.01",
+        "fastener.fan.1.02",
+        "fastener.fan.1.03",
+        "fastener.fan.2.01",
+        "fastener.fan.2.02",
+        "fastener.fan.2.03"
+      ],
+      "tool_requirements": [],
+      "safety_notes": {
+        "en": "Work only with the card removed from the system and disconnected from all power. Support the fan frame. Do not pull on the wires or use this partial observation as a complete shroud disassembly procedure. Exact screw torque and reassembly order are unknown.",
+        "ru": "Работайте только с видеокартой, извлечённой из системы и отключённой от питания. Поддерживайте рамку вентилятора. Не тяните за провода и не используйте это частичное наблюдение как полную процедуру разборки кожуха. Момент затяжки и порядок обратной сборки неизвестны."
+      },
+      "prerequisite_step_ids": [
+        "step.disconnect-fan-leads"
+      ],
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    }
+  ],
   "observations": [
     {
       "source_id": "src.gamersnexus.teardown",
@@ -46,11 +210,44 @@
     },
     {
       "source_id": "src.tomshardware.teardown",
-      "locator": "PCB front-side teardown photograph",
+      "locator": "Exact-SKU-linked rear-PCB identity photo and cooler teardown",
       "note": {
-        "en": "Six Samsung K4ZAF325BM-HC16 GDDR6 packages are visible around the GA106 GPU package. 3D package centres are estimated from the photo, not measured.",
-        "ru": "На фотографии платы видны шесть микросхем Samsung K4ZAF325BM-HC16 GDDR6 вокруг корпуса GPU GA106. Координаты корпусов в 3D оценены по фотографии и не измерены."
+        "en": "The review's main-page rear-PCB photograph reads P/N 12G-P5-3655-KR. The corresponding teardown reports eight cooler/shroud retention screws (four around the GPU and four near the far end), two fan connections, and six Samsung K4ZAF325BM-HC16 GDDR6 packages rated at 16Gbps. Individual rear-screw coordinates and memory net routing are not provided.",
+        "ru": "На фотографии обратной стороны PCB на основной странице обзора читается P/N 12G-P5-3655-KR. Соответствующая разборка указывает восемь винтов крепления кулера/кожуха (четыре вокруг GPU и четыре у дальнего края), два подключения вентиляторов и шесть микросхем Samsung K4ZAF325BM-HC16 GDDR6 с рейтингом 16 Гбит/с. Координаты отдельных задних винтов и разводка линий памяти не приведены."
+      }
+    },
+    {
+      "source_id": "src.lanoc.review",
+      "locator": "PCB rear-side photograph and card layout discussion",
+      "note": {
+        "en": "The exact 12G-P5-3655-KR XC BLACK sample has no backplate and shows four heatsink mounting screws around the GPU; a large PCB airflow cutout is visible toward the left end. This is a visual observation, not a complete fastener map or service sequence.",
+        "ru": "На точном образце XC BLACK 12G-P5-3655-KR отсутствует backplate; вокруг GPU видны четыре винта крепления радиатора, а у левого края заметен крупный вырез PCB для воздушного потока. Это визуальное наблюдение, а не полная карта крепежа или инструкция по разборке."
+      }
+    },
+    {
+      "source_id": "src.gamersnexus.teardown",
+      "locator": "05:33–13:25",
+      "note": {
+        "en": "The teardown provides two pad-thickness observations (~2.0 mm and a less certain ~1.5 mm) without unambiguous contact-location assignment; counts three screws per replaceable fan; shows a copper plate contacting a MOSFET row, two shunts (8-pin path: 5 mΩ; PCIe-slot 12 V value unknown), one fuse, two inductors in a tentatively identified memory-VRM area, and reads the GPU die marking GA106-300-A1. It does not provide electrical net mapping, part designators or calibrated component coordinates.",
+        "ru": "Разборка даёт два наблюдения толщины термопрокладок (~2,0 мм и менее уверенно ~1,5 мм) без однозначной привязки к конкретной контактной зоне; указывает три винта на каждый заменяемый вентилятор; показывает медную пластину на ряду MOSFET, два шунта (линия 8-pin: 5 мОм; значение шунта PCIe-слота неизвестно), один предохранитель, два дросселя в предположительно определённой зоне VRM памяти и маркировку GPU GA106-300-A1. Электрическая карта цепей, позиционные обозначения и калиброванные координаты компонентов отсутствуют."
+      }
+    },
+    {
+      "source_id": "src.gamersnexus.teardown",
+      "locator": "01:30–05:33",
+      "note": {
+        "en": "Transcript distinguishes four spring-loaded GPU screws, a separate pair of fin-stack base screws, two narrow I/O-plate screws with reverse-side nuts, and three small display-output screws. It does not map these groups to Tom's Hardware's eight-screw aggregate.",
+        "ru": "Расшифровка различает четыре подпружиненных винта GPU, отдельную пару винтов основания пакета рёбер, два узких винта I/O-планки с гайками с обратной стороны и три маленьких винта выходной панели. Эти группы не сопоставлены с агрегатом из восьми винтов Tom's Hardware."
+      }
+    },
+    {
+      "source_id": "src.gamersnexus.teardown",
+      "locator": "09:00",
+      "note": {
+        "en": "Each replaceable fan has three retaining screws. Additional shroud fasteners are pointed out, but the presenter is unsure whether their count is four or six; no numeric claim is made.",
+        "ru": "На каждый заменяемый вентилятор приходится три крепёжных винта. Дополнительные винты кожуха показаны, но автор не уверен, четыре их или шесть; числовое утверждение не сделано."
       }
     }
-  ]
+  ],
+  "complete_sequence": false
 }

@@ -147,6 +147,357 @@
       "source_ids": [
         "src.lanoc.review"
       ]
+    },
+    {
+      "id": "quiz.gpu.sm.count",
+      "prompt": {
+        "en": "How many streaming multiprocessors (SMs) are specified for the RTX 3060 GA106 configuration?",
+        "ru": "Сколько потоковых мультипроцессоров (SM) указано для конфигурации RTX 3060 на GA106?"
+      },
+      "choices": [
+        {
+          "en": "24 SMs",
+          "ru": "24 SM"
+        },
+        {
+          "en": "28 SMs",
+          "ru": "28 SM"
+        },
+        {
+          "en": "32 SMs",
+          "ru": "32 SM"
+        }
+      ],
+      "correct_index": 1,
+      "explanation": {
+        "en": "The GA106 RTX 3060 configuration contains 28 SMs. This is an architectural count, not a physical layout drawing.",
+        "ru": "Конфигурация GA106 RTX 3060 содержит 28 SM. Это архитектурное количество, а не чертёж физического размещения."
+      },
+      "source_ids": [
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "quiz.gpu.rt.generation",
+      "prompt": {
+        "en": "Which generation of RT Cores is used by the Ampere GeForce RTX 30 series?",
+        "ru": "Какое поколение RT-ядер используется в Ampere GeForce RTX 30?"
+      },
+      "choices": [
+        {
+          "en": "First generation",
+          "ru": "Первое поколение"
+        },
+        {
+          "en": "Second generation",
+          "ru": "Второе поколение"
+        },
+        {
+          "en": "Third generation",
+          "ru": "Третье поколение"
+        }
+      ],
+      "correct_index": 1,
+      "explanation": {
+        "en": "NVIDIA describes Ampere RTX 30-series RT Cores as second-generation.",
+        "ru": "NVIDIA описывает RT-ядра Ampere RTX 30 как RT-ядра второго поколения."
+      },
+      "source_ids": [
+        "src.nvidia.rtx3060.architecture"
+      ]
+    },
+    {
+      "id": "quiz.memory.package.count",
+      "prompt": {
+        "en": "How many GDDR6 package positions are visible in the exact XC BLACK review/teardown material?",
+        "ru": "Сколько позиций микросхем GDDR6 видно в материалах обзора/разборки точной XC BLACK?"
+      },
+      "choices": [
+        {
+          "en": "4 packages",
+          "ru": "4 микросхемы"
+        },
+        {
+          "en": "6 packages",
+          "ru": "6 микросхем"
+        },
+        {
+          "en": "8 packages",
+          "ru": "8 микросхем"
+        }
+      ],
+      "correct_index": 1,
+      "explanation": {
+        "en": "Six GDDR6 package positions are visible in exact XC BLACK material. The precise device part number and package-to-bus mapping have not been confirmed.",
+        "ru": "В материалах точной XC BLACK видны шесть позиций микросхем GDDR6. Точный номер микросхем и соответствие корпусов каналам шины не подтверждены."
+      },
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "quiz.gpu.tpc.organization",
+      "prompt": {
+        "en": "What does one GA10x TPC contain?",
+        "ru": "Что входит в один TPC архитектуры GA10x?"
+      },
+      "choices": [
+        {
+          "en": "One SM and two PolyMorph Engines",
+          "ru": "Один SM и два PolyMorph Engine"
+        },
+        {
+          "en": "Two SMs and one PolyMorph Engine",
+          "ru": "Два SM и один PolyMorph Engine"
+        },
+        {
+          "en": "Four SMs and one RT Core",
+          "ru": "Четыре SM и одно RT-ядро"
+        }
+      ],
+      "correct_index": 1,
+      "explanation": {
+        "en": "NVIDIA describes each GA10x TPC as two SMs and one PolyMorph Engine. The 14 TPCs in this package are a logical grouping derived from 28 configured SMs.",
+        "ru": "NVIDIA описывает каждый TPC GA10x как два SM и один PolyMorph Engine. 14 TPC в пакете — логическая группировка, выведенная из 28 активных SM."
+      },
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "quiz.gpu.sm.partition.count",
+      "prompt": {
+        "en": "Into how many processing partitions is one GA10x SM divided?",
+        "ru": "На сколько вычислительных секций разделён один SM GA10x?"
+      },
+      "choices": [
+        {
+          "en": "Two partitions",
+          "ru": "Две секции"
+        },
+        {
+          "en": "Four partitions",
+          "ru": "Четыре секции"
+        },
+        {
+          "en": "Eight partitions",
+          "ru": "Восемь секций"
+        }
+      ],
+      "correct_index": 1,
+      "explanation": {
+        "en": "NVIDIA Figure 3 depicts four processing blocks (partitions) in each GA10x SM. Across 28 RTX 3060 SMs, this gives 112 logical partition entries.",
+        "ru": "На рисунке 3 NVIDIA показаны четыре вычислительных блока (секции) в каждом SM GA10x. Для 28 SM RTX 3060 это даёт 112 логических записей секций."
+      },
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "quiz.gpu.sm.partition.register_file",
+      "prompt": {
+        "en": "What is the size of the register file in one GA10x SM processing partition?",
+        "ru": "Каков размер файла регистров одной вычислительной секции SM GA10x?"
+      },
+      "choices": [
+        {
+          "en": "32 KiB",
+          "ru": "32 КиБ"
+        },
+        {
+          "en": "64 KiB",
+          "ru": "64 КиБ"
+        },
+        {
+          "en": "128 KiB",
+          "ru": "128 КиБ"
+        }
+      ],
+      "correct_index": 1,
+      "explanation": {
+        "en": "Figure 3 labels each partition register file as 16,384 × 32-bit, which equals 64 KiB. Four partitions provide the 256 KiB register file per SM.",
+        "ru": "На рисунке 3 файл регистров секции обозначен как 16 384 × 32 бита, что равно 64 КиБ. Четыре секции дают 256 КиБ на SM."
+      },
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "quiz.gpu.sm.partition.tensor",
+      "prompt": {
+        "en": "How many third-generation Tensor Cores are assigned to each GA10x SM processing partition?",
+        "ru": "Сколько Tensor Core третьего поколения приходится на одну вычислительную секцию SM GA10x?"
+      },
+      "choices": [
+        {
+          "en": "Zero; Tensor Cores are outside the SM",
+          "ru": "Ноль; Tensor Core находятся вне SM"
+        },
+        {
+          "en": "One Tensor Core",
+          "ru": "Одно Tensor Core"
+        },
+        {
+          "en": "Four Tensor Cores",
+          "ru": "Четыре Tensor Core"
+        }
+      ],
+      "correct_index": 1,
+      "explanation": {
+        "en": "NVIDIA's GA10x SM diagram depicts one third-generation Tensor Core in each of four processing partitions, for four Tensor Cores per SM.",
+        "ru": "На схеме SM GA10x NVIDIA показано по одному Tensor Core третьего поколения в каждой из четырёх секций — всего четыре Tensor Core на SM."
+      },
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "quiz.memory.unpopulated.locations",
+      "prompt": {
+        "en": "How many unused memory locations does Tom's Hardware report on the reviewed PCB?",
+        "ru": "Сколько незанятых позиций памяти Tom's Hardware отмечает на рассмотренной плате?"
+      },
+      "choices": [
+        {
+          "en": "None; all memory locations are populated",
+          "ru": "Ни одной; все позиции памяти заняты"
+        },
+        {
+          "en": "Two unused locations",
+          "ru": "Две незанятые позиции"
+        },
+        {
+          "en": "Six unused locations",
+          "ru": "Шесть незанятых позиций"
+        }
+      ],
+      "correct_index": 1,
+      "explanation": {
+        "en": "The teardown describes two unused memory locations on the PCB. This observation does not prove that they are electrically routed or can be populated on this card.",
+        "ru": "В разборке описаны две незанятые позиции памяти на PCB. Это наблюдение не доказывает, что к ним подведены электрические цепи или что в них можно установить микросхемы на этой карте."
+      },
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ]
+    },
+    {
+      "id": "quiz.video.nvdec.role",
+      "prompt": {
+        "en": "Which dedicated engine decodes a compressed video stream on the RTX 3060?",
+        "ru": "Какой выделенный блок декодирует сжатый видеопоток на RTX 3060?"
+      },
+      "choices": [
+        {
+          "en": "NVENC",
+          "ru": "NVENC"
+        },
+        {
+          "en": "NVDEC",
+          "ru": "NVDEC"
+        },
+        {
+          "en": "Tensor Core",
+          "ru": "Tensor Core"
+        }
+      ],
+      "correct_index": 1,
+      "explanation": {
+        "en": "NVDEC is the dedicated video decoder. NVENC is the separate encoder.",
+        "ru": "NVDEC — выделенный видеодекодер. NVENC — отдельный кодировщик."
+      },
+      "source_ids": [
+        "src.nvidia.video_encode_decode_matrix",
+        "src.nvidia.video_codec_sdk"
+      ]
+    },
+    {
+      "id": "quiz.video.nvenc.generation",
+      "prompt": {
+        "en": "Which NVENC generation does NVIDIA list for the desktop RTX 3060?",
+        "ru": "Какое поколение NVENC NVIDIA указывает для настольной RTX 3060?"
+      },
+      "choices": [
+        {
+          "en": "7th Generation",
+          "ru": "7-е поколение"
+        },
+        {
+          "en": "5th Generation",
+          "ru": "5-е поколение"
+        },
+        {
+          "en": "3rd Generation",
+          "ru": "3-е поколение"
+        }
+      ],
+      "correct_index": 0,
+      "explanation": {
+        "en": "The NVIDIA support matrix lists one 7th-generation NVENC for the desktop RTX 3060.",
+        "ru": "В матрице NVIDIA для настольной RTX 3060 указан один NVENC 7-го поколения."
+      },
+      "source_ids": [
+        "src.nvidia.video_encode_decode_matrix"
+      ]
+    },
+    {
+      "id": "quiz.video.av1.encode",
+      "prompt": {
+        "en": "Does the RTX 3060's 7th-generation NVENC support AV1 hardware encoding?",
+        "ru": "Поддерживает ли NVENC 7-го поколения в RTX 3060 аппаратное кодирование AV1?"
+      },
+      "choices": [
+        {
+          "en": "Yes, all AV1 profiles",
+          "ru": "Да, все профили AV1"
+        },
+        {
+          "en": "No, AV1 encoding is not listed as supported",
+          "ru": "Нет, поддержка кодирования AV1 не указана"
+        },
+        {
+          "en": "Only AV1 at 8-bit",
+          "ru": "Только AV1 с глубиной 8 бит"
+        }
+      ],
+      "correct_index": 1,
+      "explanation": {
+        "en": "NVIDIA's matrix marks AV1 encoding unsupported for this NVENC generation. This does not mean AV1 decoding is unsupported.",
+        "ru": "В матрице NVIDIA для этого поколения NVENC кодирование AV1 отмечено как неподдерживаемое. Это не означает отсутствие декодирования AV1."
+      },
+      "source_ids": [
+        "src.nvidia.video_encode_decode_matrix"
+      ]
+    },
+    {
+      "id": "quiz.video.av1.decode",
+      "prompt": {
+        "en": "Does the RTX 3060's NVDEC support hardware AV1 decoding?",
+        "ru": "Поддерживает ли NVDEC в RTX 3060 аппаратное декодирование AV1?"
+      },
+      "choices": [
+        {
+          "en": "Yes, subject to the matrix's format/profile limits",
+          "ru": "Да, с ограничениями формата и профиля из матрицы"
+        },
+        {
+          "en": "No, AV1 is unsupported in both directions",
+          "ru": "Нет, AV1 не поддерживается ни для кодирования, ни для декодирования"
+        },
+        {
+          "en": "Only AV1 encoding",
+          "ru": "Только кодирование AV1"
+        }
+      ],
+      "correct_index": 0,
+      "explanation": {
+        "en": "The desktop RTX 3060 row lists AV1 decoding, while its NVENC row does not list AV1 encoding.",
+        "ru": "Для настольной RTX 3060 строка NVDEC указывает декодирование AV1, а строка NVENC не указывает его кодирование."
+      },
+      "source_ids": [
+        "src.nvidia.video_encode_decode_matrix"
+      ]
     }
   ]
 }

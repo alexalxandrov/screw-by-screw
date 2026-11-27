@@ -143,6 +143,2863 @@
       "to": "assembly.power_stage",
       "type": "contains",
       "source_ids": []
+    },
+    {
+      "id": "rel.gpu.package.contains.die",
+      "from": "chip.gpu.ga106",
+      "to": "chip.gpu.die",
+      "type": "contains",
+      "source_ids": []
+    },
+    {
+      "id": "rel.cooling.contains.thermal.interface",
+      "from": "assembly.cooling",
+      "to": "cooling.thermal_interface",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.thermal.interface.contains.gpu.paste",
+      "from": "cooling.thermal_interface",
+      "to": "cooling.thermal_paste.gpu",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.thermal.interface.contains.memory.pad",
+      "from": "cooling.thermal_interface",
+      "to": "cooling.thermal_pad.memory",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.thermal.interface.contains.vrm.pad",
+      "from": "cooling.thermal_interface",
+      "to": "cooling.thermal_pad.vrm",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.card.contains.fasteners",
+      "from": "assembly.card.root",
+      "to": "assembly.fasteners",
+      "type": "contains",
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ]
+    },
+    {
+      "id": "rel.fasteners.contains.01",
+      "from": "assembly.fasteners",
+      "to": "fastener.cooler.01",
+      "type": "contains",
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ]
+    },
+    {
+      "id": "rel.fasteners.contains.02",
+      "from": "assembly.fasteners",
+      "to": "fastener.cooler.02",
+      "type": "contains",
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ]
+    },
+    {
+      "id": "rel.fasteners.contains.03",
+      "from": "assembly.fasteners",
+      "to": "fastener.cooler.03",
+      "type": "contains",
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ]
+    },
+    {
+      "id": "rel.fasteners.contains.04",
+      "from": "assembly.fasteners",
+      "to": "fastener.cooler.04",
+      "type": "contains",
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ]
+    },
+    {
+      "id": "rel.fasteners.contains.05",
+      "from": "assembly.fasteners",
+      "to": "fastener.cooler.05",
+      "type": "contains",
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ]
+    },
+    {
+      "id": "rel.fasteners.contains.06",
+      "from": "assembly.fasteners",
+      "to": "fastener.cooler.06",
+      "type": "contains",
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ]
+    },
+    {
+      "id": "rel.fasteners.contains.07",
+      "from": "assembly.fasteners",
+      "to": "fastener.cooler.07",
+      "type": "contains",
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ]
+    },
+    {
+      "id": "rel.fasteners.contains.08",
+      "from": "assembly.fasteners",
+      "to": "fastener.cooler.08",
+      "type": "contains",
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ]
+    },
+    {
+      "id": "rel.board.contains.pcie",
+      "from": "assembly.pcb.board",
+      "to": "pcb.connector.pcie",
+      "type": "contains",
+      "source_ids": [
+        "src.evga.spec"
+      ]
+    },
+    {
+      "id": "rel.board.contains.fan.header.1",
+      "from": "assembly.pcb.electronics",
+      "to": "connector.fan.header.1",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.board.contains.fan.header.2",
+      "from": "assembly.pcb.electronics",
+      "to": "connector.fan.header.2",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.fan.header.1.connected.fan.1",
+      "from": "connector.fan.header.1",
+      "to": "assembly.fan.1",
+      "type": "connected_to",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.fan.header.2.connected.fan.2",
+      "from": "connector.fan.header.2",
+      "to": "assembly.fan.2",
+      "type": "connected_to",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.bracket.contains.dp1",
+      "from": "connector.io.bracket",
+      "to": "connector.displayport.1",
+      "type": "contains",
+      "source_ids": [
+        "src.evga.spec",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.bracket.contains.dp2",
+      "from": "connector.io.bracket",
+      "to": "connector.displayport.2",
+      "type": "contains",
+      "source_ids": [
+        "src.evga.spec",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.bracket.contains.dp3",
+      "from": "connector.io.bracket",
+      "to": "connector.displayport.3",
+      "type": "contains",
+      "source_ids": [
+        "src.evga.spec",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.bracket.contains.hdmi",
+      "from": "connector.io.bracket",
+      "to": "connector.hdmi.1",
+      "type": "contains",
+      "source_ids": [
+        "src.evga.spec",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.powerstage.contains.shunts",
+      "from": "assembly.power_stage",
+      "to": "power.shunt.cluster",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.powerstage.contains.passives",
+      "from": "assembly.power_stage",
+      "to": "power.passives.cluster",
+      "type": "contains",
+      "source_ids": []
+    },
+    {
+      "id": "rel.board.contains.airflow.cutout",
+      "from": "assembly.pcb.board",
+      "to": "pcb.airflow.cutout",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.gpu.transfers.heat.to.contact",
+      "from": "chip.gpu.ga106",
+      "to": "cooling.gpu_contact",
+      "type": "transfers_heat_to",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.powerstage.contains.inductor.1",
+      "from": "assembly.power_stage",
+      "to": "power.inductor.candidate.1",
+      "type": "contains",
+      "source_ids": [
+        "src.techpowerup.pcb"
+      ]
+    },
+    {
+      "id": "rel.powerstage.contains.inductor.2",
+      "from": "assembly.power_stage",
+      "to": "power.inductor.candidate.2",
+      "type": "contains",
+      "source_ids": [
+        "src.techpowerup.pcb"
+      ]
+    },
+    {
+      "id": "rel.powerstage.contains.capacitors",
+      "from": "assembly.power_stage",
+      "to": "power.capacitor.cluster",
+      "type": "contains",
+      "source_ids": [
+        "src.techpowerup.pcb"
+      ]
+    },
+    {
+      "id": "rel.powerstage.contains.switches",
+      "from": "assembly.power_stage",
+      "to": "power.switching_device.cluster",
+      "type": "contains",
+      "source_ids": [
+        "src.techpowerup.pcb"
+      ]
+    },
+    {
+      "id": "rel.powerstage.contains.controller",
+      "from": "assembly.power_stage",
+      "to": "power.controller.candidate",
+      "type": "contains",
+      "source_ids": [
+        "src.techpowerup.pcb"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.fan-1-frame",
+      "from": "assembly.fan.1",
+      "to": "fan.1.frame",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.fan-1-hub",
+      "from": "assembly.fan.1",
+      "to": "fan.1.hub",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.fan-1-blade-1",
+      "from": "assembly.fan.1.rotor",
+      "to": "fan.1.blade.1",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.fan-1-blade-2",
+      "from": "assembly.fan.1.rotor",
+      "to": "fan.1.blade.2",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.fan-1-blade-3",
+      "from": "assembly.fan.1.rotor",
+      "to": "fan.1.blade.3",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.fan-1-blade-4",
+      "from": "assembly.fan.1.rotor",
+      "to": "fan.1.blade.4",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.fan-1-blade-5",
+      "from": "assembly.fan.1.rotor",
+      "to": "fan.1.blade.5",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.fan-1-blade-6",
+      "from": "assembly.fan.1.rotor",
+      "to": "fan.1.blade.6",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.fan-1-blade-7",
+      "from": "assembly.fan.1.rotor",
+      "to": "fan.1.blade.7",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.fan-2-frame",
+      "from": "assembly.fan.2",
+      "to": "fan.2.frame",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.fan-2-hub",
+      "from": "assembly.fan.2",
+      "to": "fan.2.hub",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.fan-2-blade-1",
+      "from": "assembly.fan.2.rotor",
+      "to": "fan.2.blade.1",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.fan-2-blade-2",
+      "from": "assembly.fan.2.rotor",
+      "to": "fan.2.blade.2",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.fan-2-blade-3",
+      "from": "assembly.fan.2.rotor",
+      "to": "fan.2.blade.3",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.fan-2-blade-4",
+      "from": "assembly.fan.2.rotor",
+      "to": "fan.2.blade.4",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.fan-2-blade-5",
+      "from": "assembly.fan.2.rotor",
+      "to": "fan.2.blade.5",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.fan-2-blade-6",
+      "from": "assembly.fan.2.rotor",
+      "to": "fan.2.blade.6",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.fan-2-blade-7",
+      "from": "assembly.fan.2.rotor",
+      "to": "fan.2.blade.7",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-01",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.01",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-02",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.02",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-03",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.03",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-04",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.04",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-05",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.05",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-06",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.06",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-07",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.07",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-08",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.08",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-09",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.09",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-10",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.10",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-11",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.11",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-12",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.12",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-13",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.13",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-14",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.14",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-15",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.15",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-16",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.16",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-17",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.17",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-18",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.18",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-19",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.19",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-20",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.20",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-21",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.21",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-22",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.22",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-23",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.23",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatsink-fin-24",
+      "from": "cooling.heatsink",
+      "to": "cooling.heatsink.fin.24",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatpipe-candidate-1",
+      "from": "cooling.heatpipes",
+      "to": "cooling.heatpipe.candidate.1",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-heatpipe-candidate-2",
+      "from": "cooling.heatpipes",
+      "to": "cooling.heatpipe.candidate.2",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-thermal_pad-memory-01",
+      "from": "cooling.thermal_pad.memory",
+      "to": "cooling.thermal_pad.memory.01",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-thermal_pad-memory-02",
+      "from": "cooling.thermal_pad.memory",
+      "to": "cooling.thermal_pad.memory.02",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-thermal_pad-memory-03",
+      "from": "cooling.thermal_pad.memory",
+      "to": "cooling.thermal_pad.memory.03",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-thermal_pad-memory-04",
+      "from": "cooling.thermal_pad.memory",
+      "to": "cooling.thermal_pad.memory.04",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-thermal_pad-memory-05",
+      "from": "cooling.thermal_pad.memory",
+      "to": "cooling.thermal_pad.memory.05",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-thermal_pad-memory-06",
+      "from": "cooling.thermal_pad.memory",
+      "to": "cooling.thermal_pad.memory.06",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.cooling-thermal_pad-vrm-01",
+      "from": "cooling.thermal_pad.vrm",
+      "to": "cooling.thermal_pad.vrm.01",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.die.contains.sm.cluster",
+      "from": "chip.gpu.die",
+      "to": "chip.gpu.sm.cluster",
+      "type": "contains",
+      "source_ids": [
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.sm.contains.cuda_core.array",
+      "from": "chip.gpu.sm.cluster",
+      "to": "chip.gpu.cuda_core.array",
+      "type": "contains",
+      "source_ids": [
+        "src.tomshardware.rtx3060.specs",
+        "src.nvidia.rtx3060.architecture"
+      ]
+    },
+    {
+      "id": "rel.sm.contains.tensor_core.array",
+      "from": "chip.gpu.sm.cluster",
+      "to": "chip.gpu.tensor_core.array",
+      "type": "contains",
+      "source_ids": [
+        "src.tomshardware.rtx3060.specs",
+        "src.nvidia.rtx3060.architecture"
+      ]
+    },
+    {
+      "id": "rel.sm.contains.rt_core.array",
+      "from": "chip.gpu.sm.cluster",
+      "to": "chip.gpu.rt_core.array",
+      "type": "contains",
+      "source_ids": [
+        "src.tomshardware.rtx3060.specs",
+        "src.nvidia.rtx3060.architecture"
+      ]
+    },
+    {
+      "id": "rel.sm.contains.tmu.array",
+      "from": "chip.gpu.sm.cluster",
+      "to": "chip.gpu.tmu.array",
+      "type": "contains",
+      "source_ids": [
+        "src.tomshardware.rtx3060.specs",
+        "src.nvidia.rtx3060.architecture"
+      ]
+    },
+    {
+      "id": "rel.sm.contains.rop.array",
+      "from": "chip.gpu.sm.cluster",
+      "to": "chip.gpu.rop.array",
+      "type": "contains",
+      "source_ids": [
+        "src.tomshardware.rtx3060.specs",
+        "src.nvidia.rtx3060.architecture"
+      ]
+    },
+    {
+      "id": "rel.pcb.contains.gddr6.bus",
+      "from": "assembly.pcb.electronics",
+      "to": "chip.memory.gddr6.bus",
+      "type": "contains",
+      "source_ids": [
+        "src.evga.spec"
+      ]
+    },
+    {
+      "id": "rel.gddr6.bus.contains.channel.01",
+      "from": "chip.memory.gddr6.bus",
+      "to": "chip.memory.channel.01",
+      "type": "contains",
+      "source_ids": [
+        "src.evga.spec",
+        "src.samsung.gddr6.catalog"
+      ]
+    },
+    {
+      "id": "rel.gddr6.bus.contains.channel.02",
+      "from": "chip.memory.gddr6.bus",
+      "to": "chip.memory.channel.02",
+      "type": "contains",
+      "source_ids": [
+        "src.evga.spec",
+        "src.samsung.gddr6.catalog"
+      ]
+    },
+    {
+      "id": "rel.gddr6.bus.contains.channel.03",
+      "from": "chip.memory.gddr6.bus",
+      "to": "chip.memory.channel.03",
+      "type": "contains",
+      "source_ids": [
+        "src.evga.spec",
+        "src.samsung.gddr6.catalog"
+      ]
+    },
+    {
+      "id": "rel.gddr6.bus.contains.channel.04",
+      "from": "chip.memory.gddr6.bus",
+      "to": "chip.memory.channel.04",
+      "type": "contains",
+      "source_ids": [
+        "src.evga.spec",
+        "src.samsung.gddr6.catalog"
+      ]
+    },
+    {
+      "id": "rel.gddr6.bus.contains.channel.05",
+      "from": "chip.memory.gddr6.bus",
+      "to": "chip.memory.channel.05",
+      "type": "contains",
+      "source_ids": [
+        "src.evga.spec",
+        "src.samsung.gddr6.catalog"
+      ]
+    },
+    {
+      "id": "rel.gddr6.bus.contains.channel.06",
+      "from": "chip.memory.gddr6.bus",
+      "to": "chip.memory.channel.06",
+      "type": "contains",
+      "source_ids": [
+        "src.evga.spec",
+        "src.samsung.gddr6.catalog"
+      ]
+    },
+    {
+      "id": "rel.heatpipes.contains.visible-end.01",
+      "from": "cooling.heatpipes",
+      "to": "cooling.heatpipe.end.01",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.heatpipes.contains.visible-end.02",
+      "from": "cooling.heatpipes",
+      "to": "cooling.heatpipe.end.02",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.heatpipes.contains.visible-end.03",
+      "from": "cooling.heatpipes",
+      "to": "cooling.heatpipe.end.03",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.heatpipes.contains.visible-end.04",
+      "from": "cooling.heatpipes",
+      "to": "cooling.heatpipe.end.04",
+      "type": "contains",
+      "source_ids": [
+        "src.lanoc.review"
+      ]
+    },
+    {
+      "id": "rel.heatpipe.main.group.contains.01",
+      "from": "cooling.heatpipe.candidate.1",
+      "to": "cooling.heatpipe.main.01",
+      "type": "contains",
+      "source_ids": [
+        "src.thefpsreview.exact_sku"
+      ]
+    },
+    {
+      "id": "rel.heatpipe.main.group.contains.02",
+      "from": "cooling.heatpipe.candidate.1",
+      "to": "cooling.heatpipe.main.02",
+      "type": "contains",
+      "source_ids": [
+        "src.thefpsreview.exact_sku"
+      ]
+    },
+    {
+      "id": "rel.heatpipe.main.group.contains.03",
+      "from": "cooling.heatpipe.candidate.1",
+      "to": "cooling.heatpipe.main.03",
+      "type": "contains",
+      "source_ids": [
+        "src.thefpsreview.exact_sku"
+      ]
+    },
+    {
+      "id": "rel.heatpipe.main.group.contains.04",
+      "from": "cooling.heatpipe.candidate.1",
+      "to": "cooling.heatpipe.main.04",
+      "type": "contains",
+      "source_ids": [
+        "src.thefpsreview.exact_sku"
+      ]
+    },
+    {
+      "id": "rel.heatpipe.side.group.contains.01",
+      "from": "cooling.heatpipe.candidate.2",
+      "to": "cooling.heatpipe.side.01",
+      "type": "contains",
+      "source_ids": [
+        "src.thefpsreview.exact_sku"
+      ]
+    },
+    {
+      "id": "rel.heatpipe.side.group.contains.02",
+      "from": "cooling.heatpipe.candidate.2",
+      "to": "cooling.heatpipe.side.02",
+      "type": "contains",
+      "source_ids": [
+        "src.thefpsreview.exact_sku"
+      ]
+    },
+    {
+      "id": "rel.fan.1.contains.mount_screw.01",
+      "from": "assembly.fan.1",
+      "to": "fastener.fan.1.01",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.fan.1.contains.mount_screw.02",
+      "from": "assembly.fan.1",
+      "to": "fastener.fan.1.02",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.fan.1.contains.mount_screw.03",
+      "from": "assembly.fan.1",
+      "to": "fastener.fan.1.03",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.fan.2.contains.mount_screw.01",
+      "from": "assembly.fan.2",
+      "to": "fastener.fan.2.01",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.fan.2.contains.mount_screw.02",
+      "from": "assembly.fan.2",
+      "to": "fastener.fan.2.02",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.fan.2.contains.mount_screw.03",
+      "from": "assembly.fan.2",
+      "to": "fastener.fan.2.03",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.shunts.contains.8pin",
+      "from": "power.shunt.cluster",
+      "to": "power.shunt.8pin",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.shunts.contains.pcie_slot",
+      "from": "power.shunt.cluster",
+      "to": "power.shunt.pcie_slot",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.power_stage.contains.input_fuse",
+      "from": "assembly.power_stage",
+      "to": "power.fuse.input",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.thermal_interface.contains.vrm_copper_contact",
+      "from": "cooling.thermal_interface",
+      "to": "cooling.vrm.copper_contact",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.mosfet_row.cooled_by.copper_plate",
+      "from": "power.switching_device.cluster",
+      "to": "cooling.vrm.copper_contact",
+      "type": "cooled_by",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.smcluster.contains.tpccluster",
+      "from": "chip.gpu.sm.cluster",
+      "to": "chip.gpu.tpc.cluster",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.polymorph.array",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.polymorph.array",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.tpc01.contains.sm01",
+      "from": "chip.gpu.tpc.01",
+      "to": "chip.gpu.sm.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc01.contains.sm02",
+      "from": "chip.gpu.tpc.01",
+      "to": "chip.gpu.sm.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc02.contains.sm03",
+      "from": "chip.gpu.tpc.02",
+      "to": "chip.gpu.sm.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc02.contains.sm04",
+      "from": "chip.gpu.tpc.02",
+      "to": "chip.gpu.sm.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc03.contains.sm05",
+      "from": "chip.gpu.tpc.03",
+      "to": "chip.gpu.sm.05",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc03.contains.sm06",
+      "from": "chip.gpu.tpc.03",
+      "to": "chip.gpu.sm.06",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc04.contains.sm07",
+      "from": "chip.gpu.tpc.04",
+      "to": "chip.gpu.sm.07",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc04.contains.sm08",
+      "from": "chip.gpu.tpc.04",
+      "to": "chip.gpu.sm.08",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc05.contains.sm09",
+      "from": "chip.gpu.tpc.05",
+      "to": "chip.gpu.sm.09",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc05.contains.sm10",
+      "from": "chip.gpu.tpc.05",
+      "to": "chip.gpu.sm.10",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc06.contains.sm11",
+      "from": "chip.gpu.tpc.06",
+      "to": "chip.gpu.sm.11",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc06.contains.sm12",
+      "from": "chip.gpu.tpc.06",
+      "to": "chip.gpu.sm.12",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc07.contains.sm13",
+      "from": "chip.gpu.tpc.07",
+      "to": "chip.gpu.sm.13",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc07.contains.sm14",
+      "from": "chip.gpu.tpc.07",
+      "to": "chip.gpu.sm.14",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc08.contains.sm15",
+      "from": "chip.gpu.tpc.08",
+      "to": "chip.gpu.sm.15",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc08.contains.sm16",
+      "from": "chip.gpu.tpc.08",
+      "to": "chip.gpu.sm.16",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc09.contains.sm17",
+      "from": "chip.gpu.tpc.09",
+      "to": "chip.gpu.sm.17",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc09.contains.sm18",
+      "from": "chip.gpu.tpc.09",
+      "to": "chip.gpu.sm.18",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc10.contains.sm19",
+      "from": "chip.gpu.tpc.10",
+      "to": "chip.gpu.sm.19",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc10.contains.sm20",
+      "from": "chip.gpu.tpc.10",
+      "to": "chip.gpu.sm.20",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc11.contains.sm21",
+      "from": "chip.gpu.tpc.11",
+      "to": "chip.gpu.sm.21",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc11.contains.sm22",
+      "from": "chip.gpu.tpc.11",
+      "to": "chip.gpu.sm.22",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc12.contains.sm23",
+      "from": "chip.gpu.tpc.12",
+      "to": "chip.gpu.sm.23",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc12.contains.sm24",
+      "from": "chip.gpu.tpc.12",
+      "to": "chip.gpu.sm.24",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc13.contains.sm25",
+      "from": "chip.gpu.tpc.13",
+      "to": "chip.gpu.sm.25",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc13.contains.sm26",
+      "from": "chip.gpu.tpc.13",
+      "to": "chip.gpu.sm.26",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc14.contains.sm27",
+      "from": "chip.gpu.tpc.14",
+      "to": "chip.gpu.sm.27",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc14.contains.sm28",
+      "from": "chip.gpu.tpc.14",
+      "to": "chip.gpu.sm.28",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.tpc01",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.tpc.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc01.contains.polymorph",
+      "from": "chip.gpu.tpc.01",
+      "to": "chip.gpu.tpc.01.polymorph",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.tpc02",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.tpc.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc02.contains.polymorph",
+      "from": "chip.gpu.tpc.02",
+      "to": "chip.gpu.tpc.02.polymorph",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.tpc03",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.tpc.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc03.contains.polymorph",
+      "from": "chip.gpu.tpc.03",
+      "to": "chip.gpu.tpc.03.polymorph",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.tpc04",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.tpc.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc04.contains.polymorph",
+      "from": "chip.gpu.tpc.04",
+      "to": "chip.gpu.tpc.04.polymorph",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.tpc05",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.tpc.05",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc05.contains.polymorph",
+      "from": "chip.gpu.tpc.05",
+      "to": "chip.gpu.tpc.05.polymorph",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.tpc06",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.tpc.06",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc06.contains.polymorph",
+      "from": "chip.gpu.tpc.06",
+      "to": "chip.gpu.tpc.06.polymorph",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.tpc07",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.tpc.07",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc07.contains.polymorph",
+      "from": "chip.gpu.tpc.07",
+      "to": "chip.gpu.tpc.07.polymorph",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.tpc08",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.tpc.08",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc08.contains.polymorph",
+      "from": "chip.gpu.tpc.08",
+      "to": "chip.gpu.tpc.08.polymorph",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.tpc09",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.tpc.09",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc09.contains.polymorph",
+      "from": "chip.gpu.tpc.09",
+      "to": "chip.gpu.tpc.09.polymorph",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.tpc10",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.tpc.10",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc10.contains.polymorph",
+      "from": "chip.gpu.tpc.10",
+      "to": "chip.gpu.tpc.10.polymorph",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.tpc11",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.tpc.11",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc11.contains.polymorph",
+      "from": "chip.gpu.tpc.11",
+      "to": "chip.gpu.tpc.11.polymorph",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.tpc12",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.tpc.12",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc12.contains.polymorph",
+      "from": "chip.gpu.tpc.12",
+      "to": "chip.gpu.tpc.12.polymorph",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.tpc13",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.tpc.13",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc13.contains.polymorph",
+      "from": "chip.gpu.tpc.13",
+      "to": "chip.gpu.tpc.13.polymorph",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.tpccluster.contains.tpc14",
+      "from": "chip.gpu.tpc.cluster",
+      "to": "chip.gpu.tpc.14",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ]
+    },
+    {
+      "id": "rel.tpc14.contains.polymorph",
+      "from": "chip.gpu.tpc.14",
+      "to": "chip.gpu.tpc.14.polymorph",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm01.contains.partition01",
+      "from": "chip.gpu.sm.01",
+      "to": "chip.gpu.sm.01.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm01.contains.partition02",
+      "from": "chip.gpu.sm.01",
+      "to": "chip.gpu.sm.01.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm01.contains.partition03",
+      "from": "chip.gpu.sm.01",
+      "to": "chip.gpu.sm.01.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm01.contains.partition04",
+      "from": "chip.gpu.sm.01",
+      "to": "chip.gpu.sm.01.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm02.contains.partition01",
+      "from": "chip.gpu.sm.02",
+      "to": "chip.gpu.sm.02.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm02.contains.partition02",
+      "from": "chip.gpu.sm.02",
+      "to": "chip.gpu.sm.02.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm02.contains.partition03",
+      "from": "chip.gpu.sm.02",
+      "to": "chip.gpu.sm.02.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm02.contains.partition04",
+      "from": "chip.gpu.sm.02",
+      "to": "chip.gpu.sm.02.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm03.contains.partition01",
+      "from": "chip.gpu.sm.03",
+      "to": "chip.gpu.sm.03.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm03.contains.partition02",
+      "from": "chip.gpu.sm.03",
+      "to": "chip.gpu.sm.03.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm03.contains.partition03",
+      "from": "chip.gpu.sm.03",
+      "to": "chip.gpu.sm.03.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm03.contains.partition04",
+      "from": "chip.gpu.sm.03",
+      "to": "chip.gpu.sm.03.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm04.contains.partition01",
+      "from": "chip.gpu.sm.04",
+      "to": "chip.gpu.sm.04.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm04.contains.partition02",
+      "from": "chip.gpu.sm.04",
+      "to": "chip.gpu.sm.04.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm04.contains.partition03",
+      "from": "chip.gpu.sm.04",
+      "to": "chip.gpu.sm.04.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm04.contains.partition04",
+      "from": "chip.gpu.sm.04",
+      "to": "chip.gpu.sm.04.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm05.contains.partition01",
+      "from": "chip.gpu.sm.05",
+      "to": "chip.gpu.sm.05.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm05.contains.partition02",
+      "from": "chip.gpu.sm.05",
+      "to": "chip.gpu.sm.05.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm05.contains.partition03",
+      "from": "chip.gpu.sm.05",
+      "to": "chip.gpu.sm.05.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm05.contains.partition04",
+      "from": "chip.gpu.sm.05",
+      "to": "chip.gpu.sm.05.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm06.contains.partition01",
+      "from": "chip.gpu.sm.06",
+      "to": "chip.gpu.sm.06.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm06.contains.partition02",
+      "from": "chip.gpu.sm.06",
+      "to": "chip.gpu.sm.06.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm06.contains.partition03",
+      "from": "chip.gpu.sm.06",
+      "to": "chip.gpu.sm.06.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm06.contains.partition04",
+      "from": "chip.gpu.sm.06",
+      "to": "chip.gpu.sm.06.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm07.contains.partition01",
+      "from": "chip.gpu.sm.07",
+      "to": "chip.gpu.sm.07.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm07.contains.partition02",
+      "from": "chip.gpu.sm.07",
+      "to": "chip.gpu.sm.07.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm07.contains.partition03",
+      "from": "chip.gpu.sm.07",
+      "to": "chip.gpu.sm.07.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm07.contains.partition04",
+      "from": "chip.gpu.sm.07",
+      "to": "chip.gpu.sm.07.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm08.contains.partition01",
+      "from": "chip.gpu.sm.08",
+      "to": "chip.gpu.sm.08.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm08.contains.partition02",
+      "from": "chip.gpu.sm.08",
+      "to": "chip.gpu.sm.08.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm08.contains.partition03",
+      "from": "chip.gpu.sm.08",
+      "to": "chip.gpu.sm.08.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm08.contains.partition04",
+      "from": "chip.gpu.sm.08",
+      "to": "chip.gpu.sm.08.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm09.contains.partition01",
+      "from": "chip.gpu.sm.09",
+      "to": "chip.gpu.sm.09.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm09.contains.partition02",
+      "from": "chip.gpu.sm.09",
+      "to": "chip.gpu.sm.09.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm09.contains.partition03",
+      "from": "chip.gpu.sm.09",
+      "to": "chip.gpu.sm.09.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm09.contains.partition04",
+      "from": "chip.gpu.sm.09",
+      "to": "chip.gpu.sm.09.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm10.contains.partition01",
+      "from": "chip.gpu.sm.10",
+      "to": "chip.gpu.sm.10.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm10.contains.partition02",
+      "from": "chip.gpu.sm.10",
+      "to": "chip.gpu.sm.10.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm10.contains.partition03",
+      "from": "chip.gpu.sm.10",
+      "to": "chip.gpu.sm.10.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm10.contains.partition04",
+      "from": "chip.gpu.sm.10",
+      "to": "chip.gpu.sm.10.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm11.contains.partition01",
+      "from": "chip.gpu.sm.11",
+      "to": "chip.gpu.sm.11.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm11.contains.partition02",
+      "from": "chip.gpu.sm.11",
+      "to": "chip.gpu.sm.11.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm11.contains.partition03",
+      "from": "chip.gpu.sm.11",
+      "to": "chip.gpu.sm.11.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm11.contains.partition04",
+      "from": "chip.gpu.sm.11",
+      "to": "chip.gpu.sm.11.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm12.contains.partition01",
+      "from": "chip.gpu.sm.12",
+      "to": "chip.gpu.sm.12.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm12.contains.partition02",
+      "from": "chip.gpu.sm.12",
+      "to": "chip.gpu.sm.12.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm12.contains.partition03",
+      "from": "chip.gpu.sm.12",
+      "to": "chip.gpu.sm.12.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm12.contains.partition04",
+      "from": "chip.gpu.sm.12",
+      "to": "chip.gpu.sm.12.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm13.contains.partition01",
+      "from": "chip.gpu.sm.13",
+      "to": "chip.gpu.sm.13.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm13.contains.partition02",
+      "from": "chip.gpu.sm.13",
+      "to": "chip.gpu.sm.13.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm13.contains.partition03",
+      "from": "chip.gpu.sm.13",
+      "to": "chip.gpu.sm.13.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm13.contains.partition04",
+      "from": "chip.gpu.sm.13",
+      "to": "chip.gpu.sm.13.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm14.contains.partition01",
+      "from": "chip.gpu.sm.14",
+      "to": "chip.gpu.sm.14.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm14.contains.partition02",
+      "from": "chip.gpu.sm.14",
+      "to": "chip.gpu.sm.14.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm14.contains.partition03",
+      "from": "chip.gpu.sm.14",
+      "to": "chip.gpu.sm.14.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm14.contains.partition04",
+      "from": "chip.gpu.sm.14",
+      "to": "chip.gpu.sm.14.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm15.contains.partition01",
+      "from": "chip.gpu.sm.15",
+      "to": "chip.gpu.sm.15.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm15.contains.partition02",
+      "from": "chip.gpu.sm.15",
+      "to": "chip.gpu.sm.15.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm15.contains.partition03",
+      "from": "chip.gpu.sm.15",
+      "to": "chip.gpu.sm.15.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm15.contains.partition04",
+      "from": "chip.gpu.sm.15",
+      "to": "chip.gpu.sm.15.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm16.contains.partition01",
+      "from": "chip.gpu.sm.16",
+      "to": "chip.gpu.sm.16.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm16.contains.partition02",
+      "from": "chip.gpu.sm.16",
+      "to": "chip.gpu.sm.16.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm16.contains.partition03",
+      "from": "chip.gpu.sm.16",
+      "to": "chip.gpu.sm.16.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm16.contains.partition04",
+      "from": "chip.gpu.sm.16",
+      "to": "chip.gpu.sm.16.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm17.contains.partition01",
+      "from": "chip.gpu.sm.17",
+      "to": "chip.gpu.sm.17.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm17.contains.partition02",
+      "from": "chip.gpu.sm.17",
+      "to": "chip.gpu.sm.17.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm17.contains.partition03",
+      "from": "chip.gpu.sm.17",
+      "to": "chip.gpu.sm.17.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm17.contains.partition04",
+      "from": "chip.gpu.sm.17",
+      "to": "chip.gpu.sm.17.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm18.contains.partition01",
+      "from": "chip.gpu.sm.18",
+      "to": "chip.gpu.sm.18.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm18.contains.partition02",
+      "from": "chip.gpu.sm.18",
+      "to": "chip.gpu.sm.18.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm18.contains.partition03",
+      "from": "chip.gpu.sm.18",
+      "to": "chip.gpu.sm.18.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm18.contains.partition04",
+      "from": "chip.gpu.sm.18",
+      "to": "chip.gpu.sm.18.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm19.contains.partition01",
+      "from": "chip.gpu.sm.19",
+      "to": "chip.gpu.sm.19.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm19.contains.partition02",
+      "from": "chip.gpu.sm.19",
+      "to": "chip.gpu.sm.19.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm19.contains.partition03",
+      "from": "chip.gpu.sm.19",
+      "to": "chip.gpu.sm.19.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm19.contains.partition04",
+      "from": "chip.gpu.sm.19",
+      "to": "chip.gpu.sm.19.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm20.contains.partition01",
+      "from": "chip.gpu.sm.20",
+      "to": "chip.gpu.sm.20.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm20.contains.partition02",
+      "from": "chip.gpu.sm.20",
+      "to": "chip.gpu.sm.20.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm20.contains.partition03",
+      "from": "chip.gpu.sm.20",
+      "to": "chip.gpu.sm.20.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm20.contains.partition04",
+      "from": "chip.gpu.sm.20",
+      "to": "chip.gpu.sm.20.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm21.contains.partition01",
+      "from": "chip.gpu.sm.21",
+      "to": "chip.gpu.sm.21.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm21.contains.partition02",
+      "from": "chip.gpu.sm.21",
+      "to": "chip.gpu.sm.21.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm21.contains.partition03",
+      "from": "chip.gpu.sm.21",
+      "to": "chip.gpu.sm.21.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm21.contains.partition04",
+      "from": "chip.gpu.sm.21",
+      "to": "chip.gpu.sm.21.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm22.contains.partition01",
+      "from": "chip.gpu.sm.22",
+      "to": "chip.gpu.sm.22.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm22.contains.partition02",
+      "from": "chip.gpu.sm.22",
+      "to": "chip.gpu.sm.22.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm22.contains.partition03",
+      "from": "chip.gpu.sm.22",
+      "to": "chip.gpu.sm.22.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm22.contains.partition04",
+      "from": "chip.gpu.sm.22",
+      "to": "chip.gpu.sm.22.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm23.contains.partition01",
+      "from": "chip.gpu.sm.23",
+      "to": "chip.gpu.sm.23.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm23.contains.partition02",
+      "from": "chip.gpu.sm.23",
+      "to": "chip.gpu.sm.23.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm23.contains.partition03",
+      "from": "chip.gpu.sm.23",
+      "to": "chip.gpu.sm.23.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm23.contains.partition04",
+      "from": "chip.gpu.sm.23",
+      "to": "chip.gpu.sm.23.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm24.contains.partition01",
+      "from": "chip.gpu.sm.24",
+      "to": "chip.gpu.sm.24.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm24.contains.partition02",
+      "from": "chip.gpu.sm.24",
+      "to": "chip.gpu.sm.24.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm24.contains.partition03",
+      "from": "chip.gpu.sm.24",
+      "to": "chip.gpu.sm.24.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm24.contains.partition04",
+      "from": "chip.gpu.sm.24",
+      "to": "chip.gpu.sm.24.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm25.contains.partition01",
+      "from": "chip.gpu.sm.25",
+      "to": "chip.gpu.sm.25.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm25.contains.partition02",
+      "from": "chip.gpu.sm.25",
+      "to": "chip.gpu.sm.25.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm25.contains.partition03",
+      "from": "chip.gpu.sm.25",
+      "to": "chip.gpu.sm.25.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm25.contains.partition04",
+      "from": "chip.gpu.sm.25",
+      "to": "chip.gpu.sm.25.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm26.contains.partition01",
+      "from": "chip.gpu.sm.26",
+      "to": "chip.gpu.sm.26.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm26.contains.partition02",
+      "from": "chip.gpu.sm.26",
+      "to": "chip.gpu.sm.26.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm26.contains.partition03",
+      "from": "chip.gpu.sm.26",
+      "to": "chip.gpu.sm.26.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm26.contains.partition04",
+      "from": "chip.gpu.sm.26",
+      "to": "chip.gpu.sm.26.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm27.contains.partition01",
+      "from": "chip.gpu.sm.27",
+      "to": "chip.gpu.sm.27.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm27.contains.partition02",
+      "from": "chip.gpu.sm.27",
+      "to": "chip.gpu.sm.27.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm27.contains.partition03",
+      "from": "chip.gpu.sm.27",
+      "to": "chip.gpu.sm.27.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm27.contains.partition04",
+      "from": "chip.gpu.sm.27",
+      "to": "chip.gpu.sm.27.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm28.contains.partition01",
+      "from": "chip.gpu.sm.28",
+      "to": "chip.gpu.sm.28.partition.01",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm28.contains.partition02",
+      "from": "chip.gpu.sm.28",
+      "to": "chip.gpu.sm.28.partition.02",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm28.contains.partition03",
+      "from": "chip.gpu.sm.28",
+      "to": "chip.gpu.sm.28.partition.03",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.sm28.contains.partition04",
+      "from": "chip.gpu.sm.28",
+      "to": "chip.gpu.sm.28.partition.04",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.fan-1-blade-8",
+      "from": "assembly.fan.1.rotor",
+      "to": "fan.1.blade.8",
+      "type": "contains",
+      "source_ids": [
+        "src.newegg.exact_sku.product_photo"
+      ]
+    },
+    {
+      "id": "rel.detail.contains.fan-2-blade-8",
+      "from": "assembly.fan.2.rotor",
+      "to": "fan.2.blade.8",
+      "type": "contains",
+      "source_ids": [
+        "src.newegg.exact_sku.product_photo"
+      ]
+    },
+    {
+      "id": "rel.fasteners.contains.fin_stack_base",
+      "from": "assembly.fasteners",
+      "to": "fastener.cooler.fin_stack_base",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.fasteners.contains.io_bracket_mount",
+      "from": "assembly.fasteners",
+      "to": "fastener.io.bracket.mount",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.fasteners.contains.io_display_output",
+      "from": "assembly.fasteners",
+      "to": "fastener.io.display.output",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.shroud.contains.candidate_fasteners",
+      "from": "assembly.shroud",
+      "to": "fastener.shroud.candidate",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.fastener.io_bracket_mount.fastens.bracket",
+      "from": "fastener.io.bracket.mount",
+      "to": "connector.io.bracket",
+      "type": "fastened_to",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.fastener.io_display_output.fastens.bracket",
+      "from": "fastener.io.display.output",
+      "to": "connector.io.bracket",
+      "type": "fastened_to",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.cooling.airflow.fan2",
+      "from": "assembly.fan.2",
+      "to": "cooling.heatsink",
+      "type": "airflow_over",
+      "source_ids": [
+        "src.lanoc.review"
+      ],
+      "certainty": "qualitative"
+    },
+    {
+      "id": "rel.contains.fastener.cooler.fin_stack_base.01",
+      "from": "fastener.cooler.fin_stack_base",
+      "to": "fastener.cooler.fin_stack_base.01",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener.cooler.fin_stack_base.02",
+      "from": "fastener.cooler.fin_stack_base",
+      "to": "fastener.cooler.fin_stack_base.02",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener.io.bracket.mount.01",
+      "from": "fastener.io.bracket.mount",
+      "to": "fastener.io.bracket.mount.01",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener.io.bracket.mount.02",
+      "from": "fastener.io.bracket.mount",
+      "to": "fastener.io.bracket.mount.02",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener.io.display.output.01",
+      "from": "fastener.io.display.output",
+      "to": "fastener.io.display.output.01",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener.io.display.output.02",
+      "from": "fastener.io.display.output",
+      "to": "fastener.io.display.output.02",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.contains.fastener.io.display.output.03",
+      "from": "fastener.io.display.output",
+      "to": "fastener.io.display.output.03",
+      "type": "contains",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
+    },
+    {
+      "id": "rel.pcb.contains.unpopulated_memory_locations",
+      "from": "assembly.pcb.electronics",
+      "to": "pcb.memory.unpopulated.locations",
+      "type": "contains",
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ]
+    },
+    {
+      "id": "rel.unpopulated_memory.locations.contains.01",
+      "from": "pcb.memory.unpopulated.locations",
+      "to": "pcb.memory.unpopulated.01",
+      "type": "contains",
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ]
+    },
+    {
+      "id": "rel.unpopulated_memory.locations.contains.02",
+      "from": "pcb.memory.unpopulated.locations",
+      "to": "pcb.memory.unpopulated.02",
+      "type": "contains",
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ]
+    },
+    {
+      "id": "rel.contains.chip.gpu.nvenc",
+      "from": "chip.gpu.die",
+      "to": "chip.gpu.nvenc",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.video_encode_decode_matrix",
+        "src.nvidia.video_codec_sdk"
+      ]
+    },
+    {
+      "id": "rel.contains.chip.gpu.nvdec",
+      "from": "chip.gpu.die",
+      "to": "chip.gpu.nvdec",
+      "type": "contains",
+      "source_ids": [
+        "src.nvidia.video_encode_decode_matrix",
+        "src.nvidia.video_codec_sdk"
+      ]
     }
   ]
 }

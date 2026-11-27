@@ -138,7 +138,7 @@
       "source_ids": [
         "src.lanoc.review"
       ],
-      "notes": "Approximate reviewer measurement; not a manufacturer drawing."
+      "notes": "LanOC's approximate reviewer measurement for the exact XC BLACK sample is ~85 mm impeller diameter within a ~90 mm fan opening. PC Master Race Latinoamérica describes a similarly named XC BLACK sample as using two 80 mm fans but does not identify retail P/N 12G-P5-3655-KR; retain that as an unresolved sample/measurement-convention conflict only, not as support for the target SKU's 85 mm estimate."
     },
     {
       "id": "claim.power.connector",
@@ -174,9 +174,10 @@
       "unit": null,
       "confidence_class": "independently_verified",
       "source_ids": [
-        "src.lanoc.review"
+        "src.lanoc.review",
+        "src.neoseeker.review"
       ],
-      "notes": "Applies to the reviewed XC BLACK sample."
+      "notes": "The exact-SKU LanOC 12G-P5-3655-KR sample shows exposed rear PCB and no backplate; Neoseeker independently identifies its sample as P/N 12G-P5-3655-KR and documents the exposed PCB/ventilation cutout. HotHardware's similarly named XC Black Gaming sample describes a rear backplate but does not publish its retail P/N; it remains a conflicting non-SKU-specific reference and is not used as evidence for this claim."
     },
     {
       "id": "claim.pcb.revision",
@@ -185,8 +186,10 @@
       "value": null,
       "unit": null,
       "confidence_class": "unknown",
-      "source_ids": [],
-      "notes": "PCB silkscreen identifier/revision has not been confirmed."
+      "source_ids": [
+        "src.techpowerup.pcb"
+      ],
+      "notes": "Still unknown. A public TechPowerUp product-page image appears to show the silkscreen EVGA232 REV 1.0, but the photo/sample-to-retail-SKU and PCB-revision correlation has not been independently verified. A separately indexed EVGA232 / PG190-A02 schematic is only an unverified lead."
     },
     {
       "id": "claim.memory.population",
@@ -196,10 +199,10 @@
       "unit": "packages",
       "confidence_class": "independently_verified",
       "source_ids": [
-        "src.tomshardware.teardown",
-        "src.gamersnexus.teardown"
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
       ],
-      "notes": "Six Samsung GDDR6 packages are visible in the exact XC BLACK teardown photo. Package placement in the 3D reconstruction remains image-estimated."
+      "notes": "Six GDDR6 packages are documented in exact-SKU-linked teardown and exact XC BLACK review material. Their package identity is independently identified by the same Tom's Hardware article; package coordinates remain photo-estimated and package-to-controller nets are not mapped."
     },
     {
       "id": "claim.cooling.fin_count",
@@ -223,7 +226,1256 @@
       "source_ids": [
         "src.tomshardware.teardown"
       ],
-      "notes": "Tom's Hardware identifies the six GDDR6 packages on the reviewed EVGA RTX 3060 XC BLACK sample."
+      "notes": "Tom's Hardware identifies six Samsung K4ZAF325BM-HC16 GDDR6 packages in the teardown; the rear-PCB identity photograph on the same review identifies the sample as P/N 12G-P5-3655-KR. This is the exact XC BLACK retail SKU. This claim identifies the device part number, not its PCB net mapping."
+    },
+    {
+      "id": "claim.pcie.interface",
+      "subject_id": "pcb.connector.pcie",
+      "predicate": "host_interface",
+      "value": "PCI Express 4.0",
+      "unit": null,
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.evga.spec"
+      ],
+      "notes": "This claim intentionally does not assert lane wiring, pin mapping or PCB trace routing."
+    },
+    {
+      "id": "claim.fan.header.count",
+      "subject_id": "assembly.pcb.electronics",
+      "predicate": "fan_cable_connections_visible_in_teardown",
+      "value": 2,
+      "unit": "connectors",
+      "confidence_class": "independently_verified",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "notes": "Two fan connections are visible in the exact-model teardown; this does not document their pinout or control protocol."
+    },
+    {
+      "id": "claim.cooler.fastener.count.total",
+      "subject_id": "assembly.fasteners",
+      "predicate": "cooler_retention_screw_count",
+      "value": 8,
+      "unit": "screws",
+      "confidence_class": "independently_verified",
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ],
+      "notes": "Tom's Hardware reports eight screws retaining the cooler/shroud on the EVGA RTX 3060 XC teardown. The same article's rear-PCB identity photo reads P/N 12G-P5-3655-KR, tying the sample to the exact XC BLACK SKU. Four are described around the GPU and four near the far end of the card. Their exact coordinates, head/thread type and torque are not documented."
+    },
+    {
+      "id": "claim.memory.effective_clock",
+      "subject_id": "gpu.evga.12g-p5-3655-kr",
+      "predicate": "effective_memory_clock",
+      "value": 15000,
+      "unit": "MHz effective",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.evga.spec"
+      ],
+      "notes": "EVGA's SKU datasheet lists 15,000 MHz effective GDDR6 memory clock."
+    },
+    {
+      "id": "claim.power.total_graphics_power",
+      "subject_id": "gpu.evga.12g-p5-3655-kr",
+      "predicate": "total_graphics_power",
+      "value": 170,
+      "unit": "W",
+      "confidence_class": "independently_verified",
+      "source_ids": [
+        "src.neoseeker.review"
+      ],
+      "notes": "The review identifies its sample as 12G-P5-3655-KR and lists a 170 W TGP. Treat this as the reviewed retail-SKU specification, not a measurement of every operating workload."
+    },
+    {
+      "id": "claim.power.recommended_psu",
+      "subject_id": "gpu.evga.12g-p5-3655-kr",
+      "predicate": "recommended_power_supply",
+      "value": 550,
+      "unit": "W minimum system PSU",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.evga.spec"
+      ],
+      "notes": "Manufacturer system requirement; this is not the board's own power draw."
+    },
+    {
+      "id": "claim.card.slot_width",
+      "subject_id": "gpu.evga.12g-p5-3655-kr",
+      "predicate": "slot_width",
+      "value": "Dual-slot",
+      "unit": null,
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.evga.spec"
+      ],
+      "notes": "Manufacturer-published slot width."
+    },
+    {
+      "id": "claim.card.max_digital_resolution",
+      "subject_id": "gpu.evga.12g-p5-3655-kr",
+      "predicate": "max_digital_resolution",
+      "value": "7680 × 4320",
+      "unit": null,
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.evga.spec"
+      ],
+      "notes": "Maximum digital resolution in the manufacturer-published SKU specification."
+    },
+    {
+      "id": "claim.gpu.sm_count",
+      "subject_id": "chip.gpu.sm.cluster",
+      "predicate": "streaming_multiprocessor_count",
+      "value": 28,
+      "unit": "SM",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "notes": "GA106 RTX 3060 configuration table."
+    },
+    {
+      "id": "claim.gpu.tensor_core_count",
+      "subject_id": "chip.gpu.tensor_core.array",
+      "predicate": "tensor_core_count",
+      "value": 112,
+      "unit": "cores",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.tomshardware.rtx3060.specs",
+        "src.nvidia.rtx3060.architecture"
+      ],
+      "notes": "The 112 count is the GA106 RTX 3060 configuration; generation is covered by NVIDIA's architecture source."
+    },
+    {
+      "id": "claim.gpu.rt_core_count",
+      "subject_id": "chip.gpu.rt_core.array",
+      "predicate": "ray_tracing_core_count",
+      "value": 28,
+      "unit": "cores",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.tomshardware.rtx3060.specs",
+        "src.nvidia.rtx3060.architecture"
+      ],
+      "notes": "The 28 count is the GA106 RTX 3060 configuration."
+    },
+    {
+      "id": "claim.gpu.texture_unit_count",
+      "subject_id": "chip.gpu.tmu.array",
+      "predicate": "texture_mapping_unit_count",
+      "value": 112,
+      "unit": "TMUs",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "notes": "GA106 RTX 3060 specification table."
+    },
+    {
+      "id": "claim.gpu.rop_count",
+      "subject_id": "chip.gpu.rop.array",
+      "predicate": "render_output_unit_count",
+      "value": 48,
+      "unit": "ROPs",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "notes": "GA106 RTX 3060 specification table."
+    },
+    {
+      "id": "claim.gpu.die_area",
+      "subject_id": "chip.gpu.die",
+      "predicate": "die_area",
+      "value": 276,
+      "unit": "mm²",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "notes": "Published GA106 die area; not used as an assertion about the placeholder die mesh size."
+    },
+    {
+      "id": "claim.gpu.transistor_count",
+      "subject_id": "chip.gpu.die",
+      "predicate": "transistor_count",
+      "value": 12,
+      "unit": "billion",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "notes": "Published GA106 transistor count."
+    },
+    {
+      "id": "claim.gpu.process_node",
+      "subject_id": "chip.gpu.die",
+      "predicate": "manufacturing_process",
+      "value": "Samsung 8N",
+      "unit": null,
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "notes": "Published process node; not an assertion of die dimensions."
+    },
+    {
+      "id": "claim.gpu.base_clock",
+      "subject_id": "gpu.evga.12g-p5-3655-kr",
+      "predicate": "base_clock",
+      "value": 1320,
+      "unit": "MHz",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "notes": "Published RTX 3060 base clock. EVGA's SKU specification separately lists the boost clock."
+    },
+    {
+      "id": "claim.gpu.tensor_core_generation",
+      "subject_id": "chip.gpu.tensor_core.array",
+      "predicate": "tensor_core_generation",
+      "value": 3,
+      "unit": "generation",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.rtx3060.architecture"
+      ],
+      "notes": "NVIDIA identifies the Ampere RTX 30-series Tensor Cores as third-generation."
+    },
+    {
+      "id": "claim.gpu.rt_core_generation",
+      "subject_id": "chip.gpu.rt_core.array",
+      "predicate": "rt_core_generation",
+      "value": 2,
+      "unit": "generation",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.rtx3060.architecture"
+      ],
+      "notes": "NVIDIA identifies the Ampere RTX 30-series RT Cores as second-generation."
+    },
+    {
+      "id": "claim.memory.gddr6_package_count",
+      "subject_id": "chip.memory.gddr6.bus",
+      "predicate": "gddr6_package_count",
+      "value": 6,
+      "unit": "packages",
+      "confidence_class": "independently_verified",
+      "source_ids": [
+        "src.gamersnexus.teardown",
+        "src.lanoc.review"
+      ],
+      "notes": "Six GDDR6 packages are identified on the exact 12G-P5-3655-KR sample. This is a physical package population count, not a claim about controller partitions or net routing."
+    },
+    {
+      "id": "claim.memory.package_density",
+      "subject_id": "chip.memory.gddr6.bus",
+      "predicate": "memory_package_density",
+      "value": 16,
+      "unit": "Gbit per package",
+      "confidence_class": "secondary_catalog_data",
+      "source_ids": [
+        "src.samsung.gddr6.catalog"
+      ],
+      "notes": "16 Gbit density is a secondary-catalog attribute for the verified K4ZAF325BM-HC16 device identity; the attribute itself is transcribed from a secondary catalog, not a primary Samsung datasheet. It is a package property, not a BoardView-derived PCB net or layout fact."
+    },
+    {
+      "id": "claim.memory.package_organization",
+      "subject_id": "chip.memory.gddr6.bus",
+      "predicate": "memory_package_organization",
+      "value": "512M × 32",
+      "unit": null,
+      "confidence_class": "secondary_catalog_data",
+      "source_ids": [
+        "src.samsung.gddr6.catalog"
+      ],
+      "notes": "512M × 32 organization is a secondary-catalog attribute for the verified K4ZAF325BM-HC16 device identity; the attribute itself is transcribed from a secondary catalog, not a primary Samsung datasheet. It is a package property, not a BoardView-derived PCB net or layout fact."
+    },
+    {
+      "id": "claim.memory.package_data_rate",
+      "subject_id": "chip.memory.gddr6.bus",
+      "predicate": "memory_package_data_rate",
+      "value": 16,
+      "unit": "Gbps per pin",
+      "confidence_class": "independently_verified",
+      "source_ids": [
+        "src.tomshardware.teardown",
+        "src.samsung.gddr6.catalog"
+      ],
+      "notes": "The exact-SKU-linked teardown identifies K4ZAF325BM-HC16 chips rated for 16Gbps. This is the memory-device rating, not the card's stock effective memory clock (EVGA lists 15,000MHz effective)."
+    },
+    {
+      "id": "claim.memory.package_type",
+      "subject_id": "chip.memory.gddr6.bus",
+      "predicate": "memory_package_type",
+      "value": "180 FBGA",
+      "unit": null,
+      "confidence_class": "secondary_catalog_data",
+      "source_ids": [
+        "src.samsung.gddr6.catalog"
+      ],
+      "notes": "180 FBGA package type is a secondary-catalog attribute for the verified K4ZAF325BM-HC16 device identity; the attribute itself is transcribed from a secondary catalog, not a primary Samsung datasheet. It is a package property, not a BoardView-derived PCB net or layout fact."
+    },
+    {
+      "id": "claim.memory.package_interface_width",
+      "subject_id": "chip.memory.gddr6.bus",
+      "predicate": "memory_package_interface_width",
+      "value": 32,
+      "unit": "bits",
+      "confidence_class": "secondary_catalog_data",
+      "source_ids": [
+        "src.samsung.gddr6.catalog"
+      ],
+      "notes": "32-bit package organization is a secondary-catalog attribute for the verified K4ZAF325BM-HC16 device identity; the attribute itself is transcribed from a secondary catalog, not a primary Samsung datasheet. It is a package property, not a BoardView-derived PCB net or layout fact."
+    },
+    {
+      "id": "claim.cooler.gpu_mounting_screw_count.visible",
+      "subject_id": "assembly.fasteners",
+      "predicate": "visible_gpu_area_heatsink_mounting_screw_count",
+      "value": 4,
+      "unit": "screws",
+      "confidence_class": "independently_verified",
+      "source_ids": [
+        "src.lanoc.review"
+      ],
+      "notes": "LanOC's explicit XC BLACK review identifies four heatsink mounting screws in the centre around the GPU in its 12G-P5-3655-KR sample. This is the visible GPU-area mounting set only, not a count of every screw retaining the shroud/cooler."
+    },
+    {
+      "id": "claim.cooling.heatpipe_terminal_count",
+      "subject_id": "cooling.heatpipes",
+      "predicate": "visible_copper_heatpipe_terminal_face_count",
+      "value": 4,
+      "unit": "visible terminal faces",
+      "confidence_class": "independently_verified",
+      "source_ids": [
+        "src.lanoc.review"
+      ],
+      "notes": "Four separate copper terminal faces are visible in the exact XC BLACK cooler end photograph (LanOC image 16). This does not establish four unique heatpipes; two U-shaped pipes may produce four ends. It is a visible-face count only."
+    },
+    {
+      "id": "claim.cooling.heatpipe_count",
+      "subject_id": "cooling.heatpipes",
+      "predicate": "total_heatpipe_count",
+      "value": 6,
+      "unit": "reported heatpipe runs",
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.thefpsreview.exact_sku"
+      ],
+      "notes": "The exact-SKU The FPS Review describes four central GPU-contact runs plus two side runs (six described runs). This is a source-specific route/run description, not a verified count of six independent closed U-shaped tube loops. PCWorld's overview says four copper heatpipes and Gamers Nexus narrates two central ~6 mm tube paths; the sources may be counting different geometric aspects. The actual unique physical loop count remains unresolved."
+    },
+    {
+      "id": "claim.cooling.main_heatpipe_count",
+      "subject_id": "cooling.heatpipes",
+      "predicate": "main_gpu_contact_heatpipe_count",
+      "value": 4,
+      "unit": "reported central runs",
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.thefpsreview.exact_sku"
+      ],
+      "notes": "The FPS Review describes four central GPU-contact heatpipe runs on the exact XC BLACK sample. These are route/run descriptions, not a verified count of four independent closed U-shaped tubes; individual paths remain proxies."
+    },
+    {
+      "id": "claim.cooling.side_heatpipe_count",
+      "subject_id": "cooling.heatpipes",
+      "predicate": "side_heatpipe_count",
+      "value": 2,
+      "unit": "reported side runs",
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.thefpsreview.exact_sku"
+      ],
+      "notes": "The FPS Review describes two additional side heatpipe runs on the exact XC BLACK sample. These are route/run descriptions, not a verified count of two independent closed U-shaped tubes; individual paths remain proxies."
+    },
+    {
+      "id": "claim.pcb.silkscreen_marking.candidate",
+      "subject_id": "assembly.pcb.board",
+      "predicate": "pcb_silkscreen_marking_candidate",
+      "value": "EVGA232 REV 1.0",
+      "unit": null,
+      "confidence_class": "candidate_reference_observation",
+      "source_ids": [
+        "src.techpowerup.pcb"
+      ],
+      "notes": "The PCB photograph on the TechPowerUp EVGA RTX 3060 XC BLACK product page appears to show this silkscreen marking. The photographed sample has not been independently tied to the selected 12G-P5-3655-KR unit or to a specific production batch. Keep the actual PCB revision unknown; do not use this candidate alone to select a BoardView or schematic."
+    },
+    {
+      "id": "claim.cooler.fastener.count.rear",
+      "subject_id": "assembly.fasteners",
+      "predicate": "rear_area_cooler_retention_screw_count",
+      "value": 4,
+      "unit": "screws",
+      "confidence_class": "independently_verified",
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ],
+      "notes": "Tom's Hardware's exact-SKU-linked teardown identifies four of the eight cooler/shroud screws as being near the far end/rear area of the card. Individual locations are not measured or mapped."
+    },
+    {
+      "id": "claim.cooling.thermal_pad.thickness.observation.primary",
+      "subject_id": "cooling.thermal_interface",
+      "predicate": "thermal_pad_thickness_observed",
+      "value": 2,
+      "unit": "mm",
+      "confidence_class": "measured",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "notes": "Gamers Nexus verbally measures one thermal-pad sample at about 2.0 mm in the exact-model teardown. The transcript does not unambiguously assign this sample to a specific package, VRM location or replacement-pad footprint. Do not use it as a complete replacement specification."
+    },
+    {
+      "id": "claim.cooling.thermal_pad.thickness.observation.secondary",
+      "subject_id": "cooling.thermal_interface",
+      "predicate": "thermal_pad_thickness_approximate_observation",
+      "value": 1.5,
+      "unit": "mm",
+      "confidence_class": "educational_approximation",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "notes": "Gamers Nexus estimates a second sample at approximately 1.5 mm and explicitly says it is harder to measure. Location, footprint, compression and material are not established."
+    },
+    {
+      "id": "claim.cooling.fan.mount_screws.per_fan",
+      "subject_id": "assembly.cooling",
+      "predicate": "fan_mounting_screw_count_per_fan",
+      "value": 3,
+      "unit": "screws",
+      "confidence_class": "independently_verified",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "notes": "Exact-model teardown states each independently replaceable fan is retained by three screws. Individual screw positions and specifications are not mapped."
+    },
+    {
+      "id": "claim.cooling.fan.mount_screws.total",
+      "subject_id": "assembly.cooling",
+      "predicate": "fan_mounting_screw_count_total",
+      "value": 6,
+      "unit": "screws",
+      "confidence_class": "calculated",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "notes": "Derived as two fans × three screws per fan. This is the fan-to-frame mounting hardware, distinct from the eight cooler/shroud retention screws."
+    },
+    {
+      "id": "claim.power.current_sense_shunt.count",
+      "subject_id": "power.shunt.cluster",
+      "predicate": "current_sense_shunt_count_observed",
+      "value": 2,
+      "unit": "shunts",
+      "confidence_class": "independently_verified",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "notes": "The teardown distinguishes one shunt for the auxiliary 8-pin input and another for PCIe-slot 12 V. This is not a VRM phase count."
+    },
+    {
+      "id": "claim.power.current_sense_shunt.8pin.resistance",
+      "subject_id": "power.shunt.8pin",
+      "predicate": "current_sense_resistance",
+      "value": 5,
+      "unit": "mΩ",
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "notes": "The presenter states 5 milliohms for the auxiliary input shunt. This value must not be copied to the separate PCIe-slot 12 V shunt; no reference designator or independent in-circuit measurement is supplied."
+    },
+    {
+      "id": "claim.power.input_fuse.count",
+      "subject_id": "power.fuse.input",
+      "predicate": "input_protection_fuse_count_observed",
+      "value": 1,
+      "unit": "fuse",
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "notes": "One fuse is pointed out in the exact-model teardown. Package marking, current rating, voltage rating and location are not established."
+    },
+    {
+      "id": "claim.gpu.die.marking",
+      "subject_id": "chip.gpu.ga106",
+      "predicate": "gpu_die_marking_read",
+      "value": "NVIDIA GA106-300-A1",
+      "unit": null,
+      "confidence_class": "independently_verified",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "notes": "The cleaned die marking is read in the exact-model teardown as NVIDIA GA106-300-A1. This is the package/die marking, not a full electrical revision or board ID."
+    },
+    {
+      "id": "claim.power.inductor.count.observed",
+      "subject_id": "assembly.power_stage",
+      "predicate": "inductor_packages_visible_in_teardown_near_tentative_memory_vrm_area",
+      "value": 2,
+      "unit": "inductors",
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "notes": "Two inductor packages are discussed in an area the presenter tentatively assumes may be memory VRM. The electrical function, phase assignment, values and reference designators are not confirmed."
+    },
+    {
+      "id": "claim.power.mosfet.copper_contact",
+      "subject_id": "power.switching_device.cluster",
+      "predicate": "direct_copper_plate_thermal_contact_observed",
+      "value": true,
+      "unit": null,
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "notes": "The teardown identifies a copper plate directly contacting a row of MOSFET packages. Plate dimensions and exact device coverage are not measured."
+    },
+    {
+      "id": "claim.cooling.central_heatpipe_tubes.observed",
+      "subject_id": "cooling.heatpipes",
+      "predicate": "central_heatpipe_tubes_visible",
+      "value": 2,
+      "unit": "tubes",
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "notes": "The Gamers Nexus teardown narration identifies two central tubes passing through the GPU contact plate. The FPS Review separately describes four central GPU-contact heatpipe runs plus two side runs. Tube-loop count and visible run count are different counting conventions; preserve the source-specific observations and do not interpret them as a contradiction or merge them into one physical count without a drawing."
+    },
+    {
+      "id": "claim.gpu.cuda_cores_per_sm",
+      "subject_id": "chip.gpu.sm.cluster",
+      "predicate": "cuda_cores_per_sm",
+      "value": 128,
+      "unit": "cores/SM",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ],
+      "notes": "Each GA10x SM contains 128 CUDA cores."
+    },
+    {
+      "id": "claim.gpu.tensor_cores_per_sm",
+      "subject_id": "chip.gpu.sm.cluster",
+      "predicate": "tensor_cores_per_sm",
+      "value": 4,
+      "unit": "cores/SM",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ],
+      "notes": "Each GA10x SM contains four third-generation Tensor Cores."
+    },
+    {
+      "id": "claim.gpu.texture_units_per_sm",
+      "subject_id": "chip.gpu.sm.cluster",
+      "predicate": "texture_units_per_sm",
+      "value": 4,
+      "unit": "TMU/SM",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ],
+      "notes": "Each GA10x SM contains four texture units."
+    },
+    {
+      "id": "claim.gpu.rt_cores_per_sm",
+      "subject_id": "chip.gpu.sm.cluster",
+      "predicate": "rt_cores_per_sm",
+      "value": 1,
+      "unit": "cores/SM",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ],
+      "notes": "Each GA10x SM contains one second-generation RT Core."
+    },
+    {
+      "id": "claim.gpu.register_file_per_sm",
+      "subject_id": "chip.gpu.sm.cluster",
+      "predicate": "register_file_capacity_per_sm",
+      "value": 256,
+      "unit": "KB/SM",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ],
+      "notes": "NVIDIA GA10x whitepaper specifies a 256 KB register file per SM."
+    },
+    {
+      "id": "claim.gpu.l1_shared_memory_per_sm",
+      "subject_id": "chip.gpu.sm.cluster",
+      "predicate": "l1_shared_memory_capacity_per_sm",
+      "value": 128,
+      "unit": "KB/SM",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ],
+      "notes": "NVIDIA GA10x whitepaper specifies 128 KB of configurable L1/shared memory per SM."
+    },
+    {
+      "id": "claim.gpu.sms_per_tpc",
+      "subject_id": "chip.gpu.tpc.cluster",
+      "predicate": "streaming_multiprocessors_per_tpc",
+      "value": 2,
+      "unit": "SM/TPC",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ],
+      "notes": "Each GA10x TPC contains two SMs."
+    },
+    {
+      "id": "claim.gpu.tpc_count",
+      "subject_id": "chip.gpu.tpc.cluster",
+      "predicate": "texture_processing_cluster_count",
+      "value": 14,
+      "unit": "TPC",
+      "confidence_class": "calculated",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "notes": "28 configured RTX 3060 SMs divided by two SMs per GA10x TPC = 14 logical TPCs; no GPC distribution is inferred."
+    },
+    {
+      "id": "claim.gpu.polymorph_engine_per_tpc",
+      "subject_id": "chip.gpu.polymorph.array",
+      "predicate": "polymorph_engine_count_per_tpc",
+      "value": 1,
+      "unit": "engine/TPC",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ],
+      "notes": "Each GA10x TPC contains one PolyMorph Engine."
+    },
+    {
+      "id": "claim.gpu.polymorph_engine_count",
+      "subject_id": "chip.gpu.polymorph.array",
+      "predicate": "polymorph_engine_count",
+      "value": 14,
+      "unit": "engines",
+      "confidence_class": "calculated",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper",
+        "src.tomshardware.rtx3060.specs"
+      ],
+      "notes": "One PolyMorph Engine per calculated logical TPC; 14 TPCs gives 14 engines."
+    },
+    {
+      "id": "claim.gpu.sm_partitions_per_sm",
+      "subject_id": "chip.gpu.sm.cluster",
+      "predicate": "processing_partitions_per_sm",
+      "value": 4,
+      "unit": "partitions/SM",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ],
+      "notes": "The GA10x SM is partitioned into four processing blocks."
+    },
+    {
+      "id": "claim.gpu.sm_partition_count",
+      "subject_id": "chip.gpu.sm.cluster",
+      "predicate": "processing_partition_count",
+      "value": 112,
+      "unit": "partitions",
+      "confidence_class": "calculated",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ],
+      "notes": "28 configured RTX 3060 SMs × four GA10x processing partitions per SM = 112 logical partitions."
+    },
+    {
+      "id": "claim.gpu.fp32_cores_per_partition",
+      "subject_id": "chip.gpu.sm.cluster",
+      "predicate": "fp32_cuda_cores_per_partition",
+      "value": 32,
+      "unit": "cores/partition",
+      "confidence_class": "calculated",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ],
+      "notes": "Each partition has one 16-FP32 datapath and a second 16-lane FP32/INT32 datapath; together these provide 32 FP32 lanes when executing FP32."
+    },
+    {
+      "id": "claim.gpu.fp32_int32_lanes_per_partition",
+      "subject_id": "chip.gpu.sm.cluster",
+      "predicate": "fp32_int32_lanes_per_partition",
+      "value": 16,
+      "unit": "lanes/partition",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ],
+      "notes": "The second datapath in each GA10x partition has 16 lanes that can execute either FP32 or INT32 operations."
+    },
+    {
+      "id": "claim.gpu.tensor_cores_per_partition",
+      "subject_id": "chip.gpu.sm.cluster",
+      "predicate": "tensor_cores_per_partition",
+      "value": 1,
+      "unit": "cores/partition",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ],
+      "notes": "One third-generation Tensor Core is present in each GA10x processing partition."
+    },
+    {
+      "id": "claim.gpu.ldst_per_partition",
+      "subject_id": "chip.gpu.sm.cluster",
+      "predicate": "load_store_units_per_partition",
+      "value": 4,
+      "unit": "units/partition",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ],
+      "notes": "Figure 3 depicts four LD/ST units per processing partition."
+    },
+    {
+      "id": "claim.gpu.sfu_per_partition",
+      "subject_id": "chip.gpu.sm.cluster",
+      "predicate": "special_function_units_per_partition",
+      "value": 1,
+      "unit": "units/partition",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ],
+      "notes": "Figure 3 depicts one SFU per processing partition."
+    },
+    {
+      "id": "claim.gpu.register_file_per_partition",
+      "subject_id": "chip.gpu.sm.cluster",
+      "predicate": "register_file_capacity_per_partition",
+      "value": 64,
+      "unit": "KB/partition",
+      "confidence_class": "calculated",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ],
+      "notes": "The Figure 3 register file is 16,384 × 32-bit = 524,288 bits = 64 KiB per partition."
+    },
+    {
+      "id": "claim.gpu.schedulers_per_partition",
+      "subject_id": "chip.gpu.sm.cluster",
+      "predicate": "warp_schedulers_per_partition",
+      "value": 1,
+      "unit": "scheduler/partition",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ],
+      "notes": "Figure 3 depicts one warp scheduler per processing partition."
+    },
+    {
+      "id": "claim.gpu.dispatch_units_per_partition",
+      "subject_id": "chip.gpu.sm.cluster",
+      "predicate": "dispatch_units_per_partition",
+      "value": 1,
+      "unit": "unit/partition",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ],
+      "notes": "Figure 3 depicts one dispatch unit per processing partition."
+    },
+    {
+      "id": "claim.gpu.l0_icache_per_partition",
+      "subject_id": "chip.gpu.sm.cluster",
+      "predicate": "l0_instruction_cache_per_partition",
+      "value": 1,
+      "unit": "cache/partition",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.ampere.whitepaper"
+      ],
+      "notes": "Figure 3 depicts one L0 instruction cache per processing partition."
+    },
+    {
+      "id": "claim.cooling.heatsink.material",
+      "subject_id": "cooling.heatsink",
+      "predicate": "heatsink_material",
+      "value": "Aluminium",
+      "unit": null,
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.lanoc.review"
+      ],
+      "notes": "LanOC describes the exact XC BLACK cooler as an aluminium heatsink. This records material class, not alloy or temper."
+    },
+    {
+      "id": "claim.cooling.fin.orientation",
+      "subject_id": "cooling.heatsink",
+      "predicate": "heatsink_fin_orientation",
+      "value": "Vertical",
+      "unit": null,
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.lanoc.review"
+      ],
+      "notes": "LanOC describes the fin stack as vertically laid out/oriented. No fin pitch, count or exact fin geometry is asserted."
+    },
+    {
+      "id": "claim.cooling.contact_plate.coverage",
+      "subject_id": "cooling.heatsink",
+      "predicate": "copper_contact_plate_coverage",
+      "value": "GPU die area and memory",
+      "unit": null,
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.lanoc.review"
+      ],
+      "notes": "LanOC describes a copper heat plate over the GPU that is wide enough to cover the memory as well. Exact outline and contact footprint are not measured."
+    },
+    {
+      "id": "claim.pcb.airflow_cutout.present",
+      "subject_id": "assembly.pcb.board",
+      "predicate": "pcb_air_through_cutout_present",
+      "value": true,
+      "unit": null,
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.lanoc.review",
+        "src.neoseeker.review"
+      ],
+      "notes": "LanOC describes a large PCB cutout at the card end/left side that allows airflow from the front fan through the PCB. Exact aperture outline and dimensions remain unmeasured."
+    },
+    {
+      "id": "claim.shroud.material",
+      "subject_id": "assembly.shroud",
+      "predicate": "fan_shroud_material",
+      "value": "Black plastic",
+      "unit": null,
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.lanoc.review"
+      ],
+      "notes": "LanOC explicitly describes the exact XC BLACK shroud as black plastic with textured and dotted surface areas. Polymer type and wall thickness are unknown."
+    },
+    {
+      "id": "claim.shroud.rgb.present",
+      "subject_id": "assembly.shroud",
+      "predicate": "fan_shroud_rgb_lighting_present",
+      "value": false,
+      "unit": null,
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.lanoc.review"
+      ],
+      "notes": "LanOC describes this exact XC BLACK as an all-black shroud with no RGB lighting."
+    },
+    {
+      "id": "claim.fan.blade.surface_detail",
+      "subject_id": "assembly.fan.1",
+      "predicate": "fan_blade_visual_surface_detail",
+      "value": "Raised EVGA E-logo bumps; golf-ball-like surface texture",
+      "unit": null,
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.lanoc.review"
+      ],
+      "notes": "LanOC describes raised EVGA E-logo bumps on the fan blades, similar to golf-ball dimples. The blockout now includes a simplified four-stroke E-like low-relief proxy on each blade; this is only a visual interpretation, not a calibrated reproduction. Exact logo vector, bump dimensions, spacing, depth and surface profile are not measured."
+    },
+    {
+      "id": "claim.displayport.count",
+      "subject_id": "connector.io.bracket",
+      "predicate": "displayport_output_count",
+      "value": 3,
+      "unit": "ports",
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.neoseeker.review"
+      ],
+      "notes": "Neoseeker's exact 12G-P5-3655-KR sample has three DisplayPort 1.4a outputs."
+    },
+    {
+      "id": "claim.displayport.version",
+      "subject_id": "connector.io.bracket",
+      "predicate": "displayport_output_version",
+      "value": "1.4a",
+      "unit": null,
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.neoseeker.review"
+      ],
+      "notes": "Neoseeker specifies DisplayPort 1.4a for the exact 12G-P5-3655-KR sample."
+    },
+    {
+      "id": "claim.hdmi.count",
+      "subject_id": "connector.io.bracket",
+      "predicate": "hdmi_output_count",
+      "value": 1,
+      "unit": "port",
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.neoseeker.review"
+      ],
+      "notes": "Neoseeker's exact 12G-P5-3655-KR sample has one HDMI 2.1 output."
+    },
+    {
+      "id": "claim.hdmi.version",
+      "subject_id": "connector.io.bracket",
+      "predicate": "hdmi_output_version",
+      "value": "2.1",
+      "unit": null,
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.neoseeker.review"
+      ],
+      "notes": "Neoseeker specifies HDMI 2.1 for the exact 12G-P5-3655-KR sample."
+    },
+    {
+      "id": "claim.cooling.heatpipe.physical_loop_count",
+      "subject_id": "cooling.heatpipes",
+      "predicate": "unique_physical_heatpipe_loop_count",
+      "value": null,
+      "unit": "closed tube loops",
+      "confidence_class": "unknown",
+      "source_ids": [
+        "src.thefpsreview.exact_sku",
+        "src.pcworld.xc_black",
+        "src.gamersnexus.teardown"
+      ],
+      "notes": "Unknown. The FPS Review describes four central plus two side runs; PCWorld's overview describes four copper heatpipes; Gamers Nexus narrates two central tube paths through the contact plate. These statements may count route legs, tube/loop assemblies or visible central paths differently. No calibrated cooler drawing or direct loop-by-loop inspection is available to reconcile them."
+    },
+    {
+      "id": "claim.cooling.heatpipe.counting_convention",
+      "subject_id": "cooling.heatpipes",
+      "predicate": "cross_source_counting_convention",
+      "value": "Unresolved: six reported runs vs four copper heatpipes vs two central tube paths",
+      "unit": null,
+      "confidence_class": "candidate_reference_observation",
+      "source_ids": [
+        "src.thefpsreview.exact_sku",
+        "src.pcworld.xc_black",
+        "src.gamersnexus.teardown"
+      ],
+      "notes": "Keep each publication's terminology separate. Do not describe six run proxies as six confirmed independent physical pipe loops."
+    },
+    {
+      "id": "claim.fan.oem_part_identity",
+      "subject_id": "assembly.cooling",
+      "predicate": "original_fan_manufacturer_part_number",
+      "value": null,
+      "unit": null,
+      "confidence_class": "unknown",
+      "source_ids": [
+        "src.gpufanreplacement.catalog",
+        "src.gpuconnect.catalog",
+        "src.ebay.aftermarket_fan.code_candidate"
+      ],
+      "notes": "Unknown. Aftermarket compatibility listings advertise PLA09215S12H-family replacements and another marketplace listing advertises PLD09220S12HH for a broad RTX 3060 / 3060 Ti XC BLACK family. These are conflicting seller-assigned replacement codes, not evidence of the OEM fan fitted to this exact sample; no original fan label has been inspected. Seller dimensions also conflict (approximately 90 mm vs 87 mm, with 15/20 mm depth variants). Voltage, current, connector and mounting measurements remain aftermarket catalogue claims only."
+    },
+    {
+      "id": "claim.fan.blade_count.photo_observed",
+      "subject_id": "assembly.cooling",
+      "predicate": "visible_impeller_blade_count_in_exact_sku_product_photo",
+      "value": 8,
+      "unit": "blades per fan",
+      "confidence_class": "candidate_reference_observation",
+      "source_ids": [
+        "src.newegg.exact_sku.product_photo"
+      ],
+      "notes": "Two front-view images in a Newegg listing whose title/model field identify exact SKU 12G-P5-3655-KR show eight visible impeller blade surfaces per fan. This is a photo count, not a manufacturer fan drawing, OEM datasheet or inspection of an installed sample. Blade camber, pitch, thickness, profile, depth and original fan part number remain unverified."
+    },
+    {
+      "id": "claim.cooler.fin_stack_base.screw_count",
+      "subject_id": "fastener.cooler.fin_stack_base",
+      "predicate": "fin_stack_base_to_pcb_screw_count",
+      "value": 2,
+      "unit": "screws",
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "notes": "The presenter describes 'a couple' of additional screws securing the fin-stack base to the PCB. Count is preserved as two from the spoken description; exact coordinates and screw specifications are not available."
+    },
+    {
+      "id": "claim.io.bracket.mount_screw_count",
+      "subject_id": "fastener.io.bracket.mount",
+      "predicate": "io_bracket_narrow_screw_count",
+      "value": 2,
+      "unit": "screws",
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "notes": "The teardown shows two narrow I/O-plate screws with nuts on the opposite side. Individual positions and specifications are not measured."
+    },
+    {
+      "id": "claim.io.display_output.screw_count",
+      "subject_id": "fastener.io.display.output",
+      "predicate": "display_output_retaining_screw_count",
+      "value": 3,
+      "unit": "screws",
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "notes": "Three smaller screws are shown securing the display-output section. They are not assigned one per connector."
+    },
+    {
+      "id": "claim.io.display_output.driver_size",
+      "subject_id": "fastener.io.display.output",
+      "predicate": "display_output_retaining_screw_driver",
+      "value": "Phillips #0",
+      "unit": "driver",
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "notes": "The presenter explicitly selects a Phillips #0 driver immediately before removing the three smaller display-output retaining screws. This driver note is not transferred to unrelated fastener groups."
+    },
+    {
+      "id": "claim.power.current_sense_shunt.pcie_slot.resistance",
+      "subject_id": "power.shunt.pcie_slot",
+      "predicate": "current_sense_resistance",
+      "value": null,
+      "unit": "mΩ",
+      "confidence_class": "unknown",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "notes": "The exact-model teardown distinguishes a separate PCIe-slot 12 V current-sense shunt but does not state its resistance. This value must remain unknown; the 5 mΩ value belongs only to the separate auxiliary 8-pin input shunt."
+    },
+    {
+      "id": "claim.cooling.fan.rpm.sample_operating_point",
+      "subject_id": "assembly.cooling",
+      "predicate": "fan_speed_observed_operating_point",
+      "value": 2030,
+      "unit": "RPM",
+      "confidence_class": "measured",
+      "source_ids": [
+        "src.pcper.xc_black.operating_point"
+      ],
+      "notes": "PC Perspective reports fans spinning at approximately 2030 RPM and 73% during Metro Exodus at 2160/high, in an open case at about 24 °C ambient. The review names the sample EVGA RTX 3060 12GB XC BLACK but does not show its retail part number. This is one workload operating point, not the fan's maximum/nominal RPM or a factory fan curve."
+    },
+    {
+      "id": "claim.cooling.fan.pwm.sample_operating_point",
+      "subject_id": "assembly.cooling",
+      "predicate": "fan_duty_observed_operating_point",
+      "value": 73,
+      "unit": "%",
+      "confidence_class": "measured",
+      "source_ids": [
+        "src.pcper.xc_black.operating_point"
+      ],
+      "notes": "One PC Perspective Metro Exodus 2160/high test observation: fan duty 73%, approximately 2030 RPM, open case, ambient about 24 °C. It is not a specification of the card's automatic fan curve."
+    },
+    {
+      "id": "claim.gpu.temperature.edge.sample_operating_point",
+      "subject_id": "chip.gpu.ga106",
+      "predicate": "gpu_temperature_observed_operating_point",
+      "value": 68.1,
+      "unit": "°C",
+      "confidence_class": "measured",
+      "source_ids": [
+        "src.pcper.xc_black.operating_point"
+      ],
+      "notes": "PC Perspective reports 68.1 °C GPU temperature during Metro Exodus at 2160/high in an open case at about 24 °C ambient. A single review sample/workload measurement; not a guaranteed thermal result."
+    },
+    {
+      "id": "claim.gpu.temperature.hotspot.sample_operating_point",
+      "subject_id": "chip.gpu.ga106",
+      "predicate": "gpu_hotspot_temperature_observed_operating_point",
+      "value": 80.5,
+      "unit": "°C",
+      "confidence_class": "measured",
+      "source_ids": [
+        "src.pcper.xc_black.operating_point"
+      ],
+      "notes": "PC Perspective reports 80.5 °C GPU hotspot during the same Metro Exodus 2160/high operating observation; the open case ambient was about 24 °C. Sample/workload-specific, not a design target."
+    },
+    {
+      "id": "claim.power.board_power.sample_operating_point",
+      "subject_id": "gpu.evga.12g-p5-3655-kr",
+      "predicate": "board_power_observed_operating_point",
+      "value": 172.4,
+      "unit": "W",
+      "confidence_class": "measured",
+      "source_ids": [
+        "src.pcper.xc_black.operating_point"
+      ],
+      "notes": "PC Perspective reports board power topping out at 172.4 W during its Metro Exodus 2160/high test of the EVGA XC BLACK sample. This is an observed workload peak, not a revised TGP/TDP specification; EVGA's published specification remains 170 W."
+    },
+    {
+      "id": "claim.gpu.frequency.peak.sample_operating_point",
+      "subject_id": "chip.gpu.ga106",
+      "predicate": "observed_peak_frequency",
+      "value": 1905,
+      "unit": "MHz",
+      "confidence_class": "measured",
+      "source_ids": [
+        "src.pcper.xc_black.operating_point"
+      ],
+      "notes": "PC Perspective reports frequency spikes as high as 1905 MHz during Metro Exodus at 2160/high on its EVGA GeForce RTX 3060 12GB XC BLACK sample. The review does not publish retail part number 12G-P5-3655-KR. This is an observed peak on that review sample, not EVGA's published 1777 MHz boost clock, a guaranteed frequency, or a universal operating value."
+    },
+    {
+      "id": "claim.cooling.heatpipe.diameter.observed_estimate",
+      "subject_id": "cooling.heatpipes",
+      "predicate": "observed_heatpipe_tube_diameter_estimate",
+      "value": 6,
+      "unit": "mm",
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "notes": "Gamers Nexus verbally estimates approximately 6 mm for the two central tube runs visible through the GPU contact plate. This is a rough teardown estimate, not a calibrated measurement. Do not apply it automatically to every route proxy or use it to infer the number of unique closed-loop pipes."
+    },
+    {
+      "id": "claim.memory.unpopulated_location_count",
+      "subject_id": "assembly.pcb.electronics",
+      "predicate": "unpopulated_memory_position_count",
+      "value": 2,
+      "unit": "positions",
+      "confidence_class": "teardown_supported",
+      "source_ids": [
+        "src.tomshardware.teardown"
+      ],
+      "notes": "Tom's Hardware explicitly describes two unused memory locations on the teardown PCB. The reviewed sample is linked to retail P/N 12G-P5-3655-KR by the rear-PCB identity photograph in the same review. This count records visibly unpopulated positions only; it does not establish electrical routing, footprint compatibility, or a valid memory upgrade path."
+    },
+    {
+      "id": "claim.gpu.nvenc.count",
+      "subject_id": "chip.gpu.nvenc",
+      "predicate": "dedicated_encoder_count",
+      "value": 1,
+      "unit": "engine",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.video_encode_decode_matrix"
+      ],
+      "notes": "Transcribed from the NVIDIA GeForce RTX 3060 desktop row of the Video Encode and Decode Support Matrix. Codec support remains subject to the matrix's profile, chroma-format and bit-depth columns."
+    },
+    {
+      "id": "claim.gpu.nvenc.generation",
+      "subject_id": "chip.gpu.nvenc",
+      "predicate": "generation",
+      "value": "7th Generation",
+      "unit": null,
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.video_encode_decode_matrix"
+      ],
+      "notes": "Transcribed from the NVIDIA GeForce RTX 3060 desktop row of the Video Encode and Decode Support Matrix. Codec support remains subject to the matrix's profile, chroma-format and bit-depth columns."
+    },
+    {
+      "id": "claim.gpu.nvenc.h264_encode",
+      "subject_id": "chip.gpu.nvenc",
+      "predicate": "h264_encoding_supported",
+      "value": true,
+      "unit": null,
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.video_encode_decode_matrix"
+      ],
+      "notes": "Transcribed from the NVIDIA GeForce RTX 3060 desktop row of the Video Encode and Decode Support Matrix. Codec support remains subject to the matrix's profile, chroma-format and bit-depth columns."
+    },
+    {
+      "id": "claim.gpu.nvenc.hevc_encode",
+      "subject_id": "chip.gpu.nvenc",
+      "predicate": "hevc_encoding_supported",
+      "value": true,
+      "unit": null,
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.video_encode_decode_matrix"
+      ],
+      "notes": "Transcribed from the NVIDIA GeForce RTX 3060 desktop row of the Video Encode and Decode Support Matrix. Codec support remains subject to the matrix's profile, chroma-format and bit-depth columns."
+    },
+    {
+      "id": "claim.gpu.nvenc.av1_encode",
+      "subject_id": "chip.gpu.nvenc",
+      "predicate": "av1_encoding_supported",
+      "value": false,
+      "unit": null,
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.video_encode_decode_matrix"
+      ],
+      "notes": "Transcribed from the NVIDIA GeForce RTX 3060 desktop row of the Video Encode and Decode Support Matrix. Codec support remains subject to the matrix's profile, chroma-format and bit-depth columns."
+    },
+    {
+      "id": "claim.gpu.nvdec.count",
+      "subject_id": "chip.gpu.nvdec",
+      "predicate": "dedicated_decoder_count",
+      "value": 1,
+      "unit": "engine",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.video_encode_decode_matrix"
+      ],
+      "notes": "Transcribed from the NVIDIA GeForce RTX 3060 desktop row of the Video Encode and Decode Support Matrix. Codec support remains subject to the matrix's profile, chroma-format and bit-depth columns."
+    },
+    {
+      "id": "claim.gpu.nvdec.generation",
+      "subject_id": "chip.gpu.nvdec",
+      "predicate": "generation",
+      "value": "5th Generation",
+      "unit": null,
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.video_encode_decode_matrix"
+      ],
+      "notes": "Transcribed from the NVIDIA GeForce RTX 3060 desktop row of the Video Encode and Decode Support Matrix. Codec support remains subject to the matrix's profile, chroma-format and bit-depth columns."
+    },
+    {
+      "id": "claim.gpu.nvdec.h264_decode",
+      "subject_id": "chip.gpu.nvdec",
+      "predicate": "h264_decoding_supported",
+      "value": true,
+      "unit": null,
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.video_encode_decode_matrix"
+      ],
+      "notes": "Transcribed from the NVIDIA GeForce RTX 3060 desktop row of the Video Encode and Decode Support Matrix. Codec support remains subject to the matrix's profile, chroma-format and bit-depth columns."
+    },
+    {
+      "id": "claim.gpu.nvdec.hevc_decode",
+      "subject_id": "chip.gpu.nvdec",
+      "predicate": "hevc_decoding_supported",
+      "value": true,
+      "unit": null,
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.video_encode_decode_matrix"
+      ],
+      "notes": "Transcribed from the NVIDIA GeForce RTX 3060 desktop row of the Video Encode and Decode Support Matrix. Codec support remains subject to the matrix's profile, chroma-format and bit-depth columns."
+    },
+    {
+      "id": "claim.gpu.nvdec.vp9_decode",
+      "subject_id": "chip.gpu.nvdec",
+      "predicate": "vp9_decoding_supported",
+      "value": true,
+      "unit": null,
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.video_encode_decode_matrix"
+      ],
+      "notes": "Transcribed from the NVIDIA GeForce RTX 3060 desktop row of the Video Encode and Decode Support Matrix. Codec support remains subject to the matrix's profile, chroma-format and bit-depth columns."
+    },
+    {
+      "id": "claim.gpu.nvdec.av1_decode",
+      "subject_id": "chip.gpu.nvdec",
+      "predicate": "av1_decoding_supported",
+      "value": true,
+      "unit": null,
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.nvidia.video_encode_decode_matrix"
+      ],
+      "notes": "Transcribed from the NVIDIA GeForce RTX 3060 desktop row of the Video Encode and Decode Support Matrix. Codec support remains subject to the matrix's profile, chroma-format and bit-depth columns."
     }
   ]
 }

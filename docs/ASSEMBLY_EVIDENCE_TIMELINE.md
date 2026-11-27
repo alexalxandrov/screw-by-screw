@@ -29,3 +29,12 @@ A step requires a unique ID, unique positive sequence integer, readable action/t
 ## Localization
 
 Observation notes accept either a plain string or an RU/EN object. The viewer selects the current language and falls back to the available translation. Localization changes presentation only; source locators, timestamps and evidence meaning remain unchanged.
+
+
+## RTX 3060 XC BLACK pilot — current partial evidence
+
+The `12G-P5-3655-KR` package currently records five **partial source observations** from the exact-model Gamers Nexus teardown: (1) four spring-loaded screws around the GPU cooler; (2) a separate pair retaining the fin-stack base; (3) two narrow I/O-bracket screws with reverse-side nuts and three display-output retaining screws (Phillips #0 is used for the latter); (4) disconnect both fan leads before separating the cooler; and (5) three screws retaining each independently replaceable fan. These observations are deliberately not converted into a complete removal/reassembly order.
+
+Tom's Hardware separately reports an eight-screw cooler/shroud aggregate on a teardown sample whose rear-PCB identity photograph reads P/N `12G-P5-3655-KR`: four around the GPU and four near the far end. The overlap between that aggregate and the Gamers Nexus fastener groups is not established; the counts must not be added together or represented as a reconciled screw inventory. Only four GPU-area screws have photo-positioned mesh proxies; unmapped fasteners remain logical-only. Additional shroud screws remain an uncertain four-or-six candidate group. No torque, thread, screw length or complete service procedure is inferred.
+
+The package marks the evidence as `partial_observed_sequence` and `complete_sequence: false`. It must not be treated as a full repair instruction or reassembly procedure.

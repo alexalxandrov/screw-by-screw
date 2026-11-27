@@ -7,8 +7,8 @@
 - Part number: 12G-P5-3655-KR
 - GPU: NVIDIA GeForce RTX 3060 (Ampere / GA106 family)
 - Memory: 12GB GDDR6
-- Content status: research / blockout pipeline
-- Geometry status: v0.3 technically accepted; v0.4 candidate pending local Blender run; not CAD
+- Content status: source-linked v0.6 deep-atlas development branch; canonical package is maintained at [`content/models/evga-rtx3060-xc-black-12gb`](../../../../content/models/evga-rtx3060-xc-black-12gb/)
+- Geometry status: Blender 4.3.2 v0.5 generator and GLB/SBS integration validated in earlier CI runs; latest HEAD is waiting for GitHub-hosted runner assignment; still illustrative proxy, not CAD
 - Rights status: not cleared for third-party media/assets
 
 This package is specific to the XC BLACK SKU. Do not merge data from the distinct EVGA XC Gaming SKU (12G-P5-3657-KR) or other RTX 3060 boards without evidence of equivalence.
@@ -55,27 +55,37 @@ blender --background --python tools/modeling/build_rtx3060_xc_black_blockout.py 
 
 The script produces a Blender scene, GLB export and JSON manifest unless disabled. Generated binaries are local working artifacts and are not committed by this script.
 
-The current generator candidate is v0.4 and writes versioned artifacts:
-- `rtx3060_xc_black_blockout_v04.blend`
-- `rtx3060_xc_black_blockout_v04.glb`
-- `rtx3060_xc_black_blockout_v04.manifest.json`
+The current Blender generator writes versioned v0.5 artifacts:
+- `rtx3060_xc_black_blockout_v05.blend`
+- `rtx3060_xc_black_blockout_v05.glb`
+- `rtx3060_xc_black_blockout_v05.manifest.json`
 
-Earlier v0.1/v0.2/v0.3 outputs are retained locally for comparison. v0.4 retains the fan-frame, hub and blade-pivot transform checks. The X-axis gate no longer incorrectly treats 201.8 mm as the maximum outer-shroud length; the vertical bounds remain a proxy sanity check. The v0.3 baseline passed local generation and transform-integrity checks in Blender 4.3.2. The v0.4 candidate must be run locally before acceptance. An independent standard-library validator is available at [validate_blockout_package.py](../../../../tools/modeling/validate_blockout_package.py); run it using the command in [BLOCKOUT_VALIDATION.md](02-CAD/BLOCKOUT_VALIDATION.md). Product geometry remains illustrative and has not passed the external-fidelity gate.
+Earlier v0.1/v0.2/v0.3 outputs are retained locally for comparison. v0.5 retains the fan-frame, hub and blade-pivot transform checks. The X-axis gate no longer incorrectly treats 201.8 mm as the maximum outer-shroud length; the vertical bounds remain a proxy sanity check. Earlier CI runs validated Blender generation, GLB and manifest integrity, portable SBS packaging, browser import and the viewer test suite. The latest HEAD's Actions jobs have not started because GitHub has not assigned a hosted runner (`runner_id: 0`, no steps/logs); do not interpret those attempts as passing current-head validation. Visual fidelity still requires review against an exact physical sample or calibrated references. An independent standard-library validator is available at [validate_blockout_package.py](../../../../tools/modeling/validate_blockout_package.py); run it using the command in [BLOCKOUT_VALIDATION.md](02-CAD/BLOCKOUT_VALIDATION.md). Product geometry remains illustrative and has not passed the external-fidelity gate.
 
 ## Text-first scene inspection
 
 After generating the Blender scene, produce a readable inventory without screenshots:
 
 ```bash
-blender MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v04.blend --background --python tools/modeling/inspect_blend_scene.py -- --output /tmp/sbs-inspection.txt --json-output /tmp/sbs-inspection.json
+blender MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v05.blend --background --python tools/modeling/inspect_blend_scene.py -- --output /tmp/sbs-inspection.txt --json-output /tmp/sbs-inspection.json
 ```
 
 The report includes component IDs, parent IDs, world-space positions, dimensions, bounds, mesh counts and evidence labels. It is intended for text-only review.
 
 **Accuracy warning:** the card length and height use manufacturer-published values; fan diameters are approximate reviewer measurements. Thickness, fan centres, shroud/PCB outlines and internal placements are illustrative or unknown. This asset is not suitable for manufacturing, fitment, repair or physical simulation.
 
-## Required package files (future)
+## Canonical package and remaining evidence gates
 
-model.json, components.json, relationships.json, sources.json, assembly_steps.json, process_layers.json, and a release manifest.
+The current canonical package is linked above and contains 323 semantic components, 322 typed relationships, 111 atomic claims and 29 registered sources, plus five partial teardown observations and two educational clips. It remains a starter engineering atlas, not a complete BOM or complete service manual. Exact PCB revision, matching BoardView/schematic, component reference designators and calibrated mechanical dimensions remain unverified. Heatpipe sources use different counting conventions (six route/runs, four copper heatpipes, or two central tube paths); the unique physical closed-loop count is unresolved. Eight visible blade surfaces per fan are counted from two exact-SKU listing photographs; blade profile remains proxy geometry. Original OEM fan part number is unknown; aftermarket listings are compatibility leads only.
 
 See [GPU source audit](../../../../docs/GPU_SOURCE_AUDIT.md) and [content pipeline](../../../../docs/CONTENT_PIPELINE.md).
+
+
+### GA106 compute architecture extension
+
+The canonical content package has 28 logical SM nodes and a calculated 14-TPC aggregate. Each SM's GA10x logical resource description is evidence-backed by NVIDIA's Ampere whitepaper; the instance numbers are navigation labels only and are not physical die coordinates. No GA106 GPC layout is inferred.
+
+
+### Unpopulated memory locations
+
+The exact-SKU-linked Tom's Hardware teardown also notes two unused memory positions on the PCB alongside six installed Samsung GDDR6 devices. They are separate logical-only nodes in the package; no footprint geometry, net routing or upgrade path is inferred.

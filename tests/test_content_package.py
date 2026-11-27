@@ -90,9 +90,49 @@ class ContentPackageTests(unittest.TestCase):
 
     def test_not_authored_steps_cannot_contain_steps(self):
         package = sample_package()
-        package["assembly_steps"]["steps"] = [{"id": "step.one", "target_component_ids": [],
-                                                 "source_ids": ["src.demo"]}]
+        package["assembly_steps"]["steps"] = [{
+            "id": "step.one", "sequence": 1,
+            "title": {"en": "Step", "ru": "Шаг"},
+            "component_ids": ["part.one"], "source_ids": ["src.demo"]
+        }]
         with self.assertRaisesRegex(validator.PackageError, "marked not_authored"):
+            validator.validate_package(package)
+
+    def test_partial_observed_sequence_uses_canonical_component_ids(self):
+        package = sample_package()
+        package["assembly_steps"] = {
+            "status": "partial_observed_sequence",
+            "complete_sequence": False,
+            "steps": [{
+                "id": "step.one", "sequence": 1,
+                "title": {"en": "Remove part", "ru": "Снять деталь"},
+                "description": {"en": "Description", "ru": "Описание"},
+                "component_ids": ["part.one"],
+                "tool_requirements": [],
+                "safety_notes": {"en": "Be careful", "ru": "Соблюдайте осторожность"},
+                "prerequisite_step_ids": [],
+                "source_ids": ["src.demo"]
+            }]
+        }
+        report = validator.validate_package(package)
+        self.assertIn("Assembly steps: 1 (partial_observed_sequence)", report)
+
+    def test_assembly_step_prerequisite_must_precede_dependent_step(self):
+        package = sample_package()
+        base = {
+            "title": {"en": "Step", "ru": "Шаг"},
+            "component_ids": ["part.one"],
+            "tool_requirements": [],
+            "source_ids": ["src.demo"]
+        }
+        package["assembly_steps"] = {
+            "status": "authored",
+            "steps": [
+                {**base, "id": "step.one", "sequence": 1, "prerequisite_step_ids": ["step.two"]},
+                {**base, "id": "step.two", "sequence": 2, "prerequisite_step_ids": []}
+            ]
+        }
+        with self.assertRaisesRegex(validator.PackageError, "prerequisite must precede it"):
             validator.validate_package(package)
 
     def test_unknown_claim_must_have_null_value(self):
@@ -147,6 +187,23 @@ class ContentPackageTests(unittest.TestCase):
         with self.assertRaisesRegex(validator.PackageError, "bilingual description"):
             validator.validate_package(package)
 
+    def test_logical_architecture_process_layer_accepts_bilingual_assumptions(self):
+        package = sample_package()
+        layer = package["process_layers"]["process_layers"][0]
+        layer["mode"] = "logical_architecture"
+        layer["assumptions"] = [
+            {"en": "Logical nodes are not physical layout.", "ru": "Логические узлы не являются физической компоновкой."}
+        ]
+        validator.validate_package(package)
+
+    def test_process_layer_rejects_untranslated_assumption_object(self):
+        package = sample_package()
+        package["process_layers"]["process_layers"][0]["assumptions"] = [
+            {"en": "Logical nodes are not physical layout."}
+        ]
+        with self.assertRaisesRegex(validator.PackageError, "bilingual objects"):
+            validator.validate_package(package)
+
     def test_untranslated_quiz_choice_fails(self):
         package = sample_package()
         package["learning"]["questions"][0]["choices"][0].pop("ru")
@@ -160,6 +217,56 @@ class ContentPackageTests(unittest.TestCase):
 
 
 
+    def test_exact_sku_fastener_and_memory_evidence_is_preserved(self):
+        package_dir = ROOT / "content" / "models" / "evga-rtx3060-xc-black-12gb"
+        manifest_builder.build_manifest(package_dir)
+        package = validator.load_package(package_dir)
+        validator.validate_package(package, package_dir)
+        claims = {item["id"]: item for item in package["claims"]["claims"]}
+        components = {item["id"]: item for item in package["components"]["components"]}
+        self.assertEqual(claims["claim.cooler.fastener.count.total"]["value"], 8)
+        self.assertEqual(claims["claim.cooler.fastener.count.rear"]["value"], 4)
+        self.assertEqual(claims["claim.memory.package_part_number"]["value"], "Samsung K4ZAF325BM-HC16")
+        self.assertEqual(claims["claim.memory.unpopulated_location_count"]["value"], 2)
+        self.assertEqual(components["pcb.memory.unpopulated.01"]["geometry_status"], "logical_only")
+        self.assertEqual(components["pcb.memory.unpopulated.02"]["geometry_status"], "logical_only")
+        self.assertEqual(components["pcb.memory.unpopulated.01"]["parent_id"], "pcb.memory.unpopulated.locations")
+        self.assertIn("src.tomshardware.teardown", claims["claim.memory.unpopulated_location_count"]["source_ids"])
+        for claim_id in (
+            "claim.memory.package_density",
+            "claim.memory.package_organization",
+            "claim.memory.package_type",
+            "claim.memory.package_interface_width",
+        ):
+            self.assertEqual(claims[claim_id]["confidence_class"], "secondary_catalog_data")
+        self.assertEqual(
+            package["model"]["specifications"]["memory"]["package_identity"]["part_number"],
+            "Samsung K4ZAF325BM-HC16",
+        )
+        self.assertEqual(
+            set(package["assembly_steps"]["steps"][0]["component_ids"]),
+            {"assembly.fasteners", "assembly.cooling"}
+            | {f"fastener.cooler.{index:02d}" for index in range(1, 5)},
+        )
+        for index in range(5, 9):
+            rear = components[f"fastener.cooler.{index:02d}"]
+            self.assertEqual(rear["evidence_status"], "visible_exact_model")
+            self.assertEqual(rear["geometry_status"], "logical_only")
+
+    def test_candidate_pcb_marking_does_not_confirm_revision(self):
+        package_dir = ROOT / "content" / "models" / "evga-rtx3060-xc-black-12gb"
+        manifest_builder.build_manifest(package_dir)
+        package = validator.load_package(package_dir)
+        validator.validate_package(package, package_dir)
+        claims = {item["id"]: item for item in package["claims"]["claims"]}
+        self.assertEqual(
+            claims["claim.pcb.silkscreen_marking.candidate"]["confidence_class"],
+            "candidate_reference_observation",
+        )
+        self.assertEqual(claims["claim.pcb.silkscreen_marking.candidate"]["value"], "EVGA232 REV 1.0")
+        self.assertIsNone(claims["claim.pcb.revision"]["value"])
+        self.assertEqual(claims["claim.pcb.revision"]["confidence_class"], "unknown")
+
     def test_pilot_rotors_are_separate_proxy_components_and_animation_targets(self):
         package_dir = ROOT / "content" / "models" / "evga-rtx3060-xc-black-12gb"
         manifest = manifest_builder.build_manifest(package_dir)
@@ -168,6 +275,7 @@ class ContentPackageTests(unittest.TestCase):
         report = validator.validate_package(package, package_dir)
         components = {item["id"]: item for item in package["components"]["components"]}
         relationships = {item["id"]: item for item in package["relationships"]["relationships"]}
+        claims = {item["id"]: item for item in package["claims"]["claims"]}
 
         for fan_index in (1, 2):
             fan_id = f"assembly.fan.{fan_index}"
@@ -181,9 +289,134 @@ class ContentPackageTests(unittest.TestCase):
             self.assertEqual(edge["from"], fan_id)
             self.assertEqual(edge["to"], rotor_id)
 
-        self.assertIn("Components: 24", report)
-        self.assertIn("Relationships: 16", report)
-        self.assertIn("Animation clips: 1", report)
+            blade_ids = [f"fan.{fan_index}.blade.{index}" for index in range(1, 9)]
+            self.assertTrue(all(blade_id in components for blade_id in blade_ids))
+            self.assertEqual(
+                relationships[f"rel.detail.contains.fan-{fan_index}-blade-8"]["to"],
+                f"fan.{fan_index}.blade.8",
+            )
+            self.assertIn("src.newegg.exact_sku.product_photo", components[blade_ids[-1]]["source_ids"])
+
+        self.assertIn("Components: 325", report)
+        self.assertIn("Relationships: 324", report)
+        self.assertIn("Animation clips: 2", report)
+        self.assertEqual(len(package["claims"]["claims"]), 122)
+        self.assertEqual(len(package["process_layers"]["process_layers"]), 5)
+        power_layer = next(layer for layer in package["process_layers"]["process_layers"] if layer["id"] == "process.power.qualitative")
+        self.assertEqual(len(power_layer["linked_component_ids"]), 17)
+        self.assertIn("src.gamersnexus.teardown", power_layer["source_ids"])
+        self.assertEqual(len(power_layer["visualization"]["diagram"]["groups"]), 4)
+        power_node_ids = {
+            node["component_id"]
+            for group in power_layer["visualization"]["diagram"]["groups"]
+            for node in group["nodes"]
+        }
+        self.assertEqual(power_node_ids, set(power_layer["linked_component_ids"]))
+        self.assertTrue(power_node_ids <= set(components))
+        self.assertIn("power.shunt.8pin", power_node_ids)
+        self.assertIn("power.shunt.pcie_slot", power_node_ids)
+        self.assertIn("power.fuse.input", power_node_ids)
+        self.assertIn("chip.memory.gddr6.bus", power_node_ids)
+        self.assertIn("5 mΩ current-sense shunt", power_layer["description"]["en"])
+        graphics_layer = next(layer for layer in package["process_layers"]["process_layers"] if layer["type"] == "graphics_pipeline")
+        self.assertEqual(graphics_layer["mode"], "logical_architecture")
+        self.assertEqual(len(graphics_layer["visualization"]["diagram"]["groups"]), 5)
+        graphics_node_ids = {
+            node["component_id"]
+            for group in graphics_layer["visualization"]["diagram"]["groups"]
+            for node in group["nodes"]
+        }
+        self.assertEqual(graphics_node_ids, set(graphics_layer["linked_component_ids"]))
+        self.assertTrue(graphics_node_ids <= set(components))
+        self.assertIn("chip.gpu.rop.array", graphics_node_ids)
+        self.assertIn("chip.memory.gddr6.bus", graphics_node_ids)
+        self.assertIn("connector.displayport.3", graphics_node_ids)
+        self.assertIn("connector.hdmi.1", graphics_node_ids)
+        self.assertIn("src.nvidia.ampere.whitepaper", graphics_layer["source_ids"])
+        self.assertIn("src.neoseeker.review", graphics_layer["source_ids"])
+        self.assertIn("not a fixed", graphics_layer["description"]["en"])
+        video_layer = next(layer for layer in package["process_layers"]["process_layers"] if layer["type"] == "video_codec")
+        self.assertEqual(video_layer["mode"], "logical_architecture")
+        self.assertEqual(len(video_layer["visualization"]["diagram"]["groups"]), 3)
+        self.assertEqual(set(video_layer["linked_component_ids"]), {
+            "pcb.connector.pcie", "chip.gpu.ga106", "chip.gpu.nvdec",
+            "chip.memory.gddr6.bus", "chip.gpu.sm.cluster", "chip.gpu.nvenc"
+        })
+        self.assertEqual(components["chip.gpu.nvenc"]["geometry_status"], "logical_only")
+        self.assertEqual(components["chip.gpu.nvdec"]["geometry_status"], "logical_only")
+        media_claims = {item["id"]: item for item in package["claims"]["claims"]}
+        self.assertEqual(media_claims["claim.gpu.nvenc.count"]["value"], 1)
+        self.assertEqual(media_claims["claim.gpu.nvenc.generation"]["value"], "7th Generation")
+        self.assertFalse(media_claims["claim.gpu.nvenc.av1_encode"]["value"])
+        self.assertEqual(media_claims["claim.gpu.nvdec.count"]["value"], 1)
+        self.assertEqual(media_claims["claim.gpu.nvdec.generation"]["value"], "5th Generation")
+        self.assertTrue(media_claims["claim.gpu.nvdec.av1_decode"]["value"])
+        media_source_ids = {item["id"] for item in package["sources"]["sources"]}
+        self.assertIn("src.nvidia.video_encode_decode_matrix", media_source_ids)
+        media_questions = {item["id"]: item for item in package["learning"]["questions"]}
+        self.assertEqual(media_questions["quiz.video.nvdec.role"]["correct_index"], 1)
+        self.assertEqual(media_questions["quiz.video.nvenc.generation"]["correct_index"], 0)
+        self.assertEqual(media_questions["quiz.video.av1.encode"]["correct_index"], 1)
+        self.assertEqual(media_questions["quiz.video.av1.decode"]["correct_index"], 0)
+        self.assertTrue(all("src.nvidia.video_encode_decode_matrix" in item["source_ids"] for item in media_questions.values() if item["id"].startswith("quiz.video.")))
+        self.assertEqual(len(package["learning"]["questions"]), 17)
+        self.assertEqual(len(package["assembly_steps"]["steps"]), 5)
+        self.assertEqual(claims["claim.cooler.fin_stack_base.screw_count"]["value"], 2)
+        self.assertEqual(claims["claim.io.bracket.mount_screw_count"]["value"], 2)
+        self.assertEqual(claims["claim.io.display_output.screw_count"]["value"], 3)
+        self.assertEqual(claims["claim.io.display_output.driver_size"]["value"], "Phillips #0")
+        individual_fastener_groups = {
+            "fastener.cooler.fin_stack_base": 2,
+            "fastener.io.bracket.mount": 2,
+            "fastener.io.display.output": 3,
+        }
+        for group_id, count in individual_fastener_groups.items():
+            for index in range(1, count + 1):
+                child_id = f"{group_id}.{index:02d}"
+                self.assertEqual(components[child_id]["parent_id"], group_id)
+                self.assertEqual(components[child_id]["geometry_status"], "logical_only")
+                relation = relationships[f"rel.contains.{child_id}"]
+                self.assertEqual(relation["from"], group_id)
+                self.assertEqual(relation["to"], child_id)
+                self.assertIn("src.gamersnexus.teardown", relation["source_ids"])
+        self.assertEqual(components["fastener.shroud.candidate"]["geometry_status"], "logical_only")
+        self.assertEqual(claims["claim.power.current_sense_shunt.pcie_slot.resistance"]["value"], None)
+        self.assertEqual(claims["claim.cooling.fan.rpm.sample_operating_point"]["value"], 2030)
+        self.assertEqual(claims["claim.cooling.fan.pwm.sample_operating_point"]["value"], 73)
+        self.assertEqual(claims["claim.gpu.temperature.edge.sample_operating_point"]["value"], 68.1)
+        self.assertEqual(claims["claim.gpu.temperature.hotspot.sample_operating_point"]["value"], 80.5)
+        self.assertEqual(claims["claim.gpu.frequency.peak.sample_operating_point"]["value"], 1905)
+        self.assertEqual(claims["claim.cooling.heatpipe.diameter.observed_estimate"]["value"], 6)
+        self.assertEqual(claims["claim.cooling.heatpipe.diameter.observed_estimate"]["confidence_class"], "teardown_supported")
+        self.assertNotIn("claim.cooling.heatpipe.nominal_diameter", claims)
+        self.assertEqual(relationships["rel.cooling.airflow.fan2"]["from"], "assembly.fan.2")
+        self.assertEqual(relationships["rel.cooling.airflow.fan2"]["to"], "cooling.heatsink")
+        self.assertEqual(relationships["rel.cooling.airflow.fan2"]["certainty"], "qualitative")
+        self.assertEqual(claims["claim.gpu.frequency.peak.sample_operating_point"]["confidence_class"], "measured")
+        self.assertEqual(claims["claim.power.board_power.sample_operating_point"]["value"], 172.4)
+
+        sm_instances = [item for item in components.values() if item["id"].startswith("chip.gpu.sm.") and item["id"] != "chip.gpu.sm.cluster" and item["id"].count(".") == 3]
+        self.assertEqual(len(sm_instances), 28)
+        self.assertEqual(components["chip.gpu.tpc.cluster"]["geometry_status"], "logical_only")
+        self.assertEqual(components["chip.gpu.polymorph.array"]["geometry_status"], "logical_only")
+        tpc_instances = [item for item in components.values() if item["id"].startswith("chip.gpu.tpc.") and item["id"] != "chip.gpu.tpc.cluster" and not item["id"].endswith(".polymorph")]
+        polymorph_instances = [item for item in components.values() if item["id"].startswith("chip.gpu.tpc.") and item["id"].endswith(".polymorph")]
+        partitions = [item for item in components.values() if ".partition." in item["id"]]
+        self.assertEqual(len(tpc_instances), 14)
+        self.assertEqual(len(polymorph_instances), 14)
+        self.assertEqual(len(partitions), 112)
+        self.assertTrue(all(item["parent_id"] == "chip.gpu.tpc.cluster" for item in tpc_instances))
+        for tpc_index, tpc in enumerate(sorted(tpc_instances, key=lambda item: item["id"]), start=1):
+            expected_sms = {f"chip.gpu.sm.{(tpc_index - 1) * 2 + slot:02d}" for slot in (1, 2)}
+            self.assertEqual({item["id"] for item in sm_instances if item["parent_id"] == tpc["id"]}, expected_sms)
+            self.assertEqual(len([item for item in partitions if item["parent_id"] in expected_sms]), 8)
+        for sm in sm_instances:
+            self.assertEqual(len([item for item in partitions if item["parent_id"] == sm["id"]]), 4)
+        self.assertEqual(claims["claim.gpu.tpc_count"]["value"], 14)
+        self.assertEqual(claims["claim.gpu.tpc_count"]["confidence_class"], "calculated")
+        self.assertEqual(claims["claim.gpu.sm_partition_count"]["value"], 112)
+        self.assertEqual(claims["claim.gpu.sm_partitions_per_sm"]["value"], 4)
+        self.assertEqual(claims["claim.gpu.register_file_per_partition"]["value"], 64)
         clip = package["animations"]["clips"][0]
         self.assertEqual(clip["evidence_status"], "educational_approximation")
         self.assertEqual(clip["source_ids"], [])

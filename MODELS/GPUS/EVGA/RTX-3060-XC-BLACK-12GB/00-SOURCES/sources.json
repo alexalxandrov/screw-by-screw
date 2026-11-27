@@ -1,11 +1,244 @@
 {
-  "schema_version":"0.1-draft",
-  "sources":[
-    {"id":"src.evga.spec","title":"EVGA GeForce RTX 3060 XC BLACK GAMING 12GB specification","publisher":"EVGA","url":"https://sg-repo-production-photos.s3.eu-central-1.amazonaws.com/aikido/cache/70b60b3a1a7bbeaced972a5b6905797f.pdf","type":"manufacturer_specification","applicability":"12G-P5-3655-KR","license_status":"redistribution_not_cleared","use":"link_and_source_backed_claims"},
-    {"id":"src.gamersnexus.teardown","title":"Taking Apart a Non-Existent GPU: EVGA RTX 3060 XC Black Tear-Down","publisher":"Gamers Nexus","url":"https://www.youtube.com/watch?v=hJFJ_clQT8U","type":"teardown_video","applicability":"explicitly_EVGA_RTX_3060_XC_Black","timecodes":["01:30","05:33","06:45","09:00","11:00"],"license_status":"third_party_copyright_no_reuse_permission","use":"linked_research_and_manual_observations_only"},
-    {"id":"src.lanoc.review","title":"EVGA RTX 3060 XC Black","publisher":"LanOC Reviews","url":"https://lanoc.org/review/video-cards/evga-rtx-3060-xc-black?showall=1","type":"review_with_photographic_reference","applicability":"explicit_XC_Black_review_sample","claims":["dual_fan","no_backplate","201.8mm_length","110mm_height","90mm_fan_opening","85mm_impeller_approx","cooler_geometry","pcb_layout_views"],"license_status":"third_party_copyright_no_reuse_permission","use":"linked_research_and_manual_observations_only"},
-    {"id":"src.neoseeker.review","title":"EVGA GeForce RTX 3060 XC Black Gaming Review","publisher":"Neoseeker","url":"https://www.neoseeker.com/Articles/Hardware/Reviews/evga-geforce-rtx-3060-xc-black-gaming/","type":"review","applicability":"review_sample_part_number_12G-P5-3655-KR","license_status":"third_party_copyright_no_reuse_permission","use":"linked_research_and_manual_observations_only"},
-    {"id":"src.toms.hardware.teardown","title":"EVGA GeForce RTX 3060 XC Teardown","publisher":"Tom's Hardware","url":"https://www.tomshardware.com/reviews/nvidia-geforce-rtx-3060-review/2","type":"teardown_article","applicability":"EVGA_RTX_3060_XC_variant_exact_board_revision_unconfirmed","license_status":"third_party_copyright_no_reuse_permission","use":"cross_check_only_not_authoritative_for_exact_XC_BLACK_PCB"},
-    {"id":"src.win_source.ecad_lead","title":"WIN SOURCE product record and Ultra Librarian ECAD label","publisher":"WIN SOURCE","url":"https://win-source.net/products/detail/evga/12g-p5-3655-kr.html","type":"catalog_lead","applicability":"retail_part_number_label_only","license_status":"not_applicable_until_asset_identified","use":"unverified_lead_only","notes":"The listing labels an Ultra Librarian 3D Model/ECAD module but does not establish a downloadable full graphics-card assembly. Treat as unverified catalog/ECAD lead, not GPU mechanical CAD."}
+  "schema_version": "0.1.0",
+  "sources": [
+    {
+      "id": "src.evga.spec",
+      "title": "EVGA GeForce RTX 3060 XC BLACK GAMING 12GB specification",
+      "publisher": "EVGA",
+      "url": "https://sg-repo-production-photos.s3.eu-central-1.amazonaws.com/aikido/cache/70b60b3a1a7bbeaced972a5b6905797f.pdf",
+      "type": "manufacturer_specification",
+      "applicability": "12G-P5-3655-KR",
+      "license_status": "redistribution_not_cleared"
+    },
+    {
+      "id": "src.lanoc.review",
+      "title": "EVGA RTX 3060 XC Black",
+      "publisher": "LanOC Reviews",
+      "url": "https://lanoc.org/review/video-cards/evga-rtx-3060-xc-black?showall=1",
+      "type": "exact_model_review",
+      "applicability": "explicit_XC_Black_review_sample",
+      "license_status": "third_party_copyright_no_reuse_permission"
+    },
+    {
+      "id": "src.gamersnexus.teardown",
+      "title": "EVGA RTX 3060 XC Black teardown",
+      "publisher": "Gamers Nexus",
+      "url": "https://www.youtube.com/watch?v=hJFJ_clQT8U",
+      "type": "exact_model_teardown",
+      "applicability": "explicitly_EVGA_RTX_3060_XC_Black",
+      "locators": [
+        "01:30",
+        "05:33",
+        "06:45",
+        "09:00",
+        "11:00"
+      ],
+      "license_status": "third_party_copyright_no_reuse_permission",
+      "technical_observations": [
+        {
+          "locator": "01:30–05:33",
+          "topic": "cooler_fasteners_and_fan_connectors",
+          "findings": [
+            "Four spring-loaded cooler mounting screws pass through the PCB around the GPU; the presenter uses a Phillips #0 driver.",
+            "Additional screws secure the fin-stack base and I/O/display bracket. These are distinct from the four GPU mounting screws; the video does not provide a fully calibrated board-wide screw map.",
+            "Both fan leads are separate connectors with release clips; disconnect before lifting the cooler."
+          ],
+          "confidence": "exact_model_teardown_observation",
+          "limitations": "The video does not enumerate every screw in the same grouping as Tom's Hardware's eight rear fasteners. Preserve the four GPU-area screws as a known subset; do not infer that every fan/shroud/port fastener is part of the eight."
+        },
+        {
+          "locator": "05:33–06:45",
+          "topic": "thermal_interface_and_heatpipe_layout",
+          "findings": [
+            "Two thermal-pad thickness observations are spoken: about 2.0 mm for one pad and approximately 1.5 mm for another; the second is explicitly described as harder to measure.",
+            "The presenter counts two central heatpipe tubes running through the GPU contact plate and estimates approximately 6 mm tube diameter.",
+            "The copper GPU cold plate contacts the die directly; it is joined to the fin stack, and the pipes return through the copper plate toward the memory-side region.",
+            "Six GDDR6 positions are visible, arranged three along one side and three along the other; some pipe runs cross the memory region without direct memory contact."
+          ],
+          "confidence": "exact_model_teardown_observation",
+          "limitations": "The narration does not assign the 2.0 mm and 1.5 mm observations to specific memory/VRM locations or package footprints. Heatpipe tube-loop count and exposed tube-run count are different possible counting conventions; do not collapse them without a drawing."
+        },
+        {
+          "locator": "06:45–09:00",
+          "topic": "power_stage_and_fan_service",
+          "findings": [
+            "The presenter identifies a row of MOSFETs contacted by a copper plate.",
+            "Two inductors are discussed on the opposite-side power area; the presenter tentatively calls that area the memory VRM, so that functional assignment remains tentative.",
+            "The presenter notes a thermal-pad impression on the two-inductor area but says the pad contact is incomplete for the rest of the nearby inductors.",
+            "Each fan is retained by three screws and has its own independently replaceable lead."
+          ],
+          "confidence": "exact_model_teardown_observation",
+          "limitations": "No MOSFET part number, inductor designation, inductance, VRM phase topology, controller identity, pad footprint or screw coordinates are provided."
+        },
+        {
+          "locator": "11:00–13:25",
+          "topic": "current_sense_protection_and_die_marking",
+          "findings": [
+            "Two current-sense shunts are discussed: one associated with the auxiliary power-input path and a separate one associated with PCIe-slot 12 V.",
+            "The presenter states a 5 milliohm shunt on the auxiliary power-input path; do not copy that value to the separate slot shunt.",
+            "A fuse is visible for input-protection troubleshooting.",
+            "The cleaned GPU die marking is read as NVIDIA GA106-300-A1."
+          ],
+          "confidence": "exact_model_teardown_observation",
+          "limitations": "The transcript does not provide fuse part number/rating, shunt reference designators, calibrated electrical nets or the resistance of the slot shunt."
+        }
+      ],
+      "identity_reference_url": "https://www.youtube.com/watch?v=hJFJ_clQT8U"
+    },
+    {
+      "id": "src.neoseeker.review",
+      "title": "EVGA GeForce RTX 3060 XC Black Gaming Review",
+      "publisher": "Neoseeker",
+      "url": "https://www.neoseeker.com/Articles/Hardware/Reviews/evga-geforce-rtx-3060-xc-black-gaming/",
+      "type": "exact_sku_review",
+      "applicability": "review_sample_part_number_12G-P5-3655-KR",
+      "license_status": "third_party_copyright_no_reuse_permission"
+    },
+    {
+      "id": "src.tomshardware.teardown",
+      "title": "EVGA GeForce RTX 3060 XC teardown with 12G-P5-3655-KR sample label",
+      "publisher": "Tom's Hardware",
+      "url": "https://www.tomshardware.com/reviews/nvidia-geforce-rtx-3060-review/2",
+      "type": "exact_sku_teardown_review",
+      "applicability": "The article body describes an EVGA RTX 3060 XC teardown. The rear-PCB identity photograph on the article's main page visibly reads P/N 12G-P5-3655-KR, the exact XC BLACK retail SKU. On the teardown page, Tom's Hardware reports eight cooler/shroud retention screws (four around the GPU and four near the far end), two fan connections, and six Samsung K4ZAF325BM-HC16 GDDR6 chips rated for 16Gbps. The photograph ties the teardown sample to the retail SKU; exact screw coordinates, package-to-net mapping and PCB revision remain unverified.",
+      "license_status": "third_party_copyright_no_reuse_permission",
+      "identity_reference_url": "https://www.tomshardware.com/reviews/nvidia-geforce-rtx-3060-review",
+      "identity_reference_image_url": "https://cdn.mos.cms.futurecdn.net/LYzTKyspS9Hont9woCwoo9-1200-80.jpg",
+      "identity_locator": "Main review's EVGA rear-PCB photo: label reads P/N 12G-P5-3655-KR."
+    },
+    {
+      "id": "src.techpowerup.pcb",
+      "title": "TechPowerUp EVGA RTX 3060 XC BLACK GPU specification and PCB reference image",
+      "publisher": "TechPowerUp",
+      "url": "https://www.techpowerup.com/gpu-specs/evga-rtx-3060-xc-black.b8621",
+      "type": "visual_reference_candidate",
+      "applicability": "EVGA RTX 3060 XC BLACK product page; apparent EVGA232 REV 1.0 PCB marking is a candidate observation only and is not independently matched to the exact retail sample",
+      "license_status": "third_party_copyright_no_reuse_permission"
+    },
+    {
+      "id": "src.evga232.schematic.candidate",
+      "title": "EVGA232 / PG190-A02 GA104-GA106 GPU schematic — unverified community-hosted candidate",
+      "publisher": "Community-hosted document index",
+      "url": "https://ph.i2mx.com.mx/Documents/Schematics/GPU/GPU/EVGA232%20RTX%202070%20RTX3060%20-%20PG190-A02%20-%20GA104-GA106.pdf",
+      "type": "unverified_schematic_candidate",
+      "applicability": "The community file name includes EVGA232 / RTX 2070 / RTX3060 / PG190-A02 / GA104-GA106, but the document text itself carries NVIDIA drawing number 600-1G190-BASE-A02, PCB revision PG190-A02 and BOM revision A dated 2020-06-12. Its text-layer block diagram lists NVVDD-PH1 through PH8 and FBVDDQ-PH1/PH2; this is a reference-board topology only. The PDF does not mention retail SKU 12G-P5-3655-KR or the EVGA232 silkscreen. It must not be used to assert phase count, net routing, values or pinout for the XC BLACK until a physical-board correlation is established. Rendered-page screenshots could not be fetched during this audit, so no page artwork or component-value extraction is claimed.",
+      "license_status": "unverified_do_not_redistribute",
+      "document_metadata": {
+        "page_count": 50,
+        "nvidia_drawing_number": "600-1G190-BASE-A02",
+        "pcb_revision_in_title_block": "PG190-A02",
+        "bom_revision": "A",
+        "bom_date": "2020-06-12",
+        "document_class": "NVIDIA reference design schematic",
+        "text_layer_power_block": {
+          "gpu_core_rail": "NVVDD phases 1-8",
+          "memory_rail": "FBVDDQ phases 1-2"
+        },
+        "exact_retail_sku_in_document_text": false,
+        "evga232_silkscreen_in_document_text": false,
+        "rendered_page_inspection": "unavailable_screenshot_cache_miss",
+        "boardview_included": false
+      },
+      "use_policy": "Reference-only. Do not use its reference design to populate the exact EVGA XC BLACK VRM phase count, component inventory, PCB routing, BOM or service map. The title of a third-party index is not proof of board equivalence. No PDF pages or third-party assets are redistributed."
+    },
+    {
+      "id": "src.nvidia.rtx3060.architecture",
+      "title": "NVIDIA GeForce RTX 3060 family — official architecture and specifications",
+      "publisher": "NVIDIA",
+      "url": "https://www.nvidia.com/en-us/geforce/graphics-cards/30-series/rtx-3060-3060ti/",
+      "type": "manufacturer_architecture_reference",
+      "applicability": "RTX 3060 Ampere architecture family; architecture generation and published family feature context, not EVGA board layout",
+      "license_status": "third_party_copyright_no_reuse_permission"
+    },
+    {
+      "id": "src.tomshardware.rtx3060.specs",
+      "title": "NVIDIA GeForce RTX 3060 review — GA106 specifications and architecture table",
+      "publisher": "Tom's Hardware",
+      "url": "https://www.tomshardware.com/reviews/nvidia-geforce-rtx-3060-review",
+      "type": "technical_review_specification_table",
+      "applicability": "GA106 RTX 3060 12GB reference GPU specification table; not an exact EVGA PCB schematic",
+      "license_status": "third_party_copyright_no_reuse_permission"
+    },
+    {
+      "id": "src.samsung.gddr6.catalog",
+      "title": "Samsung K4ZAF325BM-HC16 GDDR6 product listing (secondary catalog)",
+      "publisher": "Glochip product listing (secondary)",
+      "url": "https://www.samsung.glochip.com/en/pd.jsp?fromMid=352&id=45&recommendFromPid=0",
+      "type": "secondary_memory_component_catalog",
+      "applicability": "Secondary listing for K4ZAF325BM-HC16: 16Gb density, 512M × 32 organization, 16.0Gbps data rate and 180 FBGA package; not a primary Samsung datasheet",
+      "license_status": "metadata_reference_only_no_asset_reuse"
+    },
+    {
+      "id": "src.thefpsreview.exact_sku",
+      "title": "EVGA GeForce RTX 3060 XC BLACK GAMING review — exact part number and cooler description",
+      "publisher": "The FPS Review",
+      "url": "https://www.thefpsreview.com/2021/03/03/evga-geforce-rtx-3060-xc-black-gaming-review/2/",
+      "type": "exact_model_review",
+      "applicability": "Review sample explicitly identified as EVGA GeForce RTX 3060 XC BLACK GAMING, part number 12G-P5-3655-KR; describes four main heatpipes contacting the GPU and two additional side heatpipes",
+      "license_status": "third_party_copyright_no_reuse_permission"
+    },
+    {
+      "id": "src.reniemarquet.evga232",
+      "title": "EVGA232 RTX 2070 / RTX3060 PG190-A02 GA104-GA106 schematic catalogue entry",
+      "publisher": "RM Schematics (catalogue/index)",
+      "url": "https://reniemarquet.com/files/evga232-rtx-2070-rtx3060-pg190-a02-ga104-ga106-sh191528/",
+      "type": "community_schematic_catalogue_candidate",
+      "applicability": "Catalogue lists one 12.2 MB schematic for EVGA232 / RTX 2070 / RTX3060 / PG190-A02 / GA104-GA106. It does not identify the EVGA XC BLACK retail SKU 12G-P5-3655-KR or a specific retail PCB revision. Listing states the file is delivered through a Telegram post; no boardview is listed on this entry.",
+      "license_status": "third_party_service_document_no_redistribution_permission"
+    },
+    {
+      "id": "src.nvidia.ampere.whitepaper",
+      "title": "NVIDIA Ampere GA10x GPU architecture whitepaper",
+      "publisher": "NVIDIA",
+      "url": "https://www.nvidia.com/content/PDF/nvidia-ampere-ga-102-gpu-architecture-whitepaper-v2.pdf",
+      "type": "manufacturer_architecture_whitepaper",
+      "applicability": "GA10x architecture-common SM and TPC organization: 128 CUDA cores, four third-generation Tensor Cores, four texture units, one second-generation RT Core, 256 KB register file, 128 KB L1/shared memory per SM; two SMs and one PolyMorph Engine per TPC. Applied only as logical architecture to GA106 RTX 3060. The GA102 physical floorplan and GPC layout are not transferred.",
+      "license_status": "redistribution_not_cleared"
+    },
+    {
+      "id": "src.winsource.ultralibrarian.lead",
+      "title": "WIN SOURCE catalogue entry for EVGA 12G-P5-3655-KR with Ultra Librarian CAD label",
+      "publisher": "WIN SOURCE",
+      "url": "https://win-source.net/products/detail/evga/12g-p5-3655-kr.html",
+      "type": "unverified_cad_asset_lead",
+      "applicability": "Catalogue page identifies EVGA 12G-P5-3655-KR and displays an 'Ultra Librarian 3D Model' label, but the captured page exposes no actionable asset URL or download endpoint. The product image is a generic placeholder and the page states that images are for reference only. No STEP/IGES/mesh asset has been retrieved or identity-checked. Do not infer card, PCB, component or cooler geometry from this catalogue entry.",
+      "license_status": "unverified_no_asset_link_or_reuse_terms"
+    },
+    {
+      "id": "src.pcworld.xc_black",
+      "title": "NVIDIA GeForce RTX 3060 review — EVGA XC Black Gaming cooler summary",
+      "publisher": "PCWorld",
+      "url": "https://www.pcworld.com/article/394228/nvidia-geforce-rtx-3060-review.html",
+      "type": "exact_product_name_review_secondary_cooler_summary",
+      "applicability": "The article explicitly identifies its tested sample as EVGA GeForce RTX 3060 XC Black Gaming, but the accessible text does not provide retail part number 12G-P5-3655-KR. Its cooler overview describes four copper heatpipes. This is retained as a source-specific summary, not a calibrated count of tube legs, loops or exact-board routing.",
+      "license_status": "third_party_copyright_no_reuse_permission"
+    },
+    {
+      "id": "src.gpufanreplacement.catalog",
+      "title": "EVGA GeForce RTX 3060 XC Gaming replacement fan listing",
+      "publisher": "GPU Fan Replacement",
+      "url": "https://www.gpufanreplacement.com/products/evga-geforce-rtx-3060-xc-gaming-fan-replacement",
+      "type": "aftermarket_compatibility_listing",
+      "applicability": "Aftermarket seller listing names fan code PLA09215S12H and advertises broad EVGA RTX 3050/3060/3060 Ti XC-family compatibility, including XC BLACK. The listing's claimed 90 mm size, 12 V, 0.55 A, 4-pin connector and 42 mm mounting spacing are seller specifications only. No original fan label or exact-card fitment measurement has been verified.",
+      "license_status": "metadata_reference_only_no_asset_reuse"
+    },
+    {
+      "id": "src.gpuconnect.catalog",
+      "title": "EVGA RTX 3050 / 3060 / 3060 Ti XC Gaming Black replacement fan listing",
+      "publisher": "GPUConnect",
+      "url": "https://gpuconnect.com/products/evga-rtx-3050-3060-ti-xc-gaming-black-replacement-fans-15mm",
+      "type": "aftermarket_compatibility_listing",
+      "applicability": "Aftermarket replacement listing advertises broad compatibility across multiple EVGA XC Gaming Black variants and lists PLA09215S12H-family fans. The catalog material gives an approximately 87 mm size and 15 mm / 20 mm depth variants, plus seller-claimed 12 V, 0.55 A, 4-pin and 42 mm mounting spacing. These are catalogue claims, not an OEM label or confirmed fitment for 12G-P5-3655-KR; its dimensions also differ from another seller's 90 mm claim.",
+      "license_status": "metadata_reference_only_no_asset_reuse"
+    },
+    {
+      "id": "src.newegg.exact_sku.product_photo",
+      "title": "EVGA GeForce RTX 3060 XC BLACK GAMING 12G-P5-3655-KR — product photo gallery",
+      "publisher": "Newegg",
+      "url": "https://www.newegg.com/evga-xc-12g-p5-3655-kr-geforce-rtx-3060-12gb-graphics-card-double-fans/p/N82E16814487538",
+      "type": "exact_sku_retail_listing_photographic_reference",
+      "applicability": "The listing title and model field identify exact part number 12G-P5-3655-KR. Two front product photographs show eight visible impeller blade surfaces on each fan. Retained for visible blade count only; these images are not an OEM mechanical drawing or inspection of an installed sample. Blade pitch, camber, exact profile, thickness, depth and fan OEM identity remain unverified.",
+      "license_status": "third_party_copyright_no_reuse_permission"
+    }
   ]
 }

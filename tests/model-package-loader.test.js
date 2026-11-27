@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { strToU8, zipSync } from "fflate";
 import { loadModelPackage, validateModelPackageData } from "../src/viewer/ModelPackageLoader.js";
+import { createModelDataAdapter } from "../src/data/model.js";
 
 const modelId = "test.device";
 
@@ -103,8 +104,9 @@ test("validates the committed RTX 3060 model package sidecars", () => {
   };
   const report = validateModelPackageData(manifest, data);
   assert.equal(report.modelId, "gpu.evga.12g-p5-3655-kr");
-  assert.ok(report.componentCount >= 20);
-  assert.equal(report.sourceCount, 5);
+  assert.equal(report.componentCount, 323);
+  assert.equal(report.relationshipCount, 322);
+  assert.equal(report.sourceCount, 29);
 });
 
 test("loads a valid portable model package and validates all references", async () => {
@@ -288,4 +290,64 @@ test("allows an explicitly educational animation without a source but requires a
   assert.doesNotThrow(() => validateModelPackageData(testManifest(), data));
   delete data.animations.clips[0].evidence_status;
   assert.throws(() => validateModelPackageData(testManifest(), data), /evidence_status/);
+});
+
+
+test("preserves extended source metadata for linked claim references", () => {
+  const identityImage = "https://cdn.example.invalid/pcb-label.jpg";
+  const identityPage = "https://example.invalid/review";
+  const source = {
+    id: "src.identity",
+    title: "Exact retail SKU identity photograph",
+    url: "https://example.invalid/teardown",
+    applicability: "Exact retail sample P/N 12G-P5-3655-KR",
+    identity_reference_url: identityPage,
+    identity_reference_image_url: identityImage,
+    identity_locator: "Rear PCB product sticker"
+  };
+  const adapter = createModelDataAdapter({
+    model: { id: "test.device", manufacturer: "Test" },
+    sources: { sources: [source] },
+    components: { components: [{ id: "root", source_ids: ["src.identity"] }] }
+  });
+
+  assert.equal(adapter.model.sources.length, 1);
+  assert.equal(adapter.model.sources[0].label, source.title);
+  assert.equal(adapter.model.sources[0].identity_reference_url, identityPage);
+  assert.equal(adapter.model.sources[0].identity_reference_image_url, identityImage);
+  assert.equal(adapter.model.sources[0].identity_locator, "Rear PCB product sticker");
+  assert.equal(adapter.model.sources[0].applicability, source.applicability);
+
+  const unsafeAdapter = createModelDataAdapter({
+    model: { id: "test.unsafe", manufacturer: "Test" },
+    sources: { sources: [{
+      id: "src.unsafe",
+      title: "Unsafe reference",
+      url: "javascript:alert(1)",
+      identity_reference_url: "data:text/html,unsafe",
+      identity_reference_image_url: "file:///etc/passwd"
+    }] },
+    components: { components: [{ id: "root" }] }
+  });
+  assert.equal(unsafeAdapter.model.sources[0].url, "");
+  assert.equal(unsafeAdapter.model.sources[0].identity_reference_url, "");
+  assert.equal(unsafeAdapter.model.sources[0].identity_reference_image_url, "");
+});
+
+test("rejects non-HTTP source link schemes in an imported model package", () => {
+  for (const field of ["url", "identity_reference_url", "identity_reference_image_url"]) {
+    const data = makeData();
+    data.sources.sources[0][field] = "javascript:alert(1)";
+    assert.throws(
+      () => validateModelPackageData(testManifest(), data),
+      /must use HTTP or HTTPS/
+    );
+  }
+
+  const malformed = makeData();
+  malformed.sources.sources[0].identity_reference_image_url = "not a URL";
+  assert.throws(
+    () => validateModelPackageData(testManifest(), malformed),
+    /must be an absolute HTTP\(S\) URL/
+  );
 });

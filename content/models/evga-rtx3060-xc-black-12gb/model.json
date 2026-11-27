@@ -23,11 +23,27 @@
         "src.evga.spec"
       ],
       "evidence_status": "manufacturer_data",
-      "package_part_number": "Samsung K4ZAF325BM-HC16",
-      "package_capacity_gbit": 16,
-      "package_count": 6,
-      "package_count_evidence_status": "teardown_supported",
-      "package_position_status": "photo_estimated_not_measured"
+      "visible_package_positions": 6,
+      "visible_package_positions_evidence_status": "exact_sku_teardown_and_review_observation",
+      "package_position_status": "photo_estimated_not_measured",
+      "package_identity": {
+        "part_number": "Samsung K4ZAF325BM-HC16",
+        "capacity_gbit": 16,
+        "organization": "512M × 32",
+        "data_rate_gbps_per_pin": 16,
+        "package_type": "180 FBGA",
+        "interface_width_bits": 32,
+        "evidence_status": "exact_sku_part_number_review_plus_secondary_catalog_attributes",
+        "exact_sku_marking_verified": true,
+        "source_ids": [
+          "src.tomshardware.teardown",
+          "src.samsung.gddr6.catalog"
+        ],
+        "notes": "Tom's Hardware's teardown article names six Samsung K4ZAF325BM-HC16 devices; the rear-PCB photograph on the same review page identifies the sample as P/N 12G-P5-3655-KR. Density, organization, package type and 32-bit device interface are secondary-catalog attributes for that identified package part, not a primary Samsung datasheet. 16Gbps is the device rating, not the EVGA card's stock 15Gbps effective memory clock. Physical device centres remain photo-estimated, and package-to-controller nets are not mapped."
+      },
+      "device_rated_data_rate_gbps_per_pin": 16,
+      "package_capacity_total_gbit": 96,
+      "package_capacity_total_gbit_status": "calculated_from_six_packages_times_secondary_catalog_density"
     },
     "gpu": {
       "family": "GeForce RTX 3060",
@@ -60,7 +76,84 @@
       "diameter_evidence": "reviewer_measurement_approximate",
       "source_ids": [
         "src.lanoc.review"
-      ]
+      ],
+      "heatpipe_count": 6,
+      "main_gpu_contact_heatpipe_count": 4,
+      "side_heatpipe_count": 2,
+      "heatpipe_count_source_ids": [
+        "src.thefpsreview.exact_sku",
+        "src.pcworld.xc_black",
+        "src.gamersnexus.teardown"
+      ],
+      "heatpipe_geometry_status": "photo_estimated_proxy_not_measured",
+      "thermal_pad_thickness_observations": [
+        {
+          "value_mm": 2,
+          "confidence": "measured_approximate",
+          "location_assignment": "unresolved",
+          "source_ids": [
+            "src.gamersnexus.teardown"
+          ],
+          "notes": "One pad sample verbally measured at about 2.0 mm; exact contact location not isolated in the transcript."
+        },
+        {
+          "value_mm": 1.5,
+          "confidence": "approximate_estimate",
+          "location_assignment": "unresolved",
+          "source_ids": [
+            "src.gamersnexus.teardown"
+          ],
+          "notes": "Second pad sample verbally estimated around 1.5 mm; presenter says measurement is harder."
+        }
+      ],
+      "heatpipe_diameter_mm_approximate": 6,
+      "heatpipe_diameter_source_ids": [
+        "src.gamersnexus.teardown"
+      ],
+      "gn_central_heatpipe_tube_count": 2,
+      "heatpipe_count_interpretation": "The FPS Review describes four central GPU-contact runs plus two side runs; PCWorld's overview describes four copper heatpipes; Gamers Nexus narrates two central ~6 mm tube paths through the contact plate. These are source-specific descriptions that may count route legs, tubes or closed loops differently. Preserve them separately; six selectable entries are route/run proxies, not six proven independent closed tubes.",
+      "heatpipe_count_semantics": "Reported route/run categories in The FPS Review, not a verified count of independent closed U-shaped tube loops",
+      "unique_physical_heatpipe_loop_count": null,
+      "unique_physical_heatpipe_loop_count_status": "unknown_pending_calibrated_cooler_inspection",
+      "original_fan_part_number": null,
+      "original_fan_part_number_status": "unknown",
+      "original_fan_part_number_note": "Aftermarket sellers list PLA09215S12H-family compatible fans but do not establish the original OEM label or exact fitment. Seller dimensions conflict; do not use as replacement specifications without inspecting the card's fan label and measuring the sample.",
+      "aftermarket_fan_catalog_candidates": [
+        {
+          "source_id": "src.gpufanreplacement.catalog",
+          "seller_claims": {
+            "part_number": "PLA09215S12H",
+            "diameter_mm": 90,
+            "voltage_v": 12,
+            "current_a": 0.55,
+            "pins": 4,
+            "mount_spacing_mm": 42
+          },
+          "status": "aftermarket_catalog_claim_not_oem_verification"
+        },
+        {
+          "source_id": "src.gpuconnect.catalog",
+          "seller_claims": {
+            "part_number": "PLA09215S12H_family",
+            "diameter_mm": 87,
+            "depth_variants_mm": [
+              15,
+              20
+            ],
+            "voltage_v": 12,
+            "current_a": 0.55,
+            "pins": 4,
+            "mount_spacing_mm": 42
+          },
+          "status": "aftermarket_catalog_claim_not_oem_verification"
+        }
+      ],
+      "fan_blade_count_per_fan_photo_observed": 8,
+      "fan_blade_count_source_ids": [
+        "src.newegg.exact_sku.product_photo"
+      ],
+      "fan_blade_profile_status": "illustrative_proxy_not_measured",
+      "fan_blade_count_note": "Eight visible blade surfaces per fan are counted from two exact-SKU retail listing photos. This does not establish the original OEM fan part number or measured blade geometry."
     },
     "power_connector": "single 8-pin",
     "display_outputs": {
@@ -70,6 +163,20 @@
         "src.evga.spec",
         "src.lanoc.review"
       ]
+    },
+    "gpu_copper_contact_direct_to_die": true,
+    "gpu_die_marking": "NVIDIA GA106-300-A1",
+    "power_stage": {
+      "current_sense_shunt_count_observed": 2,
+      "auxiliary_8pin_shunt_resistance_milliohms": 5,
+      "pcie_slot_12v_shunt_resistance_milliohms": null,
+      "input_fuse_count_observed": 1,
+      "mosfet_row_copper_plate_contact": true,
+      "inductor_packages_visible_near_tentative_memory_vrm_area": 2,
+      "vrm_phase_topology": "unknown",
+      "source_ids": [
+        "src.gamersnexus.teardown"
+      ]
     }
   },
   "source_ids": [
@@ -77,7 +184,11 @@
     "src.lanoc.review",
     "src.gamersnexus.teardown",
     "src.neoseeker.review",
-    "src.tomshardware.teardown"
+    "src.tomshardware.teardown",
+    "src.thefpsreview.exact_sku",
+    "src.nvidia.rtx3060.architecture",
+    "src.tomshardware.rtx3060.specs",
+    "src.samsung.gddr6.catalog"
   ],
   "release": {
     "version": "0.1-draft",
