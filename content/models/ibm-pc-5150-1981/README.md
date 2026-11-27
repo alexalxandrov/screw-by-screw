@@ -12,9 +12,9 @@ This is an educational reference package for the original IBM 5150 system unit, 
 - 100 typed component relationships.
 - 21 source-linked technical claims.
 - 5 functional layers and 12 bilingual learning questions.
-- 14 granular, source-linked disassembly actions in 7 presentation groups, arranged as a branching FRU dependency graph rather than one universal linear teardown.
+- 14 granular, source-linked disassembly actions in 7 presentation groups, arranged as a branching FRU dependency graph rather than one universal linear teardown. Each action has an explicit reversible 3D scene action (hide, translate, select or conditional no-op) with an evidence class.
 - 4 source-bounded replacement fragments (cover, option adapter, PSU and system board); they are not a complete end-to-end reassembly.
-- 5 educational animation clips (overview, cover, PSU, speaker and system-board motion); all are educational approximations, not physical simulations.
+- 5 educational animation clips (overview, cover, PSU, speaker and system-board motion); all are educational approximations, not physical simulations. The service timeline supports Previous, Next and Reset; only the documented 12.7 mm slides are manufacturer-stated distances.
 - 6 registered sources, led by the two August 1981 IBM manuals and IBM corporate history, plus specimen-specific FAU and PCWorld comparison records.
 
 ## Evidence boundaries
