@@ -89,6 +89,22 @@ test("opens the published Dell package from the standalone file and verifies rea
     expect(movement.delta[2]).toBeGreaterThan(0);
     expect(Math.abs(movement.delta[1])).toBeLessThan(0.01);
   }
+
+  await page.locator("#animation-clip-select").selectOption("clip.optiplex.side-cover-removal");
+  await page.locator("#animation-seek").evaluate((element) => {
+    element.value = "1000";
+    element.dispatchEvent(new Event("input", { bubbles: true }));
+  });
+  const sideCoverDeltas = JSON.parse(await page.locator("#viewer-canvas").getAttribute("data-animation-world-deltas"));
+  expect(sideCoverDeltas.find((entry) => entry.targetId === "chassis.side_panel")?.delta[0]).toBeGreaterThan(0);
+
+  await page.locator("#animation-clip-select").selectOption("clip.optiplex.system-board-removal");
+  await page.locator("#animation-seek").evaluate((element) => {
+    element.value = "1000";
+    element.dispatchEvent(new Event("input", { bubbles: true }));
+  });
+  const boardDeltas = JSON.parse(await page.locator("#viewer-canvas").getAttribute("data-animation-world-deltas"));
+  expect(boardDeltas.find((entry) => entry.targetId === "motherboard.assembly")?.delta[2]).toBeGreaterThan(0);
   expect(pageErrors).toEqual([]);
   expect(requestFailures).toEqual([]);
 });
