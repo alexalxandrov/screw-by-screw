@@ -13,7 +13,7 @@ test("exports the active model as semantic JSON and a CSV ZIP without geometry",
   const jsonPath = await jsonDownload.path();
   const inventory = JSON.parse(await readFile(jsonPath, "utf8"));
   expect(inventory.format).toBe("sbs-semantic-inventory");
-  expect(inventory.model.part_number).toBe("12G-P5-3655-KR");
+  expect(inventory.model.part_number).toBe("5150");
   expect(inventory.counts.components).toBeGreaterThan(0);
   expect(inventory.scope.type).toBe("semantic_inventory");
   expect(inventory.scope.limitations.join(" ")).toMatch(/not a bill of materials/i);
