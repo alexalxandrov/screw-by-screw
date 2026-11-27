@@ -240,3 +240,31 @@ test("relative position tracks animate from the actual model baseline and restor
   assert.deepEqual(fan.position.toArray(), [12, 4, -7]);
   player.dispose();
 });
+
+
+test("relative local-Y lift tracks move upward in world Z under the viewer's Y-up to Z-up wrapper", () => {
+  const wrapper = new THREE.Group();
+  wrapper.rotation.x = Math.PI / 2;
+  const { root, fan } = makeScene();
+  wrapper.add(root);
+  const player = new AnimationPlayer(wrapper, [makeClip({
+    tracks: [{
+      target_id: "fan",
+      property: "position",
+      relative: true,
+      keyframes: [{ t: 0, value: [0, 0, 0] }, { t: 1, value: [0, 20, 0] }]
+    }]
+  })]);
+
+  player.selectClip("clip.test");
+  player.seek(1);
+  const worldPosition = fan.getWorldPosition(new THREE.Vector3());
+  assert.ok(Math.abs(worldPosition.x) < 1e-6);
+  assert.ok(Math.abs(worldPosition.y) < 1e-6);
+  assert.ok(Math.abs(worldPosition.z - 20) < 1e-6);
+  assert.deepEqual(player.getSnapshot().worldDeltas[0].delta, [0, 0, 20]);
+
+  player.stop();
+  assert.deepEqual(fan.position.toArray(), [0, 0, 0]);
+  player.dispose();
+});
