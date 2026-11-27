@@ -163,6 +163,16 @@
               <input id="animation-seek" class="clip-seek" type="range" min="0" max="1000" step="1" value="0" aria-label="Animation timeline" />
               <div class="clip-player-footer"><span id="animation-evidence-note" class="eyebrow" data-i18n="clipEvidenceNote">Authored model motion · not a physics simulation</span><output id="animation-time">0.00 / 0.00 s</output></div>
             </div>
+            <details id="runtime-diagnostics" class="runtime-diagnostics">
+              <summary data-i18n="runtimeDiagnostics">Runtime diagnostics</summary>
+              <dl class="runtime-diagnostics-list">
+                <div><dt data-i18n="diagnosticsModel">Model ID</dt><dd id="diagnostics-model">—</dd></div>
+                <div><dt data-i18n="diagnosticsComponents">Mapped components</dt><dd id="diagnostics-components">—</dd></div>
+                <div><dt data-i18n="diagnosticsProcedure">Procedure step</dt><dd id="diagnostics-procedure">—</dd></div>
+                <div><dt data-i18n="diagnosticsAnimation">Animation clip</dt><dd id="diagnostics-animation">—</dd></div>
+                <div><dt data-i18n="diagnosticsMotion">World-space displacement</dt><dd id="diagnostics-motion">—</dd></div>
+              </dl>
+            </details>
           </div>
 
           <div id="process-panel" class="process-panel">
