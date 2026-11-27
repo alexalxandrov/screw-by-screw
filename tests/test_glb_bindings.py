@@ -35,7 +35,7 @@ def sample_gltf():
 class GlbBindingTests(unittest.TestCase):
     def test_valid_component_bindings_pass(self):
         report = validator.validate_bindings(sample_components(), sample_gltf())
-        self.assertIn("Every content component ID is present exactly once: PASS", report)
+        self.assertIn("Every geometry-backed content component ID is present exactly once: PASS", report)
 
     def test_missing_content_component_fails(self):
         gltf = sample_gltf()
@@ -47,7 +47,7 @@ class GlbBindingTests(unittest.TestCase):
     def test_parent_mismatch_fails(self):
         gltf = sample_gltf()
         gltf["nodes"][1]["children"] = []
-        with self.assertRaisesRegex(validator.BindingError, "not nested under expected parent"):
+        with self.assertRaisesRegex(validator.BindingError, "not nested under expected represented parent"):
             validator.validate_bindings(sample_components(), gltf)
 
     def test_duplicate_glb_ids_fail(self):
