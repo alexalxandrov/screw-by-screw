@@ -62,7 +62,7 @@ EVGA RTX 3060 XC BLACK переведена в **исследовательск�
 
 Платформа проектируется как универсальный атлас для разных классов техники, но первая реализация должна быть узкой: один тщательно документированный пилотный объект, на котором проверяются 3D-разборка, карточки деталей, связи, слои процессов и обучение.
 
-Единственная опубликованная эталонная модель на текущем этапе: **IBM Personal Computer 5150 (1981), системный блок**. Это устройство выбрано из-за наличия официальных технического и сервисного руководств, позволяющих связывать утверждения и операции с первичными источниками. Пакет EVGA RTX 3060 переведён в закрытый от публичного каталога исследовательский архив: он сохраняется в репозитории, но не считается проверенной эталонной моделью. Причина — неподтверждённая точная ревизия PCB и неполная, конфликтующая между источниками карта крепежа и разборки.
+В каталоге сейчас две опубликованные эталонные записи: **IBM Personal Computer 5150 (1981)** — стартовая модель по умолчанию — и **Dell OptiPlex 5060 Tower** как семейная reference-модель платформы. У Dell не заявляется единственная установленная конфигурация или точный SKU; геометрия остаётся illustrative proxy, not CAD. EVGA RTX 3060 по-прежнему сохранена в неопубликованном исследовательском архиве. Это устройство выбрано из-за наличия официальных технического и сервисного руководств, позволяющих связывать утверждения и операции с первичными источниками. Пакет EVGA RTX 3060 переведён в закрытый от публичного каталога исследовательский архив: он сохраняется в репозитории, но не считается проверенной эталонной моделью. Причина — неподтверждённая точная ревизия PCB и неполная, конфликтующая между источниками карта крепежа и разборки.
 
 Эталонный объект Screw by Screw: **IBM Personal Computer 5150 (1981), только системный блок**. Базовая конфигурация ограничена исходным запускным периодом августа 1981 года: 16 КБ ОЗУ, без установленного дисковода и без дополнительных плат. Это отдельный пакет `computer.ibm.5150.1981`, а не модель IBM PC/XT 5160 и не поздняя ревизия 5150.
 
@@ -106,6 +106,8 @@ EVGA RTX 3060 XC BLACK переведена в **исследовательск�
 - [IBM PC 5150 branching disassembly sequence](docs/IBM_PC_5150_DISASSEMBLY_SEQUENCE.md) — second reference model, scope, geometry limits and acceptance gates.
 - [IBM PC 5150 content package](content/models/ibm-pc-5150-1981/README.md) — 71 components, 100 typed relationships, 14 branching service actions, partial replacement fragments and bilingual learning data.
 - [IBM PC 5150 source register](MODELS/COMPUTERS/IBM/5150/00-SOURCES/REFERENCE_REGISTER.md) — first-edition IBM technical and service references.
+- [Dell OptiPlex 5060 Tower research dossier](docs/OPTIPLEX_5060_RESEARCH.md) — family identity, 26 motherboard callouts, platform capabilities, optional population and geometry limits.
+- [Dell OptiPlex 5060 MT service-reference dossier](docs/PC_MODEL_OPTIPLEX_5060_MT_RESEARCH.md) — source-backed storage and service hardware observations.
 
 ## Рабочее название
 

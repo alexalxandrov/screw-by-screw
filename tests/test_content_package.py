@@ -73,6 +73,22 @@ class ContentPackageTests(unittest.TestCase):
             validator.validate_package(invalid)
 
 
+    def test_platform_family_identity_can_omit_part_number(self):
+        package = sample_package()
+        package["model"]["identity_scope"] = "platform_family"
+        package["model"]["part_number"] = None
+        package["release"]["part_number"] = None
+        package["release"]["status"] = "research_blockout"
+        report = validator.validate_package(package)
+        self.assertIn("Geometry fidelity: illustrative_proxy_not_cad", report)
+
+        invalid = sample_package()
+        invalid["model"]["identity_scope"] = "exact_sku"
+        invalid["model"]["part_number"] = None
+        invalid["release"]["part_number"] = None
+        with self.assertRaisesRegex(validator.PackageError, "Exact-SKU models must define a part_number"):
+            validator.validate_package(invalid)
+
     def test_unknown_parent_fails(self):
         package = sample_package()
         package["components"]["components"][1]["parent_id"] = "missing"

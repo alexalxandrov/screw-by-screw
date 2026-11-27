@@ -2,7 +2,7 @@
 
 ## Purpose
 
-A `.sbsmodel` file is a portable ZIP container that binds one self-contained GLB scene to the metadata needed by the Screw by Screw viewer. It is the normal interchange format for a complete interactive device model. A plain `.glb` remains supported for geometry-only inspection.
+A `.sbsmodel` file is a portable package that binds one self-contained GLB scene to the metadata needed by the Screw by Screw viewer. Two transports are supported: a ZIP container with a root manifest, and a checksummed UTF-8 JSON envelope for reproducible text-based packages. A plain `.glb` remains supported for geometry-only inspection.
 
 ## Archive layout
 
@@ -24,6 +24,17 @@ device.sbsmodel
 ```
 
 The archive root manifest uses format `sbs-model`, schema version `1.0.0`, a stable `model_id`, a file map and SHA-256 hashes. Sidecars reference one another only through stable IDs. Component IDs in the GLB are stored in node extras as `sbs_component_id`.
+
+## JSON-envelope transport
+
+A text-based package starts with the exact UTF-8 prefix `SBSMODEL-JSON\\n`, followed by one JSON object:
+
+- `format`: `sbs-model-json`;
+- `schema_version`: `1.0.0`;
+- `manifest`: the same logical package manifest used by ZIP transport;
+- `files`: a map of safe relative paths to UTF-8 sidecar strings, with `scene.glb` encoded as base64.
+
+The browser decodes the envelope, enforces the same maximum entry count and expanded-size limits as ZIP transport, validates safe paths and verifies the manifest SHA-256 checksums before parsing the sidecars or loading the GLB. The JSON envelope does not weaken archive validation; it changes only the outer transport.
 
 ## Open in the browser
 
@@ -49,7 +60,8 @@ The packager writes a deterministic archive, includes the source manifest and re
 
 ## Security and resource limits
 
-- ZIP only; ZIP64 and multi-disk archives are not supported in this format version.
+- ZIP transport: ZIP64 and multi-disk archives are not supported in this format version.
+- JSON-envelope transport: UTF-8 JSON after the `SBSMODEL-JSON\\n` prefix; GLB is base64-encoded.
 - Maximum compressed package: 512 MiB.
 - Maximum expanded package: 512 MiB.
 - Maximum individual entry / GLB: 256 MiB.
@@ -66,7 +78,7 @@ Geometry fidelity and evidence status are explicit package data. A visually smoo
 
 ## Current status
 
-The first package manifest is authored for EVGA GeForce RTX 3060 XC BLACK GAMING 12GB, part number `12G-P5-3655-KR`. The browser loader and package builder are implemented; automated tests cover archive validation and import. The generated `.sbsmodel` artifact is produced by the Blender CI workflow.
+The IBM PC 5150 reference package uses the ZIP transport. The Dell OptiPlex 5060 Tower family v0.3 package uses the checksummed JSON-envelope transport and identifies a platform family without inventing a part number. Both transports use the same browser validator. The RTX 3060 package remains a source-controlled unpublished archive.
 
 
 ## Catalogue package binding

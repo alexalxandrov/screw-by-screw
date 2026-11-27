@@ -64,3 +64,19 @@ test("catalogue lists IBM PC 5150 as a separate personal-computer reference", as
   await expect(page.locator("#catalog-results .catalog-card")).toHaveCount(0);
   await expect(page.locator("#catalog-results")).toContainText("Подходящих моделей не найдено");
 });
+
+
+test("loads the published Dell OptiPlex 5060 family package", async ({ page }) => {
+  await page.goto("/");
+  await page.locator("#catalog-open").click();
+  const card = page.locator('[data-model-id="pc.dell.optiplex-5060-tower.family"]');
+  await expect(card).toBeVisible();
+  await expect(card).toContainText("OptiPlex 5060 Tower");
+  await page.locator("#catalog-category").selectOption("desktop_computers");
+  await page.locator("#catalog-search").fill("OptiPlex 5060");
+  await expect(page.locator("#catalog-results .catalog-card")).toHaveCount(1);
+  await card.locator(".catalog-load-button").click();
+  await expect(page.locator("#model-title")).toContainText("OptiPlex 5060 Tower");
+  await expect(page.locator("#component-count")).toHaveText("137");
+  await expect(page.locator("#load-state")).toContainText("SBS MODEL");
+});

@@ -82,7 +82,7 @@ def _validate_release(release: dict, model: dict, package_dir: Path | None) -> N
         raise PackageError("Release manifest geometry_status does not match model.json")
     if release["package_version"] != model.get("release", {}).get("version"):
         raise PackageError("Release manifest package_version does not match model release version")
-    if release["status"] not in {"draft", "review", "published", "withdrawn"}:
+    if release["status"] not in {"draft", "review", "published", "withdrawn", "research_blockout"}:
         raise PackageError("Release manifest has unsupported status")
     files = release.get("files")
     if not isinstance(files, list):
