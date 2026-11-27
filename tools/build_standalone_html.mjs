@@ -123,7 +123,9 @@ if (await exists(catalogManifestPath)) {
     if (!publicRelative || publicRelative === ".." || publicRelative.startsWith(".." + sep) || isAbsolute(publicRelative)) {
       throw new Error("Catalogue package path escapes public/: " + packagePath);
     }
-    if (!(await exists(assetPath))) continue;
+    if (!(await exists(assetPath))) {
+      throw new Error("Published catalogue package is missing: " + model.id + " (" + packagePath + ")");
+    }
     const bytes = await readFile(assetPath);
     if (!bytes.length || bytes.length > 512 * 1024 * 1024) {
       throw new Error("Catalogue package size is outside the 512 MiB limit: " + packagePath);
