@@ -18,6 +18,13 @@
         "en": "Personal computers",
         "ru": "Персональные компьютеры"
       }
+    },
+    {
+      "id": "desktop_computers",
+      "label": {
+        "en": "Desktop computers",
+        "ru": "Настольные компьютеры"
+      }
     }
   ],
   "models": [
@@ -50,7 +57,9 @@
       "package_version": "0.1.0",
       "package_path": "models/rtx3060_xc_black_v05.sbsmodel",
       "published": false,
-      "publication_status": "research_archive"
+      "publication_status": "research_archive",
+      "identity_scope": "exact_sku",
+      "model_kind": "component"
     },
     {
       "id": "computer.ibm.5150.1981",
@@ -81,6 +90,59 @@
       "geometry_status": "illustrative_proxy_not_cad",
       "package_version": "0.1.0-draft",
       "package_path": "models/ibm_pc_5150_1981.sbsmodel",
+      "published": true,
+      "publication_status": "reference",
+      "identity_scope": "reference_configuration",
+      "model_kind": "system"
+    },
+    {
+      "id": "pc.dell.optiplex-5060-tower.family",
+      "package_model_id": "pc.dell.optiplex-5060-tower.family",
+      "default_package": false,
+      "manufacturer": "Dell",
+      "name": {
+        "en": "OptiPlex 5060 Tower · family reference",
+        "ru": "OptiPlex 5060 Tower · эталон семейства"
+      },
+      "part_number": null,
+      "identity_scope": "platform_family",
+      "model_kind": "system",
+      "category_id": "desktop_computers",
+      "summary": {
+        "en": "Dell OptiPlex 5060 Tower family reference v0.3.0: 137 semantic nodes, 145 relationships, 28 manufacturer sources, 34 claims, complete 26-callout motherboard map, optional fastener references and distinct 3.5-inch/2.5-inch HDD carrier and ODD release mechanisms. Optional population remains unknown; geometry is illustrative, not CAD.",
+        "ru": "Эталон семейства Dell OptiPlex 5060 Tower v0.3.0: 137 смысловых узлов, 145 связей, 28 источников производителя, 34 утверждения, полная карта 26 обозначений платы, опциональный крепёж и раздельные механизмы корзин HDD 3,5″/2,5″ и фиксатора ODD. Наличие опций неизвестно; геометрия условная, не CAD."
+      },
+      "tags": [
+        "Dell",
+        "OptiPlex",
+        "desktop",
+        "tower",
+        "PC",
+        "system",
+        "family reference",
+        "LGA1151",
+        "Coffee Lake",
+        "DDR4",
+        "PCIe Gen3",
+        "SATA",
+        "M.2",
+        "USB",
+        "motherboard map",
+        "service procedure",
+        "service hardware",
+        "optional fasteners",
+        "M2x3.5",
+        "M3x3",
+        "3.5-inch HDD",
+        "2.5-inch HDD",
+        "drive carrier",
+        "tool-less retention",
+        "optical drive latch"
+      ],
+      "status": "research_blockout",
+      "geometry_status": "illustrative_proxy_not_cad",
+      "package_version": "0.3.0",
+      "package_path": "models/dell_optiplex_5060_tower_v03.sbsmodel",
       "published": true,
       "publication_status": "reference"
     }

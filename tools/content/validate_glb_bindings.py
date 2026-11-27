@@ -49,6 +49,7 @@ def validate_bindings(components_doc: dict, gltf: dict) -> list[str]:
     nodes = gltf.get("nodes")
     if not isinstance(components, list) or not isinstance(nodes, list):
         raise BindingError("components.json and GLB must contain arrays")
+
     component_map = {}
     for component in components:
         if not isinstance(component, dict) or not isinstance(component.get("id"), str):
@@ -57,6 +58,20 @@ def validate_bindings(components_doc: dict, gltf: dict) -> list[str]:
             raise BindingError(f"Duplicate content component ID: {component['id']}")
         component_map[component["id"]] = component
 
+    # Validate semantic hierarchy separately from renderable geometry.
+    # Logical-only entries are real content nodes and do not require a GLB node.
+    for component_id, component in component_map.items():
+        parent_id = component.get("parent_id")
+        if parent_id is not None and parent_id not in component_map:
+            raise BindingError(f"Component {component_id} references unknown content parent {parent_id}")
+        visited = set()
+        cursor = component_id
+        while cursor is not None:
+            if cursor in visited:
+                raise BindingError(f"Cycle detected in content component ancestry at {cursor}")
+            visited.add(cursor)
+            cursor = component_map[cursor].get("parent_id")
+
     node_map = {}
     parent_indices = {}
     for index, node in enumerate(nodes):
@@ -64,6 +79,8 @@ def validate_bindings(components_doc: dict, gltf: dict) -> list[str]:
         component_id = extras.get("sbs_component_id") if isinstance(extras, dict) else None
         if not isinstance(component_id, str):
             continue
+        if component_id not in component_map:
+            raise BindingError(f"GLB references unknown content component ID: {component_id}")
         if component_id in node_map:
             raise BindingError(f"Duplicate GLB component ID: {component_id}")
         node_map[component_id] = index
@@ -74,18 +91,24 @@ def validate_bindings(components_doc: dict, gltf: dict) -> list[str]:
                 raise BindingError(f"GLB node {child} has multiple parents")
             parent_indices[child] = index
 
-    missing = sorted(set(component_map) - set(node_map))
+    required_geometry_ids = {
+        component_id for component_id, component in component_map.items()
+        if component.get("geometry_status") != "logical_only"
+    }
+    missing = sorted(required_geometry_ids - set(node_map))
     if missing:
-        raise BindingError(f"Content components missing from GLB: {missing}")
+        raise BindingError(f"Geometry-backed content components missing from GLB: {missing}")
 
-    node_ids = {}
+    node_ids = {index: component_id for component_id, index in node_map.items()}
     for component_id, index in node_map.items():
-        node_ids[index] = component_id
-    for component_id, component in component_map.items():
-        expected_parent = component.get("parent_id")
+        # Logical-only parents may have no glTF node. Validate against the
+        # nearest semantic ancestor that is actually represented in the GLB.
+        expected_parent = component_map[component_id].get("parent_id")
+        while expected_parent is not None and expected_parent not in node_map:
+            expected_parent = component_map[expected_parent].get("parent_id")
         if expected_parent is None:
             continue
-        index = node_map[component_id]
+
         ancestor = parent_indices.get(index)
         ancestors = set()
         found = False
@@ -99,16 +122,17 @@ def validate_bindings(components_doc: dict, gltf: dict) -> list[str]:
             ancestor = parent_indices.get(ancestor)
         if not found:
             raise BindingError(
-                f"Component {component_id} is not nested under expected parent {expected_parent}"
+                f"Component {component_id} is not nested under expected represented parent {expected_parent}"
             )
 
+    geometry_count = len(required_geometry_ids)
     return [
-        f"Canonical content components: {len(component_map)}",
+        f"Canonical semantic components: {len(component_map)}",
+        f"Components requiring geometry binding: {geometry_count}",
         f"GLB nodes with stable component IDs: {len(node_map)}",
-        "Every content component ID is present exactly once: PASS",
-        "Content parent relationships are represented in GLB ancestry: PASS",
+        "Every geometry-backed content component ID is present exactly once: PASS",
+        "GLB ancestry preserves the nearest represented semantic ancestor: PASS",
     ]
-
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)

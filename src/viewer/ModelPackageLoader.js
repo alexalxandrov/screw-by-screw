@@ -318,18 +318,65 @@ export async function loadModelPackage(file) {
   if (!file || typeof file.arrayBuffer !== "function") throw new TypeError("A local .sbsmodel file is required");
   if (file.size > MAX_MODEL_PACKAGE_BYTES) fail("archive exceeds the 512 MiB package limit");
   const buffer = await file.arrayBuffer();
-  const entries = preflightZip(buffer);
+  if (!(buffer instanceof ArrayBuffer) || buffer.byteLength > MAX_MODEL_PACKAGE_BYTES) fail("package size is outside the allowed range");
+  const prefix = "SBSMODEL-JSON\n";
+  const header = new TextDecoder().decode(buffer.slice(0, prefix.length));
   let archive;
-  try { archive = unzipSync(new Uint8Array(buffer)); }
-  catch { fail("ZIP decompression failed"); }
-  for (const entry of entries) {
-    if (entry.directory) continue;
-    const bytes = archive[entry.name];
-    if (!bytes || bytes.byteLength !== entry.uncompressedSize) fail("expanded entry size mismatch: " + entry.name);
+  let manifest;
+  let integrityVerified;
+  if (header === prefix) {
+    let envelope;
+    try { envelope = JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(buffer.slice(prefix.length))); }
+    catch { fail("invalid JSON model package envelope"); }
+    if (!envelope || envelope.format !== "sbs-model-json" || envelope.schema_version !== "1.0.0" ||
+        !envelope.manifest || !envelope.files || typeof envelope.files !== "object" || Array.isArray(envelope.files)) {
+      fail("unsupported JSON model package envelope");
+    }
+    const fileEntries = Object.entries(envelope.files);
+    if (fileEntries.length < REQUIRED_FILE_KEYS.length || fileEntries.length > MAX_MODEL_PACKAGE_ENTRIES) {
+      fail("JSON package contains an invalid number of entries");
+    }
+    archive = Object.create(null);
+    let totalUncompressedBytes = 0;
+    const encoder = new TextEncoder();
+    for (const [path, content] of fileEntries) {
+      if (!isSafeArchivePath(path)) fail("unsafe package path: " + path);
+      let bytes;
+      if (path === "scene.glb") {
+        if (typeof content !== "string") fail("scene GLB must be a base64 string");
+        if (content.length > Math.ceil(MAX_SCENE_GLB_BYTES / 3) * 4) fail("scene GLB exceeds the allowed size");
+        if (!/^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/.test(content)) {
+          fail("scene GLB must be valid base64");
+        }
+        let decoded;
+        try { decoded = globalThis.atob(content); }
+        catch { fail("scene GLB base64 decoding failed"); }
+        bytes = new Uint8Array(decoded.length);
+        for (let i = 0; i < decoded.length; i += 1) bytes[i] = decoded.charCodeAt(i);
+        if (bytes.byteLength > MAX_SCENE_GLB_BYTES) fail("scene GLB exceeds the allowed size");
+      } else {
+        if (typeof content !== "string") fail("JSON package entry must be UTF-8 text: " + path);
+        bytes = encoder.encode(content);
+      }
+      totalUncompressedBytes += bytes.byteLength;
+      if (totalUncompressedBytes > MAX_MODEL_UNCOMPRESSED_BYTES) fail("package exceeds the expanded content size limit");
+      archive[path] = bytes;
+    }
+    manifest = envelope.manifest;
+    integrityVerified = await verifyPackageChecksums(archive, manifest);
+  } else {
+    const entries = preflightZip(buffer);
+    try { archive = unzipSync(new Uint8Array(buffer)); }
+    catch { fail("ZIP decompression failed"); }
+    for (const entry of entries) {
+      if (entry.directory) continue;
+      const bytes = archive[entry.name];
+      if (!bytes || bytes.byteLength !== entry.uncompressedSize) fail("expanded entry size mismatch: " + entry.name);
+    }
+    manifest = parseJsonFile(archive, "sbs-model.json", "package manifest");
+    if (!manifest.files || typeof manifest.files !== "object") fail("manifest file map is missing");
+    integrityVerified = await verifyPackageChecksums(archive, manifest);
   }
-  const manifest = parseJsonFile(archive, "sbs-model.json", "package manifest");
-  if (!manifest.files || typeof manifest.files !== "object") fail("manifest file map is missing");
-  const integrityVerified = await verifyPackageChecksums(archive, manifest);
   const paths = {};
   const mappedPaths = new Set();
   for (const key of REQUIRED_FILE_KEYS) {
