@@ -79,6 +79,12 @@ The package retains the cover slide demo and adds three separate service-motion 
 
 All clip evidence states are `educational_approximation`. The explicit 1/2-inch slide distances are manufacturer-stated; no unmeasured clearance vector or animation duration is represented as measured motion.
 
+## Interactive 3D step execution
+
+Each service action now carries an explicit `scene_action` record in `assembly_steps.json`. The Viewer uses these records to hide a connector or fastener mesh, translate a documented FRU, or select a component when the printed operation has no independent mesh movement. Previous/Next/Reset controls rebuild the scene from captured baseline transforms and visibility states, so stepping backward reverses the demonstration.
+
+The system-board release uses the component-center vector directed away from the PSU and the manufacturer-stated 12.7 mm travel. PSU forward travel is likewise 12.7 mm when the matching operation is selected. Board lift, speaker lift, cover clearance and final FRU extraction are visual approximations; the IBM manual does not dimension those paths. The scene metadata keeps these states under the `illustrative` evidence class. The UI does not imply that these approximations are measured CAD or a physics simulation.
+
 ## Safety and unresolved geometry
 
 Disconnect mains power before opening the case. Do not open or probe the PSU. Do not force a board that does not slide freely; check for a remaining connector or fitted adapter. Exact screw drive standards, dimensions, lengths, thread pitch, materials and torque are not supplied by the cited removal procedures. Standoff count and PCB slot coordinates remain unknown.
