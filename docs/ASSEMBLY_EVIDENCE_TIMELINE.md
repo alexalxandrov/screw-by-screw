@@ -39,6 +39,8 @@ Only the approximately 1/2-inch board/PSU slides are treated as manufacturer-sta
 A step requires a unique ID, unique positive sequence integer, readable action/title, one or more component IDs, and one or more source IDs. Prerequisite IDs must resolve within the same assembly-step package. Optional safety notes and tool requirements are rendered as authored content. Observation entries require a registered source, locator and note.
 
 
+See [Reversible 3D scene actions](REVERSIBLE_SCENE_ACTIONS.md) for the package action contract and evidence classifications.
+
 ## Localization
 
 Observation notes accept either a plain string or an RU/EN object. The viewer selects the current language and falls back to the available translation. Localization changes presentation only; source locators, timestamps and evidence meaning remain unchanged.
