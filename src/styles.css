@@ -1828,3 +1828,8 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); ou
 @media (max-width: 520px) {
   .architecture-node-grid { grid-template-columns: 1fr; }
 }
+
+@media (max-width: 480px) {
+  /* The catalogue is a primary action, not a secondary quiet control. */
+  .topbar-actions #catalog-open { display: inline-flex; }
+}
