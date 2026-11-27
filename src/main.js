@@ -5,6 +5,7 @@ import { createLearningProgressStore } from "./data/learning-progress.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { SceneController } from "./viewer/SceneController.js";
+import { ProcedureController } from "./viewer/ProcedureController.js";
 import { MeasurementController } from "./viewer/MeasurementController.js";
 import { AnimationPlayer } from "./viewer/AnimationPlayer.js";
 import { createCatalogAdapter } from "./data/catalog.js";
@@ -61,6 +62,7 @@ const state = {
   componentNodes: new Map(),
   catalog: new Map(COMPONENTS.map((item) => [item.id, item])),
   sceneController: null,
+  procedureController: null,
   cameraHome: null,
   gridHelper: null,
   exploded: 0,
@@ -121,7 +123,7 @@ const UI = {
     measure: "Measure", clearMeasurement: "Clear", measureIdle: "Measurement off · model-space only", measurePrompt: "Click a visible surface to set point 1 of 2", measureFirstPoint: "Point 1 of 2 set · select the second point", measureDistance: "Distance", measureDisclaimer: "model-space only", measureNoHit: "Click a visible model surface", measureEnabled: "Measurement enabled", measureDisabled: "Measurement disabled", modelUnits: "model units", measureNote: "Not a verified physical dimension",
     clearLayer: "Clear layer", inspection: "INSPECTION", componentDetails: "Component details",
     selectComponent: "Select a component", selectHint: "Choose a part in the 3D view or assembly tree to inspect its role and evidence.",
-    identity: "IDENTITY", parent: "Parent", geometry: "Geometry", evidence: "EVIDENCE", technicalClaims: "TECHNICAL CLAIMS", claimUnknown: "Unknown", yes: "Yes", no: "No", claimSources: "Evidence sources", technicalRelationships: "TECHNICAL RELATIONSHIPS", qualitativeRelation: "Qualitative relationship", noRelationshipSource: "No source registered", exportData: "MODEL DATA", exportJson: "Export JSON", exportCsv: "CSV ZIP", exportComplete: "Export prepared · local only", exportFailed: "Export failed", assemblyEvidence: "DISASSEMBLY EVIDENCE", noVerifiedSequence: "No verified disassembly sequence has been authored for this model.", sourceObservations: "SOURCE OBSERVATIONS · NOT DISASSEMBLY STEPS", stepLabel: "Step", toolsLabel: "Tools", safetyLabel: "Safety", prerequisitesLabel: "Prerequisites", openAtSource: "Open source", procedureGroup: "PROCEDURE BRANCH", commonEntryMode: "Common entry", conditionalBranchMode: "Conditional branch", sharedPreparationMode: "Shared preparation", independentFruBranchMode: "Independent FRU branch", replacementFragments: "DOCUMENTED REPLACEMENT FRAGMENTS · NOT A COMPLETE REASSEMBLY", sequenceDisplayOnly: "Display order only · follow the source-backed prerequisites and the selected FRU branch.",
+    identity: "IDENTITY", parent: "Parent", geometry: "Geometry", evidence: "EVIDENCE", technicalClaims: "TECHNICAL CLAIMS", claimUnknown: "Unknown", yes: "Yes", no: "No", claimSources: "Evidence sources", technicalRelationships: "TECHNICAL RELATIONSHIPS", qualitativeRelation: "Qualitative relationship", noRelationshipSource: "No source registered", exportData: "MODEL DATA", exportJson: "Export JSON", exportCsv: "CSV ZIP", exportComplete: "Export prepared · local only", exportFailed: "Export failed", assemblyEvidence: "DISASSEMBLY EVIDENCE", noVerifiedSequence: "No verified disassembly sequence has been authored for this model.", sourceObservations: "SOURCE OBSERVATIONS · NOT DISASSEMBLY STEPS", stepLabel: "Step", toolsLabel: "Tools", safetyLabel: "Safety", prerequisitesLabel: "Prerequisites", openAtSource: "Open source", procedureBranchLabel: "SELECT FRU BRANCH", procedureCommonBranch: "Common opening only", procedureChooseBranch: "Common access is complete. Choose one FRU branch; the service manual does not require a single linear teardown.", procedureRunnerTitle: "STEP-BY-STEP 3D PROCEDURE", procedureRunnerDisclaimer: "Educational scene playback only · does not control physical hardware. Proxy clearances are not measured.", procedureRunnerNext: "Show next step", procedureRunnerPrevious: "Previous step", procedureRunnerReset: "Reset procedure", procedureRunnerReady: "Start with safe power isolation and cover access.", procedureRunnerVisualized: "Visual state applied in the 3D model. This does not confirm a physical service action.", procedureRunnerComplete: "Selected FRU branch completed in the educational scene.", procedureRunnerNoop: "No scene movement: this option is absent from the 16 KB launch baseline.", procedureRunnerSafety: "SAFETY / PROCEDURAL NOTE", procedureGroup: "PROCEDURE BRANCH", commonEntryMode: "Common entry", conditionalBranchMode: "Conditional branch", sharedPreparationMode: "Shared preparation", independentFruBranchMode: "Independent FRU branch", replacementFragments: "DOCUMENTED REPLACEMENT FRAGMENTS · NOT A COMPLETE REASSEMBLY", sequenceDisplayOnly: "Display order only · follow the source-backed prerequisites and the selected FRU branch.",
     sources: "SOURCES", accuracyFooter: "Unknown values remain unknown. No inferred CAD accuracy.",
     ready: "READY", localFirst: "LOCAL-FIRST · NO ACCOUNT", openModel: "Open model",
     noSelection: "No component selected", componentsCount: "components",
@@ -146,7 +148,7 @@ const UI = {
     measure: "Измерить", clearMeasurement: "Сброс", measureIdle: "Измерение выключено · только пространство модели", measurePrompt: "Нажмите на видимую поверхность, чтобы задать точку 1 из 2", measureFirstPoint: "Точка 1 из 2 задана · выберите вторую", measureDistance: "Расстояние", measureDisclaimer: "ед. модели", measureNoHit: "Нажмите на видимую поверхность модели", measureEnabled: "Инструмент измерения включён", measureDisabled: "Инструмент измерения выключен", modelUnits: "единицы модели", measureNote: "Не подтверждённый физический размер",
     clearLayer: "Сбросить слой", inspection: "ИНСПЕКЦИЯ", componentDetails: "Карточка компонента",
     selectComponent: "Выберите компонент", selectHint: "Выберите деталь в 3D-окне или дереве сборки, чтобы изучить её назначение и источники.",
-    identity: "ИДЕНТИФИКАЦИЯ", parent: "Родитель", geometry: "Геометрия", evidence: "ДОКАЗАТЕЛЬНОСТЬ", technicalClaims: "ТЕХНИЧЕСКИЕ УТВЕРЖДЕНИЯ", claimUnknown: "Неизвестно", yes: "Да", no: "Нет", claimSources: "Источники утверждения", technicalRelationships: "ТЕХНИЧЕСКИЕ СВЯЗИ", qualitativeRelation: "Качественная связь", noRelationshipSource: "Источник не зарегистрирован", exportData: "ДАННЫЕ МОДЕЛИ", exportJson: "Экспорт JSON", exportCsv: "CSV ZIP", exportComplete: "Экспорт подготовлен · локально", exportFailed: "Ошибка экспорта", assemblyEvidence: "ДОКАЗАТЕЛЬСТВА РАЗБОРКИ", noVerifiedSequence: "Подтверждённая последовательность разборки для этой модели пока не составлена.", sourceObservations: "НАБЛЮДЕНИЯ В ИСТОЧНИКАХ · НЕ ШАГИ РАЗБОРКИ", stepLabel: "Шаг", toolsLabel: "Инструменты", safetyLabel: "Безопасность", prerequisitesLabel: "Предварительные шаги", openAtSource: "Открыть источник", procedureGroup: "ВЕТВЬ ПРОЦЕДУРЫ", commonEntryMode: "Общая начальная подготовка", conditionalBranchMode: "Условная ветвь", sharedPreparationMode: "Общая подготовка разъёмов", independentFruBranchMode: "Независимая ветвь FRU", replacementFragments: "ДОКУМЕНТИРОВАННЫЕ ФРАГМЕНТЫ УСТАНОВКИ · НЕ ПОЛНАЯ ОБРАТНАЯ СБОРКА", sequenceDisplayOnly: "Порядок отображения · следуйте подтверждённым зависимостям и выбранной ветви FRU.",
+    identity: "ИДЕНТИФИКАЦИЯ", parent: "Родитель", geometry: "Геометрия", evidence: "ДОКАЗАТЕЛЬНОСТЬ", technicalClaims: "ТЕХНИЧЕСКИЕ УТВЕРЖДЕНИЯ", claimUnknown: "Неизвестно", yes: "Да", no: "Нет", claimSources: "Источники утверждения", technicalRelationships: "ТЕХНИЧЕСКИЕ СВЯЗИ", qualitativeRelation: "Качественная связь", noRelationshipSource: "Источник не зарегистрирован", exportData: "ДАННЫЕ МОДЕЛИ", exportJson: "Экспорт JSON", exportCsv: "CSV ZIP", exportComplete: "Экспорт подготовлен · локально", exportFailed: "Ошибка экспорта", assemblyEvidence: "ДОКАЗАТЕЛЬСТВА РАЗБОРКИ", noVerifiedSequence: "Подтверждённая последовательность разборки для этой модели пока не составлена.", sourceObservations: "НАБЛЮДЕНИЯ В ИСТОЧНИКАХ · НЕ ШАГИ РАЗБОРКИ", stepLabel: "Шаг", toolsLabel: "Инструменты", safetyLabel: "Безопасность", prerequisitesLabel: "Предварительные шаги", openAtSource: "Открыть источник", procedureBranchLabel: "ВЫБЕРИТЕ ВЕТВЬ FRU", procedureCommonBranch: "Только общая подготовка", procedureChooseBranch: "Общая подготовка завершена. Выберите одну ветвь FRU: руководство не требует единой линейной разборки.", procedureRunnerTitle: "ПОШАГОВАЯ 3D-ПРОЦЕДУРА", procedureRunnerDisclaimer: "Только учебное воспроизведение в сцене · не управляет реальной аппаратурой. Условные зазоры не измерены.", procedureRunnerNext: "Показать следующий шаг", procedureRunnerPrevious: "Предыдущий шаг", procedureRunnerReset: "Сбросить процедуру", procedureRunnerReady: "Начните с безопасного отключения питания и открытия корпуса.", procedureRunnerVisualized: "Визуальное состояние применено в 3D-модели. Это не подтверждает выполнение физической операции.", procedureRunnerComplete: "Выбранная ветвь FRU завершена в учебной сцене.", procedureRunnerNoop: "Геометрия не перемещается: в стартовой конфигурации 16 КБ этот узел отсутствует.", procedureRunnerSafety: "БЕЗОПАСНОСТЬ И ПРИМЕЧАНИЕ К ПРОЦЕДУРЕ", procedureGroup: "ВЕТВЬ ПРОЦЕДУРЫ", commonEntryMode: "Общая начальная подготовка", conditionalBranchMode: "Условная ветвь", sharedPreparationMode: "Общая подготовка разъёмов", independentFruBranchMode: "Независимая ветвь FRU", replacementFragments: "ДОКУМЕНТИРОВАННЫЕ ФРАГМЕНТЫ УСТАНОВКИ · НЕ ПОЛНАЯ ОБРАТНАЯ СБОРКА", sequenceDisplayOnly: "Порядок отображения · следуйте подтверждённым зависимостям и выбранной ветви FRU.",
     sources: "ИСТОЧНИКИ", accuracyFooter: "Неизвестное остаётся неизвестным. Точность CAD не подразумевается.",
     ready: "ГОТОВО", localFirst: "ЛОКАЛЬНО · БЕЗ АККАУНТА", openModel: "Открыть модель",
     noSelection: "Компонент не выбран", componentsCount: "компонентов",
@@ -1133,6 +1135,99 @@ function sourceUrlAtLocator(source, locator) {
   }
 }
 
+function renderProcedureRunner(componentId) {
+  const host = $("#procedure-runner");
+  if (!host) return;
+  const isDeviceRoot = componentId === MODEL.id || componentId === "assembly.card.root";
+  const controller = state.procedureController;
+  const routeData = ASSEMBLY_PACKAGE.procedure_routes;
+  host.hidden = !(isDeviceRoot && controller && Array.isArray(routeData?.branches));
+  if (host.hidden) return;
+
+  const snapshot = controller.getSnapshot();
+  const branchSelect = $("#procedure-branch-select");
+  const selectedBranch = snapshot.branchId ?? "";
+  if (branchSelect.dataset.modelId !== MODEL.id) {
+    branchSelect.replaceChildren();
+    const commonOption = document.createElement("option");
+    commonOption.value = "";
+    commonOption.textContent = t("procedureCommonBranch");
+    branchSelect.append(commonOption);
+    for (const route of routeData.branches) {
+      const option = document.createElement("option");
+      option.value = route.id;
+      option.textContent = localizedPackageText(route.title);
+      branchSelect.append(option);
+    }
+    branchSelect.dataset.modelId = MODEL.id;
+  }
+  branchSelect.value = selectedBranch;
+  branchSelect.disabled = snapshot.busy;
+
+  const title = $("#procedure-runner-current-title");
+  const description = $("#procedure-runner-description");
+  const note = $("#procedure-runner-note");
+  const safety = $("#procedure-runner-safety");
+  const safetyLabel = $("#procedure-runner-safety-label");
+  const sourcesHost = $("#procedure-runner-sources");
+  const progress = $("#procedure-runner-progress");
+  const status = $("#procedure-runner-status");
+  const previous = $("#procedure-previous");
+  const next = $("#procedure-next");
+  const reset = $("#procedure-reset");
+  const step = snapshot.currentStep;
+
+  host.dataset.branch = selectedBranch || "common";
+  host.dataset.stepId = snapshot.currentStepId ?? "";
+  host.dataset.completedCount = String(snapshot.completedStepIds.length);
+  host.dataset.busy = String(snapshot.busy);
+
+  progress.textContent = `${Math.max(0, snapshot.stepIndex + 1)} / ${snapshot.stepCount}`;
+  title.textContent = step
+    ? `${t("stepLabel")} ${Number.isInteger(step.sequence) ? step.sequence : snapshot.stepIndex + 1}: ${localizedPackageText(step.title ?? step.action)}`
+    : t("procedureRunnerTitle");
+  description.textContent = step ? localizedPackageText(step.description) : t("procedureRunnerReady");
+
+  const baselineOutcome = localizedPackageText(step?.baseline_outcome);
+  const actionNotes = localizedPackageList((step?.visual_actions ?? []).map((action) => action.note));
+  const visualizationPolicy = localizedPackageText(ASSEMBLY_PACKAGE.visualization_policy);
+  const detailNotes = [baselineOutcome, ...actionNotes, visualizationPolicy].filter(Boolean);
+  note.textContent = detailNotes.join(" ");
+  note.hidden = detailNotes.length === 0;
+
+  const safetyText = localizedPackageList(step?.safety_notes).join(" ");
+  safetyLabel.textContent = t("procedureRunnerSafety");
+  safety.textContent = safetyText;
+  safety.hidden = !safetyText;
+  safetyLabel.hidden = !safetyText;
+
+  sourcesHost.replaceChildren();
+  const sourceMap = new Map(MODEL.sources.map((source) => [source.id, source]));
+  for (const sourceId of step?.source_ids ?? []) {
+    const source = sourceMap.get(sourceId);
+    if (!source?.url) continue;
+    const link = document.createElement("a");
+    link.className = "assembly-source-link";
+    link.href = source.url;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = `↗ ${t("openAtSource")}: ${source.label}`;
+    sourcesHost.append(link);
+  }
+
+  if (snapshot.busy) status.textContent = t("loading");
+  else if (snapshot.branchRequired) status.textContent = t("procedureChooseBranch");
+  else if (snapshot.isComplete) status.textContent = t("procedureRunnerComplete");
+  else if (step) status.textContent = t("procedureRunnerVisualized");
+  else status.textContent = t("procedureRunnerReady");
+
+  previous.disabled = !snapshot.canGoPrevious;
+  next.disabled = !snapshot.canGoNext;
+  next.textContent = t("procedureRunnerNext");
+  reset.disabled = snapshot.stepIndex < 0 || snapshot.busy;
+  if (snapshot.branchRequired) branchSelect.focus?.({ preventScroll: true });
+}
+
 function renderAssemblyEvidence(componentId) {
   const section = $("#detail-assembly-section");
   const emptyNote = $("#assembly-empty-note");
@@ -1386,6 +1481,7 @@ function renderDetails(id) {
   renderClaims(id);
   renderRelationships(id);
   renderAssemblyEvidence(id);
+  renderProcedureRunner(id);
   $("#rotate-component").disabled = !object || !state.sceneController;
 
   const sourceHost = $("#source-links");
@@ -1804,6 +1900,11 @@ function updateExplodeUi(value) {
 
 function setExplode(value) {
   if (!state.sceneController) return;
+  const procedureState = state.procedureController?.getSnapshot();
+  if (procedureState && procedureState.stepIndex >= 0) {
+    state.procedureController.reset();
+    if (state.selectedId === MODEL.id) renderProcedureRunner(state.selectedId);
+  }
   const clipState = state.animationPlayer?.getSnapshot();
   if (clipState && clipState.status !== "idle" && clipState.status !== "ready") state.animationPlayer.stop();
   state.sceneController.setExplode(value);
@@ -2075,6 +2176,8 @@ function disposeModel(root) {
 function installModel(root, mode) {
   state.animationPlayer?.dispose();
   state.animationPlayer = null;
+  state.procedureController?.dispose();
+  state.procedureController = null;
   if (state.sceneController) state.sceneController.reset();
   disposeProcessVisuals();
   state.measurementController?.clear();
@@ -2129,6 +2232,13 @@ function installModel(root, mode) {
   collectNodes(root);
   collectFanRotors(root);
   state.sceneController = new SceneController(root);
+  if (Array.isArray(ASSEMBLY_PACKAGE.procedure_routes?.common_step_ids) && Array.isArray(ASSEMBLY_PACKAGE.procedure_routes?.branches)) {
+    state.procedureController = new ProcedureController(root, {
+      steps: ASSEMBLY_PACKAGE.steps ?? [],
+      commonStepIds: ASSEMBLY_PACKAGE.procedure_routes.common_step_ids,
+      routes: ASSEMBLY_PACKAGE.procedure_routes.branches
+    });
+  }
   fitModel(root);
   setExplode(0);
   setupAnimationPlayer(root);
@@ -2592,6 +2702,64 @@ function bindUI() {
   $("#animation-seek").addEventListener("input", (event) => state.animationPlayer?.seek(Number(event.target.value) / 1000));
   $("#quiz-next").addEventListener("click", submitLearningAnswer);
   setSimulationSpeed($("#simulation-speed")?.value ?? 1);
+  $("#procedure-branch-select").addEventListener("change", (event) => {
+    if (!state.procedureController) return;
+    try {
+      state.procedureController.setBranch(event.target.value);
+      renderProcedureRunner(state.selectedId);
+      setStatus(t("ready"));
+    } catch (error) {
+      console.error(error);
+      setStatus(t("catalogError"));
+    }
+  });
+  $("#procedure-next").addEventListener("click", async () => {
+    const controller = state.procedureController;
+    if (!controller) return;
+    const nextButton = $("#procedure-next");
+    const branchSelect = $("#procedure-branch-select");
+    nextButton.disabled = true;
+    branchSelect.disabled = true;
+    state.animationPlayer?.stop();
+    try {
+      const result = await controller.advance({ animate: !state.reducedMotion });
+      if (!result.ok && result.reason === "missing_prerequisites") {
+        setStatus(t("prerequisitesLabel") + ": " + result.missing.join(", "));
+      } else if (!result.ok && result.reason === "branch_required") {
+        setStatus(t("procedureChooseBranch"));
+      } else if (!result.ok && result.reason === "complete") {
+        setStatus(t("procedureRunnerComplete"));
+      } else {
+        setStatus(t("procedureRunnerVisualized"));
+      }
+    } catch (error) {
+      console.error(error);
+      setStatus(error.message || t("catalogError"));
+    } finally {
+      renderProcedureRunner(state.selectedId);
+    }
+  });
+  $("#procedure-previous").addEventListener("click", () => {
+    if (!state.procedureController) return;
+    try {
+      state.procedureController.previous();
+      renderProcedureRunner(state.selectedId);
+    } catch (error) {
+      console.error(error);
+      setStatus(error.message || t("catalogError"));
+    }
+  });
+  $("#procedure-reset").addEventListener("click", () => {
+    if (!state.procedureController) return;
+    try {
+      state.procedureController.reset();
+      renderProcedureRunner(state.selectedId);
+      setStatus(t("ready"));
+    } catch (error) {
+      console.error(error);
+      setStatus(error.message || t("catalogError"));
+    }
+  });
   $("#assemble-button").addEventListener("click", () => setExplode(0));
   $("#explode-button").addEventListener("click", () => setExplode(100));
   $("#animate-button").addEventListener("click", animateExplodeCycle);
