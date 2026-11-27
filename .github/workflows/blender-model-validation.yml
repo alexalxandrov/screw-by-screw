@@ -203,7 +203,9 @@ jobs:
         run: npm run test:e2e:model
       - name: Test real .sbsmodel import in browser
         run: npm run test:e2e:generated-package
-      - name: Run full viewer and accessibility suite against generated GLB
+      - name: Restore the source fallback scene for the general viewer suite
+        run: rm -rf public/models
+      - name: Run full viewer and accessibility suite against the source fallback scene
         run: npm run test:e2e:chromium
       - name: Commit standalone root launcher to feature branch
         if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
