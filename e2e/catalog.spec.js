@@ -70,6 +70,7 @@ test("quick switcher lists only published models and switches between IBM and De
   await page.goto("/");
   const switcher = page.locator("#model-switcher");
   await expect(switcher).toBeVisible();
+  await expect(switcher.locator("option")).toHaveCount(3);
   await expect(page.locator("#model-title")).toContainText("Personal Computer 5150");
   await expect(page.locator("#component-count")).toHaveText("71");
   await expect(switcher).toHaveValue("computer.ibm.5150.1981");
