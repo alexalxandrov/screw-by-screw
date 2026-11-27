@@ -9,6 +9,7 @@ test("publishes IBM 5150 and keeps the unverified GPU package out of the public 
 
   const archivedGpu = page.locator('[data-model-id="gpu.evga.12g-p5-3655-kr"]');
   await expect(archivedGpu).toHaveCount(0);
+  await expect(page.locator('[data-model-id="pc.dell.optiplex-5060-tower.family"]')).toHaveCount(0);
   const card = page.locator('[data-model-id="computer.ibm.5150.1981"]');
   await expect(card).toBeVisible();
   await expect(card).toContainText("Персональный компьютер IBM 5150 (1981)");
