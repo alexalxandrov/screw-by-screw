@@ -43,7 +43,8 @@
                 0
               ]
             }
-          ]
+          ],
+          "coordinate_space": "world"
         }
       ]
     },
@@ -86,7 +87,8 @@
                 42
               ]
             }
-          ]
+          ],
+          "coordinate_space": "world"
         },
         {
           "target_id": "cooling.cpu.heatsink",
@@ -109,7 +111,8 @@
                 62
               ]
             }
-          ]
+          ],
+          "coordinate_space": "world"
         }
       ]
     },
@@ -151,7 +154,8 @@
                 85
               ]
             }
-          ]
+          ],
+          "coordinate_space": "world"
         }
       ]
     }

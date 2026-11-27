@@ -576,6 +576,11 @@ test("Dell package exposes working 3D disassembly actions and authored animation
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-step-id", "step.optiplex.remove-side-cover");
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-action-type", "translate");
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-motion", "illustrative-translation");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-target-count", "1");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-applied-count", "1");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-resolved-targets", "chassis.side_panel");
+  const sideCoverProcedureDelta = JSON.parse(await page.locator("#viewer-canvas").getAttribute("data-procedure-world-deltas"));
+  expect(Math.hypot(...sideCoverProcedureDelta[0].delta)).toBeGreaterThan(0);
 
   await page.locator("#assembly-step-next").click();
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-step-id", "step.optiplex.remove-front-bezel");
@@ -585,6 +590,8 @@ test("Dell package exposes working 3D disassembly actions and authored animation
   await expect(page.locator("#assembly-step-progress")).toContainText("0 / 12");
   for (let step = 0; step < 4; step += 1) await page.locator("#assembly-step-next").click();
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-direction", "0,0,1");
+  const fanProcedureDelta = JSON.parse(await page.locator("#viewer-canvas").getAttribute("data-procedure-world-deltas"));
+  expect(fanProcedureDelta[0].delta[2]).toBeGreaterThan(0);
   await page.locator("#assembly-step-reset").click();
 
   await page.locator("#animation-clip-select").selectOption("clip.optiplex.side-cover-removal");
@@ -595,5 +602,41 @@ test("Dell package exposes working 3D disassembly actions and authored animation
   await expect(page.locator("#animation-player-panel")).toHaveAttribute("data-status", "paused");
   await page.locator("#animation-stop").click();
   await expect(page.locator("#animation-player-panel")).toHaveAttribute("data-status", "ready");
+  await page.locator("#animation-seek").evaluate((element) => {
+    element.value = "1000";
+    element.dispatchEvent(new Event("input", { bubbles: true }));
+  });
+  const sideCoverDeltas = JSON.parse(await page.locator("#viewer-canvas").getAttribute("data-animation-world-deltas"));
+  const sideCoverMovement = sideCoverDeltas.find((entry) => entry.targetId === "chassis.side_panel")?.delta;
+  expect(sideCoverMovement).toBeTruthy();
+  expect(sideCoverMovement[0]).toBeGreaterThan(0);
+  expect(Math.abs(sideCoverMovement[1])).toBeLessThan(0.01);
+  expect(Math.abs(sideCoverMovement[2])).toBeLessThan(0.01);
+
+  await page.locator("#animation-clip-select").selectOption("clip.optiplex.cpu-cooling-removal");
+  await page.locator("#animation-seek").evaluate((element) => {
+    element.value = "1000";
+    element.dispatchEvent(new Event("input", { bubbles: true }));
+  });
+  const cpuDeltas = JSON.parse(await page.locator("#viewer-canvas").getAttribute("data-animation-world-deltas"));
+  expect(await page.locator("#viewer-canvas").getAttribute("data-animation-target-count")).toBe("2");
+  expect(await page.locator("#viewer-canvas").getAttribute("data-animation-moved-target-count")).toBe("2");
+  for (const targetId of ["cooling.cpu.fan", "cooling.cpu.heatsink"]) {
+    const movement = cpuDeltas.find((entry) => entry.targetId === targetId)?.delta;
+    expect(movement, `missing movement diagnostics for ${targetId}`).toBeTruthy();
+    expect(movement[2]).toBeGreaterThan(0);
+    expect(Math.abs(movement[1])).toBeLessThan(0.01);
+  }
+
+  await page.locator("#animation-clip-select").selectOption("clip.optiplex.system-board-removal");
+  await page.locator("#animation-seek").evaluate((element) => {
+    element.value = "1000";
+    element.dispatchEvent(new Event("input", { bubbles: true }));
+  });
+  const boardDeltas = JSON.parse(await page.locator("#viewer-canvas").getAttribute("data-animation-world-deltas"));
+  const boardMovement = boardDeltas.find((entry) => entry.targetId === "motherboard.assembly")?.delta;
+  expect(boardMovement).toBeTruthy();
+  expect(boardMovement[2]).toBeGreaterThan(0);
+  expect(Math.abs(boardMovement[1])).toBeLessThan(0.01);
   expect(pageErrors).toEqual([]);
 });

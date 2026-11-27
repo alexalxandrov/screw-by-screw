@@ -174,6 +174,19 @@ test("OptiPlex v0.3 package passes the production loader and cross-file validati
       assert.equal(track.relative, true);
     }
   }
+  const expectedWorldTracks = [
+    ["chassis.side_panel", [110, 0, 0]],
+    ["cooling.cpu.fan", [0, 0, 42]],
+    ["cooling.cpu.heatsink", [0, 0, 62]],
+    ["motherboard.assembly", [0, 0, 85]]
+  ];
+  for (const [targetId, expectedDelta] of expectedWorldTracks) {
+    const track = loaded.data.animations.clips.flatMap((clip) => clip.tracks)
+      .find((entry) => entry.target_id === targetId);
+    assert.ok(track, `missing animation track: ${targetId}`);
+    assert.equal(track.coordinate_space, "world", `track must be world-space: ${targetId}`);
+    assert.deepEqual(track.keyframes.at(-1).value, expectedDelta);
+  }
   const sceneActionCounts = steps.map((step) => (step.scene_actions ?? []).length);
   assert.deepEqual(sceneActionCounts, [1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2]);
   for (const step of steps) {

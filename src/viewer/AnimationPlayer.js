@@ -1,5 +1,9 @@
+import { Vector3 } from "three";
+
 /**
  * Generic playback for package-authored, normalized component animation tracks.
+ * Position tracks may set coordinate_space:"world" to define offsets in viewer
+ * coordinates; parent transforms and scale are inverted by the player at runtime.
  * This class is intentionally independent of device-specific model content.
  */
 export class AnimationPlayer {
@@ -36,13 +40,30 @@ export class AnimationPlayer {
 
   getSnapshot() {
     const duration = Number(this.clip?.duration_ms ?? 0);
+    const tracks = this.clip?.tracks ?? [];
+    const worldDeltas = tracks.filter((track) => track.property === "position").map((track) => {
+      const baseline = this.snapshots.get(track.target_id + "::" + track.property);
+      if (!baseline?.worldPosition) return null;
+      const current = baseline.object.getWorldPosition(new Vector3());
+      const delta = current.sub(baseline.worldPosition);
+      return {
+        targetId: track.target_id,
+        delta: delta.toArray().map((value) => Math.abs(value) < 1e-8 ? 0 : Number(value.toFixed(3)))
+      };
+    }).filter(Boolean);
+    const movedTargetIds = new Set(worldDeltas
+      .filter((entry) => Math.hypot(...entry.delta) > 1e-3)
+      .map((entry) => entry.targetId));
     return {
       clipId: this.clip?.id ?? null,
       status: this.status,
       time: this.currentTime,
       duration,
       progress: duration > 0 ? Math.max(0, Math.min(1, this.currentTime / duration)) : 0,
-      speed: this.speed
+      speed: this.speed,
+      targetCount: new Set(tracks.map((track) => track.target_id)).size,
+      movedTargetCount: movedTargetIds.size,
+      worldDeltas
     };
   }
 
@@ -65,6 +86,7 @@ export class AnimationPlayer {
   _captureClip() {
     this.snapshots.clear();
     if (!this.clip) return;
+    this.root.updateWorldMatrix(true, true);
     for (const track of this.clip.tracks) {
       const object = this.nodesById.get(track.target_id);
       if (!object) throw new Error("Animation target is missing: " + track.target_id);
@@ -74,7 +96,8 @@ export class AnimationPlayer {
         this.snapshots.set(key, {
           object,
           property: track.property,
-          value: this._captureValue(object, track.property)
+          value: this._captureValue(object, track.property),
+          worldPosition: track.property === "position" ? object.getWorldPosition(new Vector3()) : null
         });
       }
     }
@@ -215,11 +238,23 @@ export class AnimationPlayer {
       } else {
         value = left.value.map((entry, index) => entry + (right.value[index] - entry) * amount);
       }
-      if (track.relative === true && track.property !== "visible") {
-        const baseline = this.snapshots.get(track.target_id + "::" + track.property)?.value;
-        if (baseline) value = value.map((entry, index) => baseline[index] + entry);
+      if (track.coordinate_space === "world" && track.property === "position") {
+        const baseline = this.snapshots.get(track.target_id + "::" + track.property)?.worldPosition;
+        if (!baseline) throw new Error("World-space animation target has no captured position: " + track.target_id);
+        const desiredWorldPosition = baseline.clone().add(new Vector3(value[0], value[1], value[2]));
+        if (object.parent) {
+          object.parent.updateWorldMatrix(true, false);
+          object.position.copy(object.parent.worldToLocal(desiredWorldPosition));
+        } else {
+          object.position.copy(desiredWorldPosition);
+        }
+      } else {
+        if (track.relative === true && track.property !== "visible") {
+          const baseline = this.snapshots.get(track.target_id + "::" + track.property)?.value;
+          if (baseline) value = value.map((entry, index) => baseline[index] + entry);
+        }
+        this._restoreValue(object, track.property, value);
       }
-      this._restoreValue(object, track.property, value);
     }
   }
 

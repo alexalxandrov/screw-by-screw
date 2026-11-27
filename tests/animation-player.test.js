@@ -240,3 +240,74 @@ test("relative position tracks animate from the actual model baseline and restor
   assert.deepEqual(fan.position.toArray(), [12, 4, -7]);
   player.dispose();
 });
+
+
+test("relative local-Y lift tracks move upward in world Z under the viewer's Y-up to Z-up wrapper", () => {
+  const wrapper = new THREE.Group();
+  wrapper.rotation.x = Math.PI / 2;
+  const { root, fan } = makeScene();
+  wrapper.add(root);
+  const player = new AnimationPlayer(wrapper, [makeClip({
+    tracks: [{
+      target_id: "fan",
+      property: "position",
+      relative: true,
+      keyframes: [{ t: 0, value: [0, 0, 0] }, { t: 1, value: [0, 20, 0] }]
+    }]
+  })]);
+
+  player.selectClip("clip.test");
+  player.seek(1);
+  const worldPosition = fan.getWorldPosition(new THREE.Vector3());
+  assert.ok(Math.abs(worldPosition.x) < 1e-6);
+  assert.ok(Math.abs(worldPosition.y) < 1e-6);
+  assert.ok(Math.abs(worldPosition.z - 20) < 1e-6);
+  assert.deepEqual(player.getSnapshot().worldDeltas[0].delta, [0, 0, 20]);
+
+  player.stop();
+  assert.deepEqual(fan.position.toArray(), [0, 0, 0]);
+  player.dispose();
+});
+
+
+test("world-space position tracks follow the requested vector through nested rotation and scale", () => {
+  const wrapper = new THREE.Group();
+  wrapper.rotation.set(Math.PI / 2, 0.1, -0.2);
+  wrapper.scale.set(0.8, 1.4, 2.1);
+
+  const gltfParent = new THREE.Group();
+  gltfParent.position.set(11, -7, 5);
+  gltfParent.rotation.set(0.35, -0.6, 0.8);
+  gltfParent.scale.set(2.2, 0.45, 1.7);
+  wrapper.add(gltfParent);
+
+  const { root, fan } = makeScene();
+  root.position.set(-4, 8, 2);
+  gltfParent.add(root);
+  fan.position.set(3, -6, 9);
+
+  wrapper.updateWorldMatrix(true, true);
+  const baselineWorld = fan.getWorldPosition(new THREE.Vector3());
+  const player = new AnimationPlayer(wrapper, [makeClip({
+    tracks: [{
+      target_id: "fan",
+      property: "position",
+      relative: true,
+      coordinate_space: "world",
+      keyframes: [{ t: 0, value: [0, 0, 0] }, { t: 1, value: [0, 0, 20] }]
+    }]
+  })]);
+
+  player.selectClip("clip.test");
+  player.seek(1);
+  const movedWorld = fan.getWorldPosition(new THREE.Vector3());
+  const actualDelta = movedWorld.sub(baselineWorld);
+  assert.ok(Math.abs(actualDelta.x) < 1e-5);
+  assert.ok(Math.abs(actualDelta.y) < 1e-5);
+  assert.ok(Math.abs(actualDelta.z - 20) < 1e-5);
+  assert.deepEqual(player.getSnapshot().worldDeltas[0].delta, [0, 0, 20]);
+
+  player.stop();
+  assert.deepEqual(fan.position.toArray(), [3, -6, 9]);
+  player.dispose();
+});

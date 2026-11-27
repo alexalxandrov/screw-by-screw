@@ -702,6 +702,38 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); ou
 
 
 /* Offline-first model catalogue */
+.runtime-diagnostics {
+  margin-top: 9px;
+  padding-top: 7px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font: 8px var(--mono);
+}
+.runtime-diagnostics summary {
+  cursor: pointer;
+  color: var(--muted);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.runtime-diagnostics-list {
+  display: grid;
+  gap: 6px;
+  margin: 9px 0 0;
+}
+.runtime-diagnostics-list > div {
+  display: grid;
+  grid-template-columns: minmax(88px, .42fr) minmax(0, 1fr);
+  gap: 8px;
+}
+.runtime-diagnostics-list dt { color: var(--muted); }
+.runtime-diagnostics-list dd {
+  min-width: 0;
+  margin: 0;
+  color: var(--text);
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
 .catalog-dialog {
   width: min(980px, calc(100vw - 32px));
   max-width: none;
