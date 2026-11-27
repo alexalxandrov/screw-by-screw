@@ -54,3 +54,10 @@ The `frame-ancestors` directive must be sent as an HTTP response header; it is n
 ## Remaining security review
 
 Before public deployment, review the hosting provider, TLS configuration, response headers, dependency audit output, model-parser attack surface, file-size policy, accessibility, and whether any future backend changes the no-upload/no-account privacy boundary.
+
+
+### Text model package envelopes
+
+The `SBSMODEL-JSON` transport is untrusted input just like the ZIP transport. The loader validates the exact prefix, UTF-8 JSON envelope schema, manifest paths, payload entry count, base64 shape, decoded GLB limit, aggregate decoded size and SHA-256 checksums before applying package data. Text sidecars are parsed only after checksum verification. The legacy ZIP path remains supported and keeps its archive preflight checks.
+
+Research packages may be committed for review without being publicly distributed. The catalogue defaults missing publication metadata to unpublished, and both the user-facing catalogue and standalone package builder require an explicit `published: true` flag.

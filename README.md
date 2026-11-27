@@ -56,6 +56,8 @@ Screw by Screw — концепция публичной образовател�
 
 EVGA RTX 3060 XC BLACK переведена в **исследовательский архив**: её пакет, данные и Blender-исходники сохранены, но модель скрыта из пользовательского каталога и не встраивается в автономный HTML. Не подтверждены точная аппаратная ревизия PCB, полная согласованная карта крепежа и единая последовательность обслуживания. Она не будет возвращена в публичный каталог до идентификации конкретной ревизии, разрешения расхождений между источниками и независимой проверки каждой операции.
 
+Dell OptiPlex 5060 Tower добавлена как **неопубликованная семейная исследовательская модель v0.3**. Это `platform_family` reference без выдуманного part number или service tag. Пакет содержит 137 семантических компонентов, 145 связей и source-backed service coverage; условная геометрия остаётся `illustrative_proxy_not_cad`. Запись скрыта из пользовательского каталога и не встраивается в offline launcher до независимой проверки. Подробнее: [OptiPlex 5060 research](docs/OPTIPLEX_5060_RESEARCH.md).
+
 Для любой будущей модели действует тот же порог: идентифицируемая аппаратная ревизия, первичные или надёжно перекрёстно проверенные источники, полный список компонентов и крепежа в пределах заявленного охвата, доказанные зависимости разборки, явное разделение измеренного и условного, автоматические проверки пакета и независимый обзор. Неизвестные данные остаются неизвестными.
  
 ## Стартовая стратегия
@@ -106,6 +108,8 @@ EVGA RTX 3060 XC BLACK переведена в **исследовательск�
 - [IBM PC 5150 branching disassembly sequence](docs/IBM_PC_5150_DISASSEMBLY_SEQUENCE.md) — second reference model, scope, geometry limits and acceptance gates.
 - [IBM PC 5150 content package](content/models/ibm-pc-5150-1981/README.md) — 71 components, 100 typed relationships, 14 branching service actions, partial replacement fragments and bilingual learning data.
 - [IBM PC 5150 source register](MODELS/COMPUTERS/IBM/5150/00-SOURCES/REFERENCE_REGISTER.md) — first-edition IBM technical and service references.
+- [Dell OptiPlex 5060 Tower research](docs/OPTIPLEX_5060_RESEARCH.md) — v0.3 family-level archive, source coverage and known unknowns.
+- [Multi-model library plan](docs/MULTI_MODEL_LIBRARY_PLAN.md) — identity scope, model kind and publication gates.
 
 ## Рабочее название
 

@@ -66,3 +66,10 @@ Before the full application: create a test scene with 10–20 independently sele
 ## Implemented static device catalogue
 
 The viewer includes a statically imported bilingual index at `content/catalog/models.json`. It records exact manufacturer part number, category, package version/path and geometry-evidence class. It does not need a catalogue API. Hosted builds resolve staged `.sbsmodel` archives by relative URL. The standalone HTML build embeds packages staged under `public/` as data URLs so the same catalogue works through `file://`. Every selection uses the standard package loader and package model-ID comparison.
+
+
+## Multi-model identity and package transports
+
+The catalogue distinguishes exact SKUs from platform families, physical samples and reference configurations. Family-level systems are allowed to omit a manufacturer part number; the viewer must not synthesize one. Runtime package loading is shared for startup and catalogue selection.
+
+The production loader accepts both the legacy ZIP container and the checksummed UTF-8 `SBSMODEL-JSON` envelope. Both expose the same versioned manifest, sidecars and self-contained GLB data to the viewer. Publication is a separate catalogue decision: research archives remain in the repository but are hidden from the UI and excluded from the standalone launcher until `published: true` is explicitly set.
