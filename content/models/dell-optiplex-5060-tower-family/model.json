@@ -1,0 +1,560 @@
+{
+  "schema_version": "0.1.0",
+  "id": "pc.dell.optiplex-5060-tower.family",
+  "manufacturer": "Dell",
+  "product_name": "OptiPlex 5060 Tower",
+  "part_number": null,
+  "identity_scope": "platform_family",
+  "model_kind": "system",
+  "variant_notes": "Family-level reference only. No service tag, exact retail configuration, motherboard assembly number, PCB revision or PSU part number is selected.",
+  "status": "research_blockout",
+  "geometry_status": "illustrative_proxy_not_cad",
+  "coordinate_system": {
+    "units": "mm",
+    "x": "case width",
+    "y": "case height",
+    "z": "case depth",
+    "origin": "schematic chassis base centre; positive Y upwards; front at negative Z"
+  },
+  "specifications": {
+    "physical": {
+      "height_mm": 350,
+      "width_mm": 154,
+      "depth_mm": 274,
+      "volume_l": 14.77,
+      "weight_kg": 7.93,
+      "evidence_status": "manufacturer_data",
+      "source_ids": [
+        "src.dell.5060.setup"
+      ],
+      "notes": "Published Tower family envelope and mass; internal dimensions remain unknown."
+    },
+    "motherboard": {
+      "numbered_callouts": 26,
+      "evidence_status": "manufacturer_data",
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.board_connectors"
+      ],
+      "notes": "Callout count from Dell's motherboard illustration; not a component count.",
+      "callout_coverage": "all_26_numbered_callouts_mapped_to_semantic_component_ids",
+      "callouts": [
+        {
+          "number": 1,
+          "label": "PCIe x16 mechanical / x4 electrical connector · Slot 4",
+          "component_ids": [
+            "motherboard.pcie.x16.wired_x4"
+          ]
+        },
+        {
+          "number": 2,
+          "label": "PCIe x1 connector · Slot 3",
+          "component_ids": [
+            "motherboard.pcie.x1.2"
+          ]
+        },
+        {
+          "number": 3,
+          "label": "PCIe x16 connector · Slot 2",
+          "component_ids": [
+            "motherboard.pcie.x16"
+          ]
+        },
+        {
+          "number": 4,
+          "label": "PCIe x1 connector · Slot 1",
+          "component_ids": [
+            "motherboard.pcie.x1.1"
+          ]
+        },
+        {
+          "number": 5,
+          "label": "Optional Type-C connector",
+          "component_ids": [
+            "motherboard.typec_header.optional"
+          ]
+        },
+        {
+          "number": 6,
+          "label": "Optional video connector (HDMI / DisplayPort / VGA)",
+          "component_ids": [
+            "motherboard.video_header.optional"
+          ]
+        },
+        {
+          "number": 7,
+          "label": "Optional PS/2 / serial port connector",
+          "component_ids": [
+            "motherboard.ps2_serial_header.optional"
+          ]
+        },
+        {
+          "number": 8,
+          "label": "System fan connector",
+          "component_ids": [
+            "motherboard.fan_header"
+          ]
+        },
+        {
+          "number": 9,
+          "label": "Intruder switch connector",
+          "component_ids": [
+            "motherboard.intrusion_switch_header"
+          ]
+        },
+        {
+          "number": 10,
+          "label": "CPU socket connector",
+          "component_ids": [
+            "motherboard.cpu_socket"
+          ]
+        },
+        {
+          "number": 11,
+          "label": "CPU power connector",
+          "component_ids": [
+            "motherboard.cpu_power"
+          ]
+        },
+        {
+          "number": 12,
+          "label": "CPU cooler fan connector",
+          "component_ids": [
+            "motherboard.cpu_fan_header"
+          ]
+        },
+        {
+          "number": 13,
+          "label": "Memory slots",
+          "component_ids": [
+            "motherboard.dimm.1",
+            "motherboard.dimm.2",
+            "motherboard.dimm.3",
+            "motherboard.dimm.4"
+          ]
+        },
+        {
+          "number": 14,
+          "label": "SD card reader connector",
+          "component_ids": [
+            "motherboard.sd_reader_header"
+          ]
+        },
+        {
+          "number": 15,
+          "label": "Power switch connector",
+          "component_ids": [
+            "motherboard.power_switch_header"
+          ]
+        },
+        {
+          "number": 16,
+          "label": "M.2 SSD connector",
+          "component_ids": [
+            "motherboard.m2"
+          ]
+        },
+        {
+          "number": 17,
+          "label": "SATA 0 connector · blue",
+          "component_ids": [
+            "motherboard.sata.1"
+          ]
+        },
+        {
+          "number": 18,
+          "label": "SATA 2 connector · white",
+          "component_ids": [
+            "motherboard.sata.2"
+          ]
+        },
+        {
+          "number": 19,
+          "label": "Internal speaker connector",
+          "component_ids": [
+            "motherboard.speaker_header"
+          ]
+        },
+        {
+          "number": 20,
+          "label": "SATA 3 connector · black",
+          "component_ids": [
+            "motherboard.sata.3"
+          ]
+        },
+        {
+          "number": 21,
+          "label": "SATA 1 connector · black",
+          "component_ids": [
+            "motherboard.sata.4"
+          ]
+        },
+        {
+          "number": 22,
+          "label": "System power connector · ATX",
+          "component_ids": [
+            "motherboard.system_power"
+          ]
+        },
+        {
+          "number": 23,
+          "label": "SATA power connector",
+          "component_ids": [
+            "motherboard.sata_power_header"
+          ]
+        },
+        {
+          "number": 24,
+          "label": "M.2 WLAN connector",
+          "component_ids": [
+            "motherboard.m2.wlan"
+          ]
+        },
+        {
+          "number": 25,
+          "label": "Coin-cell battery",
+          "component_ids": [
+            "motherboard.coin_cell"
+          ]
+        },
+        {
+          "number": 26,
+          "label": "Clear CMOS / Password / Service Mode jumper",
+          "component_ids": [
+            "motherboard.clear_cmos_jumper"
+          ]
+        }
+      ]
+    },
+    "fasteners": {
+      "screw_table_quantity_total": 19,
+      "system_board_to_chassis": 9,
+      "psu_to_chassis": 3,
+      "other_optional_or_module_fasteners": 7,
+      "modeled_individual_instances": 24,
+      "source_ids": [
+        "src.dell.5060.service"
+      ],
+      "notes": "24 distinct mounting instances: 9 system-board screws, 3 PSU screws, 4 captive heatsink screws, 4 heatsink-fan screws and 4 system-fan rubber grommets. The 19-entry screw-table sum remains a separate manufacturer table total; optional/module screw counts are not assumed installed.",
+      "modeled_screw_instances": 20,
+      "modeled_rubber_grommets": 4
+    },
+    "platform": {
+      "cpu_family": "8th-generation Intel Core / Coffee Lake family",
+      "socket_family": "LGA1151 platform",
+      "exact_cpu": null,
+      "exact_motherboard_part_number": null,
+      "motherboard_revision": null,
+      "exact_psu_part_number": null,
+      "source_ids": [
+        "src.dell.5060.service"
+      ],
+      "supported_processors": [
+        {
+          "model": "Pentium Gold G5400",
+          "cores": 2,
+          "threads": 4,
+          "base_ghz": 3.7,
+          "integrated_graphics": "UHD Graphics 610",
+          "dell_datasheet_power_rating_w": 65,
+          "intel_ark_tdp_w": 58,
+          "intel_thermal_solution_spec_w": 65
+        },
+        {
+          "model": "Pentium Gold G5500",
+          "cores": 2,
+          "threads": 4,
+          "base_ghz": 3.8,
+          "integrated_graphics": "UHD Graphics 630",
+          "dell_datasheet_power_rating_w": 65,
+          "intel_ark_tdp_w": 54,
+          "intel_thermal_solution_spec_w": 65
+        },
+        {
+          "model": "Core i3-8100",
+          "cores": 4,
+          "threads": 4,
+          "base_ghz": 3.6,
+          "integrated_graphics": "UHD Graphics 630",
+          "dell_datasheet_power_rating_w": 65
+        },
+        {
+          "model": "Core i3-8300",
+          "cores": 4,
+          "threads": 4,
+          "base_ghz": 3.7,
+          "integrated_graphics": "UHD Graphics 630",
+          "dell_datasheet_power_rating_w": 65
+        },
+        {
+          "model": "Core i5-8400",
+          "cores": 6,
+          "threads": 6,
+          "base_ghz": 2.8,
+          "max_turbo_ghz": 4,
+          "integrated_graphics": "UHD Graphics 630",
+          "dell_datasheet_power_rating_w": 65
+        },
+        {
+          "model": "Core i5-8500",
+          "cores": 6,
+          "threads": 6,
+          "base_ghz": 3,
+          "max_turbo_ghz": 4.1,
+          "integrated_graphics": "UHD Graphics 630",
+          "dell_datasheet_power_rating_w": 65
+        },
+        {
+          "model": "Core i5-8600",
+          "cores": 6,
+          "threads": 6,
+          "base_ghz": 3.1,
+          "max_turbo_ghz": 4.3,
+          "integrated_graphics": "UHD Graphics 630",
+          "dell_datasheet_power_rating_w": 65
+        },
+        {
+          "model": "Core i7-8700",
+          "cores": 6,
+          "threads": 12,
+          "base_ghz": 3.2,
+          "max_turbo_ghz": 4.6,
+          "integrated_graphics": "UHD Graphics 630",
+          "dell_datasheet_power_rating_w": 65
+        }
+      ],
+      "processor_notes": "The listed CPU models are platform options, not a fitted CPU. Dell's OptiPlex 5060 data sheet lists 65 W for the standard non-T options. Intel ARK separately reports 58 W TDP for G5400 and 54 W for G5500, while both specify a PCG 2015C (65 W) thermal solution; TDP and thermal-solution class are distinct properties. The Dell service manual's processor paragraph contains 35 W entries with abbreviated model names; the data sheet separately identifies 35 W T-suffix CPUs, so that service-manual row is retained as a source discrepancy and not used to assert Tower CPU population.",
+      "processor_source_ids": [
+        "src.dell.5060.processors",
+        "src.dell.5060.spec_sheet",
+        "src.intel.g5400",
+        "src.intel.g5500",
+        "src.dell.5060.service"
+      ],
+      "processor_data_semantics": {
+        "dell_datasheet_power_rating_w": "Power rating as listed in Dell OptiPlex 5060 data sheet for standard non-T processor options; not asserted as measured CPU package power.",
+        "intel_ark_tdp_w": "Intel processor-level TDP; separately recorded where a primary Intel ARK record is linked.",
+        "intel_thermal_solution_spec_w": "Intel package thermal-solution class; do not conflate with processor TDP.",
+        "service_manual_note": "35 W entries in the service-manual processor paragraph are not reconciled to the data sheet's T-suffix options."
+      }
+    },
+    "memory": {
+      "slot_count": 4,
+      "slot_type": "UDIMM",
+      "technology": "DDR4",
+      "ecc": "non-ECC",
+      "max_capacity_gb": 64,
+      "max_per_slot_gb": 16,
+      "max_data_rate_mt_s": {
+        "Core i5/i7": 2666,
+        "Pentium/i3": 2400
+      },
+      "fitted_capacity_gb": null,
+      "fitted_module_count": null,
+      "source_ids": [
+        "src.dell.5060.memory",
+        "src.dell.5060.boardlayout"
+      ]
+    },
+    "storage": {
+      "m2_ssd_connectors": 1,
+      "m2_ssd_form_factors": [
+        "2230",
+        "2280"
+      ],
+      "m2_ssd_interfaces": [
+        "SATA",
+        "PCIe"
+      ],
+      "m2_wlan_connectors": 1,
+      "m2_wlan_form_factor": "2230",
+      "sata_data_headers": 4,
+      "sata_generation_counts": {
+        "Gen2": 1,
+        "Gen3": 3
+      },
+      "sata_gen2_role": "Optical drive",
+      "supported_drive_families": [
+        "2.5-inch SATA drive",
+        "3.5-inch SATA drive",
+        "M.2 SATA SSD",
+        "M.2 PCIe SSD",
+        "Slim optical drive",
+        "M.2 Optane combinations"
+      ],
+      "fitted_drives": null,
+      "source_ids": [
+        "src.dell.5060.storage",
+        "src.dell.5060.board_connectors"
+      ],
+      "drive_retention": {
+        "3.5-inch": {
+          "carrier_release": "single blue tab",
+          "drive_to_bracket": "flexible bracket pins engage drive slots",
+          "filler_bracket": true
+        },
+        "2.5-inch": {
+          "carrier_release": "two blue side tabs",
+          "drive_to_bracket": "flexible bracket pins engage drive slots"
+        },
+        "slim_optical_drive": {
+          "carrier_release": "single blue tab",
+          "cable_routing": "route data and power leads through retention tabs beneath the drive cage"
+        }
+      }
+    },
+    "expansion": {
+      "pcie_gen3": [
+        {
+          "slot": "Slot 2",
+          "mechanical": "x16",
+          "electrical": "x16"
+        },
+        {
+          "slot": "Slot 1",
+          "mechanical": "x1",
+          "electrical": "x1"
+        },
+        {
+          "slot": "Slot 3",
+          "mechanical": "x1",
+          "electrical": "x1"
+        },
+        {
+          "slot": "Slot 4",
+          "mechanical": "x16",
+          "electrical": "x4"
+        }
+      ],
+      "rear_openings": 4,
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.board_connectors"
+      ]
+    },
+    "power_supply": {
+      "family_options": [
+        {
+          "wattage_w": 260,
+          "efficiency": "EPA Bronze"
+        },
+        {
+          "wattage_w": 260,
+          "efficiency": "EPA Platinum"
+        }
+      ],
+      "input_voltage_v": [
+        100,
+        240
+      ],
+      "input_current_a_max": 3.2,
+      "input_frequency_hz": [
+        50,
+        60
+      ],
+      "fitted_part_number": null,
+      "fitted_efficiency_option": null,
+      "source_ids": [
+        "src.dell.5060.power"
+      ]
+    },
+    "external_io": {
+      "front": {
+        "usb2": 2,
+        "usb2_powershare": 1,
+        "usb3_1_gen1": 1,
+        "usb3_1_gen2_type_c_powershare": 1,
+        "universal_audio_jack": 1,
+        "optional_sd_reader": true,
+        "optional_optical_drive": true
+      },
+      "rear": {
+        "usb2_smartpoweron": 2,
+        "usb3_1_gen1": 4,
+        "displayport_standard": 2,
+        "optional_video_module_alternatives": [
+          "HDMI 2.0b",
+          "DisplayPort",
+          "VGA",
+          "USB-C DisplayPort Alt Mode"
+        ],
+        "rj45_gigabit_ethernet": 1,
+        "line_out": 1,
+        "optional_serial": true,
+        "optional_external_antenna_connectors": 2
+      },
+      "source_ids": [
+        "src.dell.5060.ports"
+      ]
+    },
+    "service_hardware": {
+      "physical_reference_instances": 24,
+      "optional_fastener_references": 7,
+      "optional_fastener_schedule": [
+        {
+          "assembly": "SD card reader",
+          "screw_type": "#6-32×3.6",
+          "quantity": 1
+        },
+        {
+          "assembly": "WLAN module",
+          "screw_type": "M2×3.5",
+          "quantity": 1
+        },
+        {
+          "assembly": "M.2 PCIe SSD",
+          "screw_type": "M2×3.5",
+          "quantity": 1
+        },
+        {
+          "assembly": "Type-C with DP/HDMI/VGA cable module",
+          "screw_type": "M3×3",
+          "quantity": 2
+        },
+        {
+          "assembly": "Internal antenna",
+          "screw_type": "M3×3",
+          "quantity": 2
+        }
+      ],
+      "source_ids": [
+        "src.dell.5060.screw_table"
+      ]
+    }
+  },
+  "source_ids": [
+    "src.dell.5060.service",
+    "src.dell.5060.setup",
+    "src.dell.5060.boardlayout",
+    "src.dell.5060.board_removal",
+    "src.dell.5060.processors",
+    "src.dell.5060.memory",
+    "src.dell.5060.storage",
+    "src.dell.5060.board_connectors",
+    "src.dell.5060.ports",
+    "src.dell.5060.power",
+    "src.dell.5060.screw_table",
+    "src.dell.5060.heatsink",
+    "src.dell.5060.cpu_removal",
+    "src.dell.5060.system_fan",
+    "src.dell.5060.psu_removal",
+    "src.dell.5060.spec_sheet",
+    "src.intel.g5400",
+    "src.intel.g5500",
+    "src.dell.5060.m2_removal",
+    "src.dell.5060.coin_cell_removal",
+    "src.dell.5060.heatsink_fan_removal",
+    "src.dell.5060.optical_drive_install",
+    "src.dell.5060.optional_video_module",
+    "src.dell.5060.hdd35_assembly",
+    "src.dell.5060.hdd35_bracket",
+    "src.dell.5060.hdd25_assembly",
+    "src.dell.5060.hdd25_bracket",
+    "src.dell.5060.odd_removal"
+  ],
+  "release": {
+    "version": "0.3.0",
+    "status": "research_blockout",
+    "geometry_fidelity": "illustrative_proxy_not_cad"
+  }
+}
