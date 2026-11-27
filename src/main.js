@@ -1365,9 +1365,9 @@ function procedureEffectForStep(step, animate = true) {
         changed = procedureMoveWorld(board, direction.multiplyScalar(12.7), animate) || changed;
       }
     }
-    if (canvasHost) canvasHost.dataset.procedureMotion = "manufacturer-stated-slide";
+    if (changed && canvasHost) canvasHost.dataset.procedureMotion = "manufacturer-stated-slide";
     const status = $("#assembly-motion-status");
-    if (status) status.textContent = t("procedureExactSlide");
+    if (status) status.textContent = changed ? t("procedureExactSlide") : t("procedureNoGeometry");
   } else if (/step\.board\.remove|lift.*board|remove.*board|поднять.*плат|извлечь.*плат/.test(descriptors) && board) {
     const bounds = new THREE.Box3().setFromObject(board);
     const size = bounds.getSize(new THREE.Vector3());
