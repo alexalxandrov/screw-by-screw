@@ -40,6 +40,13 @@ test("opens root index.html directly without a web server or external JS/CSS", a
   expect(pageErrors).toEqual([]);
   expect(requestFailures).toEqual([]);
 
-  await page.getByRole("button", { name: /Видеокарта в сборе/ }).click();
-  await expect(page.locator("#detail-id")).toHaveText("assembly.card.root");
+  // The standalone launcher now defaults to the published IBM 5150 model;
+  // keep this smoke test valid for either the GPU fallback or the IBM package.
+  const rootButton = page.locator(
+    '#component-tree button[data-id="computer.ibm.5150.1981"], #component-tree button[data-id="assembly.card.root"]'
+  );
+  await expect(rootButton).toBeVisible();
+  const rootId = await rootButton.getAttribute("data-id");
+  await rootButton.click();
+  await expect(page.locator("#detail-id")).toHaveText(rootId);
 });
