@@ -20,6 +20,7 @@ test("IBM remains the only default while Dell is published and RTX remains archi
   assert.equal(dell.model_kind, "system");
   assert.equal(dell.part_number, null);
   assert.equal(gpu.published, false);
+  assert.equal(gpu.model_kind, "device");
   assert.equal(gpu.default_package, false);
 });
 

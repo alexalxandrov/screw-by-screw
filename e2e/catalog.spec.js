@@ -72,6 +72,7 @@ test("loads the published Dell OptiPlex 5060 family package", async ({ page }) =
   const card = page.locator('[data-model-id="pc.dell.optiplex-5060-tower.family"]');
   await expect(card).toBeVisible();
   await expect(card).toContainText("OptiPlex 5060 Tower");
+  await expect(card).toContainText("Семейство платформы · без единого артикула");
   await page.locator("#catalog-category").selectOption("desktop_computers");
   await page.locator("#catalog-search").fill("OptiPlex 5060");
   await expect(page.locator("#catalog-results .catalog-card")).toHaveCount(1);
