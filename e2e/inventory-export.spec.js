@@ -4,6 +4,9 @@ import { unzipSync, strFromU8 } from "fflate";
 
 test("exports the active model as semantic JSON and a CSV ZIP without geometry", async ({ page }) => {
   await page.goto("/");
+  await expect(page.locator("#model-title")).toHaveText("IBM Personal Computer 5150");
+  await expect(page.locator("#model-sku")).toHaveText("5150");
+  await expect(page.locator("#load-state")).toContainText("ПАКЕТ SBS MODEL");
   await expect(page.locator("#export-inventory-json")).toBeVisible();
 
   const jsonDownloadPromise = page.waitForEvent("download");
