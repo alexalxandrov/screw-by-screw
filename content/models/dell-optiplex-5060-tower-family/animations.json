@@ -82,11 +82,12 @@
               "t": 1,
               "value": [
                 0,
-                42,
-                0
+                0,
+                42
               ]
             }
-          ]
+          ],
+          "coordinate_space": "world"
         },
         {
           "target_id": "cooling.cpu.heatsink",
@@ -105,11 +106,12 @@
               "t": 1,
               "value": [
                 0,
-                62,
-                0
+                0,
+                62
               ]
             }
-          ]
+          ],
+          "coordinate_space": "world"
         }
       ]
     },
@@ -147,11 +149,12 @@
               "t": 1,
               "value": [
                 0,
-                85,
-                0
+                0,
+                85
               ]
             }
-          ]
+          ],
+          "coordinate_space": "world"
         }
       ]
     }
