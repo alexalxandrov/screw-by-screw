@@ -140,7 +140,7 @@ const UI = {
     allVisible: "All components visible", layerCooling: "Cooling layer · qualitative",
     layerPower: "Power path · qualitative", layerCompute: "GPU architecture · logical map", layerGraphicsPipeline: "Graphics paths · conceptual map", layerVideoCodec: "Video codec engines · logical map", noWebgl: "WebGL is unavailable in this browser.",
     source: "Source", noSources: "No direct source linked to this component.",
-    modelLoaded: "Model ready", glbPicker: "Choose a .glb file", learn: "Learn", learning: "LEARNING", authoredAnimations: "PACKAGE ANIMATIONS", clipSelect: "Select clip", clipTimeline: "Animation timeline", clipPlay: "Play", clipPause: "Pause", clipStop: "Stop / reset", clipReady: "Ready", clipPlaying: "Playing", clipPaused: "Paused", clipCompleted: "Completed", clipTime: "TIME", clipEvidenceNote: "Authored model motion · not a physics simulation", clipEducationalApproximation: "Educational approximation · duration is not measured RPM", clipIllustrative: "Illustrative motion · not a measured mechanism", clipDocumentedMotion: "Documented motion · source-linked", clipMeasuredMotion: "Measured motion · source and method recorded", linkedComponents: "LINKED COMPONENTS", assumptions: "ASSUMPTIONS & LIMITS", processLayer: "PROCESS LAYER", fileTooLarge: "GLB exceeds the 256 MB limit.", packageTooLarge: "SBS model package exceeds the 512 MB limit.", externalResources: "This GLB references external files. Only self-contained GLB files are allowed.", question: "QUESTION", checkAnswer: "Check answer", nextQuestion: "Next question", finishQuiz: "Finish", restartQuiz: "Try again", correctAnswer: "Correct", wrongAnswer: "Not quite", quizComplete: "Quiz complete", yourScore: "Your score", chooseAnswer: "Choose an answer first", learningProgressSaved: "Progress saved in this browser", learningProgressLocal: "Local progress · this browser", learningProgressSession: "Local storage unavailable · session only", mobileViewer: "3D", mobileStructure: "Structure", mobileDetails: "Details"
+    modelLoaded: "Model ready", glbPicker: "Choose a .glb file", learn: "Learn", learning: "LEARNING", authoredAnimations: "PACKAGE ANIMATIONS", clipSelect: "Select clip", clipTimeline: "Animation timeline", clipPlay: "Play", clipPause: "Pause", clipStop: "Stop / reset", clipReady: "Ready", clipPlaying: "Playing", clipPaused: "Paused", clipCompleted: "Completed", clipTime: "TIME", clipEvidenceNote: "Authored model motion · not a physics simulation", clipEducationalApproximation: "Educational approximation · duration is not measured RPM", clipIllustrative: "Illustrative motion · not a measured mechanism", clipDocumentedMotion: "Documented motion · source-linked", clipMeasuredMotion: "Measured motion · source and method recorded", linkedComponents: "LINKED COMPONENTS", assumptions: "ASSUMPTIONS & LIMITS", processLayer: "PROCESS LAYER", fileTooLarge: "GLB exceeds the 256 MB limit.", packageTooLarge: "SBS model package exceeds the 512 MB limit.", externalResources: "This GLB references external files. Only self-contained GLB files are allowed.", question: "QUESTION", checkAnswer: "Check answer", nextQuestion: "Next question", finishQuiz: "Finish", restartQuiz: "Try again", correctAnswer: "Correct", wrongAnswer: "Not quite", quizComplete: "Quiz complete", yourScore: "Your score", chooseAnswer: "Choose an answer first", learningProgressSaved: "Progress saved in this browser", learningProgressLocal: "Local progress · this browser", learningProgressSession: "Local storage unavailable · session only", mobileViewer: "3D", mobileStructure: "Structure", mobileDetails: "Details", compare: "Compare", compareTitle: "MODEL COMPARISON", compareLeft: "MODEL A · ACTIVE PACKAGE", compareRight: "MODEL B · COMPARISON PACKAGE", compareChoosePackage: "Load a second .sbsmodel package", compareClearPackage: "Clear comparison", compareWaiting: "Load a validated .sbsmodel package to compare semantic data.", compareLoaded: "Comparison package validated", compareError: "Could not validate the comparison package", compareSku: "PART NUMBER", compareGeometry: "GEOMETRY EVIDENCE", comparePcb: "PCB REVISION", compareSpecifications: "SPECIFICATION COMPARISON", compareClaims: "SOURCE-BACKED CLAIMS", compareCoverage: "COMPONENT INVENTORY COVERAGE", compareShared: "Shared IDs", compareLeftOnly: "Recorded only in package A", compareRightOnly: "Recorded only in package B", compareSame: "Same value", compareDifferent: "Different", compareUnknownBoth: "Unknown in both", compareUnknownLeft: "Unknown in A", compareUnknownRight: "Unknown in B", compareNotRecordedLeft: "Not recorded in A", compareNotRecordedRight: "Not recorded in B", compareOnlyLeft: "Only in package A", compareOnlyRight: "Only in package B", compareUnknown: "Unknown", compareNotRecorded: "Not recorded", compareEvidenceA: "Evidence A", compareEvidenceB: "Evidence B", compareSourcesA: "Sources A", compareSourcesB: "Sources B", compareNoClaims: "No comparable claims are recorded.", compareNoSpecifications: "No specification values are recorded in these packages.", compareCoverageNote: "Package inventory differences describe coverage only; they do not prove a physical component is absent.", compareLimitations: "INTERPRETATION LIMITS", compareLimitationsList: ["Comparison is limited to validated semantic packages, not hardware inspection.", "Unknown values are not inferred from another SKU or PCB revision.", "A missing package field does not prove physical absence.", "Component ID differences do not prove physical additions or removals.", "3D geometry, CAD, BoardView, PCB routing and physical fitment are not compared."], comparePackageModel: "Model ID"
   },
   ru: {
     modelLabel: "МОДЕЛЬ", catalogOpen: "Каталог", catalogTitle: "БИБЛИОТЕКА МОДЕЛЕЙ", catalogSubtitle: "Автономные пакеты устройств", catalogClose: "Закрыть каталог", catalogSearch: "Название, производитель или part number…", catalogSearchLabel: "ПОИСК ПО БИБЛИОТЕКЕ", catalogCategoryLabel: "КАТЕГОРИЯ", catalogEntries: "МОДЕЛИ", catalogFooter: "Пакеты моделей хранятся локально. Аккаунт и удалённый сервис каталога не нужны.", catalogAllCategories: "Все категории", catalogEmpty: "Подходящих моделей не найдено.", catalogLoad: "Открыть модель", catalogLoaded: "Уже загружена", catalogLoading: "Загрузка пакета…", catalogStatusResearch: "ИССЛЕДОВАТЕЛЬСКИЙ МАКЕТ", catalogGeometryProxy: "Условная геометрия · не CAD", catalogFamilyIdentity: "Семейство платформы · без единого артикула", catalogPackageVersion: "Пакет", catalogChoosePackage: "Выберите соответствующий файл .sbsmodel.", catalogError: "Не удалось открыть пакет из каталога.", structure: "СТРУКТУРА", components: "Компоненты",
@@ -165,7 +165,7 @@ const UI = {
     allVisible: "Все компоненты видимы", layerCooling: "Слой охлаждения · качественно",
     layerPower: "Путь питания · качественно", layerCompute: "Архитектура GPU · логическая карта", layerGraphicsPipeline: "Тракты GPU · концептуальная схема", layerVideoCodec: "NVENC / NVDEC · логическая карта", noWebgl: "В этом браузере недоступен WebGL.",
     source: "Источник", noSources: "Для этого компонента нет прямой ссылки на источник.",
-    modelLoaded: "Модель готова", glbPicker: "Выберите файл .glb", learn: "Обучение", learning: "ОБУЧЕНИЕ", authoredAnimations: "АНИМАЦИИ ПАКЕТА", clipSelect: "Выберите клип", clipTimeline: "Шкала анимации", clipPlay: "Пуск", clipPause: "Пауза", clipStop: "Стоп / сброс", clipReady: "Готово", clipPlaying: "Воспроизведение", clipPaused: "Пауза", clipCompleted: "Завершено", clipTime: "ВРЕМЯ", clipEvidenceNote: "Анимация из пакета · не физическая симуляция", clipEducationalApproximation: "Учебное приближение · длительность не является измеренным RPM", clipIllustrative: "Условное движение · не измеренный механизм", clipDocumentedMotion: "Движение подтверждено источником", clipMeasuredMotion: "Измеренное движение · источник и метод указаны", linkedComponents: "СВЯЗАННЫЕ КОМПОНЕНТЫ", assumptions: "ДОПУЩЕНИЯ И ОГРАНИЧЕНИЯ", processLayer: "СЛОЙ ПРОЦЕССА", fileTooLarge: "GLB превышает лимит 256 МБ.", packageTooLarge: "Пакет SBS model превышает лимит 512 МБ.", externalResources: "Этот GLB ссылается на внешние файлы. Разрешены только самодостаточные GLB.", question: "ВОПРОС", checkAnswer: "Проверить ответ", nextQuestion: "Следующий вопрос", finishQuiz: "Завершить", restartQuiz: "Повторить", correctAnswer: "Верно", wrongAnswer: "Не совсем", quizComplete: "Тест завершён", yourScore: "Ваш результат", chooseAnswer: "Сначала выберите ответ", learningProgressSaved: "Прогресс сохранён в этом браузере", learningProgressLocal: "ПРОГРЕСС · ЭТОТ БРАУЗЕР", learningProgressSession: "Локальное хранилище недоступно · только эта сессия", mobileViewer: "3D", mobileStructure: "Структура", mobileDetails: "Детали"
+    modelLoaded: "Модель готова", glbPicker: "Выберите файл .glb", learn: "Обучение", learning: "ОБУЧЕНИЕ", authoredAnimations: "АНИМАЦИИ ПАКЕТА", clipSelect: "Выберите клип", clipTimeline: "Шкала анимации", clipPlay: "Пуск", clipPause: "Пауза", clipStop: "Стоп / сброс", clipReady: "Готово", clipPlaying: "Воспроизведение", clipPaused: "Пауза", clipCompleted: "Завершено", clipTime: "ВРЕМЯ", clipEvidenceNote: "Анимация из пакета · не физическая симуляция", clipEducationalApproximation: "Учебное приближение · длительность не является измеренным RPM", clipIllustrative: "Условное движение · не измеренный механизм", clipDocumentedMotion: "Движение подтверждено источником", clipMeasuredMotion: "Измеренное движение · источник и метод указаны", linkedComponents: "СВЯЗАННЫЕ КОМПОНЕНТЫ", assumptions: "ДОПУЩЕНИЯ И ОГРАНИЧЕНИЯ", processLayer: "СЛОЙ ПРОЦЕССА", fileTooLarge: "GLB превышает лимит 256 МБ.", packageTooLarge: "Пакет SBS model превышает лимит 512 МБ.", externalResources: "Этот GLB ссылается на внешние файлы. Разрешены только самодостаточные GLB.", question: "ВОПРОС", checkAnswer: "Проверить ответ", nextQuestion: "Следующий вопрос", finishQuiz: "Завершить", restartQuiz: "Повторить", correctAnswer: "Верно", wrongAnswer: "Не совсем", quizComplete: "Тест завершён", yourScore: "Ваш результат", chooseAnswer: "Сначала выберите ответ", learningProgressSaved: "Прогресс сохранён в этом браузере", learningProgressLocal: "ПРОГРЕСС · ЭТОТ БРАУЗЕР", learningProgressSession: "Локальное хранилище недоступно · только эта сессия", mobileViewer: "3D", mobileStructure: "Структура", mobileDetails: "Детали", compare: "Сравнить", compareTitle: "СРАВНЕНИЕ МОДЕЛЕЙ", compareLeft: "МОДЕЛЬ А · АКТИВНЫЙ ПАКЕТ", compareRight: "МОДЕЛЬ Б · ПАКЕТ ДЛЯ СРАВНЕНИЯ", compareChoosePackage: "Загрузить второй пакет .sbsmodel", compareClearPackage: "Убрать сравнение", compareWaiting: "Загрузите проверенный пакет .sbsmodel для сопоставления семантических данных.", compareLoaded: "Пакет для сравнения проверен", compareError: "Не удалось проверить пакет для сравнения", compareSku: "PART NUMBER", compareGeometry: "ДОСТОВЕРНОСТЬ ГЕОМЕТРИИ", comparePcb: "РЕВИЗИЯ PCB", compareSpecifications: "СРАВНЕНИЕ ХАРАКТЕРИСТИК", compareClaims: "УТВЕРЖДЕНИЯ С ИСТОЧНИКАМИ", compareCoverage: "ПОКРЫТИЕ ИНВЕНТАРЯ КОМПОНЕНТОВ", compareShared: "Общие ID", compareLeftOnly: "Записаны только в пакете А", compareRightOnly: "Записаны только в пакете Б", compareSame: "Значения совпадают", compareDifferent: "Значения различаются", compareUnknownBoth: "Неизвестно в обоих", compareUnknownLeft: "Неизвестно в А", compareUnknownRight: "Неизвестно в Б", compareNotRecordedLeft: "Не записано в А", compareNotRecordedRight: "Не записано в Б", compareOnlyLeft: "Только в пакете А", compareOnlyRight: "Только в пакете Б", compareUnknown: "Неизвестно", compareNotRecorded: "Не записано", compareEvidenceA: "Доказательность А", compareEvidenceB: "Доказательность Б", compareSourcesA: "Источники А", compareSourcesB: "Источники Б", compareNoClaims: "Сопоставимых утверждений в пакетах нет.", compareNoSpecifications: "В этих пакетах нет записанных характеристик.", compareCoverageNote: "Различия показывают только покрытие инвентаря в пакетах и не доказывают физическое отсутствие детали.", compareLimitations: "ОГРАНИЧЕНИЯ ИНТЕРПРЕТАЦИИ", compareLimitationsList: ["Сравниваются проверенные семантические пакеты, а не сами физические устройства.", "Неизвестные значения не выводятся из другого SKU или ревизии PCB.", "Отсутствующее поле пакета не доказывает физическое отсутствие детали.", "Различия ID компонентов не доказывают физическое добавление или удаление деталей.", "Геометрия 3D, CAD, BoardView, трассировка PCB и совместимость по размерам не сравниваются."], comparePackageModel: "ID модели"
   }
 };
 
@@ -489,7 +489,8 @@ function applyLanguage() {
   });
   renderTree();
   if ($("#model-catalog-dialog")?.open) renderCatalog();
-  if (state.activeLayer) renderProcessLayer();
+  if (state.compareMode) renderComparison();
+  else if (state.activeLayer) renderProcessLayer();
   else if (state.learningMode) renderLearning();
   else if (state.selectedId) renderDetails(state.selectedId);
   updateMeasurementReadout();
@@ -1712,6 +1713,8 @@ function renderAssemblyEvidence(componentId) {
 }
 
 function renderDetails(id) {
+  state.compareMode = false;
+  $("#comparison-panel").hidden = true;
   state.learningMode = false;
   $("#learning-panel").hidden = true;
   $("#process-details").hidden = true;
@@ -1780,6 +1783,8 @@ function updateLearningProgressStatus() {
 }
 
 function showLearning() {
+  state.compareMode = false;
+  $("#comparison-panel").hidden = true;
   clearHighlights();
   state.activeLayer = null;
   document.querySelectorAll(".process-button").forEach((button) => button.classList.remove("active"));
@@ -1907,7 +1912,285 @@ function submitLearningAnswer() {
   renderLearning();
 }
 
+function comparisonStatusLabel(status) {
+  const keys = {
+    same: "compareSame",
+    different: "compareDifferent",
+    unknown_both: "compareUnknownBoth",
+    unknown_left: "compareUnknownLeft",
+    unknown_right: "compareUnknownRight",
+    not_recorded_left: "compareNotRecordedLeft",
+    not_recorded_right: "compareNotRecordedRight"
+  };
+  return t(keys[status] ?? "compareNotRecorded");
+}
+
+function comparisonValueText(value) {
+  if (value === null || value === undefined) return t("compareUnknown");
+  if (typeof value === "object") return JSON.stringify(value);
+  return String(value);
+}
+
+function comparisonIdentity(data) {
+  const model = data.model ?? {};
+  const pcb = (data.claims?.claims ?? []).find((claim) => claim.predicate === "pcb_revision");
+  return {
+    id: model.id ?? "unknown",
+    manufacturer: model.manufacturer ?? "",
+    name: model.display_name ?? model.product_name ?? model.name ?? model.id ?? "Unknown model",
+    part_number: model.part_number ?? "",
+    geometry_status: model.geometry_status ?? "unknown",
+    pcb_revision: pcb?.value ?? model.specifications?.pcb_revision ?? null
+  };
+}
+
+function appendComparisonIdentity(host, identity, side, sideLabel) {
+  const card = document.createElement("article");
+  card.className = "comparison-identity-card";
+  card.dataset.side = side;
+  const heading = document.createElement("span");
+  heading.className = "eyebrow";
+  heading.textContent = sideLabel;
+  const name = document.createElement("strong");
+  name.className = "comparison-identity-name";
+  name.textContent = identity.name;
+  const manufacturer = document.createElement("span");
+  manufacturer.className = "comparison-identity-manufacturer";
+  manufacturer.textContent = identity.manufacturer || t("compareNotRecorded");
+  const part = document.createElement("div");
+  part.className = "comparison-identity-field";
+  part.textContent = `${t("compareSku")}: ${identity.part_number || t("compareNotRecorded")}`;
+  const geometry = document.createElement("div");
+  geometry.className = "comparison-identity-field";
+  geometry.textContent = `${t("compareGeometry")}: ${identity.geometry_status}`;
+  const pcb = document.createElement("div");
+  pcb.className = "comparison-identity-field";
+  pcb.textContent = `${t("comparePcb")}: ${comparisonValueText(identity.pcb_revision)}`;
+  card.append(heading, name, manufacturer, part, geometry, pcb);
+  host.append(card);
+}
+
+function createComparisonStatusBadge(status) {
+  const badge = document.createElement("span");
+  badge.className = "comparison-status";
+  badge.dataset.status = status;
+  badge.textContent = comparisonStatusLabel(status);
+  return badge;
+}
+
+function appendComparisonSources(host, sources, label) {
+  if (!sources?.length) return;
+  const block = document.createElement("div");
+  block.className = "comparison-sources";
+  const heading = document.createElement("span");
+  heading.className = "eyebrow";
+  heading.textContent = label;
+  block.append(heading);
+  const list = document.createElement("div");
+  list.className = "comparison-source-list";
+  sources.forEach((source) => {
+    const item = source.url && /^https?:\/\//i.test(source.url)
+      ? document.createElement("a")
+      : document.createElement("span");
+    item.textContent = source.label ?? source.id ?? t("compareNotRecorded");
+    if (item.tagName === "A") {
+      item.href = source.url;
+      item.target = "_blank";
+      item.rel = "noopener noreferrer";
+    }
+    list.append(item);
+  });
+  block.append(list);
+  host.append(block);
+}
+
+function appendComparisonCell(host, value, evidence, sources, evidenceLabel, notes = null, sourceLabel = evidenceLabel) {
+  const cell = document.createElement("div");
+  cell.className = "comparison-value-cell";
+  const valueText = document.createElement("div");
+  valueText.className = "comparison-value";
+  valueText.textContent = comparisonValueText(value);
+  cell.append(valueText);
+  if (evidence) {
+    const evidenceText = document.createElement("span");
+    evidenceText.className = "comparison-evidence";
+    evidenceText.textContent = `${evidenceLabel}: ${evidence}`;
+    cell.append(evidenceText);
+  }
+  if (notes) {
+    const note = document.createElement("p");
+    note.className = "comparison-note";
+    note.textContent = typeof notes === "object" && notes
+      ? (notes[state.language] ?? notes.en ?? notes.ru ?? JSON.stringify(notes))
+      : String(notes);
+    cell.append(note);
+  }
+  appendComparisonSources(cell, sources, sourceLabel);
+  host.append(cell);
+}
+
+function renderComparisonRows(report, rows, host, kind) {
+  host.replaceChildren();
+  if (!rows.length) {
+    const empty = document.createElement("p");
+    empty.className = "comparison-empty";
+    empty.textContent = kind === "claims" ? t("compareNoClaims") : t("compareNoSpecifications");
+    host.append(empty);
+    return;
+  }
+
+  rows.forEach((row) => {
+    const card = document.createElement("article");
+    card.className = "comparison-row";
+    card.dataset.status = row.status;
+    card.dataset.comparisonKey = kind === "claims" ? String(row.predicate) : row.path;
+    const header = document.createElement("div");
+    header.className = "comparison-row-header";
+    const key = document.createElement("strong");
+    key.textContent = kind === "claims"
+      ? String(row.predicate).replaceAll("_", " ")
+      : row.path.replaceAll(".", " · ").replaceAll("_", " ");
+    header.append(key, createComparisonStatusBadge(row.status));
+    const values = document.createElement("div");
+    values.className = "comparison-values";
+
+    if (kind === "claims") {
+      appendComparisonCell(values, row.value_left, row.evidence_left,
+        row.sources_left, t("compareEvidenceA"), row.notes_left, t("compareSourcesA"));
+      appendComparisonCell(values, row.value_right, row.evidence_right,
+        row.sources_right, t("compareEvidenceB"), row.notes_right, t("compareSourcesB"));
+      if (row.unit_left || row.unit_right) {
+        const units = document.createElement("div");
+        units.className = "comparison-units";
+        units.textContent = `A: ${row.unit_left ?? "—"} · B: ${row.unit_right ?? "—"}`;
+        values.append(units);
+      }
+    } else {
+      appendComparisonCell(values, row.left, null, null, "");
+      appendComparisonCell(values, row.right, null, null, "");
+    }
+    card.append(header, values);
+    host.append(card);
+  });
+}
+
+function renderComparison() {
+  if (!state.compareMode) return;
+  const panel = $("#comparison-panel");
+  if (!panel) return;
+  panel.hidden = false;
+  $("#details-heading-eyebrow").textContent = t("compareTitle");
+  $("#details-heading-title").textContent = t("compare");
+  const identities = $("#comparison-identities");
+  identities.replaceChildren();
+  appendComparisonIdentity(identities, comparisonIdentity(state.packageData),
+    "a", t("compareLeft"));
+
+  const rightData = state.comparisonPackageData;
+  if (!rightData) {
+    const placeholder = document.createElement("article");
+    placeholder.className = "comparison-identity-card comparison-identity-placeholder";
+    const label = document.createElement("span");
+    label.className = "eyebrow";
+    label.textContent = t("compareRight");
+    const hint = document.createElement("p");
+    hint.textContent = t("compareWaiting");
+    placeholder.append(label, hint);
+    identities.append(placeholder);
+    $("#comparison-status").textContent = t("compareWaiting");
+    $("#comparison-summary").replaceChildren();
+    $("#comparison-specification-list").replaceChildren();
+    $("#comparison-claim-list").replaceChildren();
+    $("#comparison-coverage").replaceChildren();
+    $("#compare-clear-model").disabled = true;
+    return;
+  }
+
+  try {
+    const report = compareModelPackages(state.packageData, rightData);
+    appendComparisonIdentity(identities, report.right, "b", t("compareRight"));
+    $("#comparison-status").textContent = `${t("compareLoaded")} · ${state.comparisonFilename}`;
+    $("#compare-clear-model").disabled = false;
+
+    const summary = $("#comparison-summary");
+    summary.replaceChildren();
+    [
+      [t("compareSame"), report.summary.specifications_same],
+      [t("compareDifferent"), report.summary.specifications_different],
+      [t("compareUnknown"), report.summary.specifications_unknown],
+      [t("compareNotRecorded"), report.summary.specifications_not_recorded]
+    ].forEach(([label, value]) => {
+      const item = document.createElement("div");
+      item.className = "comparison-summary-item";
+      const number = document.createElement("strong");
+      number.textContent = String(value);
+      const text = document.createElement("span");
+      text.textContent = label;
+      item.append(number, text);
+      summary.append(item);
+    });
+
+    renderComparisonRows(report, report.specifications, $("#comparison-specification-list"), "specifications");
+    renderComparisonRows(report, report.claims, $("#comparison-claim-list"), "claims");
+
+    const coverage = $("#comparison-coverage");
+    coverage.replaceChildren();
+    const counts = report.component_coverage;
+    [
+      [t("compareShared"), counts.shared_count],
+      [t("compareLeftOnly"), counts.left_only_ids.length],
+      [t("compareRightOnly"), counts.right_only_ids.length]
+    ].forEach(([label, value]) => {
+      const item = document.createElement("div");
+      item.className = "comparison-summary-item";
+      const number = document.createElement("strong");
+      number.textContent = String(value);
+      const text = document.createElement("span");
+      text.textContent = label;
+      item.append(number, text);
+      coverage.append(item);
+    });
+    const inventoryNote = document.createElement("p");
+    inventoryNote.className = "comparison-caveat";
+    inventoryNote.textContent = t("compareCoverageNote");
+    coverage.append(inventoryNote);
+
+    const limitations = document.createElement("ul");
+    limitations.className = "comparison-limitations";
+    t("compareLimitationsList").forEach((message) => {
+      const item = document.createElement("li");
+      item.textContent = message;
+      limitations.append(item);
+    });
+    $("#comparison-limitations").replaceChildren(limitations);
+  } catch (error) {
+    $("#comparison-status").textContent = `${t("compareError")}: ${error.message}`;
+    $("#comparison-summary").replaceChildren();
+    $("#comparison-specification-list").replaceChildren();
+    $("#comparison-claim-list").replaceChildren();
+    $("#comparison-coverage").replaceChildren();
+    $("#comparison-limitations").replaceChildren();
+    $("#compare-clear-model").disabled = false;
+  }
+}
+
+function showComparison() {
+  if (state.activeLayer) setLayer("clear");
+  else clearHighlights();
+  state.animationPlayer?.stop();
+  state.compareMode = true;
+  state.learningMode = false;
+  $("#learning-panel").hidden = true;
+  $("#process-details").hidden = true;
+  $("#component-details").hidden = true;
+  $("#empty-selection").hidden = true;
+  $("#comparison-panel").hidden = false;
+  renderComparison();
+}
+
 function renderProcessLayer() {
+  state.compareMode = false;
+  $("#comparison-panel").hidden = true;
   const layer = PROCESS_PACKAGE.process_layers.find((item) => item.type === state.activeLayer);
   if (!layer) return;
   state.learningMode = false;
@@ -2543,6 +2826,7 @@ function applyPackageData(packageData) {
   document.querySelectorAll(".view-tab").forEach((button) => {
     if (button.dataset.mode === "learn") button.disabled = LEARNING_PACKAGE.questions.length === 0;
   });
+  if (state.compareMode) renderComparison();
 }
 
 function useGenericModelData(filename) {
@@ -2564,7 +2848,7 @@ function useGenericModelData(filename) {
   ANIMATION_PACKAGE = { clips: [] };
   state.catalog = new Map();
   state.packageData = {
-    model: { id: MODEL.id, manufacturer: MODEL.manufacturer, name: MODEL.name, geometry_status: "unknown" },
+    model: { id: MODEL.id, manufacturer: MODEL.manufacturer, name: MODEL.name, geometry_status: "unknown", specifications: {} },
     components: { components: [] },
     sources: { sources: [] },
     relationships: { relationships: [] },
@@ -2588,6 +2872,7 @@ function useGenericModelData(filename) {
   document.querySelectorAll(".view-tab").forEach((button) => {
     if (button.dataset.mode === "learn") button.disabled = true;
   });
+  if (state.compareMode) renderComparison();
 }
 
 function loadArrayBuffer(buffer, filename, mode = "file", packageData = null, { cancelIfInteracted = false } = {}) {
@@ -2928,6 +3213,44 @@ function bindUI() {
     }
     event.target.value = "";
   });
+  $("#compare-select-model").addEventListener("click", () => $("#comparison-file").click());
+  $("#compare-clear-model").addEventListener("click", () => {
+    state.comparisonPackageData = null;
+    state.comparisonFilename = "";
+    $("#comparison-file").value = "";
+    renderComparison();
+  });
+  $("#comparison-file").addEventListener("change", async (event) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    state.userInteracted = true;
+    if (!/\.sbsmodel$/i.test(file.name)) {
+      $("#comparison-status").textContent = t("compareError") + ": .sbsmodel required";
+      event.target.value = "";
+      return;
+    }
+    if (file.size > MAX_MODEL_PACKAGE_BYTES) {
+      $("#comparison-status").textContent = t("packageTooLarge");
+      event.target.value = "";
+      return;
+    }
+    $("#comparison-status").textContent = t("loading");
+    try {
+      const candidate = await loadModelPackage(file);
+      if (candidate.report.modelId === state.packageData.model.id) {
+        // An identical model ID is permitted, but both packages remain independent snapshots.
+      }
+      state.comparisonPackageData = candidate.data;
+      state.comparisonFilename = file.name;
+      renderComparison();
+    } catch (error) {
+      state.comparisonPackageData = null;
+      state.comparisonFilename = "";
+      renderComparison();
+      $("#comparison-status").textContent = `${t("compareError")}: ${error.message}`;
+    }
+    event.target.value = "";
+  });
   $("#component-search").addEventListener("input", renderTree);
   $("#camera-preset").addEventListener("change", (event) => setCameraPreset(event.target.value));
   $("#slice-toggle").addEventListener("click", () => setSliceEnabled(!state.sliceEnabled));
@@ -3056,6 +3379,8 @@ function bindUI() {
   document.querySelectorAll(".view-tab").forEach((button) => {
     button.addEventListener("click", () => {
       document.querySelectorAll(".view-tab").forEach((tab) => tab.classList.toggle("active", tab === button));
+      if (button.dataset.mode === "compare") { showComparison(); return; }
+      if (state.compareMode) { state.compareMode = false; $("#comparison-panel").hidden = true; }
       if (button.dataset.mode === "disassemble") { setLayer("clear"); setExplode(100); }
       if (button.dataset.mode === "explore") { setLayer("clear"); setExplode(0); }
       if (button.dataset.mode === "understand") {
