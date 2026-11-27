@@ -609,6 +609,7 @@ test("Dell package exposes working 3D disassembly actions and authored animation
     element.dispatchEvent(new Event("input", { bubbles: true }));
   });
   const cpuDeltas = JSON.parse(await page.locator("#viewer-canvas").getAttribute("data-animation-world-deltas"));
+  console.log("DELL_CPU_WORLD_DELTAS", JSON.stringify(cpuDeltas));
   expect(await page.locator("#viewer-canvas").getAttribute("data-animation-target-count")).toBe("2");
   expect(await page.locator("#viewer-canvas").getAttribute("data-animation-moved-target-count")).toBe("2");
   for (const targetId of ["cooling.cpu.fan", "cooling.cpu.heatsink"]) {
