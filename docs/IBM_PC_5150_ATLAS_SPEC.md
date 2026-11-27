@@ -39,3 +39,6 @@ Represent the PSU as a sealed field-replaceable unit. Never model the hazardous 
 See [IBM PC 5150 fastener and board-mounting evidence audit](IBM_PC_5150_FASTENER_EVIDENCE.md) for the source-by-source screw and standoff matrix.\n\nThe IBM service manual also gives separate replacement fragments for the cover, option adapter, PSU and system board. The package stores those fragments separately and marks them as incomplete; it does not infer a full end-to-end rebuild or a speaker replacement procedure. The Viewer displays branch labels, prerequisite lists, a bilingual scope notice and source-bounded replacement fragments. See [IBM PC 5150 disassembly sequence](IBM_PC_5150_DISASSEMBLY_SEQUENCE.md).\n\n## Explicit non-goals
 
 No claim of exact physical restoration, no guessed screw specifications, no complete teardown ordering, no PSU repair instructions, and no redistribution of copyrighted manuals or photographs.
+
+
+The source-backed service timeline is interactive. Each step stores a reversible `scene_action` entry with target component IDs, motion direction, evidence class and RU/EN explanation. See [Reversible 3D scene actions](REVERSIBLE_SCENE_ACTIONS.md).
