@@ -473,8 +473,11 @@ def cylinder_between(name, component_id, start, end, radius, mat, collection, pa
     obj.rotation_quaternion = Vector((0, 0, 1)).rotation_difference(direction.normalized())
     obj.data.materials.append(mat)
     move_to_collection(obj, collection)
-    tagged = tag(obj, component_id, STATUS["illustrative"],
-                 geometry="illustrative_proxy")
+    tagged = tag(
+        obj, component_id, STATUS["illustrative"],
+        geometry="illustrative_proxy", export_role="decorative_detail",
+    )
+    tagged["sbs_visual_proxy"] = True
     set_parent_keep_world(tagged, parent)
     return tagged
 
