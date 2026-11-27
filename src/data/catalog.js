@@ -1,4 +1,6 @@
 const SAFE_ID = /^[a-z0-9][a-z0-9._-]{1,127}$/;
+const IDENTITY_SCOPES = new Set(["exact_sku", "platform_family", "physical_sample", "reference_configuration"]);
+const MODEL_KINDS = new Set(["system", "assembly", "component", "device"]);
 
 function fail(message) {
   throw new TypeError("Invalid model catalogue: " + message);
@@ -47,14 +49,24 @@ export function createCatalogAdapter(data, { defaultPackageModelId = "" } = {}) 
 
     const manufacturer = typeof item.manufacturer === "string" ? item.manufacturer.trim() : "";
     const partNumber = typeof item.part_number === "string" ? item.part_number.trim() : "";
-    if (!manufacturer || !partNumber) fail("manufacturer and part_number are required for " + item.id);
-    const sku = manufacturer.toLocaleLowerCase("en") + "|" + partNumber.toLocaleLowerCase("en");
-    if (exactSkus.has(sku)) fail("duplicate manufacturer/part number: " + manufacturer + " " + partNumber);
-    exactSkus.add(sku);
+    const identityScope = typeof item.identity_scope === "string" ? item.identity_scope : "exact_sku";
+    const modelKind = typeof item.model_kind === "string" ? item.model_kind : "device";
+    if (!manufacturer) fail("manufacturer is required for " + item.id);
+    if (!IDENTITY_SCOPES.has(identityScope)) fail("identity_scope is invalid for " + item.id);
+    if (!MODEL_KINDS.has(modelKind)) fail("model_kind is invalid for " + item.id);
+    if (identityScope === "exact_sku" && !partNumber) {
+      fail("part_number is required for exact_sku model " + item.id);
+    }
+    if (partNumber) {
+      const sku = manufacturer.toLocaleLowerCase("en") + "|" + partNumber.toLocaleLowerCase("en");
+      if (exactSkus.has(sku)) fail("duplicate manufacturer/part number: " + manufacturer + " " + partNumber);
+      exactSkus.add(sku);
+    }
 
     if (!categories.has(item.category_id)) fail("unknown category for " + item.id);
     if (typeof item.status !== "string" || !item.status.trim()) fail("status is required for " + item.id);
     if (item.published !== undefined && typeof item.published !== "boolean") fail("published must be a boolean for " + item.id);
+    if (item.default_package === true && item.published !== true) fail("default package must be explicitly published for " + item.id);
     if (typeof item.geometry_status !== "string" || !item.geometry_status.trim()) fail("geometry_status is required for " + item.id);
     if (typeof item.package_version !== "string" || !item.package_version.trim()) fail("package_version is required for " + item.id);
     if (!Array.isArray(item.tags) || item.tags.some((tag) => typeof tag !== "string" || !tag.trim())) fail("tags must be strings for " + item.id);
@@ -74,6 +86,8 @@ export function createCatalogAdapter(data, { defaultPackageModelId = "" } = {}) 
       manufacturer,
       name: localized(item.name, "model " + item.id + " name"),
       partNumber,
+      identityScope,
+      modelKind,
       categoryId: item.category_id,
       category: categories.get(item.category_id).label,
       summary: localized(item.summary, "model " + item.id + " summary"),
