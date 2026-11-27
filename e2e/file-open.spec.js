@@ -52,6 +52,31 @@ test("opens root index.html directly without a web server or external JS/CSS", a
 });
 
 
+test("standalone file:// launcher switches between embedded published models without network access", async ({ page }) => {
+  const pageErrors = [];
+  const requestFailures = [];
+  page.on("pageerror", (error) => pageErrors.push(error.message));
+  page.on("requestfailed", (request) => requestFailures.push({ url: request.url(), failure: request.failure()?.errorText }));
+
+  const rootIndex = pathToFileURL(resolve(process.cwd(), "index.html")).href;
+  await page.goto(rootIndex);
+  await expect(page.locator("#viewer-canvas canvas")).toBeVisible({ timeout: 10000 });
+  await expect(page.locator("#model-title")).toContainText("Personal Computer 5150");
+  await expect(page.locator("#component-count")).toHaveText("71");
+
+  const switcher = page.locator("#model-switcher");
+  await expect(switcher.locator("option")).toHaveCount(3);
+  await switcher.selectOption("pc.dell.optiplex-5060-tower.family");
+  await expect(page.locator("#model-title")).toContainText("OptiPlex 5060");
+  await expect(page.locator("#component-count")).toHaveText("137");
+
+  await switcher.selectOption("computer.ibm.5150.1981");
+  await expect(page.locator("#model-title")).toContainText("Personal Computer 5150");
+  await expect(page.locator("#component-count")).toHaveText("71");
+  expect(pageErrors).toEqual([]);
+  expect(requestFailures).toEqual([]);
+});
+
 test("opens the published Dell package from the standalone file and verifies real disassembly and animation motion", async ({ page }) => {
   const pageErrors = [];
   const requestFailures = [];
