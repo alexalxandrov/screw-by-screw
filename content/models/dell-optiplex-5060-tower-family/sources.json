@@ -1,0 +1,286 @@
+{
+  "schema_version": "0.1.0",
+  "device_model_id": "pc.dell.optiplex-5060-tower.family",
+  "sources": [
+    {
+      "id": "src.dell.5060.service",
+      "title": "Dell OptiPlex 5060 Tower Service Manual",
+      "publisher": "Dell Technologies",
+      "source_type": "manufacturer_service_manual",
+      "url": "https://dl.dell.com/topicspdf/optiplex-5060-desktop_service-manual8_en-us.pdf",
+      "locator": "Tower service manual: screw-size list p.15; Tower motherboard callouts p.16; HDD assemblies pp.22–27; optical drive pp.28–30; M.2 PCIe SSD pp.32–33; SD reader pp.34–35; optional VGA module pp.40–41; coin-cell battery pp.54–55; heatsink fan pp.56–57; system board pp.66–69.",
+      "notes": "Primary manufacturer service manual for the Tower. Page ranges refer to the manual's printed page labels. Some optional devices and all fitted populations remain configuration-dependent.",
+      "access_date": "2026-11-26"
+    },
+    {
+      "id": "src.dell.5060.setup",
+      "title": "Dell OptiPlex 5060 Tower support · Manuals and specifications",
+      "publisher": "Dell Technologies",
+      "source_type": "manufacturer_setup_guide",
+      "url": "https://www.dell.com/support/product-details/en-us/product/optiplex-5060-desktop/resources/manuals",
+      "locator": "Tower physical characteristics",
+      "notes": "Family-level chassis dimensions and mass. These values constrain the outer envelope, not internal component coordinates.",
+      "access_date": "2026-11-26"
+    },
+    {
+      "id": "src.dell.5060.boardlayout",
+      "title": "Dell OptiPlex 5060 Tower motherboard layout",
+      "publisher": "Dell Technologies",
+      "source_type": "manufacturer_service_manual_web",
+      "url": "https://www.dell.com/support/manuals/en-us/optiplex-5060-desktop/optiplex_5060_mt_service_manual/tower-motherboard-layout?guid=guid-fdd68959-9fc2-4808-921a-11d712a6b730&lang=en-us",
+      "locator": "Tower motherboard layout, numbered callouts 1–26",
+      "notes": "Official Dell board map. Callouts identify connector positions and expansion-slot functions; they do not establish a measured PCB coordinate system or installed optional modules.",
+      "access_date": "2026-11-26"
+    },
+    {
+      "id": "src.dell.5060.board_removal",
+      "title": "Dell OptiPlex 5060 Tower system board removal",
+      "publisher": "Dell Technologies",
+      "source_type": "manufacturer_service_procedure",
+      "url": "https://www.dell.com/support/manuals/en-us/optiplex-5060-desktop/optiplex_5060_mt_service_manual/Removing-system-board?guid=guid-4619c874-96c4-4bf3-9e6e-cdc300d69ca1&lang=en-us",
+      "locator": "Removing system board — prerequisite removal list, cable disconnection and board fasteners",
+      "notes": "Manufacturer sequence used for the partial board-removal workflow. Optional components are only removed when fitted; this is not a universal teardown of every possible configuration.",
+      "access_date": "2026-11-26"
+    },
+    {
+      "id": "src.dell.5060.processors",
+      "title": "Dell OptiPlex 5060 Tower processor specifications",
+      "publisher": "Dell Technologies",
+      "source_type": "manufacturer_setup_specification",
+      "url": "https://www.dell.com/support/manuals/en-us/optiplex-5060-desktop/optiplex_5060_mt_setup_and_specs/processor?guid=guid-b6e22f5e-0a6e-434f-b097-e21f7ea9e9b4&lang=en-us",
+      "locator": "Supported 8th-generation Intel processor option table",
+      "notes": "Supported CPU options only; no particular processor is asserted as installed. A service-manual processor table differs on some thermal-power values, so the package records the setup/specification table and flags this source discrepancy.",
+      "access_date": "2026-11-26"
+    },
+    {
+      "id": "src.dell.5060.memory",
+      "title": "Dell OptiPlex 5060 Tower memory specifications",
+      "publisher": "Dell Technologies",
+      "source_type": "manufacturer_setup_specification",
+      "url": "https://www.dell.com/support/manuals/en-us/optiplex-5060-desktop/optiplex_5060_mt_setup_and_specs/memory?guid=guid-18225fae-5925-40fc-b98e-a33786b03be1&lang=en-us",
+      "locator": "Memory type, speed, slot count and maximum capacity",
+      "notes": "Manufacturer platform capability; fitted DIMM count, capacity and part numbers remain unknown.",
+      "access_date": "2026-11-26"
+    },
+    {
+      "id": "src.dell.5060.storage",
+      "title": "Dell OptiPlex 5060 Tower storage specifications",
+      "publisher": "Dell Technologies",
+      "source_type": "manufacturer_setup_specification",
+      "url": "https://www.dell.com/support/manuals/en-us/optiplex-5060-desktop/optiplex_5060_mt_setup_and_specs/storage?guid=guid-9f98af2f-4c67-48fb-a236-8260a915d407&lang=en-us",
+      "locator": "M.2 SSD, SATA drive options, supported form factors and storage combinations",
+      "notes": "Supported storage configurations, not proof of installed drive population.",
+      "access_date": "2026-11-26"
+    },
+    {
+      "id": "src.dell.5060.board_connectors",
+      "title": "Dell OptiPlex 5060 Tower system-board connectors",
+      "publisher": "Dell Technologies",
+      "source_type": "manufacturer_setup_specification",
+      "url": "https://www.dell.com/support/manuals/en-us/optiplex-5060-desktop/optiplex_5060_mt_setup_and_specs/system-board-connectors?guid=guid-c4437ab5-83cf-4c2e-a842-88de441bfc51&lang=en-us",
+      "locator": "M.2, SATA, PCIe and WLAN connector table",
+      "notes": "Manufacturer connector capability and generation information; no cable path or fitted-device state is implied.",
+      "access_date": "2026-11-26"
+    },
+    {
+      "id": "src.dell.5060.ports",
+      "title": "Dell OptiPlex 5060 Tower ports and connectors",
+      "publisher": "Dell Technologies",
+      "source_type": "manufacturer_setup_specification",
+      "url": "https://www.dell.com/support/manuals/en-us/optiplex-5060-desktop/optiplex_5060_mt_setup_and_specs/ports-and-connectors?guid=guid-2f34b1fb-c81e-4e2c-9311-f801dd11fb9b&lang=en-us",
+      "locator": "Front and rear external ports and connector counts",
+      "notes": "External I/O support and count; optional module choices vary by order configuration.",
+      "access_date": "2026-11-26"
+    },
+    {
+      "id": "src.dell.5060.power",
+      "title": "Dell OptiPlex 5060 Tower power supply specifications",
+      "publisher": "Dell Technologies",
+      "source_type": "manufacturer_setup_specification",
+      "url": "https://www.dell.com/support/manuals/en-us/optiplex-5060-desktop/optiplex_5060_mt_setup_and_specs/power-supply?guid=guid-d91d1b07-1ab0-4633-8dd8-9ef84459bf19&lang=en-us",
+      "locator": "260 W PSU variants and AC input characteristics",
+      "notes": "Two platform PSU variants are listed. The installed PSU manufacturer, Dell part number, efficiency option and revision remain unknown.",
+      "access_date": "2026-11-26"
+    },
+    {
+      "id": "src.dell.5060.screw_table",
+      "title": "Dell OptiPlex 5060 Tower screw-size list",
+      "publisher": "Dell Technologies",
+      "source_type": "manufacturer_service_manual_web",
+      "url": "https://www.dell.com/support/manuals/en-us/optiplex-5060-desktop/optiplex_5060_mt_service_manual/screw-size-list?guid=guid-a77fcea9-e6c9-4fd8-bc2b-2bedbc1f0d71&lang=en-us",
+      "locator": "Tower screw-size and quantity table",
+      "notes": "Documents listed screw types and quantities. Table sum must not be treated as installed screw count in every build.",
+      "access_date": "2026-11-26"
+    },
+    {
+      "id": "src.dell.5060.heatsink",
+      "title": "Dell OptiPlex 5060 Tower heatsink removal",
+      "publisher": "Dell Technologies",
+      "source_type": "manufacturer_service_procedure",
+      "url": "https://www.dell.com/support/manuals/en-us/optiplex-5060-desktop/optiplex_5060_mt_service_manual/removing-heat-sink?guid=guid-5187dca8-063c-4317-a83f-faeefbc6c82d&lang=en-us",
+      "locator": "Loosen four captive heatsink screws in the numbered 1–4 sequence",
+      "notes": "Supports the documented fastener group and screw-release order; no torque value or exact screw coordinates are stated.",
+      "access_date": "2026-11-26"
+    },
+    {
+      "id": "src.dell.5060.cpu_removal",
+      "title": "Dell OptiPlex 5060 Tower processor removal",
+      "publisher": "Dell Technologies",
+      "source_type": "manufacturer_service_procedure",
+      "url": "https://www.dell.com/support/manuals/en-us/optiplex-5060-desktop/optiplex_5060_mt_service_manual/removing-processor?guid=guid-2a1085f3-2318-4253-b9e1-61e799a99d84&lang=en-us",
+      "locator": "Release socket lever and processor cover after heatsink removal",
+      "notes": "Manufacturer warning about delicate socket contacts; no processor is selected for this family-level package.",
+      "access_date": "2026-11-26"
+    },
+    {
+      "id": "src.dell.5060.system_fan",
+      "title": "Dell OptiPlex 5060 Tower system fan removal",
+      "publisher": "Dell Technologies",
+      "source_type": "manufacturer_service_procedure",
+      "url": "https://www.dell.com/support/manuals/en-us/optiplex-5060-desktop/optiplex_5060_mt_service_manual/removing-system-fan?guid=guid-e43132eb-d02f-49d0-bb6e-2a1f13e8964b&lang=en-us",
+      "locator": "Disconnect intrusion-switch and fan cables; release rubber grommets",
+      "notes": "Documents fan cable routing through a mounting grommet and the elastomer mounting method. Exact grommet dimensions are not provided.",
+      "access_date": "2026-11-26"
+    },
+    {
+      "id": "src.dell.5060.psu_removal",
+      "title": "Dell OptiPlex 5060 Tower power supply removal",
+      "publisher": "Dell Technologies",
+      "source_type": "manufacturer_service_procedure",
+      "url": "https://www.dell.com/support/manuals/en-us/optiplex-5060-desktop/optiplex_5060_mt_service_manual/removing-power-supply-unit-or-psu?guid=guid-e09ec8ac-722e-477a-bcd8-a6fbc4b2f698&lang=en-us",
+      "locator": "Disconnect and unroute cables, release three PSU mounting screws and chassis tab",
+      "notes": "Manufacturer PSU removal procedure; model-specific cable routing and PSU part number are not captured by the family proxy.",
+      "access_date": "2026-11-26"
+    },
+    {
+      "id": "src.dell.5060.spec_sheet",
+      "title": "Dell OptiPlex 5060 technical specifications data sheet",
+      "publisher": "Dell Technologies",
+      "source_type": "manufacturer_technical_datasheet",
+      "url": "https://i.dell.com/sites/csdocuments/shared-content_data-sheets_documents/en/optiplex_5060_spec_sheet.pdf",
+      "locator": "Processor options; Tower I/O, storage, dimensions, weight, expansion slots and PSU rows",
+      "notes": "Combined Tower/SFF/Micro data sheet. Tower-specific chassis/ports/storage/PSU/slots use the Tower column; processor table includes standard and T-suffix options across form factors and must not be read as proof that every CPU fits every form factor.",
+      "access_date": "2026-11-27"
+    },
+    {
+      "id": "src.intel.g5400",
+      "title": "Intel Pentium Gold G5400 Processor Specifications",
+      "publisher": "Intel",
+      "source_type": "processor_manufacturer_product_specification",
+      "url": "https://www.intel.com/content/www/us/en/products/sku/129951/intel-pentium-gold-g5400-processor-4m-cache-3-70-ghz/specifications.html",
+      "locator": "CPU Specifications: 58 W TDP; GPU Specifications: UHD Graphics 610; Package Specifications: PCG 2015C (65 W)",
+      "notes": "Intel processor-level TDP and graphics identity. Thermal solution specification is a separate property and must not be conflated with TDP.",
+      "access_date": "2026-11-27"
+    },
+    {
+      "id": "src.intel.g5500",
+      "title": "Intel Pentium Gold G5500 Processor Specifications",
+      "publisher": "Intel",
+      "source_type": "processor_manufacturer_product_specification",
+      "url": "https://www.intel.com/content/www/us/en/products/sku/129946/intel-pentium-gold-g5500-processor-4m-cache-3-80-ghz/specifications.html",
+      "locator": "CPU Specifications: 54 W TDP; GPU Specifications: UHD Graphics 630; Package Specifications: PCG 2015C (65 W)",
+      "notes": "Intel processor-level TDP and graphics identity. Thermal solution specification is a separate property and must not be conflated with TDP.",
+      "access_date": "2026-11-27"
+    },
+    {
+      "id": "src.dell.5060.m2_removal",
+      "title": "Dell OptiPlex 5060 Tower removing M.2 SSD",
+      "publisher": "Dell Technologies",
+      "source_type": "manufacturer_service_procedure",
+      "url": "https://www.dell.com/support/manuals/en-ca/optiplex-5060-desktop/optiplex_5060_mt_service_manual/removing-m2-ssd?guid=guid-d1686d78-4afc-461e-b879-5fbf291e6aab&lang=en-us",
+      "locator": "Remove the single screw securing the SSD to the system board; slide SSD out of connector",
+      "notes": "Procedure is conditional on a fitted M.2 PCIe SSD; no installed drive or exact position is asserted by the family model.",
+      "access_date": "2026-11-27"
+    },
+    {
+      "id": "src.dell.5060.coin_cell_removal",
+      "title": "Dell OptiPlex 5060 Tower removing coin-cell battery",
+      "publisher": "Dell Technologies",
+      "source_type": "manufacturer_service_procedure",
+      "url": "https://www.dell.com/support/manuals/en-ca/optiplex-5060-desktop/optiplex_5060_mt_service_manual/removing-coin-cell-battery?guid=guid-25aeb843-7a64-40c7-985a-69e47c7c0b73&lang=en-us",
+      "locator": "Press battery-socket release latch; remove the coin-cell battery",
+      "notes": "Dell warns that battery removal may reset BIOS/settings. Fitted manufacturer and exact battery variant remain unknown.",
+      "access_date": "2026-11-27"
+    },
+    {
+      "id": "src.dell.5060.heatsink_fan_removal",
+      "title": "Dell OptiPlex 5060 Tower removing heatsink fan",
+      "publisher": "Dell Technologies",
+      "source_type": "manufacturer_service_procedure",
+      "url": "https://www.dell.com/support/manuals/en-in/optiplex-5060-desktop/optiplex_5060_mt_service_manual/removing-heat-sink-fan?guid=guid-e949c8bc-98ce-4dc8-adec-129c6ece95d7&lang=en-us",
+      "locator": "Disconnect heatsink assembly cable; remove fan screws through top screw holes; lift fan away",
+      "notes": "Exact fan part number and screw-head geometry are not identified by the family package.",
+      "access_date": "2026-11-27"
+    },
+    {
+      "id": "src.dell.5060.optical_drive_install",
+      "title": "Dell OptiPlex 5060 Tower installing optical drive",
+      "publisher": "Dell Technologies",
+      "source_type": "manufacturer_service_procedure",
+      "url": "https://www.dell.com/support/manuals/en-us/optiplex-5060-desktop/optiplex_5060_mt_service_manual/installing-optical-drive?guid=guid-20e8e972-ee0d-4739-b982-30e5873d6381&lang=en-us",
+      "locator": "Slide the optional optical drive into the bay until it clicks; route cables under the drive cage and connect data/power",
+      "notes": "Optional slim optical drive and routing observation only; not evidence that an ODD is fitted.",
+      "access_date": "2026-11-27"
+    },
+    {
+      "id": "src.dell.5060.optional_video_module",
+      "title": "Dell OptiPlex 5060 Tower installing optional VGA module",
+      "publisher": "Dell Technologies",
+      "source_type": "manufacturer_service_procedure",
+      "url": "https://www.dell.com/support/manuals/en-ca/optiplex-5060-desktop/optiplex_5060_mt_service_manual/installing-optional-vga-module?guid=guid-60c2a7f8-f5dd-4b51-941a-bd4a9e41ec6c&lang=en-us",
+      "locator": "Release rear metal blanking bracket, insert optional video module from inside, connect cable and secure with two M3×3 screws",
+      "notes": "VGA/HDMI/DisplayPort/Type-C module is optional and configuration-dependent; not asserted as fitted.",
+      "access_date": "2026-11-27"
+    },
+    {
+      "id": "src.dell.5060.hdd35_assembly",
+      "title": "Dell OptiPlex 5060 Tower removing 3.5-inch hard-drive assembly",
+      "publisher": "Dell Technologies",
+      "source_type": "manufacturer_service_procedure",
+      "url": "https://www.dell.com/support/manuals/en-us/optiplex-5060-desktop/optiplex_5060_mt_service_manual/removing-35inch-hard-drive-assembly?guid=guid-002dfa35-1f49-46ec-a018-9f59222bc7a3&lang=en-us",
+      "locator": "Disconnect SATA and power, remove HDD filler bracket, press blue tab and pull assembly",
+      "notes": "Optional 3.5-inch storage carrier. Exact fitted drive and cage configuration remain unknown.",
+      "access_date": "2026-11-27"
+    },
+    {
+      "id": "src.dell.5060.hdd35_bracket",
+      "title": "Dell OptiPlex 5060 Tower removing 3.5-inch drive from bracket",
+      "publisher": "Dell Technologies",
+      "source_type": "manufacturer_service_procedure",
+      "url": "https://www.dell.com/support/manuals/en-us/optiplex-5060-desktop/optiplex_5060_mt_service_manual/removing-35inch-hard-drive-from-the-hard-drive-bracket?guid=guid-7285aec1-874c-4930-a768-d5a5970c686b&lang=en-us",
+      "locator": "Pull one side of the HDD bracket to disengage pins from drive slots, then lift drive out",
+      "notes": "Documents a flexible pin retention method rather than a universal screw pattern.",
+      "access_date": "2026-11-27"
+    },
+    {
+      "id": "src.dell.5060.hdd25_assembly",
+      "title": "Dell OptiPlex 5060 Tower removing 2.5-inch hard-drive assembly",
+      "publisher": "Dell Technologies",
+      "source_type": "manufacturer_service_procedure",
+      "url": "https://www.dell.com/support/manuals/en-us/optiplex-5060-desktop/optiplex_5060_mt_service_manual/removing-the-25inch-hard-drive-assembly?guid=guid-440f086d-8aaa-4a51-b805-1afe4a9d3ba5&lang=en-us",
+      "locator": "Disconnect drive data/power, press blue tabs on both sides, pull assembly out",
+      "notes": "Separate removable 2.5-inch assembly; optional fitted population remains unknown.",
+      "access_date": "2026-11-27"
+    },
+    {
+      "id": "src.dell.5060.hdd25_bracket",
+      "title": "Dell OptiPlex 5060 Tower removing 2.5-inch drive from bracket",
+      "publisher": "Dell Technologies",
+      "source_type": "manufacturer_service_procedure",
+      "url": "https://www.dell.com/support/manuals/en-us/optiplex-5060-desktop/optiplex_5060_mt_service_manual/removing-the-25inch-drive-from-the-drive-bracket?guid=guid-4aabdcf4-a7c7-494a-8e0d-cad2b4b0828a&lang=en-us",
+      "locator": "Pull one side of the bracket to disengage its pins from drive slots, then lift drive out",
+      "notes": "Documents pin-based drive retention; the package does not invent dimensions or screw positions.",
+      "access_date": "2026-11-27"
+    },
+    {
+      "id": "src.dell.5060.odd_removal",
+      "title": "Dell OptiPlex 5060 Tower removing optical drive",
+      "publisher": "Dell Technologies",
+      "source_type": "manufacturer_service_procedure",
+      "url": "https://www.dell.com/support/manuals/en-us/optiplex-5060-desktop/optiplex_5060_mt_service_manual/removing-optical-drive?guid=guid-f1ff3fd0-8c0b-4cb4-9d0a-498f96f0ff86&lang=en-us",
+      "locator": "Disconnect ODD data/power, unroute cables from tabs under drive cage, press blue release tab and slide drive out",
+      "notes": "Slim ODD option is not asserted as fitted. Cable retention tabs are represented as a semantic group only.",
+      "access_date": "2026-11-27"
+    }
+  ]
+}
