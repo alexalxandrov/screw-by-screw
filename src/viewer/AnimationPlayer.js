@@ -1,3 +1,5 @@
+import { Vector3 } from "three";
+
 /**
  * Generic playback for package-authored, normalized component animation tracks.
  * This class is intentionally independent of device-specific model content.
@@ -40,7 +42,7 @@ export class AnimationPlayer {
     const worldDeltas = tracks.filter((track) => track.property === "position").map((track) => {
       const baseline = this.snapshots.get(track.target_id + "::" + track.property);
       if (!baseline?.worldPosition) return null;
-      const current = baseline.object.getWorldPosition(new THREE.Vector3());
+      const current = baseline.object.getWorldPosition(new Vector3());
       const delta = current.sub(baseline.worldPosition);
       return {
         targetId: track.target_id,
@@ -93,7 +95,7 @@ export class AnimationPlayer {
           object,
           property: track.property,
           value: this._captureValue(object, track.property),
-          worldPosition: track.property === "position" ? object.getWorldPosition(new THREE.Vector3()) : null
+          worldPosition: track.property === "position" ? object.getWorldPosition(new Vector3()) : null
         });
       }
     }
