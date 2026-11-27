@@ -128,7 +128,8 @@ test("compares a second validated package without replacing the active 3D model"
   const claim = page.locator('#comparison-claim-list [data-comparison-key="memory_capacity"]');
   await expect(claim).toContainText("manufacturer_data");
   await expect(claim).toContainText("Candidate specification sheet");
-  await expect(claim.locator(".comparison-sources")).toBeVisible();
+  await expect(claim.locator(".comparison-sources")).toHaveCount(2);
+  await expect(claim.locator(".comparison-sources").first()).toBeVisible();
 
   await expect(page.locator("#comparison-coverage .comparison-summary-item")).toHaveCount(3);
   await expect(page.locator("#model-sku")).toHaveText(originalSku ?? "");
