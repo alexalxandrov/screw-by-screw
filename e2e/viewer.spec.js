@@ -602,6 +602,16 @@ test("Dell package exposes working 3D disassembly actions and authored animation
   await expect(page.locator("#animation-player-panel")).toHaveAttribute("data-status", "paused");
   await page.locator("#animation-stop").click();
   await expect(page.locator("#animation-player-panel")).toHaveAttribute("data-status", "ready");
+  await page.locator("#animation-seek").evaluate((element) => {
+    element.value = "1000";
+    element.dispatchEvent(new Event("input", { bubbles: true }));
+  });
+  const sideCoverDeltas = JSON.parse(await page.locator("#viewer-canvas").getAttribute("data-animation-world-deltas"));
+  const sideCoverMovement = sideCoverDeltas.find((entry) => entry.targetId === "chassis.side_panel")?.delta;
+  expect(sideCoverMovement).toBeTruthy();
+  expect(sideCoverMovement[0]).toBeGreaterThan(0);
+  expect(Math.abs(sideCoverMovement[1])).toBeLessThan(0.01);
+  expect(Math.abs(sideCoverMovement[2])).toBeLessThan(0.01);
 
   await page.locator("#animation-clip-select").selectOption("clip.optiplex.cpu-cooling-removal");
   await page.locator("#animation-seek").evaluate((element) => {
