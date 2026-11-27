@@ -178,6 +178,7 @@ def validate_bindings(components_doc: dict, gltf: dict) -> list[str]:
         f"Components requiring geometry binding: {geometry_count}",
         f"GLB nodes with stable component IDs: {len(node_map)}",
         "Every geometry-backed content component ID is present exactly once: PASS",
+        "Every content component ID is present exactly once: PASS",
         "GLB ancestry preserves the nearest represented semantic ancestor: PASS",
         f"Declared decorative visual proxy nodes parent-checked: {len(decorative_details)}",
     ]

@@ -415,6 +415,7 @@ def validate_package(package: dict, package_dir: Path | None = None) -> list[str
         "Bilingual labels and semantic references: PASS",
         "Release manifest and SHA-256 integrity: PASS" if package_dir is not None else "Release manifest structure: PASS",
         f"Geometry fidelity: {model['geometry_status']}",
+        *(["Accuracy status: illustrative proxy, not CAD"] if model["geometry_status"] == "illustrative_proxy_not_cad" else []),
     ]
 
 
