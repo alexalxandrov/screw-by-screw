@@ -1,5 +1,7 @@
 # EVGA RTX 3060 XC BLACK content package
 
+> **Publication status: research archive.** This package is excluded from the public model catalogue and is not currently an approved reference model. Exact PCB revision, complete fastener map and a fully reconciled source-backed removal sequence remain unverified. The research data is retained for future review; do not present its proxy geometry or partial teardown observations as a complete service atlas.
+
 **Exact SKU:** `12G-P5-3655-KR`  
 **Status:** draft / educational proxy  
 **Geometry:** `illustrative_proxy_not_cad`
