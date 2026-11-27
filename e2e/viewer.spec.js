@@ -583,6 +583,9 @@ test("Dell package exposes working 3D disassembly actions and authored animation
 
   await page.locator("#assembly-step-reset").click();
   await expect(page.locator("#assembly-step-progress")).toContainText("0 / 12");
+  for (let step = 0; step < 4; step += 1) await page.locator("#assembly-step-next").click();
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-direction", "0,0,1");
+  await page.locator("#assembly-step-reset").click();
 
   await page.locator("#animation-clip-select").selectOption("clip.optiplex.side-cover-removal");
   await page.locator("#animation-play").click();
