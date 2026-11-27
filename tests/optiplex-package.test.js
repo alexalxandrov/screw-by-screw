@@ -161,7 +161,28 @@ test("OptiPlex v0.3 package passes the production loader and cross-file validati
 
   const supportedRelationshipTypes = new Set(["contains", "powered_by", "connected_to", "transfers_heat_to"]);
   assert.ok(relationships.every((relationship) => supportedRelationshipTypes.has(relationship.type)));
-  assert.equal(loaded.data.animations.clips.length, 0);
+  assert.equal(loaded.data.animations.clips.length, 3);
+  assert.deepEqual(loaded.data.animations.clips.map((clip) => clip.id), [
+    "clip.optiplex.side-cover-removal",
+    "clip.optiplex.cpu-cooling-removal",
+    "clip.optiplex.system-board-removal"
+  ]);
+  for (const clip of loaded.data.animations.clips) {
+    assert.ok(clip.tracks.length > 0, `animation clip has no tracks: ${clip.id}`);
+    for (const track of clip.tracks) {
+      assert.ok(componentIds.has(track.target_id), `unknown animation target: ${track.target_id}`);
+      assert.equal(track.relative, true);
+    }
+  }
+  const sceneActionCounts = steps.map((step) => (step.scene_actions ?? []).length);
+  assert.deepEqual(sceneActionCounts, [1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2]);
+  for (const step of steps) {
+    for (const action of step.scene_actions ?? []) {
+      for (const componentId of action.target_component_ids ?? []) {
+        assert.ok(componentIds.has(componentId), `unknown scene action target: ${step.id} -> ${componentId}`);
+      }
+    }
+  }
 });
 
 test("JSON model package rejects a tampered sidecar before loading", async () => {

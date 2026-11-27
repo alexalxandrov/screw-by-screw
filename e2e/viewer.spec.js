@@ -561,7 +561,7 @@ test("Dell package exposes working 3D disassembly actions and authored animation
   page.on("pageerror", (error) => pageErrors.push(error.message));
   await page.goto("/");
   await page.locator("#catalog-open").click();
-  const dellCard = page.locator('[data-model-id="pc.dell.optiplex-5060-tower-family"]');
+  const dellCard = page.locator('[data-model-id="pc.dell.optiplex-5060-tower.family"]');
   await expect(dellCard).toBeVisible();
   await dellCard.locator("[data-open-catalog-model]").click();
 

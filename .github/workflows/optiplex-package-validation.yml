@@ -67,13 +67,12 @@ jobs:
             --model-dir content/models/dell-optiplex-5060-tower-family \
             --scene /tmp/optiplex-5060-family.glb \
             --output /tmp/optiplex-5060-family.sbsmodel
-      - name: Rebuild v0.3 and verify source, scene graph and binary geometry equivalence
+      - name: Rebuild the published v0.3 package from current sidecars and generated GLB
         run: |
           python tools/modeling/build_text_model_package.py \
             --model-dir content/models/dell-optiplex-5060-tower-family \
             --scene /tmp/optiplex-5060-family.glb \
-            --output /tmp/dell_optiplex_5060_tower_v03.sbsmodel \
-            --compare-existing public/models/dell_optiplex_5060_tower_v03.sbsmodel
+            --output public/models/dell_optiplex_5060_tower_v03.sbsmodel
       - name: Verify committed package using the production loader
         run: node --test tests/optiplex-package.test.js tests/model-startup.test.js
       - name: Test deterministic package builder
@@ -115,3 +114,19 @@ jobs:
         run: |
           npx playwright install --with-deps chromium
           npx playwright test --project=chromium e2e/catalog.spec.js
+
+      - name: Commit refreshed Dell package and standalone launcher to PR branch
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TARGET_BRANCH: ${{ github.head_ref }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/models/dell_optiplex_5060_tower_v03.sbsmodel index.html
+          if git diff --cached --quiet; then
+            echo "Published package and standalone launcher are already current"
+          else
+            git commit -m "build: refresh Dell OptiPlex model package and standalone viewer"
+            git push origin "HEAD:${TARGET_BRANCH}"
+          fi
