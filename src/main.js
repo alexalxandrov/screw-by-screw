@@ -44,7 +44,14 @@ const DEFAULT_PACKAGE_DATA = {
   release: DEFAULT_RELEASE_PACKAGE
 };
 const LEARNING_PROGRESS_STORE = createLearningProgressStore();
-const MODEL_CATALOG = createCatalogAdapter(CATALOG_SOURCE, { defaultPackageModelId: DEFAULT_MODEL.id });
+const catalogDefaultPackage = CATALOG_SOURCE.models.find((entry) => entry?.default_package === true);
+const catalogDefaultPackageModelId =
+  typeof catalogDefaultPackage?.package_model_id === "string" && catalogDefaultPackage.package_model_id.trim()
+    ? catalogDefaultPackage.package_model_id.trim()
+    : DEFAULT_MODEL.id;
+const MODEL_CATALOG = createCatalogAdapter(CATALOG_SOURCE, {
+  defaultPackageModelId: catalogDefaultPackageModelId
+});
 
 const $ = (selector) => document.querySelector(selector);
 const canvasHost = $("#viewer-canvas");
