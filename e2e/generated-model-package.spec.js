@@ -51,6 +51,10 @@ test("IBM PC 5150 renders the sourced branching FRU graph and replacement fragme
   const firstProcedureStepId = await page.locator("#assembly-step-list .assembly-step-card").first().getAttribute("data-step-id");
   await page.locator("#assembly-step-next").click();
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-step-id", firstProcedureStepId);
+  await page.locator("#assembly-step-previous").click();
+  await expect(page.locator("#viewer-canvas")).not.toHaveAttribute("data-procedure-step-id");
+  await page.locator("#assembly-step-next").click();
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-step-id", firstProcedureStepId);
   await page.locator("#assembly-step-reset").click();
   await expect(page.locator("#viewer-canvas")).not.toHaveAttribute("data-procedure-step-id");
   await expect(page.locator("#assembly-policy-note")).toContainText("Номера шагов служат только порядком отображения");
