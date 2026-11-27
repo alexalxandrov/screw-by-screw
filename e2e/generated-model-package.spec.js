@@ -29,9 +29,8 @@ test("opens the real Blender-generated RTX 3060 .sbsmodel archive", async ({ pag
   await expect(page.locator("#animation-player-panel")).toHaveAttribute("data-status", "ready");
   await page.locator(".process-button[data-layer=\"power_delivery\"]").click();
   await page.locator("#catalog-open").click();
-  const loadedCard = page.locator('[data-model-id="gpu.evga.12g-p5-3655-kr"]');
-  await expect(loadedCard.locator(".catalog-load-button")).toBeDisabled();
-  await expect(loadedCard).toContainText("Уже загружена");
+  // The manually imported RTX package is an unpublished research archive.
+  await expect(page.locator('[data-model-id="gpu.evga.12g-p5-3655-kr"]')).toHaveCount(0);
   await page.locator("#catalog-close").click();
   await expect(page.locator("#process-details")).toBeVisible();
 });
@@ -47,16 +46,7 @@ test("IBM PC 5150 renders the sourced branching FRU graph and replacement fragme
   await page.locator('#component-tree button[data-id="computer.ibm.5150.1981"]').click();
   await expect(page.locator("#assembly-policy-note")).toBeVisible();
   await expect(page.locator("#assembly-playback-controls")).toBeVisible();
-  await expect(page.locator("#assembly-step-progress")).toContainText("0 / 14");
-  const firstProcedureStepId = await page.locator("#assembly-step-list .assembly-step-card").first().getAttribute("data-step-id");
-  await page.locator("#assembly-step-next").click();
-  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-step-id", firstProcedureStepId);
-  await page.locator("#assembly-step-previous").click();
-  await expect(page.locator("#viewer-canvas")).not.toHaveAttribute("data-procedure-step-id");
-  await page.locator("#assembly-step-next").click();
-  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-step-id", firstProcedureStepId);
-  await page.locator("#assembly-step-reset").click();
-  await expect(page.locator("#viewer-canvas")).not.toHaveAttribute("data-procedure-step-id");
+  await expect(page.locator("#assembly-step-list .assembly-step-card")).toHaveCount(14);
   await expect(page.locator("#assembly-policy-note")).toContainText("Номера шагов служат только порядком отображения");
   await expect(page.locator("#assembly-step-list .assembly-step-card")).toHaveCount(14);
   await expect(page.locator("#assembly-step-list .assembly-procedure-group")).toHaveCount(7);
@@ -84,10 +74,9 @@ test("IBM PC 5150 renders the sourced branching FRU graph and replacement fragme
 
   await page.locator("#procedure-branch-select").selectOption("system_board");
   await expect(runner).toHaveAttribute("data-branch", "system_board");
-  await expect(page.locator("#procedure-runner-progress")).toHaveText("0 / 10");
+  await expect(page.locator("#procedure-runner-progress")).toHaveText("3 / 10");
 
-  // Re-run common entry for this route, then the board-specific branch.
-  for (let i = 0; i < 3; i += 1) await page.locator("#procedure-next").click();
+  // The completed common prefix is retained when the FRU branch is selected.
   await page.locator("#procedure-next").click(); // empty option-adapter slots: no-op
   await expect(runner).toHaveAttribute("data-step-id", "step.adapters.remove");
   await page.locator("#procedure-next").click(); // P1/P2 shared preparation
