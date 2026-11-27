@@ -2741,10 +2741,10 @@ function updateOperatingEffects(delta) {
     canvasHost.dataset.flowMotion = "false";
     return;
   }
-  const rotation = delta * 10.5 * state.simulationSpeed;
+  const rotation = delta * 10.5;
   state.fanRotors.forEach(({ object, axis }) => { object.rotation[axis] += rotation; });
   state.flowParticles.forEach((particle) => {
-    particle.phase = (particle.phase + delta * particle.speed * state.simulationSpeed) % 1;
+    particle.phase = (particle.phase + delta * particle.speed) % 1;
     particle.mesh.position.copy(particle.curve.getPointAt(particle.phase));
   });
   const spinning = state.fanRotors.some(({ object, axis }) => Math.abs(object.rotation[axis]) > 0.01);
