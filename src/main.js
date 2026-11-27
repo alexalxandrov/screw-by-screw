@@ -1287,6 +1287,7 @@ function restoreProcedureSceneBaseline() {
     delete canvasHost.dataset.procedureMotion;
     delete canvasHost.dataset.procedureSelectedComponent;
     delete canvasHost.dataset.procedureActionType;
+    delete canvasHost.dataset.procedureDirection;
   }
   const status = $("#assembly-motion-status");
   if (status) status.textContent = t("procedureReset");
@@ -1364,7 +1365,7 @@ function procedureDirectionForAction(action, object) {
     if (!reference) return null;
     return procedureWorldCenter(object).sub(procedureWorldCenter(reference)).normalize();
   }
-  if (direction === "up") return new THREE.Vector3(0, 1, 0);
+  if (direction === "up") return new THREE.Vector3(0, 0, 1);
   if (direction === "frontward" || direction === "outward_from_case") {
     const rootBounds = new THREE.Box3().setFromObject(state.modelRoot);
     const rootCenter = rootBounds.getCenter(new THREE.Vector3());
@@ -1419,7 +1420,9 @@ function applyAuthoredSceneAction(action, animate = true) {
     for (const { node } of targets) {
       const direction = procedureDirectionForAction(action, node);
       if (!direction || direction.lengthSq() < 1e-8) continue;
-      const worldDelta = direction.normalize().multiplyScalar(procedureActionDistance(action, node));
+      direction.normalize();
+      if (canvasHost) canvasHost.dataset.procedureDirection = direction.toArray().map((value) => Math.abs(value) < 1e-8 ? "0" : String(Number(value.toFixed(3)))).join(",");
+      const worldDelta = direction.multiplyScalar(procedureActionDistance(action, node));
       const localDelta = procedureWorldDeltaToLocal(node, worldDelta);
       moves.push({ object: node, target: node.position.clone().add(localDelta) });
     }
