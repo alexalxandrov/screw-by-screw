@@ -67,6 +67,10 @@ jobs:
           for item in missing:
               print(f"::notice::{item}")
           PY
+  build:
+    needs: check-published-packages
+    if: needs.check-published-packages.outputs.ready == 'true'
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
