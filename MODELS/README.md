@@ -1,5 +1,12 @@
 # MODELS
 
+## Publication status
+
+- **Published reference:** IBM Personal Computer 5150 (1981), system-unit scope. Primary IBM technical and service manuals support the model and its partial FRU branches.
+- **Research archive, not published:** EVGA RTX 3060 XC BLACK (12G-P5-3655-KR). Its source package and geometry work are retained for future research, but the exact PCB revision and a complete reconciled screw/service sequence remain unverified. It is hidden from the public catalogue and not embedded in the standalone launcher.
+
+A model may enter the public catalogue only after its hardware revision, source coverage, component inventory, fastener map and disassembly dependencies have passed evidence review.
+
 Каталог контентных пакетов устройств Screw by Screw.
 
 ## Structure
