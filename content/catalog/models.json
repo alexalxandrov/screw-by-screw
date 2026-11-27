@@ -23,7 +23,7 @@
   "models": [
     {
       "id": "gpu.evga.12g-p5-3655-kr",
-      "default_package": true,
+      "default_package": false,
       "package_model_id": "gpu.evga.12g-p5-3655-kr",
       "manufacturer": "EVGA",
       "name": {
@@ -33,8 +33,8 @@
       "part_number": "12G-P5-3655-KR",
       "category_id": "graphics_cards",
       "summary": {
-        "en": "Dual-fan Ampere graphics card. Exact-SKU research blockout with source-linked component data.",
-        "ru": "Видеокарта Ampere с двумя вентиляторами. Исследовательский макет точного SKU с компонентами и ссылками на источники."
+        "en": "Archived research package. Not published as a verified reference model: exact PCB revision and complete physical service sequence remain unverified.",
+        "ru": "Архивный исследовательский пакет. Не опубликован как подтверждённая эталонная модель: точная ревизия PCB и полная физическая последовательность обслуживания не подтверждены."
       },
       "tags": [
         "GPU",
@@ -48,11 +48,13 @@
       "status": "research_blockout",
       "geometry_status": "illustrative_proxy_not_cad",
       "package_version": "0.1.0",
-      "package_path": "models/rtx3060_xc_black_v05.sbsmodel"
+      "package_path": "models/rtx3060_xc_black_v05.sbsmodel",
+      "published": false,
+      "publication_status": "research_archive"
     },
     {
       "id": "computer.ibm.5150.1981",
-      "default_package": false,
+      "default_package": true,
       "package_model_id": "computer.ibm.5150.1981",
       "manufacturer": "IBM",
       "name": {
@@ -78,7 +80,9 @@
       "status": "research_blockout",
       "geometry_status": "illustrative_proxy_not_cad",
       "package_version": "0.1.0-draft",
-      "package_path": "models/ibm_pc_5150_1981.sbsmodel"
+      "package_path": "models/ibm_pc_5150_1981.sbsmodel",
+      "published": true,
+      "publication_status": "reference"
     }
   ]
 }
