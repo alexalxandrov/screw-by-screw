@@ -37,6 +37,10 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); ou
 .topbar-model strong { font-size: 12px; font-weight: 600; }
 .sku { color: var(--dim); font: 10px var(--mono); }
 .topbar-actions { margin-left: auto; display: flex; align-items: center; gap: 12px; }
+.model-switcher-wrap { display: flex; flex-direction: column; justify-content: center; gap: 4px; min-width: 0; }
+.model-switcher { width: min(230px, 22vw); min-width: 150px; max-width: 230px; border: 1px solid #35424d; border-radius: 5px; padding: 7px 28px 7px 9px; background: #101922; color: var(--text); font: 10px var(--mono); text-overflow: ellipsis; }
+.model-switcher:hover:not(:disabled) { border-color: #647b4a; }
+.model-switcher:disabled { cursor: progress; opacity: .65; }
 .build-tag { color: var(--accent); font: 9px var(--mono); border: 1px solid rgba(195,232,109,.3); padding: 6px 8px; border-radius: 4px; }
 .quiet-button, .primary-button, .icon-button, .text-button { border: 0; }
 .quiet-button { background: transparent; color: #aeb9c3; font: 10px var(--mono); padding: 9px 7px; }
@@ -179,6 +183,8 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); ou
   .brand-copy strong { font-size: 9px; }
   .brand-copy small { font-size: 7px; }
   .topbar-actions { margin-left: auto; }
+  .model-switcher-wrap { max-width: 156px; }
+  .model-switcher { width: 156px; min-width: 0; max-width: 156px; font-size: 9px; }
   .quiet-button { display: none; }
   .viewer-toolbar { flex: 0 0 auto; padding: 8px; gap: 5px; flex-wrap: wrap; height: auto; min-height: 52px; }
   .view-tab { padding: 8px 7px; font-size: 9px; }
