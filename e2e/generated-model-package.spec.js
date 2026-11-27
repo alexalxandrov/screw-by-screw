@@ -48,8 +48,9 @@ test("IBM PC 5150 renders the sourced branching FRU graph and replacement fragme
   await expect(page.locator("#assembly-policy-note")).toBeVisible();
   await expect(page.locator("#assembly-playback-controls")).toBeVisible();
   await expect(page.locator("#assembly-step-progress")).toContainText("0 / 14");
+  const firstProcedureStepId = await page.locator("#assembly-step-list .assembly-step-card").first().getAttribute("data-step-id");
   await page.locator("#assembly-step-next").click();
-  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-step-id", "step.power.isolate");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-step-id", firstProcedureStepId);
   await page.locator("#assembly-step-reset").click();
   await expect(page.locator("#viewer-canvas")).not.toHaveAttribute("data-procedure-step-id");
   await expect(page.locator("#assembly-policy-note")).toContainText("Номера шагов служат только порядком отображения");
@@ -114,6 +115,7 @@ test("IBM PC 5150 renders the sourced branching FRU graph and replacement fragme
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-step-id", "step.board.slide.release_standoffs");
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-motion", "manufacturer-stated-slide");
   await expect(page.locator("#assembly-motion-status")).toContainText("12,7 мм");
+  await page.locator('#component-tree button[data-id="computer.ibm.5150.1981"]').click();
   await page.locator("#assembly-step-reset").click();
   await expect(page.locator("#viewer-canvas")).not.toHaveAttribute("data-procedure-step-id");
 });
