@@ -36,13 +36,30 @@ export class AnimationPlayer {
 
   getSnapshot() {
     const duration = Number(this.clip?.duration_ms ?? 0);
+    const tracks = this.clip?.tracks ?? [];
+    const worldDeltas = tracks.filter((track) => track.property === "position").map((track) => {
+      const baseline = this.snapshots.get(track.target_id + "::" + track.property);
+      if (!baseline?.worldPosition) return null;
+      const current = baseline.object.getWorldPosition(new THREE.Vector3());
+      const delta = current.sub(baseline.worldPosition);
+      return {
+        targetId: track.target_id,
+        delta: delta.toArray().map((value) => Math.abs(value) < 1e-8 ? 0 : Number(value.toFixed(3)))
+      };
+    }).filter(Boolean);
+    const movedTargetIds = new Set(worldDeltas
+      .filter((entry) => Math.hypot(...entry.delta) > 1e-3)
+      .map((entry) => entry.targetId));
     return {
       clipId: this.clip?.id ?? null,
       status: this.status,
       time: this.currentTime,
       duration,
       progress: duration > 0 ? Math.max(0, Math.min(1, this.currentTime / duration)) : 0,
-      speed: this.speed
+      speed: this.speed,
+      targetCount: new Set(tracks.map((track) => track.target_id)).size,
+      movedTargetCount: movedTargetIds.size,
+      worldDeltas
     };
   }
 
@@ -65,6 +82,7 @@ export class AnimationPlayer {
   _captureClip() {
     this.snapshots.clear();
     if (!this.clip) return;
+    this.root.updateWorldMatrix(true, true);
     for (const track of this.clip.tracks) {
       const object = this.nodesById.get(track.target_id);
       if (!object) throw new Error("Animation target is missing: " + track.target_id);
@@ -74,7 +92,8 @@ export class AnimationPlayer {
         this.snapshots.set(key, {
           object,
           property: track.property,
-          value: this._captureValue(object, track.property)
+          value: this._captureValue(object, track.property),
+          worldPosition: track.property === "position" ? object.getWorldPosition(new THREE.Vector3()) : null
         });
       }
     }
