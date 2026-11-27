@@ -226,21 +226,6 @@ jobs:
           find public/models -maxdepth 1 -type f ! -name "dell_optiplex_5060_tower_v03.sbsmodel" -delete
       - name: Run full viewer and accessibility suite against the source fallback scene
         run: npm run test:e2e:chromium
-      - name: Commit standalone root launcher to feature branch
-        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
-        env:
-          GH_TOKEN: ${{ github.token }}
-          TARGET_BRANCH: ${{ github.head_ref }}
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html content/models/evga-rtx3060-xc-black-12gb/release.json content/models/ibm-pc-5150-1981/release.json content/models/dell-optiplex-5060-tower-family/release.json
-          if git diff --cached --quiet; then
-            echo "Standalone root launcher is already current"
-          else
-            git commit -m "build: refresh standalone viewer and content manifest"
-            git push origin "HEAD:${TARGET_BRANCH}"
-          fi
       - name: Collect generated artifacts
         if: always()
         run: |

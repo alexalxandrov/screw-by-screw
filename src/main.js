@@ -91,7 +91,6 @@ const state = {
   modelWarnings: [],
   modelRevision: 0,
   powered: false,
-  simulationSpeed: 1,
   reducedMotion: false,
   fanRotors: [],
   processVisuals: null,
@@ -278,7 +277,6 @@ function setupAnimationPlayer(root) {
   state.animationPlayer = new AnimationPlayer(root, clips, {
     onChange: (snapshot) => updateAnimationPlayerUI(snapshot)
   });
-  state.animationPlayer.setSpeed(state.simulationSpeed);
   renderAnimationClipOptions();
   state.animationPlayer.selectClip(clips[0].id);
 }
@@ -1603,6 +1601,17 @@ function updateProcedureControls() {
     : `${t("procedureProgress")} ${procedureCurrentIndex + 1} / ${steps.length}`;
 }
 
+function deviceRootComponentId() {
+  const roots = COMPONENTS.filter((component) => !component.parent_id);
+  const preferred = roots.find((component) => component.id === MODEL.id);
+  return preferred?.id ?? roots[0]?.id ?? null;
+}
+
+function isDeviceRootComponent(componentId) {
+  return componentId === MODEL.id || componentId === "assembly.card.root" ||
+    (deviceRootComponentId() !== null && componentId === deviceRootComponentId());
+}
+
 function renderAssemblyEvidence(componentId) {
   const section = $("#detail-assembly-section");
   const emptyNote = $("#assembly-empty-note");
@@ -1626,11 +1635,11 @@ function renderAssemblyEvidence(componentId) {
   $("#assembly-step-next")?.addEventListener("click", () => setProcedureSceneIndex(procedureCurrentIndex + 1));
   $("#assembly-step-reset")?.addEventListener("click", () => restoreProcedureSceneBaseline());
   const playbackControls = $("#assembly-playback-controls");
-  if (playbackControls) playbackControls.hidden = !(componentId === MODEL.id || componentId === "assembly.card.root");
+  const isDeviceRoot = isDeviceRootComponent(componentId);
+  if (playbackControls) playbackControls.hidden = !isDeviceRoot;
   updateProcedureControls();
   observationHost.replaceChildren();
   replacementHost?.replaceChildren();
-  const isDeviceRoot = componentId === MODEL.id || componentId === "assembly.card.root";
   const steps = (ASSEMBLY_PACKAGE.steps ?? []).filter((step) =>
     isDeviceRoot || (step.component_ids ?? []).includes(componentId)
   );
@@ -3515,7 +3524,7 @@ function bindUI() {
       if (button.dataset.mode === "disassemble") {
         setLayer("clear");
         setExplode(0);
-        const deviceRootId = findNodeById(MODEL.id) ? MODEL.id : findNodeById("assembly.card.root") ? "assembly.card.root" : null;
+        const deviceRootId = deviceRootComponentId();
         if (deviceRootId) selectComponent(deviceRootId);
       }
       if (button.dataset.mode === "explore") { setLayer("clear"); setExplode(0); }
