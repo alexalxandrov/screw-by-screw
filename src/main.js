@@ -123,7 +123,7 @@ const UI = {
     measure: "Measure", clearMeasurement: "Clear", measureIdle: "Measurement off · model-space only", measurePrompt: "Click a visible surface to set point 1 of 2", measureFirstPoint: "Point 1 of 2 set · select the second point", measureDistance: "Distance", measureDisclaimer: "model-space only", measureNoHit: "Click a visible model surface", measureEnabled: "Measurement enabled", measureDisabled: "Measurement disabled", modelUnits: "model units", measureNote: "Not a verified physical dimension",
     clearLayer: "Clear layer", inspection: "INSPECTION", componentDetails: "Component details",
     selectComponent: "Select a component", selectHint: "Choose a part in the 3D view or assembly tree to inspect its role and evidence.",
-    identity: "IDENTITY", parent: "Parent", geometry: "Geometry", evidence: "EVIDENCE", technicalClaims: "TECHNICAL CLAIMS", claimUnknown: "Unknown", yes: "Yes", no: "No", claimSources: "Evidence sources", technicalRelationships: "TECHNICAL RELATIONSHIPS", qualitativeRelation: "Qualitative relationship", noRelationshipSource: "No source registered", exportData: "MODEL DATA", exportJson: "Export JSON", exportCsv: "CSV ZIP", exportComplete: "Export prepared · local only", exportFailed: "Export failed", assemblyEvidence: "DISASSEMBLY EVIDENCE", noVerifiedSequence: "No verified disassembly sequence has been authored for this model.", sourceObservations: "SOURCE OBSERVATIONS · NOT DISASSEMBLY STEPS", stepLabel: "Step", toolsLabel: "Tools", safetyLabel: "Safety", prerequisitesLabel: "Prerequisites", openAtSource: "Open source", procedureBranchLabel: "SELECT FRU BRANCH", procedureCommonBranch: "Common opening only", procedureChooseBranch: "Common access is complete. Choose one FRU branch; the service manual does not require a single linear teardown.", procedureRunnerTitle: "STEP-BY-STEP 3D PROCEDURE", procedureRunnerDisclaimer: "Educational scene playback only · does not control physical hardware. Proxy clearances are not measured.", procedureRunnerNext: "Show next step", procedureRunnerPrevious: "Previous step", procedureRunnerReset: "Reset procedure", procedureRunnerReady: "Start with safe power isolation and cover access.", procedureRunnerVisualized: "Visual state applied in the 3D model. This does not confirm a physical service action.", procedureRunnerComplete: "Selected FRU branch completed in the educational scene.", procedureRunnerNoop: "No scene movement: this option is absent from the 16 KB launch baseline.", procedureRunnerSafety: "SAFETY / PROCEDURAL NOTE", procedureGroup: "PROCEDURE BRANCH", commonEntryMode: "Common entry", conditionalBranchMode: "Conditional branch", sharedPreparationMode: "Shared preparation", independentFruBranchMode: "Independent FRU branch", replacementFragments: "DOCUMENTED REPLACEMENT FRAGMENTS · NOT A COMPLETE REASSEMBLY", sequenceDisplayOnly: "Display order only · follow the source-backed prerequisites and the selected FRU branch.",
+    identity: "IDENTITY", parent: "Parent", geometry: "Geometry", evidence: "EVIDENCE", technicalClaims: "TECHNICAL CLAIMS", claimUnknown: "Unknown", yes: "Yes", no: "No", claimSources: "Evidence sources", technicalRelationships: "TECHNICAL RELATIONSHIPS", qualitativeRelation: "Qualitative relationship", noRelationshipSource: "No source registered", exportData: "MODEL DATA", exportJson: "Export JSON", exportCsv: "CSV ZIP", exportComplete: "Export prepared · local only", exportFailed: "Export failed", assemblyEvidence: "DISASSEMBLY EVIDENCE", noVerifiedSequence: "No verified disassembly sequence has been authored for this model.", sourceObservations: "SOURCE OBSERVATIONS · NOT DISASSEMBLY STEPS", stepLabel: "Step", toolsLabel: "Tools", safetyLabel: "Safety", prerequisitesLabel: "Prerequisites", openAtSource: "Open source", runProcedureStep: "Show this step in 3D", resetProcedureScene: "Reset 3D procedure", previousProcedureStep: "Previous", nextProcedureStep: "Next", procedureReady: "Procedure scene ready", procedureReset: "Procedure scene reset", procedureNoGeometry: "No separate physical mesh is registered for this action; the relevant component is selected.", procedureExactSlide: "Manufacturer-stated slide: 12.7 mm (1/2 in)", procedureApproxMotion: "Illustrative extraction movement; travel is not specified by IBM.", procedureProgress: "Step", procedureBranchLabel: "SELECT FRU BRANCH", procedureCommonBranch: "Common opening only", procedureChooseBranch: "Common access is complete. Choose one FRU branch; the service manual does not require a single linear teardown.", procedureRunnerTitle: "STEP-BY-STEP 3D PROCEDURE", procedureRunnerDisclaimer: "Educational scene playback only · does not control physical hardware. Proxy clearances are not measured.", procedureRunnerNext: "Show next step", procedureRunnerPrevious: "Previous step", procedureRunnerReset: "Reset procedure", procedureRunnerReady: "Start with safe power isolation and cover access.", procedureRunnerVisualized: "Visual state applied in the 3D model. This does not confirm a physical service action.", procedureRunnerComplete: "Selected FRU branch completed in the educational scene.", procedureRunnerNoop: "No scene movement: this option is absent from the 16 KB launch baseline.", procedureRunnerSafety: "SAFETY / PROCEDURAL NOTE", procedureGroup: "PROCEDURE BRANCH", commonEntryMode: "Common entry", conditionalBranchMode: "Conditional branch", sharedPreparationMode: "Shared preparation", independentFruBranchMode: "Independent FRU branch", replacementFragments: "DOCUMENTED REPLACEMENT FRAGMENTS · NOT A COMPLETE REASSEMBLY", sequenceDisplayOnly: "Display order only · follow the source-backed prerequisites and the selected FRU branch.",
     sources: "SOURCES", accuracyFooter: "Unknown values remain unknown. No inferred CAD accuracy.",
     ready: "READY", localFirst: "LOCAL-FIRST · NO ACCOUNT", openModel: "Open model",
     noSelection: "No component selected", componentsCount: "components",
@@ -148,7 +148,7 @@ const UI = {
     measure: "Измерить", clearMeasurement: "Сброс", measureIdle: "Измерение выключено · только пространство модели", measurePrompt: "Нажмите на видимую поверхность, чтобы задать точку 1 из 2", measureFirstPoint: "Точка 1 из 2 задана · выберите вторую", measureDistance: "Расстояние", measureDisclaimer: "ед. модели", measureNoHit: "Нажмите на видимую поверхность модели", measureEnabled: "Инструмент измерения включён", measureDisabled: "Инструмент измерения выключен", modelUnits: "единицы модели", measureNote: "Не подтверждённый физический размер",
     clearLayer: "Сбросить слой", inspection: "ИНСПЕКЦИЯ", componentDetails: "Карточка компонента",
     selectComponent: "Выберите компонент", selectHint: "Выберите деталь в 3D-окне или дереве сборки, чтобы изучить её назначение и источники.",
-    identity: "ИДЕНТИФИКАЦИЯ", parent: "Родитель", geometry: "Геометрия", evidence: "ДОКАЗАТЕЛЬНОСТЬ", technicalClaims: "ТЕХНИЧЕСКИЕ УТВЕРЖДЕНИЯ", claimUnknown: "Неизвестно", yes: "Да", no: "Нет", claimSources: "Источники утверждения", technicalRelationships: "ТЕХНИЧЕСКИЕ СВЯЗИ", qualitativeRelation: "Качественная связь", noRelationshipSource: "Источник не зарегистрирован", exportData: "ДАННЫЕ МОДЕЛИ", exportJson: "Экспорт JSON", exportCsv: "CSV ZIP", exportComplete: "Экспорт подготовлен · локально", exportFailed: "Ошибка экспорта", assemblyEvidence: "ДОКАЗАТЕЛЬСТВА РАЗБОРКИ", noVerifiedSequence: "Подтверждённая последовательность разборки для этой модели пока не составлена.", sourceObservations: "НАБЛЮДЕНИЯ В ИСТОЧНИКАХ · НЕ ШАГИ РАЗБОРКИ", stepLabel: "Шаг", toolsLabel: "Инструменты", safetyLabel: "Безопасность", prerequisitesLabel: "Предварительные шаги", openAtSource: "Открыть источник", procedureBranchLabel: "ВЫБЕРИТЕ ВЕТВЬ FRU", procedureCommonBranch: "Только общая подготовка", procedureChooseBranch: "Общая подготовка завершена. Выберите одну ветвь FRU: руководство не требует единой линейной разборки.", procedureRunnerTitle: "ПОШАГОВАЯ 3D-ПРОЦЕДУРА", procedureRunnerDisclaimer: "Только учебное воспроизведение в сцене · не управляет реальной аппаратурой. Условные зазоры не измерены.", procedureRunnerNext: "Показать следующий шаг", procedureRunnerPrevious: "Предыдущий шаг", procedureRunnerReset: "Сбросить процедуру", procedureRunnerReady: "Начните с безопасного отключения питания и открытия корпуса.", procedureRunnerVisualized: "Визуальное состояние применено в 3D-модели. Это не подтверждает выполнение физической операции.", procedureRunnerComplete: "Выбранная ветвь FRU завершена в учебной сцене.", procedureRunnerNoop: "Геометрия не перемещается: в стартовой конфигурации 16 КБ этот узел отсутствует.", procedureRunnerSafety: "БЕЗОПАСНОСТЬ И ПРИМЕЧАНИЕ К ПРОЦЕДУРЕ", procedureGroup: "ВЕТВЬ ПРОЦЕДУРЫ", commonEntryMode: "Общая начальная подготовка", conditionalBranchMode: "Условная ветвь", sharedPreparationMode: "Общая подготовка разъёмов", independentFruBranchMode: "Независимая ветвь FRU", replacementFragments: "ДОКУМЕНТИРОВАННЫЕ ФРАГМЕНТЫ УСТАНОВКИ · НЕ ПОЛНАЯ ОБРАТНАЯ СБОРКА", sequenceDisplayOnly: "Порядок отображения · следуйте подтверждённым зависимостям и выбранной ветви FRU.",
+    identity: "ИДЕНТИФИКАЦИЯ", parent: "Родитель", geometry: "Геометрия", evidence: "ДОКАЗАТЕЛЬНОСТЬ", technicalClaims: "ТЕХНИЧЕСКИЕ УТВЕРЖДЕНИЯ", claimUnknown: "Неизвестно", yes: "Да", no: "Нет", claimSources: "Источники утверждения", technicalRelationships: "ТЕХНИЧЕСКИЕ СВЯЗИ", qualitativeRelation: "Качественная связь", noRelationshipSource: "Источник не зарегистрирован", exportData: "ДАННЫЕ МОДЕЛИ", exportJson: "Экспорт JSON", exportCsv: "CSV ZIP", exportComplete: "Экспорт подготовлен · локально", exportFailed: "Ошибка экспорта", assemblyEvidence: "ДОКАЗАТЕЛЬСТВА РАЗБОРКИ", noVerifiedSequence: "Подтверждённая последовательность разборки для этой модели пока не составлена.", sourceObservations: "НАБЛЮДЕНИЯ В ИСТОЧНИКАХ · НЕ ШАГИ РАЗБОРКИ", stepLabel: "Шаг", toolsLabel: "Инструменты", safetyLabel: "Безопасность", prerequisitesLabel: "Предварительные шаги", openAtSource: "Открыть источник", runProcedureStep: "Показать действие в 3D", resetProcedureScene: "Сбросить разборку", previousProcedureStep: "Назад", nextProcedureStep: "Далее", procedureReady: "Сцена процедуры готова", procedureReset: "Сцена возвращена в исходное состояние", procedureNoGeometry: "Для этого действия нет отдельной физической геометрии; выбран соответствующий компонент.", procedureExactSlide: "Заданный производителем сдвиг: 12,7 мм (1/2 дюйма)", procedureApproxMotion: "Условное извлечение; величина перемещения IBM не указана.", procedureProgress: "Шаг", procedureBranchLabel: "ВЫБЕРИТЕ ВЕТВЬ FRU", procedureCommonBranch: "Только общая подготовка", procedureChooseBranch: "Общая подготовка завершена. Выберите одну ветвь FRU: руководство не требует единой линейной разборки.", procedureRunnerTitle: "ПОШАГОВАЯ 3D-ПРОЦЕДУРА", procedureRunnerDisclaimer: "Только учебное воспроизведение в сцене · не управляет реальной аппаратурой. Условные зазоры не измерены.", procedureRunnerNext: "Показать следующий шаг", procedureRunnerPrevious: "Предыдущий шаг", procedureRunnerReset: "Сбросить процедуру", procedureRunnerReady: "Начните с безопасного отключения питания и открытия корпуса.", procedureRunnerVisualized: "Визуальное состояние применено в 3D-модели. Это не подтверждает выполнение физической операции.", procedureRunnerComplete: "Выбранная ветвь FRU завершена в учебной сцене.", procedureRunnerNoop: "Геометрия не перемещается: в стартовой конфигурации 16 КБ этот узел отсутствует.", procedureRunnerSafety: "БЕЗОПАСНОСТЬ И ПРИМЕЧАНИЕ К ПРОЦЕДУРЕ", procedureGroup: "ВЕТВЬ ПРОЦЕДУРЫ", commonEntryMode: "Общая начальная подготовка", conditionalBranchMode: "Условная ветвь", sharedPreparationMode: "Общая подготовка разъёмов", independentFruBranchMode: "Независимая ветвь FRU", replacementFragments: "ДОКУМЕНТИРОВАННЫЕ ФРАГМЕНТЫ УСТАНОВКИ · НЕ ПОЛНАЯ ОБРАТНАЯ СБОРКА", sequenceDisplayOnly: "Порядок отображения · следуйте подтверждённым зависимостям и выбранной ветви FRU.",
     sources: "ИСТОЧНИКИ", accuracyFooter: "Неизвестное остаётся неизвестным. Точность CAD не подразумевается.",
     ready: "ГОТОВО", localFirst: "ЛОКАЛЬНО · БЕЗ АККАУНТА", openModel: "Открыть модель",
     noSelection: "Компонент не выбран", componentsCount: "компонентов",
@@ -766,6 +766,7 @@ function collectNodes(root) {
     if (id && state.componentNodes.has(id)) state.modelWarnings.push(id);
     else if (id) state.componentNodes.set(id, object);
   });
+  captureProcedureSceneBaseline(root);
   $("#component-count").textContent = String(state.componentNodes.size);
   $("#scene-stats").textContent = `${state.componentNodes.size} ${t("componentsCount").toUpperCase()}`;
   renderTree();
@@ -1139,6 +1140,7 @@ function renderProcedureRunner(componentId) {
   const host = $("#procedure-runner");
   if (!host) return;
   const isDeviceRoot = componentId === MODEL.id || componentId === "assembly.card.root";
+  const isRootProcedureComponent = isDeviceRoot;
   const controller = state.procedureController;
   const routeData = ASSEMBLY_PACKAGE.procedure_routes;
   host.hidden = !(isDeviceRoot && controller && Array.isArray(routeData?.branches));
@@ -1228,6 +1230,221 @@ function renderProcedureRunner(componentId) {
   if (snapshot.branchRequired) branchSelect.focus?.({ preventScroll: true });
 }
 
+
+let procedureSceneBaselineRoot = null;
+let procedureSceneBaseline = new Map();
+let procedureCurrentIndex = -1;
+let procedureAnimationToken = 0;
+
+function captureProcedureSceneBaseline(root) {
+  procedureSceneBaselineRoot = root;
+  procedureSceneBaseline = new Map();
+  procedureCurrentIndex = -1;
+  state.componentNodes.forEach((object, id) => {
+    procedureSceneBaseline.set(id, {
+      position: object.position.clone(),
+      visible: object.visible
+    });
+  });
+}
+
+function restoreProcedureSceneBaseline() {
+  if (!state.modelRoot || procedureSceneBaselineRoot !== state.modelRoot) {
+    captureProcedureSceneBaseline(state.modelRoot);
+  }
+  procedureAnimationToken += 1;
+  procedureSceneBaseline.forEach((base, id) => {
+    const object = findNodeById(id);
+    if (!object) return;
+    object.position.copy(base.position);
+    object.visible = base.visible;
+  });
+  procedureCurrentIndex = -1;
+  if (canvasHost) {
+    delete canvasHost.dataset.procedureStepId;
+    delete canvasHost.dataset.procedureMotion;
+  }
+  const status = $("#assembly-motion-status");
+  if (status) status.textContent = t("procedureReset");
+  updateProcedureControls();
+}
+
+function animateProcedurePosition(object, target, duration = 480) {
+  if (!object) return;
+  const token = ++procedureAnimationToken;
+  const start = object.position.clone();
+  const startTime = performance.now();
+  const tick = (now) => {
+    if (token !== procedureAnimationToken) return;
+    const progress = Math.min(1, (now - startTime) / duration);
+    const eased = progress * progress * (3 - 2 * progress);
+    object.position.lerpVectors(start, target, eased);
+    if (progress < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
+
+function procedureComponentMatches(pattern) {
+  const data = COMPONENTS.find((item) => pattern.test([
+    item.id, item.en, item.ru, item.descriptionEn, item.descriptionRu
+  ].filter(Boolean).join(" ")));
+  return data ? findNodeById(data.id) : null;
+}
+
+function procedureWorldCenter(object) {
+  if (!object) return null;
+  const bounds = new THREE.Box3().setFromObject(object);
+  if (bounds.isEmpty()) return object.getWorldPosition(new THREE.Vector3());
+  return bounds.getCenter(new THREE.Vector3());
+}
+
+function procedureWorldDeltaToLocal(object, worldDelta) {
+  if (!object?.parent) return worldDelta.clone();
+  object.parent.updateMatrixWorld(true);
+  const origin = object.getWorldPosition(new THREE.Vector3());
+  const end = origin.clone().add(worldDelta);
+  return object.parent.worldToLocal(end).sub(object.parent.worldToLocal(origin));
+}
+
+function procedureMoveWorld(object, worldDelta, animate = true) {
+  if (!object || !worldDelta || worldDelta.lengthSq() === 0) return false;
+  const localDelta = procedureWorldDeltaToLocal(object, worldDelta);
+  const target = object.position.clone().add(localDelta);
+  if (animate) animateProcedurePosition(object, target);
+  else object.position.copy(target);
+  return true;
+}
+
+function procedureLabel(id) {
+  const data = state.catalog.get(id);
+  return data ? (state.language === "ru" ? data.ru : data.en) : id;
+}
+
+function procedureEffectForStep(step, animate = true) {
+  const descriptors = [step.id, localizedPackageText(step.title), localizedPackageText(step.action),
+    localizedPackageText(step.description)].filter(Boolean).join(" ").toLowerCase();
+  const ids = step.component_ids ?? [];
+  const targetNodes = ids.map((id) => ({ id, node: findNodeById(id), label: procedureLabel(id) }))
+    .filter((item) => item.node);
+
+  const connectorAction = /disconnect|unplug|отключ|отсоедин|разъ[её]м/.test(descriptors);
+  const fastenerAction = /screw|fastener|винт|креп[её]ж/.test(descriptors);
+  let changed = false;
+
+  if (connectorAction) {
+    for (const item of targetNodes) {
+      if (/connector|plug|cable|lead|power|p[123]|разъ[её]м|кабел|провод|штекер/i.test(item.id + " " + item.label)) {
+        item.node.visible = false;
+        changed = true;
+      }
+    }
+  }
+
+  if (fastenerAction && /remove|loosen|unscrew|извлеч|ослаб|выкрут|снять/.test(descriptors)) {
+    for (const item of targetNodes) {
+      if (/screw|fastener|винт|креп[её]ж/i.test(item.id + " " + item.label)) {
+        item.node.visible = false;
+        changed = true;
+      }
+    }
+  }
+
+  const board = findNodeById("assembly.system_board");
+  const psu = procedureComponentMatches(/power[ -]?supply|\bpsu\b|блок питания/i);
+  const speaker = procedureComponentMatches(/speaker|loudspeaker|динамик/i);
+  const cover = procedureComponentMatches(/case cover|top cover|chassis cover|крышка корпуса|верхняя крышка/i);
+
+  if (/step\.board\.slide|board\.slide|сдвинуть плату|отвести плату/.test(descriptors) && board) {
+    const boardCenter = procedureWorldCenter(board);
+    const psuCenter = procedureWorldCenter(psu);
+    if (boardCenter && psuCenter) {
+      const direction = boardCenter.clone().sub(psuCenter);
+      direction.z = 0;
+      if (direction.lengthSq() > 1e-6) {
+        direction.normalize();
+        changed = procedureMoveWorld(board, direction.multiplyScalar(12.7), animate) || changed;
+      }
+    }
+    if (canvasHost) canvasHost.dataset.procedureMotion = "manufacturer-stated-slide";
+    const status = $("#assembly-motion-status");
+    if (status) status.textContent = t("procedureExactSlide");
+  } else if (/step\.board\.remove|lift.*board|remove.*board|поднять.*плат|извлечь.*плат/.test(descriptors) && board) {
+    const bounds = new THREE.Box3().setFromObject(board);
+    const size = bounds.getSize(new THREE.Vector3());
+    const travel = Math.max(24, size.x * 0.55);
+    changed = procedureMoveWorld(board, new THREE.Vector3(0, 0, travel), animate) || changed;
+    if (canvasHost) canvasHost.dataset.procedureMotion = "illustrative-lift";
+  } else if (/step\.speaker|speaker.*remove|remove.*speaker|извлечь.*динамик|снять.*динамик/.test(descriptors) && speaker) {
+    const bounds = new THREE.Box3().setFromObject(speaker);
+    const size = bounds.getSize(new THREE.Vector3());
+    changed = procedureMoveWorld(speaker, new THREE.Vector3(0, 0, Math.max(22, size.z * 1.5)), animate) || changed;
+    if (canvasHost) canvasHost.dataset.procedureMotion = "illustrative-lift";
+  } else if (/step\.psu|power supply.*remove|remove.*power supply|извлечь.*блок питания|снять.*блок питания/.test(descriptors) && psu) {
+    const rootBox = new THREE.Box3().setFromObject(state.modelRoot);
+    const rootCenter = rootBox.getCenter(new THREE.Vector3());
+    const psuCenter = procedureWorldCenter(psu);
+    if (psuCenter) {
+      const direction = psuCenter.clone().sub(rootCenter);
+      direction.z = 0;
+      if (direction.lengthSq() > 1e-6) {
+        direction.normalize();
+        changed = procedureMoveWorld(psu, direction.multiplyScalar(55), animate) || changed;
+      }
+    }
+    if (canvasHost) canvasHost.dataset.procedureMotion = "illustrative-fru-extraction";
+  } else if (/step\.cover|cover.*remove|remove.*cover|сдвинуть.*крышк|снять.*крышк/.test(descriptors) && cover) {
+    const bounds = new THREE.Box3().setFromObject(state.modelRoot);
+    const rootCenter = bounds.getCenter(new THREE.Vector3());
+    const coverCenter = procedureWorldCenter(cover);
+    if (coverCenter) {
+      const direction = coverCenter.clone().sub(rootCenter);
+      direction.z = 0;
+      if (direction.lengthSq() > 1e-6) {
+        direction.normalize();
+        changed = procedureMoveWorld(cover, direction.multiplyScalar(55), animate) || changed;
+      }
+    }
+    if (canvasHost) canvasHost.dataset.procedureMotion = "illustrative-cover-slide";
+  }
+
+  return changed;
+}
+
+function setProcedureSceneIndex(nextIndex) {
+  const steps = ASSEMBLY_PACKAGE.steps ?? [];
+  if (!steps.length) return;
+  const index = Math.max(-1, Math.min(steps.length - 1, nextIndex));
+  restoreProcedureSceneBaseline();
+  procedureCurrentIndex = index;
+  for (let i = 0; i <= index; i += 1) {
+    const changed = procedureEffectForStep(steps[i], i === index);
+    if (i === index) {
+      if (canvasHost) canvasHost.dataset.procedureStepId = steps[i].id;
+      if (!changed) {
+        const targetId = (steps[i].component_ids ?? [])[0];
+        if (targetId && findNodeById(targetId)) selectComponent(targetId);
+        const status = $("#assembly-motion-status");
+        if (status) status.textContent = t("procedureNoGeometry");
+      }
+    }
+  }
+  updateProcedureControls();
+}
+
+function updateProcedureControls() {
+  const steps = ASSEMBLY_PACKAGE.steps ?? [];
+  const previous = $("#assembly-step-previous");
+  const next = $("#assembly-step-next");
+  const reset = $("#assembly-step-reset");
+  const progress = $("#assembly-step-progress");
+  if (previous) previous.disabled = procedureCurrentIndex <= -1;
+  if (next) next.disabled = procedureCurrentIndex >= steps.length - 1;
+  if (reset) reset.disabled = procedureCurrentIndex === -1;
+  if (progress) progress.textContent = procedureCurrentIndex < 0
+    ? `${t("procedureProgress")} 0 / ${steps.length}`
+    : `${t("procedureProgress")} ${procedureCurrentIndex + 1} / ${steps.length}`;
+}
+
 function renderAssemblyEvidence(componentId) {
   const section = $("#detail-assembly-section");
   const emptyNote = $("#assembly-empty-note");
@@ -1241,6 +1458,18 @@ function renderAssemblyEvidence(componentId) {
   if (!section || !emptyNote || !stepHost || !observationHeading || !observationHost) return;
 
   stepHost.replaceChildren();
+  const previousControl = $("#assembly-step-previous");
+  const nextControl = $("#assembly-step-next");
+  const resetControl = $("#assembly-step-reset");
+  previousControl?.replaceWith(previousControl.cloneNode(true));
+  nextControl?.replaceWith(nextControl.cloneNode(true));
+  resetControl?.replaceWith(resetControl.cloneNode(true));
+  $("#assembly-step-previous")?.addEventListener("click", () => setProcedureSceneIndex(procedureCurrentIndex - 1));
+  $("#assembly-step-next")?.addEventListener("click", () => setProcedureSceneIndex(procedureCurrentIndex + 1));
+  $("#assembly-step-reset")?.addEventListener("click", () => restoreProcedureSceneBaseline());
+  const playbackControls = $("#assembly-playback-controls");
+  if (playbackControls) playbackControls.hidden = !isRootProcedureComponent(componentId);
+  updateProcedureControls();
   observationHost.replaceChildren();
   replacementHost?.replaceChildren();
   const isDeviceRoot = componentId === MODEL.id || componentId === "assembly.card.root";
@@ -1385,6 +1614,16 @@ function renderAssemblyEvidence(componentId) {
       card.append(link);
     });
 
+    const runStep = document.createElement("button");
+    runStep.type = "button";
+    runStep.className = "assembly-step-run";
+    runStep.textContent = t("runProcedureStep");
+    runStep.dataset.runProcedureStep = step.id;
+    runStep.addEventListener("click", () => {
+      const fullIndex = (ASSEMBLY_PACKAGE.steps ?? []).findIndex((item) => item.id === step.id);
+      setProcedureSceneIndex(fullIndex);
+    });
+    card.append(runStep);
     stepHost.append(card);
   });
 
