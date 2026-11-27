@@ -25,6 +25,7 @@ function sampleCatalog() {
 
 test("normalizes bilingual entries and preserves the internal package model ID", () => {
   const data = sampleCatalog();
+  data.models[0].published = true;
   data.models[0].default_package = true;
   data.models[0].package_model_id = "internal.package.id";
   const catalog = createCatalogAdapter(data, { defaultPackageModelId: "internal.package.id" });
@@ -33,7 +34,25 @@ test("normalizes bilingual entries and preserves the internal package model ID",
   assert.equal(catalog.models[0].packagePath, "models/test.sbsmodel");
   assert.equal(catalog.models[0].packageModelId, "internal.package.id");
   assert.equal(catalog.models[0].defaultPackage, true);
+  assert.equal(catalog.models[0].published, true);
   assert.equal(catalog.models[0].category.en, "Graphics cards");
+});
+
+test("preserves only explicit publication flags and defaults missing flags to unpublished", () => {
+  const published = sampleCatalog();
+  published.models[0].published = true;
+  assert.equal(createCatalogAdapter(published).models[0].published, true);
+
+  const archived = sampleCatalog();
+  archived.models[0].published = false;
+  assert.equal(createCatalogAdapter(archived).models[0].published, false);
+
+  const unspecified = sampleCatalog();
+  assert.equal(createCatalogAdapter(unspecified).models[0].published, false);
+
+  const invalid = sampleCatalog();
+  invalid.models[0].published = "false";
+  assert.throws(() => createCatalogAdapter(invalid), /published must be a boolean/);
 });
 
 test("uses the application model ID for a default package without an explicit package binding", () => {

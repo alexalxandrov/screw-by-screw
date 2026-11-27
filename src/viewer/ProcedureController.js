@@ -103,11 +103,25 @@ export class ProcedureController {
   setBranch(routeId = "") {
     if (this.busy) throw new Error("Cannot change procedure branch during an animation");
     if (routeId && !this.getRoute(routeId)) throw new TypeError("Unknown procedure branch: " + routeId);
+
+    // Keep completed common access steps (for example, opening the case), but
+    // discard any actions from the previously selected FRU branch.
+    const completedCommonCount = Math.min(
+      Math.max(this.index + 1, 0),
+      this.commonStepIds.length
+    );
     this.restoreBaseline();
     this.routeId = routeId;
     const route = this.getRoute(routeId);
     this.routeStepIds = [...this.commonStepIds, ...(route?.step_ids ?? [])];
-    this.index = -1;
+    this.index = completedCommonCount - 1;
+
+    // Rebuild the common prefix from the captured baseline so the scene and
+    // timeline stay in sync when a branch is selected or changed.
+    for (let index = 0; index < completedCommonCount; index += 1) {
+      const step = this.stepMap.get(this.commonStepIds[index]);
+      for (const action of step.visual_actions ?? []) this.applyAction(action);
+    }
     return this.getSnapshot();
   }
 

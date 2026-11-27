@@ -95,6 +95,8 @@ if (await exists(catalogManifestPath)) {
         !packagePath.endsWith(".sbsmodel")) {
       throw new Error("Unsafe catalogue package path for model " + String(model.id));
     }
+    // The offline launcher is a public distribution artifact: embed only explicitly published models.
+    if (model.published !== true) continue;
     const assetPath = resolve(publicRoot, ...packagePath.split("/"));
     const publicRelative = relative(publicRoot, assetPath);
     if (!publicRelative || publicRelative === ".." || publicRelative.startsWith(".." + sep) || isAbsolute(publicRelative)) {

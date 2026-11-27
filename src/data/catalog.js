@@ -54,6 +54,7 @@ export function createCatalogAdapter(data, { defaultPackageModelId = "" } = {}) 
 
     if (!categories.has(item.category_id)) fail("unknown category for " + item.id);
     if (typeof item.status !== "string" || !item.status.trim()) fail("status is required for " + item.id);
+    if (item.published !== undefined && typeof item.published !== "boolean") fail("published must be a boolean for " + item.id);
     if (typeof item.geometry_status !== "string" || !item.geometry_status.trim()) fail("geometry_status is required for " + item.id);
     if (typeof item.package_version !== "string" || !item.package_version.trim()) fail("package_version is required for " + item.id);
     if (!Array.isArray(item.tags) || item.tags.some((tag) => typeof tag !== "string" || !tag.trim())) fail("tags must be strings for " + item.id);
@@ -78,6 +79,7 @@ export function createCatalogAdapter(data, { defaultPackageModelId = "" } = {}) 
       summary: localized(item.summary, "model " + item.id + " summary"),
       tags: [...new Set(item.tags.map((tag) => tag.trim()))],
       status: item.status,
+      published: item.published === true,
       geometryStatus: item.geometry_status,
       packageVersion: item.package_version,
       packagePath: safePackagePath(item.package_path)

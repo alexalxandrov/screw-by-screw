@@ -67,6 +67,8 @@ test("FRU branch selection keeps procedures independent and applies reversible r
   await controller.advance({ animate: false });
   await controller.advance({ animate: false });
   controller.setBranch("psu");
+  assert.equal(controller.getSnapshot().currentStepId, "cover");
+  assert.deepEqual(scene.cover.position.toArray(), [0, -50, 0]);
   await controller.advance({ animate: false });
   await controller.advance({ animate: false });
   assert.equal(scene.psuScrew.visible, false);
@@ -77,6 +79,27 @@ test("FRU branch selection keeps procedures independent and applies reversible r
   assert.equal(scene.psuScrew.visible, false);
   controller.reset();
   assert.equal(scene.psuScrew.visible, true);
+});
+
+test("switching FRU branches clears the old branch but retains common access steps", async () => {
+  const scene = fixture();
+  const controller = new ProcedureController(scene.root, packageData());
+  await controller.advance({ animate: false });
+  await controller.advance({ animate: false });
+  controller.setBranch("psu");
+  await controller.advance({ animate: false });
+  await controller.advance({ animate: false });
+  assert.equal(scene.psuScrew.visible, false);
+
+  controller.setBranch("board");
+  assert.equal(controller.getSnapshot().currentStepId, "cover");
+  assert.deepEqual(scene.cover.position.toArray(), [0, -50, 0]);
+  assert.equal(scene.psuScrew.visible, true);
+  assert.deepEqual(scene.psu.position.toArray(), [0, 0, 0]);
+
+  const result = await controller.advance({ animate: false });
+  assert.equal(result.step.id, "board");
+  assert.deepEqual(scene.board.position.toArray(), [12.7, 0, 20]);
 });
 
 test("missing prerequisites block a branch action", async () => {
