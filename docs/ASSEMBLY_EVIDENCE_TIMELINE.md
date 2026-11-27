@@ -13,6 +13,19 @@ When the top-level device is selected, the inspector displays the assembly evide
 
 When a component is selected, only authored steps that target that component are shown. Target component buttons navigate to the corresponding 3D part. Steps are not animated as physical removal paths by this panel.
 
+## Reversible 3D procedure state
+
+IBM package steps include a `scene_action` object in the content package. The Viewer executes that authored action instead of guessing a motion from the step title:
+
+- `hide`: hide the documented fastener or connector mesh after its removal/disconnection step.
+- `translate`: move a registered assembly in the authored direction. `away_from_component` derives the vector from the two component centers; the system board uses the PSU as its reference and 12.7 mm as the source-stated travel.
+- `select`: highlight the relevant component when the source action has no separately modeled moving mesh.
+- `conditional`: preserve an explicit no-op for optional hardware absent from the August 1981 baseline.
+
+Every action stores target IDs, evidence class and an RU/EN note. The UI exposes Previous, Next and Reset controls. Selecting a step card jumps to that position in the full model sequence; the scene is restored to its baseline and the active prefix of actions is replayed. Previous therefore reverses the demonstration state, and Reset returns all captured transforms and visibility flags to the initial model state.
+
+Only the approximately 1/2-inch board/PSU slides are treated as manufacturer-stated travel. Lifts, lateral extraction and clearances use a model-relative visual offset and remain explicitly `illustrative`; they are not dimensions from IBM. Hiding a connector or fastener is a didactic state change, not a claim that the real part vanishes or that its unscrewing/unplugging path has been physically solved. The reverse timeline is an interactive visualization aid, not a complete installation manual. The four IBM replacement fragments remain source-bounded text instructions.
+
 ## Accuracy and safety
 
 - Sparse video timecodes are not converted into a teardown sequence.
@@ -37,7 +50,7 @@ The IBM 5150 package uses 14 granular actions arranged in seven display groups. 
 
 The system-board branch records the IBM first-edition sequence: remove fitted adapters, disconnect P1/P2, disconnect fitted-drive leads if applicable, disconnect speaker connector P3, remove one board-retaining screw, slide the board about 1/2 inch away from the PSU until the standoffs clear their slots, then lift the board out. The branch does not require removing the PSU or removing the speaker assembly.
 
-The Viewer displays the bilingual branch-scope note, group headings, prerequisites, target-component links and source links. Four replacement fragments (cover, adapter, PSU, system board) are displayed separately as source-bounded fragments, not a full reverse procedure. The manual does not provide a separately headed speaker replacement sequence.
+The Viewer displays the bilingual branch-scope note, group headings, prerequisites, target-component links and source links. It also offers a reversible 3D procedure timeline: Previous, Next and Reset replay the scene's authored action prefix. Four replacement fragments (cover, adapter, PSU, system board) are displayed separately as source-bounded fragments, not a full reverse procedure. The manual does not provide a separately headed speaker replacement sequence.
 
 Only IBM's explicit 1/2-inch slide distances are treated as manufacturer-stated motion. PSU lift/left offsets, speaker lift and board lift are educational approximations. See [IBM PC 5150 disassembly sequence](IBM_PC_5150_DISASSEMBLY_SEQUENCE.md).
 
