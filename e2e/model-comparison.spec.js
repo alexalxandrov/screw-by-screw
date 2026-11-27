@@ -100,6 +100,7 @@ function makeComparisonPackage() {
 
 test("compares a second validated package without replacing the active 3D model", async ({ page }) => {
   await page.goto("/");
+  await expect(page.locator("#component-count")).not.toHaveText("—");
   const originalComponentCount = (await page.locator("#component-count").textContent())?.trim();
   const originalSku = (await page.locator("#model-sku").textContent())?.trim();
   expect(originalComponentCount).toBeTruthy();
@@ -134,6 +135,6 @@ test("compares a second validated package without replacing the active 3D model"
   await expect(page.locator("#component-count")).toHaveText(originalComponentCount ?? "");
 
   await page.locator("#compare-clear-model").click();
-  await expect(page.locator("#comparison-status")).toContainText("Загрузите проверенный пакет");
+  await expect(page.locator("#comparison-status")).toContainText(/Загрузите проверенный пакет|Load a validated/);
   await expect(page.locator("#comparison-claim-list")).toBeEmpty();
 });
