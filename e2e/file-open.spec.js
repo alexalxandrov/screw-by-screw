@@ -84,7 +84,6 @@ test("opens the published Dell package from the standalone file and verifies rea
     element.dispatchEvent(new Event("input", { bubbles: true }));
   });
   const animationDeltas = JSON.parse(await page.locator("#viewer-canvas").getAttribute("data-animation-world-deltas"));
-  console.log("STANDALONE_DELL_CPU_WORLD_DELTAS", JSON.stringify(animationDeltas));
   expect(animationDeltas).toHaveLength(2);
   for (const movement of animationDeltas) {
     expect(movement.delta[2]).toBeGreaterThan(0);
