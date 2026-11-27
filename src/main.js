@@ -1211,7 +1211,11 @@ function renderProcedureRunner(componentId) {
   description.textContent = step ? localizedPackageText(step.description) : t("procedureRunnerReady");
 
   const baselineOutcome = localizedPackageText(step?.baseline_outcome);
-  const actionNotes = localizedPackageList((step?.visual_actions ?? []).map((action) => action.note));
+  const actionNotes = localizedPackageList([
+    ...(step?.visual_actions ?? []).map((action) => action.note),
+    ...(step?.scene_actions ?? []).map((action) => action.note),
+    step?.scene_action?.note
+  ]);
   const visualizationPolicy = localizedPackageText(ASSEMBLY_PACKAGE.visualization_policy);
   const detailNotes = [baselineOutcome, ...actionNotes, visualizationPolicy].filter(Boolean);
   note.textContent = detailNotes.join(" ");
@@ -1283,25 +1287,39 @@ function restoreProcedureSceneBaseline() {
   if (canvasHost) {
     delete canvasHost.dataset.procedureStepId;
     delete canvasHost.dataset.procedureMotion;
+    delete canvasHost.dataset.procedureSelectedComponent;
+    delete canvasHost.dataset.procedureActionType;
   }
   const status = $("#assembly-motion-status");
   if (status) status.textContent = t("procedureReset");
   updateProcedureControls();
 }
 
-function animateProcedurePosition(object, target, duration = 480) {
-  if (!object) return;
+function animateProcedurePositions(entries, duration = 480) {
+  const moves = (entries ?? []).filter((entry) => entry?.object && entry?.target);
+  if (!moves.length) return;
+  const starts = moves.map((entry) => entry.object.position.clone());
+  const targets = moves.map((entry) => entry.target.clone());
+  if (typeof requestAnimationFrame !== "function") {
+    moves.forEach((entry, index) => entry.object.position.copy(targets[index]));
+    state.modelRoot?.updateMatrixWorld(true);
+    return;
+  }
   const token = ++procedureAnimationToken;
-  const start = object.position.clone();
-  const startTime = performance.now();
+  const startedAt = performance.now();
   const tick = (now) => {
     if (token !== procedureAnimationToken) return;
-    const progress = Math.min(1, (now - startTime) / duration);
+    const progress = Math.min(1, (now - startedAt) / Math.max(1, duration));
     const eased = progress * progress * (3 - 2 * progress);
-    object.position.lerpVectors(start, target, eased);
+    moves.forEach((entry, index) => entry.object.position.lerpVectors(starts[index], targets[index], eased));
+    state.modelRoot?.updateMatrixWorld(true);
     if (progress < 1) requestAnimationFrame(tick);
   };
   requestAnimationFrame(tick);
+}
+
+function animateProcedurePosition(object, target, duration = 480) {
+  animateProcedurePositions([{ object, target }], duration);
 }
 
 function procedureComponentMatches(pattern) {
@@ -1340,7 +1358,121 @@ function procedureLabel(id) {
   return data ? (state.language === "ru" ? data.ru : data.en) : id;
 }
 
+function procedureDirectionForAction(action, object) {
+  const modelQuaternion = state.modelRoot.getWorldQuaternion(new THREE.Quaternion());
+  const direction = String(action.direction ?? "").toLowerCase();
+  if (direction === "away_from_component") {
+    const reference = findNodeById(action.reference_component_id);
+    if (!reference) return null;
+    return procedureWorldCenter(object).sub(procedureWorldCenter(reference)).normalize();
+  }
+  if (direction === "up") return new THREE.Vector3(0, 1, 0);
+  if (direction === "frontward" || direction === "outward_from_case") {
+    const rootBounds = new THREE.Box3().setFromObject(state.modelRoot);
+    const rootCenter = rootBounds.getCenter(new THREE.Vector3());
+    return procedureWorldCenter(object).sub(rootCenter).normalize();
+  }
+  return null;
+}
+
+function procedureActionDistance(action, object) {
+  const specified = Number(action.distance);
+  if (Number.isFinite(specified) && specified > 0) {
+    const unit = String(action.unit ?? "model_units").toLowerCase();
+    const scale = unit === "mm" ? 1 : unit === "cm" ? 10 : unit === "in" || unit === "inch" ? 25.4 : unit === "m" ? 1000 : 1;
+    return specified * scale;
+  }
+  const bounds = new THREE.Box3().setFromObject(object);
+  if (bounds.isEmpty()) return 24;
+  const size = bounds.getSize(new THREE.Vector3());
+  return Math.max(24, size.length() * 0.7);
+}
+
+function applyAuthoredSceneAction(action, animate = true) {
+  const ids = action.target_component_ids ?? action.target_ids ?? [];
+  const targets = ids.map((id) => ({ id, node: findNodeById(id) })).filter((entry) => entry.node);
+  const type = String(action.type ?? "").toLowerCase();
+  const note = localizedPackageText(action.note);
+
+  if (type === "conditional" || type === "noop") {
+    if (canvasHost) canvasHost.dataset.procedureMotion = "conditional-noop";
+    const status = $("#assembly-motion-status");
+    if (status) status.textContent = note || t("procedureNoGeometry");
+    return true;
+  }
+  if (type === "select") {
+    if (canvasHost) {
+      canvasHost.dataset.procedureMotion = "selection-only";
+      canvasHost.dataset.procedureSelectedComponent = targets[0]?.id ?? "";
+    }
+    const status = $("#assembly-motion-status");
+    if (status) status.textContent = note || (targets[0] ? procedureLabel(targets[0].id) : t("procedureNoGeometry"));
+    return targets.length > 0;
+  }
+  if (type === "hide" || type === "show") {
+    for (const { node } of targets) node.visible = type === "show";
+    if (canvasHost) canvasHost.dataset.procedureMotion = type;
+    const status = $("#assembly-motion-status");
+    if (status) status.textContent = note || t("procedureRunnerVisualized");
+    return targets.length > 0;
+  }
+  if (type === "translate" || type === "move") {
+    const moves = [];
+    for (const { node } of targets) {
+      const direction = procedureDirectionForAction(action, node);
+      if (!direction || direction.lengthSq() < 1e-8) continue;
+      const worldDelta = direction.normalize().multiplyScalar(procedureActionDistance(action, node));
+      const localDelta = procedureWorldDeltaToLocal(node, worldDelta);
+      moves.push({ object: node, target: node.position.clone().add(localDelta) });
+    }
+    if (animate) animateProcedurePositions(moves, Number(action.duration_ms) || 480);
+    else moves.forEach((move) => move.object.position.copy(move.target));
+    state.modelRoot.updateMatrixWorld(true);
+    if (canvasHost) canvasHost.dataset.procedureMotion = action.evidence_class === "manufacturer_data"
+      ? "manufacturer-stated-translation"
+      : "illustrative-translation";
+    const status = $("#assembly-motion-status");
+    if (status) status.textContent = note || t("procedureRunnerVisualized");
+    return moves.length > 0;
+  }
+  if (type === "emphasis") {
+    for (const { node } of targets) {
+      node.traverse((object) => {
+        if (!object.isMesh || !object.material) return;
+        const applyColor = (material) => {
+          const clone = material.clone();
+          if (clone.color?.set) clone.color.set(action.color ?? "#d2a45e");
+          if (clone.emissive?.set) {
+            clone.emissive.set(action.color ?? "#d2a45e");
+            clone.emissiveIntensity = Math.max(Number(clone.emissiveIntensity) || 0, 0.16);
+          }
+          return clone;
+        };
+        object.material = Array.isArray(object.material)
+          ? object.material.map(applyColor)
+          : applyColor(object.material);
+      });
+    }
+    return targets.length > 0;
+  }
+  return false;
+}
+
 function procedureEffectForStep(step, animate = true) {
+  const authoredActions = Array.isArray(step.scene_actions)
+    ? step.scene_actions
+    : step.scene_action
+      ? [step.scene_action]
+      : [];
+  if (authoredActions.length) {
+    let changed = false;
+    for (const action of authoredActions) {
+      changed = applyAuthoredSceneAction(action, animate) || changed;
+    }
+    if (authoredActions.length && !changed && canvasHost) canvasHost.dataset.procedureMotion = "no-target";
+    return changed;
+  }
+
   const descriptors = [step.id, localizedPackageText(step.title), localizedPackageText(step.action),
     localizedPackageText(step.description)].filter(Boolean).join(" ").toLowerCase();
   const ids = step.component_ids ?? [];
@@ -1370,11 +1502,11 @@ function procedureEffectForStep(step, animate = true) {
   }
 
   const board = findNodeById("assembly.system_board");
-  const psu = procedureComponentMatches(/power[ -]?supply|\bpsu\b|блок питания/i);
+  const psu = procedureComponentMatches(/power[ -]?supply|\\bpsu\\b|блок питания/i);
   const speaker = procedureComponentMatches(/speaker|loudspeaker|динамик/i);
   const cover = procedureComponentMatches(/case cover|top cover|chassis cover|крышка корпуса|верхняя крышка/i);
 
-  if (/step\.board\.slide|board\.slide|сдвинуть плату|отвести плату/.test(descriptors) && board) {
+  if (/step\\.board\\.slide|board\\.slide|сдвинуть плату|отвести плату/.test(descriptors) && board) {
     const boardCenter = procedureWorldCenter(board);
     const psuCenter = procedureWorldCenter(psu);
     if (boardCenter && psuCenter) {
@@ -1388,18 +1520,18 @@ function procedureEffectForStep(step, animate = true) {
     if (changed && canvasHost) canvasHost.dataset.procedureMotion = "manufacturer-stated-slide";
     const status = $("#assembly-motion-status");
     if (status) status.textContent = changed ? t("procedureExactSlide") : t("procedureNoGeometry");
-  } else if (/step\.board\.remove|lift.*board|remove.*board|поднять.*плат|извлечь.*плат/.test(descriptors) && board) {
+  } else if (/step\\.board\\.remove|lift.*board|remove.*board|поднять.*плат|извлечь.*плат/.test(descriptors) && board) {
     const bounds = new THREE.Box3().setFromObject(board);
     const size = bounds.getSize(new THREE.Vector3());
     const travel = Math.max(24, size.x * 0.55);
     changed = procedureMoveWorld(board, new THREE.Vector3(0, 0, travel), animate) || changed;
     if (canvasHost) canvasHost.dataset.procedureMotion = "illustrative-lift";
-  } else if (/step\.speaker|speaker.*remove|remove.*speaker|извлечь.*динамик|снять.*динамик/.test(descriptors) && speaker) {
+  } else if (/step\\.speaker|speaker.*remove|remove.*speaker|извлечь.*динамик|снять.*динамик/.test(descriptors) && speaker) {
     const bounds = new THREE.Box3().setFromObject(speaker);
     const size = bounds.getSize(new THREE.Vector3());
     changed = procedureMoveWorld(speaker, new THREE.Vector3(0, 0, Math.max(22, size.z * 1.5)), animate) || changed;
     if (canvasHost) canvasHost.dataset.procedureMotion = "illustrative-lift";
-  } else if (/step\.psu|power supply.*remove|remove.*power supply|извлечь.*блок питания|снять.*блок питания/.test(descriptors) && psu) {
+  } else if (/step\\.psu|power supply.*remove|remove.*power supply|извлечь.*блок питания|снять.*блок питания/.test(descriptors) && psu) {
     const rootBox = new THREE.Box3().setFromObject(state.modelRoot);
     const rootCenter = rootBox.getCenter(new THREE.Vector3());
     const psuCenter = procedureWorldCenter(psu);
@@ -1412,7 +1544,7 @@ function procedureEffectForStep(step, animate = true) {
       }
     }
     if (canvasHost) canvasHost.dataset.procedureMotion = "illustrative-fru-extraction";
-  } else if (/step\.cover|cover.*remove|remove.*cover|сдвинуть.*крышк|снять.*крышк/.test(descriptors) && cover) {
+  } else if (/step\\.cover|cover.*remove|remove.*cover|сдвинуть.*крышк|снять.*крышк/.test(descriptors) && cover) {
     const bounds = new THREE.Box3().setFromObject(state.modelRoot);
     const rootCenter = bounds.getCenter(new THREE.Vector3());
     const coverCenter = procedureWorldCenter(cover);
@@ -1431,6 +1563,7 @@ function procedureEffectForStep(step, animate = true) {
 }
 
 function setProcedureSceneIndex(nextIndex) {
+  state.animationPlayer?.stop();
   const steps = ASSEMBLY_PACKAGE.steps ?? [];
   if (!steps.length) return;
   const index = Math.max(-1, Math.min(steps.length - 1, nextIndex));
@@ -1439,7 +1572,12 @@ function setProcedureSceneIndex(nextIndex) {
   for (let i = 0; i <= index; i += 1) {
     const changed = procedureEffectForStep(steps[i], i === index);
     if (i === index) {
-      if (canvasHost) canvasHost.dataset.procedureStepId = steps[i].id;
+      if (canvasHost) {
+        canvasHost.dataset.procedureStepId = steps[i].id;
+        const actions = Array.isArray(steps[i].scene_actions) ? steps[i].scene_actions : steps[i].scene_action ? [steps[i].scene_action] : [];
+        canvasHost.dataset.procedureActionType = actions.map((action) => action.type).join(",");
+        canvasHost.dataset.procedureTargets = actions.flatMap((action) => action.target_component_ids ?? action.target_ids ?? []).join(",");
+      }
       if (!changed) {
         const targetId = (steps[i].component_ids ?? [])[0];
         if (targetId && findNodeById(targetId)) selectComponent(targetId);
@@ -2630,12 +2768,6 @@ function setPowered(enabled) {
   }
 }
 
-function setSimulationSpeed(value) {
-  state.simulationSpeed = THREE.MathUtils.clamp(Number(value) || 1, 0.25, 2);
-  state.animationPlayer?.setSpeed(state.simulationSpeed);
-  const output = $("#simulation-speed-value");
-  if (output) output.textContent = `${state.simulationSpeed.toFixed(2)}×`;
-}
 
 function setLayer(layer) {
   if (!state.modelRoot) return;
@@ -3279,7 +3411,6 @@ function bindUI() {
   });
   $("#explode-slider").addEventListener("input", (event) => setExplode(event.target.value));
   $("#power-toggle").addEventListener("click", () => setPowered(!state.powered));
-  $("#simulation-speed").addEventListener("input", (event) => setSimulationSpeed(event.target.value));
   $("#animation-clip-select").addEventListener("change", (event) => {
     if (state.powered) setPowered(false);
     state.animationPlayer?.selectClip(event.target.value);
@@ -3292,7 +3423,6 @@ function bindUI() {
   $("#animation-stop").addEventListener("click", () => state.animationPlayer?.stop());
   $("#animation-seek").addEventListener("input", (event) => state.animationPlayer?.seek(Number(event.target.value) / 1000));
   $("#quiz-next").addEventListener("click", submitLearningAnswer);
-  setSimulationSpeed($("#simulation-speed")?.value ?? 1);
   $("#procedure-branch-select").addEventListener("change", (event) => {
     if (!state.procedureController) return;
     try {
@@ -3382,7 +3512,12 @@ function bindUI() {
       document.querySelectorAll(".view-tab").forEach((tab) => tab.classList.toggle("active", tab === button));
       if (button.dataset.mode === "compare") { showComparison(); return; }
       if (state.compareMode) { state.compareMode = false; $("#comparison-panel").hidden = true; }
-      if (button.dataset.mode === "disassemble") { setLayer("clear"); setExplode(100); }
+      if (button.dataset.mode === "disassemble") {
+        setLayer("clear");
+        setExplode(0);
+        const deviceRootId = findNodeById(MODEL.id) ? MODEL.id : findNodeById("assembly.card.root") ? "assembly.card.root" : null;
+        if (deviceRootId) selectComponent(deviceRootId);
+      }
       if (button.dataset.mode === "explore") { setLayer("clear"); setExplode(0); }
       if (button.dataset.mode === "understand") {
         setLayer("cooling");

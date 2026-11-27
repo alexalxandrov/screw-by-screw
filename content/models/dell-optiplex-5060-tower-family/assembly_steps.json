@@ -24,6 +24,21 @@
       "prerequisite_step_ids": [],
       "source_ids": [
         "src.dell.5060.board_removal"
+      ],
+      "scene_actions": [
+        {
+          "type": "translate",
+          "target_component_ids": [
+            "chassis.side_panel"
+          ],
+          "evidence_class": "illustrative",
+          "direction": "outward_from_case",
+          "distance_mode": "visual_clearance",
+          "note": {
+            "en": "Move the side-cover proxy away from the chassis. Travel is an illustrative clearance; Dell does not dimension the cover path.",
+            "ru": "Отвести условную боковую крышку от корпуса. Перемещение показывает только условный зазор; Dell не задаёт размер траектории."
+          }
+        }
       ]
     },
     {
@@ -51,6 +66,21 @@
       ],
       "source_ids": [
         "src.dell.5060.board_removal"
+      ],
+      "scene_actions": [
+        {
+          "type": "translate",
+          "target_component_ids": [
+            "chassis.front_panel"
+          ],
+          "evidence_class": "illustrative",
+          "direction": "frontward",
+          "distance_mode": "visual_clearance",
+          "note": {
+            "en": "Move the combined bezel/door proxy forward. The model does not contain separate measured hinge geometry.",
+            "ru": "Выдвинуть условную объединённую панель вперёд. В модели нет отдельной измеренной геометрии петли дверцы."
+          }
+        }
       ]
     },
     {
@@ -77,6 +107,19 @@
       ],
       "source_ids": [
         "src.dell.5060.board_removal"
+      ],
+      "scene_actions": [
+        {
+          "type": "select",
+          "target_component_ids": [
+            "chassis.front_panel"
+          ],
+          "evidence_class": "illustrative",
+          "note": {
+            "en": "The family proxy combines the bezel and door; no hinge axis or opening angle is claimed.",
+            "ru": "Условная модель объединяет панель и дверцу; ось петли и угол открытия не заявляются."
+          }
+        }
       ]
     },
     {
@@ -105,6 +148,21 @@
       "source_ids": [
         "src.dell.5060.board_removal",
         "src.dell.5060.boardlayout"
+      ],
+      "scene_actions": [
+        {
+          "type": "translate",
+          "target_component_ids": [
+            "cooling.cpu.fan"
+          ],
+          "evidence_class": "illustrative",
+          "direction": "up",
+          "distance_mode": "visual_clearance",
+          "note": {
+            "en": "Lift the fan proxy clear of the heatsink. The path is illustrative, not a measured removal distance.",
+            "ru": "Приподнять условный вентилятор над радиатором. Траектория иллюстративная, не измеренная."
+          }
+        }
       ]
     },
     {
@@ -135,6 +193,35 @@
       ],
       "source_ids": [
         "src.dell.5060.heatsink"
+      ],
+      "scene_actions": [
+        {
+          "type": "hide",
+          "target_component_ids": [
+            "fastener.cooler.captive.01",
+            "fastener.cooler.captive.02",
+            "fastener.cooler.captive.03",
+            "fastener.cooler.captive.04"
+          ],
+          "evidence_class": "illustrative",
+          "note": {
+            "en": "Hide the four captive screw proxies in Dell's documented 1–4 release order.",
+            "ru": "Убрать четыре условных винта в документированном Dell порядке ослабления 1–4."
+          }
+        },
+        {
+          "type": "translate",
+          "target_component_ids": [
+            "cooling.cpu.heatsink"
+          ],
+          "evidence_class": "illustrative",
+          "direction": "up",
+          "distance_mode": "visual_clearance",
+          "note": {
+            "en": "Lift the heatsink proxy after releasing the four captive screws. The clearance is illustrative.",
+            "ru": "Поднять условный радиатор после ослабления четырёх невыпадающих винтов. Зазор условный."
+          }
+        }
       ]
     },
     {
@@ -162,6 +249,19 @@
       ],
       "source_ids": [
         "src.dell.5060.cpu_removal"
+      ],
+      "scene_actions": [
+        {
+          "type": "select",
+          "target_component_ids": [
+            "motherboard.cpu_socket"
+          ],
+          "evidence_class": "illustrative",
+          "note": {
+            "en": "The launch-family scene models the socket, not a fitted CPU package or its retention mechanism; no processor mesh is removed.",
+            "ru": "Сцена семейства показывает сокет, но не установленный CPU и не механизм фиксации; отдельная модель процессора не извлекается."
+          }
+        }
       ]
     },
     {
@@ -191,6 +291,23 @@
       ],
       "source_ids": [
         "src.dell.5060.board_removal"
+      ],
+      "scene_actions": [
+        {
+          "type": "conditional",
+          "target_component_ids": [
+            "motherboard.pcie.x16",
+            "motherboard.pcie.x1.1",
+            "motherboard.pcie.x1.2",
+            "motherboard.pcie.x16.wired_x4"
+          ],
+          "evidence_class": "illustrative",
+          "condition": "fitted_expansion_card",
+          "note": {
+            "en": "Conditional step: the family reference does not assert that an expansion card is installed, so no card is fabricated or hidden.",
+            "ru": "Условный шаг: эталон семейства не подтверждает установленную плату расширения; отсутствующая карта не дорисовывается и не скрывается."
+          }
+        }
       ]
     },
     {
@@ -219,6 +336,20 @@
       "source_ids": [
         "src.dell.5060.board_removal",
         "src.dell.5060.storage"
+      ],
+      "scene_actions": [
+        {
+          "type": "conditional",
+          "target_component_ids": [
+            "storage.m2.optional"
+          ],
+          "evidence_class": "illustrative",
+          "condition": "m2_ssd_fitted",
+          "note": {
+            "en": "No M.2 SSD is populated in this family reference. The socket remains visible and no drive is invented.",
+            "ru": "В эталоне семейства SSD M.2 не установлен. Разъём остаётся видимым; накопитель не дорисовывается."
+          }
+        }
       ]
     },
     {
@@ -247,6 +378,20 @@
       "source_ids": [
         "src.dell.5060.board_removal",
         "src.dell.5060.boardlayout"
+      ],
+      "scene_actions": [
+        {
+          "type": "conditional",
+          "target_component_ids": [
+            "storage.sd_reader.optional"
+          ],
+          "evidence_class": "illustrative",
+          "condition": "sd_reader_fitted",
+          "note": {
+            "en": "The SD reader is optional and not populated in the reference configuration.",
+            "ru": "Картридер SD является опцией и отсутствует в эталонной конфигурации."
+          }
+        }
       ]
     },
     {
@@ -277,6 +422,23 @@
       "source_ids": [
         "src.dell.5060.board_removal",
         "src.dell.5060.memory"
+      ],
+      "scene_actions": [
+        {
+          "type": "conditional",
+          "target_component_ids": [
+            "motherboard.dimm.1",
+            "motherboard.dimm.2",
+            "motherboard.dimm.3",
+            "motherboard.dimm.4"
+          ],
+          "evidence_class": "illustrative",
+          "condition": "fitted_dimm_modules",
+          "note": {
+            "en": "The four sockets show supported positions, not installed DIMMs. The current scene contains no module geometry to remove.",
+            "ru": "Четыре слота показывают поддерживаемые позиции, а не установленные DIMM. В сцене нет геометрии модулей для извлечения."
+          }
+        }
       ]
     },
     {
@@ -314,6 +476,25 @@
       "source_ids": [
         "src.dell.5060.board_removal",
         "src.dell.5060.boardlayout"
+      ],
+      "scene_actions": [
+        {
+          "type": "select",
+          "target_component_ids": [
+            "motherboard.cpu_power",
+            "motherboard.system_power",
+            "motherboard.sata.1",
+            "motherboard.sata.2",
+            "motherboard.sata.3",
+            "motherboard.sata.4",
+            "motherboard.speaker_header"
+          ],
+          "evidence_class": "illustrative",
+          "note": {
+            "en": "Select the documented board headers. Individual cable harness paths are not modeled, so the viewer does not hide the soldered headers.",
+            "ru": "Выделить документированные разъёмы платы. Трассы отдельных жгутов не смоделированы, поэтому сами разъёмы на плате не скрываются."
+          }
+        }
       ]
     },
     {
@@ -351,6 +532,40 @@
       "source_ids": [
         "src.dell.5060.board_removal",
         "src.dell.5060.screw_table"
+      ],
+      "scene_actions": [
+        {
+          "type": "hide",
+          "target_component_ids": [
+            "fastener.motherboard.01",
+            "fastener.motherboard.02",
+            "fastener.motherboard.03",
+            "fastener.motherboard.04",
+            "fastener.motherboard.05",
+            "fastener.motherboard.06",
+            "fastener.motherboard.07",
+            "fastener.motherboard.08",
+            "fastener.motherboard.09"
+          ],
+          "evidence_class": "illustrative",
+          "note": {
+            "en": "Hide the nine schematic system-board screw proxies. Their individual positions and heads are not measured.",
+            "ru": "Убрать девять условных винтов системной платы. Их индивидуальные положения и головки не измерены."
+          }
+        },
+        {
+          "type": "translate",
+          "target_component_ids": [
+            "motherboard.assembly"
+          ],
+          "evidence_class": "illustrative",
+          "direction": "up",
+          "distance_mode": "visual_clearance",
+          "note": {
+            "en": "Lift the board assembly clear of the chassis after releasing the screws. Dell does not specify a measured lift path.",
+            "ru": "Поднять сборку платы из корпуса после освобождения винтов. Dell не задаёт измеренную траекторию подъёма."
+          }
+        }
       ]
     }
   ],

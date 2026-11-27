@@ -1,5 +1,159 @@
 {
   "schema_version": "0.1.0",
   "device_model_id": "pc.dell.optiplex-5060-tower.family",
-  "clips": []
+  "status": "educational_clips_available",
+  "policy": "These clips animate only the published illustrative family proxy. Displacements are relative to the model's actual starting transforms; they are not measured service clearances, physical simulations or claims about optional installed hardware.",
+  "clips": [
+    {
+      "id": "clip.optiplex.side-cover-removal",
+      "title": {
+        "en": "Side-cover removal",
+        "ru": "Снятие боковой крышки"
+      },
+      "evidence_status": "educational_approximation",
+      "source_ids": [
+        "src.dell.5060.service",
+        "src.dell.5060.setup"
+      ],
+      "duration_ms": 1000,
+      "easing": "ease_in_out",
+      "description": {
+        "en": "The side-cover proxy moves outward from the chassis. The direction is a presentation cue; the actual extraction travel is not dimensioned.",
+        "ru": "Условная боковая крышка отводится от корпуса. Направление показывает действие; фактическое расстояние извлечения не указано."
+      },
+      "tracks": [
+        {
+          "target_id": "chassis.side_panel",
+          "property": "position",
+          "relative": true,
+          "keyframes": [
+            {
+              "t": 0,
+              "value": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "t": 1,
+              "value": [
+                110,
+                0,
+                0
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "clip.optiplex.cpu-cooling-removal",
+      "title": {
+        "en": "CPU cooling assembly lift",
+        "ru": "Подъём системы охлаждения CPU"
+      },
+      "evidence_status": "educational_approximation",
+      "source_ids": [
+        "src.dell.5060.heatsink",
+        "src.dell.5060.heatsink_fan_removal"
+      ],
+      "duration_ms": 1400,
+      "easing": "ease_in_out",
+      "description": {
+        "en": "The fan and heatsink proxies lift clear of the motherboard. This is a relative visual clearance, not a measured travel or complete service sequence.",
+        "ru": "Условные вентилятор и радиатор поднимаются над системной платой. Это относительный визуальный зазор, а не измеренное перемещение или полная сервисная последовательность."
+      },
+      "tracks": [
+        {
+          "target_id": "cooling.cpu.fan",
+          "property": "position",
+          "relative": true,
+          "keyframes": [
+            {
+              "t": 0,
+              "value": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "t": 1,
+              "value": [
+                0,
+                0,
+                42
+              ]
+            }
+          ]
+        },
+        {
+          "target_id": "cooling.cpu.heatsink",
+          "property": "position",
+          "relative": true,
+          "keyframes": [
+            {
+              "t": 0,
+              "value": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "t": 1,
+              "value": [
+                0,
+                0,
+                62
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "clip.optiplex.system-board-removal",
+      "title": {
+        "en": "System-board extraction",
+        "ru": "Извлечение системной платы"
+      },
+      "evidence_status": "educational_approximation",
+      "source_ids": [
+        "src.dell.5060.service"
+      ],
+      "duration_ms": 1500,
+      "easing": "ease_in_out",
+      "description": {
+        "en": "The board assembly lifts away after its fasteners are released. The lift path is a visual proxy; screw positions and clearance are not measured.",
+        "ru": "Сборка системной платы поднимается после освобождения крепежа. Траектория условная; положения винтов и зазор не измерены."
+      },
+      "tracks": [
+        {
+          "target_id": "motherboard.assembly",
+          "property": "position",
+          "relative": true,
+          "keyframes": [
+            {
+              "t": 0,
+              "value": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "t": 1,
+              "value": [
+                0,
+                0,
+                85
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }

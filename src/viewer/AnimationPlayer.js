@@ -215,6 +215,10 @@ export class AnimationPlayer {
       } else {
         value = left.value.map((entry, index) => entry + (right.value[index] - entry) * amount);
       }
+      if (track.relative === true && track.property !== "visible") {
+        const baseline = this.snapshots.get(track.target_id + "::" + track.property)?.value;
+        if (baseline) value = value.map((entry, index) => baseline[index] + entry);
+      }
       this._restoreValue(object, track.property, value);
     }
   }
