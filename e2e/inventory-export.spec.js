@@ -8,7 +8,8 @@ test("exports the active model as semantic JSON and a CSV ZIP without geometry",
   // The viewer-only CI job has no generated model package staged in public/.
   // The Blender integration job tests the bundled IBM package separately.
   const ibmPackage = await page.request.head("/models/ibm_pc_5150_1981.sbsmodel");
-  if (ibmPackage.ok()) {
+  const ibmPackageContentType = ibmPackage.headers()["content-type"] ?? "";
+  if (ibmPackage.ok() && !ibmPackageContentType.includes("text/html")) {
     await expect(page.locator("#model-title")).toHaveText("IBM Personal Computer 5150");
     await expect(page.locator("#model-sku")).toHaveText("5150");
     await expect(page.locator("#load-state")).toContainText("ПАКЕТ SBS MODEL");
