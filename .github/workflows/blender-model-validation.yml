@@ -220,10 +220,26 @@ jobs:
         run: npm run test:e2e:model
       - name: Test real .sbsmodel import in browser
         run: npm run test:e2e:generated-package
-      - name: Restore the source fallback scene while retaining the committed Dell package
+      - name: Commit the generated published IBM PC 5150 package
+        if: (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository) || (github.event_name == 'push' && github.ref == 'refs/heads/main')
+        env:
+          TARGET_BRANCH: ${{ github.head_ref || github.ref_name }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/models/ibm_pc_5150_1981.sbsmodel
+          if git diff --cached --quiet; then
+            echo "Published IBM package is already current"
+          else
+            git commit -m "build: publish IBM PC 5150 model package"
+            git push origin "HEAD:${TARGET_BRANCH}"
+          fi
+      - name: Restore the source fallback scene while retaining both published packages
         run: |
           mkdir -p public/models
-          find public/models -maxdepth 1 -type f ! -name "dell_optiplex_5060_tower_v03.sbsmodel" -delete
+          find public/models -maxdepth 1 -type f \
+            ! -name "dell_optiplex_5060_tower_v03.sbsmodel" \
+            ! -name "ibm_pc_5150_1981.sbsmodel" -delete
       - name: Run full viewer and accessibility suite against the source fallback scene
         run: npm run test:e2e:chromium
       - name: Collect generated artifacts
