@@ -1,0 +1,179 @@
+{
+  "schema_version": "0.1.0",
+  "device_model_id": "pc.dell.optiplex-5060-tower.family",
+  "process_layers": [
+    {
+      "id": "process.cooling",
+      "type": "cooling",
+      "title": {
+        "en": "CPU and chassis cooling",
+        "ru": "Охлаждение CPU и корпуса"
+      },
+      "mode": "qualitative",
+      "linked_component_ids": [
+        "cooling.assembly",
+        "cooling.cpu.heatsink",
+        "cooling.cpu.fan",
+        "cooling.system_fan",
+        "motherboard.cpu_socket",
+        "chassis.frame"
+      ],
+      "source_ids": [
+        "src.dell.5060.service"
+      ],
+      "assumptions": [
+        "Positions and airflow are schematic. No CFD or measured temperature is represented."
+      ]
+    },
+    {
+      "id": "process.power",
+      "type": "power_delivery",
+      "title": {
+        "en": "Power supply and board power",
+        "ru": "Блок питания и питание платы"
+      },
+      "mode": "qualitative",
+      "linked_component_ids": [
+        "power.assembly",
+        "power.psu",
+        "power.psu.fan",
+        "power.psu.harness",
+        "motherboard.system_power",
+        "motherboard.cpu_power"
+      ],
+      "source_ids": [
+        "src.dell.5060.service"
+      ],
+      "assumptions": [
+        "No PSU internal topology, wattage, verified pinout or electrical simulation is claimed."
+      ]
+    },
+    {
+      "id": "process.memory",
+      "type": "memory_topology",
+      "title": {
+        "en": "Memory subsystem · four UDIMM sockets",
+        "ru": "Подсистема памяти · четыре разъёма UDIMM"
+      },
+      "mode": "qualitative",
+      "linked_component_ids": [
+        "motherboard.pcb",
+        "motherboard.dimm.1",
+        "motherboard.dimm.2",
+        "motherboard.dimm.3",
+        "motherboard.dimm.4",
+        "motherboard.cpu_socket"
+      ],
+      "source_ids": [
+        "src.dell.5060.memory",
+        "src.dell.5060.boardlayout"
+      ],
+      "assumptions": [
+        "Shows supported socket count and memory capability only; no channel routing, rank layout, installed DIMMs or timing training is simulated."
+      ]
+    },
+    {
+      "id": "process.storage",
+      "type": "storage_topology",
+      "title": {
+        "en": "Storage interfaces · SATA and M.2",
+        "ru": "Интерфейсы накопителей · SATA и M.2"
+      },
+      "mode": "qualitative",
+      "linked_component_ids": [
+        "motherboard.sata.1",
+        "motherboard.sata.2",
+        "motherboard.sata.3",
+        "motherboard.sata.4",
+        "motherboard.sata_power_header",
+        "motherboard.m2",
+        "motherboard.m2.wlan",
+        "storage.assembly",
+        "storage.drive_cage",
+        "storage.drive25.optional",
+        "storage.drive35.optional",
+        "storage.m2.optional",
+        "storage.optical_drive.optional",
+        "storage.drive35.carrier.optional",
+        "storage.drive35.filler_bracket.optional",
+        "storage.drive35.drive_bracket.optional",
+        "storage.drive35.release_tab.optional",
+        "storage.drive25.carrier.optional",
+        "storage.drive25.drive_bracket.optional",
+        "storage.drive25.release_tab.left.optional",
+        "storage.drive25.release_tab.right.optional",
+        "storage.optical_drive.release_tab.optional",
+        "storage.drive_cage.cable_retention_tabs"
+      ],
+      "source_ids": [
+        "src.dell.5060.storage",
+        "src.dell.5060.board_connectors"
+      ],
+      "assumptions": [
+        "Connection capabilities are documented; actual cable routes, drive population, BIOS settings and storage performance are unknown."
+      ]
+    },
+    {
+      "id": "process.pcie",
+      "type": "pcie_expansion",
+      "title": {
+        "en": "PCIe expansion topology",
+        "ru": "Топология расширения PCIe"
+      },
+      "mode": "qualitative",
+      "linked_component_ids": [
+        "motherboard.pcie.x16",
+        "motherboard.pcie.x1.1",
+        "motherboard.pcie.x1.2",
+        "motherboard.pcie.x16.wired_x4",
+        "rear.expansion_opening.1",
+        "rear.expansion_opening.2",
+        "rear.expansion_opening.3",
+        "rear.expansion_opening.4"
+      ],
+      "source_ids": [
+        "src.dell.5060.boardlayout",
+        "src.dell.5060.board_connectors"
+      ],
+      "assumptions": [
+        "Slot size and electrical lane width follow Dell's specifications; no installed card, lane sharing, chipset routing or board trace geometry is represented."
+      ]
+    },
+    {
+      "id": "process.external_io",
+      "type": "external_connectivity",
+      "title": {
+        "en": "Front and rear external connectivity",
+        "ru": "Внешние интерфейсы передней и задней панелей"
+      },
+      "mode": "qualitative",
+      "linked_component_ids": [
+        "front.io_region",
+        "front.audio_combo",
+        "front.usb2.powershare",
+        "front.usb2",
+        "front.usbc.gen2.powershare",
+        "front.usb3.gen1",
+        "rear.io_region",
+        "rear.line_out",
+        "rear.displayport.1",
+        "rear.displayport.2",
+        "rear.usb3.gen1.1",
+        "rear.usb3.gen1.2",
+        "rear.usb3.gen1.3",
+        "rear.usb3.gen1.4",
+        "rear.usb2.smartpoweron.1",
+        "rear.usb2.smartpoweron.2",
+        "rear.rj45",
+        "rear.video_module.optional"
+      ],
+      "source_ids": [
+        "src.dell.5060.ports",
+        "src.dell.5060.boardlayout"
+      ],
+      "assumptions": [
+        "Port inventory is a static family-level description; data rates, active PHY paths, optional module population and live I/O are not simulated."
+      ]
+    }
+  ]
+}

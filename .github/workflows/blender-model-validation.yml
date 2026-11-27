@@ -159,6 +159,21 @@ jobs:
           }
           console.log(JSON.stringify({ ...expected, integrityVerified: pkg.integrityVerified }, null, 2));
           NODE
+      - name: Verify Dell OptiPlex 5060 family JSON-envelope package with production loader
+        run: |
+          node --input-type=module <<'NODE'
+          import { readFile } from "node:fs/promises";
+          import { loadModelPackage } from "./src/viewer/ModelPackageLoader.js";
+          const bytes = await readFile("public/models/dell_optiplex_5060_tower_v03.sbsmodel");
+          const buffer = bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength);
+          const pkg = await loadModelPackage({ name: "dell_optiplex_5060_tower_v03.sbsmodel", size: bytes.byteLength, arrayBuffer: async () => buffer });
+          const expected = { modelId: "pc.dell.optiplex-5060-tower.family", components: 137, relationships: 145 };
+          if (pkg.report.modelId !== expected.modelId || pkg.report.componentCount !== expected.components ||
+              pkg.report.relationshipCount !== expected.relationships || !pkg.integrityVerified) {
+            throw new Error("Dell OptiPlex family package verification failed: " + JSON.stringify(pkg.report));
+          }
+          console.log(JSON.stringify({ ...expected, integrityVerified: pkg.integrityVerified }, null, 2));
+          NODE
       - name: Install Chromium for GLB integration test
         run: npx playwright install --with-deps chromium
       - name: Build viewer with generated GLB
@@ -177,13 +192,17 @@ jobs:
           if (jsonEnd < 0) throw new Error("Embedded catalogue package map is not closed");
           const rawMap = html.slice(jsonStart, jsonEnd).trim().replace(/;$/, "");
           const packages = JSON.parse(rawMap);
-          const required = catalog.models.filter((model) => model.published !== false && (model.default_package || model.id === "computer.ibm.5150.1981"));
+          const required = catalog.models.filter((model) => model.published === true);
           const archived = catalog.models.filter((model) => model.published === false);
-          if (!required.some((model) => model.default_package)) throw new Error("Catalogue has no default published model package");
+          const defaults = required.filter((model) => model.default_package === true);
+          if (defaults.length !== 1 || defaults[0].id !== "computer.ibm.5150.1981") {
+            throw new Error("IBM PC 5150 must remain the sole default published reference");
+          }
           for (const model of archived) {
             if (packages[model.id]) throw new Error("Standalone launcher must not embed unpublished research archive: " + model.id);
           }
           if (!required.some((model) => model.id === "computer.ibm.5150.1981")) throw new Error("Catalogue is missing the IBM PC 5150 reference model");
+          if (!required.some((model) => model.id === "pc.dell.optiplex-5060-tower.family")) throw new Error("Catalogue is missing the published Dell OptiPlex family reference");
           for (const model of required) {
             const dataUrl = packages[model.id];
             if (typeof dataUrl !== "string" || !dataUrl.startsWith("data:application/octet-stream;base64,")) {
@@ -201,8 +220,10 @@ jobs:
         run: npm run test:e2e:model
       - name: Test real .sbsmodel import in browser
         run: npm run test:e2e:generated-package
-      - name: Restore the source fallback scene for the general viewer suite
-        run: rm -rf public/models
+      - name: Restore the source fallback scene while retaining the committed Dell package
+        run: |
+          mkdir -p public/models
+          find public/models -maxdepth 1 -type f ! -name "dell_optiplex_5060_tower_v03.sbsmodel" -delete
       - name: Run full viewer and accessibility suite against the source fallback scene
         run: npm run test:e2e:chromium
       - name: Commit standalone root launcher to feature branch
@@ -213,7 +234,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html content/models/evga-rtx3060-xc-black-12gb/release.json content/models/ibm-pc-5150-1981/release.json
+          git add index.html content/models/evga-rtx3060-xc-black-12gb/release.json content/models/ibm-pc-5150-1981/release.json content/models/dell-optiplex-5060-tower-family/release.json
           if git diff --cached --quiet; then
             echo "Standalone root launcher is already current"
           else
@@ -232,8 +253,11 @@ jobs:
           cp MODELS/COMPUTERS/IBM/5150/04-WORKING/generated/ibm_pc_5150_1981.glb artifacts/ 2>/dev/null || true
           cp MODELS/COMPUTERS/IBM/5150/04-WORKING/generated/ibm_pc_5150_1981.manifest.json artifacts/ 2>/dev/null || true
           cp artifacts/ibm_pc_5150_1981.sbsmodel artifacts/ 2>/dev/null || true
-          cp tools/modeling/build_ibm_pc_5150_blockout.py artifacts/ibm_pc_5150_blockout_source.py
-          cp content/models/ibm-pc-5150-1981/components.json artifacts/ibm_pc_5150_components_source.json
+          cp public/models/dell_optiplex_5060_tower_v03.sbsmodel artifacts/ 2>/dev/null || true
+          cp tools/modeling/build_ibm_pc_5150_blockout.py artifacts/ibm_pc_5150_blockout_source.py 2>/dev/null || true
+          cp tools/modeling/build_ibm_pc_5150_blockout.py.gz artifacts/ibm_pc_5150_blockout_source.py.gz 2>/dev/null || true
+          cp content/models/ibm-pc-5150-1981/components.json artifacts/ibm_pc_5150_components_source.json 2>/dev/null || true
+          cp content/models/ibm-pc-5150-1981/components.json.gz artifacts/ibm_pc_5150_components_source.json.gz 2>/dev/null || true
           cp tests/test_ibm_pc_5150_content.py artifacts/ibm_pc_5150_content_tests.py 2>/dev/null || true
           cp content/models/ibm-pc-5150-1981/assembly_steps.json artifacts/ibm_pc_5150_assembly_steps.json 2>/dev/null || true
           cp content/models/ibm-pc-5150-1981/animations.json artifacts/ibm_pc_5150_animations.json 2>/dev/null || true
@@ -243,7 +267,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: rtx3060-and-ibm-5150-blender-build
+          name: rtx3060-ibm-5150-optiplex-5060-build
           path: artifacts/
           if-no-files-found: warn
           retention-days: 7

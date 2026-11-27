@@ -58,6 +58,37 @@ class ContentPackageTests(unittest.TestCase):
         report = validator.validate_package(sample_package())
         self.assertIn("Bilingual labels and semantic references: PASS", report)
 
+
+    def test_package_supports_mixed_geometry_fidelity_classes(self):
+        package = sample_package()
+        package["model"]["geometry_status"] = "mixed"
+        package["release"]["geometry_status"] = "mixed"
+        report = validator.validate_package(package)
+        self.assertIn("Geometry fidelity: mixed", report)
+
+        invalid = sample_package()
+        invalid["model"]["geometry_status"] = "physically_perfect"
+        invalid["release"]["geometry_status"] = "physically_perfect"
+        with self.assertRaisesRegex(validator.PackageError, "model.geometry_status must be one of"):
+            validator.validate_package(invalid)
+
+
+    def test_platform_family_identity_can_omit_part_number(self):
+        package = sample_package()
+        package["model"]["identity_scope"] = "platform_family"
+        package["model"]["part_number"] = None
+        package["release"]["part_number"] = None
+        package["release"]["status"] = "research_blockout"
+        report = validator.validate_package(package)
+        self.assertIn("Geometry fidelity: illustrative_proxy_not_cad", report)
+
+        invalid = sample_package()
+        invalid["model"]["identity_scope"] = "exact_sku"
+        invalid["model"]["part_number"] = None
+        invalid["release"]["part_number"] = None
+        with self.assertRaisesRegex(validator.PackageError, "Exact-SKU models must define a part_number"):
+            validator.validate_package(invalid)
+
     def test_unknown_parent_fails(self):
         package = sample_package()
         package["components"]["components"][1]["parent_id"] = "missing"

@@ -116,3 +116,47 @@ test("rejects multiple default packages and a default ID that differs from the a
   mismatch.models[0].package_model_id = "internal.package.other";
   assert.throws(() => createCatalogAdapter(mismatch, { defaultPackageModelId: "internal.package.id" }), /does not match/);
 });
+
+
+test("supports platform-family entries without invented part numbers", () => {
+  const data = sampleCatalog();
+  data.categories.push({
+    id: "desktop_computers",
+    label: { en: "Desktop computers", ru: "Настольные компьютеры" }
+  });
+  data.models.push({
+    id: "desktop.vendor.platform-001",
+    manufacturer: "Vendor",
+    name: { en: "Reference desktop platform", ru: "Эталонная платформа ПК" },
+    part_number: null,
+    identity_scope: "platform_family",
+    model_kind: "system",
+    category_id: "desktop_computers",
+    summary: { en: "Family-level research entry", ru: "Исследовательская запись на уровне семейства" },
+    tags: ["desktop", "tower"],
+    status: "research_blockout",
+    geometry_status: "illustrative_proxy_not_cad",
+    package_version: "0.1.0",
+    package_path: "models/test-desktop.sbsmodel",
+    published: true
+  });
+  const catalog = createCatalogAdapter(data);
+  const desktop = catalog.models.find((item) => item.id === "desktop.vendor.platform-001");
+  assert.equal(desktop.categoryId, "desktop_computers");
+  assert.equal(desktop.identityScope, "platform_family");
+  assert.equal(desktop.modelKind, "system");
+  assert.equal(desktop.partNumber, "");
+  assert.equal(desktop.published, true);
+});
+
+test("requires part numbers only for exact-SKU entries and validates identity metadata", () => {
+  const missingSku = sampleCatalog();
+  missingSku.models[0].part_number = null;
+  assert.throws(() => createCatalogAdapter(missingSku), /part_number is required for exact_sku/);
+  const badScope = sampleCatalog();
+  badScope.models[0].identity_scope = "approximate_guess";
+  assert.throws(() => createCatalogAdapter(badScope), /identity_scope is invalid/);
+  const badKind = sampleCatalog();
+  badKind.models[0].model_kind = "collection";
+  assert.throws(() => createCatalogAdapter(badKind), /model_kind is invalid/);
+});

@@ -18,6 +18,8 @@ EVIDENCE = {"manufacturer_data", "reviewer_measurement", "visible_exact_model",
             "candidate_count_requires_exact_board_confirmation", "unknown"}
 CLAIM_CLASSES = {"manufacturer_data", "measured", "independently_verified",
                  "calculated", "educational_approximation", "illustrative", "candidate_reference_observation", "secondary_catalog_data", "teardown_supported", "unknown"}
+GEOMETRY_STATUSES = {"manufacturer_cad", "measured_reconstruction", "teardown_supported",
+                     "photo_estimated", "illustrative_proxy_not_cad", "mixed", "unknown"}
 RELATIONSHIP_TYPES = {"contains", "mounted_in", "fastened_to", "connected_to",
                       "powered_by", "signals_to", "cooled_by", "transfers_heat_to",
                       "airflow_over", "depends_on"}
@@ -65,18 +67,22 @@ def require_source_ids(values, source_ids: set[str], label: str) -> None:
 def _validate_release(release: dict, model: dict, package_dir: Path | None) -> None:
     if not isinstance(release, dict):
         raise PackageError("release.json must be an object")
-    for key in ("model_id", "part_number", "package_version", "status", "geometry_status"):
+    for key in ("model_id", "package_version", "status", "geometry_status"):
         if not isinstance(release.get(key), str) or not release[key]:
             raise PackageError(f"release.json must define {key}")
     if release["model_id"] != model["id"]:
         raise PackageError("Release manifest model_id does not match model.json")
-    if release["part_number"] != model.get("part_number"):
+    if release.get("part_number") != model.get("part_number"):
         raise PackageError("Release manifest part_number does not match model.json")
+    if model.get("identity_scope") == "exact_sku" and (not isinstance(model.get("part_number"), str) or not model["part_number"]):
+        raise PackageError("Exact-SKU models must define a part_number")
+    if model.get("identity_scope") == "platform_family" and model.get("part_number") not in (None, ""):
+        raise PackageError("Platform-family entries must not invent an exact part_number")
     if release["geometry_status"] != model.get("geometry_status"):
         raise PackageError("Release manifest geometry_status does not match model.json")
     if release["package_version"] != model.get("release", {}).get("version"):
         raise PackageError("Release manifest package_version does not match model release version")
-    if release["status"] not in {"draft", "review", "published", "withdrawn"}:
+    if release["status"] not in {"draft", "review", "published", "withdrawn", "research_blockout"}:
         raise PackageError("Release manifest has unsupported status")
     files = release.get("files")
     if not isinstance(files, list):
@@ -183,8 +189,8 @@ def validate_package(package: dict, package_dir: Path | None = None) -> list[str
     release_doc = package["release"]
     if not isinstance(model, dict) or not isinstance(model.get("id"), str):
         raise PackageError("model.json must define a model id")
-    if model.get("geometry_status") != "illustrative_proxy_not_cad":
-        raise PackageError("Pilot geometry must remain explicitly labelled illustrative_proxy_not_cad")
+    if model.get("geometry_status") not in GEOMETRY_STATUSES:
+        raise PackageError(f"model.geometry_status must be one of: {sorted(GEOMETRY_STATUSES)}")
 
     sources = sources_doc.get("sources") if isinstance(sources_doc, dict) else None
     components = components_doc.get("components") if isinstance(components_doc, dict) else None
@@ -408,7 +414,8 @@ def validate_package(package: dict, package_dir: Path | None = None) -> list[str
         f"Animation clips: {len(animation_ids)}",
         "Bilingual labels and semantic references: PASS",
         "Release manifest and SHA-256 integrity: PASS" if package_dir is not None else "Release manifest structure: PASS",
-        "Accuracy status: illustrative proxy, not CAD",
+        f"Geometry fidelity: {model['geometry_status']}",
+        *(["Accuracy status: illustrative proxy, not CAD"] if model["geometry_status"] == "illustrative_proxy_not_cad" else []),
     ]
 
 

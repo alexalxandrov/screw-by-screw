@@ -473,8 +473,11 @@ def cylinder_between(name, component_id, start, end, radius, mat, collection, pa
     obj.rotation_quaternion = Vector((0, 0, 1)).rotation_difference(direction.normalized())
     obj.data.materials.append(mat)
     move_to_collection(obj, collection)
-    tagged = tag(obj, component_id, STATUS["illustrative"],
-                 geometry="illustrative_proxy")
+    tagged = tag(
+        obj, component_id, STATUS["illustrative"],
+        geometry="illustrative_proxy", export_role="decorative_detail",
+    )
+    tagged["sbs_visual_proxy"] = True
     set_parent_keep_world(tagged, parent)
     return tagged
 
@@ -895,6 +898,10 @@ def main():
     add_stroke_wordmark(shroud_parts[0], "EVGA", height=3.0, stroke_width=0.24)
     add_stroke_wordmark(shroud_parts[1], "GEFORCE RTX", height=2.45, stroke_width=0.20)
     for part in shroud_parts:
+        # These rails are visual construction primitives for one semantic
+        # shroud assembly, not separate inventory components.
+        part["sbs_export_role"] = "decorative_detail"
+        part["sbs_visual_proxy"] = True
         set_parent_keep_world(part, shroud_group)
 
     for i, x in enumerate(FAN_CENTERS_X, start=1):
@@ -1018,8 +1025,12 @@ def main():
     )
     for index, (offset, size) in enumerate(stage_blocks, start=1):
         world_position = tuple(stage_origin[axis] + offset[axis] for axis in range(3))
-        block = cube(f"Unidentified power-stage proxy {index}", f"power_stage.proxy.{index}",
-            world_position, size, MAT["power_stage"], pcbcol, evidence=STATUS["illustrative"])
+        block = cube(
+            f"Unidentified power-stage visual proxy {index}", f"power_stage.proxy.{index}",
+            world_position, size, MAT["power_stage"], pcbcol,
+            evidence=STATUS["illustrative"], export_role="decorative_detail",
+        )
+        block["sbs_visual_proxy"] = True
         set_parent_keep_world(block, power_stage_group)
 
     # Exact-SKU-linked teardown identifies six Samsung K4ZAF325BM-HC16 packages.
