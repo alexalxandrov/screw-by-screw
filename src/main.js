@@ -1468,7 +1468,7 @@ function renderAssemblyEvidence(componentId) {
   $("#assembly-step-next")?.addEventListener("click", () => setProcedureSceneIndex(procedureCurrentIndex + 1));
   $("#assembly-step-reset")?.addEventListener("click", () => restoreProcedureSceneBaseline());
   const playbackControls = $("#assembly-playback-controls");
-  if (playbackControls) playbackControls.hidden = !isRootProcedureComponent(componentId);
+  if (playbackControls) playbackControls.hidden = !(componentId === MODEL.id || componentId === "assembly.card.root");
   updateProcedureControls();
   observationHost.replaceChildren();
   replacementHost?.replaceChildren();
