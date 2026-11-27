@@ -1021,8 +1021,12 @@ def main():
     )
     for index, (offset, size) in enumerate(stage_blocks, start=1):
         world_position = tuple(stage_origin[axis] + offset[axis] for axis in range(3))
-        block = cube(f"Unidentified power-stage proxy {index}", f"power_stage.proxy.{index}",
-            world_position, size, MAT["power_stage"], pcbcol, evidence=STATUS["illustrative"])
+        block = cube(
+            f"Unidentified power-stage visual proxy {index}", f"power_stage.proxy.{index}",
+            world_position, size, MAT["power_stage"], pcbcol,
+            evidence=STATUS["illustrative"], export_role="decorative_detail",
+        )
+        block["sbs_visual_proxy"] = True
         set_parent_keep_world(block, power_stage_group)
 
     # Exact-SKU-linked teardown identifies six Samsung K4ZAF325BM-HC16 packages.
