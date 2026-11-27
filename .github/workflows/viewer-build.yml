@@ -1,6 +1,6 @@
 name: Viewer build
 permissions:
-  contents: read
+  contents: write
 concurrency:
   group: viewer-build-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
@@ -41,6 +41,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
@@ -58,14 +60,33 @@ jobs:
           import { readFile } from "node:fs/promises";
           const web = await readFile("dist/index.html", "utf8");
           const standalone = await readFile("index.html", "utf8");
-          if (!/<script\b[^>]*\bsrc=/.test(web)) throw new Error("Web build has no external JavaScript entry");
-          if (!/<link\b(?=[^>]*\brel=["']stylesheet["'])[^>]*\bhref=/.test(web)) throw new Error("Web build has no external stylesheet");
-          if (/<script\b(?![^>]*\bsrc=)[^>]*>[\s\S]*?<\/script>/i.test(web)) throw new Error("Web build contains an inline script");
-          if (/<style\b/i.test(web) || /\sstyle\s*=/i.test(web)) throw new Error("Web build contains inline styles");
-          if (/<script\b[^>]*\bsrc=/.test(standalone)) throw new Error("Standalone launcher still references external scripts");
-          if (/<link\b(?=[^>]*\brel=["']stylesheet["'])[^>]*\bhref=/.test(standalone)) throw new Error("Standalone launcher still references external CSS");
+          if (!/<script\\b[^>]*\\bsrc=/.test(web)) throw new Error("Web build has no external JavaScript entry");
+          if (!/<link\\b(?=[^>]*\\brel=[\"']stylesheet[\"'])[^>]*\\bhref=/.test(web)) throw new Error("Web build has no external stylesheet");
+          if (/<script\\b(?![^>]*\\bsrc=)[^>]*>[\\s\\S]*?<\\/script>/i.test(web)) throw new Error("Web build contains an inline script");
+          if (/<style\\b/i.test(web) || /\\sstyle\\s*=/.test(web)) throw new Error("Web build contains inline styles");
+          if (/<script\\b[^>]*\\bsrc=/.test(standalone)) throw new Error("Standalone launcher still references external scripts");
+          if (/<link\\b(?=[^>]*\\brel=[\"']stylesheet[\"'])[^>]*\\bhref=/.test(standalone)) throw new Error("Standalone launcher still references external CSS");
           if (!standalone.includes("Screw by Screw failed to start")) throw new Error("Standalone launcher is missing startup recovery");
-          console.log("Web CSP artifact and standalone offline launcher verified.");
+          const encodedScript = standalone.match(/data:text\\/javascript;base64,([A-Za-z0-9+/=]+)/)?.[1];
+          if (!encodedScript) throw new Error("Standalone launcher has no embedded application bundle");
+          const bundle = Buffer.from(encodedScript, "base64").toString("utf8");
+          if (!bundle.includes("procedureActionType")) throw new Error("Standalone launcher does not contain the current disassembly runtime");
+          if (bundle.includes("simulation-speed")) throw new Error("Standalone launcher contains the removed simulation-speed control");
+          console.log("Web CSP artifact and current offline standalone launcher verified.");
           NODE
       - name: Run browser interaction tests
         run: npm run test:e2e
+      - name: Commit regenerated standalone launcher
+        if: (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository) || (github.event_name == 'push' && github.ref == 'refs/heads/main')
+        env:
+          TARGET_BRANCH: ${{ github.head_ref || github.ref_name }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          if git diff --cached --quiet; then
+            echo "Standalone launcher is already current"
+          else
+            git commit -m "build: refresh standalone offline launcher"
+            git push origin "HEAD:${TARGET_BRANCH}"
+          fi
