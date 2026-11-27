@@ -147,7 +147,7 @@
                 <button id="power-toggle" class="text-button power-toggle" type="button" data-i18n="powerOn" aria-pressed="false">Включить питание</button>
               </div>
             </div>
-            <input id="explode-slider" class="range-slider" type="range" min="0" max="100" value="0" aria-label="Exploded view amount" />
+            <input id="explode-slider" class="range-slider" type="range" min="0" max="100" value="0" aria-label="Степень разнесения деталей" />
             <div class="range-labels"><span data-i18n="assembled">ASSEMBLED</span><span data-i18n="exploded">EXPLODED</span></div>
             <div id="animation-player-panel" class="clip-player" hidden>
               <div class="clip-player-heading">
@@ -186,11 +186,6 @@
               <input id="slice-position" class="slice-position" type="range" min="0" max="100" step="1" value="50" disabled aria-label="Section position" />
               <output id="slice-value">50%</output>
               <span class="slice-note" data-i18n="sliceNote">Visual cut · uncapped · not CAD</span>
-            </div>
-            <div class="simulation-controls">
-              <label for="simulation-speed" data-i18n="simulationSpeed">Скорость анимации</label>
-              <input id="simulation-speed" type="range" min="0.25" max="2" step="0.25" value="1" aria-label="Animation speed" />
-              <output id="simulation-speed-value">1.00×</output>
             </div>
             <div class="measurement-controls">
               <button id="measurement-toggle" class="process-button measurement-toggle" type="button" data-i18n="measure" aria-pressed="false" disabled>Измерить</button>

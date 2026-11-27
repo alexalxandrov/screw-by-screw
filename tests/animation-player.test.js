@@ -221,3 +221,22 @@ test("rejects missing or ambiguous component IDs when selecting a clip", () => {
   assert.throws(() => ambiguous.selectClip("clip.test"), /ID is ambiguous/);
   ambiguous.dispose();
 });
+
+test("relative position tracks animate from the actual model baseline and restore cleanly", () => {
+  const { root, fan } = makeScene();
+  fan.position.set(12, 4, -7);
+  const player = new AnimationPlayer(root, [makeClip({
+    tracks: [{
+      target_id: "fan",
+      property: "position",
+      relative: true,
+      keyframes: [{ t: 0, value: [0, 0, 0] }, { t: 1, value: [0, 0, 20] }]
+    }]
+  })]);
+  player.selectClip("clip.test");
+  player.seek(0.5);
+  assert.deepEqual(fan.position.toArray(), [12, 4, 3]);
+  player.stop();
+  assert.deepEqual(fan.position.toArray(), [12, 4, -7]);
+  player.dispose();
+});

@@ -555,3 +555,42 @@ test("shows a workload-specific cooling and board-power operating point with sou
   await expect(boardPower).toContainText("not a revised TGP/TDP specification");
   await expect(page.locator('[data-claim-id="claim.power.total_graphics_power"] .claim-value')).toContainText("170 W");
 });
+
+test("Dell package exposes working 3D disassembly actions and authored animations", async ({ page }) => {
+  const pageErrors = [];
+  page.on("pageerror", (error) => pageErrors.push(error.message));
+  await page.goto("/");
+  await page.locator("#catalog-open").click();
+  const dellCard = page.locator('[data-model-id="pc.dell.optiplex-5060-tower.family"]');
+  await expect(dellCard).toBeVisible();
+  await dellCard.locator("[data-open-catalog-model]").click();
+
+  await expect(page.locator("#model-title")).toContainText("OptiPlex 5060");
+  await expect(page.locator("#animation-player-panel")).toBeVisible();
+  await expect(page.locator("#animation-clip-select option")).toHaveCount(3);
+
+  await page.locator('[data-mode="disassemble"]').click();
+  await expect(page.locator("#detail-assembly-section")).toBeVisible();
+  await expect(page.locator("#assembly-playback-controls")).toBeVisible();
+  await page.locator("#assembly-step-next").click();
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-step-id", "step.optiplex.remove-side-cover");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-action-type", "translate");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-motion", "illustrative-translation");
+
+  await page.locator("#assembly-step-next").click();
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-step-id", "step.optiplex.remove-front-bezel");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-action-type", "translate");
+
+  await page.locator("#assembly-step-reset").click();
+  await expect(page.locator("#assembly-step-progress")).toContainText("0 / 12");
+
+  await page.locator("#animation-clip-select").selectOption("clip.optiplex.side-cover-removal");
+  await page.locator("#animation-play").click();
+  await expect(page.locator("#animation-player-panel")).toHaveAttribute("data-status", "playing");
+  await expect.poll(async () => Number(await page.locator("#animation-time").textContent().then(value => value.split("/")[0].trim()))).toBeGreaterThan(0);
+  await page.locator("#animation-pause").click();
+  await expect(page.locator("#animation-player-panel")).toHaveAttribute("data-status", "paused");
+  await page.locator("#animation-stop").click();
+  await expect(page.locator("#animation-player-panel")).toHaveAttribute("data-status", "ready");
+  expect(pageErrors).toEqual([]);
+});
