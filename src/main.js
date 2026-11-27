@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { zipSync, strToU8 } from "fflate";
 import { createSemanticInventory, createInventoryCsvFiles } from "./data/inventory-export.js";
 import { createLearningProgressStore } from "./data/learning-progress.js";
+import { compareModelPackages } from "./data/model-comparison.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { SceneController } from "./viewer/SceneController.js";
