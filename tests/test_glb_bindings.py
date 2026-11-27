@@ -62,6 +62,41 @@ class GlbBindingTests(unittest.TestCase):
             path.write_bytes(make_glb(sample_gltf()))
             self.assertEqual(validator.read_glb(path)["nodes"][2]["name"], "heatsink")
 
+    def test_logical_only_components_need_no_glb_node(self):
+        components = {"components": [
+            {"id": "root", "parent_id": None, "geometry_status": "measured"},
+            {"id": "logical.parent", "parent_id": "root", "geometry_status": "logical_only"},
+            {"id": "logical.child", "parent_id": "logical.parent", "geometry_status": "logical_only"},
+            {"id": "heatsink", "parent_id": "logical.child", "geometry_status": "photo_estimated"},
+        ]}
+        gltf = {"nodes": [
+            {"name": "root", "extras": {"sbs_component_id": "root"}, "children": [1]},
+            {"name": "heatsink", "extras": {"sbs_component_id": "heatsink"}}
+        ]}
+        report = validator.validate_bindings(components, gltf)
+        self.assertIn("Canonical semantic components: 4", report)
+        self.assertIn("Components requiring geometry binding: 2", report)
+        self.assertIn("Every geometry-backed content component ID is present exactly once: PASS", report)
+
+    def test_missing_geometry_backed_component_still_fails(self):
+        components = {"components": [
+            {"id": "root", "parent_id": None, "geometry_status": "measured"},
+            {"id": "part", "parent_id": "root", "geometry_status": "photo_estimated"},
+        ]}
+        gltf = {"nodes": [
+            {"name": "root", "extras": {"sbs_component_id": "root"}}
+        ]}
+        with self.assertRaisesRegex(validator.BindingError, "Geometry-backed content components missing from GLB"):
+            validator.validate_bindings(components, gltf)
+
+    def test_content_hierarchy_cycles_fail_even_when_nodes_are_logical_only(self):
+        components = {"components": [
+            {"id": "a", "parent_id": "b", "geometry_status": "logical_only"},
+            {"id": "b", "parent_id": "a", "geometry_status": "logical_only"},
+        ]}
+        with self.assertRaisesRegex(validator.BindingError, "Cycle detected in content component ancestry"):
+            validator.validate_bindings(components, {"nodes": []})
+
 
 if __name__ == "__main__":
     unittest.main()

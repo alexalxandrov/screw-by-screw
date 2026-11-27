@@ -18,6 +18,8 @@ EVIDENCE = {"manufacturer_data", "reviewer_measurement", "visible_exact_model",
             "candidate_count_requires_exact_board_confirmation", "unknown"}
 CLAIM_CLASSES = {"manufacturer_data", "measured", "independently_verified",
                  "calculated", "educational_approximation", "illustrative", "candidate_reference_observation", "secondary_catalog_data", "teardown_supported", "unknown"}
+GEOMETRY_STATUSES = {"manufacturer_cad", "measured_reconstruction", "teardown_supported",
+                     "photo_estimated", "illustrative_proxy_not_cad", "mixed", "unknown"}
 RELATIONSHIP_TYPES = {"contains", "mounted_in", "fastened_to", "connected_to",
                       "powered_by", "signals_to", "cooled_by", "transfers_heat_to",
                       "airflow_over", "depends_on"}
@@ -183,8 +185,8 @@ def validate_package(package: dict, package_dir: Path | None = None) -> list[str
     release_doc = package["release"]
     if not isinstance(model, dict) or not isinstance(model.get("id"), str):
         raise PackageError("model.json must define a model id")
-    if model.get("geometry_status") != "illustrative_proxy_not_cad":
-        raise PackageError("Pilot geometry must remain explicitly labelled illustrative_proxy_not_cad")
+    if model.get("geometry_status") not in GEOMETRY_STATUSES:
+        raise PackageError(f"model.geometry_status must be one of: {sorted(GEOMETRY_STATUSES)}")
 
     sources = sources_doc.get("sources") if isinstance(sources_doc, dict) else None
     components = components_doc.get("components") if isinstance(components_doc, dict) else None
@@ -408,7 +410,7 @@ def validate_package(package: dict, package_dir: Path | None = None) -> list[str
         f"Animation clips: {len(animation_ids)}",
         "Bilingual labels and semantic references: PASS",
         "Release manifest and SHA-256 integrity: PASS" if package_dir is not None else "Release manifest structure: PASS",
-        "Accuracy status: illustrative proxy, not CAD",
+        f"Geometry fidelity: {model['geometry_status']}",
     ]
 
 
