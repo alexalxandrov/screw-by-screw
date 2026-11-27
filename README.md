@@ -90,6 +90,7 @@ EVGA RTX 3060 XC BLACK переведена в **исследовательск�
 - [Source-backed claim presentation](docs/CLAIM_PRESENTATION.md)
 - [Typed relationship inspector](docs/RELATIONSHIP_INSPECTOR.md)
 - [Assembly evidence and disassembly timeline](docs/ASSEMBLY_EVIDENCE_TIMELINE.md)
+- [Reversible 3D scene actions](docs/REVERSIBLE_SCENE_ACTIONS.md)
 - [Package-authored animation runtime](docs/ANIMATION_RUNTIME.md)
 - [Каталог моделей](MODELS/README.md)
 - [Offline model catalogue and local package loading](docs/OFFLINE_MODEL_CATALOG.md)
