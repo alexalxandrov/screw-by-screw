@@ -2,7 +2,7 @@
 
 ## Goal
 
-Add a second deeply navigable reference device to Screw by Screw: the original IBM Personal Computer 5150 system unit, restricted to the August 1981 launch-era configuration. Keep the existing EVGA RTX 3060 as the default catalogue package.
+Add a second deeply navigable reference device to Screw by Screw: the original IBM Personal Computer 5150 system unit, restricted to the August 1981 launch-era configuration. Make IBM PC 5150 the sole published default reference. The EVGA RTX 3060 work remains a hidden research archive and is not bundled in public standalone builds.
 
 ## Data contract
 
@@ -34,7 +34,7 @@ Represent the PSU as a sealed field-replaceable unit. Never model the hazardous 
 3. Validate the semantic package, release hashes, component hierarchy, and 1:1 GLB component-anchor coverage.
 4. Build the portable `.sbsmodel` package and load it through the existing `ModelPackageLoader`.
 5. Verify model ID, 71 components, 100 relationships, and package integrity.
-6. Include both the GPU default package and IBM reference package in the standalone offline catalogue build.
+6. Include only published reference packages in the standalone offline catalogue build. At present this is the IBM PC 5150; unpublished research archives stay in source control but are omitted from the public package map.
 
 See [IBM PC 5150 fastener and board-mounting evidence audit](IBM_PC_5150_FASTENER_EVIDENCE.md) for the source-by-source screw and standoff matrix.\n\nThe IBM service manual also gives separate replacement fragments for the cover, option adapter, PSU and system board. The package stores those fragments separately and marks them as incomplete; it does not infer a full end-to-end rebuild or a speaker replacement procedure. The Viewer displays branch labels, prerequisite lists, a bilingual scope notice and source-bounded replacement fragments. See [IBM PC 5150 disassembly sequence](IBM_PC_5150_DISASSEMBLY_SEQUENCE.md).\n\n## Explicit non-goals
 
