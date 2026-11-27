@@ -54,3 +54,10 @@ The `frame-ancestors` directive must be sent as an HTTP response header; it is n
 ## Remaining security review
 
 Before public deployment, review the hosting provider, TLS configuration, response headers, dependency audit output, model-parser attack surface, file-size policy, accessibility, and whether any future backend changes the no-upload/no-account privacy boundary.
+
+
+## Model package import controls
+
+The `.sbsmodel` loader supports two transports: a ZIP archive with a root `sbs-model.json` manifest, and a UTF-8 JSON envelope prefixed by `SBSMODEL-JSON\\n`. In the JSON envelope, sidecars are UTF-8 strings and the GLB payload is base64-encoded. Both transports use the same safe-path, entry-count, expanded-size, SHA-256, cross-reference and GLB-binding validation before the model is applied to the viewer.
+
+The JSON envelope is a transport format, not a trust boundary. Treat every imported package as untrusted input and retain the existing size limits and integrity checks.

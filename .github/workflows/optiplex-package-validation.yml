@@ -4,6 +4,19 @@ permissions:
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "content/models/dell-optiplex-5060-tower-family/**"
+      - "content/catalog/models.json"
+      - "public/models/dell_optiplex_5060_tower_v03.sbsmodel"
+      - "tools/modeling/**"
+      - "tools/content/validate_glb_bindings.py"
+      - "src/data/catalog.js"
+      - "src/viewer/ModelPackageLoader.js"
+      - "tests/**"
+      - ".github/workflows/optiplex-package-validation.yml"
   pull_request:
     paths:
       - "content/models/dell-optiplex-5060-tower-family/**"
@@ -67,3 +80,35 @@ jobs:
         run: python -m unittest discover -s tests -p "test_text_model_package.py"
       - name: Run unit suite
         run: npm run test:unit
+      - name: Build web and offline standalone viewers
+        run: npm run build
+      - name: Verify published packages are embedded and the RTX archive is excluded
+        run: |
+          node --input-type=module <<'NODE'
+          import { readFile } from "node:fs/promises";
+          const html = await readFile("index.html", "utf8");
+          const catalog = JSON.parse(await readFile("content/catalog/models.json", "utf8"));
+          const marker = "globalThis.SBS_CATALOG_PACKAGE_DATA_URLS = ";
+          const start = html.indexOf(marker);
+          if (start < 0) throw new Error("Standalone launcher has no embedded package map");
+          const jsonStart = start + marker.length;
+          const jsonEnd = html.indexOf("</script>", jsonStart);
+          if (jsonEnd < 0) throw new Error("Embedded catalogue package map is not closed");
+          const packages = JSON.parse(html.slice(jsonStart, jsonEnd).trim().replace(/;$/, ""));
+          const published = catalog.models.filter((model) => model.published === true);
+          const archived = catalog.models.filter((model) => model.published === false);
+          for (const model of published) {
+            if (!packages[model.id]) throw new Error("Published package missing from standalone launcher: " + model.id);
+          }
+          for (const model of archived) {
+            if (packages[model.id]) throw new Error("Unpublished archive embedded in standalone launcher: " + model.id);
+          }
+          console.log(JSON.stringify({
+            published: published.map((model) => model.id),
+            excluded: archived.map((model) => model.id)
+          }, null, 2));
+          NODE
+      - name: Install Chromium and test category search and Dell package loading
+        run: |
+          npx playwright install --with-deps chromium
+          npx playwright test --project=chromium e2e/catalog.spec.js
