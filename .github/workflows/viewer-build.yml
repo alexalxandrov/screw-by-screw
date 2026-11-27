@@ -39,7 +39,7 @@ on:
       - ".github/workflows/viewer-build.yml"
 
 jobs:
-  check-published-packages:
+  check_published_packages:
     runs-on: ubuntu-latest
     outputs:
       ready: ${{ steps.check.outputs.ready }}
@@ -68,8 +68,8 @@ jobs:
               print(f"::notice::{item}")
           PY
   build:
-    needs: check-published-packages
-    if: needs.check-published-packages.outputs.ready == 'true'
+    needs: check_published_packages
+    if: needs.check_published_packages.outputs.ready == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -126,8 +126,8 @@ jobs:
             echo "::notice title=Viewer build deferred::The model-generation workflow must publish the missing offline package first."
           fi
   build:
-    needs: check-published-packages
-    if: needs.check-published-packages.outputs.ready == 'true'
+    needs: check_published_packages
+    if: needs.check_published_packages.outputs.ready == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
