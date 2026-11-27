@@ -313,7 +313,7 @@ function renderCatalog() {
   categorySelect.value = state.catalogCategory;
 
   const query = state.catalogSearch.trim().toLocaleLowerCase();
-  const entries = MODEL_CATALOG.models.filter((entry) => {
+  const entries = MODEL_CATALOG.models.filter((entry) => entry.published !== false).filter((entry) => {
     if (state.catalogCategory !== "all" && entry.categoryId !== state.catalogCategory) return false;
     const searchable = [
       entry.id, entry.manufacturer, entry.name.en, entry.name.ru, entry.partNumber,
