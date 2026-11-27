@@ -108,6 +108,7 @@ test("requires a part number for exact-SKU entries and validates identity metada
 
 test("uses the application model ID for a default package without an explicit package binding", () => {
   const data = sampleCatalog();
+  data.models[0].published = true;
   data.models[0].default_package = true;
   const catalog = createCatalogAdapter(data, { defaultPackageModelId: "internal.package.id" });
   assert.equal(catalog.models[0].packageModelId, "internal.package.id");
@@ -153,6 +154,7 @@ test("rejects unknown categories, missing geometry evidence and unsupported sche
 
 test("rejects multiple default packages and a default ID that differs from the application model", () => {
   const multiple = sampleCatalog();
+  multiple.models[0].published = true;
   multiple.models[0].default_package = true;
   multiple.models.push({
     ...multiple.models[0],
@@ -163,6 +165,7 @@ test("rejects multiple default packages and a default ID that differs from the a
   assert.throws(() => createCatalogAdapter(multiple, { defaultPackageModelId: "internal.package.id" }), /only one default/);
 
   const mismatch = sampleCatalog();
+  mismatch.models[0].published = true;
   mismatch.models[0].default_package = true;
   mismatch.models[0].package_model_id = "internal.package.other";
   assert.throws(() => createCatalogAdapter(mismatch, { defaultPackageModelId: "internal.package.id" }), /does not match/);
