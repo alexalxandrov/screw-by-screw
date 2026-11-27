@@ -27,6 +27,8 @@ test("OptiPlex v0.3 package passes the production loader and cross-file validati
   assert.equal(loaded.report.relationshipCount, 145);
   assert.equal(loaded.integrityVerified, true);
   assert.equal(loaded.data.model.geometry_status, "illustrative_proxy_not_cad");
+  assert.equal(loaded.data.model.identity_scope, "platform_family");
+  assert.equal(loaded.data.model.part_number, null);
   assert.equal(loaded.data.model.release.version, "0.3.0");
   assert.equal(loaded.data.model.specifications.physical.height_mm, 350);
   assert.equal(loaded.data.model.specifications.physical.width_mm, 154);

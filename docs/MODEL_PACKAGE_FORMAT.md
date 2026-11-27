@@ -27,7 +27,7 @@ The archive root manifest uses format `sbs-model`, schema version `1.0.0`, a sta
 
 ## JSON-envelope transport
 
-A text-based package starts with the exact UTF-8 prefix `SBSMODEL-JSON\\n`, followed by one JSON object:
+A text-based package starts with the exact UTF-8 prefix `SBSMODEL-JSON\n`, followed by one JSON object:
 
 - `format`: `sbs-model-json`;
 - `schema_version`: `1.0.0`;
@@ -61,7 +61,7 @@ The packager writes a deterministic archive, includes the source manifest and re
 ## Security and resource limits
 
 - ZIP transport: ZIP64 and multi-disk archives are not supported in this format version.
-- JSON-envelope transport: UTF-8 JSON after the `SBSMODEL-JSON\\n` prefix; GLB is base64-encoded.
+- JSON-envelope transport: UTF-8 JSON after the `SBSMODEL-JSON\n` prefix; GLB is base64-encoded.
 - Maximum compressed package: 512 MiB.
 - Maximum expanded package: 512 MiB.
 - Maximum individual entry / GLB: 256 MiB.

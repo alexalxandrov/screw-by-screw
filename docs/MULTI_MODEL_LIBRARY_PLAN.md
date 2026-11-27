@@ -21,7 +21,7 @@ A missing part number on a family-level entry is displayed as an explicit family
 
 ## Package transports
 
-The loader accepts ZIP-based `.sbsmodel` packages with a root manifest and checksummed UTF-8 JSON-envelope packages prefixed by `SBSMODEL-JSON\\n`. Both transports use the same size, path, entry-count, SHA-256, semantic-reference and GLB validation. The OptiPlex v0.3 package uses the JSON envelope so its content can be reproduced from text sidecars and generated geometry.
+The loader accepts ZIP-based `.sbsmodel` packages with a root manifest and checksummed UTF-8 JSON-envelope packages prefixed by `SBSMODEL-JSON\n`. Both transports use the same size, path, entry-count, SHA-256, semantic-reference and GLB validation. The OptiPlex v0.3 package uses the JSON envelope so its content can be reproduced from text sidecars and generated geometry.
 
 ## OptiPlex 5060 Tower v0.3
 
