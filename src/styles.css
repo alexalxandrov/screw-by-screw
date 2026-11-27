@@ -1831,5 +1831,6 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); ou
 
 @media (max-width: 480px) {
   /* The catalogue is a primary action, not a secondary quiet control. */
-  .topbar-actions #catalog-open { display: inline-flex; }
+  .topbar-actions #catalog-open,
+  .topbar-actions #language-toggle { display: inline-flex; }
 }
