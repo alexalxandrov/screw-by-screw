@@ -23,9 +23,16 @@ The prototype:
 
 This is a client-side safety boundary, not a formal sandbox for hostile 3D assets. Browser and Three.js vulnerabilities remain possible; keep the browser and dependencies updated.
 
-## Production hosting headers
+## Build outputs and production hosting headers
 
-For a static production host, configure response headers similar to:
+`npm run build` creates two intentionally different outputs:
+
+- Root `index.html` is the self-contained offline launcher for direct `file://` use. It inlines CSS and JavaScript and may embed available model packages. It is not the artifact covered by the strict web CSP below.
+- `dist/index.html` and `dist/assets/` are the web distribution. The HTML references same-origin external JavaScript and CSS and is checked by the build script for inline scripts/styles. Deploy the complete `dist/` directory, preserving its relative asset paths.
+
+Do not deploy the root standalone launcher with the strict CSP below. Do not weaken the web policy with `unsafe-inline` or `data:` merely to make that standalone file work on a server.
+
+For a static web host serving the `dist/` output, configure response headers similar to:
 
 ```
 Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
@@ -39,7 +46,7 @@ The `frame-ancestors` directive must be sent as an HTTP response header; it is n
 ## Dependency and release controls
 
 - Direct frontend dependencies are exact-version pinned in `package.json`.
-- A committed npm lockfile is still required before 1.0.
+- `package-lock.json` is committed; CI installs from it with `npm ci`.
 - CI runs a production build and Playwright browser tests.
 - The content package has a SHA-256 manifest builder and validator.
 - Third-party images/video frames are not committed; source URLs and rights status are recorded separately.

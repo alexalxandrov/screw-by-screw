@@ -8,9 +8,13 @@ Screw by Screw — концепция публичной образовател�
 
 ## Запуск
 
-**Для обычного запуска откройте `index.html` в корне проекта двойным щелчком.** Страница собирается в один автономный HTML-файл: JavaScript и CSS встроены внутрь, а доступные при сборке пакеты устройств (`.sbsmodel`) встраиваются в каталог. В актуальной feature-ветке собраны EVGA RTX 3060 и IBM PC 5150. Локальный сервер, Node.js и установка npm-пакетов для открытия готового `index.html` не требуются.
+**Для автономного запуска откройте корневой `index.html` двойным щелчком.** Это единый HTML-файл: JavaScript, CSS и пакеты опубликованных моделей встраиваются в него при сборке. В публичный атлас включён IBM PC 5150; EVGA RTX 3060 сохранена в исследовательском архиве и не встраивается в пользовательский каталог. Сервер, Node.js и npm для открытия готового файла не нужны.
 
-Для изменения исходников используйте `index.template.html`, `src/` и обычный Vite dev-сервер (`npm ci`, затем `npm run dev`). После изменений выполните `npm run build`, чтобы пересобрать корневой автономный `index.html`.
+Для разработки используйте `index.template.html`, `src/` и Vite (`npm ci`, затем `npm run dev`). Команда `npm run build` создаёт два артефакта:
+- корневой `index.html` — автономная версия для `file://`;
+- `dist/index.html` вместе с `dist/assets/` — веб-сборка с внешними JS/CSS, рассчитанная на публикацию со строгой CSP.
+
+Для веб-развёртывания публикуйте **всё содержимое `dist/`**, а не корневой автономный HTML. Заголовки CSP и границы двух форматов описаны в [Security and privacy notes](docs/SECURITY.md).
 
 ## Концепция
 
@@ -97,7 +101,9 @@ EVGA RTX 3060 XC BLACK переведена в **исследовательск�
 - [Semantic inventory export](docs/SEMANTIC_INVENTORY_EXPORT.md)
 - [Local learning progress](docs/LEARNING_PROGRESS.md)
 - [GPU pilot content package](content/models/evga-rtx3060-xc-black-12gb/README.md) — source claims, SHA-256 release manifest and bilingual learning data.
-- [IBM PC 5150 atlas implementation](docs/IBM_PC_5150_ATLAS_SPEC.md)\n- [IBM PC 5150 fastener and board-mounting evidence audit](docs/IBM_PC_5150_FASTENER_EVIDENCE.md)\n- [IBM PC 5150 branching disassembly sequence](docs/IBM_PC_5150_DISASSEMBLY_SEQUENCE.md) — second reference model, scope, geometry limits and acceptance gates.
+- [IBM PC 5150 atlas implementation](docs/IBM_PC_5150_ATLAS_SPEC.md)
+- [IBM PC 5150 fastener and board-mounting evidence audit](docs/IBM_PC_5150_FASTENER_EVIDENCE.md)
+- [IBM PC 5150 branching disassembly sequence](docs/IBM_PC_5150_DISASSEMBLY_SEQUENCE.md) — second reference model, scope, geometry limits and acceptance gates.
 - [IBM PC 5150 content package](content/models/ibm-pc-5150-1981/README.md) — 71 components, 100 typed relationships, 14 branching service actions, partial replacement fragments and bilingual learning data.
 - [IBM PC 5150 source register](MODELS/COMPUTERS/IBM/5150/00-SOURCES/REFERENCE_REGISTER.md) — first-edition IBM technical and service references.
 
