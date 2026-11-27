@@ -266,6 +266,29 @@
             </div>
             <div id="detail-assembly-section" class="detail-section" hidden>
               <span class="eyebrow" data-i18n="assemblyEvidence">DISASSEMBLY EVIDENCE</span>
+              <section id="procedure-runner" class="procedure-runner" aria-label="Interactive disassembly procedure" hidden>
+                <div class="procedure-runner-heading">
+                  <strong data-i18n="procedureRunnerTitle">STEP-BY-STEP 3D PROCEDURE</strong>
+                  <output id="procedure-runner-progress">0 / 3</output>
+                </div>
+                <label for="procedure-branch-select" class="eyebrow" data-i18n="procedureBranchLabel">SELECT FRU BRANCH</label>
+                <select id="procedure-branch-select" class="procedure-branch-select" aria-label="Select FRU branch"></select>
+                <p id="procedure-runner-disclaimer" class="procedure-runner-disclaimer" data-i18n="procedureRunnerDisclaimer">Educational scene playback only · does not control physical hardware. Proxy clearances are not measured.</p>
+                <strong id="procedure-runner-current-title" class="procedure-runner-current-title">—</strong>
+                <p id="procedure-runner-description" class="procedure-runner-description"></p>
+                <p id="procedure-runner-note" class="procedure-runner-note" hidden></p>
+                <div class="procedure-runner-safety-block">
+                  <span id="procedure-runner-safety-label" class="eyebrow" data-i18n="procedureRunnerSafety" hidden>SAFETY / PROCEDURAL NOTE</span>
+                  <p id="procedure-runner-safety" class="procedure-runner-safety" hidden></p>
+                </div>
+                <div id="procedure-runner-sources" class="procedure-runner-sources"></div>
+                <p id="procedure-runner-status" class="procedure-runner-status" role="status" aria-live="polite"></p>
+                <div class="procedure-runner-controls">
+                  <button id="procedure-previous" class="procedure-runner-button" type="button" data-i18n="procedureRunnerPrevious" disabled>Previous step</button>
+                  <button id="procedure-next" class="procedure-runner-button procedure-runner-next" type="button" data-i18n="procedureRunnerNext">Show next step</button>
+                  <button id="procedure-reset" class="procedure-runner-button" type="button" data-i18n="procedureRunnerReset" disabled>Reset procedure</button>
+                </div>
+              </section>
               <p id="assembly-empty-note" class="assembly-empty-note" hidden></p>
               <p id="assembly-policy-note" class="assembly-policy-note" hidden></p>
               <div id="assembly-step-list" class="assembly-step-list" hidden></div>
