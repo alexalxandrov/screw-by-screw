@@ -1,0 +1,31 @@
+# IBM Personal Computer 5150 — system unit (1981)
+
+**Model ID:** `computer.ibm.5150.1981`  
+**Package:** `0.1.0-draft`  
+**Geometry status:** `illustrative_proxy_not_cad`
+
+This is the second reference model in Screw by Screw. Scope is the **system unit only**: no monitor, keyboard, printer, external cassette recorder, or optional expansion cards.
+
+## Baseline
+
+The modeled baseline is the August 1981 launch configuration: 16 KB RAM, no installed diskette drive, two empty drive positions, five unpopulated expansion sockets, and an unpopulated optional 8087 socket. The first-edition technical reference and service manuals define the hardware family; later 5150 board revisions and the IBM PC/XT 5160 are excluded.
+
+The package currently contains 71 canonical semantic components, 100 typed relationships, 21 source-linked claims, six registered sources, five functional layers and 12 bilingual learning questions. Service documentation is encoded as 14 granular disassembly actions in seven groups, four partial replacement fragments and five educational animation clips.
+
+## Evidence limits
+
+The 8.5 × 11 inch system-board outline, 4.77 MHz CPU clock, 14.31818 MHz reference crystal, and 63.5 W / 120 Vac PSU specification are source-backed. The case envelope is referenced to one FAU museum specimen only. The August 1981 IBM service procedure specifies one system-board retaining screw and a slide away from the PSU; it mentions standoffs/slots but does not give their count. Four support markers in the model are illustrative, not a measured count. PCWorld's different used specimen reports two board screws/four plastic standoffs, but its board revision is not correlated with the first 16–64 KB board and is not applied here. Most component coordinates remain proxies; board hole pattern, individual DRAM/ROM population, fastener drive standard/dimensions/thread/torque, and chassis sheet-metal geometry are not asserted as measured facts.
+
+The 14 actions form a source-backed branching dependency graph, not a universal screw-by-screw teardown order. The PSU is represented as a sealed FRU. Disconnect mains before opening the case; do not open or probe the PSU.
+
+See [IBM 5150 disassembly sequence](../../../../docs/IBM_PC_5150_DISASSEMBLY_SEQUENCE.md), [IBM 5150 fastener and board-mounting evidence audit](../../../../docs/IBM_PC_5150_FASTENER_EVIDENCE.md).\n\n## Sources
+
+- [IBM Personal Computer Technical Reference, first edition, August 1981](https://ps2.infania.net/IBM_5150_Technical_Reference_6025005_AUG81.pdf) — primary hardware, board, I/O, timing and PSU reference.
+- [IBM Personal Computer Hardware Maintenance and Service, first edition, August 1981](https://minuszerodegrees.net/manuals/IBM/IBM_5150_Hardware_Maintenance_and_Service_6025072_AUG81.pdf) — primary field-replaceable-unit procedures.
+- [IBM corporate history: Personal Computer](https://www.ibm.com/history/personal-computer) — launch date and original configuration.
+
+Copyrighted manuals and photographs are linked, not redistributed. See the evidence register in the package's source data.
+
+## Next fidelity gate
+
+Promote the geometry beyond proxy status only after a serial/revision-specific physical specimen or calibrated orthographic evidence is available, followed by independent component and hierarchy review.

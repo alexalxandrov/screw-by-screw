@@ -5,6 +5,7 @@ import { createLearningProgressStore } from "./data/learning-progress.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { SceneController } from "./viewer/SceneController.js";
+import { ProcedureController } from "./viewer/ProcedureController.js";
 import { MeasurementController } from "./viewer/MeasurementController.js";
 import { AnimationPlayer } from "./viewer/AnimationPlayer.js";
 import { createCatalogAdapter } from "./data/catalog.js";
@@ -43,7 +44,14 @@ const DEFAULT_PACKAGE_DATA = {
   release: DEFAULT_RELEASE_PACKAGE
 };
 const LEARNING_PROGRESS_STORE = createLearningProgressStore();
-const MODEL_CATALOG = createCatalogAdapter(CATALOG_SOURCE, { defaultPackageModelId: DEFAULT_MODEL.id });
+const catalogDefaultPackage = CATALOG_SOURCE.models.find((entry) => entry?.default_package === true);
+const catalogDefaultPackageModelId =
+  typeof catalogDefaultPackage?.package_model_id === "string" && catalogDefaultPackage.package_model_id.trim()
+    ? catalogDefaultPackage.package_model_id.trim()
+    : DEFAULT_MODEL.id;
+const MODEL_CATALOG = createCatalogAdapter(CATALOG_SOURCE, {
+  defaultPackageModelId: catalogDefaultPackageModelId
+});
 
 const $ = (selector) => document.querySelector(selector);
 const canvasHost = $("#viewer-canvas");
@@ -61,6 +69,7 @@ const state = {
   componentNodes: new Map(),
   catalog: new Map(COMPONENTS.map((item) => [item.id, item])),
   sceneController: null,
+  procedureController: null,
   cameraHome: null,
   gridHelper: null,
   exploded: 0,
@@ -121,7 +130,7 @@ const UI = {
     measure: "Measure", clearMeasurement: "Clear", measureIdle: "Measurement off · model-space only", measurePrompt: "Click a visible surface to set point 1 of 2", measureFirstPoint: "Point 1 of 2 set · select the second point", measureDistance: "Distance", measureDisclaimer: "model-space only", measureNoHit: "Click a visible model surface", measureEnabled: "Measurement enabled", measureDisabled: "Measurement disabled", modelUnits: "model units", measureNote: "Not a verified physical dimension",
     clearLayer: "Clear layer", inspection: "INSPECTION", componentDetails: "Component details",
     selectComponent: "Select a component", selectHint: "Choose a part in the 3D view or assembly tree to inspect its role and evidence.",
-    identity: "IDENTITY", parent: "Parent", geometry: "Geometry", evidence: "EVIDENCE", technicalClaims: "TECHNICAL CLAIMS", claimUnknown: "Unknown", yes: "Yes", no: "No", claimSources: "Evidence sources", technicalRelationships: "TECHNICAL RELATIONSHIPS", qualitativeRelation: "Qualitative relationship", noRelationshipSource: "No source registered", exportData: "MODEL DATA", exportJson: "Export JSON", exportCsv: "CSV ZIP", exportComplete: "Export prepared · local only", exportFailed: "Export failed", assemblyEvidence: "DISASSEMBLY EVIDENCE", noVerifiedSequence: "No verified disassembly sequence has been authored for this model.", sourceObservations: "SOURCE OBSERVATIONS · NOT DISASSEMBLY STEPS", stepLabel: "Step", toolsLabel: "Tools", safetyLabel: "Safety", prerequisitesLabel: "Prerequisites", openAtSource: "Open source",
+    identity: "IDENTITY", parent: "Parent", geometry: "Geometry", evidence: "EVIDENCE", technicalClaims: "TECHNICAL CLAIMS", claimUnknown: "Unknown", yes: "Yes", no: "No", claimSources: "Evidence sources", technicalRelationships: "TECHNICAL RELATIONSHIPS", qualitativeRelation: "Qualitative relationship", noRelationshipSource: "No source registered", exportData: "MODEL DATA", exportJson: "Export JSON", exportCsv: "CSV ZIP", exportComplete: "Export prepared · local only", exportFailed: "Export failed", assemblyEvidence: "DISASSEMBLY EVIDENCE", noVerifiedSequence: "No verified disassembly sequence has been authored for this model.", sourceObservations: "SOURCE OBSERVATIONS · NOT DISASSEMBLY STEPS", stepLabel: "Step", toolsLabel: "Tools", safetyLabel: "Safety", prerequisitesLabel: "Prerequisites", openAtSource: "Open source", runProcedureStep: "Show this step in 3D", resetProcedureScene: "Reset 3D procedure", previousProcedureStep: "Previous", nextProcedureStep: "Next", procedureReady: "Procedure scene ready", procedureReset: "Procedure scene reset", procedureNoGeometry: "No separate physical mesh is registered for this action; the relevant component is selected.", procedureExactSlide: "Manufacturer-stated slide: 12.7 mm (1/2 in)", procedureApproxMotion: "Illustrative extraction movement; travel is not specified by IBM.", procedureProgress: "Step", procedureBranchLabel: "SELECT FRU BRANCH", procedureCommonBranch: "Common opening only", procedureChooseBranch: "Common access is complete. Choose one FRU branch; the service manual does not require a single linear teardown.", procedureRunnerTitle: "STEP-BY-STEP 3D PROCEDURE", procedureRunnerDisclaimer: "Educational scene playback only · does not control physical hardware. Proxy clearances are not measured.", procedureRunnerNext: "Show next step", procedureRunnerPrevious: "Previous step", procedureRunnerReset: "Reset procedure", procedureRunnerReady: "Start with safe power isolation and cover access.", procedureRunnerVisualized: "Visual state applied in the 3D model. This does not confirm a physical service action.", procedureRunnerComplete: "Selected FRU branch completed in the educational scene.", procedureRunnerNoop: "No scene movement: this option is absent from the 16 KB launch baseline.", procedureRunnerSafety: "SAFETY / PROCEDURAL NOTE", procedureGroup: "PROCEDURE BRANCH", commonEntryMode: "Common entry", conditionalBranchMode: "Conditional branch", sharedPreparationMode: "Shared preparation", independentFruBranchMode: "Independent FRU branch", replacementFragments: "DOCUMENTED REPLACEMENT FRAGMENTS · NOT A COMPLETE REASSEMBLY", sequenceDisplayOnly: "Display order only · follow the source-backed prerequisites and the selected FRU branch.",
     sources: "SOURCES", accuracyFooter: "Unknown values remain unknown. No inferred CAD accuracy.",
     ready: "READY", localFirst: "LOCAL-FIRST · NO ACCOUNT", openModel: "Open model",
     noSelection: "No component selected", componentsCount: "components",
@@ -146,7 +155,7 @@ const UI = {
     measure: "Измерить", clearMeasurement: "Сброс", measureIdle: "Измерение выключено · только пространство модели", measurePrompt: "Нажмите на видимую поверхность, чтобы задать точку 1 из 2", measureFirstPoint: "Точка 1 из 2 задана · выберите вторую", measureDistance: "Расстояние", measureDisclaimer: "ед. модели", measureNoHit: "Нажмите на видимую поверхность модели", measureEnabled: "Инструмент измерения включён", measureDisabled: "Инструмент измерения выключен", modelUnits: "единицы модели", measureNote: "Не подтверждённый физический размер",
     clearLayer: "Сбросить слой", inspection: "ИНСПЕКЦИЯ", componentDetails: "Карточка компонента",
     selectComponent: "Выберите компонент", selectHint: "Выберите деталь в 3D-окне или дереве сборки, чтобы изучить её назначение и источники.",
-    identity: "ИДЕНТИФИКАЦИЯ", parent: "Родитель", geometry: "Геометрия", evidence: "ДОКАЗАТЕЛЬНОСТЬ", technicalClaims: "ТЕХНИЧЕСКИЕ УТВЕРЖДЕНИЯ", claimUnknown: "Неизвестно", yes: "Да", no: "Нет", claimSources: "Источники утверждения", technicalRelationships: "ТЕХНИЧЕСКИЕ СВЯЗИ", qualitativeRelation: "Качественная связь", noRelationshipSource: "Источник не зарегистрирован", exportData: "ДАННЫЕ МОДЕЛИ", exportJson: "Экспорт JSON", exportCsv: "CSV ZIP", exportComplete: "Экспорт подготовлен · локально", exportFailed: "Ошибка экспорта", assemblyEvidence: "ДОКАЗАТЕЛЬСТВА РАЗБОРКИ", noVerifiedSequence: "Подтверждённая последовательность разборки для этой модели пока не составлена.", sourceObservations: "НАБЛЮДЕНИЯ В ИСТОЧНИКАХ · НЕ ШАГИ РАЗБОРКИ", stepLabel: "Шаг", toolsLabel: "Инструменты", safetyLabel: "Безопасность", prerequisitesLabel: "Предварительные шаги", openAtSource: "Открыть источник",
+    identity: "ИДЕНТИФИКАЦИЯ", parent: "Родитель", geometry: "Геометрия", evidence: "ДОКАЗАТЕЛЬНОСТЬ", technicalClaims: "ТЕХНИЧЕСКИЕ УТВЕРЖДЕНИЯ", claimUnknown: "Неизвестно", yes: "Да", no: "Нет", claimSources: "Источники утверждения", technicalRelationships: "ТЕХНИЧЕСКИЕ СВЯЗИ", qualitativeRelation: "Качественная связь", noRelationshipSource: "Источник не зарегистрирован", exportData: "ДАННЫЕ МОДЕЛИ", exportJson: "Экспорт JSON", exportCsv: "CSV ZIP", exportComplete: "Экспорт подготовлен · локально", exportFailed: "Ошибка экспорта", assemblyEvidence: "ДОКАЗАТЕЛЬСТВА РАЗБОРКИ", noVerifiedSequence: "Подтверждённая последовательность разборки для этой модели пока не составлена.", sourceObservations: "НАБЛЮДЕНИЯ В ИСТОЧНИКАХ · НЕ ШАГИ РАЗБОРКИ", stepLabel: "Шаг", toolsLabel: "Инструменты", safetyLabel: "Безопасность", prerequisitesLabel: "Предварительные шаги", openAtSource: "Открыть источник", runProcedureStep: "Показать действие в 3D", resetProcedureScene: "Сбросить разборку", previousProcedureStep: "Назад", nextProcedureStep: "Далее", procedureReady: "Сцена процедуры готова", procedureReset: "Сцена возвращена в исходное состояние", procedureNoGeometry: "Для этого действия нет отдельной физической геометрии; выбран соответствующий компонент.", procedureExactSlide: "Заданный производителем сдвиг: 12,7 мм (1/2 дюйма)", procedureApproxMotion: "Условное извлечение; величина перемещения IBM не указана.", procedureProgress: "Шаг", procedureBranchLabel: "ВЫБЕРИТЕ ВЕТВЬ FRU", procedureCommonBranch: "Только общая подготовка", procedureChooseBranch: "Общая подготовка завершена. Выберите одну ветвь FRU: руководство не требует единой линейной разборки.", procedureRunnerTitle: "ПОШАГОВАЯ 3D-ПРОЦЕДУРА", procedureRunnerDisclaimer: "Только учебное воспроизведение в сцене · не управляет реальной аппаратурой. Условные зазоры не измерены.", procedureRunnerNext: "Показать следующий шаг", procedureRunnerPrevious: "Предыдущий шаг", procedureRunnerReset: "Сбросить процедуру", procedureRunnerReady: "Начните с безопасного отключения питания и открытия корпуса.", procedureRunnerVisualized: "Визуальное состояние применено в 3D-модели. Это не подтверждает выполнение физической операции.", procedureRunnerComplete: "Выбранная ветвь FRU завершена в учебной сцене.", procedureRunnerNoop: "Геометрия не перемещается: в стартовой конфигурации 16 КБ этот узел отсутствует.", procedureRunnerSafety: "БЕЗОПАСНОСТЬ И ПРИМЕЧАНИЕ К ПРОЦЕДУРЕ", procedureGroup: "ВЕТВЬ ПРОЦЕДУРЫ", commonEntryMode: "Общая начальная подготовка", conditionalBranchMode: "Условная ветвь", sharedPreparationMode: "Общая подготовка разъёмов", independentFruBranchMode: "Независимая ветвь FRU", replacementFragments: "ДОКУМЕНТИРОВАННЫЕ ФРАГМЕНТЫ УСТАНОВКИ · НЕ ПОЛНАЯ ОБРАТНАЯ СБОРКА", sequenceDisplayOnly: "Порядок отображения · следуйте подтверждённым зависимостям и выбранной ветви FRU.",
     sources: "ИСТОЧНИКИ", accuracyFooter: "Неизвестное остаётся неизвестным. Точность CAD не подразумевается.",
     ready: "ГОТОВО", localFirst: "ЛОКАЛЬНО · БЕЗ АККАУНТА", openModel: "Открыть модель",
     noSelection: "Компонент не выбран", componentsCount: "компонентов",
@@ -311,7 +320,7 @@ function renderCatalog() {
   categorySelect.value = state.catalogCategory;
 
   const query = state.catalogSearch.trim().toLocaleLowerCase();
-  const entries = MODEL_CATALOG.models.filter((entry) => {
+  const entries = MODEL_CATALOG.models.filter((entry) => entry.published !== false).filter((entry) => {
     if (state.catalogCategory !== "all" && entry.categoryId !== state.catalogCategory) return false;
     const searchable = [
       entry.id, entry.manufacturer, entry.name.en, entry.name.ru, entry.partNumber,
@@ -764,6 +773,7 @@ function collectNodes(root) {
     if (id && state.componentNodes.has(id)) state.modelWarnings.push(id);
     else if (id) state.componentNodes.set(id, object);
   });
+  captureProcedureSceneBaseline(root);
   $("#component-count").textContent = String(state.componentNodes.size);
   $("#scene-stats").textContent = `${state.componentNodes.size} ${t("componentsCount").toUpperCase()}`;
   renderTree();
@@ -804,7 +814,7 @@ function renderTree() {
       parent = parent.parent;
     }
 
-    const isDeviceRoot = id === "assembly.card.root";
+    const isDeviceRoot = id === MODEL.id || id === "assembly.card.root";
     const claims = (CLAIM_PACKAGE.claims ?? []).filter((claim) =>
       claim.subject_id === id || (isDeviceRoot && claim.subject_id === MODEL.id)
     );
@@ -928,7 +938,7 @@ function renderClaims(componentId) {
   const host = $("#claim-list");
   if (!section || !host) return;
   host.replaceChildren();
-  const modelLevel = componentId === "assembly.card.root";
+  const modelLevel = componentId === MODEL.id || componentId === "assembly.card.root";
   const claims = (CLAIM_PACKAGE.claims ?? []).filter((claim) =>
     claim.subject_id === componentId || (modelLevel && claim.subject_id === MODEL.id)
   );
@@ -1133,34 +1143,408 @@ function sourceUrlAtLocator(source, locator) {
   }
 }
 
+function renderProcedureRunner(componentId) {
+  const host = $("#procedure-runner");
+  if (!host) return;
+  const isDeviceRoot = componentId === MODEL.id || componentId === "assembly.card.root";
+  const isRootProcedureComponent = isDeviceRoot;
+  const controller = state.procedureController;
+  const routeData = ASSEMBLY_PACKAGE.procedure_routes;
+  host.hidden = !(isDeviceRoot && controller && Array.isArray(routeData?.branches));
+  if (host.hidden) return;
+
+  const snapshot = controller.getSnapshot();
+  const branchSelect = $("#procedure-branch-select");
+  const selectedBranch = snapshot.branchId ?? "";
+  if (branchSelect.dataset.modelId !== MODEL.id) {
+    branchSelect.replaceChildren();
+    const commonOption = document.createElement("option");
+    commonOption.value = "";
+    commonOption.textContent = t("procedureCommonBranch");
+    branchSelect.append(commonOption);
+    for (const route of routeData.branches) {
+      const option = document.createElement("option");
+      option.value = route.id;
+      option.textContent = localizedPackageText(route.title);
+      branchSelect.append(option);
+    }
+    branchSelect.dataset.modelId = MODEL.id;
+  }
+  branchSelect.value = selectedBranch;
+  branchSelect.disabled = snapshot.busy;
+
+  const title = $("#procedure-runner-current-title");
+  const description = $("#procedure-runner-description");
+  const note = $("#procedure-runner-note");
+  const safety = $("#procedure-runner-safety");
+  const safetyLabel = $("#procedure-runner-safety-label");
+  const sourcesHost = $("#procedure-runner-sources");
+  const progress = $("#procedure-runner-progress");
+  const status = $("#procedure-runner-status");
+  const previous = $("#procedure-previous");
+  const next = $("#procedure-next");
+  const reset = $("#procedure-reset");
+  const step = snapshot.currentStep;
+
+  host.dataset.branch = selectedBranch || "common";
+  host.dataset.stepId = snapshot.currentStepId ?? "";
+  host.dataset.completedCount = String(snapshot.completedStepIds.length);
+  host.dataset.busy = String(snapshot.busy);
+
+  progress.textContent = `${Math.max(0, snapshot.stepIndex + 1)} / ${snapshot.stepCount}`;
+  title.textContent = step
+    ? `${t("stepLabel")} ${Number.isInteger(step.sequence) ? step.sequence : snapshot.stepIndex + 1}: ${localizedPackageText(step.title ?? step.action)}`
+    : t("procedureRunnerTitle");
+  description.textContent = step ? localizedPackageText(step.description) : t("procedureRunnerReady");
+
+  const baselineOutcome = localizedPackageText(step?.baseline_outcome);
+  const actionNotes = localizedPackageList((step?.visual_actions ?? []).map((action) => action.note));
+  const visualizationPolicy = localizedPackageText(ASSEMBLY_PACKAGE.visualization_policy);
+  const detailNotes = [baselineOutcome, ...actionNotes, visualizationPolicy].filter(Boolean);
+  note.textContent = detailNotes.join(" ");
+  note.hidden = detailNotes.length === 0;
+
+  const safetyText = localizedPackageList(step?.safety_notes).join(" ");
+  safetyLabel.textContent = t("procedureRunnerSafety");
+  safety.textContent = safetyText;
+  safety.hidden = !safetyText;
+  safetyLabel.hidden = !safetyText;
+
+  sourcesHost.replaceChildren();
+  const sourceMap = new Map(MODEL.sources.map((source) => [source.id, source]));
+  for (const sourceId of step?.source_ids ?? []) {
+    const source = sourceMap.get(sourceId);
+    if (!source?.url) continue;
+    const link = document.createElement("a");
+    link.className = "assembly-source-link";
+    link.href = source.url;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = `↗ ${t("openAtSource")}: ${source.label}`;
+    sourcesHost.append(link);
+  }
+
+  if (snapshot.busy) status.textContent = t("loading");
+  else if (snapshot.branchRequired) status.textContent = t("procedureChooseBranch");
+  else if (snapshot.isComplete) status.textContent = t("procedureRunnerComplete");
+  else if (step) status.textContent = t("procedureRunnerVisualized");
+  else status.textContent = t("procedureRunnerReady");
+
+  previous.disabled = !snapshot.canGoPrevious;
+  next.disabled = !snapshot.canGoNext;
+  next.textContent = t("procedureRunnerNext");
+  reset.disabled = snapshot.stepIndex < 0 || snapshot.busy;
+  if (snapshot.branchRequired) branchSelect.focus?.({ preventScroll: true });
+}
+
+
+let procedureSceneBaselineRoot = null;
+let procedureSceneBaseline = new Map();
+let procedureCurrentIndex = -1;
+let procedureAnimationToken = 0;
+
+function captureProcedureSceneBaseline(root) {
+  procedureSceneBaselineRoot = root;
+  procedureSceneBaseline = new Map();
+  procedureCurrentIndex = -1;
+  state.componentNodes.forEach((object, id) => {
+    procedureSceneBaseline.set(id, {
+      position: object.position.clone(),
+      visible: object.visible
+    });
+  });
+}
+
+function restoreProcedureSceneBaseline() {
+  if (!state.modelRoot || procedureSceneBaselineRoot !== state.modelRoot) {
+    captureProcedureSceneBaseline(state.modelRoot);
+  }
+  procedureAnimationToken += 1;
+  procedureSceneBaseline.forEach((base, id) => {
+    const object = findNodeById(id);
+    if (!object) return;
+    object.position.copy(base.position);
+    object.visible = base.visible;
+  });
+  procedureCurrentIndex = -1;
+  if (canvasHost) {
+    delete canvasHost.dataset.procedureStepId;
+    delete canvasHost.dataset.procedureMotion;
+  }
+  const status = $("#assembly-motion-status");
+  if (status) status.textContent = t("procedureReset");
+  updateProcedureControls();
+}
+
+function animateProcedurePosition(object, target, duration = 480) {
+  if (!object) return;
+  const token = ++procedureAnimationToken;
+  const start = object.position.clone();
+  const startTime = performance.now();
+  const tick = (now) => {
+    if (token !== procedureAnimationToken) return;
+    const progress = Math.min(1, (now - startTime) / duration);
+    const eased = progress * progress * (3 - 2 * progress);
+    object.position.lerpVectors(start, target, eased);
+    if (progress < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
+
+function procedureComponentMatches(pattern) {
+  const data = COMPONENTS.find((item) => pattern.test([
+    item.id, item.en, item.ru, item.descriptionEn, item.descriptionRu
+  ].filter(Boolean).join(" ")));
+  return data ? findNodeById(data.id) : null;
+}
+
+function procedureWorldCenter(object) {
+  if (!object) return null;
+  const bounds = new THREE.Box3().setFromObject(object);
+  if (bounds.isEmpty()) return object.getWorldPosition(new THREE.Vector3());
+  return bounds.getCenter(new THREE.Vector3());
+}
+
+function procedureWorldDeltaToLocal(object, worldDelta) {
+  if (!object?.parent) return worldDelta.clone();
+  object.parent.updateMatrixWorld(true);
+  const origin = object.getWorldPosition(new THREE.Vector3());
+  const end = origin.clone().add(worldDelta);
+  return object.parent.worldToLocal(end).sub(object.parent.worldToLocal(origin));
+}
+
+function procedureMoveWorld(object, worldDelta, animate = true) {
+  if (!object || !worldDelta || worldDelta.lengthSq() === 0) return false;
+  const localDelta = procedureWorldDeltaToLocal(object, worldDelta);
+  const target = object.position.clone().add(localDelta);
+  if (animate) animateProcedurePosition(object, target);
+  else object.position.copy(target);
+  return true;
+}
+
+function procedureLabel(id) {
+  const data = state.catalog.get(id);
+  return data ? (state.language === "ru" ? data.ru : data.en) : id;
+}
+
+function procedureEffectForStep(step, animate = true) {
+  const descriptors = [step.id, localizedPackageText(step.title), localizedPackageText(step.action),
+    localizedPackageText(step.description)].filter(Boolean).join(" ").toLowerCase();
+  const ids = step.component_ids ?? [];
+  const targetNodes = ids.map((id) => ({ id, node: findNodeById(id), label: procedureLabel(id) }))
+    .filter((item) => item.node);
+
+  const connectorAction = /disconnect|unplug|отключ|отсоедин|разъ[её]м/.test(descriptors);
+  const fastenerAction = /screw|fastener|винт|креп[её]ж/.test(descriptors);
+  let changed = false;
+
+  if (connectorAction) {
+    for (const item of targetNodes) {
+      if (/connector|plug|cable|lead|power|p[123]|разъ[её]м|кабел|провод|штекер/i.test(item.id + " " + item.label)) {
+        item.node.visible = false;
+        changed = true;
+      }
+    }
+  }
+
+  if (fastenerAction && /remove|loosen|unscrew|извлеч|ослаб|выкрут|снять/.test(descriptors)) {
+    for (const item of targetNodes) {
+      if (/screw|fastener|винт|креп[её]ж/i.test(item.id + " " + item.label)) {
+        item.node.visible = false;
+        changed = true;
+      }
+    }
+  }
+
+  const board = findNodeById("assembly.system_board");
+  const psu = procedureComponentMatches(/power[ -]?supply|\bpsu\b|блок питания/i);
+  const speaker = procedureComponentMatches(/speaker|loudspeaker|динамик/i);
+  const cover = procedureComponentMatches(/case cover|top cover|chassis cover|крышка корпуса|верхняя крышка/i);
+
+  if (/step\.board\.slide|board\.slide|сдвинуть плату|отвести плату/.test(descriptors) && board) {
+    const boardCenter = procedureWorldCenter(board);
+    const psuCenter = procedureWorldCenter(psu);
+    if (boardCenter && psuCenter) {
+      const direction = boardCenter.clone().sub(psuCenter);
+      direction.z = 0;
+      if (direction.lengthSq() > 1e-6) {
+        direction.normalize();
+        changed = procedureMoveWorld(board, direction.multiplyScalar(12.7), animate) || changed;
+      }
+    }
+    if (changed && canvasHost) canvasHost.dataset.procedureMotion = "manufacturer-stated-slide";
+    const status = $("#assembly-motion-status");
+    if (status) status.textContent = changed ? t("procedureExactSlide") : t("procedureNoGeometry");
+  } else if (/step\.board\.remove|lift.*board|remove.*board|поднять.*плат|извлечь.*плат/.test(descriptors) && board) {
+    const bounds = new THREE.Box3().setFromObject(board);
+    const size = bounds.getSize(new THREE.Vector3());
+    const travel = Math.max(24, size.x * 0.55);
+    changed = procedureMoveWorld(board, new THREE.Vector3(0, 0, travel), animate) || changed;
+    if (canvasHost) canvasHost.dataset.procedureMotion = "illustrative-lift";
+  } else if (/step\.speaker|speaker.*remove|remove.*speaker|извлечь.*динамик|снять.*динамик/.test(descriptors) && speaker) {
+    const bounds = new THREE.Box3().setFromObject(speaker);
+    const size = bounds.getSize(new THREE.Vector3());
+    changed = procedureMoveWorld(speaker, new THREE.Vector3(0, 0, Math.max(22, size.z * 1.5)), animate) || changed;
+    if (canvasHost) canvasHost.dataset.procedureMotion = "illustrative-lift";
+  } else if (/step\.psu|power supply.*remove|remove.*power supply|извлечь.*блок питания|снять.*блок питания/.test(descriptors) && psu) {
+    const rootBox = new THREE.Box3().setFromObject(state.modelRoot);
+    const rootCenter = rootBox.getCenter(new THREE.Vector3());
+    const psuCenter = procedureWorldCenter(psu);
+    if (psuCenter) {
+      const direction = psuCenter.clone().sub(rootCenter);
+      direction.z = 0;
+      if (direction.lengthSq() > 1e-6) {
+        direction.normalize();
+        changed = procedureMoveWorld(psu, direction.multiplyScalar(55), animate) || changed;
+      }
+    }
+    if (canvasHost) canvasHost.dataset.procedureMotion = "illustrative-fru-extraction";
+  } else if (/step\.cover|cover.*remove|remove.*cover|сдвинуть.*крышк|снять.*крышк/.test(descriptors) && cover) {
+    const bounds = new THREE.Box3().setFromObject(state.modelRoot);
+    const rootCenter = bounds.getCenter(new THREE.Vector3());
+    const coverCenter = procedureWorldCenter(cover);
+    if (coverCenter) {
+      const direction = coverCenter.clone().sub(rootCenter);
+      direction.z = 0;
+      if (direction.lengthSq() > 1e-6) {
+        direction.normalize();
+        changed = procedureMoveWorld(cover, direction.multiplyScalar(55), animate) || changed;
+      }
+    }
+    if (canvasHost) canvasHost.dataset.procedureMotion = "illustrative-cover-slide";
+  }
+
+  return changed;
+}
+
+function setProcedureSceneIndex(nextIndex) {
+  const steps = ASSEMBLY_PACKAGE.steps ?? [];
+  if (!steps.length) return;
+  const index = Math.max(-1, Math.min(steps.length - 1, nextIndex));
+  restoreProcedureSceneBaseline();
+  procedureCurrentIndex = index;
+  for (let i = 0; i <= index; i += 1) {
+    const changed = procedureEffectForStep(steps[i], i === index);
+    if (i === index) {
+      if (canvasHost) canvasHost.dataset.procedureStepId = steps[i].id;
+      if (!changed) {
+        const targetId = (steps[i].component_ids ?? [])[0];
+        if (targetId && findNodeById(targetId)) selectComponent(targetId);
+        const status = $("#assembly-motion-status");
+        if (status) status.textContent = t("procedureNoGeometry");
+      }
+    }
+  }
+  updateProcedureControls();
+}
+
+function updateProcedureControls() {
+  const steps = ASSEMBLY_PACKAGE.steps ?? [];
+  const previous = $("#assembly-step-previous");
+  const next = $("#assembly-step-next");
+  const reset = $("#assembly-step-reset");
+  const progress = $("#assembly-step-progress");
+  if (previous) previous.disabled = procedureCurrentIndex <= -1;
+  if (next) next.disabled = procedureCurrentIndex >= steps.length - 1;
+  if (reset) reset.disabled = procedureCurrentIndex === -1;
+  if (progress) progress.textContent = procedureCurrentIndex < 0
+    ? `${t("procedureProgress")} 0 / ${steps.length}`
+    : `${t("procedureProgress")} ${procedureCurrentIndex + 1} / ${steps.length}`;
+}
+
 function renderAssemblyEvidence(componentId) {
   const section = $("#detail-assembly-section");
   const emptyNote = $("#assembly-empty-note");
   const stepHost = $("#assembly-step-list");
+  const policyNote = $("#assembly-policy-note");
   const observationHeading = $("#assembly-observation-heading");
   const observationHost = $("#assembly-observation-list");
+  const replacementHeading = $("#assembly-replacement-heading");
+  const replacementPolicy = $("#assembly-replacement-policy");
+  const replacementHost = $("#assembly-replacement-list");
   if (!section || !emptyNote || !stepHost || !observationHeading || !observationHost) return;
 
   stepHost.replaceChildren();
+  const previousControl = $("#assembly-step-previous");
+  const nextControl = $("#assembly-step-next");
+  const resetControl = $("#assembly-step-reset");
+  previousControl?.replaceWith(previousControl.cloneNode(true));
+  nextControl?.replaceWith(nextControl.cloneNode(true));
+  resetControl?.replaceWith(resetControl.cloneNode(true));
+  $("#assembly-step-previous")?.addEventListener("click", () => setProcedureSceneIndex(procedureCurrentIndex - 1));
+  $("#assembly-step-next")?.addEventListener("click", () => setProcedureSceneIndex(procedureCurrentIndex + 1));
+  $("#assembly-step-reset")?.addEventListener("click", () => restoreProcedureSceneBaseline());
+  const playbackControls = $("#assembly-playback-controls");
+  if (playbackControls) playbackControls.hidden = !(componentId === MODEL.id || componentId === "assembly.card.root");
+  updateProcedureControls();
   observationHost.replaceChildren();
-  const isDeviceRoot = componentId === "assembly.card.root";
+  replacementHost?.replaceChildren();
+  const isDeviceRoot = componentId === MODEL.id || componentId === "assembly.card.root";
   const steps = (ASSEMBLY_PACKAGE.steps ?? []).filter((step) =>
     isDeviceRoot || (step.component_ids ?? []).includes(componentId)
   );
   const observations = isDeviceRoot ? (ASSEMBLY_PACKAGE.observations ?? []) : [];
-  section.hidden = steps.length === 0 && observations.length === 0 && !isDeviceRoot;
+  const replacementProcedures = isDeviceRoot
+    ? (ASSEMBLY_PACKAGE.replacement_procedures?.procedures ?? [])
+    : [];
+  section.hidden = steps.length === 0 && observations.length === 0 && replacementProcedures.length === 0 && !isDeviceRoot;
   if (section.hidden) return;
 
   emptyNote.hidden = !(isDeviceRoot && steps.length === 0);
   emptyNote.textContent = steps.length === 0 ? t("noVerifiedSequence") : "";
   stepHost.hidden = steps.length === 0;
+  if (policyNote) {
+    const policy = isDeviceRoot ? localizedPackageText(ASSEMBLY_PACKAGE.policy) : "";
+    policyNote.hidden = !policy;
+    policyNote.textContent = policy;
+  }
   observationHeading.hidden = observations.length === 0;
   observationHeading.textContent = t("sourceObservations");
   observationHost.hidden = observations.length === 0;
+  if (replacementHeading) {
+    replacementHeading.hidden = replacementProcedures.length === 0;
+    replacementHeading.textContent = t("replacementFragments");
+  }
+  if (replacementPolicy) {
+    const policy = isDeviceRoot
+      ? localizedPackageText(ASSEMBLY_PACKAGE.replacement_procedures?.policy)
+      : "";
+    replacementPolicy.hidden = !policy;
+    replacementPolicy.textContent = policy;
+  }
+  if (replacementHost) replacementHost.hidden = replacementProcedures.length === 0;
 
   const sourceMap = new Map(MODEL.sources.map((source) => [source.id, source]));
+  const groupMap = new Map((ASSEMBLY_PACKAGE.procedure_groups ?? []).map((group) => [group.id, group]));
+  const modeLabels = {
+    common_entry: "commonEntryMode",
+    conditional_branch: "conditionalBranchMode",
+    shared_preparation: "sharedPreparationMode",
+    independent_fru_branch: "independentFruBranchMode"
+  };
+  let previousGroupId = null;
 
   steps.forEach((step, index) => {
+    if (step.group_id && step.group_id !== previousGroupId) {
+      const group = groupMap.get(step.group_id);
+      const groupHeader = document.createElement("div");
+      groupHeader.className = "assembly-procedure-group";
+      groupHeader.dataset.groupId = step.group_id;
+      const groupTitle = document.createElement("strong");
+      groupTitle.className = "assembly-procedure-group-title";
+      groupTitle.textContent = group ? localizedPackageText(group.title) : step.group_id;
+      groupHeader.append(groupTitle);
+      const modeKey = modeLabels[group?.mode];
+      if (modeKey) {
+        const mode = document.createElement("span");
+        mode.className = "assembly-procedure-group-mode";
+        mode.textContent = t(modeKey);
+        groupHeader.append(mode);
+      }
+      if (isDeviceRoot) stepHost.append(groupHeader);
+      previousGroupId = step.group_id;
+    }
+
     const card = document.createElement("article");
     card.className = "assembly-step-card";
     card.dataset.stepId = step.id ?? `step-${index + 1}`;
@@ -1237,6 +1621,16 @@ function renderAssemblyEvidence(componentId) {
       card.append(link);
     });
 
+    const runStep = document.createElement("button");
+    runStep.type = "button";
+    runStep.className = "assembly-step-run";
+    runStep.textContent = t("runProcedureStep");
+    runStep.dataset.runProcedureStep = step.id;
+    runStep.addEventListener("click", () => {
+      const fullIndex = (ASSEMBLY_PACKAGE.steps ?? []).findIndex((item) => item.id === step.id);
+      setProcedureSceneIndex(fullIndex);
+    });
+    card.append(runStep);
     stepHost.append(card);
   });
 
@@ -1272,6 +1666,38 @@ function renderAssemblyEvidence(componentId) {
     }
     observationHost.append(card);
   });
+
+  replacementProcedures.forEach((procedure) => {
+    const card = document.createElement("article");
+    card.className = "assembly-replacement-card";
+    card.dataset.procedureId = procedure.id;
+    const title = document.createElement("strong");
+    title.className = "assembly-observation-locator";
+    title.textContent = localizedPackageText(procedure.title);
+    const locator = document.createElement("p");
+    locator.className = "assembly-step-meta";
+    locator.textContent = procedure.locator ?? "";
+    const list = document.createElement("ol");
+    list.className = "assembly-replacement-steps";
+    for (const item of procedure.steps ?? []) {
+      const li = document.createElement("li");
+      li.textContent = localizedPackageText(item);
+      list.append(li);
+    }
+    card.append(title, locator, list);
+    for (const sourceId of procedure.source_ids ?? []) {
+      const source = sourceMap.get(sourceId);
+      if (!source?.url) continue;
+      const link = document.createElement("a");
+      link.className = "assembly-source-link";
+      link.href = source.url;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.textContent = `↗ ${t("openAtSource")}: ${source.label}`;
+      card.append(link);
+    }
+    replacementHost?.append(card);
+  });
 }
 
 function renderDetails(id) {
@@ -1301,6 +1727,7 @@ function renderDetails(id) {
   renderClaims(id);
   renderRelationships(id);
   renderAssemblyEvidence(id);
+  renderProcedureRunner(id);
   $("#rotate-component").disabled = !object || !state.sceneController;
 
   const sourceHost = $("#source-links");
@@ -1719,6 +2146,11 @@ function updateExplodeUi(value) {
 
 function setExplode(value) {
   if (!state.sceneController) return;
+  const procedureState = state.procedureController?.getSnapshot();
+  if (procedureState && procedureState.stepIndex >= 0) {
+    state.procedureController.reset();
+    if (state.selectedId === MODEL.id) renderProcedureRunner(state.selectedId);
+  }
   const clipState = state.animationPlayer?.getSnapshot();
   if (clipState && clipState.status !== "idle" && clipState.status !== "ready") state.animationPlayer.stop();
   state.sceneController.setExplode(value);
@@ -1990,6 +2422,8 @@ function disposeModel(root) {
 function installModel(root, mode) {
   state.animationPlayer?.dispose();
   state.animationPlayer = null;
+  state.procedureController?.dispose();
+  state.procedureController = null;
   if (state.sceneController) state.sceneController.reset();
   disposeProcessVisuals();
   state.measurementController?.clear();
@@ -2044,6 +2478,13 @@ function installModel(root, mode) {
   collectNodes(root);
   collectFanRotors(root);
   state.sceneController = new SceneController(root);
+  if (Array.isArray(ASSEMBLY_PACKAGE.procedure_routes?.common_step_ids) && Array.isArray(ASSEMBLY_PACKAGE.procedure_routes?.branches)) {
+    state.procedureController = new ProcedureController(root, {
+      steps: ASSEMBLY_PACKAGE.steps ?? [],
+      commonStepIds: ASSEMBLY_PACKAGE.procedure_routes.common_step_ids,
+      routes: ASSEMBLY_PACKAGE.procedure_routes.branches
+    });
+  }
   fitModel(root);
   setExplode(0);
   setupAnimationPlayer(root);
@@ -2507,6 +2948,64 @@ function bindUI() {
   $("#animation-seek").addEventListener("input", (event) => state.animationPlayer?.seek(Number(event.target.value) / 1000));
   $("#quiz-next").addEventListener("click", submitLearningAnswer);
   setSimulationSpeed($("#simulation-speed")?.value ?? 1);
+  $("#procedure-branch-select").addEventListener("change", (event) => {
+    if (!state.procedureController) return;
+    try {
+      state.procedureController.setBranch(event.target.value);
+      renderProcedureRunner(state.selectedId);
+      setStatus(t("ready"));
+    } catch (error) {
+      console.error(error);
+      setStatus(t("catalogError"));
+    }
+  });
+  $("#procedure-next").addEventListener("click", async () => {
+    const controller = state.procedureController;
+    if (!controller) return;
+    const nextButton = $("#procedure-next");
+    const branchSelect = $("#procedure-branch-select");
+    nextButton.disabled = true;
+    branchSelect.disabled = true;
+    state.animationPlayer?.stop();
+    try {
+      const result = await controller.advance({ animate: !state.reducedMotion });
+      if (!result.ok && result.reason === "missing_prerequisites") {
+        setStatus(t("prerequisitesLabel") + ": " + result.missing.join(", "));
+      } else if (!result.ok && result.reason === "branch_required") {
+        setStatus(t("procedureChooseBranch"));
+      } else if (!result.ok && result.reason === "complete") {
+        setStatus(t("procedureRunnerComplete"));
+      } else {
+        setStatus(t("procedureRunnerVisualized"));
+      }
+    } catch (error) {
+      console.error(error);
+      setStatus(error.message || t("catalogError"));
+    } finally {
+      renderProcedureRunner(state.selectedId);
+    }
+  });
+  $("#procedure-previous").addEventListener("click", () => {
+    if (!state.procedureController) return;
+    try {
+      state.procedureController.previous();
+      renderProcedureRunner(state.selectedId);
+    } catch (error) {
+      console.error(error);
+      setStatus(error.message || t("catalogError"));
+    }
+  });
+  $("#procedure-reset").addEventListener("click", () => {
+    if (!state.procedureController) return;
+    try {
+      state.procedureController.reset();
+      renderProcedureRunner(state.selectedId);
+      setStatus(t("ready"));
+    } catch (error) {
+      console.error(error);
+      setStatus(error.message || t("catalogError"));
+    }
+  });
   $("#assemble-button").addEventListener("click", () => setExplode(0));
   $("#explode-button").addEventListener("click", () => setExplode(100));
   $("#animate-button").addEventListener("click", animateExplodeCycle);
