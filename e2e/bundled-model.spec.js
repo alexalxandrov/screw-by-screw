@@ -80,7 +80,7 @@ test("loads the generated Blender v0.5 SBS model package and resolves content-pa
   await page.locator("#animation-stop").click();
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-animation-progress", "0");
   await page.locator("#catalog-open").click();
-  const loadedCard = page.locator('[data-model-id="gpu.evga.12g-p5-3655-kr"]');
+  const loadedCard = page.locator('[data-model-id="computer.ibm.5150.1981"]');
   await expect(loadedCard.locator(".catalog-load-button")).toBeDisabled();
   await expect(loadedCard).toContainText("Уже загружена");
   await page.locator("#catalog-close").click();
@@ -176,9 +176,9 @@ test("opens the self-contained root index.html directly with the embedded Blende
   await expect(page.locator('#component-tree button[data-id="assembly.fan.2.rotor"]')).toBeVisible();
   await expect(page.locator("#load-state")).toContainText("ПАКЕТ SBS MODEL");
   const embeddedCatalogueIds = await page.evaluate(() => Object.keys(globalThis.SBS_CATALOG_PACKAGE_DATA_URLS ?? {}));
-  expect(embeddedCatalogueIds).toContain("gpu.evga.12g-p5-3655-kr");
+  expect(embeddedCatalogueIds).toContain("computer.ibm.5150.1981");
   await page.locator("#catalog-open").click();
-  const loadedFileCard = page.locator('[data-model-id="gpu.evga.12g-p5-3655-kr"]');
+  const loadedFileCard = page.locator('[data-model-id="computer.ibm.5150.1981"]');
   await expect(loadedFileCard.locator(".catalog-load-button")).toBeDisabled();
   await expect(loadedFileCard).toContainText("Уже загружена");
   await page.locator("#catalog-close").click();
