@@ -600,6 +600,57 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); ou
   .procedure-runner-button { transition: none; }
 }
 
+
+.assembly-playback-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin: 11px 0;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: #0b1219;
+}
+.assembly-playback-controls[hidden] { display: none; }
+.assembly-playback-controls button,
+.assembly-step-run {
+  padding: 6px 8px;
+  border: 1px solid rgba(158,198,213,.35);
+  border-radius: 3px;
+  background: rgba(158,198,213,.07);
+  color: #b9d4df;
+  font: 8px var(--mono);
+  cursor: pointer;
+}
+.assembly-playback-controls button:hover:not(:disabled),
+.assembly-step-run:hover { background: rgba(158,198,213,.15); }
+.assembly-playback-controls button:disabled { opacity: .4; cursor: default; }
+.assembly-step-progress {
+  flex: 1;
+  min-width: 72px;
+  color: var(--muted);
+  font: 8px var(--mono);
+  text-align: center;
+}
+.assembly-motion-status {
+  margin: 7px 0;
+  color: var(--muted);
+  font: 8px var(--mono);
+  line-height: 1.55;
+}
+.assembly-motion-status:empty { display: none; }
+.assembly-step-run { margin-top: 9px; }
+.assembly-step-card[data-active="true"] {
+  border-color: rgba(195,232,109,.58);
+  background: rgba(195,232,109,.045);
+}
+@media (max-width: 520px) {
+  .assembly-playback-controls { gap: 5px; }
+  .assembly-playback-controls button { flex: 1; }
+  .assembly-step-progress { order: -1; flex-basis: 100%; }
+}
+
 /* Model-package-authored animation player; hidden when a package has no clips. */
 .clip-player {
   margin-top: 14px;
