@@ -3,7 +3,7 @@ permissions:
   contents: write
 concurrency:
   group: blender-model-validation-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 on:
   workflow_dispatch:
@@ -51,6 +51,7 @@ on:
       - ".github/workflows/blender-model-validation.yml"
 jobs:
   build-and-inspect:
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-22.04
     timeout-minutes: 35
     steps:
