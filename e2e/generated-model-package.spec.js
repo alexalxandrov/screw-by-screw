@@ -46,6 +46,12 @@ test("IBM PC 5150 renders the sourced branching FRU graph and replacement fragme
 
   await page.locator('#component-tree button[data-id="computer.ibm.5150.1981"]').click();
   await expect(page.locator("#assembly-policy-note")).toBeVisible();
+  await expect(page.locator("#assembly-playback-controls")).toBeVisible();
+  await expect(page.locator("#assembly-step-progress")).toContainText("0 / 14");
+  await page.locator("#assembly-step-next").click();
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-step-id", "step.power.isolate");
+  await page.locator("#assembly-step-reset").click();
+  await expect(page.locator("#viewer-canvas")).not.toHaveAttribute("data-procedure-step-id");
   await expect(page.locator("#assembly-policy-note")).toContainText("Номера шагов служат только порядком отображения");
   await expect(page.locator("#assembly-step-list .assembly-step-card")).toHaveCount(14);
   await expect(page.locator("#assembly-step-list .assembly-procedure-group")).toHaveCount(7);
@@ -101,6 +107,13 @@ test("IBM PC 5150 renders the sourced branching FRU graph and replacement fragme
   await expect(runner).toHaveAttribute("data-completed-count", "0");
 
   await page.locator('#component-tree button[data-id="assembly.system_board"]').click();
+  await expect(page.locator("#assembly-playback-controls")).toBeHidden();
   await expect(page.locator("#assembly-step-list .assembly-step-card")).toHaveCount(3);
   await expect(page.locator("#assembly-step-list")).toContainText("единственный удерживающий винт платы");
+  await page.locator('[data-step-id="step.board.slide.release_standoffs"] .assembly-step-run').click();
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-step-id", "step.board.slide.release_standoffs");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-motion", "manufacturer-stated-slide");
+  await expect(page.locator("#assembly-motion-status")).toContainText("12,7 мм");
+  await page.locator("#assembly-step-reset").click();
+  await expect(page.locator("#viewer-canvas")).not.toHaveAttribute("data-procedure-step-id");
 });
