@@ -74,22 +74,69 @@ def validate_bindings(components_doc: dict, gltf: dict) -> list[str]:
 
     node_map = {}
     parent_indices = {}
+    seen_node_ids = set()
+    decorative_details = []
     for index, node in enumerate(nodes):
         extras = node.get("extras") or {}
-        component_id = extras.get("sbs_component_id") if isinstance(extras, dict) else None
-        if not isinstance(component_id, str):
-            continue
-        if component_id not in component_map:
-            raise BindingError(f"GLB references unknown content component ID: {component_id}")
-        if component_id in node_map:
-            raise BindingError(f"Duplicate GLB component ID: {component_id}")
-        node_map[component_id] = index
+        if not isinstance(extras, dict):
+            extras = {}
+        component_id = extras.get("sbs_component_id")
+
+        # Build the complete GLB hierarchy, including helper and visual-only nodes.
         for child in node.get("children", []):
             if not isinstance(child, int) or child < 0 or child >= len(nodes):
                 raise BindingError(f"Node {index} has invalid child index")
             if child in parent_indices:
                 raise BindingError(f"GLB node {child} has multiple parents")
             parent_indices[child] = index
+
+        if not isinstance(component_id, str):
+            continue
+        if component_id in seen_node_ids:
+            raise BindingError(f"Duplicate GLB component ID: {component_id}")
+        seen_node_ids.add(component_id)
+
+        if component_id not in component_map:
+            # Blender adds individually selectable screw-head/slot and other
+            # visual details that are intentionally not semantic inventory rows.
+            # Permit only explicitly marked visual proxies with a declared parent.
+            parent_id = extras.get("sbs_parent_component_id")
+            is_declared_visual_detail = (
+                extras.get("sbs_export_role") == "decorative_detail"
+                and extras.get("sbs_visual_proxy") is True
+                and isinstance(parent_id, str)
+                and parent_id in component_map
+            )
+            if not is_declared_visual_detail:
+                raise BindingError(f"GLB references unknown content component ID: {component_id}")
+            decorative_details.append((index, component_id, parent_id))
+            continue
+
+        node_map[component_id] = index
+
+    # Visual-only helper geometry must remain attached to its declared semantic
+    # parent (or a descendant path through non-semantic GLB helper nodes).
+    for index, component_id, parent_id in decorative_details:
+        expected_parent_index = node_map.get(parent_id)
+        if expected_parent_index is None:
+            raise BindingError(
+                f"Decorative visual node {component_id} references a parent without a GLB component node: {parent_id}"
+            )
+        ancestor = parent_indices.get(index)
+        ancestors = set()
+        found = False
+        while ancestor is not None:
+            if ancestor in ancestors:
+                raise BindingError("Cycle detected in GLB node ancestry")
+            ancestors.add(ancestor)
+            if ancestor == expected_parent_index:
+                found = True
+                break
+            ancestor = parent_indices.get(ancestor)
+        if not found:
+            raise BindingError(
+                f"Decorative visual node {component_id} is not nested under declared parent {parent_id}"
+            )
 
     required_geometry_ids = {
         component_id for component_id, component in component_map.items()
@@ -132,6 +179,7 @@ def validate_bindings(components_doc: dict, gltf: dict) -> list[str]:
         f"GLB nodes with stable component IDs: {len(node_map)}",
         "Every geometry-backed content component ID is present exactly once: PASS",
         "GLB ancestry preserves the nearest represented semantic ancestor: PASS",
+        f"Declared decorative visual proxy nodes parent-checked: {len(decorative_details)}",
     ]
 
 def main() -> int:

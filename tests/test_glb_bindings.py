@@ -62,6 +62,53 @@ class GlbBindingTests(unittest.TestCase):
             path.write_bytes(make_glb(sample_gltf()))
             self.assertEqual(validator.read_glb(path)["nodes"][2]["name"], "heatsink")
 
+    def test_declared_decorative_visual_nodes_are_allowed_but_parent_checked(self):
+        components = {"components": [
+            {"id": "root", "parent_id": None, "geometry_status": "measured"},
+            {"id": "fastener", "parent_id": "root", "geometry_status": "illustrative_proxy"},
+        ]}
+        gltf = {"nodes": [
+            {"name": "root", "extras": {"sbs_component_id": "root"}, "children": [1]},
+            {"name": "fastener", "extras": {"sbs_component_id": "fastener"}, "children": [2]},
+            {"name": "screw head", "extras": {
+                "sbs_component_id": "visual.detail.screw.head",
+                "sbs_export_role": "decorative_detail",
+                "sbs_visual_proxy": True,
+                "sbs_parent_component_id": "fastener",
+            }},
+        ]}
+        report = validator.validate_bindings(components, gltf)
+        self.assertIn("Declared decorative visual proxy nodes parent-checked: 1", report)
+
+    def test_unknown_glb_ids_are_not_accepted_without_explicit_visual_proxy_metadata(self):
+        components = {"components": [
+            {"id": "root", "parent_id": None, "geometry_status": "measured"},
+        ]}
+        gltf = {"nodes": [
+            {"name": "root", "extras": {"sbs_component_id": "root"}, "children": [1]},
+            {"name": "unregistered", "extras": {"sbs_component_id": "unregistered"}},
+        ]}
+        with self.assertRaisesRegex(validator.BindingError, "unknown content component ID"):
+            validator.validate_bindings(components, gltf)
+
+    def test_decorative_visual_node_must_be_nested_under_declared_parent(self):
+        components = {"components": [
+            {"id": "root", "parent_id": None, "geometry_status": "measured"},
+            {"id": "fastener", "parent_id": "root", "geometry_status": "illustrative_proxy"},
+        ]}
+        gltf = {"nodes": [
+            {"name": "root", "extras": {"sbs_component_id": "root"}, "children": [1, 2]},
+            {"name": "fastener", "extras": {"sbs_component_id": "fastener"}},
+            {"name": "orphan screw head", "extras": {
+                "sbs_component_id": "visual.detail.orphan",
+                "sbs_export_role": "decorative_detail",
+                "sbs_visual_proxy": True,
+                "sbs_parent_component_id": "fastener",
+            }},
+        ]}
+        with self.assertRaisesRegex(validator.BindingError, "not nested under declared parent"):
+            validator.validate_bindings(components, gltf)
+
     def test_logical_only_components_need_no_glb_node(self):
         components = {"components": [
             {"id": "root", "parent_id": None, "geometry_status": "measured"},

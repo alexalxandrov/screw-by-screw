@@ -254,8 +254,10 @@ jobs:
           cp MODELS/COMPUTERS/IBM/5150/04-WORKING/generated/ibm_pc_5150_1981.manifest.json artifacts/ 2>/dev/null || true
           cp artifacts/ibm_pc_5150_1981.sbsmodel artifacts/ 2>/dev/null || true
           cp public/models/dell_optiplex_5060_tower_v03.sbsmodel artifacts/ 2>/dev/null || true
-          cp tools/modeling/build_ibm_pc_5150_blockout.py artifacts/ibm_pc_5150_blockout_source.py
-          cp content/models/ibm-pc-5150-1981/components.json artifacts/ibm_pc_5150_components_source.json
+          cp tools/modeling/build_ibm_pc_5150_blockout.py artifacts/ibm_pc_5150_blockout_source.py 2>/dev/null || true
+          cp tools/modeling/build_ibm_pc_5150_blockout.py.gz artifacts/ibm_pc_5150_blockout_source.py.gz 2>/dev/null || true
+          cp content/models/ibm-pc-5150-1981/components.json artifacts/ibm_pc_5150_components_source.json 2>/dev/null || true
+          cp content/models/ibm-pc-5150-1981/components.json.gz artifacts/ibm_pc_5150_components_source.json.gz 2>/dev/null || true
           cp tests/test_ibm_pc_5150_content.py artifacts/ibm_pc_5150_content_tests.py 2>/dev/null || true
           cp content/models/ibm-pc-5150-1981/assembly_steps.json artifacts/ibm_pc_5150_assembly_steps.json 2>/dev/null || true
           cp content/models/ibm-pc-5150-1981/animations.json artifacts/ibm_pc_5150_animations.json 2>/dev/null || true
