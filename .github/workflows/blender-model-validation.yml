@@ -179,8 +179,12 @@ jobs:
           if (jsonEnd < 0) throw new Error("Embedded catalogue package map is not closed");
           const rawMap = html.slice(jsonStart, jsonEnd).trim().replace(/;$/, "");
           const packages = JSON.parse(rawMap);
-          const required = catalog.models.filter((model) => model.default_package || model.id === "computer.ibm.5150.1981");
-          if (!required.some((model) => model.default_package)) throw new Error("Catalogue has no default model package");
+          const required = catalog.models.filter((model) => model.published !== false && (model.default_package || model.id === "computer.ibm.5150.1981"));
+          const archived = catalog.models.filter((model) => model.published === false);
+          if (!required.some((model) => model.default_package)) throw new Error("Catalogue has no default published model package");
+          for (const model of archived) {
+            if (packages[model.id]) throw new Error("Standalone launcher must not embed unpublished research archive: " + model.id);
+          }
           if (!required.some((model) => model.id === "computer.ibm.5150.1981")) throw new Error("Catalogue is missing the IBM PC 5150 reference model");
           for (const model of required) {
             const dataUrl = packages[model.id];
@@ -190,6 +194,7 @@ jobs:
           }
           console.log(JSON.stringify({
             requiredPackagesEmbedded: required.map((model) => model.id),
+            archivedPackagesExcluded: archived.map((model) => model.id),
             packageCount: Object.keys(packages).length,
             selfContained: true
           }, null, 2));
