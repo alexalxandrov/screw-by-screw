@@ -100,6 +100,7 @@ EVGA RTX 3060 XC BLACK переведена в **исследовательск�
 - [Offline model catalogue and local package loading](docs/OFFLINE_MODEL_CATALOG.md)
 - [Semantic inventory export](docs/SEMANTIC_INVENTORY_EXPORT.md)
 - [Local learning progress](docs/LEARNING_PROGRESS.md)
+- [Exact model and revision comparison](docs/MODEL_COMPARISON.md)
 - [GPU pilot content package](content/models/evga-rtx3060-xc-black-12gb/README.md) — source claims, SHA-256 release manifest and bilingual learning data.
 - [IBM PC 5150 atlas implementation](docs/IBM_PC_5150_ATLAS_SPEC.md)
 - [IBM PC 5150 fastener and board-mounting evidence audit](docs/IBM_PC_5150_FASTENER_EVIDENCE.md)
