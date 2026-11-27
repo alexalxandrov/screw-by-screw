@@ -898,6 +898,10 @@ def main():
     add_stroke_wordmark(shroud_parts[0], "EVGA", height=3.0, stroke_width=0.24)
     add_stroke_wordmark(shroud_parts[1], "GEFORCE RTX", height=2.45, stroke_width=0.20)
     for part in shroud_parts:
+        # These rails are visual construction primitives for one semantic
+        # shroud assembly, not separate inventory components.
+        part["sbs_export_role"] = "decorative_detail"
+        part["sbs_visual_proxy"] = True
         set_parent_keep_world(part, shroud_group)
 
     for i, x in enumerate(FAN_CENTERS_X, start=1):
