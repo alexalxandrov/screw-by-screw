@@ -463,9 +463,9 @@ function renderCatalog() {
     if (state.loadedCatalogModelId === entry.id) {
       open.disabled = true;
       open.textContent = t("catalogLoaded");
-    } else if (state.catalogLoadingId === entry.id) {
+    } else if (state.catalogLoadingId) {
       open.disabled = true;
-      open.textContent = t("catalogLoading");
+      open.textContent = state.catalogLoadingId === entry.id ? t("catalogLoading") : t("catalogLoad");
     } else {
       open.textContent = t("catalogLoad");
       open.addEventListener("click", () => openCatalogEntry(entry));
@@ -3693,6 +3693,7 @@ async function tryLoadBundledModel() {
 
 bindUI();
 applyLanguage();
+renderModelSwitcher();
 initRenderer();
 document.documentElement.classList.add("sbs-ready");
 document.documentElement.dispatchEvent(new Event("sbs-ready"));
