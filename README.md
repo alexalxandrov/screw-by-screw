@@ -101,7 +101,9 @@ EVGA RTX 3060 XC BLACK переведена в **исследовательск�
 - [Semantic inventory export](docs/SEMANTIC_INVENTORY_EXPORT.md)
 - [Local learning progress](docs/LEARNING_PROGRESS.md)
 - [GPU pilot content package](content/models/evga-rtx3060-xc-black-12gb/README.md) — source claims, SHA-256 release manifest and bilingual learning data.
-- [IBM PC 5150 atlas implementation](docs/IBM_PC_5150_ATLAS_SPEC.md)\n- [IBM PC 5150 fastener and board-mounting evidence audit](docs/IBM_PC_5150_FASTENER_EVIDENCE.md)\n- [IBM PC 5150 branching disassembly sequence](docs/IBM_PC_5150_DISASSEMBLY_SEQUENCE.md) — second reference model, scope, geometry limits and acceptance gates.
+- [IBM PC 5150 atlas implementation](docs/IBM_PC_5150_ATLAS_SPEC.md)
+- [IBM PC 5150 fastener and board-mounting evidence audit](docs/IBM_PC_5150_FASTENER_EVIDENCE.md)
+- [IBM PC 5150 branching disassembly sequence](docs/IBM_PC_5150_DISASSEMBLY_SEQUENCE.md) — second reference model, scope, geometry limits and acceptance gates.
 - [IBM PC 5150 content package](content/models/ibm-pc-5150-1981/README.md) — 71 components, 100 typed relationships, 14 branching service actions, partial replacement fragments and bilingual learning data.
 - [IBM PC 5150 source register](MODELS/COMPUTERS/IBM/5150/00-SOURCES/REFERENCE_REGISTER.md) — first-edition IBM technical and service references.
 
