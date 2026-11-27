@@ -118,3 +118,8 @@ Tom's Hardware reports two unused memory locations on the teardown PCB sample li
 The canonical graph adds one logical-only NVENC node and one logical-only NVDEC node beneath the GA106 die, supported by NVIDIA's GeForce RTX 3060 desktop Video Encode and Decode Support Matrix and Video Codec SDK documentation. The matrix lists one 7th-generation NVENC and one 5th-generation NVDEC for this GPU family: H.264/HEVC encode and decode, AV1 decode, and no AV1 encode for this generation. Codec profile, chroma-format and bit-depth limits remain those in NVIDIA's matrix columns.
 
 A fifth selectable process layer presents the media-engine path from the host-facing PCIe endpoint through NVDEC, frame surfaces/GDDR6 and optional shader processing to NVENC. It is a logical architectural teaching map, not an EVGA PCB schematic or performance simulation. No physical die placement, cache path, memory-copy topology, bitrate, throughput, latency, concurrent-session limit, power or thermal behaviour is inferred.
+
+
+## Publication and evidence status
+
+This package is retained as a research archive and is excluded from the public catalogue and standalone package embeds. The exact PCB revision, complete fastener inventory and one reconciled full service sequence are not established. Existing claims and partial teardown observations remain useful research data, but they do not meet the current publication gate. No geometry or service order should be presented as a confirmed physical specimen without revision-matched primary evidence.
