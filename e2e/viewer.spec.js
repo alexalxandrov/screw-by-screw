@@ -1,5 +1,58 @@
 import { test, expect } from "@playwright/test";
 
+test("mobile workspace switches panels instead of stacking the whole application", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/");
+  const switcher = page.locator("#mobile-panel-switcher");
+  await expect(switcher).toBeVisible();
+  await expect(page.locator("#catalog-open")).toBeVisible();
+  await expect(page.locator("#language-toggle")).toBeVisible();
+  await expect(page.locator(".viewer-column")).toBeVisible();
+  await expect(page.locator(".left-panel")).toBeHidden();
+  await expect(page.locator(".details-panel")).toBeHidden();
+  await expect(page.locator('.mobile-panel-button[data-mobile-panel="viewer"]')).toHaveAttribute("aria-pressed", "true");
+
+  await page.getByRole("button", { name: "Структура" }).click();
+  await expect(page.locator(".left-panel")).toBeVisible();
+  await expect(page.locator(".viewer-column")).toBeHidden();
+  await expect(page.locator(".details-panel")).toBeHidden();
+  await expect(page.locator('.mobile-panel-button[data-mobile-panel="structure"]')).toHaveAttribute("aria-pressed", "true");
+
+  await page.getByRole("button", { name: "Детали" }).click();
+  await expect(page.locator(".details-panel")).toBeVisible();
+  await expect(page.locator(".left-panel")).toBeHidden();
+  await expect(page.locator(".viewer-column")).toBeHidden();
+  await expect(page.locator('.mobile-panel-button[data-mobile-panel="details"]')).toHaveAttribute("aria-pressed", "true");
+
+  await page.locator("#language-toggle").click();
+  await expect(page.getByRole("button", { name: "Structure" })).toBeVisible();
+});
+
+test("mobile understand and learn modes reveal their detail content", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/");
+  await page.locator('.view-tab[data-mode="understand"]').click();
+  await expect(page.locator("#app")).toHaveAttribute("data-mobile-panel", "details");
+  await expect(page.locator("#process-details")).toBeVisible();
+  await expect(page.locator(".details-panel")).toBeVisible();
+
+  await page.locator('.mobile-panel-button[data-mobile-panel="viewer"]').click();
+  await page.locator('.view-tab[data-mode="learn"]').click();
+  await expect(page.locator("#app")).toHaveAttribute("data-mobile-panel", "details");
+  await expect(page.locator("#learning-panel")).toBeVisible();
+});
+
+test("mobile workspace navigation remains hidden on desktop", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto("/");
+  await expect(page.locator("#mobile-panel-switcher")).toBeHidden();
+  await expect(page.locator(".viewer-column")).toBeVisible();
+  await expect(page.locator(".left-panel")).toBeVisible();
+  await expect(page.locator(".details-panel")).toBeVisible();
+});
+
+import { test, expect } from "@playwright/test";
+
 test("renders the fallback GPU scene and selects a component", async ({ page }) => {
   const pageErrors = [];
   page.on("pageerror", (error) => pageErrors.push(error.message));

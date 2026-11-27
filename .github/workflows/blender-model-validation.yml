@@ -132,8 +132,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
-      - name: Refresh npm lock for current manifest
-        run: npm install --package-lock-only --ignore-scripts --no-audit --no-fund
       - name: Install locked viewer dependencies
         run: npm ci --no-audit --no-fund
       - name: Verify portable package with browser loader

@@ -44,15 +44,28 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
-      - name: Generate npm lockfile
-        run: npm install --package-lock-only --ignore-scripts --no-audit --no-fund
       - name: Install locked dependencies
         run: npm ci --no-audit --no-fund
       - name: Run viewer engine unit tests
         run: npm run test:unit
       - name: Install Chromium and Firefox for browser tests
         run: npx playwright install --with-deps chromium firefox
-      - name: Build production viewer
+      - name: Build web and standalone viewers
         run: npm run build
+      - name: Verify CSP-compatible web artifact and offline standalone
+        run: |
+          node --input-type=module <<'NODE'
+          import { readFile } from "node:fs/promises";
+          const web = await readFile("dist/index.html", "utf8");
+          const standalone = await readFile("index.html", "utf8");
+          if (!/<script\b[^>]*\bsrc=/.test(web)) throw new Error("Web build has no external JavaScript entry");
+          if (!/<link\b(?=[^>]*\brel=["']stylesheet["'])[^>]*\bhref=/.test(web)) throw new Error("Web build has no external stylesheet");
+          if (/<script\b(?![^>]*\bsrc=)[^>]*>[\s\S]*?<\/script>/i.test(web)) throw new Error("Web build contains an inline script");
+          if (/<style\b/i.test(web) || /\sstyle\s*=/i.test(web)) throw new Error("Web build contains inline styles");
+          if (/<script\b[^>]*\bsrc=/.test(standalone)) throw new Error("Standalone launcher still references external scripts");
+          if (/<link\b(?=[^>]*\brel=["']stylesheet["'])[^>]*\bhref=/.test(standalone)) throw new Error("Standalone launcher still references external CSS");
+          if (!standalone.includes("Screw by Screw failed to start")) throw new Error("Standalone launcher is missing startup recovery");
+          console.log("Web CSP artifact and standalone offline launcher verified.");
+          NODE
       - name: Run browser interaction tests
         run: npm run test:e2e
