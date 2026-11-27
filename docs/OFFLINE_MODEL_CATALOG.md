@@ -23,3 +23,7 @@ The index currently contains the exact EVGA GeForce RTX 3060 XC BLACK GAMING 12G
 3. Add its exact SKU, category, package version/path and geometry status to `content/catalog/models.json`.
 4. Set `package_model_id` to the archive's internal model ID.
 5. Run catalog unit tests, viewer browser tests, package validation and the standalone build.
+
+## Publication status
+
+The local catalogue displays records with `published: true`. Records marked `published: false` remain in source control as research archives, but are filtered from the public library and omitted from standalone package embedding. IBM Personal Computer 5150 (1981) is currently the sole published default reference. The EVGA RTX 3060 package is retained but unpublished until exact PCB revision, complete fastener inventory and source-reconciled service order are verified.
