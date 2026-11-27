@@ -50,8 +50,9 @@ jobs:
       - name: Check every published catalogue package is present
         id: check
         run: |
-          python - <<'PY' >> "$GITHUB_OUTPUT"
+          ready=$(python - <<'PY'
           import json
+          import sys
           from pathlib import Path
 
           catalog = json.loads(Path("content/catalog/models.json").read_text(encoding="utf-8"))
@@ -63,10 +64,12 @@ jobs:
               package = Path("public") / package_path
               if not package.is_file() or package.stat().st_size <= 0:
                   missing.append(f"{model.get('id')}: {package}")
-          print("ready=" + ("false" if missing else "true"))
           for item in missing:
-              print(f"::notice::{item}")
+              print(item, file=sys.stderr)
+          print("true" if not missing else "false")
           PY
+          )
+          echo "ready=$ready" >> "$GITHUB_OUTPUT"
   build:
     needs: check_published_packages
     if: needs.check_published_packages.outputs.ready == 'true'
