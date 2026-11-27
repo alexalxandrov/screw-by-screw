@@ -57,7 +57,7 @@ The latest package turns the two fin-stack base screws, two I/O-bracket screw-an
 5. **Board-level electrical atlas:** obtain a legally usable BoardView/schematic/BOM for the exact revision. Until then, retain the power layer at qualitative block-diagram level and do not import data from related EVGA XC variants.
 6. **Thermal-pad evidence:** reconcile each visible contact patch to an identified device only when the evidence supports it; do not publish replacement thickness, hardness or material specifications from ambiguous observations.
 7. **Measurement calibration:** add registered reference planes, uncertainty bounds and a provenance class for every derived measurement. The current ruler remains model-space only.
-8. **Revision comparison:** compare exact SKUs and board revisions without merging geometry or claims between variants.
+8. **Revision comparison:** semantic comparison is implemented for validated packages, covering exact model identity, nested specifications, source-backed claims and component-inventory coverage. Geometry overlays and physical revision claims remain out of scope without exact CAD/PCB evidence.
 9. **Package export:** add BOM export only when a source-backed BOM exists; keep unknown reference designators and values explicit.
 10. **Validation recovery:** execute all current-head CI jobs, preserve logs/artifacts, and close test failures before treating the branch as release-ready.
 
