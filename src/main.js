@@ -140,7 +140,7 @@ const UI = {
     allVisible: "All components visible", layerCooling: "Cooling layer · qualitative",
     layerPower: "Power path · qualitative", layerCompute: "GPU architecture · logical map", layerGraphicsPipeline: "Graphics paths · conceptual map", layerVideoCodec: "Video codec engines · logical map", noWebgl: "WebGL is unavailable in this browser.",
     source: "Source", noSources: "No direct source linked to this component.",
-    modelLoaded: "Model ready", glbPicker: "Choose a .glb file", learn: "Learn", learning: "LEARNING", authoredAnimations: "PACKAGE ANIMATIONS", clipSelect: "Select clip", clipTimeline: "Animation timeline", clipPlay: "Play", clipPause: "Pause", clipStop: "Stop / reset", clipReady: "Ready", clipPlaying: "Playing", clipPaused: "Paused", clipCompleted: "Completed", clipTime: "TIME", clipEvidenceNote: "Authored model motion · not a physics simulation", clipEducationalApproximation: "Educational approximation · duration is not measured RPM", clipIllustrative: "Illustrative motion · not a measured mechanism", clipDocumentedMotion: "Documented motion · source-linked", clipMeasuredMotion: "Measured motion · source and method recorded", linkedComponents: "LINKED COMPONENTS", assumptions: "ASSUMPTIONS & LIMITS", processLayer: "PROCESS LAYER", fileTooLarge: "GLB exceeds the 256 MB limit.", packageTooLarge: "SBS model package exceeds the 512 MB limit.", externalResources: "This GLB references external files. Only self-contained GLB files are allowed.", question: "QUESTION", checkAnswer: "Check answer", nextQuestion: "Next question", finishQuiz: "Finish", restartQuiz: "Try again", correctAnswer: "Correct", wrongAnswer: "Not quite", quizComplete: "Quiz complete", yourScore: "Your score", chooseAnswer: "Choose an answer first", learningProgressSaved: "Progress saved in this browser", learningProgressLocal: "Local progress · this browser", learningProgressSession: "Local storage unavailable · session only", mobileViewer: "3D", mobileStructure: "Structure", mobileDetails: "Details", compare: "Compare", compareTitle: "MODEL COMPARISON", compareLeft: "MODEL A · ACTIVE PACKAGE", compareRight: "MODEL B · COMPARISON PACKAGE", compareChoosePackage: "Load a second .sbsmodel package", compareClearPackage: "Clear comparison", compareWaiting: "Load a validated .sbsmodel package to compare semantic data.", compareLoaded: "Comparison package validated", compareError: "Could not validate the comparison package", compareSku: "PART NUMBER", compareGeometry: "GEOMETRY EVIDENCE", comparePcb: "PCB REVISION", compareSpecifications: "SPECIFICATION COMPARISON", compareClaims: "SOURCE-BACKED CLAIMS", compareCoverage: "COMPONENT INVENTORY COVERAGE", compareShared: "Shared IDs", compareLeftOnly: "Recorded only in package A", compareRightOnly: "Recorded only in package B", compareSame: "Same value", compareDifferent: "Different", compareUnknownBoth: "Unknown in both", compareUnknownLeft: "Unknown in A", compareUnknownRight: "Unknown in B", compareNotRecordedLeft: "Not recorded in A", compareNotRecordedRight: "Not recorded in B", compareOnlyLeft: "Only in package A", compareOnlyRight: "Only in package B", compareUnknown: "Unknown", compareNotRecorded: "Not recorded", compareEvidenceA: "Evidence A", compareEvidenceB: "Evidence B", compareSourcesA: "Sources A", compareSourcesB: "Sources B", compareNoClaims: "No comparable claims are recorded.", compareNoSpecifications: "No specification values are recorded in these packages.", compareCoverageNote: "Package inventory differences describe coverage only; they do not prove a physical component is absent.", compareLimitations: "INTERPRETATION LIMITS", compareLimitationsList: ["Comparison is limited to validated semantic packages, not hardware inspection.", "Unknown values are not inferred from another SKU or PCB revision.", "A missing package field does not prove physical absence.", "Component ID differences do not prove physical additions or removals.", "3D geometry, CAD, BoardView, PCB routing and physical fitment are not compared."], comparePackageModel: "Model ID"
+    modelLoaded: "Model ready", glbPicker: "Choose a .glb file", learn: "Learn", learning: "LEARNING", authoredAnimations: "PACKAGE ANIMATIONS", runtimeDiagnostics: "Runtime diagnostics", diagnosticsModel: "Model ID", diagnosticsComponents: "Mapped components", diagnosticsProcedure: "Procedure step", diagnosticsAnimation: "Animation clip", diagnosticsMotion: "World-space displacement", clipSelect: "Select clip", clipTimeline: "Animation timeline", clipPlay: "Play", clipPause: "Pause", clipStop: "Stop / reset", clipReady: "Ready", clipPlaying: "Playing", clipPaused: "Paused", clipCompleted: "Completed", clipTime: "TIME", clipEvidenceNote: "Authored model motion · not a physics simulation", clipEducationalApproximation: "Educational approximation · duration is not measured RPM", clipIllustrative: "Illustrative motion · not a measured mechanism", clipDocumentedMotion: "Documented motion · source-linked", clipMeasuredMotion: "Measured motion · source and method recorded", linkedComponents: "LINKED COMPONENTS", assumptions: "ASSUMPTIONS & LIMITS", processLayer: "PROCESS LAYER", fileTooLarge: "GLB exceeds the 256 MB limit.", packageTooLarge: "SBS model package exceeds the 512 MB limit.", externalResources: "This GLB references external files. Only self-contained GLB files are allowed.", question: "QUESTION", checkAnswer: "Check answer", nextQuestion: "Next question", finishQuiz: "Finish", restartQuiz: "Try again", correctAnswer: "Correct", wrongAnswer: "Not quite", quizComplete: "Quiz complete", yourScore: "Your score", chooseAnswer: "Choose an answer first", learningProgressSaved: "Progress saved in this browser", learningProgressLocal: "Local progress · this browser", learningProgressSession: "Local storage unavailable · session only", mobileViewer: "3D", mobileStructure: "Structure", mobileDetails: "Details", compare: "Compare", compareTitle: "MODEL COMPARISON", compareLeft: "MODEL A · ACTIVE PACKAGE", compareRight: "MODEL B · COMPARISON PACKAGE", compareChoosePackage: "Load a second .sbsmodel package", compareClearPackage: "Clear comparison", compareWaiting: "Load a validated .sbsmodel package to compare semantic data.", compareLoaded: "Comparison package validated", compareError: "Could not validate the comparison package", compareSku: "PART NUMBER", compareGeometry: "GEOMETRY EVIDENCE", comparePcb: "PCB REVISION", compareSpecifications: "SPECIFICATION COMPARISON", compareClaims: "SOURCE-BACKED CLAIMS", compareCoverage: "COMPONENT INVENTORY COVERAGE", compareShared: "Shared IDs", compareLeftOnly: "Recorded only in package A", compareRightOnly: "Recorded only in package B", compareSame: "Same value", compareDifferent: "Different", compareUnknownBoth: "Unknown in both", compareUnknownLeft: "Unknown in A", compareUnknownRight: "Unknown in B", compareNotRecordedLeft: "Not recorded in A", compareNotRecordedRight: "Not recorded in B", compareOnlyLeft: "Only in package A", compareOnlyRight: "Only in package B", compareUnknown: "Unknown", compareNotRecorded: "Not recorded", compareEvidenceA: "Evidence A", compareEvidenceB: "Evidence B", compareSourcesA: "Sources A", compareSourcesB: "Sources B", compareNoClaims: "No comparable claims are recorded.", compareNoSpecifications: "No specification values are recorded in these packages.", compareCoverageNote: "Package inventory differences describe coverage only; they do not prove a physical component is absent.", compareLimitations: "INTERPRETATION LIMITS", compareLimitationsList: ["Comparison is limited to validated semantic packages, not hardware inspection.", "Unknown values are not inferred from another SKU or PCB revision.", "A missing package field does not prove physical absence.", "Component ID differences do not prove physical additions or removals.", "3D geometry, CAD, BoardView, PCB routing and physical fitment are not compared."], comparePackageModel: "Model ID"
   },
   ru: {
     modelLabel: "МОДЕЛЬ", catalogOpen: "Каталог", catalogTitle: "БИБЛИОТЕКА МОДЕЛЕЙ", catalogSubtitle: "Автономные пакеты устройств", catalogClose: "Закрыть каталог", catalogSearch: "Название, производитель или part number…", catalogSearchLabel: "ПОИСК ПО БИБЛИОТЕКЕ", catalogCategoryLabel: "КАТЕГОРИЯ", catalogEntries: "МОДЕЛИ", catalogFooter: "Пакеты моделей хранятся локально. Аккаунт и удалённый сервис каталога не нужны.", catalogAllCategories: "Все категории", catalogEmpty: "Подходящих моделей не найдено.", catalogLoad: "Открыть модель", catalogLoaded: "Уже загружена", catalogLoading: "Загрузка пакета…", catalogStatusResearch: "ИССЛЕДОВАТЕЛЬСКИЙ МАКЕТ", catalogGeometryProxy: "Условная геометрия · не CAD", catalogFamilyIdentity: "Семейство платформы · без единого артикула", catalogPackageVersion: "Пакет", catalogChoosePackage: "Выберите соответствующий файл .sbsmodel.", catalogError: "Не удалось открыть пакет из каталога.", structure: "СТРУКТУРА", components: "Компоненты",
@@ -165,7 +165,7 @@ const UI = {
     allVisible: "Все компоненты видимы", layerCooling: "Слой охлаждения · качественно",
     layerPower: "Путь питания · качественно", layerCompute: "Архитектура GPU · логическая карта", layerGraphicsPipeline: "Тракты GPU · концептуальная схема", layerVideoCodec: "NVENC / NVDEC · логическая карта", noWebgl: "В этом браузере недоступен WebGL.",
     source: "Источник", noSources: "Для этого компонента нет прямой ссылки на источник.",
-    modelLoaded: "Модель готова", glbPicker: "Выберите файл .glb", learn: "Обучение", learning: "ОБУЧЕНИЕ", authoredAnimations: "АНИМАЦИИ ПАКЕТА", clipSelect: "Выберите клип", clipTimeline: "Шкала анимации", clipPlay: "Пуск", clipPause: "Пауза", clipStop: "Стоп / сброс", clipReady: "Готово", clipPlaying: "Воспроизведение", clipPaused: "Пауза", clipCompleted: "Завершено", clipTime: "ВРЕМЯ", clipEvidenceNote: "Анимация из пакета · не физическая симуляция", clipEducationalApproximation: "Учебное приближение · длительность не является измеренным RPM", clipIllustrative: "Условное движение · не измеренный механизм", clipDocumentedMotion: "Движение подтверждено источником", clipMeasuredMotion: "Измеренное движение · источник и метод указаны", linkedComponents: "СВЯЗАННЫЕ КОМПОНЕНТЫ", assumptions: "ДОПУЩЕНИЯ И ОГРАНИЧЕНИЯ", processLayer: "СЛОЙ ПРОЦЕССА", fileTooLarge: "GLB превышает лимит 256 МБ.", packageTooLarge: "Пакет SBS model превышает лимит 512 МБ.", externalResources: "Этот GLB ссылается на внешние файлы. Разрешены только самодостаточные GLB.", question: "ВОПРОС", checkAnswer: "Проверить ответ", nextQuestion: "Следующий вопрос", finishQuiz: "Завершить", restartQuiz: "Повторить", correctAnswer: "Верно", wrongAnswer: "Не совсем", quizComplete: "Тест завершён", yourScore: "Ваш результат", chooseAnswer: "Сначала выберите ответ", learningProgressSaved: "Прогресс сохранён в этом браузере", learningProgressLocal: "ПРОГРЕСС · ЭТОТ БРАУЗЕР", learningProgressSession: "Локальное хранилище недоступно · только эта сессия", mobileViewer: "3D", mobileStructure: "Структура", mobileDetails: "Детали", compare: "Сравнить", compareTitle: "СРАВНЕНИЕ МОДЕЛЕЙ", compareLeft: "МОДЕЛЬ А · АКТИВНЫЙ ПАКЕТ", compareRight: "МОДЕЛЬ Б · ПАКЕТ ДЛЯ СРАВНЕНИЯ", compareChoosePackage: "Загрузить второй пакет .sbsmodel", compareClearPackage: "Убрать сравнение", compareWaiting: "Загрузите проверенный пакет .sbsmodel для сопоставления семантических данных.", compareLoaded: "Пакет для сравнения проверен", compareError: "Не удалось проверить пакет для сравнения", compareSku: "PART NUMBER", compareGeometry: "ДОСТОВЕРНОСТЬ ГЕОМЕТРИИ", comparePcb: "РЕВИЗИЯ PCB", compareSpecifications: "СРАВНЕНИЕ ХАРАКТЕРИСТИК", compareClaims: "УТВЕРЖДЕНИЯ С ИСТОЧНИКАМИ", compareCoverage: "ПОКРЫТИЕ ИНВЕНТАРЯ КОМПОНЕНТОВ", compareShared: "Общие ID", compareLeftOnly: "Записаны только в пакете А", compareRightOnly: "Записаны только в пакете Б", compareSame: "Значения совпадают", compareDifferent: "Значения различаются", compareUnknownBoth: "Неизвестно в обоих", compareUnknownLeft: "Неизвестно в А", compareUnknownRight: "Неизвестно в Б", compareNotRecordedLeft: "Не записано в А", compareNotRecordedRight: "Не записано в Б", compareOnlyLeft: "Только в пакете А", compareOnlyRight: "Только в пакете Б", compareUnknown: "Неизвестно", compareNotRecorded: "Не записано", compareEvidenceA: "Доказательность А", compareEvidenceB: "Доказательность Б", compareSourcesA: "Источники А", compareSourcesB: "Источники Б", compareNoClaims: "Сопоставимых утверждений в пакетах нет.", compareNoSpecifications: "В этих пакетах нет записанных характеристик.", compareCoverageNote: "Различия показывают только покрытие инвентаря в пакетах и не доказывают физическое отсутствие детали.", compareLimitations: "ОГРАНИЧЕНИЯ ИНТЕРПРЕТАЦИИ", compareLimitationsList: ["Сравниваются проверенные семантические пакеты, а не сами физические устройства.", "Неизвестные значения не выводятся из другого SKU или ревизии PCB.", "Отсутствующее поле пакета не доказывает физическое отсутствие детали.", "Различия ID компонентов не доказывают физическое добавление или удаление деталей.", "Геометрия 3D, CAD, BoardView, трассировка PCB и совместимость по размерам не сравниваются."], comparePackageModel: "ID модели"
+    modelLoaded: "Модель готова", glbPicker: "Выберите файл .glb", learn: "Обучение", learning: "ОБУЧЕНИЕ", authoredAnimations: "АНИМАЦИИ ПАКЕТА", runtimeDiagnostics: "Диагностика выполнения", diagnosticsModel: "ID модели", diagnosticsComponents: "Найдено компонентов", diagnosticsProcedure: "Шаг разборки", diagnosticsAnimation: "Клип анимации", diagnosticsMotion: "Смещение в мире", clipSelect: "Выберите клип", clipTimeline: "Шкала анимации", clipPlay: "Пуск", clipPause: "Пауза", clipStop: "Стоп / сброс", clipReady: "Готово", clipPlaying: "Воспроизведение", clipPaused: "Пауза", clipCompleted: "Завершено", clipTime: "ВРЕМЯ", clipEvidenceNote: "Анимация из пакета · не физическая симуляция", clipEducationalApproximation: "Учебное приближение · длительность не является измеренным RPM", clipIllustrative: "Условное движение · не измеренный механизм", clipDocumentedMotion: "Движение подтверждено источником", clipMeasuredMotion: "Измеренное движение · источник и метод указаны", linkedComponents: "СВЯЗАННЫЕ КОМПОНЕНТЫ", assumptions: "ДОПУЩЕНИЯ И ОГРАНИЧЕНИЯ", processLayer: "СЛОЙ ПРОЦЕССА", fileTooLarge: "GLB превышает лимит 256 МБ.", packageTooLarge: "Пакет SBS model превышает лимит 512 МБ.", externalResources: "Этот GLB ссылается на внешние файлы. Разрешены только самодостаточные GLB.", question: "ВОПРОС", checkAnswer: "Проверить ответ", nextQuestion: "Следующий вопрос", finishQuiz: "Завершить", restartQuiz: "Повторить", correctAnswer: "Верно", wrongAnswer: "Не совсем", quizComplete: "Тест завершён", yourScore: "Ваш результат", chooseAnswer: "Сначала выберите ответ", learningProgressSaved: "Прогресс сохранён в этом браузере", learningProgressLocal: "ПРОГРЕСС · ЭТОТ БРАУЗЕР", learningProgressSession: "Локальное хранилище недоступно · только эта сессия", mobileViewer: "3D", mobileStructure: "Структура", mobileDetails: "Детали", compare: "Сравнить", compareTitle: "СРАВНЕНИЕ МОДЕЛЕЙ", compareLeft: "МОДЕЛЬ А · АКТИВНЫЙ ПАКЕТ", compareRight: "МОДЕЛЬ Б · ПАКЕТ ДЛЯ СРАВНЕНИЯ", compareChoosePackage: "Загрузить второй пакет .sbsmodel", compareClearPackage: "Убрать сравнение", compareWaiting: "Загрузите проверенный пакет .sbsmodel для сопоставления семантических данных.", compareLoaded: "Пакет для сравнения проверен", compareError: "Не удалось проверить пакет для сравнения", compareSku: "PART NUMBER", compareGeometry: "ДОСТОВЕРНОСТЬ ГЕОМЕТРИИ", comparePcb: "РЕВИЗИЯ PCB", compareSpecifications: "СРАВНЕНИЕ ХАРАКТЕРИСТИК", compareClaims: "УТВЕРЖДЕНИЯ С ИСТОЧНИКАМИ", compareCoverage: "ПОКРЫТИЕ ИНВЕНТАРЯ КОМПОНЕНТОВ", compareShared: "Общие ID", compareLeftOnly: "Записаны только в пакете А", compareRightOnly: "Записаны только в пакете Б", compareSame: "Значения совпадают", compareDifferent: "Значения различаются", compareUnknownBoth: "Неизвестно в обоих", compareUnknownLeft: "Неизвестно в А", compareUnknownRight: "Неизвестно в Б", compareNotRecordedLeft: "Не записано в А", compareNotRecordedRight: "Не записано в Б", compareOnlyLeft: "Только в пакете А", compareOnlyRight: "Только в пакете Б", compareUnknown: "Неизвестно", compareNotRecorded: "Не записано", compareEvidenceA: "Доказательность А", compareEvidenceB: "Доказательность Б", compareSourcesA: "Источники А", compareSourcesB: "Источники Б", compareNoClaims: "Сопоставимых утверждений в пакетах нет.", compareNoSpecifications: "В этих пакетах нет записанных характеристик.", compareCoverageNote: "Различия показывают только покрытие инвентаря в пакетах и не доказывают физическое отсутствие детали.", compareLimitations: "ОГРАНИЧЕНИЯ ИНТЕРПРЕТАЦИИ", compareLimitationsList: ["Сравниваются проверенные семантические пакеты, а не сами физические устройства.", "Неизвестные значения не выводятся из другого SKU или ревизии PCB.", "Отсутствующее поле пакета не доказывает физическое отсутствие детали.", "Различия ID компонентов не доказывают физическое добавление или удаление деталей.", "Геометрия 3D, CAD, BoardView, трассировка PCB и совместимость по размерам не сравниваются."], comparePackageModel: "ID модели"
   }
 };
 
@@ -214,12 +214,54 @@ function animationStatusLabel(status) {
   return t(labels[status] ?? "clipReady");
 }
 
+function renderRuntimeDiagnostics() {
+  const setValue = (id, value) => {
+    const element = $("#" + id);
+    if (element) element.textContent = value || "—";
+  };
+  if (!canvasHost) return;
+  const data = canvasHost.dataset;
+  const procedureStep = data.procedureStepId || "—";
+  const procedureMotion = data.procedureMotion || "idle";
+  const procedureTargets = data.procedureTargetCount || "0";
+  const procedureApplied = data.procedureAppliedCount || "0";
+  setValue("diagnostics-model", MODEL.id || MODEL.name || "—");
+  setValue("diagnostics-components", String(state.componentNodes.size));
+  setValue("diagnostics-procedure", `${procedureStep} · ${procedureMotion} · ${procedureApplied}/${procedureTargets}`);
+  const player = state.animationPlayer;
+  const snapshot = player?.getSnapshot();
+  setValue("diagnostics-animation", player?.clip
+    ? `${player.clip.id} · ${snapshot.status} · ${snapshot.movedTargetCount}/${snapshot.targetCount}`
+    : `no active clip · ${ANIMATION_PACKAGE.clips?.length ?? 0} available`);
+  const parseDeltas = (value) => {
+    try { return JSON.parse(value || "[]"); } catch { return []; }
+  };
+  const animationDeltas = parseDeltas(data.animationWorldDeltas);
+  const procedureDeltas = parseDeltas(data.procedureWorldDeltas);
+  const formatDeltas = (items) => items.map((item) => {
+    const vector = (item.delta ?? []).map((value) => Number(value).toFixed(1)).join(", ");
+    return `${item.targetId || item.id || "target"}: [${vector}]`;
+  }).join("; ");
+  const motion = [
+    animationDeltas.length ? "animation " + formatDeltas(animationDeltas) : "",
+    procedureDeltas.length ? "procedure " + formatDeltas(procedureDeltas) : ""
+  ].filter(Boolean).join(" | ");
+  setValue("diagnostics-motion", motion || "no displacement recorded");
+}
+
 function updateAnimationPlayerUI(snapshot = state.animationPlayer?.getSnapshot()) {
   const panel = $("#animation-player-panel");
   if (!panel) return;
   if (!state.animationPlayer || !snapshot?.clipId) {
     panel.hidden = true;
-    if (canvasHost) canvasHost.dataset.animationStatus = "idle";
+    if (canvasHost) {
+      canvasHost.dataset.animationStatus = "idle";
+      canvasHost.dataset.animationProgress = "0";
+      canvasHost.dataset.animationTargetCount = "0";
+      canvasHost.dataset.animationMovedTargetCount = "0";
+      canvasHost.dataset.animationWorldDeltas = "[]";
+    }
+    renderRuntimeDiagnostics();
     return;
   }
   panel.hidden = false;
@@ -227,7 +269,11 @@ function updateAnimationPlayerUI(snapshot = state.animationPlayer?.getSnapshot()
   if (canvasHost) {
     canvasHost.dataset.animationStatus = snapshot.status;
     canvasHost.dataset.animationProgress = String(snapshot.progress);
+    canvasHost.dataset.animationTargetCount = String(snapshot.targetCount ?? 0);
+    canvasHost.dataset.animationMovedTargetCount = String(snapshot.movedTargetCount ?? 0);
+    canvasHost.dataset.animationWorldDeltas = JSON.stringify(snapshot.worldDeltas ?? []);
   }
+  renderRuntimeDiagnostics();
   const select = $("#animation-clip-select");
   const play = $("#animation-play");
   const pause = $("#animation-pause");
@@ -271,7 +317,11 @@ function setupAnimationPlayer(root) {
     if (canvasHost) {
       canvasHost.dataset.animationStatus = "idle";
       canvasHost.dataset.animationProgress = "0";
+      canvasHost.dataset.animationTargetCount = "0";
+      canvasHost.dataset.animationMovedTargetCount = "0";
+      canvasHost.dataset.animationWorldDeltas = "[]";
     }
+    renderRuntimeDiagnostics();
     return;
   }
   state.animationPlayer = new AnimationPlayer(root, clips, {
@@ -1288,6 +1338,10 @@ function restoreProcedureSceneBaseline() {
     delete canvasHost.dataset.procedureSelectedComponent;
     delete canvasHost.dataset.procedureActionType;
     delete canvasHost.dataset.procedureDirection;
+    delete canvasHost.dataset.procedureTargetCount;
+    delete canvasHost.dataset.procedureResolvedTargets;
+    delete canvasHost.dataset.procedureAppliedCount;
+    delete canvasHost.dataset.procedureWorldDeltas;
   }
   const status = $("#assembly-motion-status");
   if (status) status.textContent = t("procedureReset");
@@ -1387,11 +1441,21 @@ function procedureActionDistance(action, object) {
   return Math.max(24, size.length() * 0.7);
 }
 
+function publishProcedureDiagnostics(targets, appliedCount, worldDeltas = []) {
+  if (!canvasHost) return;
+  canvasHost.dataset.procedureTargetCount = String(targets.length);
+  canvasHost.dataset.procedureResolvedTargets = targets.map((entry) => entry.id).join(",");
+  canvasHost.dataset.procedureAppliedCount = String(appliedCount);
+  canvasHost.dataset.procedureWorldDeltas = JSON.stringify(worldDeltas);
+  renderRuntimeDiagnostics();
+}
+
 function applyAuthoredSceneAction(action, animate = true) {
   const ids = action.target_component_ids ?? action.target_ids ?? [];
   const targets = ids.map((id) => ({ id, node: findNodeById(id) })).filter((entry) => entry.node);
   const type = String(action.type ?? "").toLowerCase();
   const note = localizedPackageText(action.note);
+  publishProcedureDiagnostics(targets, 0);
 
   if (type === "conditional" || type === "noop") {
     if (canvasHost) canvasHost.dataset.procedureMotion = "conditional-noop";
@@ -1404,6 +1468,7 @@ function applyAuthoredSceneAction(action, animate = true) {
       canvasHost.dataset.procedureMotion = "selection-only";
       canvasHost.dataset.procedureSelectedComponent = targets[0]?.id ?? "";
     }
+    publishProcedureDiagnostics(targets, targets.length);
     const status = $("#assembly-motion-status");
     if (status) status.textContent = note || (targets[0] ? procedureLabel(targets[0].id) : t("procedureNoGeometry"));
     return targets.length > 0;
@@ -1411,21 +1476,28 @@ function applyAuthoredSceneAction(action, animate = true) {
   if (type === "hide" || type === "show") {
     for (const { node } of targets) node.visible = type === "show";
     if (canvasHost) canvasHost.dataset.procedureMotion = type;
+    publishProcedureDiagnostics(targets, targets.length);
     const status = $("#assembly-motion-status");
     if (status) status.textContent = note || t("procedureRunnerVisualized");
     return targets.length > 0;
   }
   if (type === "translate" || type === "move") {
     const moves = [];
-    for (const { node } of targets) {
+    const worldDeltas = [];
+    for (const { id, node } of targets) {
       const direction = procedureDirectionForAction(action, node);
       if (!direction || direction.lengthSq() < 1e-8) continue;
       direction.normalize();
       if (canvasHost) canvasHost.dataset.procedureDirection = direction.toArray().map((value) => Math.abs(value) < 1e-8 ? "0" : String(Number(value.toFixed(3)))).join(",");
       const worldDelta = direction.multiplyScalar(procedureActionDistance(action, node));
       const localDelta = procedureWorldDeltaToLocal(node, worldDelta);
-      moves.push({ object: node, target: node.position.clone().add(localDelta) });
+      worldDeltas.push({
+        id,
+        delta: worldDelta.toArray().map((value) => Math.abs(value) < 1e-8 ? 0 : Number(value.toFixed(3)))
+      });
+      moves.push({ id, object: node, target: node.position.clone().add(localDelta) });
     }
+    publishProcedureDiagnostics(targets, moves.length, worldDeltas);
     if (animate) animateProcedurePositions(moves, Number(action.duration_ms) || 480);
     else moves.forEach((move) => move.object.position.copy(move.target));
     state.modelRoot.updateMatrixWorld(true);
@@ -1454,6 +1526,7 @@ function applyAuthoredSceneAction(action, animate = true) {
           : applyColor(object.material);
       });
     }
+    publishProcedureDiagnostics(targets, targets.length);
     return targets.length > 0;
   }
   return false;
@@ -1588,6 +1661,7 @@ function setProcedureSceneIndex(nextIndex) {
     }
   }
   updateProcedureControls();
+  renderRuntimeDiagnostics();
 }
 
 function updateProcedureControls() {
@@ -2929,6 +3003,7 @@ function installModel(root, mode) {
   setupAnimationPlayer(root);
   setLoadState(mode === "package" ? t("loadedPackage") : mode === "file" ? t("loadedGlb") : mode === "bundled" ? t("loadedBundled") : t("demoLoaded"));
   setStatus(state.modelWarnings.length ? 'Duplicate component IDs: ' + [...new Set(state.modelWarnings)].join(', ') : t('modelLoaded'));
+  renderRuntimeDiagnostics();
 }
 
 function loadDemo() {
