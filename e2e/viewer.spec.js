@@ -462,7 +462,8 @@ test("a successful but delayed bundled model cannot replace a scene after user i
   await page.addInitScript(() => {
     const nativeFetch = window.fetch.bind(window);
     window.fetch = async (resource, init) => {
-      if (typeof resource === "string" && resource.startsWith("data:application/octet-stream;base64,")) {
+      const url = typeof resource === "string" ? resource : resource?.url ?? "";
+      if (url.includes("ibm_pc_5150_1981.sbsmodel")) {
         await new Promise((resolve) => setTimeout(resolve, 1600));
       }
       return nativeFetch(resource, init);
