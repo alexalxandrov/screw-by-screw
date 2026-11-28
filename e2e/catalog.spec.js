@@ -66,6 +66,38 @@ test("catalogue lists IBM PC 5150 as a separate personal-computer reference", as
 });
 
 
+test("quick switcher lists only published models and switches between IBM and Dell", async ({ page }) => {
+  await page.goto("/");
+  const switcher = page.locator("#model-switcher");
+  await expect(switcher).toBeVisible();
+  await expect(switcher.locator("option")).toHaveCount(3);
+  await expect(page.locator("#model-title")).toContainText("Personal Computer 5150");
+  await expect(page.locator("#component-count")).toHaveText("71");
+  await expect(switcher).toHaveValue("computer.ibm.5150.1981");
+
+  const publishedOptions = await switcher.locator("option").evaluateAll((options) =>
+    options.map((option) => ({ value: option.value, label: option.textContent }))
+  );
+  expect(publishedOptions.map((option) => option.value)).toEqual([
+    "",
+    "computer.ibm.5150.1981",
+    "pc.dell.optiplex-5060-tower.family"
+  ]);
+  expect(publishedOptions.some((option) => /RTX 3060/i.test(option.label || ""))).toBe(false);
+
+  await switcher.selectOption("pc.dell.optiplex-5060-tower.family");
+  await expect(page.locator("#model-title")).toContainText("OptiPlex 5060");
+  await expect(page.locator("#component-count")).toHaveText("137");
+  await expect(switcher).toHaveValue("pc.dell.optiplex-5060-tower.family");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-inspection-presentation", "optiplex-side-cover-xray");
+
+  await switcher.selectOption("computer.ibm.5150.1981");
+  await expect(page.locator("#model-title")).toContainText("Personal Computer 5150");
+  await expect(page.locator("#component-count")).toHaveText("71");
+  await expect(switcher).toHaveValue("computer.ibm.5150.1981");
+  await expect(page.locator("#viewer-canvas")).not.toHaveAttribute("data-inspection-presentation");
+});
+
 test("loads the published Dell OptiPlex 5060 family package", async ({ page }) => {
   await page.goto("/");
   await page.locator("#catalog-open").click();

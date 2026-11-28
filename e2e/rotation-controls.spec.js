@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 
 test("rotates a selected component and allows the motion to be interrupted", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?demo=1");
   await expect(page.locator("#component-count")).not.toHaveText("—");
   const fan = page.locator('#component-tree button[data-id="assembly.fan.1"]');
   await expect(fan).toBeVisible();

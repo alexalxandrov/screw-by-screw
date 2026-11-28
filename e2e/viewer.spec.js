@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 
 test("mobile workspace switches panels instead of stacking the whole application", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/");
+  await page.goto("/?demo=1");
   const switcher = page.locator("#mobile-panel-switcher");
   await expect(switcher).toBeVisible();
   await expect(page.locator("#catalog-open")).toBeVisible();
@@ -30,7 +30,7 @@ test("mobile workspace switches panels instead of stacking the whole application
 
 test("mobile understand and learn modes reveal their detail content", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/");
+  await page.goto("/?demo=1");
   await page.locator('.view-tab[data-mode="understand"]').click();
   await expect(page.locator("#app")).toHaveAttribute("data-mobile-panel", "details");
   await expect(page.locator("#process-details")).toBeVisible();
@@ -44,7 +44,7 @@ test("mobile understand and learn modes reveal their detail content", async ({ p
 
 test("mobile workspace navigation remains hidden on desktop", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 900 });
-  await page.goto("/");
+  await page.goto("/?demo=1");
   await expect(page.locator("#mobile-panel-switcher")).toBeHidden();
   await expect(page.locator(".viewer-column")).toBeVisible();
   await expect(page.locator(".left-panel")).toBeVisible();
@@ -56,7 +56,7 @@ test("mobile workspace navigation remains hidden on desktop", async ({ page }) =
 test("renders the fallback GPU scene and selects a component", async ({ page }) => {
   const pageErrors = [];
   page.on("pageerror", (error) => pageErrors.push(error.message));
-  await page.goto("/");
+  await page.goto("/?demo=1");
   await expect(page).toHaveTitle(/Screw by Screw/);
   await expect(page.locator("#viewer-canvas canvas")).toBeVisible();
   await expect(page.locator("#component-count")).not.toHaveText("—");
@@ -69,7 +69,7 @@ test("renders the fallback GPU scene and selects a component", async ({ page }) 
 });
 
 test("shows linked components and source-backed process explanations", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?demo=1");
   await expect(page.locator("#component-count")).not.toHaveText("—");
   await page.locator('.process-button[data-layer="cooling"]').click();
   await expect(page.locator("#process-details")).toBeVisible();
@@ -82,7 +82,7 @@ test("shows linked components and source-backed process explanations", async ({ 
 });
 
 test("binds the power process layer from package relationships", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?demo=1");
   await page.locator('.process-button[data-layer="power_delivery"]').click();
   await expect(page.locator("#process-details")).toBeVisible();
   await expect(page.locator("#process-detail-title")).toHaveText("Ввод питания, измерение тока и защита");
@@ -97,7 +97,7 @@ test("binds the power process layer from package relationships", async ({ page }
 test("renders conceptual GPU graphics paths and selects a linked architecture node", async ({ page }) => {
   const pageErrors = [];
   page.on("pageerror", (error) => pageErrors.push(error.message));
-  await page.goto("/");
+  await page.goto("/?demo=1");
   await page.locator('.process-button[data-layer="graphics_pipeline"]').click();
   await expect(page.locator("#process-details")).toBeVisible();
   await expect(page.locator("#process-detail-title")).toHaveText("Графические тракты GA106 и видеовыходы");
@@ -113,7 +113,7 @@ test("renders conceptual GPU graphics paths and selects a linked architecture no
 test("renders the RTX 3060 NVENC and NVDEC media-engine map", async ({ page }) => {
   const pageErrors = [];
   page.on("pageerror", (error) => pageErrors.push(error.message));
-  await page.goto("/");
+  await page.goto("/?demo=1");
   await page.locator('.process-button[data-layer="video_codec"]').click();
   await expect(page.locator("#process-details")).toBeVisible();
   await expect(page.locator("#process-detail-title")).toHaveText("Выделенные блоки видеокодирования и декодирования");
@@ -127,7 +127,7 @@ test("renders the RTX 3060 NVENC and NVDEC media-engine map", async ({ page }) =
 });
 
 test("allows an animated explode sequence to be cancelled and reassembled", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?demo=1");
   const button = page.locator("#animate-button");
   await button.click();
   await expect(button).toBeDisabled();
@@ -137,7 +137,7 @@ test("allows an animated explode sequence to be cancelled and reassembled", asyn
 });
 
 test("runs the source-backed quiz in Russian and English", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?demo=1");
   await page.getByRole("button", { name: "Обучение" }).click();
   await expect(page.locator("#learning-panel")).toBeVisible();
   await expect(page.locator("#quiz-question")).toHaveText("Какой объём памяти GDDR6 указан для этого SKU?");
@@ -151,7 +151,7 @@ test("runs the source-backed quiz in Russian and English", async ({ page }) => {
 });
 
 test("exploded view can be returned to assembled state", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?demo=1");
   await expect(page.locator("#component-count")).not.toHaveText("—");
   await page.locator("#explode-slider").evaluate((element) => {
     element.value = "100";
@@ -163,7 +163,7 @@ test("exploded view can be returned to assembled state", async ({ page }) => {
 });
 
 test("rejects GLB files that reference external resources", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?demo=1");
   const document = {
     asset: { version: "2.0" },
     scene: 0,
@@ -193,7 +193,7 @@ test("rejects GLB files that reference external resources", async ({ page }) => 
 
 test("keeps the shell styled and explains when the app entry module fails", async ({ page }) => {
   await page.route("**/src/main.js", (route) => route.abort());
-  await page.goto("/");
+  await page.goto("/?demo=1");
   await expect(page.locator("#startup-fallback")).toBeVisible({ timeout: 10000 });
   await expect(page.locator("#app")).toHaveClass(/app-shell/);
   const bodyBackground = await page.locator("body").evaluate((node) => getComputedStyle(node).backgroundColor);
@@ -202,7 +202,7 @@ test("keeps the shell styled and explains when the app entry module fails", asyn
 
 
 test("measurement mode is reversible, keyboard-accessible and labelled as model-space only", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?demo=1");
   const processPanel = page.locator("#process-panel");
   const toggle = page.locator("#measurement-toggle");
   const readout = page.locator("#measurement-readout");
@@ -226,7 +226,7 @@ test("measurement mode is reversible, keyboard-accessible and labelled as model-
 
 
 test("shows source-backed claims, evidence classes and explicit unknown values", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?demo=1");
   await page.locator('#component-tree button[data-id="assembly.pcb.board"]').click();
   await expect(page.locator("#detail-claims-section")).toBeVisible();
 
@@ -250,7 +250,7 @@ test("shows source-backed claims, evidence classes and explicit unknown values",
 });
 
 test("shows model-level specifications when the top-level device is selected", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?demo=1");
   await page.locator('#component-tree button[data-id="assembly.card.root"]').click();
   await expect(page.locator("#detail-claims-section")).toBeVisible();
   await expect(page.locator('[data-claim-id="claim.memory.capacity"]')).toContainText("12 GB");
@@ -262,7 +262,7 @@ test("shows model-level specifications when the top-level device is selected", a
 
 
 test("shows exact-SKU cooler screw count and secondary-catalog memory attributes", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?demo=1");
   await page.locator('#component-tree .tree-item[data-id="assembly.fasteners"]').click();
   await expect(page.locator('[data-claim-id="claim.cooler.fastener.count.total"]')).toContainText("8");
   await expect(page.locator('[data-claim-id="claim.cooler.fastener.count.rear"]')).toContainText("4");
@@ -279,7 +279,7 @@ test("shows exact-SKU cooler screw count and secondary-catalog memory attributes
 
 
 test("keeps heatpipe route counts separate from unknown physical loop count and OEM fan identity", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?demo=1");
   await page.locator('#component-tree button[data-id="cooling.heatpipes"]').click();
   await expect(page.locator('[data-claim-id="claim.cooling.heatpipe_count"]')).toContainText("6");
   await expect(page.locator('[data-claim-id="claim.cooling.heatpipe_count"]')).toContainText("reported heatpipe runs");
@@ -293,7 +293,7 @@ test("keeps heatpipe route counts separate from unknown physical loop count and 
 });
 
 test("search finds components by package marking and source title", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?demo=1");
   const search = page.locator("#component-search");
 
   await search.fill("K4ZAF325BM-HC16");
@@ -313,7 +313,7 @@ test("search finds components by package marking and source title", async ({ pag
 });
 
 test("component search keeps ordinary name and stable-ID lookup", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?demo=1");
   const search = page.locator("#component-search");
   await search.fill("cooling.heatsink");
   await expect(page.locator('#component-tree button[data-id="cooling.heatsink"]')).toBeVisible();
@@ -323,7 +323,7 @@ test("component search keeps ordinary name and stable-ID lookup", async ({ page 
 
 
 test("component cards expose typed, source-linked relationships and navigate between components", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?demo=1");
   await page.locator('#component-tree button[data-id="assembly.cooling"]').click();
   await expect(page.locator("#detail-relations-section")).toBeVisible();
 
@@ -343,7 +343,7 @@ test("component cards expose typed, source-linked relationships and navigate bet
 });
 
 test("relationships without registered sources are labelled rather than silently presented as sourced", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?demo=1");
   await page.locator('#component-tree button[data-id="assembly.power_stage"]').click();
   const relation = page.locator('[data-relationship-id="rel.pcb.contains.power_stage"]');
   await expect(relation).toBeVisible();
@@ -353,9 +353,15 @@ test("relationships without registered sources are labelled rather than silently
 
 
 test("a missing optional bundled model does not reset active user interaction", async ({ page }) => {
-  await page.route("**/models/rtx3060_xc_black_blockout_v04.glb", async (route) => {
-    await new Promise((resolve) => setTimeout(resolve, 750));
-    await route.fulfill({ status: 404, body: "not found" });
+  await page.addInitScript(() => {
+    const nativeFetch = window.fetch.bind(window);
+    window.fetch = async (resource, init) => {
+      if (typeof resource === "string" && resource.startsWith("data:application/octet-stream;base64,")) {
+        await new Promise((resolve) => setTimeout(resolve, 750));
+        throw new Error("offline package unavailable");
+      }
+      return nativeFetch(resource, init);
+    };
   });
   await page.goto("/");
   const toggle = page.locator("#measurement-toggle");
@@ -369,7 +375,7 @@ test("a missing optional bundled model does not reset active user interaction", 
 
 
 test("cooling layer exposes an inspectable thermal path without claiming simulation", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?demo=1");
   await page.locator('.process-button[data-layer="cooling"]').click();
   await expect(page.locator("#process-detail-title")).toContainText("Охлаждение и воздушный поток");
   const diagram = page.locator("#process-diagram");
@@ -391,7 +397,7 @@ test("cooling layer exposes an inspectable thermal path without claiming simulat
 });
 
 test("GPU architecture layer exposes source-linked logical GA106 and GDDR6 nodes", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?demo=1");
   await page.locator('.process-button[data-layer="gpu_compute"]').click();
   await expect(page.locator("#process-detail-title")).toContainText("Архитектура вычислений GA106");
   const diagram = page.locator("#process-diagram");
@@ -429,7 +435,7 @@ test("GPU architecture layer exposes source-linked logical GA106 and GDDR6 nodes
 });
 
 test("partial teardown steps and source observations are both shown without conflating them", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?demo=1");
   await page.locator('#component-tree button[data-id="assembly.card.root"]').click();
 
   const section = page.locator("#detail-assembly-section");
@@ -453,41 +459,36 @@ test("partial teardown steps and source observations are both shown without conf
 
 
 test("a successful but delayed bundled model cannot replace a scene after user interaction", async ({ page }) => {
-  await page.route("**/models/rtx3060_xc_black_blockout_v05.glb", async (route) => {
-    await new Promise((resolve) => setTimeout(resolve, 1200));
-    const document = {
-      asset: { version: "2.0" },
-      scene: 0,
-      scenes: [{ nodes: [0] }],
-      nodes: [{ name: "Late bundled root", extras: { sbs_component_id: "assembly.card.root" } }]
+  await page.addInitScript(() => {
+    const nativeFetch = window.fetch.bind(window);
+    window.__sbsDelayedPackageRequestStarted = false;
+    window.fetch = async (resource, init) => {
+      const url = typeof resource === "string"
+        ? resource
+        : resource?.url ?? resource?.href ?? "";
+      if (url.startsWith("data:") || url.includes("ibm_pc_5150_1981.sbsmodel")) {
+        window.__sbsDelayedPackageRequestStarted = true;
+        await new Promise((resolve) => setTimeout(resolve, 1600));
+      }
+      return nativeFetch(resource, init);
     };
-    const json = Buffer.from(JSON.stringify(document), "utf8");
-    const paddedLength = Math.ceil(json.length / 4) * 4;
-    const glb = Buffer.alloc(20 + paddedLength);
-    glb.writeUInt32LE(0x46546c67, 0);
-    glb.writeUInt32LE(2, 4);
-    glb.writeUInt32LE(glb.length, 8);
-    glb.writeUInt32LE(paddedLength, 12);
-    glb.writeUInt32LE(0x4e4f534a, 16);
-    json.copy(glb, 20);
-    glb.fill(0x20, 20 + json.length);
-    await route.fulfill({ status: 200, contentType: "model/gltf-binary", body: glb });
   });
 
-  await page.goto("/");
+  await page.goto("/", { waitUntil: "domcontentloaded" });
+  await expect.poll(() => page.evaluate(() => window.__sbsDelayedPackageRequestStarted)).toBe(true);
   await expect(page.locator("#component-count")).not.toHaveText("—");
   const fan = page.locator('#component-tree button[data-id="assembly.fan.1"]');
   await expect(fan).toBeVisible();
   await fan.click();
   await expect(page.locator("#detail-id")).toHaveText("assembly.fan.1");
-  await page.waitForTimeout(1450);
+  await page.waitForTimeout(1750);
   await expect(page.locator("#detail-id")).toHaveText("assembly.fan.1");
   await expect(page.locator('#component-tree button[data-id="assembly.fan.1"]')).toBeVisible();
 });
 
 
 test("fallback impellers have independent pivots and an evidence-labelled package clip", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?demo=1");
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-fan-rotors", "2");
   await expect(page.locator("#animation-player-panel")).toBeVisible();
   await expect(page.locator("#animation-evidence-note")).toContainText("не является измеренным RPM");
@@ -513,7 +514,7 @@ test("fallback impellers have independent pivots and an evidence-labelled packag
 
 
 test("shows a workload-specific cooling and board-power operating point with source caveats", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?demo=1");
 
   await page.locator('#component-tree button[data-id="assembly.cooling"]').click();
   const fanRpm = page.locator('[data-claim-id="claim.cooling.fan.rpm.sample_operating_point"]');

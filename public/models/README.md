@@ -1,40 +1,28 @@
-# Local model assets
+# Published local model packages
 
-The generated Blender scene, GLB and portable `.sbsmodel` archive are build artifacts and are intentionally not committed by default.
+The public model library currently contains two validated packages:
 
-The catalogue entry expects this exact package path:
+| Catalogue model | Package | Model ID |
+| --- | --- | --- |
+| IBM Personal Computer 5150 (1981) | `ibm_pc_5150_1981.sbsmodel` | `computer.ibm.5150.1981` |
+| Dell OptiPlex 5060 Tower family | `dell_optiplex_5060_tower_v03.sbsmodel` | `pc.dell.optiplex-5060-tower.family` |
 
-`public/models/rtx3060_xc_black_v05.sbsmodel`
+Both packages are loaded by the same production `ModelPackageLoader`. The standalone `index.html` embeds every catalogue entry marked `published: true`, so quick model switching works in the browser and when the HTML file is opened directly with `file://`.
 
-The release workflow creates that archive from the current Blender scene, validates its GLB node/component bindings, refreshes the content SHA-256 manifest, and stages the archive before building the standalone viewer. The standalone HTML builder then embeds any staged catalogue package as a data URL, so `index.html` can open it with `file://` and no server.
+## IBM PC 5150 package
 
-## Rebuild locally
+The IBM content sidecars and Blender generator are stored compressed in the source tree. The Blender blockout workflow restores them, generates the scene and GLB, validates semantic bindings and SHA-256 integrity, builds the portable package, runs browser tests, and commits the resulting package here. The workflow keeps the published IBM and Dell packages while removing temporary research build outputs.
 
-Run these commands from the repository root with Blender 4.3.2, Python and the locked Node dependencies installed:
+The reference is scoped to the August 1981 launch-era system unit. It contains 71 semantic components and 100 relationships. Its geometry is explicitly `illustrative_proxy_not_cad`; it is not measured CAD. The service sequence is a source-backed branching FRU graph, not one universal linear teardown. The PSU is a sealed FRU, not a user-serviceable mains assembly. See `content/models/ibm-pc-5150-1981/README.md` and `docs/IBM_PC_5150_DISASSEMBLY_SEQUENCE.md`.
 
-```bash
-blender --background --factory-startup --python-exit-code 1 --python tools/modeling/build_rtx3060_xc_black_blockout.py
+## Dell OptiPlex 5060 package
 
-python tools/modeling/validate_blockout_package.py \
-  --manifest MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v05.manifest.json \
-  --glb MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v05.glb
+The family-level reference is packaged as a self-contained JSON-envelope `.sbsmodel`. It contains 137 semantic nodes and 145 relationships. Its geometry is also illustrative, not CAD, and its model identity is a platform family rather than a single SKU. See `content/models/dell-optiplex-5060-tower-family/`.
 
-python tools/content/validate_glb_bindings.py \
-  --components content/models/evga-rtx3060-xc-black-12gb/components.json \
-  --glb MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v05.glb
+## Research archive
 
-python tools/content/build_release_manifest.py content/models/evga-rtx3060-xc-black-12gb
+The EVGA RTX 3060 XC BLACK package remains in `content/models/evga-rtx3060-xc-black-12gb/` as an unpublished research archive. It is intentionally excluded from the public selector and standalone launcher until its exact PCB revision and physical service sequence meet the publication criteria in the catalogue.
 
-mkdir -p public/models
-python tools/modeling/package_model.py \
-  --model-dir content/models/evga-rtx3060-xc-black-12gb \
-  --scene MODELS/GPUS/EVGA/RTX-3060-XC-BLACK-12GB/04-WORKING/generated/rtx3060_xc_black_blockout_v05.glb \
-  --output public/models/rtx3060_xc_black_v05.sbsmodel
+## Build contract
 
-npm ci
-npm run build
-```
-
-The resulting root `index.html` is self-contained and embeds the staged archive. Do not substitute the old v0.4 GLB path: the current catalogue entry resolves the v0.5 `.sbsmodel` package.
-
-All geometry remains labelled `illustrative_proxy_not_cad`; the package is an educational research blockout, not manufacturing or repair CAD.
+The standalone builder fails when a catalogue entry marked `published: true` has no package under `public/models/`. This prevents a successful build from silently shipping a catalogue with missing offline models. Do not mark an entry as published until its package has passed the production loader and browser tests.

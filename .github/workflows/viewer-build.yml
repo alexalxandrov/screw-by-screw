@@ -13,6 +13,7 @@ on:
       - "tests/**"
       - "content/**"
       - "e2e/**"
+      - "public/models/**"
       - "index.html"
       - "index.template.html"
       - "tools/build_standalone_html.mjs"
@@ -29,6 +30,7 @@ on:
       - "tests/viewer-scene-controller.test.js"
       - "content/**"
       - "e2e/**"
+      - "public/models/**"
       - "index.html"
       - "package.json"
       - "package-lock.json"
@@ -37,7 +39,40 @@ on:
       - ".github/workflows/viewer-build.yml"
 
 jobs:
+  check_published_packages:
+    runs-on: ubuntu-latest
+    outputs:
+      ready: ${{ steps.check.outputs.ready }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Check every published catalogue package is present
+        id: check
+        run: |
+          ready=$(python - <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+
+          catalog = json.loads(Path("content/catalog/models.json").read_text(encoding="utf-8"))
+          missing = []
+          for model in catalog.get("models", []):
+              if model.get("published") is not True:
+                  continue
+              package_path = model.get("package_path", "")
+              package = Path("public") / package_path
+              if not package.is_file() or package.stat().st_size <= 0:
+                  missing.append(f"{model.get('id')}: {package}")
+          for item in missing:
+              print(item, file=sys.stderr)
+          print("true" if not missing else "false")
+          PY
+          )
+          echo "ready=$ready" >> "$GITHUB_OUTPUT"
   build:
+    needs: check_published_packages
+    if: needs.check_published_packages.outputs.ready == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
