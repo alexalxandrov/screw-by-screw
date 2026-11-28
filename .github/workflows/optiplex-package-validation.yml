@@ -16,6 +16,7 @@ on:
       - "src/data/catalog.js"
       - "src/viewer/ModelPackageLoader.js"
       - "tests/**"
+      - "e2e/**"
       - ".github/workflows/optiplex-package-validation.yml"
   pull_request:
     paths:
@@ -31,6 +32,7 @@ on:
       - "tests/optiplex-package.test.js"
       - "tests/test_text_model_package.py"
       - "tests/test_device_blockout.py"
+      - "e2e/**"
       - "package.json"
       - "package-lock.json"
       - ".github/workflows/optiplex-package-validation.yml"
