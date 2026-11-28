@@ -3832,7 +3832,12 @@ function bindUI() {
   });
   canvasHost.addEventListener("click", onCanvasClick);
   window.addEventListener("keydown", (event) => {
-    if (event.key === "/" && document.activeElement?.tagName !== "INPUT") {
+    const activeElement = document.activeElement;
+    const isEditingControl = activeElement instanceof HTMLElement && (
+      activeElement.isContentEditable ||
+      ["INPUT", "TEXTAREA", "SELECT"].includes(activeElement.tagName)
+    );
+    if (event.key === "/" && !isEditingControl && !event.altKey && !event.ctrlKey && !event.metaKey) {
       event.preventDefault();
       $("#component-search").focus();
     }

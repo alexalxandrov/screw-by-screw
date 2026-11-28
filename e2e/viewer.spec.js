@@ -84,6 +84,21 @@ test("renders the fallback GPU scene and selects a component", async ({ page }) 
   expect(pageErrors).toEqual([]);
 });
 
+test("slash search shortcut does not steal focus from editable controls", async ({ page }) => {
+  await page.goto("/?demo=1");
+  const cameraPreset = page.locator("#camera-preset");
+  const search = page.locator("#component-search");
+
+  await cameraPreset.focus();
+  await page.keyboard.press("/");
+  await expect(cameraPreset).toBeFocused();
+
+  await search.focus();
+  await page.keyboard.press("/");
+  await expect(search).toHaveValue("/");
+  await expect(search).toBeFocused();
+});
+
 test("component search shows a recoverable empty state when there are no matches", async ({ page }) => {
   await page.goto("/?demo=1");
   const search = page.locator("#component-search");
