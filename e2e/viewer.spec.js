@@ -123,7 +123,7 @@ test("catalog empty state clears both search and category filters", async ({ pag
 
   await expect(page.locator(".catalog-empty")).toBeVisible();
   await expect(page.locator("#catalog-count")).toHaveText("0");
-  await expect(page.locator(".catalog-empty")).toContainText("По заданным фильтрам ничего не найдено");
+  await expect(page.locator(".catalog-empty")).toContainText("Подходящих моделей не найдено");
   await expect(page.locator(".catalog-empty-clear")).toHaveText("Сбросить фильтры");
 
   await page.locator(".catalog-empty-clear").click();
