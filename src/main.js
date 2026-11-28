@@ -1670,15 +1670,16 @@ function procedureDirectionForAction(action, object) {
 
 function procedureActionDistance(action, object) {
   const specified = Number(action.distance);
+  const evidenceScale = action.evidence_class === "manufacturer_data" ? 1 : 1.8;
   if (Number.isFinite(specified) && specified > 0) {
     const unit = String(action.unit ?? "model_units").toLowerCase();
     const scale = unit === "mm" ? 1 : unit === "cm" ? 10 : unit === "in" || unit === "inch" ? 25.4 : unit === "m" ? 1000 : 1;
-    return specified * scale;
+    return specified * scale * evidenceScale;
   }
   const bounds = new THREE.Box3().setFromObject(object);
-  if (bounds.isEmpty()) return 24;
+  if (bounds.isEmpty()) return 24 * evidenceScale;
   const size = bounds.getSize(new THREE.Vector3());
-  return Math.max(24, size.length() * 0.7);
+  return Math.max(24, size.length() * 0.7) * evidenceScale;
 }
 
 function publishProcedureDiagnostics(targets, appliedCount, worldDeltas = []) {
