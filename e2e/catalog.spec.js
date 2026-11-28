@@ -89,7 +89,7 @@ test("quick switcher lists only published models and switches between IBM and De
   await expect(page.locator("#model-title")).toContainText("OptiPlex 5060");
   await expect(page.locator("#component-count")).toHaveText("137");
   await expect(switcher).toHaveValue("pc.dell.optiplex-5060-tower.family");
-  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-inspection-presentation", "optiplex-side-cover-xray");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-inspection-presentation", "optiplex-open-xray");
 
   await switcher.selectOption("computer.ibm.5150.1981");
   await expect(page.locator("#model-title")).toContainText("Personal Computer 5150");
