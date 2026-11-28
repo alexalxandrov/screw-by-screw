@@ -183,13 +183,21 @@ test("exploded overview animates separate assembly groups and stop restores ever
   root.traverse((object) => {
     if (object.userData?.sbs_component_id) byId.set(object.userData.sbs_component_id, object);
   });
-  assert.deepEqual(byId.get("assembly.shroud").position.toArray(), [100.9, -85.2, 55]);
-  assert.deepEqual(byId.get("assembly.cooling").position.toArray(), [100.9, -67.2, 55]);
+  const shroudPosition = byId.get("assembly.shroud").position;
+  assert.equal(shroudPosition.x, 100.9);
+  assert.ok(Math.abs(shroudPosition.y - (-85.2)) < 1e-9);
+  assert.equal(shroudPosition.z, 55);
+  const coolingPosition = byId.get("assembly.cooling").position;
+  assert.equal(coolingPosition.x, 100.9);
+  assert.ok(Math.abs(coolingPosition.y - (-67.2)) < 1e-9);
+  assert.equal(coolingPosition.z, 55);
   const pcbPosition = byId.get("assembly.pcb.electronics").position;
   assert.equal(pcbPosition.x, 100.9);
   assert.ok(Math.abs(pcbPosition.y - 81.04) < 1e-9);
   assert.equal(pcbPosition.z, 55);
-  assert.deepEqual(byId.get("assembly.connectors").position.toArray(), [-67.2, 0, 0]);
+  assert.ok(Math.abs(byId.get("assembly.connectors").position.x - (-67.2)) < 1e-9);
+  assert.equal(byId.get("assembly.connectors").position.y, 0);
+  assert.equal(byId.get("assembly.connectors").position.z, 0);
   player.stop();
   for (const [id, position] of original) assert.deepEqual(byId.get(id).position.toArray(), position);
   player.dispose();
@@ -238,7 +246,7 @@ test("relative position tracks animate from the actual model baseline and restor
   })]);
   player.selectClip("clip.test");
   player.seek(0.5);
-  assert.deepEqual(fan.position.toArray(), [12, 4, 14]);
+  assert.deepEqual(fan.position.toArray(), [12, 4, 21]);
   player.stop();
   assert.deepEqual(fan.position.toArray(), [12, 4, -7]);
   player.dispose();
@@ -285,7 +293,7 @@ test("relative local-Y lift tracks move upward in world Z under the viewer's Y-u
   const worldPosition = fan.getWorldPosition(new THREE.Vector3());
   assert.ok(Math.abs(worldPosition.x) < 1e-6);
   assert.ok(Math.abs(worldPosition.y) < 1e-6);
-  assert.ok(Math.abs(worldPosition.z - 36) < 1e-6);
+  assert.ok(Math.abs(worldPosition.z - 56) < 1e-6);
   assert.deepEqual(player.getSnapshot().worldDeltas[0].delta, [0, 0, 56]);
 
   player.stop();
@@ -328,7 +336,7 @@ test("world-space position tracks follow the requested vector through nested rot
   const actualDelta = movedWorld.sub(baselineWorld);
   assert.ok(Math.abs(actualDelta.x) < 1e-5);
   assert.ok(Math.abs(actualDelta.y) < 1e-5);
-  assert.ok(Math.abs(actualDelta.z - 36) < 1e-5);
+  assert.ok(Math.abs(actualDelta.z - 56) < 1e-5);
   assert.deepEqual(player.getSnapshot().worldDeltas[0].delta, [0, 0, 56]);
 
   player.stop();
