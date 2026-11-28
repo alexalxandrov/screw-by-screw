@@ -4,7 +4,8 @@ import { Vector3 } from "three";
  * Generic playback for package-authored, normalized component animation tracks.
  * Position tracks may set coordinate_space:"world" to define offsets in viewer
  * coordinates; parent transforms and scale are inverted by the player at runtime.
- * Illustrative relative offsets are amplified for visual clearance, not metrology.
+ * Educational position-track travel is amplified around its starting keyframe for
+ * visual clearance, not metrology. Manufacturer-data tracks remain unmodified.
  * This class is intentionally independent of device-specific model content.
  */
 export class AnimationPlayer {
@@ -266,15 +267,23 @@ export class AnimationPlayer {
       } else {
         value = left.value.map((entry, index) => entry + (right.value[index] - entry) * amount);
       }
-      // Package-authored position tracks describe illustrative offsets from a
-      // captured baseline. Amplify those offsets for useful visual separation;
-      // manufacturer-stated positional data is never altered.
-      const isOffsetTrack = track.property === "position" &&
-        (track.relative === true || track.coordinate_space === "world");
+      // Educational position tracks are presentation motion, whether authored
+      // as offsets from the baseline or as absolute local keyframes. Scale their
+      // travel while preserving the authored starting pose. Manufacturer data
+      // is never altered.
       const isManufacturerPosition = track.evidence_class === "manufacturer_data" ||
         this.clip.evidence_status === "manufacturer_data";
-      if (isOffsetTrack && !isManufacturerPosition) {
-        value = value.map((entry) => entry * this.positionOffsetScale);
+      if (track.property === "position" && !isManufacturerPosition) {
+        if (track.relative === true || track.coordinate_space === "world") {
+          value = value.map((entry) => entry * this.positionOffsetScale);
+        } else {
+          const origin = Array.isArray(frames[0]?.value)
+            ? frames[0].value
+            : (this.snapshots.get(track.target_id + "::" + track.property)?.value ?? value);
+          value = value.map((entry, index) =>
+            origin[index] + (entry - origin[index]) * this.positionOffsetScale
+          );
+        }
       }
       if (track.coordinate_space === "world" && track.property === "position") {
         const baseline = this.snapshots.get(track.target_id + "::" + track.property)?.worldPosition;
