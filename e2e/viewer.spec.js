@@ -28,6 +28,22 @@ test("mobile workspace switches panels instead of stacking the whole application
   await expect(page.getByRole("button", { name: "Structure" })).toBeVisible();
 });
 
+test("selecting a component from the mobile structure panel opens and focuses its details", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/?demo=1");
+
+  await page.locator('.mobile-panel-button[data-mobile-panel="structure"]').click();
+  const component = page.locator('#component-tree button[data-id="assembly.card.root"]');
+  await expect(component).toBeVisible();
+  await component.click();
+
+  await expect(page.locator("#app")).toHaveAttribute("data-mobile-panel", "details");
+  await expect(page.locator(".details-panel")).toBeVisible();
+  await expect(page.locator(".left-panel")).toBeHidden();
+  await expect(page.locator("#detail-id")).toHaveText("assembly.card.root");
+  await expect(page.locator("#details-heading-title")).toBeFocused();
+});
+
 test("mobile understand and learn modes reveal their detail content", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/?demo=1");
@@ -66,6 +82,72 @@ test("renders the fallback GPU scene and selects a component", async ({ page }) 
   await expect(page.locator("#component-details")).toBeVisible();
   await expect(page.locator("#detail-id")).toHaveText("assembly.card.root");
   expect(pageErrors).toEqual([]);
+});
+
+test("slash search shortcut does not steal focus from editable controls", async ({ page }) => {
+  await page.goto("/?demo=1");
+  const cameraPreset = page.locator("#camera-preset");
+  const search = page.locator("#component-search");
+
+  await cameraPreset.focus();
+  await page.keyboard.press("/");
+  await expect(cameraPreset).toBeFocused();
+
+  await search.focus();
+  await page.keyboard.press("/");
+  await expect(search).toHaveValue("/");
+  await expect(search).toBeFocused();
+});
+
+test("slash shortcut keeps catalogue search inside the open dialog", async ({ page }) => {
+  await page.goto("/?demo=1");
+  await page.locator("#catalog-open").click();
+
+  const close = page.locator("#catalog-close");
+  const catalogSearch = page.locator("#catalog-search");
+  await close.focus();
+  await page.keyboard.press("/");
+
+  await expect(catalogSearch).toBeFocused();
+  await expect(page.locator("#component-search")).not.toBeFocused();
+});
+
+test("catalog empty state clears both search and category filters", async ({ page }) => {
+  await page.goto("/?demo=1");
+  await page.locator("#catalog-open").click();
+
+  const search = page.locator("#catalog-search");
+  const category = page.locator("#catalog-category");
+  await category.selectOption("desktop_computers");
+  await search.fill("__sbs_no_catalog_matches__");
+
+  await expect(page.locator(".catalog-empty")).toBeVisible();
+  await expect(page.locator("#catalog-count")).toHaveText("0");
+  await expect(page.locator(".catalog-empty")).toContainText("Подходящих моделей не найдено");
+  await expect(page.locator(".catalog-empty-clear")).toHaveText("Сбросить фильтры");
+
+  await page.locator(".catalog-empty-clear").click();
+  await expect(search).toHaveValue("");
+  await expect(category).toHaveValue("all");
+  await expect(page.locator("#catalog-count")).toHaveText("2");
+  await expect(page.locator(".catalog-card")).toHaveCount(2);
+  await expect(search).toBeFocused();
+});
+
+test("component search shows a recoverable empty state when there are no matches", async ({ page }) => {
+  await page.goto("/?demo=1");
+  const search = page.locator("#component-search");
+  await expect(page.locator("#component-count")).not.toHaveText("—");
+
+  await search.fill("__sbs_no_component_matches__");
+  await expect(page.locator("#component-tree .tree-empty-state")).toBeVisible();
+  await expect(page.locator("#component-tree .tree-empty-state")).toContainText("Совпадений не найдено");
+  await expect(page.locator("#component-tree .tree-item")).toHaveCount(0);
+
+  await page.locator("#component-tree .tree-empty-clear").click();
+  await expect(search).toHaveValue("");
+  await expect(page.locator("#component-tree .tree-empty-state")).toHaveCount(0);
+  await expect(page.locator("#component-tree .tree-item").first()).toBeVisible();
 });
 
 test("shows linked components and source-backed process explanations", async ({ page }) => {
@@ -640,4 +722,128 @@ test("Dell package exposes working 3D disassembly actions and authored animation
   expect(boardMovement[2]).toBeGreaterThan(0);
   expect(Math.abs(boardMovement[1])).toBeLessThan(0.01);
   expect(pageErrors).toEqual([]);
+});
+
+test("viewer controls retain independent state and expose toggle states", async ({ page }) => {
+  await page.goto("/?demo=1");
+
+  const wireframe = page.locator("#wireframe-toggle");
+  const isolate = page.locator("#isolate-toggle");
+  await expect(wireframe).toHaveAttribute("aria-pressed", "false");
+  await expect(isolate).toBeDisabled();
+  await expect(isolate).toHaveAttribute("aria-pressed", "false");
+
+  await wireframe.click();
+  await expect(wireframe).toHaveAttribute("aria-pressed", "true");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-wireframe", "true");
+
+  await page.locator('#component-tree button[data-id="cooling.heatsink"]').click();
+  await expect(isolate).toBeEnabled();
+  await isolate.click();
+  await expect(isolate).toHaveAttribute("aria-pressed", "true");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-isolated", "true");
+
+  await page.locator('#component-tree button[data-id="assembly.card.root"]').click();
+  await expect(isolate).toHaveAttribute("aria-pressed", "false");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-isolated", "false");
+
+  const cooling = page.locator('.process-button[data-layer="cooling"]');
+  await cooling.click();
+  await expect(cooling).toHaveAttribute("aria-pressed", "true");
+  await page.locator("#slice-toggle").click();
+  await expect(page.locator("#slice-toggle")).toHaveAttribute("aria-pressed", "true");
+  await expect(cooling).toHaveAttribute("aria-pressed", "true");
+  await expect(cooling).toHaveClass(/active/);
+
+  await expect(page.locator("#slice-axis")).toBeEnabled();
+  await expect(page.locator("#slice-position")).toBeEnabled();
+  await page.locator("#slice-axis").selectOption("z");
+  await page.locator("#slice-position").evaluate((input) => {
+    input.value = "70";
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+  });
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-slice-axis", "z");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-slice-fraction", "0.7");
+  await page.locator("#slice-toggle").click();
+  await expect(page.locator("#slice-toggle")).toHaveAttribute("aria-pressed", "false");
+
+  await page.locator("#measurement-toggle").click();
+  await expect(page.locator("#measurement-toggle")).toHaveAttribute("aria-pressed", "true");
+  await expect(cooling).toHaveAttribute("aria-pressed", "true");
+  await expect(cooling).toHaveClass(/active/);
+});
+
+test("camera reset, explode action and expand-tree controls work", async ({ page }) => {
+  await page.goto("/?demo=1");
+
+  await page.locator("#camera-preset").selectOption("top");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-camera-preset", "top");
+  await page.locator("#reset-view").click();
+  await expect(page.locator("#camera-preset")).toHaveValue("isometric");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-camera-preset", "isometric");
+
+  await page.locator("#explode-button").click();
+  await expect(page.locator("#explode-slider")).toHaveValue("100");
+  await expect(page.locator("#explode-value")).toHaveText("100%");
+  await page.locator("#assemble-button").click();
+  await expect(page.locator("#explode-slider")).toHaveValue("0");
+
+  await page.locator("#component-search").fill("__sbs_no_component_matches__");
+  await expect(page.locator('#component-tree button[data-id="assembly.card.root"]')).toHaveCount(0);
+  await page.locator("#expand-tree").click();
+  await expect(page.locator("#component-search")).toHaveValue("");
+  await expect(page.locator('#component-tree button[data-id="assembly.card.root"]')).toBeVisible();
+});
+
+test("viewer mode and process controls expose one pressed state", async ({ page }) => {
+  await page.goto("/?demo=1");
+  await expect(page.locator("#component-count")).not.toHaveText("—");
+  const understand = page.locator('.view-tab[data-mode="understand"]');
+  const explore = page.locator('.view-tab[data-mode="explore"]');
+  const cooling = page.locator('.process-button[data-layer="cooling"]');
+  await expect(cooling).toBeEnabled();
+
+  await understand.click();
+  await expect(understand).toHaveAttribute("aria-pressed", "true");
+  await expect(explore).toHaveAttribute("aria-pressed", "false");
+  await expect(cooling).toHaveAttribute("aria-pressed", "true");
+
+  await explore.click();
+  await expect(explore).toHaveAttribute("aria-pressed", "true");
+  await expect(understand).toHaveAttribute("aria-pressed", "false");
+  await expect(cooling).toHaveAttribute("aria-pressed", "false");
+
+  await cooling.click();
+  await expect(cooling).toHaveAttribute("aria-pressed", "true");
+  await cooling.click();
+  await expect(cooling).toHaveAttribute("aria-pressed", "false");
+});
+
+
+test("responsive workspace covers 320, 375, 390, 768 and 820px", async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 720 });
+  await page.goto("/?demo=1");
+  for (const width of [320, 375, 390, 768, 820]) {
+    await page.setViewportSize({ width, height: 844 });
+    await expect(page.locator("#mobile-panel-switcher")).toBeVisible();
+    const overflow = await page.evaluate(() => Math.max(document.documentElement.scrollWidth, document.body.scrollWidth) - window.innerWidth);
+    expect(overflow, `overflow at ${width}px`).toBeLessThanOrEqual(1);
+    for (const button of await page.locator(".mobile-panel-button").all()) {
+      expect((await button.boundingBox())?.height ?? 0).toBeGreaterThanOrEqual(44);
+    }
+    await page.locator('.mobile-panel-button[data-mobile-panel="viewer"]').click();
+    const canvas = page.locator("#viewer-canvas canvas"); await expect(canvas).toBeVisible();
+    const rect = await canvas.boundingBox(); expect(rect?.width ?? 0).toBeGreaterThan(0); expect(rect?.height ?? 0).toBeGreaterThan(0);
+    await page.locator('.mobile-panel-button[data-mobile-panel="structure"]').click(); await expect(page.locator(".left-panel")).toBeVisible();
+    await page.locator('.mobile-panel-button[data-mobile-panel="details"]').click(); await expect(page.locator(".details-panel")).toBeVisible();
+  }
+});
+
+test("WebGL render loop resumes after the mobile viewer panel is restored", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 }); await page.goto("/?demo=1");
+  const canvas = page.locator("#viewer-canvas canvas"); await expect(canvas).toBeVisible();
+  await page.locator('.mobile-panel-button[data-mobile-panel="structure"]').click(); await expect(page.locator(".viewer-column")).toBeHidden();
+  await page.locator('.mobile-panel-button[data-mobile-panel="viewer"]').click(); await expect(canvas).toBeVisible();
+  await expect.poll(async () => Boolean((await canvas.boundingBox())?.width)).toBeTruthy();
+  await page.setViewportSize({ width: 821, height: 900 }); await expect(page.locator("#mobile-panel-switcher")).toBeHidden();
 });

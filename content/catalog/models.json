@@ -109,8 +109,8 @@
       "model_kind": "system",
       "category_id": "desktop_computers",
       "summary": {
-        "en": "Dell OptiPlex 5060 Tower family reference v0.3.0: 137 semantic nodes, 145 relationships, 28 manufacturer sources, 34 claims, complete 26-callout motherboard map, optional fastener references and distinct 3.5-inch/2.5-inch HDD carrier and ODD release mechanisms. Optional population remains unknown; geometry is illustrative, not CAD.",
-        "ru": "Эталон семейства Dell OptiPlex 5060 Tower v0.3.0: 137 смысловых узлов, 145 связей, 28 источников производителя, 34 утверждения, полная карта 26 обозначений платы, опциональный крепёж и раздельные механизмы корзин HDD 3,5″/2,5″ и фиксатора ODD. Наличие опций неизвестно; геометрия условная, не CAD."
+        "en": "Dell OptiPlex 5060 Tower family v0.4.1: 137 semantic nodes, 145 relationships, 30 sources, 36 claims and 84 geometry nodes. Selectable panels, drive-cage and front/rear I/O proxies. Port counts sourced; geometry schematic; optional population unknown.",
+        "ru": "Dell OptiPlex 5060 Tower v0.4.1: 137 семантических узлов, 145 связей, 30 источников, 36 утверждений и 84 геометрических узла. Панели, каркас корзины и I/O-маркеры; количество портов подтверждено, координаты условны, состав опций неизвестен."
       },
       "tags": [
         "Dell",
@@ -141,8 +141,8 @@
       ],
       "status": "research_blockout",
       "geometry_status": "illustrative_proxy_not_cad",
-      "package_version": "0.3.0",
-      "package_path": "models/dell_optiplex_5060_tower_v03.sbsmodel",
+      "package_version": "0.4.1",
+      "package_path": "models/dell_optiplex_5060_tower_v04.sbsmodel",
       "published": true,
       "publication_status": "reference"
     }

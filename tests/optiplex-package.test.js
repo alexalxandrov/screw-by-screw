@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { loadModelPackage } from "../src/viewer/ModelPackageLoader.js";
 
-const packageBytes = await readFile(new URL("../public/models/dell_optiplex_5060_tower_v03.sbsmodel", import.meta.url));
+const packageBytes = await readFile(new URL("../public/models/dell_optiplex_5060_tower_v04.sbsmodel", import.meta.url));
 const packageBuffer = packageBytes.buffer.slice(
   packageBytes.byteOffset,
   packageBytes.byteOffset + packageBytes.byteLength
@@ -19,9 +19,9 @@ async function loadBytes(bytes, name) {
   });
 }
 
-const loaded = await loadBytes(packageBytes, "dell_optiplex_5060_tower_v03.sbsmodel");
+const loaded = await loadBytes(packageBytes, "dell_optiplex_5060_tower_v04.sbsmodel");
 
-test("OptiPlex v0.3 package passes the production loader and cross-file validation", () => {
+test("OptiPlex v0.4 package passes the production loader and cross-file validation", () => {
   assert.equal(loaded.report.modelId, "pc.dell.optiplex-5060-tower.family");
   assert.equal(loaded.report.componentCount, 137);
   assert.equal(loaded.report.relationshipCount, 145);
@@ -29,17 +29,45 @@ test("OptiPlex v0.3 package passes the production loader and cross-file validati
   assert.equal(loaded.data.model.geometry_status, "illustrative_proxy_not_cad");
   assert.equal(loaded.data.model.identity_scope, "platform_family");
   assert.equal(loaded.data.model.part_number, null);
-  assert.equal(loaded.data.model.release.version, "0.3.0");
+  const packageVersion = loaded.data.model.release.version;
+  assert.ok(["0.4.0", "0.4.1"].includes(packageVersion));
   assert.equal(loaded.data.model.specifications.physical.height_mm, 350);
   assert.equal(loaded.data.model.specifications.physical.width_mm, 154);
   assert.equal(loaded.data.model.specifications.physical.depth_mm, 274);
 
   const components = loaded.data.components.components;
   const componentIds = new Set(components.map((component) => component.id));
+
+  const proxyKinds = components.reduce((counts, component) => {
+    const kind = component.visual_proxy?.kind;
+    if (kind) counts[kind] = (counts[kind] ?? 0) + 1;
+    return counts;
+  }, {});
+  const expectedProxyKinds = packageVersion === "0.4.1"
+    ? { box: 45, panel: 7, drive_cage: 1, io_port: 25, cylinder: 2, fan: 3, fin_stack: 1 }
+    : { box: 52, cylinder: 2, fan: 3, fin_stack: 1 };
+  assert.deepEqual(proxyKinds, expectedProxyKinds);
+
   const sources = loaded.data.sources.sources;
   const sourceIds = new Set(sources.map((source) => source.id));
   const relationships = loaded.data.relationships.relationships;
   const claims = loaded.data.claims.claims;
+  if (packageVersion === "0.4.1") {
+    assert.equal(components.filter((c) => c.visual_proxy?.kind === "io_port").length, 25);
+    assert.equal(components.filter((c) => c.visual_proxy?.kind === "io_port" && c.id.startsWith("front.")).length, 7);
+    assert.equal(components.filter((c) => c.visual_proxy?.kind === "io_port" && c.id.startsWith("rear.")).length, 18);
+    assert.equal(claims.find((c) => c.id === "claim.ports.front_standard_external_connectors").value, 5);
+    assert.equal(claims.find((c) => c.id === "claim.ports.rear_standard_external_connectors").value, 10);
+    for (const id of ["front.optical_drive_bay.optional", "front.sd_card_reader_slot.optional",
+                      "rear.serial.optional", "rear.video_module.optional",
+                      "rear.antenna.1.optional", "rear.antenna.2.optional"]) {
+      const optional = components.find((c) => c.id === id);
+      assert.ok(optional);
+      assert.equal(optional.geometry_status, "unknown");
+      assert.equal(optional.visual_proxy, undefined);
+    }
+  }
+
   const steps = loaded.data.assembly_steps.steps;
   const stepIds = new Set(steps.map((step) => step.id));
   const callouts = loaded.data.model.specifications.motherboard.callouts;
@@ -51,8 +79,8 @@ test("OptiPlex v0.3 package passes the production loader and cross-file validati
   assert.equal(components.filter((component) =>
     component.fastener_population === "optional_reference_not_fitted"
   ).length, 7);
-  assert.equal(sources.length, 28);
-  assert.equal(claims.length, 34);
+  assert.equal(sources.length, packageVersion === "0.4.1" ? 30 : 28);
+  assert.equal(claims.length, packageVersion === "0.4.1" ? 36 : 34);
   assert.equal(loaded.data.process_layers.process_layers.length, 6);
   assert.equal(steps.length, 12);
   assert.equal(loaded.data.assembly_steps.observations.length, 19);

@@ -123,5 +123,7 @@ jobs:
             echo "Standalone launcher is already current"
           else
             git commit -m "build: refresh standalone offline launcher"
+            git fetch origin "${TARGET_BRANCH}"
+            git rebase "origin/${TARGET_BRANCH}"
             git push origin "HEAD:${TARGET_BRANCH}"
           fi

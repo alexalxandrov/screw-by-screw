@@ -7,11 +7,12 @@ import { Vector3 } from "three";
  * This class is intentionally independent of device-specific model content.
  */
 export class AnimationPlayer {
-  constructor(root, clips = [], { onChange = () => {} } = {}) {
+  constructor(root, clips = [], { onChange = () => {}, reducedMotion = false } = {}) {
     if (!root?.isObject3D) throw new TypeError("AnimationPlayer requires a Three.js Object3D root");
     if (!Array.isArray(clips)) throw new TypeError("Animation clips must be an array");
     this.root = root;
     this.onChange = typeof onChange === "function" ? onChange : () => {};
+    this.reducedMotion = Boolean(reducedMotion);
     this.nodesById = new Map();
     this.duplicateIds = [];
     root.traverse((object) => {
@@ -129,9 +130,31 @@ export class AnimationPlayer {
     return this.speed;
   }
 
+  setReducedMotion(enabled) {
+    this.reducedMotion = Boolean(enabled);
+    if (this.reducedMotion && this.status === "playing" && this.clip) {
+      this._cancelFrame();
+      this.currentTime = Number(this.clip.duration_ms ?? 0);
+      this._applyProgress(1);
+      this.status = "completed";
+      this.lastFrameTimestamp = null;
+      this._publish();
+    }
+    return this.reducedMotion;
+  }
+
   play() {
     if (!this.clip) return false;
     if (this.status === "playing") return true;
+    if (this.reducedMotion) {
+      this._cancelFrame();
+      this.currentTime = Number(this.clip.duration_ms ?? 0);
+      this._applyProgress(1);
+      this.status = "completed";
+      this.lastFrameTimestamp = null;
+      this._publish();
+      return true;
+    }
     if (this.status === "completed") {
       this.currentTime = 0;
       this._applyProgress(0);

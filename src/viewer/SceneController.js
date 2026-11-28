@@ -2,10 +2,11 @@ import * as THREE from "three";
 
 /** Device-agnostic scene controls shared by every Screw by Screw model. */
 export class SceneController {
-  constructor(root, { explodeDistanceFactor = 0.42 } = {}) {
+  constructor(root, { explodeDistanceFactor = 0.42, reducedMotion = false } = {}) {
     if (!root?.isObject3D) throw new TypeError("SceneController requires a Three.js Object3D root");
     this.root = root;
     this.explodeDistanceFactor = explodeDistanceFactor;
+    this.reducedMotion = Boolean(reducedMotion);
     this.explodeProgress = 0;
     this.explodable = [];
     this.nodesById = new Map();
@@ -14,6 +15,7 @@ export class SceneController {
     this.animationFrame = null;
     this.animationTimeout = null;
     this.animationResolve = null;
+    this.animationFinish = null;
     this.capture();
   }
 
@@ -38,7 +40,11 @@ export class SceneController {
       return !hasTaggedDescendant;
     }).map((object) => {
       const worldPosition = object.getWorldPosition(new THREE.Vector3());
-      const direction = worldPosition.clone().sub(center);
+      const visualBounds = new THREE.Box3().setFromObject(object);
+      const visualCenter = visualBounds.isEmpty()
+        ? worldPosition.clone()
+        : visualBounds.getCenter(new THREE.Vector3());
+      const direction = visualCenter.sub(center);
       if (direction.lengthSq() < 1e-8) {
         const hash = [...(object.userData.sbs_component_id || object.uuid)]
           .reduce((sum, char) => sum + char.charCodeAt(0), 0);
@@ -53,6 +59,12 @@ export class SceneController {
 
   getNode(id) { return this.nodesById.get(id) ?? null; }
 
+  setReducedMotion(enabled) {
+    this.reducedMotion = Boolean(enabled);
+    if (this.reducedMotion) this.animationFinish?.();
+    return this.reducedMotion;
+  }
+
   setExplode(value) { this.cancelAnimation(); return this.applyExplode(value); }
 
   applyExplode(value) {
@@ -64,8 +76,12 @@ export class SceneController {
       const parent = record.object.parent;
       if (parent) {
         parent.updateWorldMatrix(true, false);
-        record.object.position.copy(parent.worldToLocal(targetWorld));
-      } else record.object.position.copy(targetWorld);
+        const baseLocalFromWorld = parent.worldToLocal(record.baseWorldPosition.clone());
+        const targetLocal = parent.worldToLocal(targetWorld);
+        record.object.position.copy(record.baseLocalPosition).add(targetLocal.sub(baseLocalFromWorld));
+      } else {
+        record.object.position.copy(record.baseLocalPosition).add(targetWorld.sub(record.baseWorldPosition));
+      }
     }
     this.root.updateMatrixWorld(true);
     return this.explodeProgress;
@@ -75,6 +91,11 @@ export class SceneController {
     this.cancelAnimation();
     const from = this.explodeProgress;
     const to = THREE.MathUtils.clamp(Number(target) || 0, 0, 100);
+    if (this.reducedMotion) {
+      this.applyExplode(to);
+      onUpdate(this.explodeProgress);
+      return Promise.resolve(true);
+    }
     let start = null;
     const total = Math.max(1, Number(duration) || 1);
     return new Promise((resolve, reject) => {
@@ -87,6 +108,7 @@ export class SceneController {
         if (this.animationTimeout !== null) clearTimeout(this.animationTimeout);
         this.animationTimeout = null;
         this.animationResolve = null;
+        this.animationFinish = null;
         resolve(success);
       };
       const fail = (error) => {
@@ -97,9 +119,19 @@ export class SceneController {
         if (this.animationTimeout !== null) clearTimeout(this.animationTimeout);
         this.animationTimeout = null;
         this.animationResolve = null;
+        this.animationFinish = null;
         reject(error);
       };
       this.animationResolve = resolve;
+      this.animationFinish = () => {
+        try {
+          this.applyExplode(to);
+          onUpdate(this.explodeProgress);
+          finish(true);
+        } catch (error) {
+          fail(error);
+        }
+      };
       const tick = (now) => {
         if (settled) return;
         try {
@@ -135,6 +167,10 @@ export class SceneController {
     this.cancelAnimation();
     const startRotation = object.rotation[axis];
     const targetRotation = startRotation + Math.PI * 2 * Number(turns || 1);
+    if (this.reducedMotion) {
+      onUpdate(1);
+      return Promise.resolve(true);
+    }
     let start = null;
     const total = Math.max(1, Number(duration) || 1);
     return new Promise((resolve, reject) => {
@@ -147,6 +183,7 @@ export class SceneController {
         if (this.animationTimeout !== null) clearTimeout(this.animationTimeout);
         this.animationTimeout = null;
         this.animationResolve = null;
+        this.animationFinish = null;
         resolve(success);
       };
       const fail = (error) => {
@@ -157,9 +194,19 @@ export class SceneController {
         if (this.animationTimeout !== null) clearTimeout(this.animationTimeout);
         this.animationTimeout = null;
         this.animationResolve = null;
+        this.animationFinish = null;
         reject(error);
       };
       this.animationResolve = resolve;
+      this.animationFinish = () => {
+        try {
+          object.rotation[axis] = startRotation;
+          onUpdate(1);
+          finish(true);
+        } catch (error) {
+          fail(error);
+        }
+      };
       const tick = (now) => {
         if (settled) return;
         try {
@@ -192,13 +239,14 @@ export class SceneController {
     this.animationFrame = null;
     if (this.animationTimeout !== null) clearTimeout(this.animationTimeout);
     this.animationTimeout = null;
+    this.animationFinish = null;
     if (this.animationResolve) this.animationResolve(false);
     this.animationResolve = null;
   }
 
   setIsolated(target, isolate = true) {
-    if (!target) return false;
     if (!isolate) { this.restoreVisibility(); return true; }
+    if (!target) return false;
     this.restoreVisibility();
     this.visibilitySnapshot = new Map();
     const keep = new Set();

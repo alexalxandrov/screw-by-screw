@@ -1,6 +1,6 @@
 name: OptiPlex 5060 package validation
 permissions:
-  contents: read
+  contents: write
 
 on:
   workflow_dispatch:
@@ -10,7 +10,7 @@ on:
     paths:
       - "content/models/dell-optiplex-5060-tower-family/**"
       - "content/catalog/models.json"
-      - "public/models/dell_optiplex_5060_tower_v03.sbsmodel"
+      - "public/models/dell_optiplex_5060_tower_v04.sbsmodel"
       - "tools/modeling/**"
       - "tools/content/validate_glb_bindings.py"
       - "src/data/catalog.js"
@@ -22,7 +22,7 @@ on:
       - "content/models/dell-optiplex-5060-tower-family/**"
       - "content/catalog/models.json"
       - "public/models/dell_optiplex_5060_tower_v01.sbsmodel"
-      - "public/models/dell_optiplex_5060_tower_v03.sbsmodel"
+      - "public/models/dell_optiplex_5060_tower_v04.sbsmodel"
       - "tools/modeling/build_device_blockout.py"
       - "tools/modeling/package_model.py"
       - "tools/modeling/build_text_model_package.py"
@@ -30,12 +30,14 @@ on:
       - "src/viewer/ModelPackageLoader.js"
       - "tests/optiplex-package.test.js"
       - "tests/test_text_model_package.py"
+      - "tests/test_device_blockout.py"
       - "package.json"
       - "package-lock.json"
       - ".github/workflows/optiplex-package-validation.yml"
 
 jobs:
   validate-optiplex:
+    if: github.event_name == 'pull_request' || github.actor != 'github-actions[bot]'
     runs-on: ubuntu-22.04
     timeout-minutes: 15
     steps:
@@ -56,6 +58,8 @@ jobs:
           python tools/modeling/build_device_blockout.py \
             --components content/models/dell-optiplex-5060-tower-family/components.json \
             --output /tmp/optiplex-5060-family.glb
+      - name: Test procedural device geometry generator
+        run: python -m unittest discover -s tests -p "test_device_blockout.py"
       - name: Validate semantic component-to-GLB bindings
         run: |
           python tools/content/validate_glb_bindings.py \
@@ -67,13 +71,13 @@ jobs:
             --model-dir content/models/dell-optiplex-5060-tower-family \
             --scene /tmp/optiplex-5060-family.glb \
             --output /tmp/optiplex-5060-family.sbsmodel
-      - name: Rebuild the published v0.3 package from current sidecars and generated GLB
+      - name: Rebuild the published v0.4 package from current sidecars and generated GLB
         run: |
           python tools/modeling/build_text_model_package.py \
             --model-dir content/models/dell-optiplex-5060-tower-family \
             --scene /tmp/optiplex-5060-family.glb \
-            --output public/models/dell_optiplex_5060_tower_v03.sbsmodel
-      - name: Verify committed package using the production loader
+            --output public/models/dell_optiplex_5060_tower_v04.sbsmodel
+      - name: Verify regenerated package using the production loader
         run: node --test tests/optiplex-package.test.js tests/model-startup.test.js
       - name: Test deterministic package builder
         run: python -m unittest discover -s tests -p "test_text_model_package.py"
@@ -114,3 +118,25 @@ jobs:
         run: |
           npx playwright install --with-deps chromium
           npx playwright test --project=chromium e2e/catalog.spec.js
+
+      - name: Commit regenerated OptiPlex v0.4 package
+        if: (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository) || (github.event_name == 'push' && github.ref == 'refs/heads/main')
+        env:
+          TARGET_BRANCH: ${{ github.head_ref || github.ref_name }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/models/dell_optiplex_5060_tower_v04.sbsmodel
+          if git diff --cached --quiet; then
+            echo "Published OptiPlex v0.4 package is already current"
+          else
+            git commit -m "build: publish OptiPlex 5060 procedural geometry v0.4"
+            # npm run build regenerates the tracked standalone launcher; this workflow
+            # publishes only the model package, so discard that unrelated build output
+            # before rebasing the generated package commit onto a concurrently updated branch.
+            git restore --worktree index.html
+            git fetch origin "${TARGET_BRANCH}"
+            git rebase "origin/${TARGET_BRANCH}"
+            git push origin "HEAD:${TARGET_BRANCH}"
+          fi
+

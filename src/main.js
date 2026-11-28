@@ -80,6 +80,8 @@ const state = {
   activeLayer: null,
   sourceMode: "demo",
   animationFrame: 0,
+  scheduleRender: null,
+  resizeRenderer: null,
   learningMode: false,
   learningIndex: 0,
   learningScore: 0,
@@ -118,8 +120,29 @@ const MAX_GLB_BYTES = MAX_SCENE_GLB_BYTES;
 
 const UI = {
   en: {
-    modelLabel: "MODEL", modelSwitcherLabel: "SWITCH MODEL", modelSwitcherPlaceholder: "Choose a model…", catalogOpen: "Library", catalogTitle: "MODEL LIBRARY", catalogSubtitle: "Offline-ready model packages", catalogClose: "Close library", catalogSearch: "Search model, manufacturer or part number…", catalogSearchLabel: "SEARCH THE LIBRARY", catalogCategoryLabel: "CATEGORY", catalogEntries: "MODELS", catalogFooter: "Model packages are stored locally. No account or remote catalogue service is required.", catalogAllCategories: "All categories", catalogEmpty: "No models match this search.", catalogLoad: "Open model", catalogLoaded: "Currently loaded", catalogLoading: "Loading package…", catalogStatusResearch: "RESEARCH BLOCKOUT", catalogGeometryProxy: "Illustrative proxy · not CAD", catalogFamilyIdentity: "Platform family · no single part number", catalogPackageVersion: "Package", catalogChoosePackage: "Choose the matching .sbsmodel package to continue.", catalogError: "Could not open this catalog package.", structure: "STRUCTURE", components: "Components",
+    modelSwitcherAria: "Quick switch between published models",
+    languageToggleAria: "RU / EN — Switch language",
+    workspacePanelAria: "Workspace panel navigation",
+    componentSearchAria: "Search components, labels, claims and sources",
+    componentTreeAria: "Component hierarchy",
+    viewerColumnAria: "3D model viewer",
+    viewModesAria: "Viewer modes",
+    processLayerControlsAria: "Process layer controls",
+    resetView: "Reset camera",
+    wireframeToggle: "Toggle wireframe display",
+    isolateToggle: "Isolate selected component",
+    explodeSliderAria: "Explode distance",
+    animationClipAria: "Animation clip",
+    animationTimelineAria: "Animation timeline",
+    sectionPositionAria: "Section position",
+    inventoryExportAria: "Model data export",
+    comparisonPanelAria: "Model package comparison",
+    processDiagramAria: "Logical architecture diagram",
+    procedureRunnerAria: "Interactive disassembly procedure",
+    procedureBranchAria: "Select service procedure branch",
+    modelLabel: "MODEL", modelSwitcherLabel: "SWITCH MODEL", modelSwitcherPlaceholder: "Choose a model…", catalogOpen: "Library", catalogTitle: "MODEL LIBRARY", catalogSubtitle: "Offline-ready model packages", catalogClose: "Close library", catalogSearch: "Search model, manufacturer or part number…", catalogSearchLabel: "SEARCH THE LIBRARY", catalogCategoryLabel: "CATEGORY", catalogEntries: "MODELS", catalogFooter: "Model packages are stored locally. No account or remote catalogue service is required.", catalogAllCategories: "All categories", catalogEmpty: "No models match this search.", catalogClearFilters: "Clear filters", catalogLoad: "Open model", catalogLoaded: "Currently loaded", catalogLoading: "Loading package…", catalogStatusResearch: "RESEARCH BLOCKOUT", catalogGeometryProxy: "Illustrative proxy · not CAD", catalogFamilyIdentity: "Platform family · no single part number", catalogPackageVersion: "Package", catalogChoosePackage: "Choose the matching .sbsmodel package to continue.", catalogError: "Could not open this catalog package.", structure: "STRUCTURE", components: "Components",
     searchPlaceholder: "Search components, claims, IDs and sources…", assemblyTree: "ASSEMBLY TREE", showAll: "Show all",
+    noSearchResults: "No components match this search.", clearSearch: "Clear search",
     proxyNote: "Illustrative geometry · not CAD", explore: "Explore", disassemble: "Disassemble",
     understand: "Understand", animate: "Animate", assembledState: "ASSEMBLED STATE", demoScene: "DEMO SCENE · LOCAL",
     assemblyState: "ASSEMBLY STATE", assemble: "Assemble", explode: "Explode",
@@ -143,8 +166,29 @@ const UI = {
     modelLoaded: "Model ready", glbPicker: "Choose a .glb file", learn: "Learn", learning: "LEARNING", authoredAnimations: "PACKAGE ANIMATIONS", runtimeDiagnostics: "Runtime diagnostics", diagnosticsModel: "Model ID", diagnosticsComponents: "Mapped components", diagnosticsProcedure: "Procedure step", diagnosticsAnimation: "Animation clip", diagnosticsMotion: "World-space displacement", clipSelect: "Select clip", clipTimeline: "Animation timeline", clipPlay: "Play", clipPause: "Pause", clipStop: "Stop / reset", clipReady: "Ready", clipPlaying: "Playing", clipPaused: "Paused", clipCompleted: "Completed", clipTime: "TIME", clipEvidenceNote: "Authored model motion · not a physics simulation", clipEducationalApproximation: "Educational approximation · duration is not measured RPM", clipIllustrative: "Illustrative motion · not a measured mechanism", clipDocumentedMotion: "Documented motion · source-linked", clipMeasuredMotion: "Measured motion · source and method recorded", linkedComponents: "LINKED COMPONENTS", assumptions: "ASSUMPTIONS & LIMITS", processLayer: "PROCESS LAYER", fileTooLarge: "GLB exceeds the 256 MB limit.", packageTooLarge: "SBS model package exceeds the 512 MB limit.", externalResources: "This GLB references external files. Only self-contained GLB files are allowed.", question: "QUESTION", checkAnswer: "Check answer", nextQuestion: "Next question", finishQuiz: "Finish", restartQuiz: "Try again", correctAnswer: "Correct", wrongAnswer: "Not quite", quizComplete: "Quiz complete", yourScore: "Your score", chooseAnswer: "Choose an answer first", learningProgressSaved: "Progress saved in this browser", learningProgressLocal: "Local progress · this browser", learningProgressSession: "Local storage unavailable · session only", mobileViewer: "3D", mobileStructure: "Structure", mobileDetails: "Details", compare: "Compare", compareTitle: "MODEL COMPARISON", compareLeft: "MODEL A · ACTIVE PACKAGE", compareRight: "MODEL B · COMPARISON PACKAGE", compareChoosePackage: "Load a second .sbsmodel package", compareClearPackage: "Clear comparison", compareWaiting: "Load a validated .sbsmodel package to compare semantic data.", compareLoaded: "Comparison package validated", compareError: "Could not validate the comparison package", compareSku: "PART NUMBER", compareGeometry: "GEOMETRY EVIDENCE", comparePcb: "PCB REVISION", compareSpecifications: "SPECIFICATION COMPARISON", compareClaims: "SOURCE-BACKED CLAIMS", compareCoverage: "COMPONENT INVENTORY COVERAGE", compareShared: "Shared IDs", compareLeftOnly: "Recorded only in package A", compareRightOnly: "Recorded only in package B", compareSame: "Same value", compareDifferent: "Different", compareUnknownBoth: "Unknown in both", compareUnknownLeft: "Unknown in A", compareUnknownRight: "Unknown in B", compareNotRecordedLeft: "Not recorded in A", compareNotRecordedRight: "Not recorded in B", compareOnlyLeft: "Only in package A", compareOnlyRight: "Only in package B", compareUnknown: "Unknown", compareNotRecorded: "Not recorded", compareEvidenceA: "Evidence A", compareEvidenceB: "Evidence B", compareSourcesA: "Sources A", compareSourcesB: "Sources B", compareNoClaims: "No comparable claims are recorded.", compareNoSpecifications: "No specification values are recorded in these packages.", compareCoverageNote: "Package inventory differences describe coverage only; they do not prove a physical component is absent.", compareLimitations: "INTERPRETATION LIMITS", compareLimitationsList: ["Comparison is limited to validated semantic packages, not hardware inspection.", "Unknown values are not inferred from another SKU or PCB revision.", "A missing package field does not prove physical absence.", "Component ID differences do not prove physical additions or removals.", "3D geometry, CAD, BoardView, PCB routing and physical fitment are not compared."], comparePackageModel: "Model ID"
   },
   ru: {
-    modelLabel: "МОДЕЛЬ", modelSwitcherLabel: "БЫСТРОЕ ПЕРЕКЛЮЧЕНИЕ", modelSwitcherPlaceholder: "Выбрать модель…", catalogOpen: "Каталог", catalogTitle: "БИБЛИОТЕКА МОДЕЛЕЙ", catalogSubtitle: "Автономные пакеты устройств", catalogClose: "Закрыть каталог", catalogSearch: "Название, производитель или part number…", catalogSearchLabel: "ПОИСК ПО БИБЛИОТЕКЕ", catalogCategoryLabel: "КАТЕГОРИЯ", catalogEntries: "МОДЕЛИ", catalogFooter: "Пакеты моделей хранятся локально. Аккаунт и удалённый сервис каталога не нужны.", catalogAllCategories: "Все категории", catalogEmpty: "Подходящих моделей не найдено.", catalogLoad: "Открыть модель", catalogLoaded: "Уже загружена", catalogLoading: "Загрузка пакета…", catalogStatusResearch: "ИССЛЕДОВАТЕЛЬСКИЙ МАКЕТ", catalogGeometryProxy: "Условная геометрия · не CAD", catalogFamilyIdentity: "Семейство платформы · без единого артикула", catalogPackageVersion: "Пакет", catalogChoosePackage: "Выберите соответствующий файл .sbsmodel.", catalogError: "Не удалось открыть пакет из каталога.", structure: "СТРУКТУРА", components: "Компоненты",
+    modelSwitcherAria: "Быстрое переключение между опубликованными моделями",
+    languageToggleAria: "RU / EN — Сменить язык",
+    workspacePanelAria: "Переключение панелей рабочего пространства",
+    componentSearchAria: "Поиск компонентов, обозначений, утверждений и источников",
+    componentTreeAria: "Иерархия компонентов",
+    viewerColumnAria: "Окно трёхмерной модели",
+    viewModesAria: "Режимы просмотра модели",
+    processLayerControlsAria: "Управление слоями процессов",
+    resetView: "Сбросить ракурс камеры",
+    wireframeToggle: "Переключить каркасное отображение",
+    isolateToggle: "Изолировать выбранный компонент",
+    explodeSliderAria: "Степень разнесения компонентов",
+    animationClipAria: "Клип анимации",
+    animationTimelineAria: "Шкала времени анимации",
+    sectionPositionAria: "Положение сечения",
+    inventoryExportAria: "Экспорт данных модели",
+    comparisonPanelAria: "Сравнение пакетов моделей",
+    processDiagramAria: "Логическая схема архитектуры",
+    procedureRunnerAria: "Интерактивная процедура разборки",
+    procedureBranchAria: "Выбор ветви сервисной процедуры",
+    modelLabel: "МОДЕЛЬ", modelSwitcherLabel: "БЫСТРОЕ ПЕРЕКЛЮЧЕНИЕ", modelSwitcherPlaceholder: "Выбрать модель…", catalogOpen: "Каталог", catalogTitle: "БИБЛИОТЕКА МОДЕЛЕЙ", catalogSubtitle: "Автономные пакеты устройств", catalogClose: "Закрыть каталог", catalogSearch: "Название, производитель или part number…", catalogSearchLabel: "ПОИСК ПО БИБЛИОТЕКЕ", catalogCategoryLabel: "КАТЕГОРИЯ", catalogEntries: "МОДЕЛИ", catalogFooter: "Пакеты моделей хранятся локально. Аккаунт и удалённый сервис каталога не нужны.", catalogAllCategories: "Все категории", catalogEmpty: "Подходящих моделей не найдено.", catalogClearFilters: "Сбросить фильтры", catalogLoad: "Открыть модель", catalogLoaded: "Уже загружена", catalogLoading: "Загрузка пакета…", catalogStatusResearch: "ИССЛЕДОВАТЕЛЬСКИЙ МАКЕТ", catalogGeometryProxy: "Условная геометрия · не CAD", catalogFamilyIdentity: "Семейство платформы · без единого артикула", catalogPackageVersion: "Пакет", catalogChoosePackage: "Выберите соответствующий файл .sbsmodel.", catalogError: "Не удалось открыть пакет из каталога.", structure: "СТРУКТУРА", components: "Компоненты",
     searchPlaceholder: "Компонент, маркировка, утверждение или источник…", assemblyTree: "ДЕРЕВО СБОРКИ", showAll: "Показать все",
+    noSearchResults: "Совпадений не найдено. Измените запрос или очистите поиск.", clearSearch: "Очистить поиск",
     proxyNote: "Условная геометрия · не CAD", explore: "Обзор", disassemble: "Разборка",
     understand: "Принцип работы", animate: "Анимировать", assembledState: "СОБРАННОЕ СОСТОЯНИЕ", demoScene: "ДЕМО-СЦЕНА · ЛОКАЛЬНО",
     assemblyState: "СОСТОЯНИЕ СБОРКИ", assemble: "Собрать", explode: "Разобрать",
@@ -178,6 +222,10 @@ function setMobilePanel(panel) {
   appShell.dataset.mobilePanel = panel;
   document.querySelectorAll(".mobile-panel-button").forEach((button) => {
     button.setAttribute("aria-pressed", String(button.dataset.mobilePanel === panel));
+  });
+  if (panel === "viewer") requestAnimationFrame(() => {
+    state.resizeRenderer?.();
+    state.scheduleRender?.();
   });
 }
 
@@ -325,6 +373,7 @@ function setupAnimationPlayer(root) {
     return;
   }
   state.animationPlayer = new AnimationPlayer(root, clips, {
+    reducedMotion: state.reducedMotion,
     onChange: (snapshot) => updateAnimationPlayerUI(snapshot)
   });
   renderAnimationClipOptions();
@@ -412,9 +461,16 @@ function renderCatalog() {
   host.replaceChildren();
   if (count) count.textContent = String(entries.length);
   if (!entries.length) {
-    const empty = document.createElement("p");
+    const empty = document.createElement("div");
     empty.className = "catalog-empty";
-    empty.textContent = t("catalogEmpty");
+    const message = document.createElement("p");
+    message.textContent = t("catalogEmpty");
+    const clear = document.createElement("button");
+    clear.type = "button";
+    clear.className = "catalog-empty-clear";
+    clear.textContent = t("catalogClearFilters");
+    clear.addEventListener("click", clearCatalogFilters);
+    empty.append(message, clear);
     host.append(empty);
     return;
   }
@@ -474,6 +530,17 @@ function renderCatalog() {
     card.append(category, title, manufacturer, sku, summary, metadata, footer);
     host.append(card);
   });
+}
+
+function clearCatalogFilters() {
+  state.catalogSearch = "";
+  state.catalogCategory = "all";
+  const search = $("#catalog-search");
+  const category = $("#catalog-category");
+  if (search) search.value = "";
+  if (category) category.value = "all";
+  renderCatalog();
+  search?.focus();
 }
 
 function openCatalog() {
@@ -552,6 +619,16 @@ function applyLanguage() {
   document.querySelectorAll("[data-i18n-placeholder]").forEach((node) => {
     node.placeholder = t(node.dataset.i18nPlaceholder);
   });
+  document.querySelectorAll("[data-i18n-aria-label]").forEach((node) => {
+    const value = t(node.dataset.i18nAriaLabel);
+    if (value) node.setAttribute("aria-label", value);
+  });
+  document.querySelectorAll("[data-i18n-title]").forEach((node) => {
+    const value = t(node.dataset.i18nTitle);
+    if (value) node.setAttribute("title", value);
+  });
+  syncProcessButtons();
+  syncIsolateButton();
   renderModelSwitcher();
   renderTree();
   if ($("#model-catalog-dialog")?.open) renderCatalog();
@@ -561,6 +638,52 @@ function applyLanguage() {
   else if (state.selectedId) renderDetails(state.selectedId);
   updateMeasurementReadout();
   renderAnimationClipOptions();
+}
+
+function syncProcessButtons() {
+  document.querySelectorAll(".process-button[data-layer]").forEach((button) => {
+    const active = Boolean(state.activeLayer) && button.dataset.layer === state.activeLayer;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", String(active));
+  });
+}
+
+function syncViewTabs(activeButton = null) {
+  const tabs = [...document.querySelectorAll(".view-tab")];
+  const selected = activeButton ?? tabs.find((tab) => tab.classList.contains("active")) ?? tabs[0];
+  tabs.forEach((tab) => {
+    const active = tab === selected;
+    tab.classList.toggle("active", active);
+    tab.setAttribute("aria-pressed", String(active));
+  });
+}
+
+function syncIsolateButton() {
+  const button = $("#isolate-toggle");
+  if (!button) return;
+  const available = Boolean(state.selected && state.sceneController);
+  const active = available && state.isolated;
+  button.disabled = !available;
+  button.classList.toggle("active", active);
+  button.setAttribute("aria-pressed", String(active));
+  if (canvasHost) canvasHost.dataset.isolated = String(Boolean(active));
+}
+
+function setWireframe(enabled) {
+  state.wireframe = Boolean(enabled);
+  state.modelRoot?.traverse((object) => {
+    const sources = [object.material, object.userData?.__sbsOriginalMaterial];
+    const materials = new Set(sources.flatMap((material) =>
+      Array.isArray(material) ? material : material ? [material] : []
+    ));
+    materials.forEach((material) => { material.wireframe = state.wireframe; });
+  });
+  const button = $("#wireframe-toggle");
+  if (button) {
+    button.classList.toggle("active", state.wireframe);
+    button.setAttribute("aria-pressed", String(state.wireframe));
+  }
+  if (canvasHost) canvasHost.dataset.wireframe = String(state.wireframe);
 }
 
 function tag(object, id, evidence = "illustrative", geometry = "proxy") {
@@ -968,6 +1091,27 @@ function renderTree() {
   const visibleEntries = entries.filter((entry) => !query || visibleIds.has(entry.id));
   visibleEntries.sort((a, b) => a.depth - b.depth || a.id.localeCompare(b.id));
 
+  if (query && visibleEntries.length === 0) {
+    const emptyState = document.createElement("div");
+    emptyState.className = "tree-empty-state";
+    emptyState.setAttribute("role", "status");
+    const message = document.createElement("p");
+    message.textContent = t("noSearchResults");
+    const clearButton = document.createElement("button");
+    clearButton.type = "button";
+    clearButton.className = "tree-empty-clear";
+    clearButton.textContent = t("clearSearch");
+    clearButton.addEventListener("click", () => {
+      const search = $("#component-search");
+      search.value = "";
+      renderTree();
+      search.focus();
+    });
+    emptyState.append(message, clearButton);
+    host.append(emptyState);
+    return;
+  }
+
   visibleEntries.forEach((entry) => {
     const button = document.createElement("button");
     button.type = "button";
@@ -1355,6 +1499,17 @@ let procedureSceneBaselineRoot = null;
 let procedureSceneBaseline = new Map();
 let procedureCurrentIndex = -1;
 let procedureAnimationToken = 0;
+let procedureAnimationFinish = null;
+
+function applyReducedMotionPreference(enabled) {
+  state.reducedMotion = Boolean(enabled);
+  if (canvasHost) canvasHost.dataset.reducedMotion = String(state.reducedMotion);
+  if (state.reducedMotion) procedureAnimationFinish?.();
+  state.sceneController?.setReducedMotion(state.reducedMotion);
+  state.procedureController?.setReducedMotion(state.reducedMotion);
+  state.animationPlayer?.setReducedMotion(state.reducedMotion);
+  if (state.reducedMotion && state.powered) setStatus("Reduced motion preference enabled");
+}
 
 function captureProcedureSceneBaseline(root) {
   procedureSceneBaselineRoot = root;
@@ -1373,6 +1528,7 @@ function restoreProcedureSceneBaseline() {
     captureProcedureSceneBaseline(state.modelRoot);
   }
   procedureAnimationToken += 1;
+  procedureAnimationFinish = null;
   procedureSceneBaseline.forEach((base, id) => {
     const object = findNodeById(id);
     if (!object) return;
@@ -1401,13 +1557,20 @@ function animateProcedurePositions(entries, duration = 480) {
   if (!moves.length) return;
   const starts = moves.map((entry) => entry.object.position.clone());
   const targets = moves.map((entry) => entry.target.clone());
-  if (typeof requestAnimationFrame !== "function") {
+  const token = ++procedureAnimationToken;
+  procedureAnimationFinish = null;
+  const finish = () => {
+    if (token !== procedureAnimationToken) return;
     moves.forEach((entry, index) => entry.object.position.copy(targets[index]));
     state.modelRoot?.updateMatrixWorld(true);
+    if (procedureAnimationFinish === finish) procedureAnimationFinish = null;
+  };
+  if (state.reducedMotion || typeof requestAnimationFrame !== "function") {
+    finish();
     return;
   }
-  const token = ++procedureAnimationToken;
   const startedAt = performance.now();
+  procedureAnimationFinish = finish;
   const tick = (now) => {
     if (token !== procedureAnimationToken) return;
     const progress = Math.min(1, (now - startedAt) / Math.max(1, duration));
@@ -1415,6 +1578,7 @@ function animateProcedurePositions(entries, duration = 480) {
     moves.forEach((entry, index) => entry.object.position.lerpVectors(starts[index], targets[index], eased));
     state.modelRoot?.updateMatrixWorld(true);
     if (progress < 1) requestAnimationFrame(tick);
+    else finish();
   };
   requestAnimationFrame(tick);
 }
@@ -2060,7 +2224,7 @@ function showLearning() {
   $("#comparison-panel").hidden = true;
   clearHighlights();
   state.activeLayer = null;
-  document.querySelectorAll(".process-button").forEach((button) => button.classList.remove("active"));
+  syncProcessButtons();
   $("#process-details").hidden = true;
   buildProcessVisuals();
   state.learningMode = true;
@@ -2603,20 +2767,30 @@ function selectComponent(id) {
   // or mesh in the current illustrative scene. They remain inspectable from
   // their semantic package data without fabricating a 3D object.
   if (!object && !state.catalog.has(id)) return;
+  const selectionChanged = state.selectedId !== id;
+  if (selectionChanged && state.isolated) {
+    state.sceneController?.setIsolated(state.selected, false);
+    state.isolated = false;
+  }
   clearHighlights();
   state.activeLayer = null;
+  syncProcessButtons();
   buildProcessVisuals();
-  document.querySelectorAll(".process-button").forEach((button) => button.classList.remove("active"));
   $("#process-details").hidden = true;
   state.learningMode = false;
   state.selected = object;
   state.selectedId = id;
+  syncIsolateButton();
   if (object) {
     object.traverse((child) => { if (child.isMesh) applyHighlight(child); });
     if (object.isMesh) applyHighlight(object);
   }
   renderDetails(id);
   renderTree();
+  if (window.matchMedia("(max-width: 820px)").matches && appShell?.dataset.mobilePanel !== "details") {
+    setMobilePanel("details");
+    $("#details-heading-title")?.focus({ preventScroll: true });
+  }
   setStatus(id);
 }
 
@@ -2739,11 +2913,17 @@ async function animateExplodeCycle() {
 }
 
 function setIsolated(isolate) {
-  if (!state.selected || !state.sceneController) return;
-  state.isolated = Boolean(isolate);
-  state.sceneController.setIsolated(state.selected, state.isolated);
-  $("#isolate-toggle").classList.toggle("active", state.isolated);
+  if (!state.sceneController || (Boolean(isolate) && !state.selected)) {
+    syncIsolateButton();
+    return false;
+  }
+  const next = Boolean(isolate);
+  const updated = state.sceneController.setIsolated(state.selected, next);
+  if (!updated) return false;
+  state.isolated = next;
+  syncIsolateButton();
   setStatus(state.isolated ? t("isolate") : t("allVisible"));
+  return true;
 }
 
 function disposeProcessVisuals() {
@@ -2905,11 +3085,10 @@ function setPowered(enabled) {
 
 function setLayer(layer) {
   if (!state.modelRoot) return;
+  if (layer !== "clear" && !PROCESS_PACKAGE.process_layers.some((item) => item.type === layer)) return;
   clearHighlights();
   state.activeLayer = layer === "clear" || state.activeLayer === layer ? null : layer;
-  document.querySelectorAll(".process-button").forEach((button) => {
-    button.classList.toggle("active", button.dataset.layer === state.activeLayer);
-  });
+  syncProcessButtons();
   if (!state.activeLayer) {
     state.learningMode = false;
     $("#learning-panel").hidden = true;
@@ -3002,6 +3181,7 @@ function installModel(root, mode) {
   }
   updateMeasurementReadout();
   state.powered = false;
+  state.wireframe = false;
   const powerButton = $("#power-toggle");
   if (powerButton) {
     powerButton.textContent = t("powerOn");
@@ -3032,19 +3212,23 @@ function installModel(root, mode) {
   state.selectedId = null;
   state.isolated = false;
   state.activeLayer = null;
-  $("#isolate-toggle").classList.remove("active");
+  syncIsolateButton();
+  syncProcessButtons();
   $("#component-details").hidden = true;
   $("#empty-selection").hidden = false;
-  document.querySelectorAll(".process-button").forEach((button) => button.classList.remove("active"));
+  syncProcessButtons();
   collectNodes(root);
   applyModelPresentation(root);
+  setWireframe(false);
   collectFanRotors(root);
-  state.sceneController = new SceneController(root);
+  state.sceneController = new SceneController(root, { reducedMotion: state.reducedMotion });
+  syncIsolateButton();
   if (Array.isArray(ASSEMBLY_PACKAGE.procedure_routes?.common_step_ids) && Array.isArray(ASSEMBLY_PACKAGE.procedure_routes?.branches)) {
     state.procedureController = new ProcedureController(root, {
       steps: ASSEMBLY_PACKAGE.steps ?? [],
       commonStepIds: ASSEMBLY_PACKAGE.procedure_routes.common_step_ids,
-      routes: ASSEMBLY_PACKAGE.procedure_routes.branches
+      routes: ASSEMBLY_PACKAGE.procedure_routes.branches,
+      reducedMotion: state.reducedMotion
     });
   }
   fitModel(root);
@@ -3092,6 +3276,8 @@ function applyPackageData(packageData) {
     button.disabled = button.dataset.layer !== "clear" &&
       !PROCESS_PACKAGE.process_layers.some((layer) => layer.type === button.dataset.layer);
   });
+  syncProcessButtons();
+  syncViewTabs();
   document.querySelectorAll(".view-tab").forEach((button) => {
     if (button.dataset.mode === "learn") button.disabled = LEARNING_PACKAGE.questions.length === 0;
   });
@@ -3218,7 +3404,13 @@ function initRenderer() {
     state.scene.background = new THREE.Color(0x0a1016);
     state.camera = new THREE.PerspectiveCamera(42, 1, 0.1, 4000);
     state.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
-    state.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    const mobileViewport = window.matchMedia("(max-width: 820px)");
+    const updateRendererPixelRatio = () => {
+      state.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, mobileViewport.matches ? 1.5 : 2));
+      state.resizeRenderer?.();
+    };
+    updateRendererPixelRatio();
+    mobileViewport.addEventListener?.("change", updateRendererPixelRatio);
     state.renderer.localClippingEnabled = true;
     state.renderer.outputColorSpace = THREE.SRGBColorSpace;
     state.renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -3251,26 +3443,40 @@ function initRenderer() {
       state.camera.aspect = width / height;
       state.camera.updateProjectionMatrix();
       state.renderer.setSize(width, height, false);
+      state.scheduleRender?.();
     };
+    state.resizeRenderer = resize;
     new ResizeObserver(resize).observe(canvasHost);
     resize();
 
-    state.reducedMotion = Boolean(window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches);
-    canvasHost.dataset.reducedMotion = String(state.reducedMotion);
-    window.matchMedia?.("(prefers-reduced-motion: reduce)")?.addEventListener?.("change", (event) => {
-      state.reducedMotion = event.matches;
-      canvasHost.dataset.reducedMotion = String(state.reducedMotion);
-      if (state.reducedMotion && state.powered) setStatus("Reduced motion preference enabled");
+    const reducedMotionPreference = window.matchMedia?.("(prefers-reduced-motion: reduce)");
+    applyReducedMotionPreference(Boolean(reducedMotionPreference?.matches));
+    reducedMotionPreference?.addEventListener?.("change", (event) => {
+      applyReducedMotionPreference(event.matches);
     });
     const clock = new THREE.Clock();
+    const shouldRender = () => document.visibilityState !== "hidden" &&
+      (!mobileViewport.matches || appShell?.dataset.mobilePanel === "viewer");
     const render = () => {
-      state.animationFrame = requestAnimationFrame(render);
+      state.animationFrame = 0;
+      if (!shouldRender()) return;
       const delta = Math.min(clock.getDelta(), 0.05);
       updateOperatingEffects(delta);
       state.controls.update();
       state.renderer.render(state.scene, state.camera);
+      state.animationFrame = requestAnimationFrame(render);
     };
-    render();
+    state.scheduleRender = () => {
+      if (state.animationFrame || !shouldRender()) return;
+      state.animationFrame = requestAnimationFrame(render);
+    };
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible") {
+        state.resizeRenderer?.();
+        state.scheduleRender?.();
+      }
+    });
+    state.scheduleRender();
     resetCamera();
   } catch (error) {
     console.error(error);
@@ -3543,14 +3749,7 @@ function bindUI() {
     setIsolated(false);
   });
   $("#isolate-toggle").addEventListener("click", () => setIsolated(!state.isolated));
-  $("#wireframe-toggle").addEventListener("click", () => {
-    state.wireframe = !state.wireframe;
-    state.modelRoot?.traverse((object) => {
-      const materials = Array.isArray(object.material) ? object.material : [object.material];
-      materials.filter(Boolean).forEach((material) => { material.wireframe = state.wireframe; });
-    });
-    $("#wireframe-toggle").classList.toggle("active", state.wireframe);
-  });
+  $("#wireframe-toggle").addEventListener("click", () => setWireframe(!state.wireframe));
   $("#explode-slider").addEventListener("input", (event) => setExplode(event.target.value));
   $("#power-toggle").addEventListener("click", () => setPowered(!state.powered));
   $("#animation-clip-select").addEventListener("change", (event) => {
@@ -3641,7 +3840,7 @@ function bindUI() {
       button.disabled = false;
     }
   });
-  document.querySelectorAll(".process-button").forEach((button) => {
+  document.querySelectorAll(".process-button[data-layer]").forEach((button) => {
     button.addEventListener("click", () => {
       setLayer(button.dataset.layer);
       if (button.dataset.layer !== "clear" && window.matchMedia("(max-width: 820px)").matches) {
@@ -3651,7 +3850,7 @@ function bindUI() {
   });
   document.querySelectorAll(".view-tab").forEach((button) => {
     button.addEventListener("click", () => {
-      document.querySelectorAll(".view-tab").forEach((tab) => tab.classList.toggle("active", tab === button));
+      syncViewTabs(button);
       if (button.dataset.mode === "compare") { showComparison(); return; }
       if (state.compareMode) { state.compareMode = false; $("#comparison-panel").hidden = true; }
       if (button.dataset.mode === "disassemble") {
@@ -3679,9 +3878,17 @@ function bindUI() {
   });
   canvasHost.addEventListener("click", onCanvasClick);
   window.addEventListener("keydown", (event) => {
-    if (event.key === "/" && document.activeElement?.tagName !== "INPUT") {
+    const activeElement = document.activeElement;
+    const isEditingControl = activeElement instanceof HTMLElement && (
+      activeElement.isContentEditable ||
+      ["INPUT", "TEXTAREA", "SELECT"].includes(activeElement.tagName)
+    );
+    if (event.key === "/" && !isEditingControl && !event.altKey && !event.ctrlKey && !event.metaKey) {
       event.preventDefault();
-      $("#component-search").focus();
+      const searchTarget = $("#model-catalog-dialog")?.open
+        ? $("#catalog-search")
+        : $("#component-search");
+      searchTarget?.focus();
     }
     if (event.key === "Escape" && $("#model-catalog-dialog")?.open) {
       event.preventDefault();

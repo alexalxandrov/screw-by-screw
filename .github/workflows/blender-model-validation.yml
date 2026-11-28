@@ -51,7 +51,7 @@ on:
       - ".github/workflows/blender-model-validation.yml"
 jobs:
   build-and-inspect:
-    if: github.actor != 'github-actions[bot]'
+    if: github.event_name == 'pull_request' || github.actor != 'github-actions[bot]'
     runs-on: ubuntu-22.04
     timeout-minutes: 35
     steps:
@@ -165,9 +165,9 @@ jobs:
           node --input-type=module <<'NODE'
           import { readFile } from "node:fs/promises";
           import { loadModelPackage } from "./src/viewer/ModelPackageLoader.js";
-          const bytes = await readFile("public/models/dell_optiplex_5060_tower_v03.sbsmodel");
+          const bytes = await readFile("public/models/dell_optiplex_5060_tower_v04.sbsmodel");
           const buffer = bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength);
-          const pkg = await loadModelPackage({ name: "dell_optiplex_5060_tower_v03.sbsmodel", size: bytes.byteLength, arrayBuffer: async () => buffer });
+          const pkg = await loadModelPackage({ name: "dell_optiplex_5060_tower_v04.sbsmodel", size: bytes.byteLength, arrayBuffer: async () => buffer });
           const expected = { modelId: "pc.dell.optiplex-5060-tower.family", components: 137, relationships: 145 };
           if (pkg.report.modelId !== expected.modelId || pkg.report.componentCount !== expected.components ||
               pkg.report.relationshipCount !== expected.relationships || !pkg.integrityVerified) {
@@ -233,13 +233,19 @@ jobs:
             echo "Published IBM package is already current"
           else
             git commit -m "build: publish IBM PC 5150 model package"
+            # npm run build regenerates the tracked standalone launcher; this workflow
+            # publishes only the model package, so discard that unrelated build output
+            # before rebasing the generated package commit onto a concurrently updated branch.
+            git restore --worktree index.html
+            git fetch origin "${TARGET_BRANCH}"
+            git rebase "origin/${TARGET_BRANCH}"
             git push origin "HEAD:${TARGET_BRANCH}"
           fi
       - name: Restore the source fallback scene while retaining both published packages
         run: |
           mkdir -p public/models
           find public/models -maxdepth 1 -type f \
-            ! -name "dell_optiplex_5060_tower_v03.sbsmodel" \
+            ! -name "dell_optiplex_5060_tower_v04.sbsmodel" \
             ! -name "ibm_pc_5150_1981.sbsmodel" -delete
       - name: Run full viewer and accessibility suite against the source fallback scene
         run: npm run test:e2e:chromium
@@ -255,7 +261,7 @@ jobs:
           cp MODELS/COMPUTERS/IBM/5150/04-WORKING/generated/ibm_pc_5150_1981.glb artifacts/ 2>/dev/null || true
           cp MODELS/COMPUTERS/IBM/5150/04-WORKING/generated/ibm_pc_5150_1981.manifest.json artifacts/ 2>/dev/null || true
           cp artifacts/ibm_pc_5150_1981.sbsmodel artifacts/ 2>/dev/null || true
-          cp public/models/dell_optiplex_5060_tower_v03.sbsmodel artifacts/ 2>/dev/null || true
+          cp public/models/dell_optiplex_5060_tower_v04.sbsmodel artifacts/ 2>/dev/null || true
           cp tools/modeling/build_ibm_pc_5150_blockout.py artifacts/ibm_pc_5150_blockout_source.py 2>/dev/null || true
           cp tools/modeling/build_ibm_pc_5150_blockout.py.gz artifacts/ibm_pc_5150_blockout_source.py.gz 2>/dev/null || true
           cp content/models/ibm-pc-5150-1981/components.json artifacts/ibm_pc_5150_components_source.json 2>/dev/null || true

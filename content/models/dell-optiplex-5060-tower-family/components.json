@@ -60,7 +60,7 @@
         "ru": "Макетный компонент уровня семейства; точную деталь и расположение требуется подтвердить."
       },
       "visual_proxy": {
-        "kind": "box",
+        "kind": "panel",
         "translation": [
           0,
           1,
@@ -93,7 +93,7 @@
         "ru": "Макетный компонент уровня семейства; точную деталь и расположение требуется подтвердить."
       },
       "visual_proxy": {
-        "kind": "box",
+        "kind": "panel",
         "translation": [
           0,
           349,
@@ -126,7 +126,7 @@
         "ru": "Съёмная боковая крышка; геометрия защёлки и невыпадающего крепежа не измерена."
       },
       "visual_proxy": {
-        "kind": "box",
+        "kind": "panel",
         "translation": [
           77,
           175,
@@ -159,7 +159,7 @@
         "ru": "Макетный компонент уровня семейства; точную деталь и расположение требуется подтвердить."
       },
       "visual_proxy": {
-        "kind": "box",
+        "kind": "panel",
         "translation": [
           0,
           175,
@@ -192,7 +192,7 @@
         "ru": "Макетный компонент уровня семейства; точную деталь и расположение требуется подтвердить."
       },
       "visual_proxy": {
-        "kind": "box",
+        "kind": "panel",
         "translation": [
           0,
           175,
@@ -258,7 +258,7 @@
         "ru": "Макетный компонент уровня семейства; точную деталь и расположение требуется подтвердить."
       },
       "visual_proxy": {
-        "kind": "box",
+        "kind": "panel",
         "translation": [
           0,
           260,
@@ -291,7 +291,7 @@
         "ru": "Макетный компонент уровня семейства; точную деталь и расположение требуется подтвердить."
       },
       "visual_proxy": {
-        "kind": "box",
+        "kind": "cylinder",
         "translation": [
           23,
           261,
@@ -302,7 +302,9 @@
           11,
           2
         ],
-        "material": 3
+        "material": 3,
+        "axis": "z",
+        "segments": 32
       }
     },
     {
@@ -992,7 +994,7 @@
         "ru": "Обозначение Dell №25: батарейка RTC. Производитель, химический тип, ёмкость и дата выпуска установленной батарейки в пакете семейства не определены."
       },
       "visual_proxy": {
-        "kind": "box",
+        "kind": "cylinder",
         "translation": [
           -50,
           145,
@@ -1003,7 +1005,9 @@
           20,
           20
         ],
-        "material": 4
+        "material": 4,
+        "axis": "x",
+        "segments": 32
       },
       "manufacturer_callout_numbers": [
         25
@@ -1047,7 +1051,7 @@
         "ru": "Радиатор CPU снимается после ослабления четырёх невыпадающих винтов в порядке 1–4. Геометрия рёбер, материал и размеры не измерены."
       },
       "visual_proxy": {
-        "kind": "box",
+        "kind": "fin_stack",
         "translation": [
           -27,
           224,
@@ -1058,7 +1062,8 @@
           55,
           64
         ],
-        "material": 0
+        "material": 0,
+        "fin_count": 16
       }
     },
     {
@@ -1080,7 +1085,7 @@
         "ru": "Вентилятор радиатора CPU. Руководство Dell включает его снятие в подготовку к демонтажу платы; номер детали OEM и электрические параметры неизвестны."
       },
       "visual_proxy": {
-        "kind": "box",
+        "kind": "fan",
         "translation": [
           1,
           224,
@@ -1091,7 +1096,9 @@
           88,
           88
         ],
-        "material": 1
+        "material": 1,
+        "axis": "x",
+        "blade_count": 7
       }
     },
     {
@@ -1113,7 +1120,7 @@
         "ru": "Корпусной вентилятор закреплён четырьмя резиновыми втулками. Dell документирует отключение кабеля и освобождение втулок; точный размер и номер вентилятора неизвестны."
       },
       "visual_proxy": {
-        "kind": "box",
+        "kind": "fan",
         "translation": [
           0,
           265,
@@ -1124,7 +1131,9 @@
           90,
           90
         ],
-        "material": 1
+        "material": 1,
+        "axis": "x",
+        "blade_count": 7
       }
     },
     {
@@ -1198,7 +1207,7 @@
         "ru": "Макетный компонент уровня семейства; точную деталь и расположение требуется подтвердить."
       },
       "visual_proxy": {
-        "kind": "box",
+        "kind": "fan",
         "translation": [
           0,
           345,
@@ -1209,7 +1218,9 @@
           3,
           84
         ],
-        "material": 1
+        "material": 1,
+        "axis": "y",
+        "blade_count": 7
       }
     },
     {
@@ -1262,11 +1273,11 @@
         "src.dell.5060.setup"
       ],
       "description": {
-        "en": "The platform supports multiple storage arrangements; exact fitted cage revision and population are configuration-dependent.",
-        "ru": "Платформа поддерживает несколько вариантов размещения накопителей; точная ревизия установленной корзины и её комплектация зависят от конфигурации."
+        "en": "The platform supports multiple storage arrangements; exact fitted cage revision and population are configuration-dependent. Generic open carrier frame; fitted drive population and exact cage revision remain unknown.",
+        "ru": "Платформа поддерживает несколько вариантов размещения накопителей; точная ревизия установленной корзины и её комплектация зависят от конфигурации. Условный открытый каркас; установленный состав накопителей и точная ревизия корзины неизвестны."
       },
       "visual_proxy": {
-        "kind": "box",
+        "kind": "drive_cage",
         "translation": [
           0,
           112,
@@ -2521,14 +2532,31 @@
       },
       "category": "status_indicator",
       "evidence_status": "manufacturer_data",
-      "geometry_status": "logical_only",
+      "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.dell.5060.boardlayout",
-        "src.dell.5060.ports"
+        "src.dell.5060.ports",
+        "src.dell.5060.front_view"
       ],
       "description": {
-        "en": "Front power-button illumination/status is documented in the external-view legend; exact LED color behavior is not reconstructed.",
-        "ru": "Подсветка/индикация кнопки питания указана в легенде внешнего вида; точные режимы и цвета LED не реконструированы."
+        "en": "Front power-button illumination/status is documented in the external-view legend; exact LED color behavior is not reconstructed. Type/count is documented; aperture shape, dimensions and placement are schematic.",
+        "ru": "Подсветка/индикация кнопки питания указана в легенде внешнего вида; точные режимы и цвета LED не реконструированы. Тип и количество документированы; форма, размеры и положение условны."
+      },
+      "visual_proxy": {
+        "kind": "io_port",
+        "profile": "status_led",
+        "translation": [
+          23,
+          274,
+          -143.2
+        ],
+        "scale": [
+          3,
+          2,
+          3
+        ],
+        "material": 1,
+        "axis": "z"
       }
     },
     {
@@ -2540,14 +2568,31 @@
       },
       "category": "status_indicator",
       "evidence_status": "manufacturer_data",
-      "geometry_status": "logical_only",
+      "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.dell.5060.boardlayout",
-        "src.dell.5060.ports"
+        "src.dell.5060.ports",
+        "src.dell.5060.front_view"
       ],
       "description": {
-        "en": "Dell identifies a front HDD activity light. LED drive activity is not animated or connected to a live disk state.",
-        "ru": "Dell обозначает передний индикатор активности HDD. Индикация не анимируется и не связана с состоянием реального диска."
+        "en": "Dell identifies a front HDD activity light. LED drive activity is not animated or connected to a live disk state. Type/count is documented; aperture shape, dimensions and placement are schematic.",
+        "ru": "Dell обозначает передний индикатор активности HDD. Индикация не анимируется и не связана с состоянием реального диска. Тип и количество документированы; форма, размеры и положение условны."
+      },
+      "visual_proxy": {
+        "kind": "io_port",
+        "profile": "status_led",
+        "translation": [
+          23,
+          255,
+          -143.2
+        ],
+        "scale": [
+          3,
+          2,
+          3
+        ],
+        "material": 1,
+        "axis": "z"
       }
     },
     {
@@ -2562,7 +2607,8 @@
       "geometry_status": "unknown",
       "source_ids": [
         "src.dell.5060.boardlayout",
-        "src.dell.5060.ports"
+        "src.dell.5060.ports",
+        "src.dell.5060.front_view"
       ],
       "description": {
         "en": "Optional front optical-drive opening shown in Dell's Tower view. Drive and bezel details vary by order configuration.",
@@ -2581,7 +2627,8 @@
       "geometry_status": "unknown",
       "source_ids": [
         "src.dell.5060.boardlayout",
-        "src.dell.5060.ports"
+        "src.dell.5060.ports",
+        "src.dell.5060.front_view"
       ],
       "description": {
         "en": "Optional SD card reader opening; module presence is not confirmed.",
@@ -2597,14 +2644,31 @@
       },
       "category": "external_port",
       "evidence_status": "manufacturer_data",
-      "geometry_status": "logical_only",
+      "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.dell.5060.boardlayout",
-        "src.dell.5060.ports"
+        "src.dell.5060.ports",
+        "src.dell.5060.front_view"
       ],
       "description": {
-        "en": "Front universal audio/headset jack listed in the product port specification.",
-        "ru": "Передний универсальный аудиоразъём для гарнитуры, указанный в спецификации портов."
+        "en": "Front universal audio/headset jack listed in the product port specification. Type/count is documented; aperture shape, dimensions and placement are schematic.",
+        "ru": "Передний универсальный аудиоразъём для гарнитуры, указанный в спецификации портов. Тип и количество документированы; форма, размеры и положение условны."
+      },
+      "visual_proxy": {
+        "kind": "io_port",
+        "profile": "audio_jack",
+        "translation": [
+          33,
+          236,
+          -143.2
+        ],
+        "scale": [
+          8,
+          2.6,
+          8
+        ],
+        "material": 1,
+        "axis": "z"
       }
     },
     {
@@ -2616,14 +2680,31 @@
       },
       "category": "external_port",
       "evidence_status": "manufacturer_data",
-      "geometry_status": "logical_only",
+      "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.dell.5060.boardlayout",
-        "src.dell.5060.ports"
+        "src.dell.5060.ports",
+        "src.dell.5060.front_view"
       ],
       "description": {
-        "en": "One front USB 2.0 Type-A port with PowerShare capability.",
-        "ru": "Один передний порт USB 2.0 Type-A с функцией PowerShare."
+        "en": "One front USB 2.0 Type-A port with PowerShare capability. Type/count is documented; aperture shape, dimensions and placement are schematic.",
+        "ru": "Один передний порт USB 2.0 Type-A с функцией PowerShare. Тип и количество документированы; форма, размеры и положение условны."
+      },
+      "visual_proxy": {
+        "kind": "io_port",
+        "profile": "usb_a",
+        "translation": [
+          -24,
+          236,
+          -143.2
+        ],
+        "scale": [
+          10,
+          2.6,
+          14
+        ],
+        "material": 1,
+        "axis": "z"
       }
     },
     {
@@ -2635,14 +2716,31 @@
       },
       "category": "external_port",
       "evidence_status": "manufacturer_data",
-      "geometry_status": "logical_only",
+      "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.dell.5060.boardlayout",
-        "src.dell.5060.ports"
+        "src.dell.5060.ports",
+        "src.dell.5060.front_view"
       ],
       "description": {
-        "en": "One additional front USB 2.0 Type-A port without the PowerShare label.",
-        "ru": "Ещё один передний порт USB 2.0 Type-A без обозначения PowerShare."
+        "en": "One additional front USB 2.0 Type-A port without the PowerShare label. Type/count is documented; aperture shape, dimensions and placement are schematic.",
+        "ru": "Ещё один передний порт USB 2.0 Type-A без обозначения PowerShare. Тип и количество документированы; форма, размеры и положение условны."
+      },
+      "visual_proxy": {
+        "kind": "io_port",
+        "profile": "usb_a",
+        "translation": [
+          -9,
+          236,
+          -143.2
+        ],
+        "scale": [
+          10,
+          2.6,
+          14
+        ],
+        "material": 1,
+        "axis": "z"
       }
     },
     {
@@ -2654,14 +2752,31 @@
       },
       "category": "external_port",
       "evidence_status": "manufacturer_data",
-      "geometry_status": "logical_only",
+      "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.dell.5060.boardlayout",
-        "src.dell.5060.ports"
+        "src.dell.5060.ports",
+        "src.dell.5060.front_view"
       ],
       "description": {
-        "en": "One front USB 3.1 Gen 2 Type-C port with PowerShare, as documented by Dell.",
-        "ru": "Один передний порт USB 3.1 Gen 2 Type-C с PowerShare согласно документации Dell."
+        "en": "One front USB 3.1 Gen 2 Type-C port with PowerShare, as documented by Dell. Type/count is documented; aperture shape, dimensions and placement are schematic.",
+        "ru": "Один передний порт USB 3.1 Gen 2 Type-C с PowerShare согласно документации Dell. Тип и количество документированы; форма, размеры и положение условны."
+      },
+      "visual_proxy": {
+        "kind": "io_port",
+        "profile": "usb_c",
+        "translation": [
+          7,
+          236,
+          -143.2
+        ],
+        "scale": [
+          9,
+          2.6,
+          11
+        ],
+        "material": 1,
+        "axis": "z"
       }
     },
     {
@@ -2673,14 +2788,31 @@
       },
       "category": "external_port",
       "evidence_status": "manufacturer_data",
-      "geometry_status": "logical_only",
+      "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.dell.5060.boardlayout",
-        "src.dell.5060.ports"
+        "src.dell.5060.ports",
+        "src.dell.5060.front_view"
       ],
       "description": {
-        "en": "One front USB 3.1 Gen 1 Type-A port.",
-        "ru": "Один передний порт USB 3.1 Gen 1 Type-A."
+        "en": "One front USB 3.1 Gen 1 Type-A port. Type/count is documented; aperture shape, dimensions and placement are schematic.",
+        "ru": "Один передний порт USB 3.1 Gen 1 Type-A. Тип и количество документированы; форма, размеры и положение условны."
+      },
+      "visual_proxy": {
+        "kind": "io_port",
+        "profile": "usb_a",
+        "translation": [
+          23,
+          236,
+          -143.2
+        ],
+        "scale": [
+          10,
+          2.6,
+          14
+        ],
+        "material": 1,
+        "axis": "z"
       }
     },
     {
@@ -2692,14 +2824,30 @@
       },
       "category": "mechanical_io",
       "evidence_status": "manufacturer_data",
-      "geometry_status": "logical_only",
+      "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.dell.5060.boardlayout",
-        "src.dell.5060.ports"
+        "src.dell.5060.ports",
+        "src.dell.5060.back_view"
       ],
       "description": {
-        "en": "Semantic grouping for Dell-documented rear ports, indicators, openings and chassis locks. Individual coordinates and port module combinations are not measured.",
-        "ru": "Смысловая группа задних портов, индикаторов, отверстий и замков по документации Dell. Координаты и комбинации модулей не измерены."
+        "en": "Semantic grouping for Dell-documented rear ports, indicators, openings and chassis locks. Individual coordinates and port module combinations are not measured. Schematic backing only; no measured I/O coordinates or optional-module combination is asserted.",
+        "ru": "Смысловая группа задних портов, индикаторов, отверстий и замков по документации Dell. Координаты и комбинации модулей не измерены. Только схематическая подложка; измеренные координаты и сочетания опциональных модулей не заявляются."
+      },
+      "visual_proxy": {
+        "kind": "panel",
+        "translation": [
+          -25,
+          250,
+          139
+        ],
+        "scale": [
+          105,
+          190,
+          2
+        ],
+        "material": 1,
+        "axis": "z"
       }
     },
     {
@@ -2711,14 +2859,31 @@
       },
       "category": "external_port",
       "evidence_status": "manufacturer_data",
-      "geometry_status": "logical_only",
+      "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.dell.5060.boardlayout",
-        "src.dell.5060.ports"
+        "src.dell.5060.ports",
+        "src.dell.5060.back_view"
       ],
       "description": {
-        "en": "One rear line-out connector listed by Dell.",
-        "ru": "Один задний аудиовыход Line-out по документации Dell."
+        "en": "One rear line-out connector listed by Dell. Type/count is documented; aperture shape, dimensions and placement are schematic.",
+        "ru": "Один задний аудиовыход Line-out по документации Dell. Тип и количество документированы; форма, размеры и положение условны."
+      },
+      "visual_proxy": {
+        "kind": "io_port",
+        "profile": "audio_jack",
+        "translation": [
+          -60,
+          331,
+          140.5
+        ],
+        "scale": [
+          8,
+          2.6,
+          8
+        ],
+        "material": 1,
+        "axis": "z"
       }
     },
     {
@@ -2733,7 +2898,8 @@
       "geometry_status": "unknown",
       "source_ids": [
         "src.dell.5060.boardlayout",
-        "src.dell.5060.ports"
+        "src.dell.5060.ports",
+        "src.dell.5060.back_view"
       ],
       "description": {
         "en": "Optional rear serial port; presence depends on the ordered I/O configuration.",
@@ -2752,7 +2918,8 @@
       "geometry_status": "unknown",
       "source_ids": [
         "src.dell.5060.boardlayout",
-        "src.dell.5060.ports"
+        "src.dell.5060.ports",
+        "src.dell.5060.back_view"
       ],
       "description": {
         "en": "Dell documents optional HDMI 2.0b, DisplayPort, VGA or USB-C DisplayPort Alt Mode module options. These are alternatives, not four simultaneous ports.",
@@ -2768,14 +2935,31 @@
       },
       "category": "external_port",
       "evidence_status": "manufacturer_data",
-      "geometry_status": "logical_only",
+      "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.dell.5060.boardlayout",
-        "src.dell.5060.ports"
+        "src.dell.5060.ports",
+        "src.dell.5060.back_view"
       ],
       "description": {
-        "en": "One of two standard rear DisplayPort outputs listed by Dell.",
-        "ru": "Один из двух штатных задних выходов DisplayPort по документации Dell."
+        "en": "One of two standard rear DisplayPort outputs listed by Dell. Type/count is documented; aperture shape, dimensions and placement are schematic.",
+        "ru": "Один из двух штатных задних выходов DisplayPort по документации Dell. Тип и количество документированы; форма, размеры и положение условны."
+      },
+      "visual_proxy": {
+        "kind": "io_port",
+        "profile": "displayport",
+        "translation": [
+          -60,
+          309,
+          140.5
+        ],
+        "scale": [
+          16,
+          2.6,
+          9
+        ],
+        "material": 1,
+        "axis": "z"
       }
     },
     {
@@ -2787,14 +2971,31 @@
       },
       "category": "external_port",
       "evidence_status": "manufacturer_data",
-      "geometry_status": "logical_only",
+      "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.dell.5060.boardlayout",
-        "src.dell.5060.ports"
+        "src.dell.5060.ports",
+        "src.dell.5060.back_view"
       ],
       "description": {
-        "en": "One of two standard rear DisplayPort outputs listed by Dell.",
-        "ru": "Один из двух штатных задних выходов DisplayPort по документации Dell."
+        "en": "One of two standard rear DisplayPort outputs listed by Dell. Type/count is documented; aperture shape, dimensions and placement are schematic.",
+        "ru": "Один из двух штатных задних выходов DisplayPort по документации Dell. Тип и количество документированы; форма, размеры и положение условны."
+      },
+      "visual_proxy": {
+        "kind": "io_port",
+        "profile": "displayport",
+        "translation": [
+          -60,
+          290,
+          140.5
+        ],
+        "scale": [
+          16,
+          2.6,
+          9
+        ],
+        "material": 1,
+        "axis": "z"
       }
     },
     {
@@ -2806,14 +3007,31 @@
       },
       "category": "external_port",
       "evidence_status": "manufacturer_data",
-      "geometry_status": "logical_only",
+      "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.dell.5060.boardlayout",
-        "src.dell.5060.ports"
+        "src.dell.5060.ports",
+        "src.dell.5060.back_view"
       ],
       "description": {
-        "en": "One of four rear USB 3.1 Gen 1 Type-A ports.",
-        "ru": "Один из четырёх задних портов USB 3.1 Gen 1 Type-A."
+        "en": "One of four rear USB 3.1 Gen 1 Type-A ports. Type/count is documented; aperture shape, dimensions and placement are schematic.",
+        "ru": "Один из четырёх задних портов USB 3.1 Gen 1 Type-A. Тип и количество документированы; форма, размеры и положение условны."
+      },
+      "visual_proxy": {
+        "kind": "io_port",
+        "profile": "usb_a",
+        "translation": [
+          -38,
+          310,
+          140.5
+        ],
+        "scale": [
+          10,
+          2.6,
+          14
+        ],
+        "material": 1,
+        "axis": "z"
       }
     },
     {
@@ -2825,14 +3043,31 @@
       },
       "category": "external_port",
       "evidence_status": "manufacturer_data",
-      "geometry_status": "logical_only",
+      "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.dell.5060.boardlayout",
-        "src.dell.5060.ports"
+        "src.dell.5060.ports",
+        "src.dell.5060.back_view"
       ],
       "description": {
-        "en": "One of four rear USB 3.1 Gen 1 Type-A ports.",
-        "ru": "Один из четырёх задних портов USB 3.1 Gen 1 Type-A."
+        "en": "One of four rear USB 3.1 Gen 1 Type-A ports. Type/count is documented; aperture shape, dimensions and placement are schematic.",
+        "ru": "Один из четырёх задних портов USB 3.1 Gen 1 Type-A. Тип и количество документированы; форма, размеры и положение условны."
+      },
+      "visual_proxy": {
+        "kind": "io_port",
+        "profile": "usb_a",
+        "translation": [
+          -22,
+          310,
+          140.5
+        ],
+        "scale": [
+          10,
+          2.6,
+          14
+        ],
+        "material": 1,
+        "axis": "z"
       }
     },
     {
@@ -2844,14 +3079,31 @@
       },
       "category": "external_port",
       "evidence_status": "manufacturer_data",
-      "geometry_status": "logical_only",
+      "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.dell.5060.boardlayout",
-        "src.dell.5060.ports"
+        "src.dell.5060.ports",
+        "src.dell.5060.back_view"
       ],
       "description": {
-        "en": "One of four rear USB 3.1 Gen 1 Type-A ports.",
-        "ru": "Один из четырёх задних портов USB 3.1 Gen 1 Type-A."
+        "en": "One of four rear USB 3.1 Gen 1 Type-A ports. Type/count is documented; aperture shape, dimensions and placement are schematic.",
+        "ru": "Один из четырёх задних портов USB 3.1 Gen 1 Type-A. Тип и количество документированы; форма, размеры и положение условны."
+      },
+      "visual_proxy": {
+        "kind": "io_port",
+        "profile": "usb_a",
+        "translation": [
+          -6,
+          310,
+          140.5
+        ],
+        "scale": [
+          10,
+          2.6,
+          14
+        ],
+        "material": 1,
+        "axis": "z"
       }
     },
     {
@@ -2863,14 +3115,31 @@
       },
       "category": "external_port",
       "evidence_status": "manufacturer_data",
-      "geometry_status": "logical_only",
+      "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.dell.5060.boardlayout",
-        "src.dell.5060.ports"
+        "src.dell.5060.ports",
+        "src.dell.5060.back_view"
       ],
       "description": {
-        "en": "One of four rear USB 3.1 Gen 1 Type-A ports.",
-        "ru": "Один из четырёх задних портов USB 3.1 Gen 1 Type-A."
+        "en": "One of four rear USB 3.1 Gen 1 Type-A ports. Type/count is documented; aperture shape, dimensions and placement are schematic.",
+        "ru": "Один из четырёх задних портов USB 3.1 Gen 1 Type-A. Тип и количество документированы; форма, размеры и положение условны."
+      },
+      "visual_proxy": {
+        "kind": "io_port",
+        "profile": "usb_a",
+        "translation": [
+          10,
+          310,
+          140.5
+        ],
+        "scale": [
+          10,
+          2.6,
+          14
+        ],
+        "material": 1,
+        "axis": "z"
       }
     },
     {
@@ -2882,14 +3151,31 @@
       },
       "category": "external_port",
       "evidence_status": "manufacturer_data",
-      "geometry_status": "logical_only",
+      "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.dell.5060.boardlayout",
-        "src.dell.5060.ports"
+        "src.dell.5060.ports",
+        "src.dell.5060.back_view"
       ],
       "description": {
-        "en": "One of two rear USB 2.0 SmartPower On ports.",
-        "ru": "Один из двух задних портов USB 2.0 SmartPower On."
+        "en": "One of two rear USB 2.0 SmartPower On ports. Type/count is documented; aperture shape, dimensions and placement are schematic.",
+        "ru": "Один из двух задних портов USB 2.0 SmartPower On. Тип и количество документированы; форма, размеры и положение условны."
+      },
+      "visual_proxy": {
+        "kind": "io_port",
+        "profile": "usb_a",
+        "translation": [
+          -58,
+          269,
+          140.5
+        ],
+        "scale": [
+          10,
+          2.6,
+          14
+        ],
+        "material": 1,
+        "axis": "z"
       }
     },
     {
@@ -2901,14 +3187,31 @@
       },
       "category": "external_port",
       "evidence_status": "manufacturer_data",
-      "geometry_status": "logical_only",
+      "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.dell.5060.boardlayout",
-        "src.dell.5060.ports"
+        "src.dell.5060.ports",
+        "src.dell.5060.back_view"
       ],
       "description": {
-        "en": "One of two rear USB 2.0 SmartPower On ports.",
-        "ru": "Один из двух задних портов USB 2.0 SmartPower On."
+        "en": "One of two rear USB 2.0 SmartPower On ports. Type/count is documented; aperture shape, dimensions and placement are schematic.",
+        "ru": "Один из двух задних портов USB 2.0 SmartPower On. Тип и количество документированы; форма, размеры и положение условны."
+      },
+      "visual_proxy": {
+        "kind": "io_port",
+        "profile": "usb_a",
+        "translation": [
+          -42,
+          269,
+          140.5
+        ],
+        "scale": [
+          10,
+          2.6,
+          14
+        ],
+        "material": 1,
+        "axis": "z"
       }
     },
     {
@@ -2920,14 +3223,31 @@
       },
       "category": "network_port",
       "evidence_status": "manufacturer_data",
-      "geometry_status": "logical_only",
+      "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.dell.5060.boardlayout",
-        "src.dell.5060.ports"
+        "src.dell.5060.ports",
+        "src.dell.5060.back_view"
       ],
       "description": {
-        "en": "One rear RJ-45 Ethernet connector; exact network controller and PHY are not identified here.",
-        "ru": "Один задний разъём Ethernet RJ-45; конкретный сетевой контроллер и PHY здесь не определяются."
+        "en": "One rear RJ-45 Ethernet connector; exact network controller and PHY are not identified here. Type/count is documented; aperture shape, dimensions and placement are schematic.",
+        "ru": "Один задний разъём Ethernet RJ-45; конкретный сетевой контроллер и PHY здесь не определяются. Тип и количество документированы; форма, размеры и положение условны."
+      },
+      "visual_proxy": {
+        "kind": "io_port",
+        "profile": "rj45",
+        "translation": [
+          -20,
+          269,
+          140.5
+        ],
+        "scale": [
+          16,
+          2.6,
+          16
+        ],
+        "material": 1,
+        "axis": "z"
       }
     },
     {
@@ -2939,14 +3259,31 @@
       },
       "category": "mechanical_io",
       "evidence_status": "manufacturer_data",
-      "geometry_status": "logical_only",
+      "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.dell.5060.boardlayout",
-        "src.dell.5060.ports"
+        "src.dell.5060.ports",
+        "src.dell.5060.back_view"
       ],
       "description": {
-        "en": "One of four rear expansion-card openings; card occupancy is unknown.",
-        "ru": "Одно из четырёх задних окон плат расширения; наличие плат неизвестно."
+        "en": "One of four rear expansion-card openings; card occupancy is unknown. Type/count is documented; aperture shape, dimensions and placement are schematic.",
+        "ru": "Одно из четырёх задних окон плат расширения; наличие плат неизвестно. Тип и количество документированы; форма, размеры и положение условны."
+      },
+      "visual_proxy": {
+        "kind": "io_port",
+        "profile": "expansion_slot",
+        "translation": [
+          17,
+          230,
+          140.5
+        ],
+        "scale": [
+          96,
+          2.6,
+          14
+        ],
+        "material": 1,
+        "axis": "z"
       }
     },
     {
@@ -2958,14 +3295,31 @@
       },
       "category": "mechanical_io",
       "evidence_status": "manufacturer_data",
-      "geometry_status": "logical_only",
+      "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.dell.5060.boardlayout",
-        "src.dell.5060.ports"
+        "src.dell.5060.ports",
+        "src.dell.5060.back_view"
       ],
       "description": {
-        "en": "One of four rear expansion-card openings; card occupancy is unknown.",
-        "ru": "Одно из четырёх задних окон плат расширения; наличие плат неизвестно."
+        "en": "One of four rear expansion-card openings; card occupancy is unknown. Type/count is documented; aperture shape, dimensions and placement are schematic.",
+        "ru": "Одно из четырёх задних окон плат расширения; наличие плат неизвестно. Тип и количество документированы; форма, размеры и положение условны."
+      },
+      "visual_proxy": {
+        "kind": "io_port",
+        "profile": "expansion_slot",
+        "translation": [
+          17,
+          209,
+          140.5
+        ],
+        "scale": [
+          96,
+          2.6,
+          14
+        ],
+        "material": 1,
+        "axis": "z"
       }
     },
     {
@@ -2977,14 +3331,31 @@
       },
       "category": "mechanical_io",
       "evidence_status": "manufacturer_data",
-      "geometry_status": "logical_only",
+      "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.dell.5060.boardlayout",
-        "src.dell.5060.ports"
+        "src.dell.5060.ports",
+        "src.dell.5060.back_view"
       ],
       "description": {
-        "en": "One of four rear expansion-card openings; card occupancy is unknown.",
-        "ru": "Одно из четырёх задних окон плат расширения; наличие плат неизвестно."
+        "en": "One of four rear expansion-card openings; card occupancy is unknown. Type/count is documented; aperture shape, dimensions and placement are schematic.",
+        "ru": "Одно из четырёх задних окон плат расширения; наличие плат неизвестно. Тип и количество документированы; форма, размеры и положение условны."
+      },
+      "visual_proxy": {
+        "kind": "io_port",
+        "profile": "expansion_slot",
+        "translation": [
+          17,
+          188,
+          140.5
+        ],
+        "scale": [
+          96,
+          2.6,
+          14
+        ],
+        "material": 1,
+        "axis": "z"
       }
     },
     {
@@ -2996,14 +3367,31 @@
       },
       "category": "mechanical_io",
       "evidence_status": "manufacturer_data",
-      "geometry_status": "logical_only",
+      "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.dell.5060.boardlayout",
-        "src.dell.5060.ports"
+        "src.dell.5060.ports",
+        "src.dell.5060.back_view"
       ],
       "description": {
-        "en": "One of four rear expansion-card openings; card occupancy is unknown.",
-        "ru": "Одно из четырёх задних окон плат расширения; наличие плат неизвестно."
+        "en": "One of four rear expansion-card openings; card occupancy is unknown. Type/count is documented; aperture shape, dimensions and placement are schematic.",
+        "ru": "Одно из четырёх задних окон плат расширения; наличие плат неизвестно. Тип и количество документированы; форма, размеры и положение условны."
+      },
+      "visual_proxy": {
+        "kind": "io_port",
+        "profile": "expansion_slot",
+        "translation": [
+          17,
+          167,
+          140.5
+        ],
+        "scale": [
+          96,
+          2.6,
+          14
+        ],
+        "material": 1,
+        "axis": "z"
       }
     },
     {
@@ -3015,14 +3403,31 @@
       },
       "category": "power_interface",
       "evidence_status": "manufacturer_data",
-      "geometry_status": "logical_only",
+      "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.dell.5060.boardlayout",
-        "src.dell.5060.ports"
+        "src.dell.5060.ports",
+        "src.dell.5060.back_view"
       ],
       "description": {
-        "en": "Rear AC inlet on the PSU enclosure. Exact PSU model and inlet module are unknown.",
-        "ru": "Задний сетевой вход на корпусе БП. Точная модель БП и узел входа неизвестны."
+        "en": "Rear AC inlet on the PSU enclosure. Exact PSU model and inlet module are unknown. Type/count is documented; aperture shape, dimensions and placement are schematic.",
+        "ru": "Задний сетевой вход на корпусе БП. Точная модель БП и узел входа неизвестны. Тип и количество документированы; форма, размеры и положение условны."
+      },
+      "visual_proxy": {
+        "kind": "io_port",
+        "profile": "power_inlet",
+        "translation": [
+          43,
+          64,
+          139.5
+        ],
+        "scale": [
+          30,
+          8,
+          24
+        ],
+        "material": 1,
+        "axis": "z"
       }
     },
     {
@@ -3037,7 +3442,8 @@
       "geometry_status": "unknown",
       "source_ids": [
         "src.dell.5060.boardlayout",
-        "src.dell.5060.ports"
+        "src.dell.5060.ports",
+        "src.dell.5060.back_view"
       ],
       "description": {
         "en": "Optional external antenna connection for a compatible wireless configuration.",
@@ -3056,7 +3462,8 @@
       "geometry_status": "unknown",
       "source_ids": [
         "src.dell.5060.boardlayout",
-        "src.dell.5060.ports"
+        "src.dell.5060.ports",
+        "src.dell.5060.back_view"
       ],
       "description": {
         "en": "Optional external antenna connection for a compatible wireless configuration.",
@@ -3072,14 +3479,31 @@
       },
       "category": "status_indicator",
       "evidence_status": "manufacturer_data",
-      "geometry_status": "logical_only",
+      "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.dell.5060.boardlayout",
-        "src.dell.5060.ports"
+        "src.dell.5060.ports",
+        "src.dell.5060.back_view"
       ],
       "description": {
-        "en": "Power-supply diagnostic light documented on the rear panel; diagnostic behavior is not simulated.",
-        "ru": "Диагностический индикатор блока питания на задней панели; поведение индикации не симулируется."
+        "en": "Power-supply diagnostic light documented on the rear panel; diagnostic behavior is not simulated. Type/count is documented; aperture shape, dimensions and placement are schematic.",
+        "ru": "Диагностический индикатор блока питания на задней панели; поведение индикации не симулируется. Тип и количество документированы; форма, размеры и положение условны."
+      },
+      "visual_proxy": {
+        "kind": "io_port",
+        "profile": "status_led",
+        "translation": [
+          60,
+          42,
+          139.5
+        ],
+        "scale": [
+          4,
+          2.5,
+          4
+        ],
+        "material": 1,
+        "axis": "z"
       }
     },
     {
@@ -3091,14 +3515,31 @@
       },
       "category": "mechanical_io",
       "evidence_status": "manufacturer_data",
-      "geometry_status": "logical_only",
+      "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.dell.5060.boardlayout",
-        "src.dell.5060.ports"
+        "src.dell.5060.ports",
+        "src.dell.5060.back_view"
       ],
       "description": {
-        "en": "Chassis anti-theft cable attachment point.",
-        "ru": "Точка крепления противоугонного троса к корпусу."
+        "en": "Chassis anti-theft cable attachment point. Type/count is documented; aperture shape, dimensions and placement are schematic.",
+        "ru": "Точка крепления противоугонного троса к корпусу. Тип и количество документированы; форма, размеры и положение условны."
+      },
+      "visual_proxy": {
+        "kind": "io_port",
+        "profile": "security_slot",
+        "translation": [
+          65,
+          116,
+          139.5
+        ],
+        "scale": [
+          6,
+          2.5,
+          12
+        ],
+        "material": 1,
+        "axis": "z"
       }
     },
     {
@@ -3110,14 +3551,31 @@
       },
       "category": "mechanical_io",
       "evidence_status": "manufacturer_data",
-      "geometry_status": "logical_only",
+      "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.dell.5060.boardlayout",
-        "src.dell.5060.ports"
+        "src.dell.5060.ports",
+        "src.dell.5060.back_view"
       ],
       "description": {
-        "en": "Chassis padlock loop identified in Dell's rear-view legend.",
-        "ru": "Петля корпуса для навесного замка по схеме задней панели Dell."
+        "en": "Chassis padlock loop identified in Dell's rear-view legend. Type/count is documented; aperture shape, dimensions and placement are schematic.",
+        "ru": "Петля корпуса для навесного замка по схеме задней панели Dell. Тип и количество документированы; форма, размеры и положение условны."
+      },
+      "visual_proxy": {
+        "kind": "io_port",
+        "profile": "padlock_slot",
+        "translation": [
+          65,
+          82,
+          139.5
+        ],
+        "scale": [
+          8,
+          2.5,
+          8
+        ],
+        "material": 1,
+        "axis": "z"
       }
     },
     {
@@ -3132,7 +3590,8 @@
       "geometry_status": "logical_only",
       "source_ids": [
         "src.dell.5060.boardlayout",
-        "src.dell.5060.ports"
+        "src.dell.5060.ports",
+        "src.dell.5060.back_view"
       ],
       "description": {
         "en": "Service Tag location on the chassis. No real service-tag value is stored in this family package.",
@@ -3170,7 +3629,8 @@
       "geometry_status": "unknown",
       "source_ids": [
         "src.dell.5060.screw_table",
-        "src.dell.5060.optional_video_module"
+        "src.dell.5060.optional_video_module",
+        "src.dell.5060.back_view"
       ],
       "description": {
         "en": "Dell's screw table lists a Type-C with DP/HDMI/VGA cable module secured by two M3×3 screws. Presence and exact port option remain unknown.",

@@ -6,7 +6,7 @@ import * as THREE from "three";
  * hardware and must never be presented as an automated service tool.
  */
 export class ProcedureController {
-  constructor(root, { steps = [], commonStepIds = [], routes = [] } = {}) {
+  constructor(root, { steps = [], commonStepIds = [], routes = [], reducedMotion = false } = {}) {
     if (!root?.isObject3D) throw new TypeError("ProcedureController requires a Three.js Object3D root");
     if (!Array.isArray(steps) || !Array.isArray(commonStepIds) || !Array.isArray(routes)) {
       throw new TypeError("ProcedureController requires steps, commonStepIds and routes arrays");
@@ -24,6 +24,9 @@ export class ProcedureController {
     this.index = -1;
     this.busy = false;
     this.disposed = false;
+    this.reducedMotion = Boolean(reducedMotion);
+    this.animationFrame = null;
+    this.animationFinish = null;
     this.validatePackage();
     this.captureBaseline();
   }
@@ -93,6 +96,12 @@ export class ProcedureController {
         }
       }
     }
+  }
+
+  setReducedMotion(enabled) {
+    this.reducedMotion = Boolean(enabled);
+    if (this.reducedMotion) this.animationFinish?.();
+    return this.reducedMotion;
   }
 
   getRoute(routeId = this.routeId) {
@@ -166,7 +175,7 @@ export class ProcedureController {
     this.busy = true;
     try {
       for (const action of step.visual_actions ?? []) {
-        if (action.type === "move" && animate) await this.animateMove(action);
+        if (action.type === "move" && animate && !this.reducedMotion) await this.animateMove(action);
         else this.applyAction(action);
       }
       this.index = nextIndex;
@@ -247,23 +256,38 @@ export class ProcedureController {
     const starts = targets.map((node) => node.position.clone());
     const ends = starts.map((start) => start.clone().add(new THREE.Vector3(...action.offset)));
     const duration = Math.max(1, Number(action.duration_ms) || 700);
-    if (typeof requestAnimationFrame !== "function") {
+    if (this.reducedMotion || typeof requestAnimationFrame !== "function") {
       targets.forEach((node, index) => node.position.copy(ends[index]));
       this.root.updateMatrixWorld(true);
       return Promise.resolve(true);
     }
     return new Promise((resolve) => {
+      let settled = false;
       let startTime = null;
+      const finish = () => {
+        if (settled) return;
+        settled = true;
+        if (this.animationFrame !== null && typeof cancelAnimationFrame === "function") {
+          cancelAnimationFrame(this.animationFrame);
+        }
+        this.animationFrame = null;
+        targets.forEach((node, index) => node.position.copy(ends[index]));
+        this.root.updateMatrixWorld(true);
+        if (this.animationFinish === finish) this.animationFinish = null;
+        resolve(true);
+      };
+      this.animationFinish = finish;
       const tick = (time) => {
+        if (settled) return;
         if (startTime === null) startTime = time;
         const progress = THREE.MathUtils.clamp((time - startTime) / duration, 0, 1);
         const eased = progress * progress * (3 - 2 * progress);
         targets.forEach((node, index) => node.position.lerpVectors(starts[index], ends[index], eased));
         this.root.updateMatrixWorld(true);
-        if (progress >= 1) resolve(true);
-        else requestAnimationFrame(tick);
+        if (progress >= 1) finish();
+        else this.animationFrame = requestAnimationFrame(tick);
       };
-      requestAnimationFrame(tick);
+      this.animationFrame = requestAnimationFrame(tick);
     });
   }
 

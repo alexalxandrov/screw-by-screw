@@ -18,3 +18,33 @@ test("learning panel meets automated WCAG A/AA checks", async ({ page }) => {
   await page.getByRole("button", { name: "Обучение" }).click();
   await audit(page);
 });
+
+test("catalog dialog meets automated WCAG A/AA checks", async ({ page }) => {
+  await page.goto("/?demo=1");
+  await page.locator("#catalog-open").click();
+  await expect(page.locator("#model-catalog-dialog")).toBeVisible();
+  await audit(page);
+});
+
+test("model comparison view meets automated WCAG A/AA checks", async ({ page }) => {
+  await page.goto("/?demo=1");
+  await page.locator('.view-tab[data-mode="compare"]').click();
+  await expect(page.locator("#comparison-panel")).toBeVisible();
+  await audit(page);
+});
+
+test("language toggle keeps its accessible name synchronized with the visible bilingual label", async ({ page }) => {
+  await page.goto("/?demo=1");
+  const languageToggle = page.locator("#language-toggle");
+  const initialName = await languageToggle.getAttribute("aria-label");
+
+  await expect(languageToggle).toContainText("RU / EN");
+  await expect(languageToggle).toHaveAttribute("aria-label", /RU \/ EN/);
+  await languageToggle.click();
+  const switchedName = await languageToggle.getAttribute("aria-label");
+  expect(switchedName).not.toBe(initialName);
+  await expect(languageToggle).toContainText("RU / EN");
+
+  await languageToggle.click();
+  await expect(languageToggle).toHaveAttribute("aria-label", initialName);
+});

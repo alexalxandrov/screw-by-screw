@@ -2,7 +2,7 @@
   "schema_version": "0.1.0",
   "model_id": "pc.dell.optiplex-5060-tower.family",
   "part_number": null,
-  "package_version": "0.3.0",
+  "package_version": "0.4.1",
   "status": "research_blockout",
   "geometry_status": "illustrative_proxy_not_cad",
   "identity_scope": "platform_family",
@@ -14,14 +14,38 @@
     "process_layers": 6,
     "assembly_steps": 12,
     "learning_questions": 9,
-    "documented_source_records": 28,
-    "geometry_nodes": 58,
+    "documented_source_records": 30,
+    "geometry_nodes": 84,
     "optional_population_unknown": true,
     "motherboard_callout_mappings": 26,
-    "technical_claims": 34,
+    "technical_claims": 36,
     "optional_fastener_references": 7,
     "physical_fastener_instances": 24,
     "service_observations": 19,
-    "storage_mechanism_nodes": 10
+    "storage_mechanism_nodes": 10,
+    "geometry_primitives": {
+      "box": 45,
+      "panel": 7,
+      "drive_cage": 1,
+      "io_port": 25,
+      "cylinder": 2,
+      "fan": 3,
+      "fin_stack": 1,
+      "total": 84,
+      "note": "Schematic proxy meshes only; port identities/counts are sourced, positions/dimensions are not measured. Current guide images say 5070 and were excluded from 5060 placement."
+    },
+    "io_port_profiles": {
+      "usb_a": 9,
+      "usb_c": 1,
+      "audio_jack": 2,
+      "displayport": 2,
+      "rj45": 1,
+      "expansion_slot": 4,
+      "power_inlet": 1,
+      "status_led": 3,
+      "security_slot": 1,
+      "padlock_slot": 1
+    },
+    "optional_port_modules_remain_logical_only": true
   }
 }
