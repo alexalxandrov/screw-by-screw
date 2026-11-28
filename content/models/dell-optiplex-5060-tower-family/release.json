@@ -2,7 +2,7 @@
   "schema_version": "0.1.0",
   "model_id": "pc.dell.optiplex-5060-tower.family",
   "part_number": null,
-  "package_version": "0.3.0",
+  "package_version": "0.4.0",
   "status": "research_blockout",
   "geometry_status": "illustrative_proxy_not_cad",
   "identity_scope": "platform_family",
@@ -22,6 +22,14 @@
     "optional_fastener_references": 7,
     "physical_fastener_instances": 24,
     "service_observations": 19,
-    "storage_mechanism_nodes": 10
+    "storage_mechanism_nodes": 10,
+    "geometry_primitives": {
+      "box": 52,
+      "cylinder": 2,
+      "fan": 3,
+      "fin_stack": 1,
+      "total": 58,
+      "note": "Fan blade count and fin spacing are illustrative rendering choices, not sourced physical specifications."
+    }
   }
 }
