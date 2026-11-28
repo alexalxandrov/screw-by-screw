@@ -459,7 +459,7 @@ test("partial teardown steps and source observations are both shown without conf
 
 
 test("a successful but delayed bundled model cannot replace a scene after user interaction", async ({ page }) => {
-  await page.route(/ibm_pc_5150_1981\\.sbsmodel(?:$|[?#])/, async (route) => {
+  await page.route("**/ibm_pc_5150_1981.sbsmodel", async (route) => {
     await new Promise((resolve) => setTimeout(resolve, 1600));
     await route.continue();
   });
