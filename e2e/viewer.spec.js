@@ -28,6 +28,22 @@ test("mobile workspace switches panels instead of stacking the whole application
   await expect(page.getByRole("button", { name: "Structure" })).toBeVisible();
 });
 
+test("selecting a component from the mobile structure panel opens and focuses its details", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/?demo=1");
+
+  await page.locator('.mobile-panel-button[data-mobile-panel="structure"]').click();
+  const component = page.locator('#component-tree button[data-id="assembly.card.root"]');
+  await expect(component).toBeVisible();
+  await component.click();
+
+  await expect(page.locator("#app")).toHaveAttribute("data-mobile-panel", "details");
+  await expect(page.locator(".details-panel")).toBeVisible();
+  await expect(page.locator(".left-panel")).toBeHidden();
+  await expect(page.locator("#detail-id")).toHaveText("assembly.card.root");
+  await expect(page.locator("#details-heading-title")).toBeFocused();
+});
+
 test("mobile understand and learn modes reveal their detail content", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/?demo=1");

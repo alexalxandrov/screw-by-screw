@@ -2740,6 +2740,10 @@ function selectComponent(id) {
   }
   renderDetails(id);
   renderTree();
+  if (window.matchMedia("(max-width: 820px)").matches && appShell?.dataset.mobilePanel !== "details") {
+    setMobilePanel("details");
+    $("#details-heading-title")?.focus({ preventScroll: true });
+  }
   setStatus(id);
 }
 
