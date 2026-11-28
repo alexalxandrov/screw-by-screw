@@ -7,7 +7,7 @@ export class SceneController {
     this.root = root;
     // Scale the full-range exploded-view clearance to the model envelope so a
     // small GPU and a full tower do not receive the same arbitrary translation.
-    // At 100%, parts travel roughly 28% of the model's bounding-box diagonal.
+    // At 100%, parts travel roughly 42% of the model's bounding-box diagonal.
     this.root.updateWorldMatrix(true, true);
     const modelBounds = new THREE.Box3().setFromObject(root);
     const modelDiagonal = modelBounds.isEmpty()
