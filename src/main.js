@@ -969,31 +969,59 @@ function findNodeById(id) {
 function applyModelPresentation(root) {
   if (!canvasHost) return;
   delete canvasHost.dataset.inspectionPresentation;
+  delete canvasHost.dataset.inspectionTransparentComponents;
   if (MODEL.id !== "pc.dell.optiplex-5060-tower.family") return;
 
-  const sidePanel = state.componentNodes.get("chassis.side_panel");
-  if (!sidePanel) return;
+  // Keep the internal assemblies opaque; make the outer shell and board tray
+  // translucent so the already-exploded tower reads as an open inspection view.
+  const translucentComponentIds = [
+    "chassis.frame",
+    "chassis.base",
+    "chassis.top",
+    "chassis.side_panel",
+    "chassis.front_panel",
+    "chassis.rear_panel",
+    "chassis.board_tray"
+  ];
+  const updatedMeshes = new Set();
+  const appliedComponentIds = [];
 
-  let updatedMeshes = 0;
-  sidePanel.traverse((object) => {
-    if (!object.isMesh || !object.material) return;
-    const materials = Array.isArray(object.material) ? object.material : [object.material];
-    const inspectionMaterials = materials.map((material) => {
-      const clone = material.clone();
-      clone.color?.lerp(new THREE.Color(0x9ab5bf), 0.45);
-      clone.transparent = true;
-      clone.opacity = 0.18;
-      clone.depthWrite = false;
-      clone.side = THREE.DoubleSide;
-      clone.needsUpdate = true;
-      return clone;
+  for (const id of translucentComponentIds) {
+    const component = state.componentNodes.get(id);
+    if (!component) continue;
+    let componentUpdated = false;
+    component.traverse((object) => {
+      if (!object.isMesh || !object.material || updatedMeshes.has(object)) return;
+
+      // Do not tint nested semantic components (for example, front I/O or the
+      // motherboard) just because they live below an outer panel in the tree.
+      let ancestor = object.parent;
+      while (ancestor && ancestor !== component) {
+        if (typeof ancestor.userData?.sbs_component_id === "string") return;
+        ancestor = ancestor.parent;
+      }
+
+      const materials = Array.isArray(object.material) ? object.material : [object.material];
+      const inspectionMaterials = materials.map((material) => {
+        const clone = material.clone();
+        clone.color?.lerp(new THREE.Color(0x9ab5bf), 0.45);
+        clone.transparent = true;
+        clone.opacity = 0.18;
+        clone.depthWrite = false;
+        clone.side = THREE.DoubleSide;
+        clone.needsUpdate = true;
+        return clone;
+      });
+      object.material = Array.isArray(object.material) ? inspectionMaterials : inspectionMaterials[0];
+      updatedMeshes.add(object);
+      componentUpdated = true;
     });
-    object.material = Array.isArray(object.material) ? inspectionMaterials : inspectionMaterials[0];
-    updatedMeshes += 1;
-  });
+    if (componentUpdated) appliedComponentIds.push(id);
+  }
 
-  if (updatedMeshes > 0) {
-    canvasHost.dataset.inspectionPresentation = "optiplex-side-cover-xray";
+  if (updatedMeshes.size > 0) {
+    canvasHost.dataset.inspectionPresentation = "optiplex-open-xray";
+    canvasHost.dataset.inspectionTransparentComponents = appliedComponentIds.join(",");
   }
 }
 
@@ -2905,8 +2933,10 @@ async function animateExplodeCycle() {
   const button = $("#animate-button");
   button.disabled = true;
   try {
-    const expanded = await controller.animateExplode(100, 950, updateExplodeUi);
-    if (expanded) await controller.animateExplode(0, 950, updateExplodeUi);
+    const firstTarget = controller.explodeProgress >= 50 ? 0 : 100;
+    const secondTarget = firstTarget === 100 ? 0 : 100;
+    const expanded = await controller.animateExplode(firstTarget, 950, updateExplodeUi);
+    if (expanded) await controller.animateExplode(secondTarget, 950, updateExplodeUi);
   } finally {
     button.disabled = false;
   }
@@ -3231,8 +3261,17 @@ function installModel(root, mode) {
       reducedMotion: state.reducedMotion
     });
   }
+  // Dell opens as an already-separated inspection model; other devices keep
+  // their assembled starting pose until the Disassemble view is selected.
+  const initialExplodeProgress = MODEL.id === "pc.dell.optiplex-5060-tower.family" ? 100 : 0;
+  setExplode(initialExplodeProgress);
+  if (canvasHost) {
+    canvasHost.dataset.explodeDistanceFactor = String(state.sceneController.explodeDistanceFactor);
+    canvasHost.dataset.initialExplodeProgress = String(initialExplodeProgress);
+  }
+  // Fit after applying the initial separation so no displaced components start
+  // outside the camera frustum.
   fitModel(root);
-  setExplode(0);
   setupAnimationPlayer(root);
   setLoadState(mode === "package" ? t("loadedPackage") : mode === "file" ? t("loadedGlb") : mode === "bundled" ? t("loadedBundled") : t("demoLoaded"));
   setStatus(state.modelWarnings.length ? 'Duplicate component IDs: ' + [...new Set(state.modelWarnings)].join(', ') : t('modelLoaded'));
@@ -3855,11 +3894,16 @@ function bindUI() {
       if (state.compareMode) { state.compareMode = false; $("#comparison-panel").hidden = true; }
       if (button.dataset.mode === "disassemble") {
         setLayer("clear");
-        setExplode(0);
+        setExplode(100);
+        fitModel(state.modelRoot);
         const deviceRootId = deviceRootComponentId();
         if (deviceRootId) selectComponent(deviceRootId);
       }
-      if (button.dataset.mode === "explore") { setLayer("clear"); setExplode(0); }
+      if (button.dataset.mode === "explore") {
+        setLayer("clear");
+        setExplode(0);
+        fitModel(state.modelRoot);
+      }
       if (button.dataset.mode === "understand") {
         setLayer("cooling");
         if (window.matchMedia("(max-width: 820px)").matches) setMobilePanel("details");
