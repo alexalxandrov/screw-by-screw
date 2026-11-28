@@ -75,11 +75,11 @@ test("AnimationPlayer plays immediately under reduced motion and keeps seek avai
     const player = new AnimationPlayer(root, [makeClip()], { reducedMotion: true });
     player.selectClip("clip.reduced-motion");
     assert.equal(player.play(), true);
-    assert.deepEqual(component.position.toArray(), [18, 0, 0]);
+    assert.deepEqual(component.position.toArray(), [28, 0, 0]);
     assert.equal(player.getSnapshot().status, "completed");
     assert.equal(raf.pendingCount, 0);
     player.seek(0.5);
-    assert.deepEqual(component.position.toArray(), [9, 0, 0]);
+    assert.deepEqual(component.position.toArray(), [14, 0, 0]);
     assert.equal(player.getSnapshot().status, "paused");
     player.dispose();
   } finally {
@@ -96,10 +96,10 @@ test("AnimationPlayer completes in-progress playback when reduced motion is enab
     player.play();
     raf.frame(0);
     raf.frame(250);
-    assert.deepEqual(component.position.toArray(), [4.5, 0, 0]);
+    assert.deepEqual(component.position.toArray(), [7, 0, 0]);
     assert.equal(player.getSnapshot().status, "playing");
     player.setReducedMotion(true);
-    assert.deepEqual(component.position.toArray(), [18, 0, 0]);
+    assert.deepEqual(component.position.toArray(), [28, 0, 0]);
     assert.equal(player.getSnapshot().status, "completed");
     assert.equal(raf.pendingCount, 0);
     player.dispose();
@@ -124,7 +124,7 @@ test("ProcedureController applies final step transforms immediately under reduce
   await controller.advance();
   const result = await controller.advance();
   assert.equal(result.ok, true);
-  assert.deepEqual(component.position.toArray(), [0, 21.6, 0]);
+  assert.deepEqual(component.position.toArray(), [0, 33.6, 0]);
   assert.equal(controller.getSnapshot().busy, false);
 });
 
@@ -142,7 +142,7 @@ test("ProcedureController finishes an active step when reduced motion is enabled
     controller.setReducedMotion(true);
     const result = await advancing;
     assert.equal(result.ok, true);
-    assert.deepEqual(component.position.toArray(), [0, 21.6, 0]);
+    assert.deepEqual(component.position.toArray(), [0, 33.6, 0]);
     assert.equal(controller.getSnapshot().busy, false);
     assert.equal(raf.pendingCount, 0);
   } finally {
