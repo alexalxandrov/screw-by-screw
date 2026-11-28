@@ -38,7 +38,7 @@ A historical passing run does not certify a later branch head. A job marked fail
 
 ### Current PR #44 verification — 2026-11-28
 
-The current PR head is `b87f172713431c58c79c680b8b2fbf5ddaf96c68`. All four required workflows have now executed on this exact SHA and completed successfully:
+The latest code-bearing revision verified by CI is `b87f172713431c58c79c680b8b2fbf5ddaf96c68`. All four required workflows executed on this exact SHA and completed successfully:
 
 - [Model package validation — run 46169688974](https://github.com/alexalxandrov/screw-by-screw/actions/runs/46169688974): success; job `test`.
 - [OptiPlex 5060 package validation — run 46169688826](https://github.com/alexalxandrov/screw-by-screw/actions/runs/46169688826): success; job `validate-optiplex`.
@@ -47,7 +47,7 @@ The current PR head is `b87f172713431c58c79c680b8b2fbf5ddaf96c68`. All four requ
 
 The earlier bot-triggered `action_required` results on this same SHA were subsequently approved and rerun; their final run conclusions are `success`, with jobs present and completed. They are not outstanding failures.
 
-PR #44 remains open and unmerged. The automated current-head CI gate is now satisfied. This does not replace owner visual review, manual accessibility and target-hardware performance checks, or asset-rights review; Release 1.0 remains not approved until those gates are accepted.
+After these successful runs, two documentation-only commits updated the release roadmap and acceptance checklist. The compare from the verified code-bearing SHA contains only those Markdown files; no application, model, test or workflow files changed, and the workflows do not trigger on docs-only paths. The green runs therefore certify the code-bearing revision, while the appended documentation changes do not require a code retest. PR #44 remains open and unmerged. This does not replace owner visual review, manual accessibility and target-hardware performance checks, or asset-rights review; Release 1.0 remains not approved until those gates are accepted.
 
 ## Non-negotiable accuracy policy
 
