@@ -459,12 +459,23 @@ test("partial teardown steps and source observations are both shown without conf
 
 
 test("a successful but delayed bundled model cannot replace a scene after user interaction", async ({ page }) => {
-  await page.route("**/ibm_pc_5150_1981.sbsmodel", async (route) => {
-    await new Promise((resolve) => setTimeout(resolve, 1600));
-    await route.continue();
+  await page.addInitScript(() => {
+    const nativeFetch = window.fetch.bind(window);
+    window.__sbsDelayedPackageRequestStarted = false;
+    window.fetch = async (resource, init) => {
+      const url = typeof resource === "string"
+        ? resource
+        : resource?.url ?? resource?.href ?? "";
+      if (url.startsWith("data:") || url.includes("ibm_pc_5150_1981.sbsmodel")) {
+        window.__sbsDelayedPackageRequestStarted = true;
+        await new Promise((resolve) => setTimeout(resolve, 1600));
+      }
+      return nativeFetch(resource, init);
+    };
   });
 
   await page.goto("/");
+  await expect.poll(() => page.evaluate(() => window.__sbsDelayedPackageRequestStarted)).toBe(true);
   await expect(page.locator("#model-title")).toContainText("GeForce RTX 3060");
   await expect(page.locator("#component-count")).not.toHaveText("—");
   const fan = page.locator('#component-tree button[data-id="assembly.fan.1"]');
