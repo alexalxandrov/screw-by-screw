@@ -83,6 +83,27 @@ test("standalone file:// launcher switches between embedded published models wit
   expect(requestFailures).toEqual([]);
 });
 
+test("reduced-motion preference completes package playback while keeping the timeline seekable", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  const rootIndex = pathToFileURL(resolve(process.cwd(), "index.html")).href;
+  await page.goto(rootIndex);
+  await expect(page.locator("#viewer-canvas canvas")).toBeVisible({ timeout: 10000 });
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-reduced-motion", "true");
+
+  await page.locator("#model-switcher").selectOption("pc.dell.optiplex-5060-tower.family");
+  await expect(page.locator("#animation-player-panel")).toBeVisible();
+  await page.locator("#animation-play").click();
+  await expect(page.locator("#animation-status")).toHaveAttribute("data-status", "completed");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-animation-progress", "1");
+
+  await page.locator("#animation-seek").evaluate((input) => {
+    input.value = "500";
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+  });
+  await expect(page.locator("#animation-status")).toHaveAttribute("data-status", "paused");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-animation-progress", "0.5");
+});
+
 test("a missing offline catalogue package never opens the system file picker", async ({ page }) => {
   const rootIndex = pathToFileURL(resolve(process.cwd(), "index.html")).href;
   await page.goto(rootIndex);

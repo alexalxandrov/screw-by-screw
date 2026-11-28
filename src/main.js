@@ -365,6 +365,7 @@ function setupAnimationPlayer(root) {
     return;
   }
   state.animationPlayer = new AnimationPlayer(root, clips, {
+    reducedMotion: state.reducedMotion,
     onChange: (snapshot) => updateAnimationPlayerUI(snapshot)
   });
   renderAnimationClipOptions();
@@ -1451,6 +1452,17 @@ let procedureSceneBaselineRoot = null;
 let procedureSceneBaseline = new Map();
 let procedureCurrentIndex = -1;
 let procedureAnimationToken = 0;
+let procedureAnimationFinish = null;
+
+function applyReducedMotionPreference(enabled) {
+  state.reducedMotion = Boolean(enabled);
+  if (canvasHost) canvasHost.dataset.reducedMotion = String(state.reducedMotion);
+  if (state.reducedMotion) procedureAnimationFinish?.();
+  state.sceneController?.setReducedMotion(state.reducedMotion);
+  state.procedureController?.setReducedMotion(state.reducedMotion);
+  state.animationPlayer?.setReducedMotion(state.reducedMotion);
+  if (state.reducedMotion && state.powered) setStatus("Reduced motion preference enabled");
+}
 
 function captureProcedureSceneBaseline(root) {
   procedureSceneBaselineRoot = root;
@@ -1469,6 +1481,7 @@ function restoreProcedureSceneBaseline() {
     captureProcedureSceneBaseline(state.modelRoot);
   }
   procedureAnimationToken += 1;
+  procedureAnimationFinish = null;
   procedureSceneBaseline.forEach((base, id) => {
     const object = findNodeById(id);
     if (!object) return;
@@ -1497,13 +1510,20 @@ function animateProcedurePositions(entries, duration = 480) {
   if (!moves.length) return;
   const starts = moves.map((entry) => entry.object.position.clone());
   const targets = moves.map((entry) => entry.target.clone());
-  if (typeof requestAnimationFrame !== "function") {
+  const token = ++procedureAnimationToken;
+  procedureAnimationFinish = null;
+  const finish = () => {
+    if (token !== procedureAnimationToken) return;
     moves.forEach((entry, index) => entry.object.position.copy(targets[index]));
     state.modelRoot?.updateMatrixWorld(true);
+    if (procedureAnimationFinish === finish) procedureAnimationFinish = null;
+  };
+  if (state.reducedMotion || typeof requestAnimationFrame !== "function") {
+    finish();
     return;
   }
-  const token = ++procedureAnimationToken;
   const startedAt = performance.now();
+  procedureAnimationFinish = finish;
   const tick = (now) => {
     if (token !== procedureAnimationToken) return;
     const progress = Math.min(1, (now - startedAt) / Math.max(1, duration));
@@ -1511,6 +1531,7 @@ function animateProcedurePositions(entries, duration = 480) {
     moves.forEach((entry, index) => entry.object.position.lerpVectors(starts[index], targets[index], eased));
     state.modelRoot?.updateMatrixWorld(true);
     if (progress < 1) requestAnimationFrame(tick);
+    else finish();
   };
   requestAnimationFrame(tick);
 }
@@ -3149,13 +3170,14 @@ function installModel(root, mode) {
   applyModelPresentation(root);
   setWireframe(false);
   collectFanRotors(root);
-  state.sceneController = new SceneController(root);
+  state.sceneController = new SceneController(root, { reducedMotion: state.reducedMotion });
   syncIsolateButton();
   if (Array.isArray(ASSEMBLY_PACKAGE.procedure_routes?.common_step_ids) && Array.isArray(ASSEMBLY_PACKAGE.procedure_routes?.branches)) {
     state.procedureController = new ProcedureController(root, {
       steps: ASSEMBLY_PACKAGE.steps ?? [],
       commonStepIds: ASSEMBLY_PACKAGE.procedure_routes.common_step_ids,
-      routes: ASSEMBLY_PACKAGE.procedure_routes.branches
+      routes: ASSEMBLY_PACKAGE.procedure_routes.branches,
+      reducedMotion: state.reducedMotion
     });
   }
   fitModel(root);
@@ -3368,12 +3390,10 @@ function initRenderer() {
     new ResizeObserver(resize).observe(canvasHost);
     resize();
 
-    state.reducedMotion = Boolean(window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches);
-    canvasHost.dataset.reducedMotion = String(state.reducedMotion);
-    window.matchMedia?.("(prefers-reduced-motion: reduce)")?.addEventListener?.("change", (event) => {
-      state.reducedMotion = event.matches;
-      canvasHost.dataset.reducedMotion = String(state.reducedMotion);
-      if (state.reducedMotion && state.powered) setStatus("Reduced motion preference enabled");
+    const reducedMotionPreference = window.matchMedia?.("(prefers-reduced-motion: reduce)");
+    applyReducedMotionPreference(Boolean(reducedMotionPreference?.matches));
+    reducedMotionPreference?.addEventListener?.("change", (event) => {
+      applyReducedMotionPreference(event.matches);
     });
     const clock = new THREE.Clock();
     const render = () => {
