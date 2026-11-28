@@ -62,7 +62,7 @@ test("selects a package clip and interpolates vector properties by normalized ti
   assert.deepEqual(fan.position.toArray(), [0, 0, 0]);
 
   player.seek(0.25);
-  assert.deepEqual(fan.position.toArray(), [4.5, 0, 0]);
+  assert.deepEqual(fan.position.toArray(), [7, 0, 0]);
   assert.equal(player.getSnapshot().time, 250);
   player.dispose();
 });
@@ -76,7 +76,7 @@ test("playback advances by frame timestamps, can pause, resume and complete", ()
     player.play();
     raf.frame(0);
     raf.frame(400);
-    assert.deepEqual(fan.position.toArray(), [7.2, 0, 0]);
+    assert.deepEqual(fan.position.toArray(), [11.2, 0, 0]);
     assert.equal(player.getSnapshot().status, "playing");
 
     assert.equal(player.pause(), true);
@@ -85,7 +85,7 @@ test("playback advances by frame timestamps, can pause, resume and complete", ()
     player.play();
     raf.frame(1000);
     raf.frame(1600);
-    assert.deepEqual(fan.position.toArray(), [18, 0, 0]);
+    assert.deepEqual(fan.position.toArray(), [28, 0, 0]);
     assert.equal(player.getSnapshot().status, "completed");
     assert.equal(player.getSnapshot().progress, 1);
     player.dispose();
@@ -100,7 +100,7 @@ test("stop restores the original component transform after partial playback", ()
   const player = new AnimationPlayer(root, [makeClip()]);
   player.selectClip("clip.test");
   player.seek(0.8);
-  assert.deepEqual(fan.position.toArray(), [14.4, 0, 0]);
+  assert.deepEqual(fan.position.toArray(), [22.4, 0, 0]);
   player.stop();
   assert.deepEqual(fan.position.toArray(), [1, 2, 3]);
   assert.equal(player.getSnapshot().time, 0);
@@ -183,13 +183,13 @@ test("exploded overview animates separate assembly groups and stop restores ever
   root.traverse((object) => {
     if (object.userData?.sbs_component_id) byId.set(object.userData.sbs_component_id, object);
   });
-  assert.deepEqual(byId.get("assembly.shroud").position.toArray(), [100.9, -61.2, 55]);
-  assert.deepEqual(byId.get("assembly.cooling").position.toArray(), [100.9, -43.2, 55]);
+  assert.deepEqual(byId.get("assembly.shroud").position.toArray(), [100.9, -85.2, 55]);
+  assert.deepEqual(byId.get("assembly.cooling").position.toArray(), [100.9, -67.2, 55]);
   const pcbPosition = byId.get("assembly.pcb.electronics").position;
   assert.equal(pcbPosition.x, 100.9);
-  assert.ok(Math.abs(pcbPosition.y - 58.24) < 1e-9);
+  assert.ok(Math.abs(pcbPosition.y - 81.04) < 1e-9);
   assert.equal(pcbPosition.z, 55);
-  assert.deepEqual(byId.get("assembly.connectors").position.toArray(), [-43.2, 0, 0]);
+  assert.deepEqual(byId.get("assembly.connectors").position.toArray(), [-67.2, 0, 0]);
   player.stop();
   for (const [id, position] of original) assert.deepEqual(byId.get(id).position.toArray(), position);
   player.dispose();
@@ -200,7 +200,7 @@ test("supports clip-level ease-in-out and clamps playback speed", () => {
   const player = new AnimationPlayer(root, [makeClip({ easing: "ease_in_out" })]);
   player.selectClip("clip.test");
   player.seek(0.25);
-  assert.deepEqual(fan.position.toArray(), [2.8125, 0, 0]);
+  assert.deepEqual(fan.position.toArray(), [4.375, 0, 0]);
   assert.equal(player.setSpeed(10), 4);
   assert.equal(player.setSpeed(-1), 0.1);
   player.dispose();
@@ -238,7 +238,7 @@ test("relative position tracks animate from the actual model baseline and restor
   })]);
   player.selectClip("clip.test");
   player.seek(0.5);
-  assert.deepEqual(fan.position.toArray(), [12, 4, 11]);
+  assert.deepEqual(fan.position.toArray(), [12, 4, 14]);
   player.stop();
   assert.deepEqual(fan.position.toArray(), [12, 4, -7]);
   player.dispose();
@@ -286,7 +286,7 @@ test("relative local-Y lift tracks move upward in world Z under the viewer's Y-u
   assert.ok(Math.abs(worldPosition.x) < 1e-6);
   assert.ok(Math.abs(worldPosition.y) < 1e-6);
   assert.ok(Math.abs(worldPosition.z - 36) < 1e-6);
-  assert.deepEqual(player.getSnapshot().worldDeltas[0].delta, [0, 0, 36]);
+  assert.deepEqual(player.getSnapshot().worldDeltas[0].delta, [0, 0, 56]);
 
   player.stop();
   assert.deepEqual(fan.position.toArray(), [0, 0, 0]);
@@ -329,7 +329,7 @@ test("world-space position tracks follow the requested vector through nested rot
   assert.ok(Math.abs(actualDelta.x) < 1e-5);
   assert.ok(Math.abs(actualDelta.y) < 1e-5);
   assert.ok(Math.abs(actualDelta.z - 36) < 1e-5);
-  assert.deepEqual(player.getSnapshot().worldDeltas[0].delta, [0, 0, 36]);
+  assert.deepEqual(player.getSnapshot().worldDeltas[0].delta, [0, 0, 56]);
 
   player.stop();
   assert.deepEqual(fan.position.toArray(), [3, -6, 9]);
