@@ -4,15 +4,20 @@ import { Vector3 } from "three";
  * Generic playback for package-authored, normalized component animation tracks.
  * Position tracks may set coordinate_space:"world" to define offsets in viewer
  * coordinates; parent transforms and scale are inverted by the player at runtime.
+ * Illustrative relative offsets are amplified for visual clearance, not metrology.
  * This class is intentionally independent of device-specific model content.
  */
 export class AnimationPlayer {
-  constructor(root, clips = [], { onChange = () => {}, reducedMotion = false } = {}) {
+  constructor(root, clips = [], { onChange = () => {}, reducedMotion = false, positionOffsetScale = 1.8 } = {}) {
     if (!root?.isObject3D) throw new TypeError("AnimationPlayer requires a Three.js Object3D root");
     if (!Array.isArray(clips)) throw new TypeError("Animation clips must be an array");
     this.root = root;
     this.onChange = typeof onChange === "function" ? onChange : () => {};
     this.reducedMotion = Boolean(reducedMotion);
+    const requestedOffsetScale = Number(positionOffsetScale);
+    this.positionOffsetScale = Number.isFinite(requestedOffsetScale)
+      ? Math.max(1, requestedOffsetScale)
+      : 1.8;
     this.nodesById = new Map();
     this.duplicateIds = [];
     root.traverse((object) => {
@@ -260,6 +265,16 @@ export class AnimationPlayer {
         value = eased >= right.t ? right.value : left.value;
       } else {
         value = left.value.map((entry, index) => entry + (right.value[index] - entry) * amount);
+      }
+      // Package-authored position tracks describe illustrative offsets from a
+      // captured baseline. Amplify those offsets for useful visual separation;
+      // manufacturer-stated positional data is never altered.
+      const isOffsetTrack = track.property === "position" &&
+        (track.relative === true || track.coordinate_space === "world");
+      const isManufacturerPosition = track.evidence_class === "manufacturer_data" ||
+        this.clip.evidence_status === "manufacturer_data";
+      if (isOffsetTrack && !isManufacturerPosition) {
+        value = value.map((entry) => entry * this.positionOffsetScale);
       }
       if (track.coordinate_space === "world" && track.property === "position") {
         const baseline = this.snapshots.get(track.target_id + "::" + track.property)?.worldPosition;
