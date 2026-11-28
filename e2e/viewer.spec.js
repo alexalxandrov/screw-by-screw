@@ -652,7 +652,18 @@ test("Dell package exposes working 3D disassembly actions and authored animation
   await expect(page.locator("#animation-player-panel")).toBeVisible();
   await expect(page.locator("#animation-clip-select option")).toHaveCount(3);
 
+  // Dell is intentionally loaded as a separated, translucent inspection model.
+  await expect(page.locator("#explode-slider")).toHaveValue("100");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-initial-explode-progress", "100");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-inspection-presentation", "optiplex-open-xray");
+  const transparentComponents = await page.locator("#viewer-canvas").getAttribute("data-inspection-transparent-components");
+  expect(transparentComponents).toContain("chassis.side_panel");
+  expect(transparentComponents).toContain("chassis.front_panel");
+  expect(transparentComponents).toContain("chassis.board_tray");
+  expect(Number(await page.locator("#viewer-canvas").getAttribute("data-explode-distance-factor"))).toBeGreaterThan(1);
+
   await page.locator('[data-mode="disassemble"]').click();
+  await expect(page.locator("#explode-slider")).toHaveValue("100");
   await expect(page.locator("#detail-assembly-section")).toBeVisible();
   await expect(page.locator("#assembly-playback-controls")).toBeVisible();
   await page.locator("#assembly-step-next").click();
