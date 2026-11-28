@@ -202,7 +202,7 @@ def _validate_proxy(component: dict, proxy: dict):
     kind = proxy.get("kind")
     transformed_scale = list(scale)
     rotation = None
-    if kind in {"cylinder", "fan", "io_port", "vent_grille"}:
+    if kind in {"cylinder", "fan", "panel", "io_port", "vent_grille"}:
         axis = proxy.get("axis", "y")
         if axis not in AXIS_ROTATIONS:
             raise ValueError(f"invalid proxy axis for {component_id}: {axis!r}")
