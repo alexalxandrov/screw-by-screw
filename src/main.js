@@ -843,6 +843,37 @@ function findNodeById(id) {
   return state.componentNodes.get(id) ?? null;
 }
 
+function applyModelPresentation(root) {
+  if (!canvasHost) return;
+  delete canvasHost.dataset.inspectionPresentation;
+  if (MODEL.id !== "pc.dell.optiplex-5060-tower.family") return;
+
+  const sidePanel = state.componentNodes.get("chassis.side_panel");
+  if (!sidePanel) return;
+
+  let updatedMeshes = 0;
+  sidePanel.traverse((object) => {
+    if (!object.isMesh || !object.material) return;
+    const materials = Array.isArray(object.material) ? object.material : [object.material];
+    const inspectionMaterials = materials.map((material) => {
+      const clone = material.clone();
+      clone.color?.lerp(new THREE.Color(0x9ab5bf), 0.45);
+      clone.transparent = true;
+      clone.opacity = 0.18;
+      clone.depthWrite = false;
+      clone.side = THREE.DoubleSide;
+      clone.needsUpdate = true;
+      return clone;
+    });
+    object.material = Array.isArray(object.material) ? inspectionMaterials : inspectionMaterials[0];
+    updatedMeshes += 1;
+  });
+
+  if (updatedMeshes > 0) {
+    canvasHost.dataset.inspectionPresentation = "optiplex-side-cover-xray";
+  }
+}
+
 function collectNodes(root) {
   state.componentNodes.clear();
   state.modelWarnings = [];
@@ -3006,6 +3037,7 @@ function installModel(root, mode) {
   $("#empty-selection").hidden = false;
   document.querySelectorAll(".process-button").forEach((button) => button.classList.remove("active"));
   collectNodes(root);
+  applyModelPresentation(root);
   collectFanRotors(root);
   state.sceneController = new SceneController(root);
   if (Array.isArray(ASSEMBLY_PACKAGE.procedure_routes?.common_step_ids) && Array.isArray(ASSEMBLY_PACKAGE.procedure_routes?.branches)) {
