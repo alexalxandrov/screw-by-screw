@@ -474,7 +474,7 @@ test("a successful but delayed bundled model cannot replace a scene after user i
     };
   });
 
-  await page.goto("/");
+  await page.goto("/", { waitUntil: "domcontentloaded" });
   await expect.poll(() => page.evaluate(() => window.__sbsDelayedPackageRequestStarted)).toBe(true);
   await expect(page.locator("#model-title")).toContainText("GeForce RTX 3060");
   await expect(page.locator("#component-count")).not.toHaveText("—");
