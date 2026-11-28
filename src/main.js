@@ -493,7 +493,9 @@ function closeCatalog() {
 
 async function fetchCatalogPackage(entry) {
   const embedded = globalThis.SBS_CATALOG_PACKAGE_DATA_URLS?.[entry.id];
-  if (!embedded && window.location.protocol === "file:") return null;
+  if (!embedded && window.location.protocol === "file:") {
+    throw new Error("This offline launcher does not include the selected published model. Rebuild index.html with the current catalogue packages.");
+  }
 
   const packageUrl = embedded || `${import.meta.env.BASE_URL}${entry.packagePath}`;
   const response = await fetch(packageUrl);
@@ -524,13 +526,6 @@ async function openCatalogEntry(entry) {
   let handedToViewer = false;
   try {
     const loaded = await fetchCatalogPackage(entry);
-    if (!loaded) {
-      state.pendingCatalogModelId = entry.packageModelId;
-      closeCatalog();
-      setStatus(t("catalogChoosePackage"));
-      $("#model-file").click();
-      return;
-    }
     closeCatalog();
     handedToViewer = true;
     loadArrayBuffer(loaded.modelPackage.sceneBuffer, loaded.filename, "package", loaded.modelPackage.data);
