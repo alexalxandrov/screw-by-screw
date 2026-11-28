@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { loadModelPackage } from "../src/viewer/ModelPackageLoader.js";
 
-const packageBytes = await readFile(new URL("../public/models/dell_optiplex_5060_tower_v03.sbsmodel", import.meta.url));
+const packageBytes = await readFile(new URL("../public/models/dell_optiplex_5060_tower_v04.sbsmodel", import.meta.url));
 const packageBuffer = packageBytes.buffer.slice(
   packageBytes.byteOffset,
   packageBytes.byteOffset + packageBytes.byteLength
@@ -19,9 +19,9 @@ async function loadBytes(bytes, name) {
   });
 }
 
-const loaded = await loadBytes(packageBytes, "dell_optiplex_5060_tower_v03.sbsmodel");
+const loaded = await loadBytes(packageBytes, "dell_optiplex_5060_tower_v04.sbsmodel");
 
-test("OptiPlex v0.3 package passes the production loader and cross-file validation", () => {
+test("OptiPlex v0.4 package passes the production loader and cross-file validation", () => {
   assert.equal(loaded.report.modelId, "pc.dell.optiplex-5060-tower.family");
   assert.equal(loaded.report.componentCount, 137);
   assert.equal(loaded.report.relationshipCount, 145);
@@ -29,13 +29,21 @@ test("OptiPlex v0.3 package passes the production loader and cross-file validati
   assert.equal(loaded.data.model.geometry_status, "illustrative_proxy_not_cad");
   assert.equal(loaded.data.model.identity_scope, "platform_family");
   assert.equal(loaded.data.model.part_number, null);
-  assert.equal(loaded.data.model.release.version, "0.3.0");
+  assert.equal(loaded.data.model.release.version, "0.4.0");
   assert.equal(loaded.data.model.specifications.physical.height_mm, 350);
   assert.equal(loaded.data.model.specifications.physical.width_mm, 154);
   assert.equal(loaded.data.model.specifications.physical.depth_mm, 274);
 
   const components = loaded.data.components.components;
   const componentIds = new Set(components.map((component) => component.id));
+
+  const proxyKinds = components.reduce((counts, component) => {
+    const kind = component.visual_proxy?.kind;
+    if (kind) counts[kind] = (counts[kind] ?? 0) + 1;
+    return counts;
+  }, {});
+  assert.deepEqual(proxyKinds, { box: 52, cylinder: 2, fan: 3, fin_stack: 1 });
+
   const sources = loaded.data.sources.sources;
   const sourceIds = new Set(sources.map((source) => source.id));
   const relationships = loaded.data.relationships.relationships;
