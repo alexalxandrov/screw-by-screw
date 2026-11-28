@@ -51,7 +51,7 @@ test("common access steps apply reversible emphasis and cover movement", async (
   assert.equal((await controller.advance({ animate: false })).step.id, "open");
   assert.notEqual(scene.coverScrew.material.color.getHex(), originalColor);
   assert.equal((await controller.advance({ animate: false })).step.id, "cover");
-  assert.deepEqual(scene.cover.position.toArray(), [0, -90, 0]);
+  assert.deepEqual(scene.cover.position.toArray(), [0, -140, 0]);
   assert.equal(controller.getSnapshot().branchRequired, true);
   controller.previous();
   assert.deepEqual(scene.cover.position.toArray(), [0, 0, 0]);
@@ -79,11 +79,11 @@ test("FRU branch selection keeps procedures independent and applies reversible r
   await controller.advance({ animate: false });
   controller.setBranch("psu");
   assert.equal(controller.getSnapshot().currentStepId, "cover");
-  assert.deepEqual(scene.cover.position.toArray(), [0, -90, 0]);
+  assert.deepEqual(scene.cover.position.toArray(), [0, -140, 0]);
   await controller.advance({ animate: false });
   await controller.advance({ animate: false });
   assert.equal(scene.psuScrew.visible, false);
-  assert.deepEqual(scene.psu.position.toArray(), [-18, -22.86, 18]);
+  assert.deepEqual(scene.psu.position.toArray(), [-28, -35.56, 28]);
   assert.equal(scene.board.position.length(), 0);
   controller.previous();
   assert.deepEqual(scene.psu.position.toArray(), [0, 0, 0]);
@@ -104,13 +104,13 @@ test("switching FRU branches clears the old branch but retains common access ste
 
   controller.setBranch("board");
   assert.equal(controller.getSnapshot().currentStepId, "cover");
-  assert.deepEqual(scene.cover.position.toArray(), [0, -90, 0]);
+  assert.deepEqual(scene.cover.position.toArray(), [0, -140, 0]);
   assert.equal(scene.psuScrew.visible, true);
   assert.deepEqual(scene.psu.position.toArray(), [0, 0, 0]);
 
   const result = await controller.advance({ animate: false });
   assert.equal(result.step.id, "board");
-  assert.deepEqual(scene.board.position.toArray(), [22.86, 0, 36]);
+  assert.deepEqual(scene.board.position.toArray(), [35.56, 0, 56]);
 });
 
 test("missing prerequisites block a branch action", async () => {
@@ -142,7 +142,7 @@ test("unselected FRU branches do not move or remove unrelated components", async
   await controller.advance({ animate: false });
   await controller.advance({ animate: false });
   await controller.advance({ animate: false });
-  assert.deepEqual(scene.board.position.toArray(), [22.86, 0, 36]);
+  assert.deepEqual(scene.board.position.toArray(), [35.56, 0, 56]);
   assert.deepEqual(scene.psu.position.toArray(), [0, 0, 0]);
   assert.equal(scene.psuScrew.visible, true);
 });
