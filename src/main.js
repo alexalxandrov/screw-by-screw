@@ -1921,6 +1921,7 @@ function updateProcedureControls() {
     const stepLabel = $("#assembly-scrubber-step");
     const value = Math.max(0, Math.min(steps.length, procedureCurrentIndex + 1));
     if (slider) {
+      slider.dataset.mode = "disassembly";
       slider.min = "0";
       slider.max = String(steps.length);
       slider.step = "1";
@@ -2953,6 +2954,7 @@ function updateAssemblyTimeline() {
   if (state.timelineMode === "disassembly" && isDellDisassemblyModel()) {
     const steps = ASSEMBLY_PACKAGE.steps ?? [];
     const value = Math.max(0, Math.min(steps.length, procedureCurrentIndex + 1));
+    slider.dataset.mode = "disassembly";
     slider.min = "0";
     slider.max = String(steps.length);
     slider.step = "1";
@@ -2977,6 +2979,7 @@ function updateAssemblyTimeline() {
 
   if (state.timelineMode === "animation" && state.animationPlayer?.clip) {
     const snapshot = state.animationPlayer.getSnapshot();
+    slider.dataset.mode = "animation";
     slider.min = "0";
     slider.max = "1000";
     slider.step = "1";
@@ -2996,6 +2999,7 @@ function updateAssemblyTimeline() {
   }
 
   state.timelineMode = "explode";
+  slider.dataset.mode = "explode";
   slider.min = "0";
   slider.max = "100";
   slider.step = "1";
@@ -3027,7 +3031,6 @@ function updateExplodeUi(value) {
 
 function setExplode(value) {
   if (!state.sceneController) return;
-  if (state.timelineMode !== "explode") setAssemblyTimelineMode("explode");
   const procedureState = state.procedureController?.getSnapshot();
   if (procedureState && procedureState.stepIndex >= 0) {
     state.procedureController.reset();
