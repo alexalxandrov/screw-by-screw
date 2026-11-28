@@ -76,3 +76,12 @@ The Gamers Nexus exact-model teardown also gives a rough verbal estimate of appr
 ## Dedicated video codec engines
 
 The RTX 3060 pilot records NVIDIA's listed single 7th-generation NVENC encoder and single 5th-generation NVDEC decoder as separate logical-only components. Codec capabilities are transcribed from NVIDIA's GeForce RTX 3060 desktop support-matrix row; profile, chroma-format and bit-depth restrictions remain source-defined. The viewer's video-codec layer is an architecture map, not a measured throughput, latency, concurrency, thermal or EVGA PCB-routing model.
+
+
+## 2026-11-28 — cross-model engineering pass
+
+Dell OptiPlex 5060 Tower family package v0.4.1 adds generic panel/drive-cage proxies and separately selectable standard front/rear I/O proxies. The semantic inventory remains 137 stable component IDs and 145 typed relationships. Two atomic claims record five standard front external connectors and ten standard rear data/audio/network connectors; the PSU AC inlet is counted separately. Optional SD, optical, serial, third-video and antenna populations remain unknown/unpopulated.
+
+Evidence caveat: the current official Dell front/rear guide pages are hosted under the OptiPlex 5060 guide URL, but their embedded images visibly carry a 5070 label. Their image pixels are excluded from 5060 geometry placement. Text legends and the port specification are used for identity/count only. Marker dimensions and positions remain schematic.
+
+The Viewer pauses its WebGL loop while mobile Structure/Details panels or a background tab are active, caps mobile DPR at 1.5, and expands responsive tests to 320/375/390/768/820 CSS pixels. Release 1.0 remains not approved pending exact-head CI success, owner physical-device visual review, manual accessibility, target-hardware performance and asset-rights acceptance.
