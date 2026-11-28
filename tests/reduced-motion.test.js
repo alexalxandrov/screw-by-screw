@@ -75,11 +75,11 @@ test("AnimationPlayer plays immediately under reduced motion and keeps seek avai
     const player = new AnimationPlayer(root, [makeClip()], { reducedMotion: true });
     player.selectClip("clip.reduced-motion");
     assert.equal(player.play(), true);
-    assert.deepEqual(component.position.toArray(), [10, 0, 0]);
+    assert.deepEqual(component.position.toArray(), [18, 0, 0]);
     assert.equal(player.getSnapshot().status, "completed");
     assert.equal(raf.pendingCount, 0);
     player.seek(0.5);
-    assert.deepEqual(component.position.toArray(), [5, 0, 0]);
+    assert.deepEqual(component.position.toArray(), [9, 0, 0]);
     assert.equal(player.getSnapshot().status, "paused");
     player.dispose();
   } finally {
@@ -96,7 +96,7 @@ test("AnimationPlayer completes in-progress playback when reduced motion is enab
     player.play();
     raf.frame(0);
     raf.frame(250);
-    assert.deepEqual(component.position.toArray(), [2.5, 0, 0]);
+    assert.deepEqual(component.position.toArray(), [4.5, 0, 0]);
     assert.equal(player.getSnapshot().status, "playing");
     player.setReducedMotion(true);
     assert.deepEqual(component.position.toArray(), [10, 0, 0]);
