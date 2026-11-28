@@ -35,3 +35,8 @@ The OptiPlex workflow now runs dedicated Python tests for all primitive kinds, a
 3. Add individual storage carrier and latch meshes only where the family reference supports them.
 4. Add a physical-sample configuration overlay only after a specific OptiPlex 5060 Tower configuration is identified.
 5. Keep exact board revision, cable routing, optional population and all unmeasured dimensions explicitly unknown until supported.
+
+
+## v0.4.1 update
+
+The follow-on package adds generic folded-panel, drive-cage, vent-grille and typed I/O-port primitives. Dell 5060 now has selectable standard front/rear I/O proxies while preserving 137 semantic IDs and 145 typed relationships. Port counts are sourced, positions remain schematic, and optional modules remain unpopulated/unknown. See [the v0.4.1 geometry note](OPTIPLEX_PROCEDURAL_GEOMETRY_V041.md) and [the external I/O evidence audit](OPTIPLEX_5060_IO_GEOMETRY_EVIDENCE.md).
