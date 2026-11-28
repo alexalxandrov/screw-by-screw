@@ -29,10 +29,10 @@ function fixture() {
 function packageData() {
   const steps = [
     { id: "open", prerequisite_step_ids: [], visual_actions: [{ type: "emphasis", target_ids: ["fastener.cover.left"], color: "#d8a35c" }] },
-    { id: "cover", prerequisite_step_ids: ["open"], visual_actions: [{ type: "move", target_ids: ["assembly.cover"], offset: [0, -50, 0] }] },
+    { id: "cover", prerequisite_step_ids: ["open"], visual_actions: [{ type: "move", target_ids: ["assembly.cover"], offset: [0, -90, 0] }] },
     { id: "psu-screws", prerequisite_step_ids: ["cover"], visual_actions: [{ type: "hide", target_ids: ["fastener.psu.1"] }] },
-    { id: "psu", prerequisite_step_ids: ["psu-screws"], visual_actions: [{ type: "move", target_ids: ["assembly.power_supply"], offset: [-10, -12.7, 10] }] },
-    { id: "board", prerequisite_step_ids: ["cover"], visual_actions: [{ type: "move", target_ids: ["assembly.system_board"], offset: [12.7, 0, 20] }] }
+    { id: "psu", prerequisite_step_ids: ["psu-screws"], visual_actions: [{ type: "move", target_ids: ["assembly.power_supply"], offset: [-18, -22.86, 18] }] },
+    { id: "board", prerequisite_step_ids: ["cover"], visual_actions: [{ type: "move", target_ids: ["assembly.system_board"], offset: [22.86, 0, 36] }] }
   ];
   return {
     steps,
@@ -51,7 +51,7 @@ test("common access steps apply reversible emphasis and cover movement", async (
   assert.equal((await controller.advance({ animate: false })).step.id, "open");
   assert.notEqual(scene.coverScrew.material.color.getHex(), originalColor);
   assert.equal((await controller.advance({ animate: false })).step.id, "cover");
-  assert.deepEqual(scene.cover.position.toArray(), [0, -50, 0]);
+  assert.deepEqual(scene.cover.position.toArray(), [0, -90, 0]);
   assert.equal(controller.getSnapshot().branchRequired, true);
   controller.previous();
   assert.deepEqual(scene.cover.position.toArray(), [0, 0, 0]);
@@ -61,6 +61,17 @@ test("common access steps apply reversible emphasis and cover movement", async (
   assert.equal(scene.coverScrew.material.color.getHex(), originalColor);
 });
 
+test("manufacturer-stated movement offsets are not visually amplified", async () => {
+  const scene = fixture();
+  const data = packageData();
+  data.steps[1].visual_actions[0].evidence_class = "manufacturer_data";
+  const controller = new ProcedureController(scene.root, data);
+  await controller.advance({ animate: false });
+  await controller.advance({ animate: false });
+  assert.deepEqual(scene.cover.position.toArray(), [0, -50, 0]);
+  controller.dispose();
+});
+
 test("FRU branch selection keeps procedures independent and applies reversible removals", async () => {
   const scene = fixture();
   const controller = new ProcedureController(scene.root, packageData());
@@ -68,11 +79,11 @@ test("FRU branch selection keeps procedures independent and applies reversible r
   await controller.advance({ animate: false });
   controller.setBranch("psu");
   assert.equal(controller.getSnapshot().currentStepId, "cover");
-  assert.deepEqual(scene.cover.position.toArray(), [0, -50, 0]);
+  assert.deepEqual(scene.cover.position.toArray(), [0, -90, 0]);
   await controller.advance({ animate: false });
   await controller.advance({ animate: false });
   assert.equal(scene.psuScrew.visible, false);
-  assert.deepEqual(scene.psu.position.toArray(), [-10, -12.7, 10]);
+  assert.deepEqual(scene.psu.position.toArray(), [-18, -22.86, 18]);
   assert.equal(scene.board.position.length(), 0);
   controller.previous();
   assert.deepEqual(scene.psu.position.toArray(), [0, 0, 0]);
@@ -93,13 +104,13 @@ test("switching FRU branches clears the old branch but retains common access ste
 
   controller.setBranch("board");
   assert.equal(controller.getSnapshot().currentStepId, "cover");
-  assert.deepEqual(scene.cover.position.toArray(), [0, -50, 0]);
+  assert.deepEqual(scene.cover.position.toArray(), [0, -90, 0]);
   assert.equal(scene.psuScrew.visible, true);
   assert.deepEqual(scene.psu.position.toArray(), [0, 0, 0]);
 
   const result = await controller.advance({ animate: false });
   assert.equal(result.step.id, "board");
-  assert.deepEqual(scene.board.position.toArray(), [12.7, 0, 20]);
+  assert.deepEqual(scene.board.position.toArray(), [22.86, 0, 36]);
 });
 
 test("missing prerequisites block a branch action", async () => {
@@ -131,7 +142,7 @@ test("unselected FRU branches do not move or remove unrelated components", async
   await controller.advance({ animate: false });
   await controller.advance({ animate: false });
   await controller.advance({ animate: false });
-  assert.deepEqual(scene.board.position.toArray(), [12.7, 0, 20]);
+  assert.deepEqual(scene.board.position.toArray(), [22.86, 0, 36]);
   assert.deepEqual(scene.psu.position.toArray(), [0, 0, 0]);
   assert.equal(scene.psuScrew.visible, true);
 });
