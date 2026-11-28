@@ -30,7 +30,7 @@ test("OptiPlex v0.4 package passes the production loader and cross-file validati
   assert.equal(loaded.data.model.identity_scope, "platform_family");
   assert.equal(loaded.data.model.part_number, null);
   const packageVersion = loaded.data.model.release.version;
-  assert.ok(["0.4.0", "0.4.1", "0.4.2"].includes(packageVersion));
+  assert.equal(packageVersion, "0.4.2");
   assert.equal(loaded.data.model.specifications.physical.height_mm, 350);
   assert.equal(loaded.data.model.specifications.physical.width_mm, 154);
   assert.equal(loaded.data.model.specifications.physical.depth_mm, 274);
@@ -51,6 +51,12 @@ test("OptiPlex v0.4 package passes the production loader and cross-file validati
     : { box: 52, cylinder: 2, fan: 3, fin_stack: 1 };
   if (packageVersion === "0.4.1") delete expectedProxyKinds.chassis_frame;
   assert.deepEqual(proxyKinds, expectedProxyKinds);
+  if (packageVersion === "0.4.2") {
+    assert.equal(components.find((component) => component.id === "chassis.frame").visual_proxy?.kind, "chassis_frame");
+    assert.equal(components.find((component) => component.id === "chassis.side_panel").visual_proxy?.axis, "x");
+    assert.equal(components.find((component) => component.id === "chassis.front_panel").visual_proxy?.axis, "z");
+    assert.equal(components.find((component) => component.id === "chassis.rear_panel").visual_proxy?.axis, "z");
+  }
 
   const sources = loaded.data.sources.sources;
   const sourceIds = new Set(sources.map((source) => source.id));
