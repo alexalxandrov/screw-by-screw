@@ -38,16 +38,14 @@ A historical passing run does not certify a later branch head. A job marked fail
 
 ### Current main verification — 2026-11-28
 
-The latest code-bearing revision verified by CI is `75fd7bae3374950b00d5167ec02d4341c35a5967`. All four required workflows executed their jobs and completed successfully:
+The current code-bearing revision is `3aa9b3acca0ad9aff567680c0fcad1b35dfb1086`.
 
-- [Model package validation — run 46174036357](https://github.com/alexalxandrov/screw-by-screw/actions/runs/46174036357): success; job `test`.
-- [OptiPlex 5060 package validation — run 46174036353](https://github.com/alexalxandrov/screw-by-screw/actions/runs/46174036353): success; job `validate-optiplex`.
-- [Blender blockout generation — run 46174036346](https://github.com/alexalxandrov/screw-by-screw/actions/runs/46174036346): success; job `build-and-inspect`; generated build artifacts retained.
-- [Viewer build — run 46174036354](https://github.com/alexalxandrov/screw-by-screw/actions/runs/46174036354): success; both `check_published_packages` and `build` jobs.
+- [Viewer build — run 46176218986](https://github.com/alexalxandrov/screw-by-screw/actions/runs/46176218986): **success**. Unit tests and build passed; the browser suite completed with 65 passing tests; the strict-CSP production runtime test completed with 1 passing test.
+- [OptiPlex 5060 package validation — run 46176218976](https://github.com/alexalxandrov/screw-by-screw/actions/runs/46176218976): **success**. Geometry generation, semantic GLB bindings, package validation and browser loading passed.
+- [Blender blockout generation — run 46176219012](https://github.com/alexalxandrov/screw-by-screw/actions/runs/46176219012): Blender 4.3.2 scene/GLB generation, release-manifest validation, IBM and Dell package builds, and browser package-loader integration passed. The final viewer/accessibility suite is still running.
+- [Model package validation — run 46174036357](https://github.com/alexalxandrov/screw-by-screw/actions/runs/46174036357): latest successful run is on `75fd7bae3374950b00d5167ec02d4341c35a5967`. It was not triggered on `3aa9b3a` because that commit contains no model-package/content changes covered by its path filters.
 
-The current `main` HEAD is `f9738b62915248f1c950f332d28f5cde47a9db19`, a CI-generated standalone-launcher refresh. A direct commit comparison confirms that it changes only the root `index.html` relative to `75fd7ba`; application, model, test and workflow files are unchanged. The generated bot commit intentionally does not trigger another workflow run, preventing a build loop. The successful jobs above therefore certify the code-bearing revision, and the later HEAD contains its generated offline launcher.
-
-PR #44 (procedural OptiPlex geometry v0.4) was merged into `main` on 2026-11-28 at 17:35:39 UTC. It is not an open or pending change. The automated engineering gates are green; owner visual review, manual accessibility, target-hardware performance and asset-rights review remain outstanding. Release 1.0 is not approved until those owner-acceptance gates are closed.
+PR #44 (procedural OptiPlex geometry v0.4) is merged into `main`. The automated Viewer and OptiPlex gates are green. The Blender job's final suite is pending; do not describe the full workflow set as green until it completes. Owner visual review, manual accessibility, target-hardware performance and asset-rights review remain open. Release 1.0 is not approved.
 
 ## Non-negotiable accuracy policy
 

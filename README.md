@@ -74,16 +74,14 @@ EVGA RTX 3060 XC BLACK переведена в **исследовательск�
 
 ### Актуальная инженерная проверка — 2026-11-28
 
-Последняя проверенная кодовая версия — `75fd7bae3374950b00d5167ec02d4341c35a5967`. Все четыре обязательных workflow запустили jobs и завершились успешно:
+Кодовая версия проверяется на коммите `3aa9b3acca0ad9aff567680c0fcad1b35dfb1086`.
 
-- [Model package validation — run 46174036357](https://github.com/alexalxandrov/screw-by-screw/actions/runs/46174036357): success; job `test`.
-- [OptiPlex 5060 package validation — run 46174036353](https://github.com/alexalxandrov/screw-by-screw/actions/runs/46174036353): success; job `validate-optiplex`.
-- [Blender blockout generation — run 46174036346](https://github.com/alexalxandrov/screw-by-screw/actions/runs/46174036346): success; job `build-and-inspect`.
-- [Viewer build — run 46174036354](https://github.com/alexalxandrov/screw-by-screw/actions/runs/46174036354): success; jobs `check_published_packages` and `build`.
+- [Viewer build — run 46176218986](https://github.com/alexalxandrov/screw-by-screw/actions/runs/46176218986): **success**. Unit suite прошёл; production build и offline standalone собраны; общий браузерный набор — 65 passed; дополнительный strict-CSP runtime suite — 1 passed.
+- [OptiPlex 5060 package validation — run 46176218976](https://github.com/alexalxandrov/screw-by-screw/actions/runs/46176218976): **success**. Проверены генератор геометрии, semantic bindings, портативный пакет и браузерная загрузка Dell.
+- [Blender blockout generation — run 46176219012](https://github.com/alexalxandrov/screw-by-screw/actions/runs/46176219012): Blender 4.3.2, генерация сцены/GLB, release manifest, пакеты IBM и Dell и browser package-loader integration завершились успешно; заключительный viewer/accessibility suite ещё выполняется.
+- [Model package validation — run 46174036357](https://github.com/alexalxandrov/screw-by-screw/actions/runs/46174036357): последний успешный запуск на `75fd7bae3374950b00d5167ec02d4341c35a5967`. На `3aa9b3a` workflow не запускался: в коммите нет изменений model-package/content paths, которые входят в его триггер.
 
-Текущий HEAD `main` — `f9738b62915248f1c950f332d28f5cde47a9db19`. Он создан Viewer CI для обновления автономного `index.html`; сравнение с проверенным кодовым коммитом подтверждает, что изменён только этот файл. Повторные workflow на bot-authored коммите намеренно не запускаются, чтобы не создавать цикл сборок. Поэтому CI-свидетельство относится к коду `75fd7ba`, а `f9738b6` — к сгенерированному автономному артефакту из той же версии.
-
-PR #44, добавивший процедурную геометрию Dell v0.4, слит в `main` 28 ноября 2026 года в 17:35:39 UTC. Релиз 1.0 **не утверждён**: остаются визуальная приёмка владельцем, ручная проверка доступности, тестирование производительности на целевом оборудовании и проверка прав на материалы. RTX 3060 остаётся только в исследовательском архиве до подтверждения точной PCB-ревизии и полного источникового покрытия.
+Предыдущий PR #44 с процедурной геометрией Dell v0.4 слит в `main` 28 ноября 2026 года. Релиз 1.0 **не утверждён**: остаются визуальная приёмка владельцем, ручная проверка доступности, производительности на целевом оборудовании и прав на материалы. RTX 3060 остаётся только в исследовательском архиве до подтверждения точной PCB-ревизии и полного источникового покрытия.
 
 ## Документы
 
