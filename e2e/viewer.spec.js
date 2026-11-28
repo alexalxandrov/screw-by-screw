@@ -470,22 +470,7 @@ test("a successful but delayed bundled model cannot replace a scene after user i
   });
 
   await page.goto("/");
-  const document = {
-      asset: { version: "2.0" },
-      scene: 0,
-      scenes: [{ nodes: [0] }],
-      nodes: [{ name: "Late bundled root", extras: { sbs_component_id: "assembly.card.root" } }]
-    };
-    const json = Buffer.from(JSON.stringify(document), "utf8");
-    const paddedLength = Math.ceil(json.length / 4) * 4;
-    const glb = Buffer.alloc(20 + paddedLength);
-    glb.writeUInt32LE(0x46546c67, 0);
-    glb.writeUInt32LE(2, 4);
-    glb.writeUInt32LE(glb.length, 8);
-    glb.writeUInt32LE(paddedLength, 12);
-    glb.writeUInt32LE(0x4e4f534a, 16);
-    json.copy(glb, 20);
-    glb.fill(0x20, 20 + json.length);
+  await expect(page.locator("#model-title")).toContainText("GeForce RTX 3060");
   await expect(page.locator("#component-count")).not.toHaveText("—");
   const fan = page.locator('#component-tree button[data-id="assembly.fan.1"]');
   await expect(fan).toBeVisible();
