@@ -9,7 +9,7 @@ import { Vector3 } from "three";
  * This class is intentionally independent of device-specific model content.
  */
 export class AnimationPlayer {
-  constructor(root, clips = [], { onChange = () => {}, reducedMotion = false, positionOffsetScale = 1.8 } = {}) {
+  constructor(root, clips = [], { onChange = () => {}, reducedMotion = false, positionOffsetScale = 2.8 } = {}) {
     if (!root?.isObject3D) throw new TypeError("AnimationPlayer requires a Three.js Object3D root");
     if (!Array.isArray(clips)) throw new TypeError("Animation clips must be an array");
     this.root = root;
