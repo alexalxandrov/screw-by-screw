@@ -29,10 +29,10 @@ function fixture() {
 function packageData() {
   const steps = [
     { id: "open", prerequisite_step_ids: [], visual_actions: [{ type: "emphasis", target_ids: ["fastener.cover.left"], color: "#d8a35c" }] },
-    { id: "cover", prerequisite_step_ids: ["open"], visual_actions: [{ type: "move", target_ids: ["assembly.cover"], offset: [0, -90, 0] }] },
+    { id: "cover", prerequisite_step_ids: ["open"], visual_actions: [{ type: "move", target_ids: ["assembly.cover"], offset: [0, -50, 0] }] },
     { id: "psu-screws", prerequisite_step_ids: ["cover"], visual_actions: [{ type: "hide", target_ids: ["fastener.psu.1"] }] },
-    { id: "psu", prerequisite_step_ids: ["psu-screws"], visual_actions: [{ type: "move", target_ids: ["assembly.power_supply"], offset: [-18, -22.86, 18] }] },
-    { id: "board", prerequisite_step_ids: ["cover"], visual_actions: [{ type: "move", target_ids: ["assembly.system_board"], offset: [22.86, 0, 36] }] }
+    { id: "psu", prerequisite_step_ids: ["psu-screws"], visual_actions: [{ type: "move", target_ids: ["assembly.power_supply"], offset: [-10, -12.7, 10] }] },
+    { id: "board", prerequisite_step_ids: ["cover"], visual_actions: [{ type: "move", target_ids: ["assembly.system_board"], offset: [12.7, 0, 20] }] }
   ];
   return {
     steps,
