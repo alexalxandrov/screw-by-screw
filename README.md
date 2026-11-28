@@ -120,3 +120,10 @@ Viewer CI автоматически обновил скомпилированн
 ## Автономный каталог устройств
 
 Библиотека использует локальный индекс `content/catalog/models.json`: поиск по названию, производителю и точному part number, фильтр категории, статус исследования и класс точности геометрии. Hosted-версия загружает пакеты по относительным путям, а standalone `index.html` встраивает staged `.sbsmodel`-архивы для запуска через `file://` без сервера.
+
+
+## Latest engineering pass — 2026-11-28
+
+Dell OptiPlex 5060 family reference v0.4.1 adds selectable schematic front/rear I/O port markers, panel geometry and an open drive-cage proxy. Port identity and standard counts link to Dell's text documentation; the current front/rear illustrations under the 5060 guide URL visibly say 5070, so their image pixels were excluded from 5060 placement. Optional modules remain unknown, not fitted. See [I/O evidence audit](docs/OPTIPLEX_5060_IO_GEOMETRY_EVIDENCE.md) and [geometry v0.4.1](docs/OPTIPLEX_PROCEDURAL_GEOMETRY_V041.md).
+
+The mobile Viewer now suspends WebGL rendering when its mobile viewer panel is hidden or the document is backgrounded, uses a mobile DPR cap of 1.5, and tests five viewport widths (320, 375, 390, 768 and 820 CSS pixels) with 44px panel controls. Version 1.0 is not approved: fresh current-head CI, owner visual review on target hardware, manual accessibility, target performance and asset-rights acceptance remain open.
