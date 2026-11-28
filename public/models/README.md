@@ -5,7 +5,7 @@ The public model library currently contains two validated packages:
 | Catalogue model | Package | Model ID |
 | --- | --- | --- |
 | IBM Personal Computer 5150 (1981) | `ibm_pc_5150_1981.sbsmodel` | `computer.ibm.5150.1981` |
-| Dell OptiPlex 5060 Tower family | `dell_optiplex_5060_tower_v03.sbsmodel` | `pc.dell.optiplex-5060-tower.family` |
+| Dell OptiPlex 5060 Tower family | `dell_optiplex_5060_tower_v04.sbsmodel` | `pc.dell.optiplex-5060-tower.family` |
 
 Both packages are loaded by the same production `ModelPackageLoader`. The standalone `index.html` embeds every catalogue entry marked `published: true`, so quick model switching works in the browser and when the HTML file is opened directly with `file://`.
 
@@ -17,7 +17,7 @@ The reference is scoped to the August 1981 launch-era system unit. It contains 7
 
 ## Dell OptiPlex 5060 package
 
-The family-level reference is packaged as a self-contained JSON-envelope `.sbsmodel`. It contains 137 semantic nodes and 145 relationships. Its geometry is also illustrative, not CAD, and its model identity is a platform family rather than a single SKU. See `content/models/dell-optiplex-5060-tower-family/`.
+The family-level reference is packaged as a self-contained JSON-envelope `.sbsmodel`. It contains 137 semantic nodes and 145 relationships. The v0.4 scene uses 58 per-component meshes: 52 box proxies, two cylinders, three fan assemblies and one fin stack. Fan blade count and fin spacing are rendering choices, not sourced hardware specifications. Geometry remains illustrative, not CAD; the model identity is a platform family rather than a single SKU. See `content/models/dell-optiplex-5060-tower-family/`.
 
 ## Research archive
 
