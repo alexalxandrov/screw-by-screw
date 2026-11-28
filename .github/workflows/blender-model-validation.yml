@@ -55,7 +55,7 @@ jobs:
     runs-on: ubuntu-22.04
     timeout-minutes: 35
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7.0.1
         with:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - name: Install Blender runtime libraries
@@ -130,7 +130,7 @@ jobs:
           cp artifacts/rtx3060_xc_black_v05.sbsmodel public/models/
           cp MODELS/COMPUTERS/IBM/5150/04-WORKING/generated/ibm_pc_5150_1981.glb public/models/
           cp artifacts/ibm_pc_5150_1981.sbsmodel public/models/
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7.1.0
         with:
           node-version: "22"
       - name: Install locked viewer dependencies
@@ -272,7 +272,7 @@ jobs:
           cp content/models/ibm-pc-5150-1981/sources.json artifacts/ibm_pc_5150_sources.json 2>/dev/null || true
           cp docs/IBM_PC_5150_DISASSEMBLY_SEQUENCE.md artifacts/ 2>/dev/null || true
           cp docs/IBM_PC_5150_FASTENER_EVIDENCE.md artifacts/ 2>/dev/null || true
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7.0.2
         if: always()
         with:
           name: rtx3060-ibm-5150-optiplex-5060-build
