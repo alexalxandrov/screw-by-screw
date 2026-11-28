@@ -77,6 +77,25 @@ test("standalone file:// launcher switches between embedded published models wit
   expect(requestFailures).toEqual([]);
 });
 
+test("a missing offline catalogue package never opens the system file picker", async ({ page }) => {
+  const rootIndex = pathToFileURL(resolve(process.cwd(), "index.html")).href;
+  await page.goto(rootIndex);
+  await expect(page.locator("#viewer-canvas canvas")).toBeVisible({ timeout: 10000 });
+
+  await page.evaluate(() => {
+    delete globalThis.SBS_CATALOG_PACKAGE_DATA_URLS["pc.dell.optiplex-5060-tower.family"];
+    globalThis.__sbsFilePickerCalls = 0;
+    const fileInput = document.querySelector("#model-file");
+    fileInput.click = () => { globalThis.__sbsFilePickerCalls += 1; };
+  });
+
+  await page.locator("#model-switcher").selectOption("pc.dell.optiplex-5060-tower.family");
+  await expect(page.locator("#viewer-error")).toBeVisible();
+  await expect(page.locator("#viewer-error")).toContainText("offline launcher does not include");
+  await expect(page.locator("#model-title")).toContainText("Personal Computer 5150");
+  expect(await page.evaluate(() => globalThis.__sbsFilePickerCalls)).toBe(0);
+});
+
 test("opens the published Dell package from the standalone file and verifies real disassembly and animation motion", async ({ page }) => {
   const pageErrors = [];
   const requestFailures = [];
