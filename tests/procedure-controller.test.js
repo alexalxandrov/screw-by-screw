@@ -83,7 +83,9 @@ test("FRU branch selection keeps procedures independent and applies reversible r
   await controller.advance({ animate: false });
   await controller.advance({ animate: false });
   assert.equal(scene.psuScrew.visible, false);
-  assert.deepEqual(scene.psu.position.toArray(), [-28, -35.56, 28]);
+  assert.equal(scene.psu.position.x, -28);
+  assert.ok(Math.abs(scene.psu.position.y - (-35.56)) < 1e-9);
+  assert.equal(scene.psu.position.z, 28);
   assert.equal(scene.board.position.length(), 0);
   controller.previous();
   assert.deepEqual(scene.psu.position.toArray(), [0, 0, 0]);
@@ -110,7 +112,9 @@ test("switching FRU branches clears the old branch but retains common access ste
 
   const result = await controller.advance({ animate: false });
   assert.equal(result.step.id, "board");
-  assert.deepEqual(scene.board.position.toArray(), [35.56, 0, 56]);
+  assert.ok(Math.abs(scene.board.position.x - 35.56) < 1e-9);
+  assert.equal(scene.board.position.y, 0);
+  assert.equal(scene.board.position.z, 56);
 });
 
 test("missing prerequisites block a branch action", async () => {
@@ -142,7 +146,9 @@ test("unselected FRU branches do not move or remove unrelated components", async
   await controller.advance({ animate: false });
   await controller.advance({ animate: false });
   await controller.advance({ animate: false });
-  assert.deepEqual(scene.board.position.toArray(), [35.56, 0, 56]);
+  assert.ok(Math.abs(scene.board.position.x - 35.56) < 1e-9);
+  assert.equal(scene.board.position.y, 0);
+  assert.equal(scene.board.position.z, 56);
   assert.deepEqual(scene.psu.position.toArray(), [0, 0, 0]);
   assert.equal(scene.psuScrew.visible, true);
 });
