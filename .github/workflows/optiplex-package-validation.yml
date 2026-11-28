@@ -37,7 +37,7 @@ on:
 
 jobs:
   validate-optiplex:
-    if: github.actor != 'github-actions[bot]'
+    if: github.event_name == 'pull_request' || github.actor != 'github-actions[bot]'
     runs-on: ubuntu-22.04
     timeout-minutes: 15
     steps:
