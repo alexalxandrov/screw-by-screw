@@ -476,7 +476,7 @@ test("a successful but delayed bundled model cannot replace a scene after user i
   await expect(fan).toBeVisible();
   await fan.click();
   await expect(page.locator("#detail-id")).toHaveText("assembly.fan.1");
-  await page.waitForTimeout(1450);
+  await page.waitForTimeout(1750);
   await expect(page.locator("#detail-id")).toHaveText("assembly.fan.1");
   await expect(page.locator('#component-tree button[data-id="assembly.fan.1"]')).toBeVisible();
 });
