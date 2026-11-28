@@ -325,8 +325,8 @@ test("world-space position tracks follow the requested vector through nested rot
   const actualDelta = movedWorld.sub(baselineWorld);
   assert.ok(Math.abs(actualDelta.x) < 1e-5);
   assert.ok(Math.abs(actualDelta.y) < 1e-5);
-  assert.ok(Math.abs(actualDelta.z - 36] < 1e-5);
-  assert.deepEqual(player.getSnapshot().worldDeltas[0].delta, [0, 0, 20]);
+  assert.ok(Math.abs(actualDelta.z - 36) < 1e-5);
+  assert.deepEqual(player.getSnapshot().worldDeltas[0].delta, [0, 0, 36]);
 
   player.stop();
   assert.deepEqual(fan.position.toArray(), [3, -6, 9]);
