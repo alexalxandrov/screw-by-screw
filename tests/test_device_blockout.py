@@ -98,6 +98,26 @@ class DeviceBlockoutGeometryTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "segments"):
             build_glb(make_document([{"kind": "cylinder", "segments": 4}]))
 
+
+    def test_cylinder_side_winding_faces_outward(self):
+        from tools.modeling.build_device_blockout import _append_cylinder
+        positions, normals, indices = [], [], []
+        _append_cylinder(positions, normals, indices, radius=0.5, depth=1.0, segments=12)
+        a, b, c = [indices[index] for index in range(3)]
+        points = [positions[index * 3:index * 3 + 3] for index in (a, b, c)]
+        first = [points[1][i] - points[0][i] for i in range(3)]
+        second = [points[2][i] - points[0][i] for i in range(3)]
+        face_normal = [
+            first[1] * second[2] - first[2] * second[1],
+            first[2] * second[0] - first[0] * second[2],
+            first[0] * second[1] - first[1] * second[0],
+        ]
+        average_normal = [
+            sum(normals[index * 3 + axis] for index in (a, b, c)) / 3
+            for axis in range(3)
+        ]
+        self.assertGreater(sum(face_normal[i] * average_normal[i] for i in range(3)), 0)
+
     def test_axis_rotation_is_applied_without_changing_global_envelope(self):
         gltf = parse_glb(build_glb(make_document([{"kind": "cylinder", "axis": "z"}])))
         node = gltf["nodes"][1]
