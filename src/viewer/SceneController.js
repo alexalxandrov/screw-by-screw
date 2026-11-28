@@ -16,7 +16,7 @@ export class SceneController {
     const requestedFactor = Number(explodeDistanceFactor);
     this.explodeDistanceFactor = Number.isFinite(requestedFactor) && requestedFactor > 0
       ? requestedFactor
-      : Math.max(0.7, modelDiagonal * 0.0028);
+      : Math.max(0.7, modelDiagonal * 0.0042);
     this.reducedMotion = Boolean(reducedMotion);
     this.explodeProgress = 0;
     this.explodable = [];
