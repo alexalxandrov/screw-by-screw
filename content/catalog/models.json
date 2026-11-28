@@ -141,8 +141,8 @@
       ],
       "status": "research_blockout",
       "geometry_status": "illustrative_proxy_not_cad",
-      "package_version": "0.3.0",
-      "package_path": "models/dell_optiplex_5060_tower_v03.sbsmodel",
+      "package_version": "0.4.0",
+      "package_path": "models/dell_optiplex_5060_tower_v04.sbsmodel",
       "published": true,
       "publication_status": "reference"
     }
