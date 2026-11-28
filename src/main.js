@@ -1427,7 +1427,7 @@ function renderProcedureRunner(componentId) {
   const isRootProcedureComponent = isDeviceRoot;
   const controller = state.procedureController;
   const routeData = ASSEMBLY_PACKAGE.procedure_routes;
-  host.hidden = !(isDeviceRoot && controller && Array.isArray(routeData?.branches));
+  host.hidden = isDellDisassemblyModel() || !(isDeviceRoot && controller && Array.isArray(routeData?.branches));
   if (host.hidden) return;
 
   const snapshot = controller.getSnapshot();
@@ -1986,7 +1986,7 @@ function renderAssemblyEvidence(componentId) {
   $("#assembly-step-reset")?.addEventListener("click", () => restoreProcedureSceneBaseline());
   const playbackControls = $("#assembly-playback-controls");
   const isDeviceRoot = isDeviceRootComponent(componentId);
-  if (playbackControls) playbackControls.hidden = !isDeviceRoot;
+  if (playbackControls) playbackControls.hidden = !isDeviceRoot || isDellDisassemblyModel();
   updateProcedureControls();
   observationHost.replaceChildren();
   replacementHost?.replaceChildren();
@@ -2140,7 +2140,9 @@ function renderAssemblyEvidence(componentId) {
       const fullIndex = (ASSEMBLY_PACKAGE.steps ?? []).findIndex((item) => item.id === step.id);
       setProcedureSceneIndex(fullIndex);
     });
-    card.append(runStep);
+    // Dell's shared assembly scrubber is the only mechanism that advances
+    // the procedure; keep these cards as read-only reference notes.
+    if (!isDellDisassemblyModel()) card.append(runStep);
     stepHost.append(card);
   });
 

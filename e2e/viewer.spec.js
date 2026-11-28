@@ -680,7 +680,10 @@ test("Dell tower is assembled with a visible chassis and one scrubber drives 12 
   }
 
   await page.locator('[data-mode="disassemble"]').click();
-  await expect(page.locator("#assembly-playback-controls")).toBeVisible();
+  await expect(page.locator("#assembly-playback-controls")).toBeHidden();
+  await expect(page.locator("#procedure-runner")).toBeHidden();
+  await expect(page.locator("#assembly-step-list .assembly-step-card")).toHaveCount(12);
+  await expect(page.locator("#assembly-step-list .assembly-step-run")).toHaveCount(0);
   await slider.evaluate((element) => {
     element.value = "1";
     element.dispatchEvent(new Event("input", { bubbles: true }));
