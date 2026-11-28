@@ -553,7 +553,7 @@
     "src.dell.5060.odd_removal"
   ],
   "release": {
-    "version": "0.4.0",
+    "version": "0.4.1",
     "status": "research_blockout",
     "geometry_fidelity": "illustrative_proxy_not_cad"
   }
