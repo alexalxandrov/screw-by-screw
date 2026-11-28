@@ -1,4 +1,7 @@
-# OptiPlex 5060 Tower — procedural geometry v0.4.1
+# OptiPlex 5060 Tower — procedural geometry v0.4.1 (historical)
+
+> **Superseded by [OptiPlex v0.4.2](OPTIPLEX_PROCEDURAL_GEOMETRY_V042.md).** This page records the earlier pre-disassembled x-ray presentation and v0.4.1 proxy geometry. It is retained for history only; it does not describe the current default viewer state.
+
 
 The package retains 137 stable semantic component IDs and 145 typed relationships. Geometry-bearing nodes increase from 58 to 84:
 
