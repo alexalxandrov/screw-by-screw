@@ -84,6 +84,9 @@ The RTX 3060 pilot records NVIDIA's listed single 7th-generation NVENC encoder a
 
 ## 2026-11-28 — cross-model engineering pass
 
+The Dell viewer now opens the OptiPlex 5060 Tower as an exploded inspection model with a translucent chassis shell and board tray. The common exploded-view clearance scales with the loaded model's bounding-box diagonal. Illustrative package-animation and procedure offsets use a 1.8× presentation multiplier; manufacturer-data offsets remain unchanged. This improves visibility only and does not convert proxy motion into measured service geometry.
+
+
 Dell OptiPlex 5060 Tower family package v0.4.1 adds generic panel/drive-cage proxies and separately selectable standard front/rear I/O proxies. The semantic inventory remains 137 stable component IDs and 145 typed relationships. Two atomic claims record five standard front external connectors and ten standard rear data/audio/network connectors; the PSU AC inlet is counted separately. Optional SD, optical, serial, third-video and antenna populations remain unknown/unpopulated.
 
 Evidence caveat: the current official Dell front/rear guide pages are hosted under the OptiPlex 5060 guide URL, but their embedded images visibly carry a 5070 label. Their image pixels are excluded from 5060 geometry placement. Text legends and the port specification are used for identity/count only. Marker dimensions and positions remain schematic.
