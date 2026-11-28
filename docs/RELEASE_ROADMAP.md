@@ -8,7 +8,7 @@
 - **0.6:** viewer interaction slice: GLB loading, component picking, hierarchy, isolation, camera presets, section view, search, source claims and model-space measurement.
 - **0.7:** exploded view, deterministic reassembly, source-aware assembly observations and package-authored animation runtime.
 - **0.8:** bilingual content package, provenance links, confidence classes and process-layer data contract.
-- **0.9:** automated content/GLB binding, SHA-256 release integrity, import hardening, accessibility automation, browser interaction and Blender-to-viewer integration. Earlier revisions exercised these workflows; latest branch-head CI execution is currently unresolved and must be rerun before release certification.
+- **0.9:** automated content/GLB binding, SHA-256 release integrity, import hardening, accessibility automation, browser interaction and Blender-to-viewer integration. The code-bearing commit `7d26a0f` passed Viewer build (74 unit tests and 58 E2E tests) and Blender blockout generation (57 E2E tests plus GLB/SBSMODEL generation and import checks). See the exact run links and current generated-artifact HEAD interpretation below.
 - **1.0:** educational release candidate only after current-head automated checks, owner visual review, local interaction review, manual accessibility/performance checks and asset-rights review.
 
 These are capability milestones, not promises that every feature will be physically simulated. The first model remains a documented educational proxy until verified geometry is obtained.
@@ -36,6 +36,15 @@ The pilot tracks five partial teardown observations, but no complete removal/rea
 
 A historical passing run does not certify a later branch head. A job that is marked failed but has no started steps and no runner logs is not a code-test result. Record the exact commit SHA and run URLs; mark the gate pending until GitHub Actions executes the workflow steps and publishes their outcomes.
 
+For PR #44, code commit `7d26a0fcc9c6058c43a2283548789790f303492f` was checked by:
+- [Viewer build run 46161631346](https://github.com/alexalxandrov/screw-by-screw/actions/runs/46161631346): success; 74 unit tests, 58 E2E tests.
+- [Blender blockout generation run 46161631342](https://github.com/alexalxandrov/screw-by-screw/actions/runs/46161631342): success; 57 E2E tests after generated GLB/SBSMODEL and browser-import checks.
+- [Model package validation run 46160305251](https://github.com/alexalxandrov/screw-by-screw/actions/runs/46160305251) and [OptiPlex package validation run 46160305188](https://github.com/alexalxandrov/screw-by-screw/actions/runs/46160305188): success on the preceding package-equivalent commit `9f140969`; the reduced-motion patch did not change model-package data.
+
+Viewer CI then regenerated root `index.html` and pushed commit `e8f2faa300a49ea3d835671ca1381f483fdd4b3f`. The diff from `7d26a0f` is only that generated file. Bot-authored follow-up workflows on `e8f2faa` were marked `action_required` with no jobs started; do not misreport those as code-test failures or successful reruns. A new code-bearing commit still requires its own checks.
+
+PR #44 remains open and unmerged. These runs do not replace owner visual review, manual accessibility and target-hardware performance review, or asset-rights review.
+
 ## Non-negotiable accuracy policy
 
 A manufacturer specification, reviewer measurement, sample operating point, calibrated photo estimate, physical measurement, illustrative placeholder and unknown value are different evidence classes. Never silently promote one class to another. Nominal product dimensions do not automatically define every exterior component's maximum extent.
@@ -48,13 +57,14 @@ The viewer includes:
 - an assembly evidence panel separating source observations from authored disassembly steps;
 - startup protection so a late optional bundled-model response cannot replace a scene after user interaction;
 - camera presets and reversible uncapped visual section clipping;
-- package-authored animation playback with play/pause, normalized seek, speed and reset.
+- package-authored animation playback with play/pause, normalized seek, speed and reset;
+- system `prefers-reduced-motion` support across package clips, procedural disassembly, exploded-view transitions and UI CSS motion. Under reduced motion, timed transitions resolve directly to their final state; manual animation seeking remains available.
 
 These capabilities do not increase the physical fidelity of the RTX 3060 proxy. Owner visual acceptance, rights review and target-hardware performance testing remain required before 1.0.
 
 ## Package-authored animation runtime
 
-The generic runtime supports clip selection, play, pause, normalized seek, playback speed, completion and stop/reset with deterministic restoration of starting transforms. Animation tracks target stable component IDs and carry explicit evidence metadata. The RTX 3060 pilot includes an educational visual rotor-turn clip bound to two stable impeller pivots (not measured RPM) and a reversible exploded-cooler overview (presentation offsets, not service clearances or removal order). Procedural airflow and power effects remain separate viewer-generated educational overlays.
+The generic runtime supports clip selection, play, pause, normalized seek, playback speed, completion and stop/reset with deterministic restoration of starting transforms. System reduced-motion preferences are applied at startup and observed live: timed playback and procedural transitions finish immediately rather than interpolating, while users retain manual timeline seeking and inspection. Animation tracks target stable component IDs and carry explicit evidence metadata. The RTX 3060 pilot includes an educational visual rotor-turn clip bound to two stable impeller pivots (not measured RPM) and a reversible exploded-cooler overview (presentation offsets, not service clearances or removal order). Procedural airflow and power effects remain separate viewer-generated educational overlays.
 
 
 The PC Perspective review also reports a momentary frequency peak of **1905 MHz** during Metro Exodus at 2160/high. It is attached to the GPU as a measured review-sample observation, explicitly distinct from EVGA's published 1777 MHz boost clock; the article does not disclose the reviewed card's retail part number, so this is XC BLACK model evidence rather than an exact-P/N claim.
