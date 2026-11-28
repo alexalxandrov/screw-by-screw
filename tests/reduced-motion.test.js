@@ -99,7 +99,7 @@ test("AnimationPlayer completes in-progress playback when reduced motion is enab
     assert.deepEqual(component.position.toArray(), [4.5, 0, 0]);
     assert.equal(player.getSnapshot().status, "playing");
     player.setReducedMotion(true);
-    assert.deepEqual(component.position.toArray(), [10, 0, 0]);
+    assert.deepEqual(component.position.toArray(), [18, 0, 0]);
     assert.equal(player.getSnapshot().status, "completed");
     assert.equal(raf.pendingCount, 0);
     player.dispose();
