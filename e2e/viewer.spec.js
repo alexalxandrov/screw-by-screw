@@ -674,7 +674,7 @@ test("Dell package exposes working 3D disassembly actions and authored animation
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-applied-count", "1");
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-resolved-targets", "chassis.side_panel");
   const sideCoverProcedureDelta = JSON.parse(await page.locator("#viewer-canvas").getAttribute("data-procedure-world-deltas"));
-  expect(Math.hypot(...sideCoverProcedureDelta[0].delta)).toBeGreaterThan(0);
+  expect(Math.hypot(...sideCoverProcedureDelta[0].delta)).toBeGreaterThan(500);
 
   await page.locator("#assembly-step-next").click();
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-step-id", "step.optiplex.remove-front-bezel");
