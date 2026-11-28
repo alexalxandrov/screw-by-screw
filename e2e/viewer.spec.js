@@ -84,6 +84,22 @@ test("renders the fallback GPU scene and selects a component", async ({ page }) 
   expect(pageErrors).toEqual([]);
 });
 
+test("component search shows a recoverable empty state when there are no matches", async ({ page }) => {
+  await page.goto("/?demo=1");
+  const search = page.locator("#component-search");
+  await expect(page.locator("#component-count")).not.toHaveText("—");
+
+  await search.fill("__sbs_no_component_matches__");
+  await expect(page.locator("#component-tree .tree-empty-state")).toBeVisible();
+  await expect(page.locator("#component-tree .tree-empty-state")).toContainText("Совпадений не найдено");
+  await expect(page.locator("#component-tree .tree-item")).toHaveCount(0);
+
+  await page.locator("#component-tree .tree-empty-clear").click();
+  await expect(search).toHaveValue("");
+  await expect(page.locator("#component-tree .tree-empty-state")).toHaveCount(0);
+  await expect(page.locator("#component-tree .tree-item").first()).toBeVisible();
+});
+
 test("shows linked components and source-backed process explanations", async ({ page }) => {
   await page.goto("/?demo=1");
   await expect(page.locator("#component-count")).not.toHaveText("—");
