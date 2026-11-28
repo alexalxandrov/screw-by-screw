@@ -6,7 +6,7 @@ import * as THREE from "three";
  * hardware and must never be presented as an automated service tool.
  */
 export class ProcedureController {
-  constructor(root, { steps = [], commonStepIds = [], routes = [], reducedMotion = false } = {}) {
+  constructor(root, { steps = [], commonStepIds = [], routes = [], reducedMotion = false, movementScale = 1.8 } = {}) {
     if (!root?.isObject3D) throw new TypeError("ProcedureController requires a Three.js Object3D root");
     if (!Array.isArray(steps) || !Array.isArray(commonStepIds) || !Array.isArray(routes)) {
       throw new TypeError("ProcedureController requires steps, commonStepIds and routes arrays");
@@ -15,6 +15,10 @@ export class ProcedureController {
     this.steps = steps;
     this.commonStepIds = [...commonStepIds];
     this.routes = routes;
+    const requestedMovementScale = Number(movementScale);
+    this.movementScale = Number.isFinite(requestedMovementScale)
+      ? Math.max(1, requestedMovementScale)
+      : 1.8;
     this.stepMap = new Map();
     this.nodesById = new Map();
     this.baseline = new Map();
@@ -217,13 +221,18 @@ export class ProcedureController {
     this.root.updateMatrixWorld(true);
   }
 
+  movementOffset(action) {
+    const multiplier = action.evidence_class === "manufacturer_data" ? 1 : this.movementScale;
+    return new THREE.Vector3(...action.offset).multiplyScalar(multiplier);
+  }
+
   applyAction(action) {
     if (action.type === "noop") return;
     const targets = (action.target_ids ?? []).map((id) => this.nodesById.get(id));
     if (targets.some((node) => !node)) throw new Error("A documented procedure target disappeared from the scene");
 
     if (action.type === "move") {
-      const offset = new THREE.Vector3(...action.offset);
+      const offset = this.movementOffset(action);
       for (const node of targets) node.position.add(offset);
     } else if (action.type === "hide" || action.type === "show") {
       for (const node of targets) node.visible = action.type === "show";
@@ -254,7 +263,8 @@ export class ProcedureController {
     const targets = (action.target_ids ?? []).map((id) => this.nodesById.get(id));
     if (targets.some((node) => !node)) return Promise.reject(new Error("A procedure movement target is missing"));
     const starts = targets.map((node) => node.position.clone());
-    const ends = starts.map((start) => start.clone().add(new THREE.Vector3(...action.offset)));
+    const offset = this.movementOffset(action);
+    const ends = starts.map((start) => start.clone().add(offset));
     const duration = Math.max(1, Number(action.duration_ms) || 700);
     if (this.reducedMotion || typeof requestAnimationFrame !== "function") {
       targets.forEach((node, index) => node.position.copy(ends[index]));
