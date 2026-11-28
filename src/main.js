@@ -119,7 +119,7 @@ const MAX_GLB_BYTES = MAX_SCENE_GLB_BYTES;
 const UI = {
   en: {
     modelSwitcherAria: "Quick switch between published models",
-    languageToggleAria: "Switch between Russian and English",
+    languageToggleAria: "RU / EN — Switch language",
     workspacePanelAria: "Workspace panel navigation",
     componentSearchAria: "Search components, labels, claims and sources",
     componentTreeAria: "Component hierarchy",
@@ -164,7 +164,7 @@ const UI = {
   },
   ru: {
     modelSwitcherAria: "Быстрое переключение между опубликованными моделями",
-    languageToggleAria: "Сменить язык: русский или английский",
+    languageToggleAria: "RU / EN — Сменить язык",
     workspacePanelAria: "Переключение панелей рабочего пространства",
     componentSearchAria: "Поиск компонентов, обозначений, утверждений и источников",
     componentTreeAria: "Иерархия компонентов",

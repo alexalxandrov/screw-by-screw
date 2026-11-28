@@ -233,6 +233,10 @@ jobs:
             echo "Published IBM package is already current"
           else
             git commit -m "build: publish IBM PC 5150 model package"
+            # npm run build regenerates the tracked standalone launcher; this workflow
+            # publishes only the model package, so discard that unrelated build output
+            # before rebasing the generated package commit onto a concurrently updated branch.
+            git restore --worktree index.html
             git fetch origin "${TARGET_BRANCH}"
             git rebase "origin/${TARGET_BRANCH}"
             git push origin "HEAD:${TARGET_BRANCH}"

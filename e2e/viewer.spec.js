@@ -718,7 +718,9 @@ test("viewer mode and process controls expose one pressed state", async ({ page 
   await page.locator('.view-tab[data-mode="understand"]').click();
   await expect(page.locator('.view-tab[data-mode="understand"]')).toHaveAttribute("aria-pressed", "true");
   await expect(page.locator('.view-tab[data-mode="explore"]')).toHaveAttribute("aria-pressed", "false");
-  await expect(page.locator('.process-button[data-layer="cooling"]')).toHaveAttribute("aria-pressed", "true");
-  await page.locator('.process-button[data-layer="cooling"]').click();
-  await expect(page.locator('.process-button[data-layer="cooling"]')).toHaveAttribute("aria-pressed", "false");
+  const cooling = page.locator('.process-button[data-layer="cooling"]');
+  await cooling.click();
+  await expect(cooling).toHaveAttribute("aria-pressed", "true");
+  await cooling.click();
+  await expect(cooling).toHaveAttribute("aria-pressed", "false");
 });

@@ -66,9 +66,15 @@ test("standalone file:// launcher switches between embedded published models wit
 
   const switcher = page.locator("#model-switcher");
   await expect(switcher.locator("option")).toHaveCount(3);
+  await page.locator("#wireframe-toggle").click();
+  await expect(page.locator("#wireframe-toggle")).toHaveAttribute("aria-pressed", "true");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-wireframe", "true");
+
   await switcher.selectOption("pc.dell.optiplex-5060-tower.family");
   await expect(page.locator("#model-title")).toContainText("OptiPlex 5060");
   await expect(page.locator("#component-count")).toHaveText("137");
+  await expect(page.locator("#wireframe-toggle")).toHaveAttribute("aria-pressed", "false");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-wireframe", "false");
 
   await switcher.selectOption("computer.ibm.5150.1981");
   await expect(page.locator("#model-title")).toContainText("Personal Computer 5150");
@@ -121,10 +127,12 @@ test("opens the published Dell package from the standalone file and verifies rea
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-applied-count", "1");
   const procedureDelta = JSON.parse(await page.locator("#viewer-canvas").getAttribute("data-procedure-world-deltas"));
   expect(Math.hypot(...procedureDelta[0].delta)).toBeGreaterThan(0);
+  const stepProgress = page.locator("#assembly-step-progress");
+  await expect(stepProgress).toContainText("1 /");
   await page.locator("#assembly-step-previous").click();
-  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-applied-count", "0");
+  await expect(stepProgress).toContainText("0 /");
   await page.locator("#assembly-step-next").click();
-  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-applied-count", "1");
+  await expect(stepProgress).toContainText("1 /");
 
   await page.locator("#animation-clip-select").selectOption("clip.optiplex.cpu-cooling-removal");
   await page.locator("#animation-seek").evaluate((element) => {

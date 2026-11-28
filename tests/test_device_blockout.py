@@ -137,46 +137,46 @@ class DeviceBlockoutGeometryTests(unittest.TestCase):
         self.assertEqual(node["scale"], [10, 10, 10])
 
 
+    def test_nested_model_space_proxy_transforms_are_not_parent_local(self):
+            document = {
+                "device_model_id": "test.nested",
+                "components": [
+                    {"id": "test.root", "parent_id": None, "geometry_status": "assembly_node"},
+                    {
+                        "id": "test.parent",
+                        "parent_id": "test.root",
+                        "geometry_status": "illustrative_proxy",
+                        "visual_proxy": {
+                            "kind": "box", "translation": [-72, 165, 0],
+                            "scale": [3, 230, 230], "material": 0,
+                        },
+                    },
+                    {
+                        "id": "test.child",
+                        "parent_id": "test.parent",
+                        "geometry_status": "illustrative_proxy",
+                        "visual_proxy": {
+                            "kind": "box", "translation": [-55, 165, 0],
+                            "scale": [3, 220, 196], "material": 2,
+                        },
+                    },
+                ],
+            }
+            gltf = parse_glb(build_glb(document))
+            root, parent, child, parent_proxy, child_proxy = gltf["nodes"]
+            self.assertEqual(root["children"], [1])
+            self.assertEqual(parent["children"], [2, 3])
+            self.assertEqual(child["children"], [4])
+            for semantic in (root, parent, child):
+                self.assertNotIn("translation", semantic)
+                self.assertNotIn("scale", semantic)
+                self.assertNotIn("mesh", semantic)
+            self.assertEqual(parent_proxy["translation"], [-72, 165, 0])
+            self.assertEqual(child_proxy["translation"], [-55, 165, 0])
+            self.assertEqual(parent_proxy["scale"], [3, 230, 230])
+            self.assertEqual(child_proxy["scale"], [3, 220, 196])
+            self.assertEqual(parent_proxy["extras"]["sbs_parent_component_id"], "test.parent")
+            self.assertEqual(child_proxy["extras"]["sbs_parent_component_id"], "test.child")
+
 if __name__ == "__main__":
     unittest.main()
-
-def test_nested_model_space_proxy_transforms_are_not_parent_local(self):
-        document = {
-            "device_model_id": "test.nested",
-            "components": [
-                {"id": "test.root", "parent_id": None, "geometry_status": "assembly_node"},
-                {
-                    "id": "test.parent",
-                    "parent_id": "test.root",
-                    "geometry_status": "illustrative_proxy",
-                    "visual_proxy": {
-                        "kind": "box", "translation": [-72, 165, 0],
-                        "scale": [3, 230, 230], "material": 0,
-                    },
-                },
-                {
-                    "id": "test.child",
-                    "parent_id": "test.parent",
-                    "geometry_status": "illustrative_proxy",
-                    "visual_proxy": {
-                        "kind": "box", "translation": [-55, 165, 0],
-                        "scale": [3, 220, 196], "material": 2,
-                    },
-                },
-            ],
-        }
-        gltf = parse_glb(build_glb(document))
-        root, parent, child, parent_proxy, child_proxy = gltf["nodes"]
-        self.assertEqual(root["children"], [1])
-        self.assertEqual(parent["children"], [2, 3])
-        self.assertEqual(child["children"], [4])
-        for semantic in (root, parent, child):
-            self.assertNotIn("translation", semantic)
-            self.assertNotIn("scale", semantic)
-            self.assertNotIn("mesh", semantic)
-        self.assertEqual(parent_proxy["translation"], [-72, 165, 0])
-        self.assertEqual(child_proxy["translation"], [-55, 165, 0])
-        self.assertEqual(parent_proxy["scale"], [3, 230, 230])
-        self.assertEqual(child_proxy["scale"], [3, 220, 196])
-        self.assertEqual(parent_proxy["extras"]["sbs_parent_component_id"], "test.parent")
-        self.assertEqual(child_proxy["extras"]["sbs_parent_component_id"], "test.child")
