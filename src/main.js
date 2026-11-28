@@ -75,6 +75,7 @@ const state = {
   cameraHome: null,
   gridHelper: null,
   exploded: 0,
+  timelineMode: "explode",
   isolated: false,
   wireframe: false,
   activeLayer: null,
@@ -247,7 +248,7 @@ function renderAnimationClipOptions() {
   });
   select.value = selectedId;
   select.setAttribute("aria-label", t("clipSelect"));
-  $("#animation-seek")?.setAttribute("aria-label", t("clipTimeline"));
+  $("#assembly-scrubber")?.setAttribute("aria-label", t("clipTimeline"));
   updateAnimationPlayerUI();
 }
 
@@ -326,7 +327,7 @@ function updateAnimationPlayerUI(snapshot = state.animationPlayer?.getSnapshot()
   const play = $("#animation-play");
   const pause = $("#animation-pause");
   const stop = $("#animation-stop");
-  const seek = $("#animation-seek");
+  const seek = $("#assembly-scrubber");
   const status = $("#animation-status");
   const time = $("#animation-time");
   const evidenceNote = $("#animation-evidence-note");
@@ -334,9 +335,26 @@ function updateAnimationPlayerUI(snapshot = state.animationPlayer?.getSnapshot()
   if (play) play.disabled = snapshot.status === "playing";
   if (pause) pause.disabled = snapshot.status !== "playing";
   if (stop) stop.disabled = snapshot.status === "ready" && snapshot.time === 0;
-  if (seek) {
+  if (seek && state.timelineMode === "animation") {
     seek.disabled = false;
+    seek.min = "0";
+    seek.max = "1000";
+    seek.step = "1";
     seek.value = String(Math.round(snapshot.progress * 1000));
+    const start = $("#assembly-scrubber-start");
+    const end = $("#assembly-scrubber-end");
+    const output = $("#explode-value");
+    const stepLabel = $("#assembly-scrubber-step");
+    if (start) start.textContent = "0 s";
+    if (end) end.textContent = (snapshot.duration / 1000).toFixed(2) + " s";
+    if (output) output.textContent = (snapshot.time / 1000).toFixed(2) + " / " + (snapshot.duration / 1000).toFixed(2) + " s";
+    if (stepLabel) {
+      const description = localizedPackageText(state.animationPlayer.clip?.description);
+      stepLabel.textContent = description || localizedPackageText(state.animationPlayer.clip?.title) || "";
+      stepLabel.hidden = !stepLabel.textContent;
+    }
+    const modeLabel = $("#timeline-mode-label");
+    if (modeLabel) modeLabel.textContent = t("authoredAnimations");
   }
   if (evidenceNote) {
     const evidenceLabel = {
@@ -969,12 +987,12 @@ function findNodeById(id) {
 function applyModelPresentation(root) {
   if (!canvasHost) return;
   delete canvasHost.dataset.inspectionPresentation;
-  delete canvasHost.dataset.inspectionTransparentComponents;
+  delete canvasHost.dataset.inspectionChassisComponents;
   if (MODEL.id !== "pc.dell.optiplex-5060-tower.family") return;
 
-  // Keep the internal assemblies opaque; make the outer shell and board tray
-  // translucent so the already-exploded tower reads as an open inspection view.
-  const translucentComponentIds = [
+  // The tower is an opaque, assembled chassis by default. Shell parts remain
+  // independently selectable and the scrubber moves them during disassembly.
+  const chassisIds = [
     "chassis.frame",
     "chassis.base",
     "chassis.top",
@@ -983,46 +1001,23 @@ function applyModelPresentation(root) {
     "chassis.rear_panel",
     "chassis.board_tray"
   ];
-  const updatedMeshes = new Set();
-  const appliedComponentIds = [];
-
-  for (const id of translucentComponentIds) {
+  const visible = chassisIds.filter((id) => {
     const component = state.componentNodes.get(id);
-    if (!component) continue;
-    let componentUpdated = false;
+    if (!component) return false;
+    let hasMesh = false;
     component.traverse((object) => {
-      if (!object.isMesh || !object.material || updatedMeshes.has(object)) return;
-
-      // Do not tint nested semantic components (for example, front I/O or the
-      // motherboard) just because they live below an outer panel in the tree.
+      if (!object.isMesh || !object.material) return;
       let ancestor = object.parent;
       while (ancestor && ancestor !== component) {
         if (typeof ancestor.userData?.sbs_component_id === "string") return;
         ancestor = ancestor.parent;
       }
-
-      const materials = Array.isArray(object.material) ? object.material : [object.material];
-      const inspectionMaterials = materials.map((material) => {
-        const clone = material.clone();
-        clone.color?.lerp(new THREE.Color(0x9ab5bf), 0.45);
-        clone.transparent = true;
-        clone.opacity = 0.18;
-        clone.depthWrite = false;
-        clone.side = THREE.DoubleSide;
-        clone.needsUpdate = true;
-        return clone;
-      });
-      object.material = Array.isArray(object.material) ? inspectionMaterials : inspectionMaterials[0];
-      updatedMeshes.add(object);
-      componentUpdated = true;
+      hasMesh = true;
     });
-    if (componentUpdated) appliedComponentIds.push(id);
-  }
-
-  if (updatedMeshes.size > 0) {
-    canvasHost.dataset.inspectionPresentation = "optiplex-open-xray";
-    canvasHost.dataset.inspectionTransparentComponents = appliedComponentIds.join(",");
-  }
+    return hasMesh;
+  });
+  canvasHost.dataset.inspectionPresentation = "optiplex-chassis";
+  canvasHost.dataset.inspectionChassisComponents = visible.join(",");
 }
 
 function collectNodes(root) {
@@ -1574,6 +1569,7 @@ function restoreProcedureSceneBaseline() {
     delete canvasHost.dataset.procedureResolvedTargets;
     delete canvasHost.dataset.procedureAppliedCount;
     delete canvasHost.dataset.procedureWorldDeltas;
+    delete canvasHost.dataset.procedureStepIndex;
   }
   const status = $("#assembly-motion-status");
   if (status) status.textContent = t("procedureReset");
@@ -1884,6 +1880,7 @@ function setProcedureSceneIndex(nextIndex) {
   const index = Math.max(-1, Math.min(steps.length - 1, nextIndex));
   restoreProcedureSceneBaseline();
   procedureCurrentIndex = index;
+  if (canvasHost && index >= 0) canvasHost.dataset.procedureStepIndex = String(index);
   for (let i = 0; i <= index; i += 1) {
     const changed = procedureEffectForStep(steps[i], i === index);
     if (i === index) {
@@ -1915,8 +1912,41 @@ function updateProcedureControls() {
   if (next) next.disabled = procedureCurrentIndex >= steps.length - 1;
   if (reset) reset.disabled = procedureCurrentIndex === -1;
   if (progress) progress.textContent = procedureCurrentIndex < 0
-    ? `${t("procedureProgress")} 0 / ${steps.length}`
-    : `${t("procedureProgress")} ${procedureCurrentIndex + 1} / ${steps.length}`;
+    ? t("procedureProgress") + " 0 / " + steps.length
+    : t("procedureProgress") + " " + (procedureCurrentIndex + 1) + " / " + steps.length;
+
+  if (MODEL.id === "pc.dell.optiplex-5060-tower.family" && state.timelineMode === "disassembly") {
+    const slider = $("#assembly-scrubber");
+    const output = $("#explode-value");
+    const stepLabel = $("#assembly-scrubber-step");
+    const value = Math.max(0, Math.min(steps.length, procedureCurrentIndex + 1));
+    if (slider) {
+      slider.min = "0";
+      slider.max = String(steps.length);
+      slider.step = "1";
+      slider.value = String(value);
+    }
+    if (output) output.textContent = value + " / " + steps.length;
+    const current = steps[procedureCurrentIndex];
+    if (stepLabel) {
+      stepLabel.textContent = current
+        ? t("stepLabel") + " " + (current.sequence ?? procedureCurrentIndex + 1) + ": " +
+          localizedPackageText(current.title) + " — " + localizedPackageText(current.description)
+        : t("procedureRunnerReady");
+      stepLabel.hidden = false;
+    }
+    const start = $("#assembly-scrubber-start");
+    const end = $("#assembly-scrubber-end");
+    const modeLabel = $("#timeline-mode-label");
+    if (start) start.textContent = t("assembled");
+    if (end) end.textContent = t("exploded");
+    if (modeLabel) modeLabel.textContent = t("procedureRunnerTitle");
+    if (canvasHost) {
+      canvasHost.dataset.timelineMode = "disassembly";
+      canvasHost.dataset.procedureScrubberStep = String(value);
+    }
+    $("#model-state").textContent = value === 0 ? t("assembledState") : t("exploded");
+  }
 }
 
 function deviceRootComponentId() {
@@ -2907,15 +2937,97 @@ function updateSlicePosition(value) {
   updateSlicePlane();
 }
 
+function isDellDisassemblyModel() {
+  return MODEL.id === "pc.dell.optiplex-5060-tower.family";
+}
+
+function updateAssemblyTimeline() {
+  const slider = $("#assembly-scrubber");
+  if (!slider) return;
+  const modeLabel = $("#timeline-mode-label");
+  const start = $("#assembly-scrubber-start");
+  const end = $("#assembly-scrubber-end");
+  const output = $("#explode-value");
+  const stepLabel = $("#assembly-scrubber-step");
+
+  if (state.timelineMode === "disassembly" && isDellDisassemblyModel()) {
+    const steps = ASSEMBLY_PACKAGE.steps ?? [];
+    const value = Math.max(0, Math.min(steps.length, procedureCurrentIndex + 1));
+    slider.min = "0";
+    slider.max = String(steps.length);
+    slider.step = "1";
+    slider.value = String(value);
+    slider.setAttribute("aria-label", t("procedureRunnerAria"));
+    if (modeLabel) modeLabel.textContent = t("procedureRunnerTitle");
+    if (start) start.textContent = t("assembled");
+    if (end) end.textContent = t("exploded");
+    if (output) output.textContent = value + " / " + steps.length;
+    const step = steps[procedureCurrentIndex];
+    if (stepLabel) {
+      stepLabel.textContent = step
+        ? t("stepLabel") + " " + (step.sequence ?? procedureCurrentIndex + 1) + ": " +
+          localizedPackageText(step.title) + " — " + localizedPackageText(step.description)
+        : t("procedureRunnerReady");
+      stepLabel.hidden = false;
+    }
+    $("#model-state").textContent = value === 0 ? t("assembledState") : t("exploded");
+    if (canvasHost) canvasHost.dataset.timelineMode = "disassembly";
+    return;
+  }
+
+  if (state.timelineMode === "animation" && state.animationPlayer?.clip) {
+    const snapshot = state.animationPlayer.getSnapshot();
+    slider.min = "0";
+    slider.max = "1000";
+    slider.step = "1";
+    slider.value = String(Math.round(snapshot.progress * 1000));
+    slider.setAttribute("aria-label", t("clipTimeline"));
+    if (modeLabel) modeLabel.textContent = t("authoredAnimations");
+    if (start) start.textContent = "0 s";
+    if (end) end.textContent = (snapshot.duration / 1000).toFixed(2) + " s";
+    if (output) output.textContent = (snapshot.time / 1000).toFixed(2) + " / " + (snapshot.duration / 1000).toFixed(2) + " s";
+    if (stepLabel) {
+      stepLabel.textContent = localizedPackageText(state.animationPlayer.clip.description) ||
+        localizedPackageText(state.animationPlayer.clip.title);
+      stepLabel.hidden = !stepLabel.textContent;
+    }
+    if (canvasHost) canvasHost.dataset.timelineMode = "animation";
+    return;
+  }
+
+  state.timelineMode = "explode";
+  slider.min = "0";
+  slider.max = "100";
+  slider.step = "1";
+  slider.value = String(state.exploded);
+  slider.setAttribute("aria-label", t("explodeSliderAria"));
+  if (modeLabel) modeLabel.textContent = t("assemblyState");
+  if (start) start.textContent = t("assembled");
+  if (end) end.textContent = t("exploded");
+  if (output) output.textContent = Math.round(state.exploded) + "%";
+  if (stepLabel) {
+    stepLabel.textContent = "";
+    stepLabel.hidden = true;
+  }
+  if (canvasHost) canvasHost.dataset.timelineMode = "explode";
+}
+
+function setAssemblyTimelineMode(mode) {
+  if (mode === "disassembly" && isDellDisassemblyModel()) state.timelineMode = "disassembly";
+  else if (mode === "animation" && state.animationPlayer?.clip) state.timelineMode = "animation";
+  else state.timelineMode = "explode";
+  updateAssemblyTimeline();
+}
+
 function updateExplodeUi(value) {
   state.exploded = Math.max(0, Math.min(100, Number(value)));
-  $("#explode-slider").value = String(state.exploded);
-  $("#explode-value").textContent = `${Math.round(state.exploded)}%`;
+  if (state.timelineMode === "explode") updateAssemblyTimeline();
   $("#model-state").textContent = state.powered ? t("operatingState") : (state.exploded ? t("exploded") : t("assembledState"));
 }
 
 function setExplode(value) {
   if (!state.sceneController) return;
+  if (state.timelineMode !== "explode") setAssemblyTimelineMode("explode");
   const procedureState = state.procedureController?.getSnapshot();
   if (procedureState && procedureState.stepIndex >= 0) {
     state.procedureController.reset();
@@ -2925,22 +3037,6 @@ function setExplode(value) {
   if (clipState && clipState.status !== "idle" && clipState.status !== "ready") state.animationPlayer.stop();
   state.sceneController.setExplode(value);
   updateExplodeUi(value);
-}
-
-async function animateExplodeCycle() {
-  if (!state.sceneController) return;
-  state.animationPlayer?.stop();
-  const controller = state.sceneController;
-  const button = $("#animate-button");
-  button.disabled = true;
-  try {
-    const firstTarget = controller.explodeProgress >= 50 ? 0 : 100;
-    const secondTarget = firstTarget === 100 ? 0 : 100;
-    const expanded = await controller.animateExplode(firstTarget, 950, updateExplodeUi);
-    if (expanded) await controller.animateExplode(secondTarget, 950, updateExplodeUi);
-  } finally {
-    button.disabled = false;
-  }
 }
 
 function setIsolated(isolate) {
@@ -3262,10 +3358,10 @@ function installModel(root, mode) {
       reducedMotion: state.reducedMotion
     });
   }
-  // Dell opens as an already-separated inspection model; other devices keep
-  // their assembled starting pose until the Disassemble view is selected.
-  const initialExplodeProgress = MODEL.id === "pc.dell.optiplex-5060-tower.family" ? 100 : 0;
+  state.timelineMode = isDellDisassemblyModel() ? "disassembly" : "explode";
+  const initialExplodeProgress = 0;
   setExplode(initialExplodeProgress);
+  updateAssemblyTimeline();
   if (canvasHost) {
     canvasHost.dataset.explodeDistanceFactor = String(state.sceneController.explodeDistanceFactor);
     canvasHost.dataset.initialExplodeProgress = String(initialExplodeProgress);
@@ -3790,19 +3886,33 @@ function bindUI() {
   });
   $("#isolate-toggle").addEventListener("click", () => setIsolated(!state.isolated));
   $("#wireframe-toggle").addEventListener("click", () => setWireframe(!state.wireframe));
-  $("#explode-slider").addEventListener("input", (event) => setExplode(event.target.value));
+  $("#assembly-scrubber").addEventListener("input", (event) => {
+    const value = Number(event.target.value);
+    if (state.timelineMode === "disassembly" && isDellDisassemblyModel()) {
+      setProcedureSceneIndex(Math.round(value) - 1);
+    } else if (state.timelineMode === "animation") {
+      state.animationPlayer?.seek(value / 1000);
+    } else {
+      setExplode(value);
+    }
+  });
   $("#power-toggle").addEventListener("click", () => setPowered(!state.powered));
   $("#animation-clip-select").addEventListener("change", (event) => {
     if (state.powered) setPowered(false);
+    setAssemblyTimelineMode("animation");
     state.animationPlayer?.selectClip(event.target.value);
+    updateAssemblyTimeline();
   });
   $("#animation-play").addEventListener("click", () => {
     if (state.powered) setPowered(false);
+    setAssemblyTimelineMode("animation");
     state.animationPlayer?.play();
   });
   $("#animation-pause").addEventListener("click", () => state.animationPlayer?.pause());
-  $("#animation-stop").addEventListener("click", () => state.animationPlayer?.stop());
-  $("#animation-seek").addEventListener("input", (event) => state.animationPlayer?.seek(Number(event.target.value) / 1000));
+  $("#animation-stop").addEventListener("click", () => {
+    state.animationPlayer?.stop();
+    setAssemblyTimelineMode(isDellDisassemblyModel() ? "disassembly" : "explode");
+  });
   $("#quiz-next").addEventListener("click", submitLearningAnswer);
   $("#procedure-branch-select").addEventListener("change", (event) => {
     if (!state.procedureController) return;
@@ -3862,9 +3972,6 @@ function bindUI() {
       setStatus(error.message || t("catalogError"));
     }
   });
-  $("#assemble-button").addEventListener("click", () => setExplode(0));
-  $("#explode-button").addEventListener("click", () => setExplode(100));
-  $("#animate-button").addEventListener("click", animateExplodeCycle);
   $("#rotate-component").addEventListener("click", async () => {
     const id = state.selectedId;
     const controller = state.sceneController;
@@ -3895,14 +4002,28 @@ function bindUI() {
       if (state.compareMode) { state.compareMode = false; $("#comparison-panel").hidden = true; }
       if (button.dataset.mode === "disassemble") {
         setLayer("clear");
-        setExplode(100);
+        if (isDellDisassemblyModel()) {
+          state.animationPlayer?.stop();
+          setAssemblyTimelineMode("disassembly");
+          setProcedureSceneIndex(-1);
+        } else {
+          setAssemblyTimelineMode("explode");
+          setExplode(100);
+        }
         fitModel(state.modelRoot);
         const deviceRootId = deviceRootComponentId();
         if (deviceRootId) selectComponent(deviceRootId);
       }
       if (button.dataset.mode === "explore") {
         setLayer("clear");
-        setExplode(0);
+        if (isDellDisassemblyModel()) {
+          state.animationPlayer?.stop();
+          setAssemblyTimelineMode("disassembly");
+          setProcedureSceneIndex(-1);
+        } else {
+          setAssemblyTimelineMode("explode");
+          setExplode(0);
+        }
         fitModel(state.modelRoot);
       }
       if (button.dataset.mode === "understand") {
