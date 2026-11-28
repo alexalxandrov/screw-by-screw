@@ -6,7 +6,7 @@ import * as THREE from "three";
  * hardware and must never be presented as an automated service tool.
  */
 export class ProcedureController {
-  constructor(root, { steps = [], commonStepIds = [], routes = [], reducedMotion = false, movementScale = 1.8 } = {}) {
+  constructor(root, { steps = [], commonStepIds = [], routes = [], reducedMotion = false, movementScale = 2.8 } = {}) {
     if (!root?.isObject3D) throw new TypeError("ProcedureController requires a Three.js Object3D root");
     if (!Array.isArray(steps) || !Array.isArray(commonStepIds) || !Array.isArray(routes)) {
       throw new TypeError("ProcedureController requires steps, commonStepIds and routes arrays");
