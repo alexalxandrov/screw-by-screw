@@ -18,7 +18,7 @@ export class AnimationPlayer {
     const requestedOffsetScale = Number(positionOffsetScale);
     this.positionOffsetScale = Number.isFinite(requestedOffsetScale)
       ? Math.max(1, requestedOffsetScale)
-      : 1.8;
+      : 2.8;
     this.nodesById = new Map();
     this.duplicateIds = [];
     root.traverse((object) => {
