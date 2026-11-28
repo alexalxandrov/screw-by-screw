@@ -27,7 +27,7 @@ on:
       - main
     paths:
       - "src/**"
-      - "tests/viewer-scene-controller.test.js"
+      - "tests/**"
       - "content/**"
       - "e2e/**"
       - "public/models/**"
