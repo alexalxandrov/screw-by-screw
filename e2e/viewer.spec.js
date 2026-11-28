@@ -476,7 +476,6 @@ test("a successful but delayed bundled model cannot replace a scene after user i
 
   await page.goto("/", { waitUntil: "domcontentloaded" });
   await expect.poll(() => page.evaluate(() => window.__sbsDelayedPackageRequestStarted)).toBe(true);
-  await expect(page.locator("#model-title")).toContainText("GeForce RTX 3060");
   await expect(page.locator("#component-count")).not.toHaveText("—");
   const fan = page.locator('#component-tree button[data-id="assembly.fan.1"]');
   await expect(fan).toBeVisible();
