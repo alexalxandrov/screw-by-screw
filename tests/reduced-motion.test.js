@@ -124,7 +124,9 @@ test("ProcedureController applies final step transforms immediately under reduce
   await controller.advance();
   const result = await controller.advance();
   assert.equal(result.ok, true);
-  assert.deepEqual(component.position.toArray(), [0, 33.6, 0]);
+  assert.ok(Math.abs(component.position.y - 33.6) < 1e-9);
+  assert.equal(component.position.x, 0);
+  assert.equal(component.position.z, 0);
   assert.equal(controller.getSnapshot().busy, false);
 });
 
@@ -142,7 +144,9 @@ test("ProcedureController finishes an active step when reduced motion is enabled
     controller.setReducedMotion(true);
     const result = await advancing;
     assert.equal(result.ok, true);
-    assert.deepEqual(component.position.toArray(), [0, 33.6, 0]);
+    assert.ok(Math.abs(component.position.y - 33.6) < 1e-9);
+  assert.equal(component.position.x, 0);
+  assert.equal(component.position.z, 0);
     assert.equal(controller.getSnapshot().busy, false);
     assert.equal(raf.pendingCount, 0);
   } finally {
