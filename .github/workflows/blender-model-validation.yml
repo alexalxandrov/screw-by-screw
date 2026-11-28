@@ -3,7 +3,7 @@ permissions:
   contents: write
 concurrency:
   group: blender-model-validation-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 on:
   workflow_dispatch:
