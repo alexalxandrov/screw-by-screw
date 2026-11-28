@@ -30,7 +30,7 @@ test("OptiPlex v0.4 package passes the production loader and cross-file validati
   assert.equal(loaded.data.model.identity_scope, "platform_family");
   assert.equal(loaded.data.model.part_number, null);
   const packageVersion = loaded.data.model.release.version;
-  assert.ok(["0.4.0", "0.4.1"].includes(packageVersion));
+  assert.ok(["0.4.0", "0.4.1", "0.4.2"].includes(packageVersion));
   assert.equal(loaded.data.model.specifications.physical.height_mm, 350);
   assert.equal(loaded.data.model.specifications.physical.width_mm, 154);
   assert.equal(loaded.data.model.specifications.physical.depth_mm, 274);
@@ -43,16 +43,20 @@ test("OptiPlex v0.4 package passes the production loader and cross-file validati
     if (kind) counts[kind] = (counts[kind] ?? 0) + 1;
     return counts;
   }, {});
-  const expectedProxyKinds = packageVersion === "0.4.1"
-    ? { box: 45, panel: 7, drive_cage: 1, io_port: 25, cylinder: 2, fan: 3, fin_stack: 1 }
+  const expectedProxyKinds = ["0.4.1", "0.4.2"].includes(packageVersion)
+    ? {
+        chassis_frame: packageVersion === "0.4.2" ? 1 : undefined,
+        box: 45, panel: 7, drive_cage: 1, io_port: 25, cylinder: 2, fan: 3, fin_stack: 1
+      }
     : { box: 52, cylinder: 2, fan: 3, fin_stack: 1 };
+  if (packageVersion === "0.4.1") delete expectedProxyKinds.chassis_frame;
   assert.deepEqual(proxyKinds, expectedProxyKinds);
 
   const sources = loaded.data.sources.sources;
   const sourceIds = new Set(sources.map((source) => source.id));
   const relationships = loaded.data.relationships.relationships;
   const claims = loaded.data.claims.claims;
-  if (packageVersion === "0.4.1") {
+  if (["0.4.1", "0.4.2"].includes(packageVersion)) {
     assert.equal(components.filter((c) => c.visual_proxy?.kind === "io_port").length, 25);
     assert.equal(components.filter((c) => c.visual_proxy?.kind === "io_port" && c.id.startsWith("front.")).length, 7);
     assert.equal(components.filter((c) => c.visual_proxy?.kind === "io_port" && c.id.startsWith("rear.")).length, 18);
@@ -79,8 +83,8 @@ test("OptiPlex v0.4 package passes the production loader and cross-file validati
   assert.equal(components.filter((component) =>
     component.fastener_population === "optional_reference_not_fitted"
   ).length, 7);
-  assert.equal(sources.length, packageVersion === "0.4.1" ? 30 : 28);
-  assert.equal(claims.length, packageVersion === "0.4.1" ? 36 : 34);
+  assert.equal(sources.length, ["0.4.1", "0.4.2"].includes(packageVersion) ? 30 : 28);
+  assert.equal(claims.length, ["0.4.1", "0.4.2"].includes(packageVersion) ? 36 : 34);
   assert.equal(loaded.data.process_layers.process_layers.length, 6);
   assert.equal(steps.length, 12);
   assert.equal(loaded.data.assembly_steps.observations.length, 19);
