@@ -3905,6 +3905,11 @@ function bindUI() {
   $("#power-toggle").addEventListener("click", () => setPowered(!state.powered));
   $("#animation-clip-select").addEventListener("change", (event) => {
     if (state.powered) setPowered(false);
+    // Do not layer a clip over an already-applied procedural removal step.
+    // The shared scrubber returns to the assembled baseline before clip seek.
+    if (isDellDisassemblyModel() && state.timelineMode === "disassembly" && procedureCurrentIndex >= 0) {
+      setProcedureSceneIndex(-1);
+    }
     setAssemblyTimelineMode("animation");
     state.animationPlayer?.selectClip(event.target.value);
     updateAssemblyTimeline();

@@ -736,15 +736,11 @@ test("Dell tower is assembled with a visible chassis and one scrubber drives 12 
   await expect(page.locator("#explode-value")).toHaveText("12 / 12");
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-step-id", "step.optiplex.remove-system-board");
 
-  await slider.evaluate((element) => {
-    element.value = "0";
-    element.dispatchEvent(new Event("input", { bubbles: true }));
-  });
-  await expect(slider).toHaveValue("0");
-  await expect(page.locator("#viewer-canvas")).not.toHaveAttribute("data-procedure-step-id");
-
+  // Selecting an authored clip from a disassembled stage first restores the
+  // procedure baseline, then reuses this same scrubber as the clip timeline.
   await page.locator("#animation-clip-select").selectOption("clip.optiplex.side-cover-removal");
   await expect(slider).toHaveAttribute("data-mode", "animation");
+  await expect(page.locator("#viewer-canvas")).not.toHaveAttribute("data-procedure-step-id");
   await slider.evaluate((element) => {
     element.value = "1000";
     element.dispatchEvent(new Event("input", { bubbles: true }));
@@ -762,7 +758,9 @@ test("Dell tower is assembled with a visible chassis and one scrubber drives 12 
   await expect(page.locator("#animation-player-panel")).toHaveAttribute("data-status", "paused");
   await page.locator("#animation-stop").click();
   await expect(page.locator("#animation-player-panel")).toHaveAttribute("data-status", "ready");
+  await expect(slider).toHaveAttribute("data-mode", "disassembly");
   await expect(slider).toHaveAttribute("max", "12");
+  await expect(slider).toHaveValue("0");
 
   await page.locator("#animation-clip-select").selectOption("clip.optiplex.cpu-cooling-removal");
   await expect(slider).toHaveAttribute("data-mode", "animation");
