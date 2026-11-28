@@ -18,7 +18,7 @@ export class ProcedureController {
     const requestedMovementScale = Number(movementScale);
     this.movementScale = Number.isFinite(requestedMovementScale)
       ? Math.max(1, requestedMovementScale)
-      : 1.8;
+      : 2.8;
     this.stepMap = new Map();
     this.nodesById = new Map();
     this.baseline = new Map();
