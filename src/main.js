@@ -2941,6 +2941,8 @@ function updateSlicePosition(value) {
   updateSlicePlane();
 }
 
+// A single scrubber owns Dell procedure progress and temporarily lends its
+// normalized range to authored clips; all other models keep explode semantics.
 function isDellDisassemblyModel() {
   return MODEL.id === "pc.dell.optiplex-5060-tower.family";
 }
