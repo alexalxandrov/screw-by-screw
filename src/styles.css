@@ -2247,3 +2247,89 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); ou
     touch-action: pan-y;
   }
 }
+
+/* Readability pass: slightly larger text and a more usable shared assembly scrubber. */
+.eyebrow { font-size: 10px; }
+.brand-copy strong { font-size: 12px; }
+.brand-copy small { font-size: 10px; }
+.topbar-model strong { font-size: 13px; }
+.sku, .build-tag, .toolbar-camera, .viewport-overlay { font-size: 10px; }
+.quiet-button { font-size: 11px; }
+.primary-button { font-size: 12px; }
+.model-switcher { font-size: 11px; }
+.panel-heading h1, .panel-heading h2 { font-size: 16px; }
+.count-pill, .tree-toolbar { font-size: 11px; }
+.search-box input { font-size: 11px; }
+.text-button { font-size: 11px; }
+.tree-item { font-size: 12px; line-height: 1.4; padding: 9px 8px; }
+.tree-item .tree-kind, .tree-item .tree-symbol { font-size: 9px; }
+.sidebar-note { font-size: 10px; }
+.view-tab { font-size: 11px; padding: 9px 11px; }
+.camera-preset, .slice-axis { font-size: 10px; }
+.process-title, .slice-controls > label, .slice-note { font-size: 9px; }
+.process-button { font-size: 11px; padding: 8px 11px; }
+.detail-category, .detail-index { font-size: 10px; }
+#detail-name { font-size: 18px; }
+.detail-description { font-size: 12px; line-height: 1.65; }
+.detail-grid { font-size: 10px; }
+.detail-grid dd { font-size: 9px; }
+.evidence-copy, .source-links a { font-size: 10px; }
+.details-footer { font-size: 9px; }
+.timeline-panel { padding: 15px 22px 12px; }
+.timeline-heading strong { font-size: 14px; }
+.timeline-heading .eyebrow { font-size: 10px; }
+.range-labels { font-size: 10px; }
+.assembly-scrubber {
+  display: block;
+  height: 32px;
+  margin: 7px 0 3px;
+  padding: 0;
+  accent-color: var(--accent);
+  cursor: grab;
+  touch-action: pan-y;
+}
+.assembly-scrubber:active { cursor: grabbing; }
+.assembly-scrubber::-webkit-slider-runnable-track {
+  height: 9px;
+  border: 1px solid #4b5d69;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(195,232,109,.58), rgba(103,151,172,.42));
+}
+.assembly-scrubber::-moz-range-track {
+  height: 9px;
+  border: 1px solid #4b5d69;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(195,232,109,.58), rgba(103,151,172,.42));
+}
+.assembly-scrubber::-webkit-slider-thumb {
+  appearance: none;
+  width: 26px;
+  height: 26px;
+  margin-top: -9px;
+  border: 2px solid #e8f6cc;
+  border-radius: 50%;
+  background: #b7df67;
+  box-shadow: 0 0 0 5px rgba(195,232,109,.13), 0 2px 9px rgba(0,0,0,.5);
+}
+.assembly-scrubber::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #e8f6cc;
+  border-radius: 50%;
+  background: #b7df67;
+  box-shadow: 0 0 0 5px rgba(195,232,109,.13), 0 2px 9px rgba(0,0,0,.5);
+}
+.assembly-scrubber-step { margin: 7px 0 9px; color: #c6d3dc; font-size: 12px; line-height: 1.5; }
+.procedure-runner-disclaimer,
+.procedure-runner-description,
+.procedure-runner-note,
+.procedure-runner-safety,
+.procedure-runner-status { font-size: 10px; }
+.procedure-runner-current-title { font-size: 12px; }
+.procedure-runner-button { font-size: 10px; padding: 8px 9px; }
+.clip-player-controls .text-button { font-size: 10px; }
+.runtime-diagnostics { font-size: 9px; }
+@media (max-width: 620px) {
+  .assembly-scrubber { height: 34px; }
+  .timeline-panel { padding: 12px 14px 10px; }
+}
