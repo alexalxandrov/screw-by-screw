@@ -200,16 +200,16 @@ class DeviceBlockoutGeometryTests(unittest.TestCase):
         accessor = gltf["accessors"][gltf["meshes"][0]["primitives"][0]["attributes"]["POSITION"]]
         self.assertGreaterEqual(accessor["count"], 12 * 24)
 
-    def test_panel_axis_rotation_preserves_vertical_chassis_orientation(self):
+    def test_panel_axis_rotation_preserves_nonuniform_world_dimensions(self):
         gltf = parse_glb(build_glb(make_document([
-            {"kind": "panel", "axis": "x"},
-            {"kind": "panel", "axis": "z"},
+            {"kind": "panel", "axis": "x", "scale": [1.5, 346, 270]},
+            {"kind": "panel", "axis": "z", "scale": [154, 342, 5]},
         ])))
         side_panel, front_panel = gltf["nodes"][-2:]
         self.assertEqual(side_panel["rotation"], [0.0, 0.0, 2 ** -0.5, 2 ** -0.5])
         self.assertEqual(front_panel["rotation"], [2 ** -0.5, 0.0, 0.0, 2 ** -0.5])
-        self.assertEqual(side_panel["scale"], [10, 10, 10])
-        self.assertEqual(front_panel["scale"], [10, 10, 10])
+        self.assertEqual(side_panel["scale"], [346, 1.5, 270])
+        self.assertEqual(front_panel["scale"], [154, 5, 342])
 
     def test_invalid_new_io_profile_and_grille_density_are_rejected(self):
         with self.assertRaisesRegex(ValueError, "io_port profile"):
