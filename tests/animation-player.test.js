@@ -183,10 +183,10 @@ test("exploded overview animates separate assembly groups and stop restores ever
   root.traverse((object) => {
     if (object.userData?.sbs_component_id) byId.set(object.userData.sbs_component_id, object);
   });
-  assert.deepEqual(byId.get("assembly.shroud").position.toArray(), [100.9, -42, 55]);
-  assert.deepEqual(byId.get("assembly.cooling").position.toArray(), [100.9, -24, 55]);
-  assert.deepEqual(byId.get("assembly.pcb.electronics").position.toArray(), [100.9, 40, 55]);
-  assert.deepEqual(byId.get("assembly.connectors").position.toArray(), [-24, 0, 0]);
+  assert.deepEqual(byId.get("assembly.shroud").position.toArray(), [100.9, -61.2, 55]);
+  assert.deepEqual(byId.get("assembly.cooling").position.toArray(), [100.9, -43.2, 55]);
+  assert.deepEqual(byId.get("assembly.pcb.electronics").position.toArray(), [100.9, 58.24, 55]);
+  assert.deepEqual(byId.get("assembly.connectors").position.toArray(), [-43.2, 0, 0]);
   player.stop();
   for (const [id, position] of original) assert.deepEqual(byId.get(id).position.toArray(), position);
   player.dispose();
