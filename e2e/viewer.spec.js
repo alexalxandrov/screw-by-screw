@@ -99,6 +99,41 @@ test("slash search shortcut does not steal focus from editable controls", async 
   await expect(search).toBeFocused();
 });
 
+test("slash shortcut keeps catalogue search inside the open dialog", async ({ page }) => {
+  await page.goto("/?demo=1");
+  await page.locator("#catalog-open").click();
+
+  const close = page.locator("#catalog-close");
+  const catalogSearch = page.locator("#catalog-search");
+  await close.focus();
+  await page.keyboard.press("/");
+
+  await expect(catalogSearch).toBeFocused();
+  await expect(page.locator("#component-search")).not.toBeFocused();
+});
+
+test("catalog empty state clears both search and category filters", async ({ page }) => {
+  await page.goto("/?demo=1");
+  await page.locator("#catalog-open").click();
+
+  const search = page.locator("#catalog-search");
+  const category = page.locator("#catalog-category");
+  await category.selectOption("desktop_computers");
+  await search.fill("__sbs_no_catalog_matches__");
+
+  await expect(page.locator(".catalog-empty")).toBeVisible();
+  await expect(page.locator("#catalog-count")).toHaveText("0");
+  await expect(page.locator(".catalog-empty")).toContainText("По заданным фильтрам ничего не найдено");
+  await expect(page.locator(".catalog-empty-clear")).toHaveText("Сбросить фильтры");
+
+  await page.locator(".catalog-empty-clear").click();
+  await expect(search).toHaveValue("");
+  await expect(category).toHaveValue("all");
+  await expect(page.locator("#catalog-count")).toHaveText("2");
+  await expect(page.locator(".catalog-card")).toHaveCount(2);
+  await expect(search).toBeFocused();
+});
+
 test("component search shows a recoverable empty state when there are no matches", async ({ page }) => {
   await page.goto("/?demo=1");
   const search = page.locator("#component-search");

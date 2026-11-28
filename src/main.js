@@ -138,7 +138,7 @@ const UI = {
     processDiagramAria: "Logical architecture diagram",
     procedureRunnerAria: "Interactive disassembly procedure",
     procedureBranchAria: "Select service procedure branch",
-    modelLabel: "MODEL", modelSwitcherLabel: "SWITCH MODEL", modelSwitcherPlaceholder: "Choose a model…", catalogOpen: "Library", catalogTitle: "MODEL LIBRARY", catalogSubtitle: "Offline-ready model packages", catalogClose: "Close library", catalogSearch: "Search model, manufacturer or part number…", catalogSearchLabel: "SEARCH THE LIBRARY", catalogCategoryLabel: "CATEGORY", catalogEntries: "MODELS", catalogFooter: "Model packages are stored locally. No account or remote catalogue service is required.", catalogAllCategories: "All categories", catalogEmpty: "No models match this search.", catalogLoad: "Open model", catalogLoaded: "Currently loaded", catalogLoading: "Loading package…", catalogStatusResearch: "RESEARCH BLOCKOUT", catalogGeometryProxy: "Illustrative proxy · not CAD", catalogFamilyIdentity: "Platform family · no single part number", catalogPackageVersion: "Package", catalogChoosePackage: "Choose the matching .sbsmodel package to continue.", catalogError: "Could not open this catalog package.", structure: "STRUCTURE", components: "Components",
+    modelLabel: "MODEL", modelSwitcherLabel: "SWITCH MODEL", modelSwitcherPlaceholder: "Choose a model…", catalogOpen: "Library", catalogTitle: "MODEL LIBRARY", catalogSubtitle: "Offline-ready model packages", catalogClose: "Close library", catalogSearch: "Search model, manufacturer or part number…", catalogSearchLabel: "SEARCH THE LIBRARY", catalogCategoryLabel: "CATEGORY", catalogEntries: "MODELS", catalogFooter: "Model packages are stored locally. No account or remote catalogue service is required.", catalogAllCategories: "All categories", catalogEmpty: "No models match these filters.", catalogClearFilters: "Clear filters", catalogLoad: "Open model", catalogLoaded: "Currently loaded", catalogLoading: "Loading package…", catalogStatusResearch: "RESEARCH BLOCKOUT", catalogGeometryProxy: "Illustrative proxy · not CAD", catalogFamilyIdentity: "Platform family · no single part number", catalogPackageVersion: "Package", catalogChoosePackage: "Choose the matching .sbsmodel package to continue.", catalogError: "Could not open this catalog package.", structure: "STRUCTURE", components: "Components",
     searchPlaceholder: "Search components, claims, IDs and sources…", assemblyTree: "ASSEMBLY TREE", showAll: "Show all",
     noSearchResults: "No components match this search.", clearSearch: "Clear search",
     proxyNote: "Illustrative geometry · not CAD", explore: "Explore", disassemble: "Disassemble",
@@ -184,7 +184,7 @@ const UI = {
     processDiagramAria: "Логическая схема архитектуры",
     procedureRunnerAria: "Интерактивная процедура разборки",
     procedureBranchAria: "Выбор ветви сервисной процедуры",
-    modelLabel: "МОДЕЛЬ", modelSwitcherLabel: "БЫСТРОЕ ПЕРЕКЛЮЧЕНИЕ", modelSwitcherPlaceholder: "Выбрать модель…", catalogOpen: "Каталог", catalogTitle: "БИБЛИОТЕКА МОДЕЛЕЙ", catalogSubtitle: "Автономные пакеты устройств", catalogClose: "Закрыть каталог", catalogSearch: "Название, производитель или part number…", catalogSearchLabel: "ПОИСК ПО БИБЛИОТЕКЕ", catalogCategoryLabel: "КАТЕГОРИЯ", catalogEntries: "МОДЕЛИ", catalogFooter: "Пакеты моделей хранятся локально. Аккаунт и удалённый сервис каталога не нужны.", catalogAllCategories: "Все категории", catalogEmpty: "Подходящих моделей не найдено.", catalogLoad: "Открыть модель", catalogLoaded: "Уже загружена", catalogLoading: "Загрузка пакета…", catalogStatusResearch: "ИССЛЕДОВАТЕЛЬСКИЙ МАКЕТ", catalogGeometryProxy: "Условная геометрия · не CAD", catalogFamilyIdentity: "Семейство платформы · без единого артикула", catalogPackageVersion: "Пакет", catalogChoosePackage: "Выберите соответствующий файл .sbsmodel.", catalogError: "Не удалось открыть пакет из каталога.", structure: "СТРУКТУРА", components: "Компоненты",
+    modelLabel: "МОДЕЛЬ", modelSwitcherLabel: "БЫСТРОЕ ПЕРЕКЛЮЧЕНИЕ", modelSwitcherPlaceholder: "Выбрать модель…", catalogOpen: "Каталог", catalogTitle: "БИБЛИОТЕКА МОДЕЛЕЙ", catalogSubtitle: "Автономные пакеты устройств", catalogClose: "Закрыть каталог", catalogSearch: "Название, производитель или part number…", catalogSearchLabel: "ПОИСК ПО БИБЛИОТЕКЕ", catalogCategoryLabel: "КАТЕГОРИЯ", catalogEntries: "МОДЕЛИ", catalogFooter: "Пакеты моделей хранятся локально. Аккаунт и удалённый сервис каталога не нужны.", catalogAllCategories: "Все категории", catalogEmpty: "По заданным фильтрам ничего не найдено.", catalogClearFilters: "Сбросить фильтры", catalogLoad: "Открыть модель", catalogLoaded: "Уже загружена", catalogLoading: "Загрузка пакета…", catalogStatusResearch: "ИССЛЕДОВАТЕЛЬСКИЙ МАКЕТ", catalogGeometryProxy: "Условная геометрия · не CAD", catalogFamilyIdentity: "Семейство платформы · без единого артикула", catalogPackageVersion: "Пакет", catalogChoosePackage: "Выберите соответствующий файл .sbsmodel.", catalogError: "Не удалось открыть пакет из каталога.", structure: "СТРУКТУРА", components: "Компоненты",
     searchPlaceholder: "Компонент, маркировка, утверждение или источник…", assemblyTree: "ДЕРЕВО СБОРКИ", showAll: "Показать все",
     noSearchResults: "Совпадений не найдено. Измените запрос или очистите поиск.", clearSearch: "Очистить поиск",
     proxyNote: "Условная геометрия · не CAD", explore: "Обзор", disassemble: "Разборка",
@@ -455,9 +455,16 @@ function renderCatalog() {
   host.replaceChildren();
   if (count) count.textContent = String(entries.length);
   if (!entries.length) {
-    const empty = document.createElement("p");
+    const empty = document.createElement("div");
     empty.className = "catalog-empty";
-    empty.textContent = t("catalogEmpty");
+    const message = document.createElement("p");
+    message.textContent = t("catalogEmpty");
+    const clear = document.createElement("button");
+    clear.type = "button";
+    clear.className = "catalog-empty-clear";
+    clear.textContent = t("catalogClearFilters");
+    clear.addEventListener("click", clearCatalogFilters);
+    empty.append(message, clear);
     host.append(empty);
     return;
   }
@@ -517,6 +524,17 @@ function renderCatalog() {
     card.append(category, title, manufacturer, sku, summary, metadata, footer);
     host.append(card);
   });
+}
+
+function clearCatalogFilters() {
+  state.catalogSearch = "";
+  state.catalogCategory = "all";
+  const search = $("#catalog-search");
+  const category = $("#catalog-category");
+  if (search) search.value = "";
+  if (category) category.value = "all";
+  renderCatalog();
+  search?.focus();
 }
 
 function openCatalog() {
@@ -3839,7 +3857,10 @@ function bindUI() {
     );
     if (event.key === "/" && !isEditingControl && !event.altKey && !event.ctrlKey && !event.metaKey) {
       event.preventDefault();
-      $("#component-search").focus();
+      const searchTarget = $("#model-catalog-dialog")?.open
+        ? $("#catalog-search")
+        : $("#component-search");
+      searchTarget?.focus();
     }
     if (event.key === "Escape" && $("#model-catalog-dialog")?.open) {
       event.preventDefault();
