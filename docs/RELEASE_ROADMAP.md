@@ -36,18 +36,18 @@ The pilot tracks five partial teardown observations, but no complete removal/rea
 
 A historical passing run does not certify a later branch head. A job marked failed or action-required without started steps and runner logs is not a code-test result. Record the exact commit SHA and run URLs; mark the gate pending until GitHub Actions executes the workflow steps and publishes their outcomes.
 
-### Current PR #44 verification — 2026-11-28
+### Current main verification — 2026-11-28
 
-The latest code-bearing revision verified by CI is `b87f172713431c58c79c680b8b2fbf5ddaf96c68`. All four required workflows executed on this exact SHA and completed successfully:
+The latest code-bearing revision verified by CI is `75fd7bae3374950b00d5167ec02d4341c35a5967`. All four required workflows executed their jobs and completed successfully:
 
-- [Model package validation — run 46169688974](https://github.com/alexalxandrov/screw-by-screw/actions/runs/46169688974): success; job `test`.
-- [OptiPlex 5060 package validation — run 46169688826](https://github.com/alexalxandrov/screw-by-screw/actions/runs/46169688826): success; job `validate-optiplex`.
-- [Blender blockout generation — run 46169688804](https://github.com/alexalxandrov/screw-by-screw/actions/runs/46169688804): success; job `build-and-inspect`; build artifact retained.
-- [Viewer build — run 46169688785](https://github.com/alexalxandrov/screw-by-screw/actions/runs/46169688785): success; both `check_published_packages` and `build` jobs.
+- [Model package validation — run 46174036357](https://github.com/alexalxandrov/screw-by-screw/actions/runs/46174036357): success; job `test`.
+- [OptiPlex 5060 package validation — run 46174036353](https://github.com/alexalxandrov/screw-by-screw/actions/runs/46174036353): success; job `validate-optiplex`.
+- [Blender blockout generation — run 46174036346](https://github.com/alexalxandrov/screw-by-screw/actions/runs/46174036346): success; job `build-and-inspect`; generated build artifacts retained.
+- [Viewer build — run 46174036354](https://github.com/alexalxandrov/screw-by-screw/actions/runs/46174036354): success; both `check_published_packages` and `build` jobs.
 
-The earlier bot-triggered `action_required` results on this same SHA were subsequently approved and rerun; their final run conclusions are `success`, with jobs present and completed. They are not outstanding failures.
+The current `main` HEAD is `f9738b62915248f1c950f332d28f5cde47a9db19`, a CI-generated standalone-launcher refresh. A direct commit comparison confirms that it changes only the root `index.html` relative to `75fd7ba`; application, model, test and workflow files are unchanged. The generated bot commit intentionally does not trigger another workflow run, preventing a build loop. The successful jobs above therefore certify the code-bearing revision, and the later HEAD contains its generated offline launcher.
 
-After these successful runs, two documentation-only commits updated the release roadmap and acceptance checklist. The compare from the verified code-bearing SHA contains only those Markdown files; no application, model, test or workflow files changed, and the workflows do not trigger on docs-only paths. The green runs therefore certify the code-bearing revision, while the appended documentation changes do not require a code retest. PR #44 remains open and unmerged. This does not replace owner visual review, manual accessibility and target-hardware performance checks, or asset-rights review; Release 1.0 remains not approved until those gates are accepted.
+PR #44 (procedural OptiPlex geometry v0.4) was merged into `main` on 2026-11-28 at 17:35:39 UTC. It is not an open or pending change. The automated engineering gates are green; owner visual review, manual accessibility, target-hardware performance and asset-rights review remain outstanding. Release 1.0 is not approved until those owner-acceptance gates are closed.
 
 ## Non-negotiable accuracy policy
 
