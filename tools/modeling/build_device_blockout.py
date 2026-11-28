@@ -102,7 +102,7 @@ def _append_cylinder(
             math.cos(a1), 0.0, math.sin(a1),
             math.cos(a0), 0.0, math.sin(a0),
         ))
-        indices.extend((base, base + 1, base + 2, base, base + 2, base + 3))
+        indices.extend((base, base + 2, base + 1, base, base + 3, base + 2))
 
         base = len(positions) // 3
         positions.extend((0.0, half_depth, 0.0, x0, half_depth, z0, x1, half_depth, z1))
