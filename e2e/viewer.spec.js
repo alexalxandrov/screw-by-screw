@@ -666,8 +666,10 @@ test("Dell tower is assembled with a visible chassis and one scrubber drives 12 
 
   const slider = page.locator("#assembly-scrubber");
   await expect(slider).toBeVisible();
+  await expect(slider).toHaveAttribute("data-mode", "disassembly");
   await expect(slider).toHaveValue("0");
   await expect(slider).toHaveAttribute("max", "12");
+  await expect(page.locator("#explode-value")).toHaveText("0 / 12");
   await expect(page.locator("#explode-slider")).toHaveCount(0);
   await expect(page.locator("#animation-seek")).toHaveCount(0);
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-initial-explode-progress", "0");
@@ -705,6 +707,15 @@ test("Dell tower is assembled with a visible chassis and one scrubber drives 12 
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-step-id", "step.optiplex.remove-cpu-fan");
   const fanDelta = JSON.parse(await page.locator("#viewer-canvas").getAttribute("data-procedure-world-deltas"));
   expect(fanDelta[0].delta[2]).toBeGreaterThan(0);
+
+  // The full 12-stage guide is reachable from the same control.
+  await slider.evaluate((element) => {
+    element.value = "12";
+    element.dispatchEvent(new Event("input", { bubbles: true }));
+  });
+  await expect(slider).toHaveValue("12");
+  await expect(page.locator("#explode-value")).toHaveText("12 / 12");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-step-id", "step.optiplex.remove-system-board");
 
   await slider.evaluate((element) => {
     element.value = "0";

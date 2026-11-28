@@ -248,8 +248,9 @@ function renderAnimationClipOptions() {
   });
   select.value = selectedId;
   select.setAttribute("aria-label", t("clipSelect"));
-  $("#assembly-scrubber")?.setAttribute("aria-label", t("clipTimeline"));
+  if (state.timelineMode === "animation") $("#assembly-scrubber")?.setAttribute("aria-label", t("clipTimeline"));
   updateAnimationPlayerUI();
+  if (state.timelineMode !== "animation") updateAssemblyTimeline();
 }
 
 function animationStatusLabel(status) {
