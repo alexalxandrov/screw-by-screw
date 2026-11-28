@@ -3,7 +3,7 @@
 ## Version policy
 
 - **0.1–0.3:** procedural blockout and owner-run Blender/GLB technical validation.
-- **0.4:** photo-informed proxy geometry and improved component separation; Blender 4.3.2 generation was made reproducible in CI.
+- **0.4:** photo-informed proxy geometry and improved component separation; Blender 4.3.2 generation was made reproducible in CI. OptiPlex package v0.4 adds per-component box, cylinder, fan and fin-stack primitives with automated geometry tests; all remain explicitly illustrative proxies.
 - **0.5:** model-package validation, text-first inspection and reproducible quality gates.
 - **0.6:** viewer interaction slice: GLB loading, component picking, hierarchy, isolation, camera presets, section view, search, source claims and model-space measurement.
 - **0.7:** exploded view, deterministic reassembly, source-aware assembly observations and package-authored animation runtime.
