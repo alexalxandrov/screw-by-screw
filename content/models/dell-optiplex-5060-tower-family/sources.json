@@ -281,6 +281,26 @@
       "locator": "Disconnect ODD data/power, unroute cables from tabs under drive cage, press blue release tab and slide drive out",
       "notes": "Slim ODD option is not asserted as fitted. Cable retention tabs are represented as a semantic group only.",
       "access_date": "2026-11-27"
+    },
+    {
+      "id": "src.dell.5060.front_view",
+      "title": "Dell OptiPlex 5060 Tower front view",
+      "publisher": "Dell Technologies",
+      "source_type": "manufacturer_setup_guide_web",
+      "url": "https://www.dell.com/support/manuals/en-us/optiplex-5060-desktop/optiplex_5060_mt_setup_and_specs/front-view?guid=guid-cd24c6a2-daef-411f-8e94-0c7e9ff8d174&lang=en-us",
+      "locator": "Front view text legend callouts 1–9: power button/light, optional optical drive/card reader, HDD activity, headset jack and four front USB ports.",
+      "notes": "Text legend only. Embedded image visibly labels OptiPlex 5070 under a 5060 guide URL; pixels and coordinates excluded from 5060 placement.",
+      "access_date": "2026-11-28"
+    },
+    {
+      "id": "src.dell.5060.back_view",
+      "title": "Dell OptiPlex 5060 Tower back view",
+      "publisher": "Dell Technologies",
+      "source_type": "manufacturer_setup_guide_web",
+      "url": "https://www.dell.com/support/manuals/en-us/optiplex-5060-desktop/optiplex_5060_mt_setup_and_specs/back-view?guid=guid-2ea3360b-a234-4e0f-a1ec-89da5d329043&lang=en-us",
+      "locator": "Rear view text legend callouts 1–15: line-out, optional serial/video, DisplayPorts, USB, RJ-45, expansion, AC inlet, optional antennas, indicators and locks.",
+      "notes": "Text legend only. Embedded image visibly labels OptiPlex 5070 under a 5060 guide URL; pixels and coordinates excluded from 5060 placement.",
+      "access_date": "2026-11-28"
     }
   ]
 }
