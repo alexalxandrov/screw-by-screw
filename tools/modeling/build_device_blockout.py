@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build a self-contained GLB from semantic component visual_proxy metadata.
 
-Supported illustrative primitives: box, cylinder, fan and fin_stack.
+Supported illustrative primitives: chassis_frame, panel, box, cylinder, fan and fin_stack.
 Stable component IDs and assembly hierarchy are preserved in glTF node extras.
 All generated geometry remains an educational proxy, never measured CAD.
 """
@@ -130,10 +130,25 @@ def _build_proxy_geometry(proxy: dict) -> tuple[list[float], list[float], list[i
     kind=proxy.get("kind"); positions=[]; normals=[]; indices=[]
     if kind=="box": _append_box(positions,normals,indices)
     elif kind=="panel":
-        _append_box(positions,normals,indices,size=(0.98,0.04,0.98))
+        # A visibly solid sheet with reinforced edges. Dimensions are normalized
+        # proxy proportions; the component's world scale supplies the model envelope.
+        _append_box(positions,normals,indices,size=(0.98,0.20,0.98))
         for sign in (-1,1):
-            _append_box(positions,normals,indices,center=(sign*0.46,0.07,0.0),size=(0.06,0.18,0.96))
-            _append_box(positions,normals,indices,center=(0.0,0.07,sign*0.46),size=(0.96,0.18,0.06))
+            _append_box(positions,normals,indices,center=(sign*0.46,0.14,0.0),size=(0.08,0.32,0.96))
+            _append_box(positions,normals,indices,center=(0.0,0.14,sign*0.46),size=(0.96,0.32,0.08))
+    elif kind=="chassis_frame":
+        # Open perimeter frame: four corner uprights plus top, bottom and mid rails.
+        # This gives the tower a readable shell without claiming measured CAD.
+        for x in (-0.46, 0.46):
+            for z in (-0.46, 0.46):
+                _append_box(positions,normals,indices,center=(x,0.0,z),size=(0.075,0.98,0.075))
+        for y in (-0.46, 0.46):
+            for z in (-0.46, 0.46):
+                _append_box(positions,normals,indices,center=(0.0,y,z),size=(0.98,0.075,0.075))
+            for x in (-0.46, 0.46):
+                _append_box(positions,normals,indices,center=(x,y,0.0),size=(0.075,0.075,0.98))
+        for y in (-0.18, 0.18):
+            _append_box(positions,normals,indices,center=(0.0,y,0.46),size=(0.90,0.045,0.055))
     elif kind=="cylinder": _append_cylinder(positions,normals,indices,segments=proxy.get("segments",32))
     elif kind=="fan":
         count=proxy.get("blade_count",7)

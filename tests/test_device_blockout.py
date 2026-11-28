@@ -192,6 +192,25 @@ class DeviceBlockoutGeometryTests(unittest.TestCase):
         for mesh in gltf["meshes"]:
             self.assertGreater(gltf["accessors"][mesh["primitives"][0]["indices"]]["count"], 0)
 
+    def test_chassis_frame_contains_corner_posts_and_perimeter_rails(self):
+        gltf = parse_glb(build_glb(make_document([{"kind": "chassis_frame"}])))
+        self.assertEqual(len(gltf["meshes"]), 1)
+        proxy_node = gltf["nodes"][-1]
+        self.assertEqual(proxy_node["extras"]["sbs_export_role"], "decorative_detail")
+        accessor = gltf["accessors"][gltf["meshes"][0]["primitives"][0]["attributes"]["POSITION"]]
+        self.assertGreaterEqual(accessor["count"], 12 * 24)
+
+    def test_panel_axis_rotation_preserves_vertical_chassis_orientation(self):
+        gltf = parse_glb(build_glb(make_document([
+            {"kind": "panel", "axis": "x"},
+            {"kind": "panel", "axis": "z"},
+        ])))
+        side_panel, front_panel = gltf["nodes"][-2:]
+        self.assertEqual(side_panel["rotation"], [0.0, 0.0, 2 ** -0.5, 2 ** -0.5])
+        self.assertEqual(front_panel["rotation"], [2 ** -0.5, 0.0, 0.0, 2 ** -0.5])
+        self.assertEqual(side_panel["scale"], [10, 10, 10])
+        self.assertEqual(front_panel["scale"], [10, 10, 10])
+
     def test_invalid_new_io_profile_and_grille_density_are_rejected(self):
         with self.assertRaisesRegex(ValueError, "io_port profile"):
             build_glb(make_document([{"kind": "io_port", "profile": "hdmi"}]))

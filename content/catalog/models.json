@@ -109,8 +109,8 @@
       "model_kind": "system",
       "category_id": "desktop_computers",
       "summary": {
-        "en": "Dell OptiPlex 5060 Tower family v0.4.1: 137 semantic nodes, 145 relationships, 30 sources, 36 claims and 84 geometry nodes. Selectable panels, drive-cage and front/rear I/O proxies. Port counts sourced; geometry schematic; optional population unknown.",
-        "ru": "Dell OptiPlex 5060 Tower v0.4.1: 137 семантических узлов, 145 связей, 30 источников, 36 утверждений и 84 геометрических узла. Панели, каркас корзины и I/O-маркеры; количество портов подтверждено, координаты условны, состав опций неизвестен."
+        "en": "Dell OptiPlex 5060 Tower family v0.4.2: 137 semantic nodes, 145 relationships, 30 sources, 36 claims and 85 geometry nodes. Includes an open chassis frame, correctly oriented opaque case panels, drive cage and I/O proxies. Geometry is schematic; optional population remains unknown.",
+        "ru": "Dell OptiPlex 5060 Tower v0.4.2: 137 семантических узлов, 145 связей, 30 источников, 36 утверждений и 85 геометрических узлов. Добавлен открытый каркас корпуса, правильно ориентированные непрозрачные панели, корзина накопителей и I/O-маркеры. Геометрия условная; комплектация опций неизвестна."
       },
       "tags": [
         "Dell",
@@ -141,7 +141,7 @@
       ],
       "status": "research_blockout",
       "geometry_status": "illustrative_proxy_not_cad",
-      "package_version": "0.4.1",
+      "package_version": "0.4.2",
       "package_path": "models/dell_optiplex_5060_tower_v04.sbsmodel",
       "published": true,
       "publication_status": "reference"

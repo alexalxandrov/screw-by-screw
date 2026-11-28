@@ -2,7 +2,7 @@
   "schema_version": "0.1.0",
   "model_id": "pc.dell.optiplex-5060-tower.family",
   "part_number": null,
-  "package_version": "0.4.1",
+  "package_version": "0.4.2",
   "status": "research_blockout",
   "geometry_status": "illustrative_proxy_not_cad",
   "identity_scope": "platform_family",
@@ -15,7 +15,7 @@
     "assembly_steps": 12,
     "learning_questions": 9,
     "documented_source_records": 30,
-    "geometry_nodes": 84,
+    "geometry_nodes": 85,
     "optional_population_unknown": true,
     "motherboard_callout_mappings": 26,
     "technical_claims": 36,
@@ -31,8 +31,9 @@
       "cylinder": 2,
       "fan": 3,
       "fin_stack": 1,
-      "total": 84,
-      "note": "Schematic proxy meshes only; port identities/counts are sourced, positions/dimensions are not measured. Current guide images say 5070 and were excluded from 5060 placement."
+      "total": 85,
+      "note": "Schematic chassis-frame, panel, drive-cage and I/O proxy meshes only; port identities/counts are sourced, positions/dimensions are not measured. Current guide images say 5070 and were excluded from 5060 placement.",
+      "chassis_frame": 1
     },
     "io_port_profiles": {
       "usb_a": 9,

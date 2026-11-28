@@ -31,14 +31,28 @@
       },
       "category": "mechanical_assembly",
       "evidence_status": "teardown_supported",
-      "geometry_status": "assembly_node",
+      "geometry_status": "illustrative_proxy",
       "source_ids": [
         "src.dell.5060.service",
         "src.dell.5060.setup"
       ],
       "description": {
-        "en": "Outer structure constrained by Dell's published envelope; internal folds and interfaces are schematic.",
-        "ru": "Внешняя конструкция ограничена опубликованными Dell габаритами; внутренние штамповки и интерфейсы показаны схематично."
+        "en": "Open perimeter frame with corner uprights and reinforcing rails. Internal folds and interfaces remain schematic; this is not measured CAD.",
+        "ru": "Открытый периметральный каркас с угловыми стойками и усилителями. Внутренние штамповки и интерфейсы показаны схематично; это не измеренная CAD-модель."
+      },
+      "visual_proxy": {
+        "kind": "chassis_frame",
+        "translation": [
+          0,
+          175,
+          0
+        ],
+        "scale": [
+          154,
+          350,
+          274
+        ],
+        "material": 0
       }
     },
     {
@@ -137,7 +151,8 @@
           346,
           270
         ],
-        "material": 1
+        "material": 1,
+        "axis": "x"
       }
     },
     {
@@ -170,7 +185,8 @@
           342,
           5
         ],
-        "material": 1
+        "material": 1,
+        "axis": "z"
       }
     },
     {
@@ -203,7 +219,8 @@
           342,
           2
         ],
-        "material": 0
+        "material": 0,
+        "axis": "z"
       }
     },
     {
