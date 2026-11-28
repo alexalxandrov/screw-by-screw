@@ -35,6 +35,22 @@ test("records duplicate stable component IDs", () => {
   assert.deepEqual(controller.duplicateIds, ["fan.1"]);
 });
 
+test("default explode clearance scales with the overall model envelope", () => {
+  const small = makeScene();
+  const smallController = new SceneController(small.root);
+  const fanStart = small.fan.position.clone();
+  smallController.setExplode(100);
+  assert.ok(smallController.explodeDistanceFactor >= 0.7);
+  assert.ok(small.fan.position.distanceTo(fanStart) >= 69.9);
+
+  const large = makeScene();
+  large.root.scale.setScalar(30);
+  large.root.updateMatrixWorld(true);
+  const largeController = new SceneController(large.root);
+  assert.ok(largeController.explodeDistanceFactor > smallController.explodeDistanceFactor * 2);
+});
+
+
 test("exploded view is reversible and preserves nested hierarchy", () => {
   const { root, fan, board } = makeScene();
   const controller = new SceneController(root);
