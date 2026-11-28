@@ -563,6 +563,32 @@
         "src.dell.5060.odd_removal"
       ],
       "notes": "Optional slim optical drive; its installed presence is unknown."
+    },
+    {
+      "id": "claim.ports.front_standard_external_connectors",
+      "subject_id": "front.io_region",
+      "predicate": "front_standard_external_connector_count",
+      "value": 5,
+      "unit": "ports",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.5060.ports",
+        "src.dell.5060.front_view"
+      ],
+      "notes": "Five standard front connectors: one universal headset/audio jack and four USB ports. Optional SD reader and optical drive excluded."
+    },
+    {
+      "id": "claim.ports.rear_standard_external_connectors",
+      "subject_id": "rear.io_region",
+      "predicate": "rear_standard_data_audio_network_connector_count",
+      "value": 10,
+      "unit": "ports",
+      "confidence_class": "manufacturer_data",
+      "source_ids": [
+        "src.dell.5060.ports",
+        "src.dell.5060.back_view"
+      ],
+      "notes": "Ten standard rear data/audio/network connectors: one line-out, two DisplayPorts, four USB 3.1 Gen 1, two USB 2.0 SmartPower On and one RJ-45. AC inlet separate; serial, third-video and antenna modules optional."
     }
   ]
 }
