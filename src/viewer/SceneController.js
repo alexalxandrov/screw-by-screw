@@ -2,10 +2,21 @@ import * as THREE from "three";
 
 /** Device-agnostic scene controls shared by every Screw by Screw model. */
 export class SceneController {
-  constructor(root, { explodeDistanceFactor = 0.42, reducedMotion = false } = {}) {
+  constructor(root, { explodeDistanceFactor = null, reducedMotion = false } = {}) {
     if (!root?.isObject3D) throw new TypeError("SceneController requires a Three.js Object3D root");
     this.root = root;
-    this.explodeDistanceFactor = explodeDistanceFactor;
+    // Scale the full-range exploded-view clearance to the model envelope so a
+    // small GPU and a full tower do not receive the same arbitrary translation.
+    // At 100%, parts travel roughly 28% of the model's bounding-box diagonal.
+    this.root.updateWorldMatrix(true, true);
+    const modelBounds = new THREE.Box3().setFromObject(root);
+    const modelDiagonal = modelBounds.isEmpty()
+      ? 0
+      : modelBounds.getSize(new THREE.Vector3()).length();
+    const requestedFactor = Number(explodeDistanceFactor);
+    this.explodeDistanceFactor = Number.isFinite(requestedFactor) && requestedFactor > 0
+      ? requestedFactor
+      : Math.max(0.7, modelDiagonal * 0.0028);
     this.reducedMotion = Boolean(reducedMotion);
     this.explodeProgress = 0;
     this.explodable = [];
