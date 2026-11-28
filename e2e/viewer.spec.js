@@ -641,3 +641,84 @@ test("Dell package exposes working 3D disassembly actions and authored animation
   expect(Math.abs(boardMovement[1])).toBeLessThan(0.01);
   expect(pageErrors).toEqual([]);
 });
+
+test("viewer controls retain independent state and expose toggle states", async ({ page }) => {
+  await page.goto("/?demo=1");
+
+  const wireframe = page.locator("#wireframe-toggle");
+  const isolate = page.locator("#isolate-toggle");
+  await expect(wireframe).toHaveAttribute("aria-pressed", "false");
+  await expect(isolate).toBeDisabled();
+  await expect(isolate).toHaveAttribute("aria-pressed", "false");
+
+  await wireframe.click();
+  await expect(wireframe).toHaveAttribute("aria-pressed", "true");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-wireframe", "true");
+
+  await page.locator('#component-tree button[data-id="cooling.heatsink"]').click();
+  await expect(isolate).toBeEnabled();
+  await isolate.click();
+  await expect(isolate).toHaveAttribute("aria-pressed", "true");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-isolated", "true");
+
+  await page.locator('#component-tree button[data-id="assembly.card.root"]').click();
+  await expect(isolate).toHaveAttribute("aria-pressed", "false");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-isolated", "false");
+
+  const cooling = page.locator('.process-button[data-layer="cooling"]');
+  await cooling.click();
+  await expect(cooling).toHaveAttribute("aria-pressed", "true");
+  await page.locator("#slice-toggle").click();
+  await expect(page.locator("#slice-toggle")).toHaveAttribute("aria-pressed", "true");
+  await expect(cooling).toHaveAttribute("aria-pressed", "true");
+  await expect(cooling).toHaveClass(/active/);
+
+  await expect(page.locator("#slice-axis")).toBeEnabled();
+  await expect(page.locator("#slice-position")).toBeEnabled();
+  await page.locator("#slice-axis").selectOption("z");
+  await page.locator("#slice-position").evaluate((input) => {
+    input.value = "70";
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+  });
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-slice-axis", "z");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-slice-fraction", "0.7");
+  await page.locator("#slice-toggle").click();
+  await expect(page.locator("#slice-toggle")).toHaveAttribute("aria-pressed", "false");
+
+  await page.locator("#measurement-toggle").click();
+  await expect(page.locator("#measurement-toggle")).toHaveAttribute("aria-pressed", "true");
+  await expect(cooling).toHaveAttribute("aria-pressed", "true");
+  await expect(cooling).toHaveClass(/active/);
+});
+
+test("camera reset, explode action and expand-tree controls work", async ({ page }) => {
+  await page.goto("/?demo=1");
+
+  await page.locator("#camera-preset").selectOption("top");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-camera-preset", "top");
+  await page.locator("#reset-view").click();
+  await expect(page.locator("#camera-preset")).toHaveValue("isometric");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-camera-preset", "isometric");
+
+  await page.locator("#explode-button").click();
+  await expect(page.locator("#explode-slider")).toHaveValue("100");
+  await expect(page.locator("#explode-value")).toHaveText("100%");
+  await page.locator("#assemble-button").click();
+  await expect(page.locator("#explode-slider")).toHaveValue("0");
+
+  await page.locator("#component-search").fill("__sbs_no_component_matches__");
+  await expect(page.locator('#component-tree button[data-id="assembly.card.root"]')).toHaveCount(0);
+  await page.locator("#expand-tree").click();
+  await expect(page.locator("#component-search")).toHaveValue("");
+  await expect(page.locator('#component-tree button[data-id="assembly.card.root"]')).toBeVisible();
+});
+
+test("viewer mode and process controls expose one pressed state", async ({ page }) => {
+  await page.goto("/?demo=1");
+  await page.locator('.view-tab[data-mode="understand"]').click();
+  await expect(page.locator('.view-tab[data-mode="understand"]')).toHaveAttribute("aria-pressed", "true");
+  await expect(page.locator('.view-tab[data-mode="explore"]')).toHaveAttribute("aria-pressed", "false");
+  await expect(page.locator('.process-button[data-layer="cooling"]')).toHaveAttribute("aria-pressed", "true");
+  await page.locator('.process-button[data-layer="cooling"]').click();
+  await expect(page.locator('.process-button[data-layer="cooling"]')).toHaveAttribute("aria-pressed", "false");
+});

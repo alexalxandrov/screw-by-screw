@@ -18,3 +18,17 @@ test("learning panel meets automated WCAG A/AA checks", async ({ page }) => {
   await page.getByRole("button", { name: "Обучение" }).click();
   await audit(page);
 });
+
+test("catalog dialog meets automated WCAG A/AA checks", async ({ page }) => {
+  await page.goto("/?demo=1");
+  await page.locator("#catalog-open").click();
+  await expect(page.locator("#model-catalog-dialog")).toBeVisible();
+  await audit(page);
+});
+
+test("model comparison view meets automated WCAG A/AA checks", async ({ page }) => {
+  await page.goto("/?demo=1");
+  await page.locator('.view-tab[data-mode="compare"]').click();
+  await expect(page.locator("#comparison-panel")).toBeVisible();
+  await audit(page);
+});

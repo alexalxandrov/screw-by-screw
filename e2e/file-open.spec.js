@@ -121,6 +121,10 @@ test("opens the published Dell package from the standalone file and verifies rea
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-applied-count", "1");
   const procedureDelta = JSON.parse(await page.locator("#viewer-canvas").getAttribute("data-procedure-world-deltas"));
   expect(Math.hypot(...procedureDelta[0].delta)).toBeGreaterThan(0);
+  await page.locator("#assembly-step-previous").click();
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-applied-count", "0");
+  await page.locator("#assembly-step-next").click();
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-applied-count", "1");
 
   await page.locator("#animation-clip-select").selectOption("clip.optiplex.cpu-cooling-removal");
   await page.locator("#animation-seek").evaluate((element) => {
@@ -151,4 +155,23 @@ test("opens the published Dell package from the standalone file and verifies rea
   expect(boardDeltas.find((entry) => entry.targetId === "motherboard.assembly")?.delta[2]).toBeGreaterThan(0);
   expect(pageErrors).toEqual([]);
   expect(requestFailures).toEqual([]);
+});
+
+test("visible open and compare buttons invoke their matching file pickers", async ({ page }) => {
+  await page.goto("/?demo=1");
+  await expect(page.locator("#viewer-canvas canvas")).toBeVisible();
+
+  const modelChooserEvent = page.waitForEvent("filechooser");
+  await page.locator("#open-model").click();
+  const modelChooser = await modelChooserEvent;
+  expect(await (await modelChooser.element()).getAttribute("id")).toBe("model-file");
+  await modelChooser.setFiles([]);
+
+  await page.locator('.view-tab[data-mode="compare"]').click();
+  await expect(page.locator("#comparison-panel")).toBeVisible();
+  const comparisonChooserEvent = page.waitForEvent("filechooser");
+  await page.locator("#compare-select-model").click();
+  const comparisonChooser = await comparisonChooserEvent;
+  expect(await (await comparisonChooser.element()).getAttribute("id")).toBe("comparison-file");
+  await comparisonChooser.setFiles([]);
 });

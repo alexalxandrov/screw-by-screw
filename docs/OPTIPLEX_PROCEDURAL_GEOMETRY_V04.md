@@ -19,8 +19,8 @@ The current 58 geometry-bearing nodes are generated as:
 - **Cylinder:** local-Y cylinder with selectable X/Y/Z axis orientation.
 - **Fan:** segmented perimeter frame, generic swept blades and central hub.
 - **Fin stack:** repeated parallel plates inside the existing illustrative component envelope.
-- Every generated mesh remains attached to its original stable semantic component node.
-- Dimensions and locations continue to use the existing model-space envelope. No source-backed fastener positions or unmeasured optional hardware were added.
+- Every generated mesh remains attached to its original stable semantic component node through an untagged visual-proxy child. The helper carries the proxy mesh and its transform; semantic nodes retain identity transforms and the documented component hierarchy.
+- Proxy translations and dimensions continue to use the existing model-space envelope. Keeping these transforms on visual children prevents parent transforms from being applied again to nested components. No source-backed fastener positions or unmeasured optional hardware were added.
 
 Fan blade count and heatsink fin spacing are purely visual rendering parameters. They are not claims about the actual factory fan blade count, fin count, pitch, or exact heatsink construction.
 

@@ -118,6 +118,26 @@ const MAX_GLB_BYTES = MAX_SCENE_GLB_BYTES;
 
 const UI = {
   en: {
+    modelSwitcherAria: "Quick switch between published models",
+    languageToggleAria: "Switch between Russian and English",
+    workspacePanelAria: "Workspace panel navigation",
+    componentSearchAria: "Search components, labels, claims and sources",
+    componentTreeAria: "Component hierarchy",
+    viewerColumnAria: "3D model viewer",
+    viewModesAria: "Viewer modes",
+    processLayerControlsAria: "Process layer controls",
+    resetView: "Reset camera",
+    wireframeToggle: "Toggle wireframe display",
+    isolateToggle: "Isolate selected component",
+    explodeSliderAria: "Explode distance",
+    animationClipAria: "Animation clip",
+    animationTimelineAria: "Animation timeline",
+    sectionPositionAria: "Section position",
+    inventoryExportAria: "Model data export",
+    comparisonPanelAria: "Model package comparison",
+    processDiagramAria: "Logical architecture diagram",
+    procedureRunnerAria: "Interactive disassembly procedure",
+    procedureBranchAria: "Select service procedure branch",
     modelLabel: "MODEL", modelSwitcherLabel: "SWITCH MODEL", modelSwitcherPlaceholder: "Choose a model…", catalogOpen: "Library", catalogTitle: "MODEL LIBRARY", catalogSubtitle: "Offline-ready model packages", catalogClose: "Close library", catalogSearch: "Search model, manufacturer or part number…", catalogSearchLabel: "SEARCH THE LIBRARY", catalogCategoryLabel: "CATEGORY", catalogEntries: "MODELS", catalogFooter: "Model packages are stored locally. No account or remote catalogue service is required.", catalogAllCategories: "All categories", catalogEmpty: "No models match this search.", catalogLoad: "Open model", catalogLoaded: "Currently loaded", catalogLoading: "Loading package…", catalogStatusResearch: "RESEARCH BLOCKOUT", catalogGeometryProxy: "Illustrative proxy · not CAD", catalogFamilyIdentity: "Platform family · no single part number", catalogPackageVersion: "Package", catalogChoosePackage: "Choose the matching .sbsmodel package to continue.", catalogError: "Could not open this catalog package.", structure: "STRUCTURE", components: "Components",
     searchPlaceholder: "Search components, claims, IDs and sources…", assemblyTree: "ASSEMBLY TREE", showAll: "Show all",
     proxyNote: "Illustrative geometry · not CAD", explore: "Explore", disassemble: "Disassemble",
@@ -143,6 +163,26 @@ const UI = {
     modelLoaded: "Model ready", glbPicker: "Choose a .glb file", learn: "Learn", learning: "LEARNING", authoredAnimations: "PACKAGE ANIMATIONS", runtimeDiagnostics: "Runtime diagnostics", diagnosticsModel: "Model ID", diagnosticsComponents: "Mapped components", diagnosticsProcedure: "Procedure step", diagnosticsAnimation: "Animation clip", diagnosticsMotion: "World-space displacement", clipSelect: "Select clip", clipTimeline: "Animation timeline", clipPlay: "Play", clipPause: "Pause", clipStop: "Stop / reset", clipReady: "Ready", clipPlaying: "Playing", clipPaused: "Paused", clipCompleted: "Completed", clipTime: "TIME", clipEvidenceNote: "Authored model motion · not a physics simulation", clipEducationalApproximation: "Educational approximation · duration is not measured RPM", clipIllustrative: "Illustrative motion · not a measured mechanism", clipDocumentedMotion: "Documented motion · source-linked", clipMeasuredMotion: "Measured motion · source and method recorded", linkedComponents: "LINKED COMPONENTS", assumptions: "ASSUMPTIONS & LIMITS", processLayer: "PROCESS LAYER", fileTooLarge: "GLB exceeds the 256 MB limit.", packageTooLarge: "SBS model package exceeds the 512 MB limit.", externalResources: "This GLB references external files. Only self-contained GLB files are allowed.", question: "QUESTION", checkAnswer: "Check answer", nextQuestion: "Next question", finishQuiz: "Finish", restartQuiz: "Try again", correctAnswer: "Correct", wrongAnswer: "Not quite", quizComplete: "Quiz complete", yourScore: "Your score", chooseAnswer: "Choose an answer first", learningProgressSaved: "Progress saved in this browser", learningProgressLocal: "Local progress · this browser", learningProgressSession: "Local storage unavailable · session only", mobileViewer: "3D", mobileStructure: "Structure", mobileDetails: "Details", compare: "Compare", compareTitle: "MODEL COMPARISON", compareLeft: "MODEL A · ACTIVE PACKAGE", compareRight: "MODEL B · COMPARISON PACKAGE", compareChoosePackage: "Load a second .sbsmodel package", compareClearPackage: "Clear comparison", compareWaiting: "Load a validated .sbsmodel package to compare semantic data.", compareLoaded: "Comparison package validated", compareError: "Could not validate the comparison package", compareSku: "PART NUMBER", compareGeometry: "GEOMETRY EVIDENCE", comparePcb: "PCB REVISION", compareSpecifications: "SPECIFICATION COMPARISON", compareClaims: "SOURCE-BACKED CLAIMS", compareCoverage: "COMPONENT INVENTORY COVERAGE", compareShared: "Shared IDs", compareLeftOnly: "Recorded only in package A", compareRightOnly: "Recorded only in package B", compareSame: "Same value", compareDifferent: "Different", compareUnknownBoth: "Unknown in both", compareUnknownLeft: "Unknown in A", compareUnknownRight: "Unknown in B", compareNotRecordedLeft: "Not recorded in A", compareNotRecordedRight: "Not recorded in B", compareOnlyLeft: "Only in package A", compareOnlyRight: "Only in package B", compareUnknown: "Unknown", compareNotRecorded: "Not recorded", compareEvidenceA: "Evidence A", compareEvidenceB: "Evidence B", compareSourcesA: "Sources A", compareSourcesB: "Sources B", compareNoClaims: "No comparable claims are recorded.", compareNoSpecifications: "No specification values are recorded in these packages.", compareCoverageNote: "Package inventory differences describe coverage only; they do not prove a physical component is absent.", compareLimitations: "INTERPRETATION LIMITS", compareLimitationsList: ["Comparison is limited to validated semantic packages, not hardware inspection.", "Unknown values are not inferred from another SKU or PCB revision.", "A missing package field does not prove physical absence.", "Component ID differences do not prove physical additions or removals.", "3D geometry, CAD, BoardView, PCB routing and physical fitment are not compared."], comparePackageModel: "Model ID"
   },
   ru: {
+    modelSwitcherAria: "Быстрое переключение между опубликованными моделями",
+    languageToggleAria: "Сменить язык: русский или английский",
+    workspacePanelAria: "Переключение панелей рабочего пространства",
+    componentSearchAria: "Поиск компонентов, обозначений, утверждений и источников",
+    componentTreeAria: "Иерархия компонентов",
+    viewerColumnAria: "Окно трёхмерной модели",
+    viewModesAria: "Режимы просмотра модели",
+    processLayerControlsAria: "Управление слоями процессов",
+    resetView: "Сбросить ракурс камеры",
+    wireframeToggle: "Переключить каркасное отображение",
+    isolateToggle: "Изолировать выбранный компонент",
+    explodeSliderAria: "Степень разнесения компонентов",
+    animationClipAria: "Клип анимации",
+    animationTimelineAria: "Шкала времени анимации",
+    sectionPositionAria: "Положение сечения",
+    inventoryExportAria: "Экспорт данных модели",
+    comparisonPanelAria: "Сравнение пакетов моделей",
+    processDiagramAria: "Логическая схема архитектуры",
+    procedureRunnerAria: "Интерактивная процедура разборки",
+    procedureBranchAria: "Выбор ветви сервисной процедуры",
     modelLabel: "МОДЕЛЬ", modelSwitcherLabel: "БЫСТРОЕ ПЕРЕКЛЮЧЕНИЕ", modelSwitcherPlaceholder: "Выбрать модель…", catalogOpen: "Каталог", catalogTitle: "БИБЛИОТЕКА МОДЕЛЕЙ", catalogSubtitle: "Автономные пакеты устройств", catalogClose: "Закрыть каталог", catalogSearch: "Название, производитель или part number…", catalogSearchLabel: "ПОИСК ПО БИБЛИОТЕКЕ", catalogCategoryLabel: "КАТЕГОРИЯ", catalogEntries: "МОДЕЛИ", catalogFooter: "Пакеты моделей хранятся локально. Аккаунт и удалённый сервис каталога не нужны.", catalogAllCategories: "Все категории", catalogEmpty: "Подходящих моделей не найдено.", catalogLoad: "Открыть модель", catalogLoaded: "Уже загружена", catalogLoading: "Загрузка пакета…", catalogStatusResearch: "ИССЛЕДОВАТЕЛЬСКИЙ МАКЕТ", catalogGeometryProxy: "Условная геометрия · не CAD", catalogFamilyIdentity: "Семейство платформы · без единого артикула", catalogPackageVersion: "Пакет", catalogChoosePackage: "Выберите соответствующий файл .sbsmodel.", catalogError: "Не удалось открыть пакет из каталога.", structure: "СТРУКТУРА", components: "Компоненты",
     searchPlaceholder: "Компонент, маркировка, утверждение или источник…", assemblyTree: "ДЕРЕВО СБОРКИ", showAll: "Показать все",
     proxyNote: "Условная геометрия · не CAD", explore: "Обзор", disassemble: "Разборка",
@@ -552,6 +592,16 @@ function applyLanguage() {
   document.querySelectorAll("[data-i18n-placeholder]").forEach((node) => {
     node.placeholder = t(node.dataset.i18nPlaceholder);
   });
+  document.querySelectorAll("[data-i18n-aria-label]").forEach((node) => {
+    const value = t(node.dataset.i18nAriaLabel);
+    if (value) node.setAttribute("aria-label", value);
+  });
+  document.querySelectorAll("[data-i18n-title]").forEach((node) => {
+    const value = t(node.dataset.i18nTitle);
+    if (value) node.setAttribute("title", value);
+  });
+  syncProcessButtons();
+  syncIsolateButton();
   renderModelSwitcher();
   renderTree();
   if ($("#model-catalog-dialog")?.open) renderCatalog();
@@ -561,6 +611,52 @@ function applyLanguage() {
   else if (state.selectedId) renderDetails(state.selectedId);
   updateMeasurementReadout();
   renderAnimationClipOptions();
+}
+
+function syncProcessButtons() {
+  document.querySelectorAll(".process-button[data-layer]").forEach((button) => {
+    const active = Boolean(state.activeLayer) && button.dataset.layer === state.activeLayer;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", String(active));
+  });
+}
+
+function syncViewTabs(activeButton = null) {
+  const tabs = [...document.querySelectorAll(".view-tab")];
+  const selected = activeButton ?? tabs.find((tab) => tab.classList.contains("active")) ?? tabs[0];
+  tabs.forEach((tab) => {
+    const active = tab === selected;
+    tab.classList.toggle("active", active);
+    tab.setAttribute("aria-pressed", String(active));
+  });
+}
+
+function syncIsolateButton() {
+  const button = $("#isolate-toggle");
+  if (!button) return;
+  const available = Boolean(state.selected && state.sceneController);
+  const active = available && state.isolated;
+  button.disabled = !available;
+  button.classList.toggle("active", active);
+  button.setAttribute("aria-pressed", String(active));
+  if (canvasHost) canvasHost.dataset.isolated = String(Boolean(active));
+}
+
+function setWireframe(enabled) {
+  state.wireframe = Boolean(enabled);
+  state.modelRoot?.traverse((object) => {
+    const sources = [object.material, object.userData?.__sbsOriginalMaterial];
+    const materials = new Set(sources.flatMap((material) =>
+      Array.isArray(material) ? material : material ? [material] : []
+    ));
+    materials.forEach((material) => { material.wireframe = state.wireframe; });
+  });
+  const button = $("#wireframe-toggle");
+  if (button) {
+    button.classList.toggle("active", state.wireframe);
+    button.setAttribute("aria-pressed", String(state.wireframe));
+  }
+  if (canvasHost) canvasHost.dataset.wireframe = String(state.wireframe);
 }
 
 function tag(object, id, evidence = "illustrative", geometry = "proxy") {
@@ -2060,7 +2156,7 @@ function showLearning() {
   $("#comparison-panel").hidden = true;
   clearHighlights();
   state.activeLayer = null;
-  document.querySelectorAll(".process-button").forEach((button) => button.classList.remove("active"));
+  syncProcessButtons();
   $("#process-details").hidden = true;
   buildProcessVisuals();
   state.learningMode = true;
@@ -2603,14 +2699,20 @@ function selectComponent(id) {
   // or mesh in the current illustrative scene. They remain inspectable from
   // their semantic package data without fabricating a 3D object.
   if (!object && !state.catalog.has(id)) return;
+  const selectionChanged = state.selectedId !== id;
+  if (selectionChanged && state.isolated) {
+    state.sceneController?.setIsolated(state.selected, false);
+    state.isolated = false;
+  }
   clearHighlights();
   state.activeLayer = null;
+  syncProcessButtons();
   buildProcessVisuals();
-  document.querySelectorAll(".process-button").forEach((button) => button.classList.remove("active"));
   $("#process-details").hidden = true;
   state.learningMode = false;
   state.selected = object;
   state.selectedId = id;
+  syncIsolateButton();
   if (object) {
     object.traverse((child) => { if (child.isMesh) applyHighlight(child); });
     if (object.isMesh) applyHighlight(object);
@@ -2739,11 +2841,17 @@ async function animateExplodeCycle() {
 }
 
 function setIsolated(isolate) {
-  if (!state.selected || !state.sceneController) return;
-  state.isolated = Boolean(isolate);
-  state.sceneController.setIsolated(state.selected, state.isolated);
-  $("#isolate-toggle").classList.toggle("active", state.isolated);
+  if (!state.sceneController || (Boolean(isolate) && !state.selected)) {
+    syncIsolateButton();
+    return false;
+  }
+  const next = Boolean(isolate);
+  const updated = state.sceneController.setIsolated(state.selected, next);
+  if (!updated) return false;
+  state.isolated = next;
+  syncIsolateButton();
   setStatus(state.isolated ? t("isolate") : t("allVisible"));
+  return true;
 }
 
 function disposeProcessVisuals() {
@@ -2905,11 +3013,10 @@ function setPowered(enabled) {
 
 function setLayer(layer) {
   if (!state.modelRoot) return;
+  if (layer !== "clear" && !PROCESS_PACKAGE.process_layers.some((item) => item.type === layer)) return;
   clearHighlights();
   state.activeLayer = layer === "clear" || state.activeLayer === layer ? null : layer;
-  document.querySelectorAll(".process-button").forEach((button) => {
-    button.classList.toggle("active", button.dataset.layer === state.activeLayer);
-  });
+  syncProcessButtons();
   if (!state.activeLayer) {
     state.learningMode = false;
     $("#learning-panel").hidden = true;
@@ -3002,6 +3109,7 @@ function installModel(root, mode) {
   }
   updateMeasurementReadout();
   state.powered = false;
+  state.wireframe = false;
   const powerButton = $("#power-toggle");
   if (powerButton) {
     powerButton.textContent = t("powerOn");
@@ -3032,14 +3140,17 @@ function installModel(root, mode) {
   state.selectedId = null;
   state.isolated = false;
   state.activeLayer = null;
-  $("#isolate-toggle").classList.remove("active");
+  syncIsolateButton();
+  syncProcessButtons();
   $("#component-details").hidden = true;
   $("#empty-selection").hidden = false;
-  document.querySelectorAll(".process-button").forEach((button) => button.classList.remove("active"));
+  syncProcessButtons();
   collectNodes(root);
   applyModelPresentation(root);
+  setWireframe(false);
   collectFanRotors(root);
   state.sceneController = new SceneController(root);
+  syncIsolateButton();
   if (Array.isArray(ASSEMBLY_PACKAGE.procedure_routes?.common_step_ids) && Array.isArray(ASSEMBLY_PACKAGE.procedure_routes?.branches)) {
     state.procedureController = new ProcedureController(root, {
       steps: ASSEMBLY_PACKAGE.steps ?? [],
@@ -3092,6 +3203,8 @@ function applyPackageData(packageData) {
     button.disabled = button.dataset.layer !== "clear" &&
       !PROCESS_PACKAGE.process_layers.some((layer) => layer.type === button.dataset.layer);
   });
+  syncProcessButtons();
+  syncViewTabs();
   document.querySelectorAll(".view-tab").forEach((button) => {
     if (button.dataset.mode === "learn") button.disabled = LEARNING_PACKAGE.questions.length === 0;
   });
@@ -3543,14 +3656,7 @@ function bindUI() {
     setIsolated(false);
   });
   $("#isolate-toggle").addEventListener("click", () => setIsolated(!state.isolated));
-  $("#wireframe-toggle").addEventListener("click", () => {
-    state.wireframe = !state.wireframe;
-    state.modelRoot?.traverse((object) => {
-      const materials = Array.isArray(object.material) ? object.material : [object.material];
-      materials.filter(Boolean).forEach((material) => { material.wireframe = state.wireframe; });
-    });
-    $("#wireframe-toggle").classList.toggle("active", state.wireframe);
-  });
+  $("#wireframe-toggle").addEventListener("click", () => setWireframe(!state.wireframe));
   $("#explode-slider").addEventListener("input", (event) => setExplode(event.target.value));
   $("#power-toggle").addEventListener("click", () => setPowered(!state.powered));
   $("#animation-clip-select").addEventListener("change", (event) => {
@@ -3641,7 +3747,7 @@ function bindUI() {
       button.disabled = false;
     }
   });
-  document.querySelectorAll(".process-button").forEach((button) => {
+  document.querySelectorAll(".process-button[data-layer]").forEach((button) => {
     button.addEventListener("click", () => {
       setLayer(button.dataset.layer);
       if (button.dataset.layer !== "clear" && window.matchMedia("(max-width: 820px)").matches) {
@@ -3651,7 +3757,7 @@ function bindUI() {
   });
   document.querySelectorAll(".view-tab").forEach((button) => {
     button.addEventListener("click", () => {
-      document.querySelectorAll(".view-tab").forEach((tab) => tab.classList.toggle("active", tab === button));
+      syncViewTabs(button);
       if (button.dataset.mode === "compare") { showComparison(); return; }
       if (state.compareMode) { state.compareMode = false; $("#comparison-panel").hidden = true; }
       if (button.dataset.mode === "disassemble") {

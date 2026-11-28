@@ -38,7 +38,11 @@ export class SceneController {
       return !hasTaggedDescendant;
     }).map((object) => {
       const worldPosition = object.getWorldPosition(new THREE.Vector3());
-      const direction = worldPosition.clone().sub(center);
+      const visualBounds = new THREE.Box3().setFromObject(object);
+      const visualCenter = visualBounds.isEmpty()
+        ? worldPosition.clone()
+        : visualBounds.getCenter(new THREE.Vector3());
+      const direction = visualCenter.sub(center);
       if (direction.lengthSq() < 1e-8) {
         const hash = [...(object.userData.sbs_component_id || object.uuid)]
           .reduce((sum, char) => sum + char.charCodeAt(0), 0);
@@ -64,8 +68,12 @@ export class SceneController {
       const parent = record.object.parent;
       if (parent) {
         parent.updateWorldMatrix(true, false);
-        record.object.position.copy(parent.worldToLocal(targetWorld));
-      } else record.object.position.copy(targetWorld);
+        const baseLocalFromWorld = parent.worldToLocal(record.baseWorldPosition.clone());
+        const targetLocal = parent.worldToLocal(targetWorld);
+        record.object.position.copy(record.baseLocalPosition).add(targetLocal.sub(baseLocalFromWorld));
+      } else {
+        record.object.position.copy(record.baseLocalPosition).add(targetWorld.sub(record.baseWorldPosition));
+      }
     }
     this.root.updateMatrixWorld(true);
     return this.explodeProgress;
@@ -197,8 +205,8 @@ export class SceneController {
   }
 
   setIsolated(target, isolate = true) {
-    if (!target) return false;
     if (!isolate) { this.restoreVisibility(); return true; }
+    if (!target) return false;
     this.restoreVisibility();
     this.visibilitySnapshot = new Map();
     const keep = new Set();

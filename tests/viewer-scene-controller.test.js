@@ -132,3 +132,32 @@ test("reset restores exploded transforms and visibility", () => {
   assert.equal(controller.explodeProgress, 0);
   assert.deepEqual(fan.position.toArray(), start.toArray());
 });
+
+test("model-space visual children define explosion direction without inheriting proxy offsets", () => {
+  const root = new THREE.Group();
+  root.userData.sbs_component_id = "system.root";
+
+  const semantic = new THREE.Group();
+  semantic.userData.sbs_component_id = "board.assembly";
+  root.add(semantic);
+  const proxy = new THREE.Mesh(new THREE.BoxGeometry(2, 2, 2), new THREE.MeshBasicMaterial());
+  proxy.position.set(10, 0, 0);
+  semantic.add(proxy);
+
+  const opposite = new THREE.Mesh(new THREE.BoxGeometry(2, 2, 2), new THREE.MeshBasicMaterial());
+  opposite.userData.sbs_component_id = "front.panel";
+  opposite.position.set(-10, 0, 0);
+  root.add(opposite);
+
+  const controller = new SceneController(root);
+  const originalSemanticPosition = semantic.position.clone();
+  const originalProxyLocalPosition = proxy.position.clone();
+
+  controller.setExplode(100);
+  assert.notDeepEqual(semantic.position.toArray(), originalSemanticPosition.toArray());
+  assert.deepEqual(proxy.position.toArray(), originalProxyLocalPosition.toArray());
+
+  controller.setExplode(0);
+  assert.deepEqual(semantic.position.toArray(), originalSemanticPosition.toArray());
+  assert.deepEqual(proxy.position.toArray(), originalProxyLocalPosition.toArray());
+});

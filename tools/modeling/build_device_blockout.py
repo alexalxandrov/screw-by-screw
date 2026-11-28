@@ -229,7 +229,7 @@ def build_glb(document: dict) -> bytes:
     if len(roots) != 1:
         raise ValueError(f"expected one system root, found {len(roots)}")
 
-    nodes, meshes, accessors, buffer_views = [], [], [], []
+    nodes, proxy_nodes, meshes, accessors, buffer_views = [], [], [], [], []
     geometry_counts: dict[str, int] = {}
     binary = bytearray()
 
@@ -292,13 +292,30 @@ def build_glb(document: dict) -> bytes:
                     "indices": index_accessor, "material": material, "mode": 4,
                 }],
             })
-            node.update({"mesh": mesh_index, "translation": proxy["translation"], "scale": node_scale})
+            proxy_node = {
+                "name": f"{kind} proxy · {component['id']}",
+                "extras": {
+                    "sbs_export_role": "decorative_detail",
+                    "sbs_visual_proxy": True,
+                    "sbs_parent_component_id": component["id"],
+                },
+                "mesh": mesh_index,
+                "translation": proxy["translation"],
+                "scale": node_scale,
+            }
             if rotation:
-                node["rotation"] = rotation
+                proxy_node["rotation"] = rotation
+            proxy_nodes.append(proxy_node)
+            node.setdefault("children", []).append(len(components) + len(proxy_nodes) - 1)
 
         if children[index]:
-            node["children"] = children[index]
+            node["children"] = [*children[index], *node.get("children", [])]
         nodes.append(node)
+
+    # Keep semantic nodes identity-transformed. Proxy geometry uses the existing
+    # model-space envelope on a visual child, preventing inherited parent transforms
+    # from being compounded into nested model-space proxy coordinates.
+    nodes.extend(proxy_nodes)
 
     gltf = {
         "asset": {"version": "2.0", "generator": "Screw by Screw · procedural illustrative proxy generator v0.4"},

@@ -32,18 +32,18 @@
           <button class="quiet-button" id="catalog-open" type="button" data-i18n="catalogOpen">Library</button>
           <label class="model-switcher-wrap" for="model-switcher">
             <span class="eyebrow" data-i18n="modelSwitcherLabel">БЫСТРОЕ ПЕРЕКЛЮЧЕНИЕ</span>
-            <select id="model-switcher" class="model-switcher" aria-label="Быстрое переключение между опубликованными моделями">
+            <select id="model-switcher" class="model-switcher" data-i18n-aria-label="modelSwitcherAria" aria-label="Quick switch between published models">
               <option value="" data-i18n="modelSwitcherPlaceholder">Выбрать модель…</option>
             </select>
           </label>
-          <button class="quiet-button" id="language-toggle" type="button" aria-label="RU / EN — Switch language">RU / EN</button>
+          <button class="quiet-button" id="language-toggle" type="button" data-i18n-aria-label="languageToggleAria" aria-label="Switch between Russian and English">RU / EN</button>
           <button class="primary-button" id="open-model" type="button" data-i18n="openModel">Open model</button>
           <input id="model-file" type="file" accept=".glb,.sbsmodel,model/gltf-binary" hidden />
         </div>
       </header>
 
 
-      <nav id="mobile-panel-switcher" class="mobile-panel-switcher" aria-label="Workspace panel">
+      <nav id="mobile-panel-switcher" class="mobile-panel-switcher" data-i18n-aria-label="workspacePanelAria" aria-label="Workspace panel navigation">
         <button class="mobile-panel-button" type="button" data-mobile-panel="viewer" data-i18n="mobileViewer" aria-pressed="true">3D</button>
         <button class="mobile-panel-button" type="button" data-mobile-panel="structure" data-i18n="mobileStructure" aria-pressed="false">Структура</button>
         <button class="mobile-panel-button" type="button" data-mobile-panel="details" data-i18n="mobileDetails" aria-pressed="false">Детали</button>
@@ -84,28 +84,28 @@
           </div>
           <label class="search-box">
             <span aria-hidden="true">⌕</span>
-            <input id="component-search" type="search" placeholder="Компонент, маркировка, утверждение или источник…" data-i18n-placeholder="searchPlaceholder" aria-label="Search components, identifiers, claims and sources" />
+            <input id="component-search" type="search" placeholder="Компонент, маркировка, утверждение или источник…" data-i18n-placeholder="searchPlaceholder" data-i18n-aria-label="componentSearchAria" aria-label="Search components, labels, claims and sources" />
             <kbd>/</kbd>
           </label>
           <div class="tree-toolbar">
             <span data-i18n="assemblyTree">ASSEMBLY TREE</span>
             <button id="expand-tree" class="text-button" type="button" data-i18n="showAll">Show all</button>
           </div>
-          <nav id="component-tree" class="component-tree" aria-label="Component hierarchy"></nav>
+          <nav id="component-tree" class="component-tree" data-i18n-aria-label="componentTreeAria" aria-label="Component hierarchy"></nav>
           <div class="sidebar-note">
             <span class="status-dot"></span>
             <span data-i18n="proxyNote">Illustrative geometry · not CAD</span>
           </div>
         </aside>
 
-        <section class="viewer-column" aria-label="3D model viewer">
+        <section class="viewer-column" data-i18n-aria-label="viewerColumnAria" aria-label="3D model viewer">
           <div class="viewer-toolbar">
-            <div class="view-tabs">
-              <button class="view-tab active" type="button" data-mode="explore" data-i18n="explore">Explore</button>
-              <button class="view-tab" type="button" data-mode="disassemble" data-i18n="disassemble">Disassemble</button>
-              <button class="view-tab" type="button" data-mode="understand" data-i18n="understand">Understand</button>
-              <button class="view-tab" type="button" data-mode="learn" data-i18n="learn">Learn</button>
-              <button class="view-tab" type="button" data-mode="compare" data-i18n="compare">Compare</button>
+            <div class="view-tabs" role="group" data-i18n-aria-label="viewModesAria" aria-label="Viewer modes">
+              <button class="view-tab active" type="button" data-mode="explore" data-i18n="explore" aria-pressed="true">Explore</button>
+              <button class="view-tab" type="button" data-mode="disassemble" data-i18n="disassemble" aria-pressed="false">Disassemble</button>
+              <button class="view-tab" type="button" data-mode="understand" data-i18n="understand" aria-pressed="false">Understand</button>
+              <button class="view-tab" type="button" data-mode="learn" data-i18n="learn" aria-pressed="false">Learn</button>
+              <button class="view-tab" type="button" data-mode="compare" data-i18n="compare" aria-pressed="false">Compare</button>
             </div>
             <div class="toolbar-camera">
               <label for="camera-preset" data-i18n="cameraPreset">VIEW</label>
@@ -119,9 +119,9 @@
               </select>
             </div>
             <div class="view-actions">
-              <button class="icon-button" id="reset-view" type="button" title="Reset camera" aria-label="Reset camera">↺</button>
-              <button class="icon-button" id="wireframe-toggle" type="button" title="Wireframe" aria-label="Wireframe">▦</button>
-              <button class="icon-button" id="isolate-toggle" type="button" title="Isolate selected" aria-label="Isolate selected">◉</button>
+              <button class="icon-button" id="reset-view" type="button" data-i18n-title="resetView" data-i18n-aria-label="resetView" title="Reset camera" aria-label="Reset camera">↺</button>
+              <button class="icon-button" id="wireframe-toggle" type="button" data-i18n-title="wireframeToggle" data-i18n-aria-label="wireframeToggle" title="Toggle wireframe display" aria-label="Toggle wireframe display" aria-pressed="false">▦</button>
+              <button class="icon-button" id="isolate-toggle" type="button" data-i18n-title="isolateToggle" data-i18n-aria-label="isolateToggle" title="Isolate selected component" aria-label="Isolate selected component" aria-pressed="false" disabled>◉</button>
             </div>
           </div>
 
@@ -153,7 +153,7 @@
                 <button id="power-toggle" class="text-button power-toggle" type="button" data-i18n="powerOn" aria-pressed="false">Включить питание</button>
               </div>
             </div>
-            <input id="explode-slider" class="range-slider" type="range" min="0" max="100" value="0" aria-label="Степень разнесения деталей" />
+            <input id="explode-slider" class="range-slider" type="range" min="0" max="100" value="0" data-i18n-aria-label="explodeSliderAria" aria-label="Explode distance" />
             <div class="range-labels"><span data-i18n="assembled">ASSEMBLED</span><span data-i18n="exploded">EXPLODED</span></div>
             <div id="animation-player-panel" class="clip-player" hidden>
               <div class="clip-player-heading">
@@ -161,12 +161,12 @@
                 <output id="animation-status" class="clip-status" data-status="ready" aria-live="polite">Ready</output>
               </div>
               <div class="clip-player-controls">
-                <select id="animation-clip-select" aria-label="Animation clip"></select>
+                <select id="animation-clip-select" data-i18n-aria-label="animationClipAria" aria-label="Animation clip"></select>
                 <button id="animation-play" class="text-button" type="button" data-i18n="clipPlay">Play</button>
                 <button id="animation-pause" class="text-button" type="button" data-i18n="clipPause" disabled>Pause</button>
                 <button id="animation-stop" class="text-button" type="button" data-i18n="clipStop" disabled>Stop / reset</button>
               </div>
-              <input id="animation-seek" class="clip-seek" type="range" min="0" max="1000" step="1" value="0" aria-label="Animation timeline" />
+              <input id="animation-seek" class="clip-seek" type="range" min="0" max="1000" step="1" value="0" data-i18n-aria-label="animationTimelineAria" aria-label="Animation timeline" />
               <div class="clip-player-footer"><span id="animation-evidence-note" class="eyebrow" data-i18n="clipEvidenceNote">Authored model motion · not a physics simulation</span><output id="animation-time">0.00 / 0.00 s</output></div>
             </div>
             <details id="runtime-diagnostics" class="runtime-diagnostics">
@@ -183,13 +183,13 @@
 
           <div id="process-panel" class="process-panel">
             <div class="process-title"><span class="eyebrow" data-i18n="processLayers">PROCESS LAYERS</span><span data-i18n="qualitativeOnly">QUALITATIVE ONLY</span></div>
-            <div class="process-buttons">
-              <button class="process-button" data-layer="cooling" type="button"><span class="process-icon cooling-icon">≈</span><span data-i18n="cooling">Cooling</span></button>
-              <button class="process-button" data-layer="power_delivery" type="button"><span class="process-icon power-icon">ϟ</span><span data-i18n="powerDelivery">Power delivery</span></button>
-              <button class="process-button" data-layer="gpu_compute" type="button"><span class="process-icon compute-icon">◇</span><span data-i18n="gpuCompute">GPU architecture</span></button>
-              <button class="process-button" data-layer="graphics_pipeline" type="button"><span class="process-icon compute-icon">⇢</span><span data-i18n="graphicsPipeline">GPU data paths</span></button>
-              <button class="process-button" data-layer="video_codec" type="button"><span class="process-icon compute-icon">▶</span><span data-i18n="videoCodec">Video engines</span></button>
-              <button class="process-button" data-layer="clear" type="button"><span class="process-icon clear-icon">×</span><span data-i18n="clearLayer">Clear layer</span></button>
+            <div class="process-buttons" role="group" data-i18n-aria-label="processLayerControlsAria" aria-label="Process layer controls">
+              <button class="process-button" data-layer="cooling" type="button" aria-pressed="false"><span class="process-icon cooling-icon">≈</span><span data-i18n="cooling">Cooling</span></button>
+              <button class="process-button" data-layer="power_delivery" type="button" aria-pressed="false"><span class="process-icon power-icon">ϟ</span><span data-i18n="powerDelivery">Power delivery</span></button>
+              <button class="process-button" data-layer="gpu_compute" type="button" aria-pressed="false"><span class="process-icon compute-icon">◇</span><span data-i18n="gpuCompute">GPU architecture</span></button>
+              <button class="process-button" data-layer="graphics_pipeline" type="button" aria-pressed="false"><span class="process-icon compute-icon">⇢</span><span data-i18n="graphicsPipeline">GPU data paths</span></button>
+              <button class="process-button" data-layer="video_codec" type="button" aria-pressed="false"><span class="process-icon compute-icon">▶</span><span data-i18n="videoCodec">Video engines</span></button>
+              <button class="process-button" data-layer="clear" type="button" aria-pressed="false"><span class="process-icon clear-icon">×</span><span data-i18n="clearLayer">Clear layer</span></button>
             </div>
             <div class="slice-controls">
               <button id="slice-toggle" class="process-button slice-toggle" type="button" data-i18n="sliceToggle" aria-pressed="false">Section cut</button>
@@ -199,7 +199,7 @@
                 <option value="y">Y</option>
                 <option value="z">Z</option>
               </select>
-              <input id="slice-position" class="slice-position" type="range" min="0" max="100" step="1" value="50" disabled aria-label="Section position" />
+              <input id="slice-position" class="slice-position" type="range" min="0" max="100" step="1" value="50" disabled data-i18n-aria-label="sectionPositionAria" aria-label="Section position" />
               <output id="slice-value">50%</output>
               <span class="slice-note" data-i18n="sliceNote">Visual cut · uncapped · not CAD</span>
             </div>
@@ -217,7 +217,7 @@
             <div><span class="eyebrow" id="details-heading-eyebrow" data-i18n="inspection">INSPECTION</span><h2 id="details-heading-title" data-i18n="componentDetails">Component details</h2></div>
             <span class="detail-index" id="detail-index">—</span>
           </div>
-          <section class="inventory-export" aria-label="Model data export">
+          <section class="inventory-export" data-i18n-aria-label="inventoryExportAria" aria-label="Model data export">
             <span class="eyebrow" data-i18n="exportData">ДАННЫЕ МОДЕЛИ</span>
             <div class="inventory-export-buttons">
               <button id="export-inventory-json" type="button" data-i18n="exportJson">Экспорт JSON</button>
@@ -239,7 +239,7 @@
             <div id="quiz-sources" class="quiz-sources"></div>
             <button id="quiz-next" class="primary-button quiz-next" type="button" disabled>Check answer</button>
           </div>
-          <section id="comparison-panel" class="comparison-panel" hidden aria-label="Model package comparison">
+          <section id="comparison-panel" class="comparison-panel" hidden data-i18n-aria-label="comparisonPanelAria" aria-label="Model package comparison">
             <div class="comparison-toolbar">
               <span class="eyebrow" data-i18n="compareTitle">MODEL COMPARISON</span>
               <div class="comparison-toolbar-actions">
@@ -272,7 +272,7 @@
             <div class="process-detail-type" id="process-detail-type">COOLING</div>
             <h3 id="process-detail-title">—</h3>
             <p id="process-detail-description" class="detail-description">—</p>
-            <section id="process-diagram" class="process-diagram" aria-label="Logical GPU architecture diagram" hidden></section>
+            <section id="process-diagram" class="process-diagram" data-i18n-aria-label="processDiagramAria" aria-label="Logical architecture diagram" hidden></section>
             <div class="detail-section">
               <span class="eyebrow" data-i18n="linkedComponents">LINKED COMPONENTS</span>
               <div id="process-components" class="process-components"></div>
@@ -313,13 +313,13 @@
             </div>
             <div id="detail-assembly-section" class="detail-section" hidden>
               <span class="eyebrow" data-i18n="assemblyEvidence">DISASSEMBLY EVIDENCE</span>
-              <section id="procedure-runner" class="procedure-runner" aria-label="Interactive disassembly procedure" hidden>
+              <section id="procedure-runner" class="procedure-runner" data-i18n-aria-label="procedureRunnerAria" aria-label="Interactive disassembly procedure" hidden>
                 <div class="procedure-runner-heading">
                   <strong data-i18n="procedureRunnerTitle">STEP-BY-STEP 3D PROCEDURE</strong>
                   <output id="procedure-runner-progress">0 / 3</output>
                 </div>
                 <label for="procedure-branch-select" class="eyebrow" data-i18n="procedureBranchLabel">SELECT FRU BRANCH</label>
-                <select id="procedure-branch-select" class="procedure-branch-select" aria-label="Select FRU branch"></select>
+                <select id="procedure-branch-select" class="procedure-branch-select" data-i18n-aria-label="procedureBranchAria" aria-label="Select service procedure branch"></select>
                 <p id="procedure-runner-disclaimer" class="procedure-runner-disclaimer" data-i18n="procedureRunnerDisclaimer">Educational scene playback only · does not control physical hardware. Proxy clearances are not measured.</p>
                 <strong id="procedure-runner-current-title" class="procedure-runner-current-title">—</strong>
                 <p id="procedure-runner-description" class="procedure-runner-description"></p>
