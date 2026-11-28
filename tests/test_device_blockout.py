@@ -178,5 +178,23 @@ class DeviceBlockoutGeometryTests(unittest.TestCase):
             self.assertEqual(parent_proxy["extras"]["sbs_parent_component_id"], "test.parent")
             self.assertEqual(child_proxy["extras"]["sbs_parent_component_id"], "test.child")
 
+
+    def test_new_panel_cage_grille_and_io_profile_geometry(self):
+        profiles = ["usb_a", "usb_c", "audio_jack", "displayport", "rj45", "serial",
+                    "power_inlet", "expansion_slot", "status_led", "security_slot", "padlock_slot"]
+        proxies = [{"kind": "panel"}, {"kind": "drive_cage"}, {"kind": "vent_grille", "slat_count": 12, "axis": "z"}]
+        proxies.extend({"kind": "io_port", "profile": p, "axis": "z"} for p in profiles)
+        gltf = parse_glb(build_glb(make_document(proxies)))
+        self.assertEqual(len(gltf["meshes"]), len(proxies))
+        self.assertEqual(len(gltf["nodes"]), 1 + len(proxies) * 2)
+        for mesh in gltf["meshes"]:
+            self.assertGreater(gltf["accessors"][mesh["primitives"][0]["indices"]]["count"], 0)
+
+    def test_invalid_new_io_profile_and_grille_density_are_rejected(self):
+        with self.assertRaisesRegex(ValueError, "io_port profile"):
+            build_glb(make_document([{"kind": "io_port", "profile": "hdmi"}]))
+        with self.assertRaisesRegex(ValueError, "slat_count"):
+            build_glb(make_document([{"kind": "vent_grille", "slat_count": 2}]))
+
 if __name__ == "__main__":
     unittest.main()
