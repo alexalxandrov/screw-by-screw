@@ -34,16 +34,20 @@ The pilot tracks five partial teardown observations, but no complete removal/rea
 
 ## CI interpretation
 
-A historical passing run does not certify a later branch head. A job that is marked failed but has no started steps and no runner logs is not a code-test result. Record the exact commit SHA and run URLs; mark the gate pending until GitHub Actions executes the workflow steps and publishes their outcomes.
+A historical passing run does not certify a later branch head. A job marked failed or action-required without started steps and runner logs is not a code-test result. Record the exact commit SHA and run URLs; mark the gate pending until GitHub Actions executes the workflow steps and publishes their outcomes.
 
-For PR #44, code commit `7d26a0fcc9c6058c43a2283548789790f303492f` was checked by:
-- [Viewer build run 46161631346](https://github.com/alexalxandrov/screw-by-screw/actions/runs/46161631346): success; 74 unit tests, 58 E2E tests.
-- [Blender blockout generation run 46161631342](https://github.com/alexalxandrov/screw-by-screw/actions/runs/46161631342): success; 57 E2E tests after generated GLB/SBSMODEL and browser-import checks.
-- [Model package validation run 46160305251](https://github.com/alexalxandrov/screw-by-screw/actions/runs/46160305251) and [OptiPlex package validation run 46160305188](https://github.com/alexalxandrov/screw-by-screw/actions/runs/46160305188): success on the preceding package-equivalent commit `9f140969`; the reduced-motion patch did not change model-package data.
+### Current PR #44 verification — 2026-11-28
 
-Viewer CI then regenerated root `index.html` and pushed commit `e8f2faa300a49ea3d835671ca1381f483fdd4b3f`. The diff from `7d26a0f` is only that generated file. Bot-authored follow-up workflows on `e8f2faa` were marked `action_required` with no jobs started; do not misreport those as code-test failures or successful reruns. A new code-bearing commit still requires its own checks.
+The current PR head is `b87f172713431c58c79c680b8b2fbf5ddaf96c68`. All four required workflows have now executed on this exact SHA and completed successfully:
 
-PR #44 remains open and unmerged. These runs do not replace owner visual review, manual accessibility and target-hardware performance review, or asset-rights review.
+- [Model package validation — run 46169688974](https://github.com/alexalxandrov/screw-by-screw/actions/runs/46169688974): success; job `test`.
+- [OptiPlex 5060 package validation — run 46169688826](https://github.com/alexalxandrov/screw-by-screw/actions/runs/46169688826): success; job `validate-optiplex`.
+- [Blender blockout generation — run 46169688804](https://github.com/alexalxandrov/screw-by-screw/actions/runs/46169688804): success; job `build-and-inspect`; build artifact retained.
+- [Viewer build — run 46169688785](https://github.com/alexalxandrov/screw-by-screw/actions/runs/46169688785): success; both `check_published_packages` and `build` jobs.
+
+The earlier bot-triggered `action_required` results on this same SHA were subsequently approved and rerun; their final run conclusions are `success`, with jobs present and completed. They are not outstanding failures.
+
+PR #44 remains open and unmerged. The automated current-head CI gate is now satisfied. This does not replace owner visual review, manual accessibility and target-hardware performance checks, or asset-rights review; Release 1.0 remains not approved until those gates are accepted.
 
 ## Non-negotiable accuracy policy
 
@@ -84,4 +88,4 @@ Dell OptiPlex 5060 Tower family package v0.4.1 adds generic panel/drive-cage pro
 
 Evidence caveat: the current official Dell front/rear guide pages are hosted under the OptiPlex 5060 guide URL, but their embedded images visibly carry a 5070 label. Their image pixels are excluded from 5060 geometry placement. Text legends and the port specification are used for identity/count only. Marker dimensions and positions remain schematic.
 
-The Viewer pauses its WebGL loop while mobile Structure/Details panels or a background tab are active, caps mobile DPR at 1.5, and expands responsive tests to 320/375/390/768/820 CSS pixels. Release 1.0 remains not approved pending exact-head CI success, owner physical-device visual review, manual accessibility, target-hardware performance and asset-rights acceptance.
+The Viewer pauses its WebGL loop while mobile Structure/Details panels or a background tab are active, caps mobile DPR at 1.5, and expands responsive tests to 320/375/390/768/820 CSS pixels. Current-head CI is green on `b87f172`; Release 1.0 remains not approved pending owner physical-device visual review, manual accessibility, target-hardware performance and asset-rights acceptance.
