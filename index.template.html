@@ -145,16 +145,14 @@
 
           <div class="timeline-panel">
             <div class="timeline-heading">
-              <div><span class="eyebrow" data-i18n="assemblyState">ASSEMBLY STATE</span><strong id="explode-value">0%</strong></div>
+              <div><span id="timeline-mode-label" class="eyebrow" data-i18n="assemblyState">ASSEMBLY STATE</span><strong id="explode-value">0%</strong></div>
               <div class="timeline-actions">
-                <button id="assemble-button" class="text-button" type="button" data-i18n="assemble">Assemble</button>
-                <button id="explode-button" class="text-button" type="button" data-i18n="explode">Explode</button>
-                <button id="animate-button" class="text-button" type="button" data-i18n="animate">Animate</button>
                 <button id="power-toggle" class="text-button power-toggle" type="button" data-i18n="powerOn" aria-pressed="false">Включить питание</button>
               </div>
             </div>
-            <input id="explode-slider" class="range-slider" type="range" min="0" max="100" value="0" data-i18n-aria-label="explodeSliderAria" aria-label="Explode distance" />
-            <div class="range-labels"><span data-i18n="assembled">ASSEMBLED</span><span data-i18n="exploded">EXPLODED</span></div>
+            <input id="assembly-scrubber" class="range-slider assembly-scrubber" type="range" min="0" max="100" step="1" value="0" data-i18n-aria-label="explodeSliderAria" aria-label="Assembly and disassembly timeline" />
+            <div class="range-labels"><span id="assembly-scrubber-start" data-i18n="assembled">ASSEMBLED</span><span id="assembly-scrubber-end" data-i18n="exploded">EXPLODED</span></div>
+            <p id="assembly-scrubber-step" class="assembly-scrubber-step" aria-live="polite" hidden></p>
             <div id="animation-player-panel" class="clip-player" hidden>
               <div class="clip-player-heading">
                 <label for="animation-clip-select" class="eyebrow" data-i18n="authoredAnimations">PACKAGE ANIMATIONS</label>
@@ -166,7 +164,6 @@
                 <button id="animation-pause" class="text-button" type="button" data-i18n="clipPause" disabled>Pause</button>
                 <button id="animation-stop" class="text-button" type="button" data-i18n="clipStop" disabled>Stop / reset</button>
               </div>
-              <input id="animation-seek" class="clip-seek" type="range" min="0" max="1000" step="1" value="0" data-i18n-aria-label="animationTimelineAria" aria-label="Animation timeline" />
               <div class="clip-player-footer"><span id="animation-evidence-note" class="eyebrow" data-i18n="clipEvidenceNote">Authored model motion · not a physics simulation</span><output id="animation-time">0.00 / 0.00 s</output></div>
             </div>
             <details id="runtime-diagnostics" class="runtime-diagnostics">

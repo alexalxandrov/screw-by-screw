@@ -208,14 +208,21 @@ test("renders the RTX 3060 NVENC and NVDEC media-engine map", async ({ page }) =
   expect(pageErrors).toEqual([]);
 });
 
-test("allows an animated explode sequence to be cancelled and reassembled", async ({ page }) => {
+test("one assembly scrubber controls explode and reassembly", async ({ page }) => {
   await page.goto("/?demo=1");
-  const button = page.locator("#animate-button");
-  await button.click();
-  await expect(button).toBeDisabled();
-  await page.locator("#assemble-button").click();
-  await expect(button).toBeEnabled({ timeout: 3000 });
-  await expect(page.locator("#explode-slider")).toHaveValue("0");
+  const slider = page.locator("#assembly-scrubber");
+  await expect(slider).toBeVisible();
+  await expect(page.locator("#explode-slider")).toHaveCount(0);
+  await slider.evaluate((element) => {
+    element.value = "100";
+    element.dispatchEvent(new Event("input", { bubbles: true }));
+  });
+  await expect(page.locator("#explode-value")).toHaveText("100%");
+  await slider.evaluate((element) => {
+    element.value = "0";
+    element.dispatchEvent(new Event("input", { bubbles: true }));
+  });
+  await expect(page.locator("#explode-value")).toHaveText("0%");
 });
 
 test("runs the source-backed quiz in Russian and English", async ({ page }) => {
@@ -232,15 +239,19 @@ test("runs the source-backed quiz in Russian and English", async ({ page }) => {
   await expect(page.locator("#quiz-choices").getByRole("button", { name: "192-bit" })).toBeVisible();
 });
 
-test("exploded view can be returned to assembled state", async ({ page }) => {
+test("the single assembly scrubber returns the model to its assembled state", async ({ page }) => {
   await page.goto("/?demo=1");
   await expect(page.locator("#component-count")).not.toHaveText("—");
-  await page.locator("#explode-slider").evaluate((element) => {
+  const slider = page.locator("#assembly-scrubber");
+  await slider.evaluate((element) => {
     element.value = "100";
     element.dispatchEvent(new Event("input", { bubbles: true }));
   });
   await expect(page.locator("#explode-value")).toHaveText("100%");
-  await page.getByRole("button", { name: "Собрать" }).click();
+  await slider.evaluate((element) => {
+    element.value = "0";
+    element.dispatchEvent(new Event("input", { bubbles: true }));
+  });
   await expect(page.locator("#explode-value")).toHaveText("0%");
 });
 
@@ -639,7 +650,7 @@ test("shows a workload-specific cooling and board-power operating point with sou
   await expect(page.locator('[data-claim-id="claim.power.total_graphics_power"] .claim-value')).toContainText("170 W");
 });
 
-test("Dell package exposes working 3D disassembly actions and authored animations", async ({ page }) => {
+test("Dell tower is assembled with a visible chassis and one scrubber drives 12 disassembly stages and authored clips", async ({ page }) => {
   const pageErrors = [];
   page.on("pageerror", (error) => pageErrors.push(error.message));
   await page.goto("/");
@@ -649,54 +660,62 @@ test("Dell package exposes working 3D disassembly actions and authored animation
   await dellCard.locator("[data-open-catalog-model]").click();
 
   await expect(page.locator("#model-title")).toContainText("OptiPlex 5060");
+  await expect(page.locator("#component-count")).toHaveText("137");
   await expect(page.locator("#animation-player-panel")).toBeVisible();
   await expect(page.locator("#animation-clip-select option")).toHaveCount(3);
 
-  // Dell is intentionally loaded as a separated, translucent inspection model.
-  await expect(page.locator("#explode-slider")).toHaveValue("100");
-  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-initial-explode-progress", "100");
-  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-inspection-presentation", "optiplex-open-xray");
-  const transparentComponents = await page.locator("#viewer-canvas").getAttribute("data-inspection-transparent-components");
-  expect(transparentComponents).toContain("chassis.side_panel");
-  expect(transparentComponents).toContain("chassis.front_panel");
-  expect(transparentComponents).toContain("chassis.board_tray");
-  expect(Number(await page.locator("#viewer-canvas").getAttribute("data-explode-distance-factor"))).toBeGreaterThan(1);
+  const slider = page.locator("#assembly-scrubber");
+  await expect(slider).toBeVisible();
+  await expect(slider).toHaveValue("0");
+  await expect(slider).toHaveAttribute("max", "12");
+  await expect(page.locator("#explode-slider")).toHaveCount(0);
+  await expect(page.locator("#animation-seek")).toHaveCount(0);
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-initial-explode-progress", "0");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-inspection-presentation", "optiplex-chassis");
+  const chassisComponents = await page.locator("#viewer-canvas").getAttribute("data-inspection-chassis-components");
+  for (const id of ["chassis.frame", "chassis.side_panel", "chassis.front_panel", "chassis.rear_panel"]) {
+    expect(chassisComponents).toContain(id);
+  }
 
   await page.locator('[data-mode="disassemble"]').click();
-  await expect(page.locator("#explode-slider")).toHaveValue("100");
-  await expect(page.locator("#detail-assembly-section")).toBeVisible();
   await expect(page.locator("#assembly-playback-controls")).toBeVisible();
-  await page.locator("#assembly-step-next").click();
+  await slider.evaluate((element) => {
+    element.value = "1";
+    element.dispatchEvent(new Event("input", { bubbles: true }));
+  });
+  await expect(slider).toHaveValue("1");
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-step-id", "step.optiplex.remove-side-cover");
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-action-type", "translate");
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-motion", "illustrative-translation");
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-target-count", "1");
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-applied-count", "1");
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-resolved-targets", "chassis.side_panel");
-  const sideCoverProcedureDelta = JSON.parse(await page.locator("#viewer-canvas").getAttribute("data-procedure-world-deltas"));
-  expect(Math.hypot(...sideCoverProcedureDelta[0].delta)).toBeGreaterThan(500);
+  const sideCoverDelta = JSON.parse(await page.locator("#viewer-canvas").getAttribute("data-procedure-world-deltas"));
+  expect(Math.hypot(...sideCoverDelta[0].delta)).toBeGreaterThan(500);
 
-  await page.locator("#assembly-step-next").click();
+  await slider.evaluate((element) => {
+    element.value = "2";
+    element.dispatchEvent(new Event("input", { bubbles: true }));
+  });
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-step-id", "step.optiplex.remove-front-bezel");
-  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-action-type", "translate");
+  await slider.evaluate((element) => {
+    element.value = "4";
+    element.dispatchEvent(new Event("input", { bubbles: true }));
+  });
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-step-id", "step.optiplex.remove-cpu-fan");
+  const fanDelta = JSON.parse(await page.locator("#viewer-canvas").getAttribute("data-procedure-world-deltas"));
+  expect(fanDelta[0].delta[2]).toBeGreaterThan(0);
 
-  await page.locator("#assembly-step-reset").click();
-  await expect(page.locator("#assembly-step-progress")).toContainText("0 / 12");
-  for (let step = 0; step < 4; step += 1) await page.locator("#assembly-step-next").click();
-  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-direction", "0,0,1");
-  const fanProcedureDelta = JSON.parse(await page.locator("#viewer-canvas").getAttribute("data-procedure-world-deltas"));
-  expect(fanProcedureDelta[0].delta[2]).toBeGreaterThan(0);
-  await page.locator("#assembly-step-reset").click();
+  await slider.evaluate((element) => {
+    element.value = "0";
+    element.dispatchEvent(new Event("input", { bubbles: true }));
+  });
+  await expect(slider).toHaveValue("0");
+  await expect(page.locator("#viewer-canvas")).not.toHaveAttribute("data-procedure-step-id");
 
   await page.locator("#animation-clip-select").selectOption("clip.optiplex.side-cover-removal");
-  await page.locator("#animation-play").click();
-  await expect(page.locator("#animation-player-panel")).toHaveAttribute("data-status", "playing");
-  await expect.poll(async () => Number(await page.locator("#animation-time").textContent().then(value => value.split("/")[0].trim()))).toBeGreaterThan(0);
-  await page.locator("#animation-pause").click();
-  await expect(page.locator("#animation-player-panel")).toHaveAttribute("data-status", "paused");
-  await page.locator("#animation-stop").click();
-  await expect(page.locator("#animation-player-panel")).toHaveAttribute("data-status", "ready");
-  await page.locator("#animation-seek").evaluate((element) => {
+  await expect(slider).toHaveAttribute("data-mode", "animation");
+  await slider.evaluate((element) => {
     element.value = "1000";
     element.dispatchEvent(new Event("input", { bubbles: true }));
   });
@@ -707,8 +726,17 @@ test("Dell package exposes working 3D disassembly actions and authored animation
   expect(Math.abs(sideCoverMovement[1])).toBeLessThan(0.01);
   expect(Math.abs(sideCoverMovement[2])).toBeLessThan(0.01);
 
+  await page.locator("#animation-play").click();
+  await expect(page.locator("#animation-player-panel")).toHaveAttribute("data-status", "playing");
+  await page.locator("#animation-pause").click();
+  await expect(page.locator("#animation-player-panel")).toHaveAttribute("data-status", "paused");
+  await page.locator("#animation-stop").click();
+  await expect(page.locator("#animation-player-panel")).toHaveAttribute("data-status", "ready");
+  await expect(slider).toHaveAttribute("max", "12");
+
   await page.locator("#animation-clip-select").selectOption("clip.optiplex.cpu-cooling-removal");
-  await page.locator("#animation-seek").evaluate((element) => {
+  await expect(slider).toHaveAttribute("data-mode", "animation");
+  await slider.evaluate((element) => {
     element.value = "1000";
     element.dispatchEvent(new Event("input", { bubbles: true }));
   });
@@ -717,13 +745,14 @@ test("Dell package exposes working 3D disassembly actions and authored animation
   expect(await page.locator("#viewer-canvas").getAttribute("data-animation-moved-target-count")).toBe("2");
   for (const targetId of ["cooling.cpu.fan", "cooling.cpu.heatsink"]) {
     const movement = cpuDeltas.find((entry) => entry.targetId === targetId)?.delta;
-    expect(movement, `missing movement diagnostics for ${targetId}`).toBeTruthy();
+    expect(movement, "missing movement diagnostics for " + targetId).toBeTruthy();
     expect(movement[2]).toBeGreaterThan(0);
     expect(Math.abs(movement[1])).toBeLessThan(0.01);
   }
 
   await page.locator("#animation-clip-select").selectOption("clip.optiplex.system-board-removal");
-  await page.locator("#animation-seek").evaluate((element) => {
+  await expect(slider).toHaveAttribute("data-mode", "animation");
+  await slider.evaluate((element) => {
     element.value = "1000";
     element.dispatchEvent(new Event("input", { bubbles: true }));
   });
@@ -793,11 +822,18 @@ test("camera reset, explode action and expand-tree controls work", async ({ page
   await expect(page.locator("#camera-preset")).toHaveValue("isometric");
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-camera-preset", "isometric");
 
-  await page.locator("#explode-button").click();
-  await expect(page.locator("#explode-slider")).toHaveValue("100");
+  const scrubber = page.locator("#assembly-scrubber");
+  await scrubber.evaluate((element) => {
+    element.value = "100";
+    element.dispatchEvent(new Event("input", { bubbles: true }));
+  });
+  await expect(scrubber).toHaveValue("100");
   await expect(page.locator("#explode-value")).toHaveText("100%");
-  await page.locator("#assemble-button").click();
-  await expect(page.locator("#explode-slider")).toHaveValue("0");
+  await scrubber.evaluate((element) => {
+    element.value = "0";
+    element.dispatchEvent(new Event("input", { bubbles: true }));
+  });
+  await expect(scrubber).toHaveValue("0");
 
   await page.locator("#component-search").fill("__sbs_no_component_matches__");
   await expect(page.locator('#component-tree button[data-id="assembly.card.root"]')).toHaveCount(0);
