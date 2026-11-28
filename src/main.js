@@ -1670,7 +1670,7 @@ function procedureDirectionForAction(action, object) {
 
 function procedureActionDistance(action, object) {
   const specified = Number(action.distance);
-  const evidenceScale = action.evidence_class === "manufacturer_data" ? 1 : 1.8;
+  const evidenceScale = action.evidence_class === "manufacturer_data" ? 1 : 2.8;
   if (Number.isFinite(specified) && specified > 0) {
     const unit = String(action.unit ?? "model_units").toLowerCase();
     const scale = unit === "mm" ? 1 : unit === "cm" ? 10 : unit === "in" || unit === "inch" ? 25.4 : unit === "m" ? 1000 : 1;
