@@ -17,9 +17,13 @@ on:
       - "index.html"
       - "index.template.html"
       - "tools/build_standalone_html.mjs"
+      - "tools/serve_secure_preview.mjs"
+      - "playwright.csp.config.js"
       - "package.json"
       - "package-lock.json"
       - "playwright.config.js"
+      - "playwright.csp.config.js"
+      - "tools/serve_secure_preview.mjs"
       - "vite.config.js"
       - ".github/workflows/viewer-build.yml"
   push:
@@ -111,6 +115,8 @@ jobs:
           NODE
       - name: Run browser interaction tests
         run: npm run test:e2e
+      - name: Exercise the production web build under strict CSP headers
+        run: npm run test:e2e:csp
       - name: Commit regenerated standalone launcher
         if: (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository) || (github.event_name == 'push' && github.ref == 'refs/heads/main')
         env:

@@ -43,6 +43,13 @@ Permissions-Policy: camera=(), microphone=(), geolocation=()
 
 The `frame-ancestors` directive must be sent as an HTTP response header; it is not effective in a CSP meta element. Adjust `connect-src` for the local Vite HMR WebSocket only in development, not production.
 
+
+### Automated production-CSP verification
+
+The Viewer workflow serves the actual `dist/` output over HTTP with the response-header policy above and runs a separate Chromium suite against it. The suite checks the response headers, WebGL startup, switching between published IBM/Dell packages and opening Compare mode. It fails on browser-reported CSP violations, page errors or failed resource requests.
+
+Run it locally after `npm run build` with `npm run test:e2e:csp`. The secure preview server is a CI/test harness, not a production hosting service. A release still requires checking the real hosting provider's emitted headers and TLS configuration; the standalone root `index.html` remains a separate `file://` artifact.
+
 ## Dependency and release controls
 
 - Direct frontend dependencies are exact-version pinned in `package.json`.
