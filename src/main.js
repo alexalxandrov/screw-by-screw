@@ -3668,6 +3668,10 @@ function bindUI() {
 
 async function tryLoadBundledModel() {
   const revision = state.modelRevision;
+  if (new URLSearchParams(window.location.search).get("demo") === "1") {
+    setLoadState(t("demoLoaded"));
+    return;
+  }
   try {
     const defaultEntry = MODEL_CATALOG.models.find((entry) => entry.defaultPackage) ?? MODEL_CATALOG.models[0];
     if (!defaultEntry) throw new Error("The model catalogue contains no default package");
