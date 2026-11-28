@@ -114,61 +114,74 @@ def _append_cylinder(
         indices.extend((base, base + 1, base + 2))
 
 
+def _append_port_frame(positions, normals, indices, *, width=0.84, height=0.72, border=0.09, depth=0.18):
+    """Schematic aperture rim in local X/Z plane; normalized proxy dimensions only."""
+    _append_box(positions,normals,indices,center=(0.0,-0.08,0.0),size=(width,0.08,height))
+    for center,size in [
+        ((0.0,0.0,height/2-border/2),(width+2*border,depth,border)),
+        ((0.0,0.0,-height/2+border/2),(width+2*border,depth,border)),
+        ((-width/2-border/2,0.0,0.0),(border,depth,height)),
+        ((width/2+border/2,0.0,0.0),(border,depth,height)),
+    ]:
+        _append_box(positions,normals,indices,center=center,size=size)
+
+
 def _build_proxy_geometry(proxy: dict) -> tuple[list[float], list[float], list[int]]:
-    kind = proxy.get("kind")
-    positions: list[float] = []
-    normals: list[float] = []
-    indices: list[int] = []
-
-    if kind == "box":
-        _append_box(positions, normals, indices)
-
-    elif kind == "cylinder":
-        _append_cylinder(positions, normals, indices, segments=proxy.get("segments", 32))
-
-    elif kind == "fan":
-        blade_count = proxy.get("blade_count", 7)
-        if isinstance(blade_count, bool) or not isinstance(blade_count, int) or not 3 <= blade_count <= 24:
-            raise ValueError("fan blade_count must be an integer from 3 to 24")
-
-        # Segmented perimeter frame, generic swept blades and a central hub.
-        # Blade count is a rendering choice, not a sourced hardware specification.
-        for segment in range(28):
-            angle = 2 * math.pi * segment / 28
-            center = (0.43 * math.cos(angle), 0.0, 0.43 * math.sin(angle))
-            _append_box(
-                positions, normals, indices,
-                center=center, size=(0.10, 0.12, 0.055), rotation_y=-angle,
-            )
-        for blade in range(blade_count):
-            angle = 2 * math.pi * blade / blade_count
-            center = (0.25 * math.cos(angle), 0.0, 0.25 * math.sin(angle))
-            _append_box(
-                positions, normals, indices,
-                center=center, size=(0.28, 0.045, 0.07), rotation_y=-angle - 0.34,
-            )
-        _append_cylinder(positions, normals, indices, radius=0.14, depth=0.14, segments=32)
-
-    elif kind == "fin_stack":
-        fin_count = proxy.get("fin_count", 14)
-        if isinstance(fin_count, bool) or not isinstance(fin_count, int) or not 4 <= fin_count <= 40:
-            raise ValueError("fin_stack fin_count must be an integer from 4 to 40")
-        for fin in range(fin_count):
-            y = -0.43 + (0.86 * fin / max(1, fin_count - 1))
-            _append_box(
-                positions, normals, indices,
-                center=(0.0, y, 0.0), size=(0.92, 0.035, 0.94),
-            )
-        _append_box(
-            positions, normals, indices,
-            center=(0.0, -0.465, 0.0), size=(0.96, 0.045, 0.96),
-        )
-
-    else:
-        raise ValueError(f"unsupported proxy geometry kind: {kind!r}")
-
-    return positions, normals, indices
-
+    kind=proxy.get("kind"); positions=[]; normals=[]; indices=[]
+    if kind=="box": _append_box(positions,normals,indices)
+    elif kind=="panel":
+        _append_box(positions,normals,indices,size=(0.98,0.04,0.98))
+        for sign in (-1,1):
+            _append_box(positions,normals,indices,center=(sign*0.46,0.07,0.0),size=(0.06,0.18,0.96))
+            _append_box(positions,normals,indices,center=(0.0,0.07,sign*0.46),size=(0.96,0.18,0.06))
+    elif kind=="cylinder": _append_cylinder(positions,normals,indices,segments=proxy.get("segments",32))
+    elif kind=="fan":
+        count=proxy.get("blade_count",7)
+        if isinstance(count,bool) or not isinstance(count,int) or not 3<=count<=24: raise ValueError("fan blade_count must be an integer from 3 to 24")
+        for i in range(28):
+            a=2*math.pi*i/28
+            _append_box(positions,normals,indices,center=(0.43*math.cos(a),0.0,0.43*math.sin(a)),size=(0.10,0.12,0.055),rotation_y=-a)
+        for i in range(count):
+            a=2*math.pi*i/count
+            _append_box(positions,normals,indices,center=(0.25*math.cos(a),0.0,0.25*math.sin(a)),size=(0.28,0.045,0.07),rotation_y=-a-0.34)
+        _append_cylinder(positions,normals,indices,radius=0.14,depth=0.14,segments=32)
+    elif kind=="fin_stack":
+        count=proxy.get("fin_count",14)
+        if isinstance(count,bool) or not isinstance(count,int) or not 4<=count<=40: raise ValueError("fin_stack fin_count must be an integer from 4 to 40")
+        for i in range(count):
+            y=-0.43+0.86*i/max(1,count-1)
+            _append_box(positions,normals,indices,center=(0.0,y,0.0),size=(0.92,0.035,0.94))
+        _append_box(positions,normals,indices,center=(0.0,-0.465,0.0),size=(0.96,0.045,0.96))
+    elif kind=="drive_cage":
+        _append_box(positions,normals,indices,center=(0.0,-0.43,0.0),size=(0.96,0.10,0.96))
+        for sign in (-1,1):
+            _append_box(positions,normals,indices,center=(sign*0.43,0.0,0.0),size=(0.10,0.82,0.96))
+            _append_box(positions,normals,indices,center=(sign*0.43,0.40,0.0),size=(0.12,0.08,0.96))
+        _append_box(positions,normals,indices,center=(0.0,0.20,0.43),size=(0.82,0.42,0.10))
+        _append_box(positions,normals,indices,center=(0.0,-0.12,-0.43),size=(0.82,0.62,0.08))
+    elif kind=="vent_grille":
+        count=proxy.get("slat_count",12)
+        if isinstance(count,bool) or not isinstance(count,int) or not 3<=count<=40: raise ValueError("vent_grille slat_count must be an integer from 3 to 40")
+        for i in range(count):
+            z=-0.43+0.86*i/max(1,count-1)
+            _append_box(positions,normals,indices,center=(0.0,0.0,z),size=(0.96,0.12,0.035))
+        for z in (-0.47,0.47): _append_box(positions,normals,indices,center=(0.0,0.0,z),size=(1.0,0.14,0.035))
+    elif kind=="io_port":
+        profile=proxy.get("profile")
+        allowed={"usb_a","usb_c","audio_jack","displayport","rj45","serial","power_inlet","expansion_slot","status_led","security_slot","padlock_slot"}
+        if profile not in allowed: raise ValueError(f"unsupported io_port profile: {profile!r}")
+        if profile in {"audio_jack","status_led"}: _append_cylinder(positions,normals,indices,radius=0.42 if profile=="audio_jack" else 0.25,depth=0.22,segments=24)
+        elif profile=="usb_a": _append_port_frame(positions,normals,indices,width=0.68,height=0.76,border=0.11,depth=0.16)
+        elif profile=="usb_c": _append_port_frame(positions,normals,indices,width=0.70,height=0.44,border=0.13,depth=0.17)
+        elif profile=="rj45": _append_port_frame(positions,normals,indices,width=0.82,height=0.84,border=0.10,depth=0.20)
+        elif profile=="displayport": _append_port_frame(positions,normals,indices,width=0.88,height=0.64,border=0.09,depth=0.18)
+        elif profile=="serial": _append_port_frame(positions,normals,indices,width=0.90,height=0.72,border=0.08,depth=0.18)
+        elif profile=="power_inlet": _append_port_frame(positions,normals,indices,width=0.90,height=0.82,border=0.12,depth=0.20)
+        elif profile=="expansion_slot": _append_port_frame(positions,normals,indices,width=0.94,height=0.22,border=0.06,depth=0.12)
+        elif profile=="security_slot": _append_port_frame(positions,normals,indices,width=0.28,height=0.72,border=0.08,depth=0.12)
+        elif profile=="padlock_slot": _append_cylinder(positions,normals,indices,radius=0.32,depth=0.16,segments=24)
+    else: raise ValueError(f"unsupported proxy geometry kind: {kind!r}")
+    return positions,normals,indices
 
 def _validate_proxy(component: dict, proxy: dict):
     component_id = component["id"]
@@ -189,7 +202,7 @@ def _validate_proxy(component: dict, proxy: dict):
     kind = proxy.get("kind")
     transformed_scale = list(scale)
     rotation = None
-    if kind in {"cylinder", "fan"}:
+    if kind in {"cylinder", "fan", "io_port", "vent_grille"}:
         axis = proxy.get("axis", "y")
         if axis not in AXIS_ROTATIONS:
             raise ValueError(f"invalid proxy axis for {component_id}: {axis!r}")
