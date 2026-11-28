@@ -131,6 +131,8 @@ jobs:
             echo "Published OptiPlex v0.4 package is already current"
           else
             git commit -m "build: publish OptiPlex 5060 procedural geometry v0.4"
+            git fetch origin "${TARGET_BRANCH}"
+            git rebase "origin/${TARGET_BRANCH}"
             git push origin "HEAD:${TARGET_BRANCH}"
           fi
 
