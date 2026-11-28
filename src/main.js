@@ -80,6 +80,8 @@ const state = {
   activeLayer: null,
   sourceMode: "demo",
   animationFrame: 0,
+  scheduleRender: null,
+  resizeRenderer: null,
   learningMode: false,
   learningIndex: 0,
   learningScore: 0,
@@ -220,6 +222,10 @@ function setMobilePanel(panel) {
   appShell.dataset.mobilePanel = panel;
   document.querySelectorAll(".mobile-panel-button").forEach((button) => {
     button.setAttribute("aria-pressed", String(button.dataset.mobilePanel === panel));
+  });
+  if (panel === "viewer") requestAnimationFrame(() => {
+    state.resizeRenderer?.();
+    state.scheduleRender?.();
   });
 }
 
@@ -3398,7 +3404,13 @@ function initRenderer() {
     state.scene.background = new THREE.Color(0x0a1016);
     state.camera = new THREE.PerspectiveCamera(42, 1, 0.1, 4000);
     state.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
-    state.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    const mobileViewport = window.matchMedia("(max-width: 820px)");
+    const updateRendererPixelRatio = () => {
+      state.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, mobileViewport.matches ? 1.5 : 2));
+      state.resizeRenderer?.();
+    };
+    updateRendererPixelRatio();
+    mobileViewport.addEventListener?.("change", updateRendererPixelRatio);
     state.renderer.localClippingEnabled = true;
     state.renderer.outputColorSpace = THREE.SRGBColorSpace;
     state.renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -3431,7 +3443,9 @@ function initRenderer() {
       state.camera.aspect = width / height;
       state.camera.updateProjectionMatrix();
       state.renderer.setSize(width, height, false);
+      state.scheduleRender?.();
     };
+    state.resizeRenderer = resize;
     new ResizeObserver(resize).observe(canvasHost);
     resize();
 
@@ -3441,14 +3455,28 @@ function initRenderer() {
       applyReducedMotionPreference(event.matches);
     });
     const clock = new THREE.Clock();
+    const shouldRender = () => document.visibilityState !== "hidden" &&
+      (!mobileViewport.matches || appShell?.dataset.mobilePanel === "viewer");
     const render = () => {
-      state.animationFrame = requestAnimationFrame(render);
+      state.animationFrame = 0;
+      if (!shouldRender()) return;
       const delta = Math.min(clock.getDelta(), 0.05);
       updateOperatingEffects(delta);
       state.controls.update();
       state.renderer.render(state.scene, state.camera);
+      state.animationFrame = requestAnimationFrame(render);
     };
-    render();
+    state.scheduleRender = () => {
+      if (state.animationFrame || !shouldRender()) return;
+      state.animationFrame = requestAnimationFrame(render);
+    };
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible") {
+        state.resizeRenderer?.();
+        state.scheduleRender?.();
+      }
+    });
+    state.scheduleRender();
     resetCamera();
   } catch (error) {
     console.error(error);
