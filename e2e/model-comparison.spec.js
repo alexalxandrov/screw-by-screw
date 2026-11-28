@@ -99,7 +99,7 @@ function makeComparisonPackage() {
 }
 
 test("compares a second validated package without replacing the active 3D model", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?demo=1");
   await expect(page.locator("#component-count")).not.toHaveText("—");
   const originalComponentCount = (await page.locator("#component-count").textContent())?.trim();
   const originalSku = (await page.locator("#model-sku").textContent())?.trim();
