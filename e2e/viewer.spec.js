@@ -717,6 +717,22 @@ test("Dell tower is assembled with a visible chassis and one scrubber drives 12 
   await expect(page.locator("#explode-value")).toHaveText("12 / 12");
   await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-step-id", "step.optiplex.remove-system-board");
 
+  // Exercise a real pointer drag across the full track, not only a synthetic input event.
+  await slider.evaluate((element) => {
+    element.value = "0";
+    element.dispatchEvent(new Event("input", { bubbles: true }));
+  });
+  const sliderBounds = await slider.boundingBox();
+  expect(sliderBounds).toBeTruthy();
+  const sliderY = sliderBounds.y + sliderBounds.height / 2;
+  await page.mouse.move(sliderBounds.x + 13, sliderY);
+  await page.mouse.down();
+  await page.mouse.move(sliderBounds.x + sliderBounds.width - 13, sliderY, { steps: 18 });
+  await page.mouse.up();
+  await expect(slider).toHaveValue("12");
+  await expect(page.locator("#explode-value")).toHaveText("12 / 12");
+  await expect(page.locator("#viewer-canvas")).toHaveAttribute("data-procedure-step-id", "step.optiplex.remove-system-board");
+
   await slider.evaluate((element) => {
     element.value = "0";
     element.dispatchEvent(new Event("input", { bubbles: true }));
