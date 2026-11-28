@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 
 test("resumes learning progress after page reload in the same browser", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?demo=1");
   const learn = page.locator('.view-tab[data-mode="learn"]');
   await expect(learn).toBeEnabled();
   await learn.click();
@@ -27,7 +27,7 @@ test("resumes learning progress after page reload in the same browser", async ({
 });
 
 test("restarting a completed learning quiz clears its saved progress", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?demo=1");
   await page.locator('.view-tab[data-mode="learn"]').click();
 
   for (let index = 0; index < 17; index += 1) {
