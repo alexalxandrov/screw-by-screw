@@ -818,3 +818,32 @@ test("viewer mode and process controls expose one pressed state", async ({ page 
   await cooling.click();
   await expect(cooling).toHaveAttribute("aria-pressed", "false");
 });
+
+
+test("responsive workspace covers 320, 375, 390, 768 and 820px", async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 720 });
+  await page.goto("/?demo=1");
+  for (const width of [320, 375, 390, 768, 820]) {
+    await page.setViewportSize({ width, height: 844 });
+    await expect(page.locator("#mobile-panel-switcher")).toBeVisible();
+    const overflow = await page.evaluate(() => Math.max(document.documentElement.scrollWidth, document.body.scrollWidth) - window.innerWidth);
+    expect(overflow, `overflow at ${width}px`).toBeLessThanOrEqual(1);
+    for (const button of await page.locator(".mobile-panel-button").all()) {
+      expect((await button.boundingBox())?.height ?? 0).toBeGreaterThanOrEqual(44);
+    }
+    await page.locator('.mobile-panel-button[data-mobile-panel="viewer"]').click();
+    const canvas = page.locator("#viewer-canvas canvas"); await expect(canvas).toBeVisible();
+    const rect = await canvas.boundingBox(); expect(rect?.width ?? 0).toBeGreaterThan(0); expect(rect?.height ?? 0).toBeGreaterThan(0);
+    await page.locator('.mobile-panel-button[data-mobile-panel="structure"]').click(); await expect(page.locator(".left-panel")).toBeVisible();
+    await page.locator('.mobile-panel-button[data-mobile-panel="details"]').click(); await expect(page.locator(".details-panel")).toBeVisible();
+  }
+});
+
+test("WebGL render loop resumes after the mobile viewer panel is restored", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 }); await page.goto("/?demo=1");
+  const canvas = page.locator("#viewer-canvas canvas"); await expect(canvas).toBeVisible();
+  await page.locator('.mobile-panel-button[data-mobile-panel="structure"]').click(); await expect(page.locator(".viewer-column")).toBeHidden();
+  await page.locator('.mobile-panel-button[data-mobile-panel="viewer"]').click(); await expect(canvas).toBeVisible();
+  await expect.poll(async () => Boolean((await canvas.boundingBox())?.width)).toBeTruthy();
+  await page.setViewportSize({ width: 821, height: 900 }); await expect(page.locator("#mobile-panel-switcher")).toBeHidden();
+});
